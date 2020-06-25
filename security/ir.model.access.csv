@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_setup,setup.setup,model_policy_arope,base.group_user,1,1,1,1
+access_setup1,setup.setup1,model_insurance_line_business,base.group_user,1,1,1,1
+access_setup2,setup.setup2,model_insurance_product,base.group_user,1,1,1,1
+access_setup3,setup.setup3,model_collection_arope,base.group_user,1,1,1,1
+access_setup3,setup.setup4,model_policy_risk,base.group_user,1,1,1,1
+
+
+
+
+
+
+
+
