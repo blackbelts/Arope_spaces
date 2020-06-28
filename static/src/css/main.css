@@ -1,0 +1,58 @@
+.o_main_navbar > ul > li > a, .o_main_navbar > ul > li > label {
+    color: black;
+}
+
+.o_main_navbar{
+    background-color: white;
+    color: black;
+    border-bottom: none;
+}
+.o_form_view .o_form_sheet_bg {
+    border-bottom: none;
+    background: transparent;
+    
+}
+.o_form_view{
+    background-color: transparent;
+}
+html .o_web_client > .o_action_manager > .o_action > .o_content{
+    background: url(../img/background-img.jpg);
+    background-size: cover;
+    width: auto;
+}
+.o_form_view .o_form_sheet_bg > .o_form_sheet {
+    background-color: rgba(255,255,255,.7);
+    opacity: 1;
+    width: 57%;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status{
+    margin: 0 auto;
+}
+.o_form_view .o_group.o_inner_group > tbody > tr > td.o_td_label{
+    min-width: 62px
+}
+.o_form_view .o_group .o_field_widget{
+    height: 36px;
+}
+.o_field_widget, .o_field_widget input.o_input{
+    height: 36px;
+}
+.o_datepicker .o_datepicker_button{
+    top:6px;
+}
+
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.disabled{
+    color: black;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled{
+    color: black;
+}
+.edit_btn{
+    margin-right: 4px;
+    width: 54px;
+}
+.buy_btn{
+    /* margin-right: 4px; */
+    width: 54px;
+}
+
