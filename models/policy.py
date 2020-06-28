@@ -38,8 +38,8 @@ class AropePolicy(models.Model):
                               string="Product", copy=True, domain="[('line_of_bus','=',line_of_bussines)]")
     endorsement_date = fields.Date(string="Endorsement Date")
     customer = fields.Many2one('res.partner', 'Customer', copy=True)
-    broker = fields.Many2one('res.partner', 'Broker', copy=True,
-                             domain="[('broker','=', True)]")
+    broker = fields.Many2one('res.users', 'Broker', copy=True,
+                             domain="[('partner_id.broker','=', True)]")
     policy_type = fields.Selection([('New', 'New'),
                                     ('Renewal', 'Renewal'),
                                     ('Endorsement', 'Endorsement')],

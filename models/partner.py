@@ -5,7 +5,7 @@ from odoo.exceptions import ValidationError
 class inhertResPartner(models.Model):
     _inherit = 'res.partner'
     broker=fields.Boolean(string='Broker')
-    broker_id = fields.Boolean(string='Broker ID')
+    broker_id = fields.Char(string='Broker ID')
 
 
 
