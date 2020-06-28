@@ -1,22 +1,21 @@
 
 <odoo>
-      <menuitem id="arope_space" name="Arope Space"/>
+<!--      <menuitem id="arope_space" name="Arope Space"/>-->
 
 
 
-         <menuitem id="policy_view" name="Policy" parent="arope_space"
+         <menuitem id="policy_view" name="Policies"
                   action="policy_form_action"/>
-        <menuitem id="policy_config" name="Configuration" parent="arope_space"
+        <menuitem id="policy_config" name="Configuration"
                   />
-            <menuitem id="policy_collection" name="Collections" parent="arope_space"
-                  />
+            <menuitem id="policy_collection" name="Collections"
+                   action="collection_action"/>
 
        <menuitem id="line_business" name="Line Of Business" parent="policy_config"
                   action="insurance_line_business_action" />
          <menuitem id="product" name="Products" parent="policy_config"
                   action="insurance_Products_action" />
-        <menuitem id="collection" name="Collections" parent="policy_collection"
-                  action="collection_action" />
+
 
 
 

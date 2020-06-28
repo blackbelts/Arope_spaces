@@ -3,7 +3,7 @@ access_setup,setup.setup,model_policy_arope,base.group_user,1,1,1,1
 access_setup1,setup.setup1,model_insurance_line_business,base.group_user,1,1,1,1
 access_setup2,setup.setup2,model_insurance_product,base.group_user,1,1,1,1
 access_setup3,setup.setup3,model_collection_arope,base.group_user,1,1,1,1
-access_setup3,setup.setup4,model_policy_risk,base.group_user,1,1,1,1
+access_setup4,setup.setup4,model_policy_risk,base.group_user,1,1,1,1
 
 
 

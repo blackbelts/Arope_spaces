@@ -20,7 +20,7 @@
         <field name="res_model">collection.arope</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
-            <p class="oe_view_nocontent_create">Line of Business
+            <p class="oe_view_nocontent_create">Collections
             </p>
         </field>
     </record>
