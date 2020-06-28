@@ -1,0 +1,124 @@
+<odoo>
+
+    <!-- Add a custom form view -->
+    <record id="get_a_quote_view_form" model="ir.ui.view">
+		<field name="name">Get A Quote</field>
+		<field name="model">travel.quotation</field>
+		<field name="arch" type="xml">
+			<form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="step_1,step_2,step_3"/>
+                </header>
+                <sheet>
+                    <h3>Get A Quote</h3>
+                    <field attrs="{'invisible': [('state', '=','step_3')]}" name="package" widget="radio"/>
+                    <group attrs="{'invisible': [('state', '=','step_3')]}">
+                        <group>
+                            <field name="geographical_coverage" attrs="{'readonly': [('state', '!=','step_1')]}"/>
+                        </group>
+                        <group>
+                            <field name="DOB" attrs="{'readonly': [('state', '!=','step_1')]}"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('state', '!=','step_3')]}">
+                        <group>
+                            <field name="insured"/>
+                        </group>
+                        <group>
+                            <field name="gender"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('state', '!=','step_3')]}">
+                        <group>
+                            <field name="address"/>
+                        </group>
+                        <group>
+                            <field name="phone"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('state', '!=','step_3')]}">
+                        <group>
+                            <field name="national_id"/>
+                        </group>
+                        <group>
+                            <field name="passport_num"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('state', '=','step_3')]}">
+                        <group>
+                            <field name="coverage_from" attrs="{'readonly': [('state', '!=','step_1')]}"/>
+                        </group>
+                        <group>
+                            <field name="coverage_to" attrs="{'readonly': [('state', '!=','step_1')]}"/>
+                        </group>
+                        <group>
+                            <field name="days" attrs="{'readonly': [('state', '!=','step_1')]}"/>
+                        </group>
+                    </group>
+                    <notebook attrs="{'invisible': [('state', '!=', 'step_2')]}">
+                        <page string="Billing Info">
+                            <h3>Billing Information</h3>
+
+                            <group>
+
+                                <group>
+                                    <!-- <field name="price_details"/> -->
+                                    <field name="currency_id"/>
+                                    <field name="net_premium"/>
+                                    <field name="gross_premium"/>
+                                    <field name="supervisory_stamp"/>
+                                    <!-- <field name="travel_agency_comm"/>
+                                    <field name="bonus_commission"/>
+                                    <field name="net_to_insurer"/> -->
+
+                                </group>
+                                <group>
+                                    
+                                    <field name="issue_fees"/>
+                                    <field name="proportional_stamp"/>
+                                    <field name="dimensional_stamp"/>
+                                    <field name="admin_fees"/>
+                                </group>
+                            </group>
+                            
+                            <button type="object" string="Edit" name="edit_data" class="btn btn-warning edit_btn"/>
+                            <button type="object" string="Buy" name="go_to_traveller_info" class="btn btn-success buy_btn"/>
+                        </page>
+                    </notebook>
+                    <button attrs="{'invisible': [('state', '!=', 'step_1')]}" string="Get A Quote" name="get_financial_data" type="object" class="btn btn-secondary btn-lg btn-block"/>
+                </sheet>
+                <xpath expr="." position="inside">
+                    <link rel="stylesheet" href="/Arope-spaces/static/src/css/main.css"/>
+                </xpath>
+                
+			</form>
+		</field>
+	</record>
+    <!-- Add a custom Tree (List) view -->
+    <record id="get_a_quote_view_tree" model="ir.ui.view">
+		<field name="name">Get A Quote</field>
+		<field name="model">travel.quotation</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="package"/>
+                <field name="geographical_coverage"/>
+                <field name="DOB"/>
+                <field name="coverage_from"/>
+                <field name="coverage_to"/>
+                <field name="days"/>
+
+			</tree>
+		</field>
+	</record>
+    <record model="ir.actions.act_window" id="get_a_quote_action">
+            <field name="name">Get A Quote</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">travel.quotation</field>
+            <field name="view_id" ref="get_a_quote_view_tree"/>
+            <field name="view_mode">form,tree</field>
+    </record>
+    
+    
+  
+
+</odoo>
