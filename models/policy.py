@@ -1,7 +1,8 @@
-from odoo import models, tools, fields, api
+from odoo import models, tools, fields, api,exceptions
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from datetime import timedelta, datetime
+
 
 
 class AropePolicy(models.Model):
@@ -45,6 +46,7 @@ class AropePolicy(models.Model):
                                     ('Endorsement', 'Endorsement')],
                                    string='Policy Type',default='New')
     is_renewal = fields.Boolean(string="Renewal")
+    index=fields.Char()
     collection_ids=fields.One2many('collection.arope','policy','Collections')
     risk_ids=fields.One2many('policy.risk','policy_risk_id',string='Risks')
     check_item = fields.Char(compute='_compute_insured_policy')
