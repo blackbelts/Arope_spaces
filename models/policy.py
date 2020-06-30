@@ -1,7 +1,8 @@
-from odoo import models, tools, fields, api
+from odoo import models, tools, fields, api,exceptions
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from datetime import timedelta, datetime
+
 
 
 class AropePolicy(models.Model):
@@ -38,13 +39,14 @@ class AropePolicy(models.Model):
                               string="Product", copy=True, domain="[('line_of_bus','=',line_of_bussines)]")
     endorsement_date = fields.Date(string="Endorsement Date")
     customer = fields.Many2one('res.partner', 'Customer', copy=True)
-    broker = fields.Many2one('res.partner', 'Broker', copy=True,
-                             domain="[('broker','=', True)]")
+    broker = fields.Many2one('res.users', 'Broker', copy=True,
+                             domain="[('partner_id.broker','=', True)]")
     policy_type = fields.Selection([('New', 'New'),
                                     ('Renewal', 'Renewal'),
                                     ('Endorsement', 'Endorsement')],
                                    string='Policy Type',default='New')
     is_renewal = fields.Boolean(string="Renewal")
+    index=fields.Char()
     collection_ids=fields.One2many('collection.arope','policy','Collections')
     risk_ids=fields.One2many('policy.risk','policy_risk_id',string='Risks')
     check_item = fields.Char(compute='_compute_insured_policy')

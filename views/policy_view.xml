@@ -32,6 +32,8 @@
             <form>
             <header>
                     <field name="policy_status" widget="statusbar" statusbar_visible="pending,approved"/>
+                       <button name="get_rank" string="Tesr" type="object"
+                            class="oe_highlight"/>
                 </header>
                 <sheet>
                 <!-- <xpath expr="//link[@rel='stylesheet']" position="after">
@@ -64,6 +66,7 @@
                         <field name="endorsement_no" />
                         <field name="endorsement_reason" />
                         <field name="endorsement_type" />
+                        <field name="index" />
                     </group>
                 </group>
                 <group>
