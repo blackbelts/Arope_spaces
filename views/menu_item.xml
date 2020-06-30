@@ -19,12 +19,12 @@
                   action="sales_team.sales_team_config_action" />
 
       <menuitem id="get_a_quote" name="Get A Quote" />
-        <menuitem id="configuration_view_menu" name="Configuration"/>
+        <!-- <menuitem id="configuration_view_menu" name="Configuration"/> -->
         <menuitem id="travel" parent="get_a_quote" name="Travel Quotation" action="get_a_quote_action"/>
-        <menuitem id="price_menu" name="Price Table" parent="configuration_view_menu"
-                  action="quotation_price_action" sequence="1"/>
-        <menuitem id="price_menu_family" name="Family Package" parent="configuration_view_menu"
-                  action="quotation_price_action_family" sequence="2"/>
+        <menuitem id="price_menu" name="Price Table" parent="policy_config"
+                  action="quotation_price_action" sequence="4"/>
+        <menuitem id="price_menu_family" name="Family Package" parent="policy_config"
+                  action="quotation_price_action_family" sequence="5"/>
 
 
 
