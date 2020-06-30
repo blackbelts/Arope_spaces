@@ -28,5 +28,7 @@
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
+        # '/travel_quotation/static/src/css/main.css'
     ],
+    'css': ['static/src/css/main.css'],
 }
