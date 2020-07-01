@@ -26,6 +26,22 @@ class Product(models.Model):
     line_of_bus = fields.Many2one('insurance.line.business', 'Line of Business',required=True)
     _sql_constraints = [
         ('product_unique', 'unique(product_name,line_of_bus)', 'Product already exists!')]
+class Notification(models.Model):
+    _name = 'system.notify'
+    _rec_name = 'type'
+
+    type = fields.Selection([('Collection', 'Collection'),
+                               ('Renewal', 'Renewal')],
+                              'Type', required=True)
+    color = fields.Selection([
+        ('Orange', 'Orange'),
+        ('Green', 'Green'),
+        ('Red', 'Red'),],
+        'Color',required=True)
+    no_days = fields.Integer('Number of days', required=True)
+
+    _sql_constraints = [
+        ('type_unique', 'unique(type,color,no_days)', 'Rule Exist!')]
 
 
 

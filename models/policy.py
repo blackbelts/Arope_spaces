@@ -1,7 +1,7 @@
 from odoo import models, tools, fields, api,exceptions
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime,date
 
 
 
@@ -46,7 +46,7 @@ class AropePolicy(models.Model):
                                     ('Endorsement', 'Endorsement')],
                                    string='Policy Type',default='New')
     is_renewal = fields.Boolean(string="Renewal")
-    index=fields.Char()
+    index=fields.Date()
     collection_ids=fields.One2many('collection.arope','policy','Collections')
     risk_ids=fields.One2many('policy.risk','policy_risk_id',string='Risks')
     check_item = fields.Char(compute='_compute_insured_policy')
@@ -59,9 +59,18 @@ class AropePolicy(models.Model):
             self.check_item = 'Group'
         else:
             self.check_item = self.line_of_bussines.object
-
-
-
+    # def testyy(self):
+    #     # self.index=date(date.today().year, 1, 1)-relativedelta(years=1)
+    #     date_last_year = date(date.today().year, 1, 1) - relativedelta(years=1)
+    #     date_start = date(date.today().year, 1, 1)
+    #     date3 = date_start
+    #
+    #     for i in range(6):
+    #         total = 0.0
+    #         for pol in self.env['policy.arope'].search(
+    #                 [('start_date', '>=', date3),('start_date', '<=', date3+relativedelta(months=1))]):
+    #             total += pol.gross_premium
+    #         date3 = date3 + relativedelta(months=1)
 
 
 
