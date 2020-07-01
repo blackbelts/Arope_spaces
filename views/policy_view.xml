@@ -30,11 +30,16 @@
         <field name="model">policy.arope</field>
         <field name="arch" type="xml">
             <form>
-                <header>
+            <header>
                     <field name="policy_status" widget="statusbar" statusbar_visible="pending,approved"/>
                        <button name="get_rank" string="Tesr" type="object"
                             class="oe_highlight"/>
                 </header>
+                <sheet>
+                <!-- <xpath expr="//link[@rel='stylesheet']" position="after">
+                    <link rel="stylesheet" href="/travel_quotation/static/src/css/main.css"/>
+                </xpath>
+                 -->
                 <div class="oe_title">
                     <h1>
                         <label for="policy_num"/>
@@ -160,7 +165,8 @@
                             </field>
                     </page>
                 </notebook>
-
+                
+            </sheet>
             </form>
         </field>
     </record>

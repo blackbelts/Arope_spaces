@@ -5,7 +5,7 @@
 .o_main_navbar{
     background-color: white;
     color: black;
-    border-bottom: none;
+    border-bottom: 1px solid black !important;
 }
 .o_form_view .o_form_sheet_bg {
     border-bottom: none;
@@ -15,6 +15,9 @@
 .o_form_view{
     background-color: transparent;
 }
+.o_control_panel {
+    /* display: none; */
+}
 html .o_web_client > .o_action_manager > .o_action > .o_content{
     background: url(../img/background-img.jpg);
     background-size: cover;
@@ -23,7 +26,7 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
 .o_form_view .o_form_sheet_bg > .o_form_sheet {
     background-color: rgba(255,255,255,.7);
     opacity: 1;
-    width: 57%;
+    width: 62%;
 }
 .o_form_view .o_form_statusbar > .o_statusbar_status{
     margin: 0 auto;
@@ -54,5 +57,15 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
 .buy_btn{
     /* margin-right: 4px; */
     width: 54px;
+}
+.custom_btn {
+    background-color: midnightblue;
+    color: white;
+}
+.o_list_view .o_list_table{
+    background-color: rgba(255,255,255,.7);
+}
+.o_list_view .o_list_table .text-warning {
+    color: black !important;
 }
 

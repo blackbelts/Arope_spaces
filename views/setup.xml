@@ -1,7 +1,7 @@
 <odoo>
 
     <!-- Add a custom form view -->
- <record model="ir.ui.view" id="tree_line_business">
+    <record model="ir.ui.view" id="tree_line_business">
         <field name="name">tree.line.business</field>
         <field name="model">insurance.line.business</field>
         <field name="priority" eval="16"/>
