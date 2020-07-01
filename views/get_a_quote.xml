@@ -55,22 +55,18 @@
                             <field name="days" attrs="{'readonly': [('state', '!=','step_1')]}"/>
                         </group>
                     </group>
-                    <notebook attrs="{'invisible': [('state', '!=', 'step_2')]}">
+                    <!-- <notebook attrs="{'invisible': [('state', '!=', 'step_2')]}">
                         <page string="Billing Info">
                             <h3>Billing Information</h3>
 
                             <group>
 
                                 <group>
-                                    <!-- <field name="price_details"/> -->
                                     <field name="currency_id"/>
                                     <field name="net_premium"/>
                                     <field name="gross_premium"/>
                                     <field name="supervisory_stamp"/>
-                                    <!-- <field name="travel_agency_comm"/>
-                                    <field name="bonus_commission"/>
-                                    <field name="net_to_insurer"/> -->
-
+                                  
                                 </group>
                                 <group>
                                     
@@ -84,12 +80,37 @@
                             <button type="object" string="Edit" name="edit_data" class="btn btn-warning edit_btn"/>
                             <button type="object" string="Buy" name="go_to_traveller_info" class="btn btn-success buy_btn"/>
                         </page>
-                    </notebook>
+                    </notebook> -->
+                    <div style="width: 253px; margin: 0 auto;" class="card mb-5 mb-lg-0" attrs="{'invisible': [('state', '!=', 'step_2')]}">
+                        <div class="card-body">
+                            <h4 class="card-title text-muted text-uppercase text-center">Your Total Quote</h4>
+                            <h2 class="card-price text-center">$ <field name="gross_premium"/><span class="period">/month</span></h2>
+                            <hr/>
+                            <div class="text-center">
+                                <button type="object" string="Edit" name="edit_data" class="btn btn-warning edit_btn"/>
+                                <button type="object" string="Buy" name="go_to_traveller_info" class="btn btn-success buy_btn"/>
+                            </div>
+                            <!-- <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Single User</li>
+                            <li><span class="fa-li"><i class="fas fa-check"></i></span>5GB Storage</li>
+                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Public Projects</li>
+                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Community Access</li>
+                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Unlimited Private Projects</li>
+                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Dedicated Phone Support</li>
+                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Free Subdomain</li>
+                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Monthly Status Reports</li>
+                            </ul> -->
+                            <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
+                        </div>
+                    </div>
+                    <button attrs="{'invisible': [('state', '!=', 'step_3')]}" string="PAY" type="object" class="btn btn-secondary btn-lg btn-block"/>
                     <button attrs="{'invisible': [('state', '!=', 'step_1')]}" string="Get A Quote" name="get_financial_data" type="object" class="btn btn-secondary btn-lg btn-block"/>
                 </sheet>
-                <xpath expr="." position="inside">
+                    
+                   
+                <!-- <xpath expr="." position="inside">
                     <link rel="stylesheet" href="/Arope-spaces/static/src/css/main.css"/>
-                </xpath>
+                </xpath> -->
                 
 			</form>
 		</field>
@@ -118,7 +139,11 @@
             <field name="view_mode">form,tree</field>
     </record>
     
-    
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/Arope-spaces/static/src/css/main.css"/>
+        </xpath>
+    </template>
   
 
 </odoo>

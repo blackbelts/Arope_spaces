@@ -23,11 +23,13 @@
         'views/price_setup.xml',
         'views/targets.xml',
         'views/menu_item.xml',
-
-
+	    'views/dashboard_views.xml',
     ],
+    'qweb': ["static/src/xml/hrms_dashboard.xml"],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
+        # '/travel_quotation/static/src/css/main.css'
     ],
+    'css': ['static/src/css/main.css'],
 }
