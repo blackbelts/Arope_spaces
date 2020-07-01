@@ -23,9 +23,10 @@
         'views/price_setup.xml',
         'views/targets.xml',
         'views/menu_item.xml',
-
-
+	'views/dashboard_views.xml',
+	
     ],
+    'qweb': ["static/src/xml/hrms_dashboard.xml"],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
