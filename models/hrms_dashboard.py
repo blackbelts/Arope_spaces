@@ -107,6 +107,10 @@ class Brokers(models.Model):
     def get_renew(self, id):
         result={}
         ids = []
+        green = {}
+        red = {}
+        orange = {}
+        finalResult = []
         for rec in self.env['system.notify'].search([('type','=','Renewal')]):
             if rec.color=='Green':
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
@@ -117,6 +121,7 @@ class Brokers(models.Model):
                 result[rec.color]=total
                 result['count'] = len(ids)
                 result['ids'] = ids
+                green.update(result)
             elif rec.color=='Orange':
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
@@ -127,6 +132,7 @@ class Brokers(models.Model):
                 result[rec.color]=total
                 result['count'] = len(ids)
                 result['ids'] = ids
+                orange.update(result)
             else:
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
@@ -139,12 +145,20 @@ class Brokers(models.Model):
                 result[rec.color]=total
                 result['count'] = len(ids)
                 result['ids'] = ids
-        return result
+                red.update(result)
+            finalResult.append(green)
+            finalResult.append(orange)
+            finalResult.append(red)
+        return finalResult
 
     @api.model
     def get_collections(self, id):
         result = {}
         ids = []
+        green = {}
+        red = {}
+        orange = {}
+        finalResult = []
         for rec in self.env['system.notify'].search([('type', '=', 'Collection')]):
             if rec.color == 'Green':
                 
@@ -156,6 +170,7 @@ class Brokers(models.Model):
                 result[rec.color] = total
                 result['count'] = len(ids)
                 result['ids'] = ids
+                green.update(result)
             elif rec.color=='Orange':
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
@@ -166,6 +181,7 @@ class Brokers(models.Model):
                 result[rec.color] = total
                 result['count'] = len(ids)
                 result['ids'] = ids
+                orange.update(result)
 
             else:
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
@@ -178,7 +194,11 @@ class Brokers(models.Model):
                 result[rec.color] = total
                 result['count'] = len(ids)
                 result['ids'] = ids
-        return result
+                red.update(result)
+            finalResult.append(green)
+            finalResult.append(orange)
+            finalResult.append(red)
+        return finalResult
 
     @api.model
     def get_dashboard(self, id):
