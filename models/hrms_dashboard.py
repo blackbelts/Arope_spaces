@@ -148,7 +148,7 @@ class Brokers(models.Model):
             else:
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'paid'), ('collect_date', '<=', datetime.today().date() - relativedelta(days=self.env['collection.arope'].search([('type','=','collect_date'),('color','=','Orange')]), ]):
+                for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('collect_date', '<=', datetime.today().date() - relativedelta(days=self.env['collection.arope'].search([('type','=','collect_date'),('color','=','Orange')]), ]):
                     total += prod.policy.gross_premium
             result[rec.color] = total
         return result
