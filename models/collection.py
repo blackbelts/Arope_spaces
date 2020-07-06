@@ -12,3 +12,7 @@ class AropeCollection(models.Model):
     net_premium=fields.Float(string='Net Premium',related='policy.net_premium',store=True)
     gross_premium=fields.Float(string='Gross Premium',related='policy.gross_premium',store=True)
     broker=fields.Many2one(related='policy.broker',string='Broker')
+    state = fields.Selection([('outstanding', 'Outstanding'),
+                               ('paid', 'Paid'),
+                              ('canceled', 'Canceled')],
+                             'State', required=True, default='paid')

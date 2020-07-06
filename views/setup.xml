@@ -89,7 +89,6 @@
                 <field name="type"/>
                 <field name="color"/>
                 <field name="no_days"/>
-
             </tree>
         </field>
     </record>

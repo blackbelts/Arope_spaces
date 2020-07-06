@@ -104,6 +104,42 @@ class Brokers(models.Model):
         return {'current_year': current_prod, 'last_year': last_prod}
 
     @api.model
+    def get_renew(self, id):
+        result={}
+        for rec in self.env['system.notify'].search([('type','=','Renewal')]):
+            if rec.color=='Green':
+                rec.no_days*=-1
+                date1=datetime.today().date()+relativedelta(days=rec.no_days)
+                total = 0
+                for prod in self.env['policy.arope'].search([('broker.id', '=', id),('end_date', '>=', date1),]):
+                    total += prod.gross_premium
+            else:
+                date1 = datetime.today().date() + relativedelta(days=rec.no_days)
+                total = 0
+                for prod in self.env['policy.arope'].search([('broker.id', '=', id), ('end_date', '<=', date1), ]):
+                    total += prod.gross_premium
+            result[rec.color]=total
+        return result
+
+    @api.model
+    def get_collections(self, id):
+        result = {}
+        for rec in self.env['system.notify'].search([('type', '=', 'Renewal')]):
+            if rec.color == 'Green':
+                rec.no_days *= -1
+                date1 = datetime.today().date() + relativedelta(days=rec.no_days)
+                total = 0
+                for prod in self.env['collection.arope'].search([('broker.id', '=', id), ('state', '=', 'paid'),('collect_date', '>=', date1), ]):
+                    total += prod.policy.gross_premium
+            else:
+                date1 = datetime.today().date() + relativedelta(days=rec.no_days)
+                total = 0
+                for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'paid'), ('collect_date', '<=', date1), ]):
+                    total += prod.policy.gross_premium
+            result[rec.color] = total
+        return result
+
+    @api.model
     def get_dashboard(self, id):
 
         return {

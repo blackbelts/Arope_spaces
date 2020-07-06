@@ -11,6 +11,7 @@
                 <field name="net_premium"/>
                 <field name="gross_premium"/>
                 <field name="broker"/>
+                <field name="state"/>
 
             </tree>
         </field>
