@@ -2845,3 +2845,24 @@ table.dataTable thead td {
 }
 
 /*-------------------- END Offset Sidebar ------------------- */
+
+/* -------------------- Custom -----------------------*/
+.custom-card{
+    background-color:transparent
+}
+.custom-card .card-body{
+    background-color:transparent !important
+}
+.custom-card .card-body h2{
+    text-align:center !important;
+    margin-bottom:20px !important
+}
+.green{
+    background-color: #3EB650 !important
+}
+.orange{
+    background-color: #FCC133 !important
+}
+.red{
+    background-color: #E12B38 !important
+}
