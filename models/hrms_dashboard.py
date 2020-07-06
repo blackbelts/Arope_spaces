@@ -114,6 +114,9 @@ class Brokers(models.Model):
                 for prod in self.env['policy.arope'].search([('broker.id', '=', id),('end_date', '>=', datetime.today().date()),('end_date', '<=', date1),]):
                     total += prod.gross_premium
                     ids.append(prod.id)
+                result[rec.color]=total
+                result['count'] = len(ids)
+                result['ids'] = ids
             elif rec.color=='Orange':
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
@@ -121,6 +124,9 @@ class Brokers(models.Model):
                 for prod in self.env['policy.arope'].search([('broker.id', '=', id), ('end_date', '<=', datetime.today().date()),('end_date', '>=', date1)]):
                     total += prod.gross_premium
                     ids.append(prod.id)
+                result[rec.color]=total
+                result['count'] = len(ids)
+                result['ids'] = ids
             else:
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
@@ -130,9 +136,9 @@ class Brokers(models.Model):
                     total += prod.gross_premium
                     ids.append(prod.id)
 
-            result[rec.color]=total
-            result['count'] = len(ids)
-            result['ids'] = ids
+                result[rec.color]=total
+                result['count'] = len(ids)
+                result['ids'] = ids
         return result
 
     @api.model
@@ -147,6 +153,9 @@ class Brokers(models.Model):
                 for prod in self.env['collection.arope'].search([('broker.id', '=', id), ('state', '=', 'outstanding'),('collect_date', '>=', datetime.today().date()),('collect_date', '<=', date1) ]):
                     total += prod.policy.gross_premium
                     ids.append(prod.id)
+                result[rec.color] = total
+                result['count'] = len(ids)
+                result['ids'] = ids
             elif rec.color=='Orange':
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
@@ -154,16 +163,21 @@ class Brokers(models.Model):
                 for prod in self.env['collection.arope'].search([('broker.id', '=', id), ('state', '=', 'outstanding'), ('collect_date', '<=', datetime.today().date()),('collect_date', '>=', date1)]):
                     total += prod.gross_premium
                     ids.append(prod.id)
+                result[rec.color] = total
+                result['count'] = len(ids)
+                result['ids'] = ids
 
             else:
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('collect_date', '<=', datetime.today().date() - relativedelta(days=self.env['collection.arope'].search([('type','=','collect_date'),('color','=','Orange')]), ]):
+                for prod in self.env['collection.arope'].search([('broker.id', '=', id), ('state', '=', 'outstanding'),('collect_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Orange')],limit=1).no_days)), ]):
+                # for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('collect_date', '<=', date.today() - relativedelta(days=self.env['collection.arope'].search([('type','=','Collection'),('color','=','Orange')])))]):
+                # self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('collect_date', '<=', datetime.today().date() - relativedelta(days=self.env['collection.arope'].search([('type','=','collect_date'),('color','=','Orange')]), ]):
                     total += prod.policy.gross_premium
                     ids.append(prod.id)
-            result[rec.color] = total
-            result['count'] = len(ids)
-            result['ids'] = ids
+                result[rec.color] = total
+                result['count'] = len(ids)
+                result['ids'] = ids
         return result
 
     @api.model
