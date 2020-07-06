@@ -12,9 +12,9 @@ class TravelQuotation(models.Model):
     _description = 'Get A Quote'
 
     package = fields.Selection([('individual', 'Individual'), ('family', 'Family')], 'Package For', default='individual')
-    state = fields.Selection([('step_1', 'Step 1'),
-                              ('step_2', 'Step 2'),
-                              ('step_3', 'Step 3'), ],
+    state = fields.Selection([('step_1', 'Info'),
+                              ('step_2', 'Price'),
+                              ('step_3', 'Pay'), ],
                              'Steps', required=True, default='step_1', copy=False)
     geographical_coverage = fields.Selection([('zone 1', 'Europe'),
                                               ('zone 2', 'Worldwide excluding USA & CANADA'),

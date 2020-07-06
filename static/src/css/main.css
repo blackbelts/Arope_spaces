@@ -5,7 +5,7 @@
 .o_main_navbar{
     background-color: white;
     color: black;
-    border-bottom: 1px solid black !important;
+    border-bottom: 1px solid #dee2e6 !important;
 }
 .o_form_view .o_form_sheet_bg {
     border-bottom: none;
@@ -68,4 +68,23 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
 .o_list_view .o_list_table .text-warning {
     color: black !important;
 }
+.btn-primary{
+    color: #FFFFFF;
+    background-color: #00A09D;
+    border-color: #00A09D;
+    }
 
+.btn-primary:hover {
+    color: #FFFFFF;
+    background-color: #007a77;
+    border-color: #006d6b;
+}
+.o_menu_apps .dropdown-menu.show {
+    background: url(../img/background-img.jpg);
+}
+.o_menu_apps .dropdown-menu.show .form-row {
+    display: none;
+}
+.o_menu_apps .dropdown-menu.show .o_app {
+     margin-top: 80px;
+}
