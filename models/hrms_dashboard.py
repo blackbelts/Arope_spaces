@@ -112,10 +112,14 @@ class Brokers(models.Model):
                 total = 0
                 for prod in self.env['policy.arope'].search([('broker.id', '=', id),('end_date', '>=', datetime.today().date()),('end_date', '<=', date1),]):
                     total += prod.gross_premium
-            else:
-                rec.no_days*=-1
-                date1 = datetime.today().date() + relativedelta(days=rec.no_days)
+            elif rec.color=='Orange':
+                date1 = datetime.today().date() -relativedelta(days=rec.no_days)
                 total = 0
+                for prod in self.env['policy.arope'].search([('broker.id', '=', id), ('end_date', '<=', datetime.today().date()),('end_date', '>=', date1)]):
+                    total += prod.gross_premium
+            else:
+                days=self.env['system.notify'].search([('type', '=', 'Renewal'),('color', '=', 'Orange')],limit=1).no_days
+                date1 = datetime.today().date() -relativedelta(days=days)
                 for prod in self.env['policy.arope'].search([('broker.id', '=', id), ('end_date', '<=', datetime.today().date()),('end_date', '>=', date1)]):
                     total += prod.gross_premium
             result[rec.color]=total
