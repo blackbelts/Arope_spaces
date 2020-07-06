@@ -145,7 +145,7 @@ class Brokers(models.Model):
     def get_collections(self, id):
         result = {}
         ids = []        
-        for rec in self.env['system.notify'].search([('type', '=', 'Collection')]):
+        for rec in self.env['collection.arope'].search([('type', '=', 'Collection')]):
             if rec.color == 'Green':
                 ids = []
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
