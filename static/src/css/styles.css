@@ -2866,3 +2866,11 @@ table.dataTable thead td {
 .red{
     background-color: #E12B38 !important
 }
+.header-title{
+    font-size: 2.16666667rem !important;
+    font-weight: bold;
+}
+.s-report-inner h2{
+    font-size: 2.16666667rem !important;
+    font-weight: bold;
+}
