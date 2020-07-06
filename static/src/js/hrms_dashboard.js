@@ -45,24 +45,20 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                         dataProvideritem.color = "#EE7879"
                         dataProvider.push(dataProvideritem)
                     })
-                    var dataProvider2 = []
                     var chart = AmCharts.makeChart("ambarchart2", {
-                        "type": "serial",
-                        "addClassNames": true,
                         "theme": "light",
-                        "autoMargins": false,
-                        "marginLeft": 30,
-                        "marginRight": 8,
-                        "marginTop": 10,
-                        "marginBottom": 26,
+                        "type": "serial",
                         "balloon": {
                             "adjustBorderColor": false,
                             "horizontalPadding": 10,
-                            "verticalPadding": 8,
-                            "color": "#ffffff"
+                            "verticalPadding": 4,
+                            "color": "#fff"
                         },
-
                         "dataProvider": dataProvider,
+                        "valueAxes": [{
+                            "unit": "$",
+                            "position": "left",
+                        }],
                         "startDuration": 1,
                         "graphs": [{
                             "alphaField": "alpha",
@@ -90,17 +86,17 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                             "valueField": "target",
                             "dashLengthField": "dashLengthLine"
                         }],
+                        "plotAreaFillAlphas": 0.1,
                         "categoryField": "month",
                         "categoryAxis": {
-                            "gridPosition": "start",
-                            "axisAlpha": 0,
-                            "tickLength": 0
+                            "gridPosition": "start"
                         },
                         "export": {
                             "enabled": false
                         }
+
                     });
-                    console.log(self.production_compare)
+                    var dataProvider2 = []
                     self.production_compare.current_year.forEach(function (e, i) {
                         var dataProvideritem = {}
                         dataProvideritem.month = monthes[i]
@@ -154,8 +150,6 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                         }
 
                     });
-                    console.log(dataProvider2)
-
                 })
             })
 
