@@ -62,7 +62,7 @@ class Brokers(models.Model):
                          ('start_date', '<=', rule.to_date)]):
                     total += pol.gross_premium
                 result[rule.name] = [rule.amount, total]
-        #del result[False]
+        del result[False]
         x = OrderedDict(sorted(result.items(), key=lambda x: months.index(x[0])))
         for key, value in x.items():
             targetlist.append(value[0])
@@ -122,8 +122,8 @@ class Brokers(models.Model):
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
                 for prod in self.env['policy.arope'].search(
-                        [('broker.id', '=', id), ('end_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([(('type','=','Renewal'),('color','=','Orange'))],limit=1).no_days)),
-                         ('end_date', '>=', date1)]):
+                        [('broker.id', '=', id), ('end_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Renewal'),('color','=','Orange')],limit=1).no_days)),
+                         ]):
                     total += prod.gross_premium
 
             result[rec.color]=total
