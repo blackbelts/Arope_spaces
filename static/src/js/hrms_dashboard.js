@@ -194,7 +194,14 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
             }).then(function (res) {
                 self.production_compare = res
             });
-            return $.when(get_rank, get_production, get_target_production, get_production_compare);
+            var get_renew=rpc.query({
+                model: "arope.broker",
+                method: "get_renew",
+                args: [user]
+            }).then(function (res) {
+                console.log("get_renew",res)
+            });
+            return $.when(get_rank, get_production, get_target_production, get_production_compare,get_renew);
         },
         makeNumber: function (x) {
             return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
