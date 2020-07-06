@@ -43,14 +43,14 @@
                 </div>
                 <!-- page title area end -->
                 <div class="main-content-inner">
-                    <div class="sales-report-area mt-5 mb-5">
+                    <div class="sales-report-area top-sales-report mt-5 mb-5">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="single-report mb-xs-30">
+                                <div class="single-report mb-xs-30" id="rank">
                                     <div class="s-report-inner pr--20 pt--30 mb-3">
                                         <div class="icon"><i class="fa fa-sort-numeric-asc"></i></div>
                                         <div class="s-report-title d-flex justify-content-between">
-                                            <h4 class="header-title mb-0">Your Rank</h4>
+                                            <h4 class="header-title mb-0 new-header">Your Rank</h4>
                                             <!--<p>24 H</p>-->
                                         </div>
                                         <div class="d-flex justify-content-between pb-2">
@@ -64,11 +64,11 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="single-report mb-xs-30">
+                                <div class="single-report mb-xs-30" id="production">
                                     <div class="s-report-inner pr--20 pt--30 mb-3">
                                         <div class="icon"><i class="fa fa-money"></i></div>
                                         <div class="s-report-title d-flex justify-content-between">
-                                            <h4 class="header-title mb-0">Total Production</h4>
+                                            <h4 class="header-title new-header mb-0">Total Production</h4>
                                             <!--<p>24 H</p>-->
                                         </div>
                                         <div class="d-flex justify-content-between pb-2">

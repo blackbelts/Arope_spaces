@@ -19,6 +19,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
             '/Arope-spaces/static/src/js/lib/d3.min.js'
         ],
         events: {
+            'click #production':'production_list'
         },
 
         init: function (parent, context) {
@@ -200,7 +201,9 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
         makeNumber: function (x) {
             return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         },
-
+        production_list:function(x){
+            console.log("teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet")
+        }
 
     });
 
