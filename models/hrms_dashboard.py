@@ -132,17 +132,23 @@ class Brokers(models.Model):
     @api.model
     def get_collections(self, id):
         result = {}
-        for rec in self.env['system.notify'].search([('type', '=', 'Renewal')]):
+        for rec in self.env['system.notify'].search([('type', '=', 'Collection')]):
             if rec.color == 'Green':
-                rec.no_days *= -1
-                date1 = datetime.today().date() + relativedelta(days=rec.no_days)
+                date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('broker.id', '=', id), ('state', '=', 'paid'),('collect_date', '>=', date1), ]):
+                for prod in self.env['collection.arope'].search([('broker.id', '=', id), ('state', '=', 'outstanding'),('collect_date', '>=', datetime.today().date()),('collect_date', '<=', date1) ]):
                     total += prod.policy.gross_premium
-            else:
-                date1 = datetime.today().date() + relativedelta(days=rec.no_days)
+            elif rec.color=='Orange':
+                #rec.no_days*=-1
+                date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'paid'), ('collect_date', '<=', date1), ]):
+                for prod in self.env['collection.arope'].search([('broker.id', '=', id), ('state', '=', 'outstanding'), ('collect_date', '<=', datetime.today().date()),('collect_date', '>=', date1)]):
+                    total += prod.gross_premium
+
+            else:
+                date1 = datetime.today().date() - relativedelta(days=rec.no_days)
+                total = 0
+                for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'paid'), ('collect_date', '<=', datetime.today().date() - relativedelta(days=self.env['collection.arope'].search([('type','=','collect_date'),('color','=','Orange')]), ]):
                     total += prod.policy.gross_premium
             result[rec.color] = total
         return result
