@@ -32,7 +32,7 @@
             <form>
             <header>
                     <field name="policy_status" widget="statusbar" statusbar_visible="pending,approved"/>
-                       <button name="get_rank" string="Tesr" type="object"
+                       <button name="testyy" string="Tesr" type="object"
                             class="oe_highlight"/>
                 </header>
                 <sheet>
