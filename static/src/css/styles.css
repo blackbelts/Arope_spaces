@@ -2884,3 +2884,6 @@ table.dataTable thead td {
 .single-report .icon {
     font-size: 28px !important;
     }
+    .page-container{
+        padding-left:0px
+    }
