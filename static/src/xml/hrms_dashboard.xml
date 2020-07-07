@@ -124,7 +124,7 @@
                                                             <h4 class="header-title permium mb-0">
                                                                 Count : <t t-esc="widget.collections_statistics.Green.count" />
                                                                 <br/><br/>
-                                                                Total : <t t-esc="widget.collections_statistics.Green.total" /> $
+                                                                Total : <t t-esc="widget.makeNumber(widget.collections_statistics.Green.total)" /> $
                                                             </h4>
                                                             <!--<p>24 H</p>-->
                                                         </div>
@@ -145,7 +145,7 @@
                                                             <h4 class="header-title permium mb-0">
                                                                 Count : <t t-esc="widget.collections_statistics.Orange.count" />
                                                                 <br/><br/>
-                                                                Total : <t t-esc="widget.collections_statistics.Orange.total" /> $
+                                                                Total : <t t-esc="widget.makeNumber(widget.collections_statistics.Orange.total)" /> $
                                                             </h4>
                                                             <!--<p>24 H</p>-->
                                                         </div>
@@ -167,7 +167,7 @@
                                                            <h4 class="header-title permium mb-0">
                                                                 Count : <t t-esc="widget.collections_statistics.Red.count" />
                                                                 <br/><br/>
-                                                                Total : <t t-esc="widget.collections_statistics.Red.total" /> $
+                                                                Total : <t t-esc="widget.makeNumber(widget.collections_statistics.Red.total)" /> $
                                                             </h4>
                                                         </div>
 <!--                                                        <div class="d-flex justify-content-between pb-2">-->
@@ -203,7 +203,7 @@
                                                            <h4 class="header-title permium mb-0">
                                                                 Count : <t t-esc="widget.renew_statistics.Green.count" />
                                                                 <br/><br/>
-                                                                Total : <t t-esc="widget.renew_statistics.Green.total" /> $
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" /> $
                                                             </h4>
                                                         </div>
 <!--                                                        <div class="d-flex justify-content-between pb-2">-->
@@ -224,7 +224,7 @@
                                                            <h4 class="header-title permium mb-0">
                                                                 Count : <t t-esc="widget.renew_statistics.Orange.count" />
                                                                 <br/><br/>
-                                                                Total : <t t-esc="widget.renew_statistics.Orange.total" /> $
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Orange.total)" /> $
                                                             </h4>
                                                         </div>
 <!--                                                        <div class="d-flex justify-content-between pb-2">-->
@@ -245,7 +245,7 @@
                                                             <h4 class="header-title permium mb-0">
                                                                 Count : <t t-esc="widget.renew_statistics.Red.count" />
                                                                 <br/><br/>
-                                                                Total : <t t-esc="widget.renew_statistics.Red.total" /> $
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Red.total)" /> $
                                                             </h4>
                                                         </div>
 <!--                                                        <div class="d-flex justify-content-between pb-2">-->
