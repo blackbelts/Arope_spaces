@@ -2860,11 +2860,27 @@ table.dataTable thead td {
 .green{
     background-color: #3EB650 !important
 }
+
 .orange{
     background-color: #FCC133 !important
 }
 .red{
     background-color: #E12B38 !important
+}
+.greenspan{
+    color: #3EB650 !important;
+    font-size: 2rem!important;
+    font-weight: bold !important;
+}
+.orangespan{
+    color: #FCC133 !important;
+    font-size: 2rem!important;
+    font-weight: bold !important;
+}
+.redspan{
+    color: #E12B38 !important;
+    font-size: 2rem!important;
+    font-weight: bold !important;
 }
 .new-header{
     font-size: 2.16666667rem !important;
@@ -2873,6 +2889,9 @@ table.dataTable thead td {
 .top-sales-report h2{
     font-size: 2.16666667rem !important;
     font-weight: bold;
+}
+.top-sales-report .larage{
+font-size: 5rem !important;
 }
 .permium{
     font-size: 2rem!important;
@@ -2887,3 +2906,9 @@ table.dataTable thead td {
     .page-container{
         padding-left:0px !important
     }
+    .footer-area {
+    padding: 10px 0;
+}
+.card-body{
+    padding:0.5rem
+}
