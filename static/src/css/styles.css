@@ -2878,3 +2878,6 @@ table.dataTable thead td {
     font-size: 2rem!important;
     font-weight: bold !important;
 }
+.cursor{
+    cursor: pointer;
+}

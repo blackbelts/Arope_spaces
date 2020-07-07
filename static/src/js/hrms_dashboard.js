@@ -19,8 +19,16 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
             '/Arope-spaces/static/src/js/lib/d3.min.js'
         ],
         events: {
-            'click #production':'production_list'
+
+            'click #production':'production_list',
+            'click #green_collection':'green_collection',
+            'click #orange_collection':'orange_collection',
+            'click #red_collection':'red_collection',
+            'click #green_renew':'green_renew',
+            'click #orange_renew':'orange_renew',
+            'click #red_renew':'red_renew',
         },
+
 
         init: function (parent, context) {
             this._super(parent, context);
@@ -212,8 +220,91 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
             return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         },
         production_list:function(x){
-            console.log("teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet")
-        }
+            var self = this;
+            this.do_action({
+            name: _t("Policy Tree"),
+            type: 'ir.actions.act_window',
+            res_model: 'policy.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.brokerProduction.ids]],
+            target: 'current'
+        })
+        },
+        green_collection:function(){
+        var self = this;
+            this.do_action({
+            name: _t("tree.collection"),
+            type: 'ir.actions.act_window',
+            res_model: 'collection.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.collections_statistics.Green.ids]],
+            target: 'current'
+            })
+        },
+        orange_collection:function(){
+         var self = this;
+            this.do_action({
+            name: _t("tree.collection"),
+            type: 'ir.actions.act_window',
+            res_model: 'collection.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.collections_statistics.Orange.ids]],
+            target: 'current'
+        })
+
+        },
+        red_collection:function(){
+         var self = this;
+            this.do_action({
+            name: _t("tree.collection"),
+            type: 'ir.actions.act_window',
+            res_model: 'collection.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.collections_statistics.Red.ids]],
+            target: 'current'
+        })
+        },
+        orange_renew:function(){
+        var self = this;
+            this.do_action({
+            name: _t("Policy Tree"),
+            type: 'ir.actions.act_window',
+            res_model: 'policy.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.renew_statistics.Orange.ids]],
+            target: 'current'
+        })
+
+        },
+        green_renew:function(){
+           var self = this;
+            this.do_action({
+            name: _t("Policy Tree"),
+            type: 'ir.actions.act_window',
+            res_model: 'policy.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.renew_statistics.Green.ids]],
+            target: 'current'
+        })
+        },
+        red_renew:function(){
+           var self = this;
+            this.do_action({
+            name: _t("Policy Tree"),
+            type: 'ir.actions.act_window',
+            res_model: 'policy.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.renew_statistics.Red.ids]],
+            target: 'current'
+        })
+        },
 
     });
 

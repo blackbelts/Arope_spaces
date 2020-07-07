@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="single-report mb-xs-30" id="production">
+                                <div class="single-report mb-xs-30 cursor" id="production">
                                     <div class="s-report-inner pr--20 pt--30 mb-3">
                                         <div class="icon"><i class="fa fa-money"></i></div>
                                         <div class="s-report-title d-flex justify-content-between">
@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <div class="single-report mb-xs-30">
+                                                <div class="single-report mb-xs-30 cursor" id="green_collection">
                                                     <div class="s-report-inner pr--20 pt--30 mb-3">
                                                         <div class="icon green"></div>
                                                         <div class="s-report-title d-flex justify-content-between">
@@ -130,7 +130,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
-                                                <div class="single-report mb-xs-30">
+                                                <div class="single-report mb-xs-30 cursor" id="orange_collection">
                                                     <div class="s-report-inner pr--20 pt--30 mb-3">
                                                         <div class="icon orange"></div>
                                                         <div class="s-report-title d-flex justify-content-between">
@@ -152,7 +152,7 @@
                                                 </div>
                                             </div>
                                             <di class="col-md-4">
-                                                <div class="single-report">
+                                                <div class="single-report cursor" id="red_collection">
                                                     <div class="s-report-inner pr--20 pt--30 mb-3">
                                                         <div class="icon red"></div>
                                                         <div class="s-report-title d-flex justify-content-between">
@@ -188,7 +188,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <div class="single-report mb-xs-30">
+                                                <div class="single-report mb-xs-30 cursor" id="green_renew">
                                                     <div class="s-report-inner pr--20 pt--30 mb-3">
                                                         <div class="icon green"></div>
                                                         <div class="s-report-title d-flex justify-content-between">
@@ -209,14 +209,14 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
-                                                <div class="single-report mb-xs-30">
+                                                <div class="single-report mb-xs-30 cursor" id="orange_renew">
                                                     <div class="s-report-inner pr--20 pt--30 mb-3">
                                                         <div class="icon orange"></div>
                                                         <div class="s-report-title d-flex justify-content-between">
                                                            <h4 class="header-title permium mb-0">
-                                                                Count : <t t-esc="widget.renew_statistics.Green.count" />
+                                                                Count : <t t-esc="widget.renew_statistics.Orange.count" />
                                                                 <br/><br/>
-                                                                Total : <t t-esc="widget.renew_statistics.Green.total" /> $
+                                                                Total : <t t-esc="widget.renew_statistics.Orange.total" /> $
                                                             </h4>
                                                         </div>
 <!--                                                        <div class="d-flex justify-content-between pb-2">-->
@@ -230,14 +230,14 @@
                                                 </div>
                                             </div>
                                             <di class="col-md-4">
-                                                <div class="single-report">
+                                                <div class="single-report cursor" id="red_renew">
                                                     <div class="s-report-inner pr--20 pt--30 mb-3">
                                                         <div class="icon red"></div>
                                                         <div class="s-report-title d-flex justify-content-between">
                                                             <h4 class="header-title permium mb-0">
-                                                                Count : <t t-esc="widget.renew_statistics.Green.count" />
+                                                                Count : <t t-esc="widget.renew_statistics.Red.count" />
                                                                 <br/><br/>
-                                                                Total : <t t-esc="widget.renew_statistics.Green.total" /> $
+                                                                Total : <t t-esc="widget.renew_statistics.Red.total" /> $
                                                             </h4>
                                                         </div>
 <!--                                                        <div class="d-flex justify-content-between pb-2">-->
