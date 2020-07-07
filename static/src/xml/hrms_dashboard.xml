@@ -87,6 +87,9 @@
                         <div class="col-lg-6 mt-5">
                             <div class="card">
                                 <div class="card-body">
+                                    <div class="d-sm-flex justify-content-between align-items-center">
+                                            <h2 class="header-title mb-0">Target Vs Production</h2>
+                                        </div>
                                     <div id="ambarchart2"></div>
                                 </div>
                             </div>
@@ -94,6 +97,9 @@
                         <div class="col-lg-6 mt-5">
                             <div class="card">
                                 <div class="card-body">
+                                    <div class="d-sm-flex justify-content-between align-items-center">
+                                            <h2 class="header-title mb-0">Current Year Vs Last Year</h2>
+                                        </div>
                                     <div id="ambarchart1"></div>
                                 </div>
                             </div>
@@ -262,7 +268,7 @@
             <!-- footer area start-->
             <footer>
                 <div class="footer-area">
-                    <p>© Copyright 2018. All right reserved. Template by
+                    <p>© Copyright 2020. All right reserved. Template by
                         <a href="https://colorlib.com/wp/">BlackBelts</a>.
                     </p>
                 </div>

@@ -28,8 +28,6 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
             'click #orange_renew':'orange_renew',
             'click #red_renew':'red_renew',
         },
-
-
         init: function (parent, context) {
             this._super(parent, context);
             this.action_id = context.id;
@@ -51,7 +49,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                         dataProvideritem.month = monthes[i]
                         dataProvideritem.target = e
                         dataProvideritem.production = self.target_production.production[i]
-                        dataProvideritem.color = "#EE7879"
+                        dataProvideritem.color = "#3EB650"
                         dataProvider.push(dataProvideritem)
                     })
                     var chart = AmCharts.makeChart("ambarchart2", {
@@ -86,7 +84,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                             "bulletSize": 7,
                             "bulletBorderAlpha": 1,
                             "bulletColor": "#FFFFFF",
-                            "lineColor": "#44ABAA",
+                            "lineColor": "#3EB650",
                             "useLineColorForBulletBorder": true,
                             "bulletBorderThickness": 3,
                             "fillAlphas": 0,
