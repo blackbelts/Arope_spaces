@@ -15,46 +15,27 @@
                     <group attrs="{'invisible': [('state', '=','step_3')]}">
                         <group>
                             <field name="geographical_coverage" attrs="{'readonly': [('state', '!=','step_1')]}"/>
+                            <field name="coverage_from" attrs="{'readonly': [('state', '!=','step_1')]}"/>
+                            <field name="days" attrs="{'readonly': [('state', '!=','step_1')]}"/>
                         </group>
                         <group>
                             <field name="DOB" attrs="{'readonly': [('state', '!=','step_1')]}"/>
+                            <field name="coverage_to" attrs="{'readonly': [('state', '!=','step_1')]}"/>
                         </group>
                     </group>
                     <group attrs="{'invisible': [('state', '!=','step_3')]}">
                         <group>
                             <field name="insured"/>
-                        </group>
-                        <group>
-                            <field name="gender"/>
-                        </group>
-                    </group>
-                    <group attrs="{'invisible': [('state', '!=','step_3')]}">
-                        <group>
                             <field name="address"/>
-                        </group>
-                        <group>
-                            <field name="phone"/>
-                        </group>
-                    </group>
-                    <group attrs="{'invisible': [('state', '!=','step_3')]}">
-                        <group>
                             <field name="national_id"/>
                         </group>
                         <group>
-                            <field name="passport_num"/>
+                            <field name="gender"/>
+                            <field name="address"/>
+                            <field name="phone"/>
                         </group>
                     </group>
-                    <group attrs="{'invisible': [('state', '=','step_3')]}">
-                        <group>
-                            <field name="coverage_from" attrs="{'readonly': [('state', '!=','step_1')]}"/>
-                        </group>
-                        <group>
-                            <field name="coverage_to" attrs="{'readonly': [('state', '!=','step_1')]}"/>
-                        </group>
-                        <group>
-                            <field name="days" attrs="{'readonly': [('state', '!=','step_1')]}"/>
-                        </group>
-                    </group>
+                    
                     <!-- <notebook attrs="{'invisible': [('state', '!=', 'step_2')]}">
                         <page string="Billing Info">
                             <h3>Billing Information</h3>
