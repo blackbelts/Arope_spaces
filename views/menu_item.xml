@@ -1,15 +1,16 @@
 
 <odoo>
-<!--      <menuitem id="arope_space" name="Arope Space"/>-->
+      <menuitem id="arope_space" name="My Space"  sequence="-100"/>
 
 
-
+   <menuitem id="menu_hrms_dashboard" name="Dashboard" action="hr_action_dashboard"
+            parent="arope_space" />
          <menuitem id="policy_view" name="Policies"
-                  action="policy_form_action"/>
+                  action="policy_form_action" parent="arope_space"/>
         <menuitem id="policy_config" name="Configuration"
-                  />
+                   parent="arope_space"/>
             <menuitem id="policy_collection" name="Collections"
-                   action="collection_action"/>
+                   action="collection_action" parent="arope_space"/>
 
        <menuitem id="line_business" name="Line Of Business" parent="policy_config"
                   action="insurance_line_business_action" />
@@ -20,7 +21,7 @@
       <menuitem id="target_ch" name="Targets" parent="policy_config"
                   action="sales_team.sales_team_config_action" />
 
-      <menuitem id="get_a_quote" name="Get A Quote" />
+      <menuitem id="get_a_quote" name="Get A Quote" parent="arope_space" />
         <!-- <menuitem id="configuration_view_menu" name="Configuration"/> -->
         <menuitem id="travel" parent="get_a_quote" name="Travel Quotation" action="get_a_quote_action"/>
         <menuitem id="price_menu" name="Price Table" parent="policy_config"

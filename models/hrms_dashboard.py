@@ -182,7 +182,6 @@ class Brokers(models.Model):
 
     @api.model
     def get_dashboard(self, id):
-
         return {
             "production": self.get_production(id),
             'rank': self.get_rank(id),
