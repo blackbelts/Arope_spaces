@@ -19,8 +19,15 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
             '/Arope-spaces/static/src/js/lib/d3.min.js'
         ],
         events: {
-        },
 
+            'click #production':'production_list',
+            'click #green_collection':'green_collection',
+            'click #orange_collection':'orange_collection',
+            'click #red_collection':'red_collection',
+            'click #green_renew':'green_renew',
+            'click #orange_renew':'orange_renew',
+            'click #red_renew':'red_renew',
+        },
         init: function (parent, context) {
             this._super(parent, context);
             this.action_id = context.id;
@@ -42,7 +49,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                         dataProvideritem.month = monthes[i]
                         dataProvideritem.target = e
                         dataProvideritem.production = self.target_production.production[i]
-                        dataProvideritem.color = "#EE7879"
+                        dataProvideritem.color = "#3778C2"
                         dataProvider.push(dataProvideritem)
                     })
                     var chart = AmCharts.makeChart("ambarchart2", {
@@ -77,7 +84,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                             "bulletSize": 7,
                             "bulletBorderAlpha": 1,
                             "bulletColor": "#FFFFFF",
-                            "lineColor": "#44ABAA",
+                            "lineColor": "#3EB650",
                             "useLineColorForBulletBorder": true,
                             "bulletBorderThickness": 3,
                             "fillAlphas": 0,
@@ -102,8 +109,8 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                         dataProvideritem.month = monthes[i]
                         dataProvideritem.current_year = e
                         dataProvideritem.last_year = self.production_compare.last_year[i]
-                        dataProvideritem.color = "#bfbffd"
-                        dataProvideritem.color2 = "#7474F0"
+                        dataProvideritem.color = "#3EB650"
+                        dataProvideritem.color2 = "#3778C2"
                         dataProvider2.push(dataProvideritem)
                     })
                     var chart = AmCharts.makeChart("ambarchart1", {
@@ -165,6 +172,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                 method: "get_production",
                 args: [user]
             }).then(function (res) {
+                console.log(res)
                 self.brokerProduction = res
             })
             var get_rank = rpc.query({
@@ -193,14 +201,108 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                 method: "get_renew",
                 args: [user]
             }).then(function (res) {
+                self.renew_statistics=res
                 console.log("get_renew",res)
             });
-            return $.when(get_rank, get_production, get_target_production, get_production_compare,get_renew);
+            var get_collections=rpc.query({
+                model: "arope.broker",
+                method: "get_collections",
+                args: [user]
+            }).then(function (res) {
+                self.collections_statistics=res
+                console.log("get_collections",res)
+            });
+            return $.when(get_rank, get_production, get_target_production, get_production_compare,get_renew,get_collections);
         },
         makeNumber: function (x) {
             return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         },
+        production_list:function(x){
+            var self = this;
+            this.do_action({
+            name: _t("Policy Tree"),
+            type: 'ir.actions.act_window',
+            res_model: 'policy.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.brokerProduction.ids]],
+            target: 'current'
+        })
+        },
+        green_collection:function(){
+        var self = this;
+            this.do_action({
+            name: _t("tree.collection"),
+            type: 'ir.actions.act_window',
+            res_model: 'collection.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.collections_statistics.Green.ids]],
+            target: 'current'
+            })
+        },
+        orange_collection:function(){
+         var self = this;
+            this.do_action({
+            name: _t("tree.collection"),
+            type: 'ir.actions.act_window',
+            res_model: 'collection.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.collections_statistics.Orange.ids]],
+            target: 'current'
+        })
 
+        },
+        red_collection:function(){
+         var self = this;
+            this.do_action({
+            name: _t("tree.collection"),
+            type: 'ir.actions.act_window',
+            res_model: 'collection.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.collections_statistics.Red.ids]],
+            target: 'current'
+        })
+        },
+        orange_renew:function(){
+        var self = this;
+            this.do_action({
+            name: _t("Policy Tree"),
+            type: 'ir.actions.act_window',
+            res_model: 'policy.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.renew_statistics.Orange.ids]],
+            target: 'current'
+        })
+
+        },
+        green_renew:function(){
+           var self = this;
+            this.do_action({
+            name: _t("Policy Tree"),
+            type: 'ir.actions.act_window',
+            res_model: 'policy.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.renew_statistics.Green.ids]],
+            target: 'current'
+        })
+        },
+        red_renew:function(){
+           var self = this;
+            this.do_action({
+            name: _t("Policy Tree"),
+            type: 'ir.actions.act_window',
+            res_model: 'policy.arope',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['id','in',this.renew_statistics.Red.ids]],
+            target: 'current'
+        })
+        },
 
     });
 
