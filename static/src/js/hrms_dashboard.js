@@ -49,7 +49,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                         dataProvideritem.month = monthes[i]
                         dataProvideritem.target = e
                         dataProvideritem.production = self.target_production.production[i]
-                        dataProvideritem.color = "#3EB650"
+                        dataProvideritem.color = "#3778C2"
                         dataProvider.push(dataProvideritem)
                     })
                     var chart = AmCharts.makeChart("ambarchart2", {
@@ -109,8 +109,8 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                         dataProvideritem.month = monthes[i]
                         dataProvideritem.current_year = e
                         dataProvideritem.last_year = self.production_compare.last_year[i]
-                        dataProvideritem.color = "#bfbffd"
-                        dataProvideritem.color2 = "#7474F0"
+                        dataProvideritem.color = "#3EB650"
+                        dataProvideritem.color2 = "#3778C2"
                         dataProvider2.push(dataProvideritem)
                     })
                     var chart = AmCharts.makeChart("ambarchart1", {
