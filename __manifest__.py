@@ -32,5 +32,6 @@
         'demo/demo.xml',
         # '/travel_quotation/static/src/css/main.css'
     ],
+    'images': ['static/description/icon.png'],
     'css': ['static/src/css/main.css'],
 }
