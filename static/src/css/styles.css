@@ -2881,3 +2881,6 @@ table.dataTable thead td {
 .cursor{
     cursor: pointer;
 }
+.single-report .icon {
+    font-size: 28px !important;
+    }

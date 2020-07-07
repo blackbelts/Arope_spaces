@@ -18,6 +18,8 @@
             <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css"
                 media="all" />
             <!-- others css -->
+                        <link rel="stylesheet" href="/Arope-spaces/static/src/css/all.min.css" />
+
             <link rel="stylesheet" href="/Arope-spaces/static/src/css/typography.css" />
             <link rel="stylesheet" href="/Arope-spaces/static/src/css/default-css.css" />
             <link rel="stylesheet" href="/Arope-spaces/static/src/css/styles.css" />
@@ -48,7 +50,7 @@
                             <div class="col-md-6">
                                 <div class="single-report mb-xs-30" id="rank">
                                     <div class="s-report-inner pr--20 pt--30 mb-3">
-                                        <div class="icon"><i class="fa fa-sort-numeric-asc"></i></div>
+                                        <div class="icon"><i class='fas fa-medal'/></div>
                                         <div class="s-report-title d-flex justify-content-between">
                                             <h4 class="header-title mb-0 new-header">Your Rank</h4>
                                             <!--<p>24 H</p>-->
@@ -66,7 +68,7 @@
                             <div class="col-md-6">
                                 <div class="single-report mb-xs-30 cursor" id="production">
                                     <div class="s-report-inner pr--20 pt--30 mb-3">
-                                        <div class="icon"><i class="fa fa-money"></i></div>
+                                        <div class="icon"><i class="fas fa-money"></i></div>
                                         <div class="s-report-title d-flex justify-content-between">
                                             <h4 class="header-title new-header mb-0">Total Production</h4>
                                             <!--<p>24 H</p>-->
