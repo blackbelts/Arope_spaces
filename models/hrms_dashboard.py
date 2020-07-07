@@ -64,7 +64,7 @@ class Brokers(models.Model):
                          ('start_date', '<=', rule.to_date)]):
                     total += pol.gross_premium
                 result[rule.name] = [rule.amount, total]
-        del result[False]
+        # del result[False]
         x = OrderedDict(sorted(result.items(), key=lambda x: months.index(x[0])))
         for key, value in x.items():
             targetlist.append(value[0])
