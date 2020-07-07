@@ -5,7 +5,7 @@
 .o_main_navbar{
     background-color: white;
     color: black;
-    border-bottom: 1px solid #ced4da !important;
+    border-bottom: 1px solid #cccccc !important;
 }
 .o_form_view .o_form_sheet_bg {
     border-bottom: none;
