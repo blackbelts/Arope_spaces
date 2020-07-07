@@ -47,8 +47,8 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                     self.target_production.target.forEach(function (e, i) {
                         var dataProvideritem = {}
                         dataProvideritem.month = monthes[i]
-                        dataProvideritem.target = e
-                        dataProvideritem.production = self.target_production.production[i]
+                        dataProvideritem.target = self.makeNumber(e)
+                        dataProvideritem.production = self.makeNumber(self.target_production.production[i])
                         dataProvideritem.color = "#3778C2"
                         dataProvider.push(dataProvideritem)
                     })
@@ -107,8 +107,8 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                     self.production_compare.current_year.forEach(function (e, i) {
                         var dataProvideritem = {}
                         dataProvideritem.month = monthes[i]
-                        dataProvideritem.current_year = e
-                        dataProvideritem.last_year = self.production_compare.last_year[i]
+                        dataProvideritem.current_year =self.makeNumber(e)
+                        dataProvideritem.last_year = self.makeNumber(self.production_compare.last_year[i])
                         dataProvideritem.color = "#3EB650"
                         dataProvideritem.color2 = "#3778C2"
                         dataProvider2.push(dataProvideritem)
