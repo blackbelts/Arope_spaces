@@ -175,13 +175,10 @@ class Brokers(models.Model):
                     total += prod.policy.gross_premium
                     ids.append(prod.id)
                 result[rec.color] = result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
-                
-            
         return result
 
     @api.model
     def get_dashboard(self, id):
-
         return {
             "production": self.get_production(id),
             'rank': self.get_rank(id),
