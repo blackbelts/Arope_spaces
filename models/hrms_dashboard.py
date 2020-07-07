@@ -17,9 +17,11 @@ class Brokers(models.Model):
     @api.model
     def get_production(self, id):
         total = 0
+        ids=[]
         for prod in self.env['policy.arope'].search([('broker.id', '=', id)]):
             total += prod.gross_premium
-        return total
+            ids.append(prod.id)
+        return {"total":total,"ids":ids}
 
     def get_all_production(self):
         prod = {}
@@ -144,14 +146,15 @@ class Brokers(models.Model):
     @api.model
     def get_collections(self, id):
         result = {}
-        ids = []        
-        for rec in self.env['collection.arope'].search([('type', '=', 'Collection')]):
+        ids = []
+        colors=[]
+        for rec in self.env['system.notify'].search([('type', '=', 'Collection')]):
             if rec.color == 'Green':
                 ids = []
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
                 for prod in self.env['collection.arope'].search([('broker.id', '=', id), ('state', '=', 'outstanding'),('collect_date', '>=', datetime.today().date()),('collect_date', '<=', date1) ]):
-                    total += prod.policy.gross_premium
+                    total += prod.gross_premium
                     ids.append(prod.id)
                 result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
                 

@@ -166,6 +166,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                 method: "get_production",
                 args: [user]
             }).then(function (res) {
+                console.log(res)
                 self.brokerProduction = res
             })
             var get_rank = rpc.query({
@@ -194,6 +195,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                 method: "get_renew",
                 args: [user]
             }).then(function (res) {
+                self.renew_statistics=res
                 console.log("get_renew",res)
             });
             var get_collections=rpc.query({
@@ -201,6 +203,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                 method: "get_collections",
                 args: [user]
             }).then(function (res) {
+                self.collections_statistics=res
                 console.log("get_collections",res)
             });
             return $.when(get_rank, get_production, get_target_production, get_production_compare,get_renew,get_collections);
