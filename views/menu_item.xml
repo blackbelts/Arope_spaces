@@ -24,6 +24,7 @@
       <menuitem id="get_a_quote" name="Get A Quote" parent="arope_space" />
         <!-- <menuitem id="configuration_view_menu" name="Configuration"/> -->
         <menuitem id="travel" parent="get_a_quote" name="Travel Quotation" action="get_a_quote_action"/>
+        <menuitem id="medical" parent="get_a_quote" name="Medical Quotation" action="action_medical_url"/>
         <menuitem id="price_menu" name="Price Table" parent="policy_config"
                   action="quotation_price_action" sequence="4"/>
         <menuitem id="price_menu_family" name="Family Package" parent="policy_config"

@@ -23,6 +23,7 @@
         'views/price_setup.xml',
         'views/targets.xml',
 	    'views/dashboard_views.xml',
+        'views/actions.xml',
         'views/menu_item.xml',
 
     ],
