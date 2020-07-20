@@ -49,11 +49,12 @@ class AropePolicy(models.Model):
     index=fields.Date()
     collection_ids=fields.One2many('collection.arope','policy','Collections')
     risk_ids=fields.One2many('policy.risk','policy_risk_id',string='Risks')
-    check_item = fields.Char(compute='_compute_insured_policy')
+    check_item = fields.Char()
     ins_type = fields.Selection([('Individual', 'Individual'),
                                  ('Group', 'Group'), ],
                                 'I&G', track_visibility='onchange', copy=True, default='Individual', required=True)
-    @api.depends('line_of_bussines', 'ins_type')
+
+    @api.onchange('line_of_bussines', 'ins_type')
     def _compute_insured_policy(self):
         if self.ins_type == 'Group':
             self.check_item = 'Group'
