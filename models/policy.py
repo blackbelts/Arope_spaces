@@ -54,12 +54,12 @@ class AropePolicy(models.Model):
                                  ('Group', 'Group'), ],
                                 'I&G', track_visibility='onchange', copy=True, default='Individual', required=True)
 
-    # @api.onchange('line_of_bussines', 'ins_type')
-    # def _compute_insured_policy(self):
-    #     if self.ins_type == 'Group':
-    #         self.check_item = 'Group'
-    #     else:
-    #         self.check_item = self.line_of_bussines.object
+    @api.onchange('line_of_bussines', 'ins_type')
+    def _compute_insured_policy(self):
+        if self.ins_type == 'Group':
+            self.check_item = 'Group'
+        else:
+            self.check_item = self.line_of_bussines.object
     # def testyy(self):
     #     # self.index=date(date.today().year, 1, 1)-relativedelta(years=1)
     #     date_last_year = date(date.today().year, 1, 1) - relativedelta(years=1)
