@@ -23,6 +23,7 @@
         'views/price_setup.xml',
         'views/targets.xml',
 	    'views/dashboard_views.xml',
+        'views/actions.xml',
         'views/menu_item.xml',
 
     ],
@@ -32,5 +33,6 @@
         'demo/demo.xml',
         # '/travel_quotation/static/src/css/main.css'
     ],
+    'images': ['static/description/icon.png'],
     'css': ['static/src/css/main.css'],
 }

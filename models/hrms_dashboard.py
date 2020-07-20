@@ -187,5 +187,6 @@ class Brokers(models.Model):
             'rank': self.get_rank(id),
             'targetVsProduction': self.get_target_production(id),
             'lastVsCurrentYear': self.get_production_compare(id),
-
+            'collections':self.get_collections(id),
+            'renews':self.get_renew(id)
         }
