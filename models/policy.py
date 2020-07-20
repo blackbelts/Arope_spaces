@@ -53,6 +53,7 @@ class AropePolicy(models.Model):
     ins_type = fields.Selection([('Individual', 'Individual'),
                                  ('Group', 'Group'), ],
                                 'I&G', track_visibility='onchange', copy=True, default='Individual', required=True)
+
     @api.depends('line_of_bussines', 'ins_type')
     def _compute_insured_policy(self):
         if self.ins_type == 'Group':

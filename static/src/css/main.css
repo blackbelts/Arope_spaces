@@ -97,4 +97,16 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
 .o_content .o_form_view .oe_chatter, .modal-content .o_form_view .oe_chatter {
     display: none;
 }
+.o_affix_enabled .navbar-light {
+  display: none;
+}
+.o_footer {
+    display: none;
+}
 
+.o_main_navbar > ul.o_menu_systray {
+    display: none !important;
+}
+.navbar-light {
+    display: none;
+}
