@@ -35,7 +35,7 @@
                             <field name="phone"/>
                         </group>
                     </group>
-                    
+
                     <!-- <notebook attrs="{'invisible': [('state', '!=', 'step_2')]}">
                         <page string="Billing Info">
                             <h3>Billing Information</h3>
