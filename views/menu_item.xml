@@ -1,6 +1,6 @@
 
 <odoo>
-      <menuitem id="arope_space" name="My Space" web_icon="Arope-spaces,static/description/icon.png"  sequence="-100"/>
+      <menuitem id="arope_space" name="My Space" web_icon="Arope-spaces,static/description/icon.png"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group" sequence="-100"/>
 
 
    <menuitem id="menu_hrms_dashboard" name="Dashboard" action="hr_action_dashboard"

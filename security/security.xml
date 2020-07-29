@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data >
-          <record id="manager_medical_group" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="base.module_category_medical"/>
+          <record id="broker_space_group" model="res.groups">
+            <field name="name">Broker</field>
+            <field name="category_id" ref="base.module_category_arope"/>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-            <field name="comment">the user will have access All Documents</field>
+            <field name="comment">the user will have access All Broker Document</field>
+        </record>
+           <record id="client_space_group" model="res.groups">
+            <field name="name">Client</field>
+            <field name="category_id" ref="base.module_category_arope"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="comment">the user will have access All Client Document</field>
         </record>
         <!--<record id="policy_user_own_group" model="res.groups">-->
             <!--<field name="name">User: Own Documents Only</field>-->
