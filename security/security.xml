@@ -10,7 +10,7 @@
             <record id="manager_space_group" model="res.groups">
             <field name="name">Manager</field>
             <field name="category_id" ref="base.module_category_arope"/>
-            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="implied_ids" eval="[(4, ref('broker_space_group,client_space_group'))]"/>
             <field name="comment">the user will have access All Broker Document</field>
         </record>
            <record id="client_space_group" model="res.groups">
