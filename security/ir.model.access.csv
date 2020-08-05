@@ -18,7 +18,7 @@ access_setup11,setup.setup11,model_system_notify,base.group_user,1,1,1,1
 access_setup12,setup.setup12,model_survey_line_setup,base.group_user,1,1,1,1
 access_setup13,setup.setup13,model_questionnaire_line_setup,base.group_user,1,1,1,1
 
-access_setup14,setup.setup14,model_arope_quotation,base.group_user,1,1,1,1
+access_setup14,setup.setup14,model_insurance_quotation,base.group_user,1,1,1,1
 access_setup15,setup.setup15,model_medical_price,base.group_user,1,1,1,1
 access_setup16,setup.setup16,model_medical_price_line,base.group_user,1,1,1,1
 access_setup17,setup.setup17,model_survey_report,base.group_user,1,1,1,1

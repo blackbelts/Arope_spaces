@@ -35,10 +35,11 @@
 <!--        <menuitem id="application_form" name="Application Form Setup" parent="policy_config"-->
 <!--                  action="questionnaire_action" sequence="7"/>-->
     <menuitem name="Insurance Application"
-    	id="quotations"
+    	id="inurance"
     	parent="arope_space"
     	action="insurance_action"
 	    sequence="900"/>
+
 	<menuitem id="main" name="Medical "
                   />
 
