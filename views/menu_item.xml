@@ -1,6 +1,6 @@
 
 <odoo>
-      <menuitem id="arope_space" name="My Space" web_icon="Arope-spaces,static/description/icon.png"  sequence="-100"/>
+      <menuitem id="arope_space" name="My Space" web_icon="Arope-spaces,static/description/icon.png"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group,Arope-spaces.manager_space_group" sequence="-100"/>
 
 
    <menuitem id="menu_hrms_dashboard" name="Dashboard" action="hr_action_dashboard"
@@ -22,6 +22,7 @@
                   action="sales_team.sales_team_config_action" />
 
 <!--      <menuitem id="get_a_quote" name="Get A Quote" parent="arope_space" action="survey.get_quote_action" />-->
+      <menuitem id="get_a_quote" name="Get A Quote" parent="arope_space"  />
 <!--         <menuitem id="configuration_view_menu" name="Configuration"/> -->
 <!--        <menuitem id="travel" parent="get_a_quote" name="Quotation" />-->
 <!--        <menuitem id="medical" parent="get_a_quote" name="Medical Quotation" action="action_medical_url"/>-->
