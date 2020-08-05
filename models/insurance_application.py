@@ -27,7 +27,7 @@ time = [('12:00 AM', '12:00 AM'), ('12:30 AM', '12:30 AM'), ('01:00 AM', '01:00 
              ('10:00 PM', '10:00 PM'), ('10:30 PM', '10:30 PM'), ('11:00 PM', '11:00 PM'), ('11:30 PM', '11:30 PM')]
 
 class Quotation(models.Model):
-    _name = 'arope.quotation'
+    _name = 'insurance.quotation'
     _rec_name = 'id'
     # insurance_type = fields.Selection([
     #     ('medical', 'Medical'),
@@ -105,7 +105,7 @@ class Quotation(models.Model):
         return {
             # 'name': 'FEC',
             'type': 'ir.actions.act_url',
-            'url': "web/content/?model=arope.quotation&id=" + str(
+            'url': "web/content/?model=insurance.quotation&id=" + str(
                 self.id) + "&filename_field=file_name&field=questionnaire&download=true&filename=questionnaire.pdf",
             'target': 'self',
         }
@@ -321,7 +321,7 @@ class Members(models.Model):
     name = fields.Char('Name')
     dob = fields.Date('Date OF Birth')
     relationship = fields.Char('Relationship')
-    quotation_id = fields.Many2one('arope.quotation')
+    quotation_id = fields.Many2one('insurance.quotation')
 
 
 class MedicalPriceTable(models.Model):
@@ -359,7 +359,7 @@ class Answers(models.Model):
     file = fields.Binary('File')
     value = fields.Float('Value')
     boolean = fields.Boolean('True Or False Answer', default=False)
-    application_id = fields.Many2one('arope.quotation', ondelete='cascade')
+    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     options = fields.Many2one('selection.options', 'Choose',ondelete='cascade', domain="[('questionnaire_id', '=', question)]")
 
 class SurveyReport(models.Model):
@@ -372,14 +372,14 @@ class SurveyReport(models.Model):
     file = fields.Binary('File')
     value = fields.Float('Value')
     boolean = fields.Boolean('True Or False Answer', default=False)
-    application_id = fields.Many2one('arope.quotation', ondelete='cascade')
+    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
 class FinalApplication(models.Model):
     _name = 'final.application'
 
     description = fields.Char('Title')
     application_files = fields.Binary('File')
-    application_id = fields.Many2one('arope.quotation', ondelete='cascade')
+    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
 class AvailableTime(models.Model):
     _name = 'available.time'
@@ -387,7 +387,7 @@ class AvailableTime(models.Model):
     date = fields.Date('Date')
     time_from = fields.Selection(time, "From", required=True)
     time_to = fields.Selection(time, "To", required=True)
-    application_id = fields.Many2one('arope.quotation', ondelete='cascade')
+    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
 class stateHistory(models.Model):
     _name = 'state.history'
@@ -403,7 +403,7 @@ class stateHistory(models.Model):
         ('cancel', 'Rejection Reasons')], string='Status', readonly=True)
     datetime = fields.Datetime('Date')
     user = fields.Many2one('res.users', ondelete='cascade')
-    application_id = fields.Many2one('arope.quotation', ondelete='cascade')
+    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
 
 
