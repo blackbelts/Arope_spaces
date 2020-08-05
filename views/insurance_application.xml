@@ -1,7 +1,7 @@
 <odoo>
 
     <!-- Add a custom form view -->
-    <record id="get_quote_view_form" model="ir.ui.view">
+    <record id="insurance_view_form" model="ir.ui.view">
 		<field name="name">Insurance Application</field>
 		<field name="model">arope.quotation</field>
 		<field name="arch" type="xml">
@@ -150,14 +150,14 @@
 		</field>
 	</record>
     <!-- Add a custom Tree (List) view -->
-    <record id="get_quote_view_tree" model="ir.ui.view">
+    <record id="insurance_view_tree" model="ir.ui.view">
 		<field name="name">Insurance Application</field>
 		<field name="model">arope.quotation</field>
 		<field name="arch" type="xml">
 			<tree>
                 <field name="name"/>
                 <field name="phone"/>
-                <field name="email"/>
+<!--                <field name="email"/>-->
                 <field name="application_number"/>
                 <field name="application_date"/>
 				<field name="lob"/>
@@ -169,11 +169,11 @@
 			</tree>
 		</field>
 	</record>
-    <record model="ir.actions.act_window" id="get_quote_action">
+    <record model="ir.actions.act_window" id="insurance_action">
             <field name="name">Insurance Application</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">arope.quotation</field>
-            <field name="view_id" ref="get_quote_view_tree"/>
+            <field name="view_id" ref="insurance_view_tree"/>
             <field name="view_mode">form,tree,kanban</field>
     </record>
      <record id="sequence_application_number" model="ir.sequence">
