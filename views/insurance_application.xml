@@ -1,0 +1,196 @@
+<odoo>
+
+    <!-- Add a custom form view -->
+    <record id="get_quote_view_form" model="ir.ui.view">
+		<field name="name">Insurance Application</field>
+		<field name="model">arope.quotation</field>
+		<field name="arch" type="xml">
+			<form>
+                <header>
+
+                    <field name="state" widget="statusbar"/>
+                    <button name="approve_medical_price" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'quick_quote')]}"/>
+                    <button type="object" string="Submit" name="submit_questionnaire" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}"/>
+                    <button name="survey_confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey')]}"/>
+                    <button name="final_confirm" string="Final Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'price')]}"/>
+                    <button name="approve" string="Approve" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'application')]}"/>
+                    <button name="pay" attrs="{'invisible': [('state', '!=', 'pay')]}" string="Pay"  type="object" class="oe_highlight"/>
+                    <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', 'proposal')]}"/>
+                </header>
+                <sheet>
+                    <h3>Insurance Application Form</h3>
+                    <group>
+                        <group>
+                            <field name="lob"/>
+                        </group>
+                        <group>
+                            <field attrs="{'invisible': [('lob', '=', 1)]}" name="product_id"/>
+                        </group>
+                    </group>
+                    <br/>
+                    <h3>Customer Information</h3>
+                    <group>
+                        <group>
+
+                            <field name="name" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+                            <field name="phone" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+<!--                            <field name="contact" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>-->
+                            <field name="email" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+                            <field name="target_price" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+                        </group>
+                        <group>
+                            <field name="application_number" readonly="1" force_save="1"/>
+                            <field name="application_date" />
+                            <field name="quote_trials" readonly="1" force_save="1"  attrs="{'invisible': [('lob', '!=', 1)]}"/>
+                            <field name="final_price" readonly="1" force_save="1"/>
+                            <field name="create_uid"/>
+                        </group>
+                    </group>
+
+                     <notebook>
+                        <page string="Quick Quote" attrs="{'invisible': [('lob', '!=', 1)]}">
+                            <group>
+                                <field name="dob" force_save="1" attrs="{'readonly': [('state', '!=', 'quick_quote')]}"/>
+                                <field name="product" force_save="1" attrs="{'readonly': [('state', '!=', 'quick_quote')]}"/>
+                                <field name="price" force_save="1" attrs="{'readonly': [('state', '!=', 'price')]}"/>
+                            </group>
+                        </page>
+
+                        <page string="Questionnaire"  attrs="{'invisible': [('state', '=', 'quick_quote')]}">
+                            <button name="create_pdf" string="Download" type="object" class="oe_highlight"/>
+<!--                            <group>-->
+<!--                                <field name="questionnaire" widget="download_link"/>-->
+
+<!--                            </group>-->
+                            <field name="questions_ids" widget="many2many">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+<!--                                    <field name="desc" />-->
+                                    <field name="options"/>
+                                    <field name="text"/>
+                                    <field name="value"/>
+
+<!--                                    <field name="boolean"/>-->
+                                    <field name="file"/>
+                                </tree>
+                            </field>
+                        </page>
+                         <page string="Required For Survey"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal'])]}">
+                            <group>
+
+                                <group>
+                                    <field name="address"/>
+<!--                                    <field name="bussines_activity"/>-->
+                                    <field name="sum_insured"/>
+                                </group>
+                                <group>
+                                    <field name="name_of_contact_person"/>
+                                    <field name="main_phone"/>
+                                    <field name="spare_phone"/>
+                                </group>
+                            </group>
+                            <field name="available_time_ids">
+                                <tree editable="bottom">
+                                        <field name="date"/>
+                                        <field name="time_from"/>
+                                        <field name="time_to"/>
+                                </tree>
+                            </field>
+                         </page>
+                         <page string="Survey Report"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal'])]}">
+                                <field name="survey_report_ids">
+                                    <tree editable="bottom">
+                                        <field name="question"/>
+<!--                                        <field name="desc" />-->
+                                        <field name="options"/>
+                                        <field name="text"/>
+                                        <field name="value"/>
+
+<!--                                        <field name="boolean"/>-->
+                                        <field name="file"/>
+                                    </tree>
+                                </field>
+                         </page>
+
+                        <page string="Final Premium" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey'])]}">
+                            <group>
+                                <field name="final_price" attrs="{'readonly': [('state', '!=', 'price')]}" force_save="1"/>
+                            </group>
+                        </page>
+                        <page string="Scanned Application" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'price'])]}">
+                            <h3>Please Upload Your National ID, Application (Questionnaire), And Other Required Files</h3>
+                            <group>
+                                <field name="final_application_ids">
+                                    <tree editable="bottom">
+                                        <field name="description"/>
+                                        <field name="application_files" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                         <page string="Rejection Reason" attrs="{'invisible': [('state', '!=', 'cancel')]}">
+                            <group>
+                                <field name="rejection_reason"/>
+                                <field name="comment"/>
+                            </group>
+                        </page>
+                         <page string="State History" >
+                            <field name="state_history_ids">
+                                 <tree editable="bottom">
+                                        <field name="state" readonly="1" force_save="1"/>
+                                        <field name="datetime" readonly="1" force_save="1"/>
+                                        <field name="user" readonly="1" force_save="1"/>
+                                    </tree>
+                            </field>
+                        </page>
+
+                    </notebook>
+                </sheet>
+			</form>
+		</field>
+	</record>
+    <!-- Add a custom Tree (List) view -->
+    <record id="get_quote_view_tree" model="ir.ui.view">
+		<field name="name">Insurance Application</field>
+		<field name="model">arope.quotation</field>
+		<field name="arch" type="xml">
+			<tree>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="application_number"/>
+                <field name="application_date"/>
+				<field name="lob"/>
+                <field name="product"/>
+                <field name="target_price"/>
+                <field name="final_price"/>
+                <field name="state"/>
+
+			</tree>
+		</field>
+	</record>
+    <record model="ir.actions.act_window" id="get_quote_action">
+            <field name="name">Insurance Application</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">arope.quotation</field>
+            <field name="view_id" ref="get_quote_view_tree"/>
+            <field name="view_mode">form,tree,kanban</field>
+    </record>
+     <record id="sequence_application_number" model="ir.sequence">
+        <field name="name">application_number</field>
+        <field name="code">application_number</field>
+<!--        <field name="prefix"><field name="lob.name"/></field>-->
+        <field name="padding">6</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+    <record id="sequence_trial_number" model="ir.sequence">
+        <field name="name">trial_number</field>
+        <field name="code">trial_number</field>
+<!--        <field name="prefix"><field name="lob.name"/></field>-->
+        <field name="padding">6</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+</odoo>

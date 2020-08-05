@@ -26,7 +26,7 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
 .o_form_view .o_form_sheet_bg > .o_form_sheet {
     background-color: rgba(255,255,255,.7);
     opacity: 1;
-    width: 62%;
+    width: 80%;
 }
 .o_form_view .o_form_statusbar > .o_statusbar_status{
     margin: 0 auto;
@@ -35,11 +35,12 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
     min-width: 62px
 }
 .o_form_view .o_group .o_field_widget{
-    height: 36px;
+
+    width: 97% !important;
 }
-.o_field_widget, .o_field_widget input.o_input{
+/**.o_field_widget, .o_field_widget input.o_input{
     height: 36px;
-}
+}**/
 .o_datepicker .o_datepicker_button{
     top:6px;
 }
@@ -70,14 +71,14 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
 }
 .btn-primary{
     color: #FFFFFF;
-    background-color: #00A09D;
-    border-color: #00A09D;
+    background-color: #e77a11;
+    border-color: #e77a11;
     }
 
 .btn-primary:hover {
     color: #FFFFFF;
-    background-color: #007a77;
-    border-color: #006d6b;
+    background-color: #e77a11;
+    border-color: #e77a11;
 }
 .o_menu_apps .dropdown-menu.show {
     background: url(../img/background-img.jpg);
@@ -97,4 +98,29 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
 .o_content .o_form_view .oe_chatter, .modal-content .o_form_view .oe_chatter {
     display: none;
 }
+.o_affix_enabled .navbar-light {
+  display: none;
+}
+.o_footer {
+    display: none;
+}
 
+
+.navbar-light {
+    display: none;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:after {
+    border-left-color: #e77a11;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled {
+    background-color: #e77a11;
+    color: white !important;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: white;
+    background-color: #e77a11;
+    border-color: #e77a11;
+}
+.o_form_view .o_group.o_inner_group > tbody > tr > td.o_td_label {
+    min-width: 160px !important;
+}

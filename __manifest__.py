@@ -23,6 +23,9 @@
         'views/price_setup.xml',
         'views/targets.xml',
 	    'views/dashboard_views.xml',
+        # 'views/selection_question.xml',
+        'views/medical_price_setup.xml',
+        'views/insurance_application.xml',
         'views/actions.xml',
         'views/menu_item.xml',
 

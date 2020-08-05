@@ -21,14 +21,29 @@
       <menuitem id="target_ch" name="Targets" parent="policy_config"
                   action="sales_team.sales_team_config_action" />
 
-      <menuitem id="get_a_quote" name="Get A Quote" parent="arope_space" />
+<!--      <menuitem id="get_a_quote" name="Get A Quote" parent="arope_space" action="survey.get_quote_action" />-->
 <!--         <menuitem id="configuration_view_menu" name="Configuration"/> -->
-        <menuitem id="travel" parent="get_a_quote" name="Travel Quotation" action="get_a_quote_action"/>
-        <menuitem id="medical" parent="get_a_quote" name="Medical Quotation" action="action_medical_url"/>
+<!--        <menuitem id="travel" parent="get_a_quote" name="Quotation" />-->
+<!--        <menuitem id="medical" parent="get_a_quote" name="Medical Quotation" action="action_medical_url"/>-->
         <menuitem id="price_menu" name="Price Table" parent="policy_config"
                   action="quotation_price_action" sequence="4"/>
         <menuitem id="price_menu_family" name="Family Package" parent="policy_config"
                   action="quotation_price_action_family" sequence="5"/>
+<!--        <menuitem id="selection_setup" name="Selection Answer Setup" parent="policy_config"-->
+<!--                  action="selection_questions_action" sequence="15"/>-->
+<!--        <menuitem id="application_form" name="Application Form Setup" parent="policy_config"-->
+<!--                  action="questionnaire_action" sequence="7"/>-->
+    <menuitem name="Insurance Application"
+    	id="quotations"
+    	parent="arope_space"
+    	action="get_quote_action"
+	    sequence="900"/>
+	<menuitem id="main" name="Medical "
+                  />
+
+
+      <menuitem id="medical_setup" name="Medical Price Setup" parent="policy_config"
+                  action="medical_price_action" sequence="100"/>
 
 
 

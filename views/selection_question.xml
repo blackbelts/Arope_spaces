@@ -1,0 +1,47 @@
+<odoo>
+
+    <!-- Add a custom form view -->
+    <record id="selection_questions_view_form" model="ir.ui.view">
+		<field name="name">Selection Question</field>
+		<field name="model">selection.questions</field>
+		<field name="arch" type="xml">
+			<form>
+                <sheet>
+
+                    <group>
+                        <field name="product"/>
+                        <field name="quotation"/>
+                    </group>
+                    <notebook>
+                        <page string="Options">
+                            <field name="options_ids">
+                                <tree editable="bottom">
+                                    <field name="option"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+    <record id="selection_questions_view_tree" model="ir.ui.view">
+		<field name="name">Selection Question</field>
+		<field name="model">selection.questions</field>
+		<field name="arch" type="xml">
+			<tree>
+                <field name="product"/>
+                <field name="quotation"/>
+
+			</tree>
+		</field>
+	</record>
+    <record model="ir.actions.act_window" id="selection_questions_action">
+            <field name="name">Selection Question</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">selection.questions</field>
+            <field name="view_id" ref="selection_questions_view_tree"/>
+            <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

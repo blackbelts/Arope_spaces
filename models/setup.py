@@ -26,6 +26,13 @@ class Product(models.Model):
     line_of_bus = fields.Many2one('insurance.line.business', 'Line of Business',required=True)
     _sql_constraints = [
         ('product_unique', 'unique(product_name,line_of_bus)', 'Product already exists!')]
+
+    questionnaire_file = fields.Binary('Upload Questionnaire')
+    file_name = fields.Char("File Name")
+
+    questionnaire_ids = fields.One2many('questionnaire.line.setup', 'product_id')
+    survey_ids = fields.One2many('survey.line.setup', 'product_id')
+
 class Notification(models.Model):
     _name = 'system.notify'
     _rec_name = 'type'
