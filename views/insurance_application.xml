@@ -57,11 +57,12 @@
                         </page>
 
                         <page string="Questionnaire"  attrs="{'invisible': [('state', '=', 'quick_quote')]}">
-                            <button name="create_pdf" string="Download" type="object" class="oe_highlight"/>
-<!--                            <group>-->
-<!--                                <field name="questionnaire" widget="download_link"/>-->
+                            <button name="create_pdf" string="Download Questionnaire" type="object" class="oe_highlight"/>
+                            <group>
+                                <field name="questionnaire" filename="file_name"/>
+                                <field name="file_name" invisible="1"/>
 
-<!--                            </group>-->
+                            </group>
                             <field name="questions_ids" widget="many2many">
                                 <tree editable="bottom">
                                     <field name="question"/>
@@ -77,25 +78,27 @@
                         </page>
                          <page string="Required For Survey"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal'])]}">
                             <group>
-
-                                <group>
-                                    <field name="address"/>
-<!--                                    <field name="bussines_activity"/>-->
-                                    <field name="sum_insured"/>
-                                </group>
                                 <group>
                                     <field name="name_of_contact_person"/>
                                     <field name="main_phone"/>
                                     <field name="spare_phone"/>
                                 </group>
+                                <group>
+                                    <field name="address"/>
+                                    <field name="sum_insured"/>
+                                </group>
+
                             </group>
-                            <field name="available_time_ids">
-                                <tree editable="bottom">
-                                        <field name="date"/>
-                                        <field name="time_from"/>
-                                        <field name="time_to"/>
-                                </tree>
-                            </field>
+                            <group>
+                                <field name="available_time_ids">
+                                    <tree editable="bottom">
+                                            <field name="date"/>
+                                            <field name="date_to"/>
+                                            <field name="time_from"/>
+                                            <field name="time_to"/>
+                                    </tree>
+                                </field>
+                            </group>
                          </page>
                          <page string="Survey Report"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal'])]}">
                                 <field name="survey_report_ids">
@@ -118,15 +121,12 @@
                             </group>
                         </page>
                         <page string="Scanned Application" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'price'])]}">
-                            <h3>Please Upload Your National ID, Application (Questionnaire), And Other Required Files</h3>
-                            <group>
-                                <field name="final_application_ids">
-                                    <tree editable="bottom">
-                                        <field name="description"/>
-                                        <field name="application_files" />
-                                    </tree>
-                                </field>
-                            </group>
+                            <field name="final_application_ids">
+                                <tree editable="bottom">
+                                    <field name="description"/>
+                                    <field name="application_files" />
+                                </tree>
+                            </field>
                         </page>
                          <page string="Rejection Reason" attrs="{'invisible': [('state', '!=', 'cancel')]}">
                             <group>
@@ -169,10 +169,23 @@
 			</tree>
 		</field>
 	</record>
+    <record id="insurance_view_search" model="ir.ui.view">
+        <field name="name">insurance.search</field>
+        <field name="model">insurance.quotation</field>
+        <field name="arch" type="xml">
+            <search string="Insurance">
+                <group expand="0" string="Group By">
+                    <filter string="State" name="groupby_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record model="ir.actions.act_window" id="insurance_action">
             <field name="name">Insurance Application</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">insurance.quotation</field>
+            <field name="context">{'search_default_groupby_state': 1}</field>
             <field name="view_id" ref="insurance_view_tree"/>
             <field name="view_mode">form,tree,kanban</field>
     </record>

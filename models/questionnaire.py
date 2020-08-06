@@ -86,3 +86,10 @@ class SurveyLineSetup(models.Model):
     # selection_field = fields.Many2one('selections.fields', 'Answer', ondelele='cascade', )
     # questionnaire_id = fields.Many2one('questionnaire.setup', ondelele='cascade', index=True)
     product_id = fields.Many2one('insurance.product', ondelele='cascade', index=True)
+
+class FinalApplicationSetup(models.Model):
+    _name = 'final.application.setup'
+    _rec_name = 'description'
+    description = fields.Char('Document Name')
+    # application_files = fields.Binary('File')
+    product_id = fields.Many2one('insurance.product', ondelele='cascade', index=True)

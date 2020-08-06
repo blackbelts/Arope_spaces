@@ -4,6 +4,10 @@ from datetime import timedelta, datetime
 from odoo.http import request
 from datetime import datetime
 # from base64 import b64decode
+import codecs
+import requests
+
+
 
 import logging
 import werkzeug
@@ -28,7 +32,7 @@ time = [('12:00 AM', '12:00 AM'), ('12:30 AM', '12:30 AM'), ('01:00 AM', '01:00 
 
 class Quotation(models.Model):
     _name = 'insurance.quotation'
-    _rec_name = 'id'
+    _rec_name = 'application_number'
     # insurance_type = fields.Selection([
     #     ('medical', 'Medical'),
     #     ('non-medical', 'Non-Medical')], string='Insurance Type', default='medical', )
@@ -83,13 +87,26 @@ class Quotation(models.Model):
     final_application_ids = fields.One2many('final.application', 'application_id')
     questions_ids = fields.One2many('insurances.answers', 'application_id')
     survey_report_ids = fields.One2many('survey.report', 'application_id')
-    available_time_ids = fields.One2many('available.time', 'application_id')
+    available_time_ids = fields.One2many('available.time', 'application_id', sting='Available Time')
     state_history_ids = fields.One2many('state.history', 'application_id')
 
 
 
 
     def create_pdf(self):
+        return {
+            'type': 'ir.actions.act_url',
+            'url': 'http://207.154.195.214/questionnaire.docx',
+            'target': 'self',
+        }
+
+
+        # file = self.product_id.questionnaire_file
+        # file_decode = base64.decodestring(file)
+        # image_result = open('questionnaire.docx', 'wb')  # create a writable image and write the decoding result
+        # image_result.write(file_decode)
+        # with codecs.open('questionnaire.docx', 'w') as f:
+        #     f.write(file_decode)
         # pdf = self.product_id.questionnaire_file
         # pdf = base64.b64decode(pdf)
         # with open('file.pdf', 'wb') as fout:
@@ -102,13 +119,13 @@ class Quotation(models.Model):
         # f = open('file.pdf', 'wb')
         # f.write(bytes)
         # f.close()
-        return {
-            # 'name': 'FEC',
-            'type': 'ir.actions.act_url',
-            'url': "web/content/?model=insurance.quotation&id=" + str(
-                self.id) + "&filename_field=file_name&field=questionnaire&download=true&filename=questionnaire.pdf",
-            'target': 'self',
-        }
+        # return {
+        #     # 'name': 'FEC',
+        #     'type': 'ir.actions.act_url',
+        #     'url': "web/content/?model=insurance.quotation&id=" + str(
+        #         self.id) + "&filename_field=file_name&field=questionnaire&download=true&filename=questionnaire.pdf",
+        #     'target': 'self',
+        # }
         # response = werkzeug.wrappers.Response()
         # slide_slide_obj = request.env['slide.slide'].sudo().search([('id', '=', id)])
         # response.data = slide_slide_obj.datas and slide_slide_obj.datas.decode('base64') or ''
@@ -123,8 +140,42 @@ class Quotation(models.Model):
             currentMonth = datetime.today().strftime("%m")
             self.write({'application_number' : self.lob.line_of_business.upper() + '/' + currentYear[2:4] + '/' + currentMonth +
                                                '/' + number})
+
             if self.lob.line_of_business == 'Medical':
+                # print('Medical')
                 self.write({'state': 'quick_quote'})
+                if self.questions_ids:
+                    for question in self.questions_ids:
+                        question.unlink()
+                if self.survey_report_ids:
+                    for question in self.survey_report_ids:
+                        question.unlink()
+                if self.final_application_ids:
+                    for question in self.final_application_ids:
+                        question.unlink()
+                related_questions = self.env["questionnaire.line.setup"].search(
+                    [("product_id.product_name", "=", 'Medical')])
+                if related_questions:
+                    for question in related_questions:
+                        # if question.selection_question:
+                        #     self.env['insurances.answers'].create({"question": question.id,"selection_question": question.selection_question.id, "desc": question.desc, "application_id": self.id})
+                        # else:
+                        self.env['insurances.answers'].create(
+                            {"question": question.id,
+                             "desc": question.desc, "application_id": self.id})
+                related_survey_questions = self.env["survey.line.setup"].search(
+                    [("product_id.product_name", "=", 'Medical')])
+                if related_survey_questions:
+                    for question in related_survey_questions:
+                        self.env['survey.report'].create(
+                            {"question": question.id, "desc": question.desc, "application_id": self.id})
+                related_documents = self.env["final.application.setup"].search(
+                    [("product_id.product_name", "=", 'Medical')])
+                if related_documents:
+                    for question in related_documents:
+                        self.env['final.application'].create(
+                            {"description": question.id, "application_id": self.id})
+
                 # self.env['state.history'].create({"application_id": self.id, "state": 'quick_quote',
                 #                                   "datetime": datetime.now.strftime("%m/%d/%Y, %H:%M:%S"), "user": self.create_uid})
             else:
@@ -132,6 +183,7 @@ class Quotation(models.Model):
                 # self.env['state.history'].create({"application_id": self.id, "state": 'proposal',
                 #                                   "datetime": datetime.now.strftime("%m/%d/%Y, %H:%M:%S"),
                 #                                   "user": self.write_uid})
+
 
 
     @api.onchange('product_id')
@@ -142,10 +194,13 @@ class Quotation(models.Model):
         if self.survey_report_ids:
             for question in self.survey_report_ids:
                 question.unlink()
+        if self.final_application_ids:
+            for question in self.final_application_ids:
+                question.unlink()
         if self.product_id:
             # print(self.product_id)
-            self.questionnaire = self.product_id.questionnaire_file
-            self.file_name = self.product_id.file_name
+            # self.questionnaire = self.product_id.questionnaire_file
+            # self.file_name = self.product_id.file_name
             related_questions = self.env["questionnaire.line.setup"].search([("product_id.id", "=", self.product_id.id)])
             if related_questions:
                 for question in related_questions:
@@ -159,8 +214,12 @@ class Quotation(models.Model):
             if related_survey_questions:
                 for question in related_survey_questions:
                     self.env['survey.report'].create({"question": question.id, "desc": question.desc, "application_id": self.id})
-
-
+            related_documents = self.env["final.application.setup"].search(
+                [("product_id.id", "=", self.product_id.id)])
+            if related_documents:
+                for question in related_documents:
+                    self.env['final.application'].create(
+                        {"description": question.id, "application_id": self.id})
 
     @api.onchange('dob')
     def compute_trial_number(self):
@@ -377,14 +436,15 @@ class SurveyReport(models.Model):
 class FinalApplication(models.Model):
     _name = 'final.application'
 
-    description = fields.Char('Title')
+    description = fields.Many2one('final.application.setup', 'Document Name')
     application_files = fields.Binary('File')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
 class AvailableTime(models.Model):
     _name = 'available.time'
 
-    date = fields.Date('Date')
+    date = fields.Date('From Date')
+    date_to = fields.Date('To Date')
     time_from = fields.Selection(time, "From", required=True)
     time_to = fields.Selection(time, "To", required=True)
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
@@ -400,7 +460,7 @@ class stateHistory(models.Model):
         ('application', 'Scanned Application'),
         ('pay', 'Payment'),
         ('paid', 'Paid'),
-        ('cancel', 'Rejection Reasons')], string='Status', readonly=True)
+        ('cancel', 'Rejection Reasons')], string='State', readonly=True)
     datetime = fields.Datetime('Date')
     user = fields.Many2one('res.users', ondelete='cascade')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')

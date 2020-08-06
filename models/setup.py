@@ -32,6 +32,8 @@ class Product(models.Model):
 
     questionnaire_ids = fields.One2many('questionnaire.line.setup', 'product_id')
     survey_ids = fields.One2many('survey.line.setup', 'product_id')
+    final_application_ids = fields.One2many('final.application.setup', 'product_id')
+
 
 class Notification(models.Model):
     _name = 'system.notify'

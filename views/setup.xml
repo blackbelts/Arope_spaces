@@ -87,6 +87,13 @@
                                 </tree>
                             </field>
                         </page>
+                        <page string="Document Required" >
+                            <field name="final_application_ids">
+                                <tree editable="bottom">
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+                        </page>
 
                     </notebook>
 
