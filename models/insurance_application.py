@@ -54,7 +54,9 @@ class Quotation(models.Model):
     spare_phone = fields.Char('Mobile Number (Spare)')
     state = fields.Selection([
         ('quick_quote', 'Quick Quote'),
-        ('proposal', 'Proposal (Questionnaire)'),
+        ('proposal', 'Fill Form'),
+        ('submitted', 'Form Submitted'),
+        ('survey_required', 'Survey Required'),
         ('survey', 'Survey Report'),
         ('price', 'Pricing'),
         ('application', 'Scanned Application'),
@@ -73,7 +75,7 @@ class Quotation(models.Model):
     # available_time_from = fields.Datetime('Available Time From')
     # available_time_to = fields.Datetime('To')
     # image = fields.Binary("Image", help="Select image here")
-    questionnaire = fields.Binary("Questionnaire")
+    questionnaire = fields.Binary("Upload Application")
     file_name = fields.Char("File Name")
     edit_questionnaire = fields.Binary("Questionnaire Edited")
     price = fields.Float('Premium')
@@ -89,6 +91,7 @@ class Quotation(models.Model):
     survey_report_ids = fields.One2many('survey.report', 'application_id')
     available_time_ids = fields.One2many('available.time', 'application_id', sting='Available Time')
     state_history_ids = fields.One2many('state.history', 'application_id')
+    # create_uid = fields.Many2one('res.users', 'Broker')
 
 
 
@@ -317,19 +320,37 @@ class Quotation(models.Model):
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
 
-
+    def survey_required(self):
+        self.write({'state': 'survey_required'})
+        self.env['state.history'].create({"application_id": self.id, "state": 'survey_required',
+                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                          "user": self.write_uid.id})
+    # def pricing(self):
+    #     self.write({'state': 'price'})
+    #     self.env['state.history'].create({"application_id": self.id, "state": 'price',
+    #                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    #                                       "user": self.write_uid.id})
 
     def submit_questionnaire(self):
-        if self.lob.line_of_business == 'Medical':
-            self.write({'state': 'price'})
-            self.env['state.history'].create({"application_id": self.id, "state": 'price',
-                                              "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                              "user": self.write_uid.id})
-        else:
-            self.write({'state': 'survey'})
-            self.env['state.history'].create({"application_id": self.id, "state": 'survey',
-                                              "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                              "user": self.write_uid.id})
+        self.write({'state': 'submitted'})
+        self.env['state.history'].create({"application_id": self.id, "state": 'submitted',
+                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                          "user": self.write_uid.id})
+    def submit_survey_required(self):
+        self.write({'state': 'survey'})
+        self.env['state.history'].create({"application_id": self.id, "state": 'survey',
+                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                          "user": self.write_uid.id})
+        # if self.lob.line_of_business == 'Medical':
+        #     self.write({'state': 'price'})
+        #     self.env['state.history'].create({"application_id": self.id, "state": 'price',
+        #                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        #                                       "user": self.write_uid.id})
+        # else:
+        #     self.write({'state': 'survey'})
+        #     self.env['state.history'].create({"application_id": self.id, "state": 'survey',
+        #                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        #                                       "user": self.write_uid.id})
 
     # def question_type(self,i):
     #
@@ -454,7 +475,9 @@ class stateHistory(models.Model):
 
     state = fields.Selection([
         ('quick_quote', 'Quick Quote'),
-        ('proposal', 'Proposal (Questionnaire)'),
+        ('proposal', 'Fill Form'),
+        ('submitted', 'Form Submitted'),
+        ('survey_required', 'Survey Required'),
         ('survey', 'Survey Report'),
         ('price', 'Pricing'),
         ('application', 'Scanned Application'),

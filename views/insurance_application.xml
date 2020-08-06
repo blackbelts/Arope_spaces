@@ -12,6 +12,9 @@
                     <button name="approve_medical_price" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'quick_quote')]}"/>
                     <button type="object" string="Submit" name="submit_questionnaire" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}"/>
                     <button name="survey_confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey')]}"/>
+                    <button name="survey_required" string="Survey Required" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
+                    <button name="submit_survey_required" string="Submit" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey_required')]}"/>
+                    <button name="survey_confirm" string="Pricing" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
                     <button name="final_confirm" string="Final Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'price')]}"/>
                     <button name="approve" string="Approve" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'application')]}"/>
                     <button name="pay" attrs="{'invisible': [('state', '!=', 'pay')]}" string="Pay"  type="object" class="oe_highlight"/>
@@ -43,7 +46,7 @@
                             <field name="application_date" />
                             <field name="quote_trials" readonly="1" force_save="1"  attrs="{'invisible': [('lob', '!=', 1)]}"/>
                             <field name="final_price" readonly="1" force_save="1"/>
-                            <field name="create_uid"/>
+                            <field name="create_uid" string="Broker" />
                         </group>
                     </group>
 
@@ -55,14 +58,17 @@
                                 <field name="price" force_save="1" attrs="{'readonly': [('state', '!=', 'price')]}"/>
                             </group>
                         </page>
-
-                        <page string="Questionnaire"  attrs="{'invisible': [('state', '=', 'quick_quote')]}">
-                            <button name="create_pdf" string="Download Questionnaire" type="object" class="oe_highlight"/>
+                        <page string="Download Form"  attrs="{'invisible': [('state', '=', 'quick_quote')]}">
+                             <button name="create_pdf" string="Download Application" type="object" class="oe_highlight"/>
                             <group>
                                 <field name="questionnaire" filename="file_name"/>
                                 <field name="file_name" invisible="1"/>
 
                             </group>
+                        </page>
+
+                        <page string="Fill Form"  attrs="{'invisible': [('state', '=', 'quick_quote')]}">
+
                             <field name="questions_ids" widget="many2many">
                                 <tree editable="bottom">
                                     <field name="question"/>
@@ -76,7 +82,7 @@
                                 </tree>
                             </field>
                         </page>
-                         <page string="Required For Survey"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal'])]}">
+                         <page string="Required For Survey"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'submitted'])]}">
                             <group>
                                 <group>
                                     <field name="name_of_contact_person"/>
@@ -100,7 +106,7 @@
                                 </field>
                             </group>
                          </page>
-                         <page string="Survey Report"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal'])]}">
+                         <page string="Survey Report"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'submitted' ,'survey_required'])]}">
                                 <field name="survey_report_ids">
                                     <tree editable="bottom">
                                         <field name="question"/>
@@ -115,12 +121,12 @@
                                 </field>
                          </page>
 
-                        <page string="Final Premium" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey'])]}">
+                        <page string="Final Premium" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'submitted','survey_required'])]}">
                             <group>
                                 <field name="final_price" attrs="{'readonly': [('state', '!=', 'price')]}" force_save="1"/>
                             </group>
                         </page>
-                        <page string="Scanned Application" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'price'])]}">
+                        <page string="Scanned Application" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'price', 'submitted','survey_required'])]}">
                             <field name="final_application_ids">
                                 <tree editable="bottom">
                                     <field name="description"/>
@@ -155,9 +161,10 @@
 		<field name="model">insurance.quotation</field>
 		<field name="arch" type="xml">
 			<tree>
+                <field name="create_uid" string="Broker"/>
                 <field name="name"/>
                 <field name="phone"/>
-                <field name="email"/>
+<!--                <field name="email"/>-->
                 <field name="application_number"/>
                 <field name="application_date"/>
 				<field name="lob"/>
