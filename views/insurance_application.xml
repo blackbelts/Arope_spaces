@@ -11,17 +11,29 @@
                     <field name="state" widget="statusbar"/>
                     <button name="approve_medical_price" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'quick_quote')]}"/>
                     <button type="object" string="Submit" name="submit_questionnaire" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}"/>
+                    <button name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey_required')]}"/>
                     <button name="survey_confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey')]}"/>
                     <button name="survey_required" string="Survey Required" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
-                    <button name="submit_survey_required" string="Submit" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey_required')]}"/>
-                    <button name="survey_confirm" string="Pricing" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
-                    <button name="final_confirm" string="Final Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'price')]}"/>
-                    <button name="approve" string="Approve" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'application')]}"/>
-                    <button name="pay" attrs="{'invisible': [('state', '!=', 'pay')]}" string="Pay"  type="object" class="oe_highlight"/>
-                    <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', 'proposal')]}"/>
+                    <button name="submit_survey_required" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'surveyor')]}"/>
+                    <button name="survey_confirm" string="Offering" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
+                    <button name="final_confirm" string="Confirm Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer')]}"/>
+                    <button name="accept_offer" string="Approve" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer_ready')]}"/>
+                    <button name="issued" attrs="{'invisible': [('state', '!=', 'policy_pending')]}" string="Issued"  type="object" class="oe_highlight"/>
+                    <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['proposal', 'submitted'])]}"/>
+
                 </header>
+
                 <sheet>
                     <h3>Insurance Application Form</h3>
+                    <h2 attrs="{'invisible': [('state', '!=', 'quick_quote')]}">Enter quick quote required info and get instant result</h2>
+                    <h2 attrs="{'invisible': [('state', '!=', 'proposal')]}">Kindly answer application form questions</h2>
+                    <h2 attrs="{'invisible': [('state', '!=', 'offer_ready')]}">Offer is ready. You can print</h2>
+                    <h2 attrs="{'invisible': [('state', '!=', 'application')]}">Kindly upload documents as per below list</h2>
+                    <h2 attrs="{'invisible': [('state', '!=', 'policy_pending')]}">Policy issue is in progress</h2>
+                    <h2 attrs="{'invisible': [('state', '!=', 'issued')]}">Policy is issued</h2>
+                    <h2 attrs="{'invisible': [('state', '!=', 'survey_required')]}">Fill in survey required information</h2>
+<!--                    <h2 attrs="{'invisible': [('state', '!=', 'quick_quote')]}">Pending on reinsurance agreement</h2>-->
+
                     <group>
                         <group>
                             <field name="lob"/>
@@ -43,6 +55,7 @@
                         </group>
                         <group>
                             <field name="application_number" readonly="1" force_save="1"/>
+                            <field name="policy_number" readonly="1" force_save="1" attrs="{'invisible': [('policy_number', '=', False)]}"/>
                             <field name="application_date" />
                             <field name="quote_trials" readonly="1" force_save="1"  attrs="{'invisible': [('lob', '!=', 1)]}"/>
                             <field name="final_price" readonly="1" force_save="1"/>
@@ -55,32 +68,42 @@
                             <group>
                                 <field name="dob" force_save="1" attrs="{'readonly': [('state', '!=', 'quick_quote')]}"/>
                                 <field name="product" force_save="1" attrs="{'readonly': [('state', '!=', 'quick_quote')]}"/>
-                                <field name="price" force_save="1" attrs="{'readonly': [('state', '!=', 'price')]}"/>
+                                <field name="price" force_save="1" attrs="{'readonly': [('state', '!=', 'offer')]}"/>
                             </group>
                         </page>
-                        <page string="Download Form"  attrs="{'invisible': [('state', '=', 'quick_quote')]}">
-                             <button name="create_pdf" string="Download Application" type="object" class="oe_highlight"/>
-                            <group>
-                                <field name="questionnaire" filename="file_name"/>
-                                <field name="file_name" invisible="1"/>
+<!--                        <page string="Download Form"  attrs="{'invisible': [('state', '=', 'quick_quote')]}">-->
+<!--                             <button name="create_pdf" string="Download Application" type="object" class="oe_highlight"/>-->
+<!--                            <group>-->
+<!--                                <field name="questionnaire" filename="file_name"/>-->
+<!--                                <field name="file_name" invisible="1"/>-->
 
-                            </group>
-                        </page>
+<!--                            </group>-->
+<!--                        </page>-->
 
                         <page string="Fill Form"  attrs="{'invisible': [('state', '=', 'quick_quote')]}">
 
-                            <field name="questions_ids" widget="many2many">
+                            <field name="choose_questions_ids" attrs="{'invisible': [('choose_questions_ids', '=', False)]}">
                                 <tree editable="bottom">
                                     <field name="question"/>
-<!--                                    <field name="desc" />-->
                                     <field name="options"/>
-                                    <field name="text"/>
-                                    <field name="value"/>
-
-<!--                                    <field name="boolean"/>-->
                                     <field name="file"/>
                                 </tree>
                             </field>
+                            <field name="numerical_questions_ids" attrs="{'invisible': [('choose_questions_ids', '=', False)]}">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="value"/>
+                                    <field name="file"/>
+                                </tree>
+                            </field>
+                            <field name="text_questions_ids" attrs="{'invisible': [('choose_questions_ids', '=', False)]}">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="text"/>
+                                    <field name="file"/>
+                                </tree>
+                            </field>
+
                         </page>
                          <page string="Required For Survey"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'submitted'])]}">
                             <group>
@@ -94,7 +117,9 @@
                                     <field name="sum_insured"/>
                                 </group>
 
+
                             </group>
+
                             <group>
                                 <field name="available_time_ids">
                                     <tree editable="bottom">
@@ -105,8 +130,11 @@
                                     </tree>
                                 </field>
                             </group>
+                             <group>
+                                 <field name="surveyor" />
+                             </group>
                          </page>
-                         <page string="Survey Report"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'submitted' ,'survey_required'])]}">
+                         <page string="Survey Report"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'submitted' ,'survey_required', 'surveyor'])]}">
                                 <field name="survey_report_ids">
                                     <tree editable="bottom">
                                         <field name="question"/>
@@ -121,12 +149,12 @@
                                 </field>
                          </page>
 
-                        <page string="Final Premium" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'submitted','survey_required'])]}">
+                        <page string="Final Premium" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'submitted','survey_required', 'surveyor'])]}">
                             <group>
-                                <field name="final_price" attrs="{'readonly': [('state', '!=', 'price')]}" force_save="1"/>
+                                <field name="final_price" attrs="{'readonly': [('state', '!=', 'offer')]}" force_save="1"/>
                             </group>
                         </page>
-                        <page string="Scanned Application" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'price', 'submitted','survey_required'])]}">
+                        <page string="Scanned Application" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'offer', 'submitted','survey_required', 'surveyor','offer_ready'])]}">
                             <field name="final_application_ids">
                                 <tree editable="bottom">
                                     <field name="description"/>

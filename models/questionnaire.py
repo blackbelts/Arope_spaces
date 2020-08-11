@@ -13,6 +13,8 @@ class QuestionnaireLineSetup(models.Model):
     question = fields.Char('Question')
     options = fields.One2many('selection.options', 'questionnaire_id', sting="Selections")
     desc = fields.Char('Description')
+    question_type = fields.Selection([('text', 'Text'), ('numerical', 'Numerical'), ('choose', 'Choose')],
+                                     'Question Type', default='text')
     # question_type = fields.Selection([('text', 'Text'), ('numerical', 'Numerical'), ('boolean', 'True OR False')],
     #                                  'Question Type', default='text')
     # text = fields.Char('Text')
@@ -75,7 +77,7 @@ class SurveyLineSetup(models.Model):
     options = fields.One2many('selection.options', 'survey_id', sting="Selections")
 
     desc = fields.Char('Description')
-    # question_type = fields.Selection([('text', 'Text'), ('numerical', 'Numerical'), ('boolean', 'True OR False')],
+    # question_type = fields.Selection([('text', 'Text'), ('numerical', 'Numerical'), ('choose', 'Choose')],
     #                                  'Question Type', default='text')
     # text = fields.Char('Text')
     # file = fields.Binary('File')

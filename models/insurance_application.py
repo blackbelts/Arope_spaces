@@ -36,8 +36,7 @@ class Quotation(models.Model):
     # insurance_type = fields.Selection([
     #     ('medical', 'Medical'),
     #     ('non-medical', 'Non-Medical')], string='Insurance Type', default='medical', )
-    lob = fields.Many2one('insurance.line.business', 'LOB', required=True,
-                          default=lambda self: self.env['insurance.line.business'].search([('line_of_business', '=', 'Medical')]))
+    lob = fields.Many2one('insurance.line.business', 'LOB', required=True)
     product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
     # domain = "[('id', '!=', 26)]"
     name = fields.Char('Name', required=True)
@@ -55,14 +54,16 @@ class Quotation(models.Model):
     state = fields.Selection([
         ('quick_quote', 'Quick Quote'),
         ('proposal', 'Fill Form'),
-        ('submitted', 'Form Submitted'),
+        ('submitted', 'Form Complete'),
         ('survey_required', 'Survey Required'),
+        ('surveyor', 'Surveyor Assigned'),
         ('survey', 'Survey Report'),
-        ('price', 'Pricing'),
-        ('application', 'Scanned Application'),
-        ('pay', 'Payment'),
-        ('paid', 'Paid'),
-        ('cancel', 'Rejected')], string='Status', readonly=True)
+        ('offer', 'To Offer'),
+        ('offer_ready', 'Offer Ready'),
+        ('application', 'Upload Documents'),
+        ('policy_pending', 'Policy Pending'),
+        ('issued', 'Issued'),
+        ('cancel', 'Rejected')], string='Status', readonly=True, default='quick_quote')
     rejection_reason = fields.Selection([('price', 'Price'), ('benefits', 'Benefit')], sting="Reason")
     comment = fields.Text('Comment')
 
@@ -87,11 +88,15 @@ class Quotation(models.Model):
     final_price = fields.Float('Final Premium')
     # final_price = fields.Float('Final Price')
     final_application_ids = fields.One2many('final.application', 'application_id')
-    questions_ids = fields.One2many('insurances.answers', 'application_id')
+    # questions_ids = fields.One2many('insurances.answers', 'text_application_id')
+    text_questions_ids = fields.One2many('insurances.answers', 'text_application_id')
+    choose_questions_ids = fields.One2many('insurances.answers', 'choose_application_id')
+    numerical_questions_ids = fields.One2many('insurances.answers', 'numerical_application_id')
     survey_report_ids = fields.One2many('survey.report', 'application_id')
     available_time_ids = fields.One2many('available.time', 'application_id', sting='Available Time')
     state_history_ids = fields.One2many('state.history', 'application_id')
-    # create_uid = fields.Many2one('res.users', 'Broker')
+    surveyor = fields.Many2one('res.users', 'Surveyor')
+    policy_number = fields.Char('Policy Num')
 
 
 
@@ -135,6 +140,14 @@ class Quotation(models.Model):
         # response.mimetype = 'application/pdf'
         # return response
 
+    @api.onchange('final_application_ids')
+    def policy_pending(self):
+        res = []
+        for rec in self.final_application_ids:
+            res.append(rec.application_files)
+        if all(res):
+            self.write({'state': 'policy_pending'})
+
     @api.onchange('lob')
     def compute_application_number(self):
         if self.lob:
@@ -147,8 +160,14 @@ class Quotation(models.Model):
             if self.lob.line_of_business == 'Medical':
                 # print('Medical')
                 self.write({'state': 'quick_quote'})
-                if self.questions_ids:
-                    for question in self.questions_ids:
+                if self.text_questions_ids:
+                    for question in self.text_questions_ids:
+                        question.unlink()
+                if self.choose_questions_ids:
+                    for question in self.choose_questions_ids:
+                        question.unlink()
+                if self.numerical_questions_ids:
+                    for question in self.numerical_questions_ids:
                         question.unlink()
                 if self.survey_report_ids:
                     for question in self.survey_report_ids:
@@ -160,12 +179,16 @@ class Quotation(models.Model):
                     [("product_id.product_name", "=", 'Medical')])
                 if related_questions:
                     for question in related_questions:
-                        # if question.selection_question:
-                        #     self.env['insurances.answers'].create({"question": question.id,"selection_question": question.selection_question.id, "desc": question.desc, "application_id": self.id})
-                        # else:
-                        self.env['insurances.answers'].create(
-                            {"question": question.id,
-                             "desc": question.desc, "application_id": self.id})
+                        if question.question_type == 'choose':
+                            self.choose_questions_ids.create(
+                                {"question": question.id, "choose_application_id": self.id})
+                        elif question.question_type == 'numerical':
+                            self.numerical_questions_ids.create(
+                                {"question": question.id, "numerical_application_id": self.id})
+                        else:
+                            self.text_questions_ids.create(
+                                {"question": question.id, "text_application_id": self.id})
+
                 related_survey_questions = self.env["survey.line.setup"].search(
                     [("product_id.product_name", "=", 'Medical')])
                 if related_survey_questions:
@@ -191,8 +214,15 @@ class Quotation(models.Model):
 
     @api.onchange('product_id')
     def get_questions(self):
-        if self.questions_ids:
-            for question in self.questions_ids:
+        if self.text_questions_ids:
+            for question in self.text_questions_ids:
+                question.unlink()
+        if self.choose_questions_ids:
+            for question in self.choose_questions_ids:
+                question.unlink()
+
+        if self.numerical_questions_ids:
+            for question in self.numerical_questions_ids:
                 question.unlink()
         if self.survey_report_ids:
             for question in self.survey_report_ids:
@@ -207,12 +237,15 @@ class Quotation(models.Model):
             related_questions = self.env["questionnaire.line.setup"].search([("product_id.id", "=", self.product_id.id)])
             if related_questions:
                 for question in related_questions:
-                    # if question.selection_question:
-                    #     self.env['insurances.answers'].create({"question": question.id,"selection_question": question.selection_question.id, "desc": question.desc, "application_id": self.id})
-                    # else:
-                        self.env['insurances.answers'].create(
-                            {"question": question.id,
-                             "desc": question.desc, "application_id": self.id})
+                    if question.question_type == 'choose':
+                        self.choose_questions_ids.create(
+                            {"question": question.id, "choose_application_id": self.id})
+                    elif question.question_type == 'numerical':
+                        self.numerical_questions_ids.create(
+                            {"question": question.id, "numerical_application_id": self.id})
+                    else:
+                        self.text_questions_ids.create(
+                            {"question": question.id, "text_application_id": self.id})
             related_survey_questions = self.env["survey.line.setup"].search([("product_id.id", "=", self.product_id.id)])
             if related_survey_questions:
                 for question in related_survey_questions:
@@ -265,8 +298,9 @@ class Quotation(models.Model):
             ages.append(age)
         return ages
 
-    @api.onchange('dob')
+    # @api.onchange('dob')
     # @api.onchange('product')
+    @api.onchange('dob')
     def calculate_price(self):
         if self.lob.line_of_business == 'Medical':
             if self.product:
@@ -315,14 +349,19 @@ class Quotation(models.Model):
                                           "user": self.write_uid.id})
 
     def survey_confirm(self):
-        self.write({'state': 'price'})
-        self.env['state.history'].create({"application_id": self.id, "state": 'price',
+        self.write({'state': 'offer'})
+        self.env['state.history'].create({"application_id": self.id, "state": 'offer',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
 
     def survey_required(self):
         self.write({'state': 'survey_required'})
         self.env['state.history'].create({"application_id": self.id, "state": 'survey_required',
+                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                          "user": self.write_uid.id})
+    def assign_surveyor(self):
+        self.write({'state': 'surveyor'})
+        self.env['state.history'].create({"application_id": self.id, "state": 'surveyor',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
     # def pricing(self):
@@ -363,25 +402,43 @@ class Quotation(models.Model):
     #         self.write({'state': 'final'})
 
     def final_confirm(self):
+        self.write({'state': 'offer_ready'})
+        self.env['state.history'].create({"application_id": self.id, "state": 'offer_ready',
+                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                          "user": self.write_uid.id})
+
+    # def approve(self):
+    #     self.write({'state': 'policy_pending'})
+    #     self.env['state.history'].create({"application_id": self.id, "state": 'policy_pending',
+    #                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    #                                       "user": self.write_uid.id})
+
+    def accept_offer(self):
         self.write({'state': 'application'})
         self.env['state.history'].create({"application_id": self.id, "state": 'application',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
 
-    def approve(self):
-        self.write({'state': 'pay'})
-        self.env['state.history'].create({"application_id": self.id, "state": 'pay',
+    def issued(self):
+
+        self.write({'state': 'issued'})
+        self.env['state.history'].create({"application_id": self.id, "state": 'issued',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'wizard.insurance.quotation',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_insurance_app_id':  self.id
+            }
 
-    def pay(self):
-        self.write({'state': 'paid'})
-        self.env['state.history'].create({"application_id": self.id, "state": 'paid',
-                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                          "user": self.write_uid.id})
+        }
 
-    # def pay(self):
-    #     self.write({'state': 'pay'})
+
+
 
     def reject(self):
         self.write({'state': 'cancel'})
@@ -434,12 +491,16 @@ class Answers(models.Model):
 
     question = fields.Many2one('questionnaire.line.setup','Question')
     # selection_question = fields.Many2one('selection.questions', ondelele='cascade')
+    question_type = fields.Selection([('text', 'Text'), ('numerical', 'Numerical'), ('choose', 'Choose')],
+                                     'Question Type', default='text')
     desc = fields.Char('Description')
-    text = fields.Char('Answer')
+    text = fields.Text('Answer')
     file = fields.Binary('File')
     value = fields.Float('Value')
     boolean = fields.Boolean('True Or False Answer', default=False)
-    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    text_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    choose_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    numerical_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     options = fields.Many2one('selection.options', 'Choose',ondelete='cascade', domain="[('questionnaire_id', '=', question)]")
 
 class SurveyReport(models.Model):
@@ -448,7 +509,7 @@ class SurveyReport(models.Model):
     question = fields.Many2one('survey.line.setup','Question')
     options = fields.Many2one('selection.options', 'Choose', ondelete='cascade', domain="[('survey_id', '=', question)]")
     desc = fields.Char('Description')
-    text = fields.Char('Answer')
+    text = fields.Text('Answer')
     file = fields.Binary('File')
     value = fields.Float('Value')
     boolean = fields.Boolean('True Or False Answer', default=False)
@@ -476,14 +537,16 @@ class stateHistory(models.Model):
     state = fields.Selection([
         ('quick_quote', 'Quick Quote'),
         ('proposal', 'Fill Form'),
-        ('submitted', 'Form Submitted'),
+        ('submitted', 'Form Complete'),
         ('survey_required', 'Survey Required'),
+        ('surveyor', 'Surveyor Assigned'),
         ('survey', 'Survey Report'),
-        ('price', 'Pricing'),
-        ('application', 'Scanned Application'),
-        ('pay', 'Payment'),
-        ('paid', 'Paid'),
-        ('cancel', 'Rejection Reasons')], string='State', readonly=True)
+        ('offer', 'To Offer'),
+        ('offer_ready', 'Offer Ready'),
+        ('application', 'Upload Documents'),
+        ('policy_pending', 'Policy Pending'),
+        ('issued', 'Issued'),
+        ('cancel', 'Rejected')], string='Status', readonly=True)
     datetime = fields.Datetime('Date')
     user = fields.Many2one('res.users', ondelete='cascade')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
@@ -534,6 +597,14 @@ class SelectionOptions(models.Model):
     option = fields.Char('Option')
     survey_id = fields.Many2one('survey.line.setup', ondelete='cascade')
     questionnaire_id = fields.Many2one('questionnaire.line.setup', ondelete='cascade')
+
+class WizardInsuranceQuotation(models.TransientModel):
+    _name = 'wizard.insurance.quotation'
+    insurance_app_id = fields.Many2one('insurance.quotation')
+    policy_number = fields.Char('Policy Num')
+
+    def policy_num(self):
+        self.insurance_app_id.write({'policy_number' : self.policy_number})
 
 
 
