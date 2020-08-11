@@ -9,21 +9,23 @@
                 <header>
 
                     <field name="state" widget="statusbar"/>
-                    <button name="approve_medical_price" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'quick_quote')]}"/>
-                    <button type="object" string="Submit" name="submit_questionnaire" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}"/>
-                    <button name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey_required')]}"/>
-                    <button name="survey_confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey')]}"/>
-                    <button name="survey_required" string="Survey Required" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
-                    <button name="submit_survey_required" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'surveyor')]}"/>
-                    <button name="survey_confirm" string="Offering" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
-                    <button name="final_confirm" string="Confirm Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer')]}"/>
-                    <button name="accept_offer" string="Approve" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer_ready')]}"/>
-                    <button name="issued" attrs="{'invisible': [('state', '!=', 'policy_pending')]}" string="Issued"  type="object" class="oe_highlight"/>
-                    <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['proposal', 'submitted'])]}"/>
 
                 </header>
 
                 <sheet>
+                    <div style="margin-bottom: 5px;">
+                        <button style="margin-left: 3px;" name="approve_medical_price" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'quick_quote')]}"/>
+                        <button style="margin-left: 3px;" type="object" string="Submit" name="submit_questionnaire" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}"/>
+                        <button style="margin-left: 3px;" name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey_required')]}"/>
+                        <button style="margin-left: 3px;" name="survey_confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey')]}"/>
+                        <button style="margin-left: 3px;" name="survey_required" string="Survey Required" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
+                        <button style="margin-left: 3px;" name="submit_survey_required" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'surveyor')]}"/>
+                        <button style="margin-left: 3px;" name="survey_confirm" string="Offering" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
+                        <button style="margin-left: 3px;" name="final_confirm" string="Confirm Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer')]}"/>
+                        <button style="margin-left: 3px;" name="accept_offer" string="Approve" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer_ready')]}"/>
+                        <button style="margin-left: 3px;" name="issued" attrs="{'invisible': [('state', '!=', 'policy_pending')]}" string="Issued"  type="object" class="oe_highlight"/>
+                        <button style="margin-left: 3px;" name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['proposal', 'submitted'])]}"/>
+                    </div>
                     <h3>Insurance Application Form</h3>
                     <h2 attrs="{'invisible': [('state', '!=', 'quick_quote')]}">Enter quick quote required info and get instant result</h2>
                     <h2 attrs="{'invisible': [('state', '!=', 'proposal')]}">Kindly answer application form questions</h2>
