@@ -149,7 +149,7 @@
                                 </field>
                          </page>
 
-                        <page string="Final Premium" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'submitted','survey_required', 'surveyor'])]}">
+                        <page string="Offer" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'submitted','survey_required', 'surveyor'])]}">
                             <group>
                                 <field name="final_price" attrs="{'readonly': [('state', '!=', 'offer')]}" force_save="1"/>
                             </group>
