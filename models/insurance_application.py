@@ -52,7 +52,7 @@ class Quotation(models.Model):
     main_phone = fields.Char('Mobile Number (Main)')
     spare_phone = fields.Char('Mobile Number (Spare)')
     state = fields.Selection([
-        ('quick_quote', 'Quick Quote'),
+        ('quick_quote', 'Quote'),
         ('proposal', 'Fill Form'),
         ('submitted', 'Form Complete'),
         ('survey_required', 'Survey Required'),
