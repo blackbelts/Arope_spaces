@@ -58,6 +58,7 @@ class Quotation(models.Model):
         ('survey_required', 'Survey Required'),
         ('surveyor', 'Surveyor Assigned'),
         ('survey', 'Survey Report'),
+        ('reinsurance', 'Reinsurance'),
         ('offer', 'To Offer'),
         ('offer_ready', 'Offer Ready'),
         ('application', 'Upload Documents'),
@@ -66,6 +67,8 @@ class Quotation(models.Model):
         ('cancel', 'Rejected')], string='Status', readonly=True, default='quick_quote')
     rejection_reason = fields.Selection([('price', 'Price'), ('benefits', 'Benefit')], sting="Reason")
     comment = fields.Text('Comment')
+    recomm = fields.Text('Recommendation')
+
 
     address = fields.Char('Full Address')
     bussines_activity = fields.Char('Client business activity')
@@ -95,6 +98,7 @@ class Quotation(models.Model):
     survey_report_ids = fields.One2many('survey.report', 'application_id')
     available_time_ids = fields.One2many('available.time', 'application_id', sting='Available Time')
     state_history_ids = fields.One2many('state.history', 'application_id')
+    offer_ids = fields.One2many('final.offer', 'application_id')
     surveyor = fields.Many2one('res.users', 'Surveyor')
     policy_number = fields.Char('Policy Num')
 
@@ -230,6 +234,9 @@ class Quotation(models.Model):
         if self.final_application_ids:
             for question in self.final_application_ids:
                 question.unlink()
+        if self.offer_ids:
+            for question in self.offer_ids:
+                question.unlink()
         if self.product_id:
             # print(self.product_id)
             # self.questionnaire = self.product_id.questionnaire_file
@@ -247,6 +254,7 @@ class Quotation(models.Model):
                         self.text_questions_ids.create(
                             {"question": question.id, "text_application_id": self.id})
             related_survey_questions = self.env["survey.line.setup"].search([("product_id.id", "=", self.product_id.id)])
+
             if related_survey_questions:
                 for question in related_survey_questions:
                     self.env['survey.report'].create({"question": question.id, "desc": question.desc, "application_id": self.id})
@@ -256,6 +264,13 @@ class Quotation(models.Model):
                 for question in related_documents:
                     self.env['final.application'].create(
                         {"description": question.id, "application_id": self.id})
+            related_offer_items = self.env["offer.setup"].search(
+                [("product_id.id", "=", self.product_id.id)])
+            if related_offer_items:
+                for question in related_offer_items:
+                    self.offer_ids.create(
+                        {"question": question.id, "application_id": self.id})
+
 
     @api.onchange('dob')
     def compute_trial_number(self):
@@ -359,6 +374,12 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'survey_required',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
+
+    def reinsurance_confirm(self):
+            self.write({'state': 'reinsurance'})
+            self.env['state.history'].create({"application_id": self.id, "state": 'reinsurance',
+                                              "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                              "user": self.write_uid.id})
     def assign_surveyor(self):
         self.write({'state': 'surveyor'})
         self.env['state.history'].create({"application_id": self.id, "state": 'surveyor',
@@ -506,7 +527,7 @@ class Answers(models.Model):
 class SurveyReport(models.Model):
     _name = 'survey.report'
 
-    question = fields.Many2one('survey.line.setup','Question')
+    question = fields.Many2one('survey.line.setup','Survey Area')
     options = fields.Many2one('selection.options', 'Choose', ondelete='cascade', domain="[('survey_id', '=', question)]")
     desc = fields.Char('Description')
     text = fields.Text('Answer')
@@ -514,6 +535,19 @@ class SurveyReport(models.Model):
     value = fields.Float('Value')
     boolean = fields.Boolean('True Or False Answer', default=False)
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+
+class FinalOffer(models.Model):
+    _name = 'final.offer'
+
+    question = fields.Many2one('offer.setup','Offer Item')
+    # options = fields.Many2one('selection.options', 'Choose', ondelete='cascade', domain="[('survey_id', '=', question)]")
+    # desc = fields.Char('Description')
+    text = fields.Text('Value')
+    file = fields.Binary('File')
+    value = fields.Float('Value')
+    # boolean = fields.Boolean('True Or False Answer', default=False)
+    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+
 
 class FinalApplication(models.Model):
     _name = 'final.application'
@@ -541,6 +575,7 @@ class stateHistory(models.Model):
         ('survey_required', 'Survey Required'),
         ('surveyor', 'Surveyor Assigned'),
         ('survey', 'Survey Report'),
+        ('reinsurance', 'Reinsurance'),
         ('offer', 'To Offer'),
         ('offer_ready', 'Offer Ready'),
         ('application', 'Upload Documents'),

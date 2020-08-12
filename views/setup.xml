@@ -95,6 +95,13 @@
                                 </tree>
                             </field>
                         </page>
+                        <page string="Offer Setup" >
+                            <field name="offer_setup_ids">
+                                <tree editable="bottom">
+                                    <field name="offer"/>
+                                </tree>
+                            </field>
+                        </page>
 
                     </notebook>
 

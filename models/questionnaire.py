@@ -95,3 +95,10 @@ class FinalApplicationSetup(models.Model):
     description = fields.Char('Document Name')
     # application_files = fields.Binary('File')
     product_id = fields.Many2one('insurance.product', ondelele='cascade', index=True)
+
+class OfferSetup(models.Model):
+    _name = 'offer.setup'
+    _rec_name = 'offer'
+    offer = fields.Char('Offer Item')
+    # application_files = fields.Binary('File')
+    product_id = fields.Many2one('insurance.product', ondelele='cascade', index=True)

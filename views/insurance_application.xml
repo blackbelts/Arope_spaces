@@ -17,7 +17,8 @@
                         <button style="margin-left: 3px;" name="approve_medical_price" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'quick_quote')]}"/>
                         <button style="margin-left: 3px;" type="object" string="Submit" name="submit_questionnaire" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}"/>
                         <button style="margin-left: 3px;" name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey_required')]}"/>
-                        <button style="margin-left: 3px;" name="survey_confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey')]}"/>
+                        <button style="margin-left: 3px;" name="reinsurance_confirm" string="Reinsurance" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey')]}"/>
+                        <button style="margin-left: 3px;" name="survey_confirm" string="Offering" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['survey','reinsurance'])]}"/>
                         <button style="margin-left: 3px;" name="survey_required" string="Survey Required" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
                         <button style="margin-left: 3px;" name="submit_survey_required" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'surveyor')]}"/>
                         <button style="margin-left: 3px;" name="survey_confirm" string="Offering" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
@@ -82,7 +83,7 @@
 <!--                            </group>-->
 <!--                        </page>-->
 
-                        <page string="Fill Form"  attrs="{'invisible': [('state', '=', 'quick_quote')]}">
+                        <page string="Application Form"  attrs="{'invisible': [('state', '=', 'quick_quote')]}">
 
                             <field name="choose_questions_ids" attrs="{'invisible': [('choose_questions_ids', '=', False)]}">
                                 <tree editable="bottom">
@@ -141,20 +142,28 @@
                                     <tree editable="bottom">
                                         <field name="question"/>
 <!--                                        <field name="desc" />-->
-                                        <field name="options"/>
-                                        <field name="text"/>
-                                        <field name="value"/>
-
+<!--                                        <field name="options"/>-->
+<!--                                        <field name="text"/>-->
+<!--                                        <field name="value"/>-->
 <!--                                        <field name="boolean"/>-->
                                         <field name="file"/>
                                     </tree>
                                 </field>
+                                <group>
+                                  <field name="recomm"/>
+                                </group>
+
                          </page>
 
                         <page string="Offer" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'submitted','survey_required', 'surveyor'])]}">
-                            <group>
-                                <field name="final_price" attrs="{'readonly': [('state', '!=', 'offer')]}" force_save="1"/>
-                            </group>
+                            <field name="offer_ids">
+                                    <tree editable="bottom">
+                                        <field name="question"/>
+                                        <field name="text"/>
+                                        <field name="value"/>
+                                        <field name="file"/>
+                                    </tree>
+                                </field>
                         </page>
                         <page string="Scanned Application" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'offer', 'submitted','survey_required', 'surveyor','offer_ready'])]}">
                             <field name="final_application_ids">

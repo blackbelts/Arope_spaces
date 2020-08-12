@@ -28,6 +28,8 @@ access_setup20,setup.setup20,model_available_time,base.group_user,1,1,1,1
 access_setup21,setup.setup21,model_state_history,base.group_user,1,1,1,1
 access_setup22,setup.setup22,model_final_application_setup,base.group_user,1,1,1,1
 access_setup23,setup.setup23,model_selection_options,base.group_user,1,1,1,1
+access_setup24,setup.setup24,model_offer_setup,base.group_user,1,1,1,1
+access_setup25,setup.setup25,model_final_offer,base.group_user,1,1,1,1
 
 
 
