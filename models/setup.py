@@ -15,6 +15,7 @@ class Aropelinebusiness(models.Model):
                                ('Project', 'Project')],
                               'Insured Type', track_visibility='onchange', required=True)
     desc = fields.Char(string='Description')
+
     product_ids=fields.One2many('insurance.product','line_of_bus',string='Products')
 
 
@@ -34,6 +35,7 @@ class Product(models.Model):
     survey_ids = fields.One2many('survey.line.setup', 'product_id')
     final_application_ids = fields.One2many('final.application.setup', 'product_id')
     offer_setup_ids = fields.One2many('offer.setup', 'product_id')
+    # state_id = fields.Many2one('state.setup', ondelete='cascade')
 
 
 class Notification(models.Model):

@@ -38,6 +38,7 @@ class Quotation(models.Model):
     #     ('non-medical', 'Non-Medical')], string='Insurance Type', default='medical', )
     lob = fields.Many2one('insurance.line.business', 'LOB', required=True)
     product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
+    test_state = fields.Many2one('state.setup', domain="[('product_ids', 'in', product_id)]")
     # domain = "[('id', '!=', 26)]"
     name = fields.Char('Name', required=True)
     # contact = fields.Char('Contact', required=True)
@@ -52,12 +53,13 @@ class Quotation(models.Model):
     main_phone = fields.Char('Mobile Number (Main)')
     spare_phone = fields.Char('Mobile Number (Spare)')
     state = fields.Selection([
-        ('quick_quote', 'Quote'),
+        ('quick_quote', 'Quick Quote'),
         ('proposal', 'Fill Form'),
         ('submitted', 'Form Complete'),
         ('survey_required', 'Survey Required'),
         ('surveyor', 'Surveyor Assigned'),
         ('survey', 'Survey Report'),
+        ('survey_complete', 'Survey Complete'),
         ('reinsurance', 'Reinsurance'),
         ('offer', 'To Offer'),
         ('offer_ready', 'Offer Ready'),
@@ -102,8 +104,9 @@ class Quotation(models.Model):
     surveyor = fields.Many2one('res.users', 'Surveyor')
     policy_number = fields.Char('Policy Num')
 
-
-
+    @api.onchange('state')
+    def compute_state(self):
+        self.test_state = self.env['state.setup'].search([('status', '=', self.state)]).id
 
     def create_pdf(self):
         return {
@@ -151,6 +154,9 @@ class Quotation(models.Model):
             res.append(rec.application_files)
         if all(res):
             self.write({'state': 'policy_pending'})
+            self.env['state.history'].create({"application_id": self.id, "state": 'policy_pending',
+                                              "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                              "user": self.write_uid.id})
 
     @api.onchange('lob')
     def compute_application_number(self):
@@ -164,52 +170,55 @@ class Quotation(models.Model):
             if self.lob.line_of_business == 'Medical':
                 # print('Medical')
                 self.write({'state': 'quick_quote'})
-                if self.text_questions_ids:
-                    for question in self.text_questions_ids:
-                        question.unlink()
-                if self.choose_questions_ids:
-                    for question in self.choose_questions_ids:
-                        question.unlink()
-                if self.numerical_questions_ids:
-                    for question in self.numerical_questions_ids:
-                        question.unlink()
-                if self.survey_report_ids:
-                    for question in self.survey_report_ids:
-                        question.unlink()
-                if self.final_application_ids:
-                    for question in self.final_application_ids:
-                        question.unlink()
-                related_questions = self.env["questionnaire.line.setup"].search(
-                    [("product_id.product_name", "=", 'Medical')])
-                if related_questions:
-                    for question in related_questions:
-                        if question.question_type == 'choose':
-                            self.choose_questions_ids.create(
-                                {"question": question.id, "choose_application_id": self.id})
-                        elif question.question_type == 'numerical':
-                            self.numerical_questions_ids.create(
-                                {"question": question.id, "numerical_application_id": self.id})
-                        else:
-                            self.text_questions_ids.create(
-                                {"question": question.id, "text_application_id": self.id})
-
-                related_survey_questions = self.env["survey.line.setup"].search(
-                    [("product_id.product_name", "=", 'Medical')])
-                if related_survey_questions:
-                    for question in related_survey_questions:
-                        self.env['survey.report'].create(
-                            {"question": question.id, "desc": question.desc, "application_id": self.id})
-                related_documents = self.env["final.application.setup"].search(
-                    [("product_id.product_name", "=", 'Medical')])
-                if related_documents:
-                    for question in related_documents:
-                        self.env['final.application'].create(
-                            {"description": question.id, "application_id": self.id})
+                self.test_state = self.env['state.setup'].search([('status', '=', 'quick_quote')]).id
+                # if self.text_questions_ids:
+                #     for question in self.text_questions_ids:
+                #         question.unlink()
+                # if self.choose_questions_ids:
+                #     for question in self.choose_questions_ids:
+                #         question.unlink()
+                # if self.numerical_questions_ids:
+                #     for question in self.numerical_questions_ids:
+                #         question.unlink()
+                # if self.survey_report_ids:
+                #     for question in self.survey_report_ids:
+                #         question.unlink()
+                # if self.final_application_ids:
+                #     for question in self.final_application_ids:
+                #         question.unlink()
+                # related_questions = self.env["questionnaire.line.setup"].search(
+                #     [("product_id.product_name", "=", 'Medical')])
+                # if related_questions:
+                #     for question in related_questions:
+                #         if question.question_type == 'choose':
+                #             self.choose_questions_ids.create(
+                #                 {"question": question.id, "choose_application_id": self.id})
+                #         elif question.question_type == 'numerical':
+                #             self.numerical_questions_ids.create(
+                #                 {"question": question.id, "numerical_application_id": self.id})
+                #         else:
+                #             self.text_questions_ids.create(
+                #                 {"question": question.id, "text_application_id": self.id})
+                #
+                # related_survey_questions = self.env["survey.line.setup"].search(
+                #     [("product_id.product_name", "=", 'Medical')])
+                # if related_survey_questions:
+                #     for question in related_survey_questions:
+                #         self.env['survey.report'].create(
+                #             {"question": question.id, "desc": question.desc, "application_id": self.id})
+                # related_documents = self.env["final.application.setup"].search(
+                #     [("product_id.product_name", "=", 'Medical')])
+                # if related_documents:
+                #     for question in related_documents:
+                #         self.env['final.application'].create(
+                #             {"description": question.id, "application_id": self.id})
 
                 # self.env['state.history'].create({"application_id": self.id, "state": 'quick_quote',
                 #                                   "datetime": datetime.now.strftime("%m/%d/%Y, %H:%M:%S"), "user": self.create_uid})
             else:
                 self.write({'state': 'proposal'})
+                self.test_state = self.env['state.setup'].search([('status', '=', 'proposal')]).id
+                # self.test_state. = 1
                 # self.env['state.history'].create({"application_id": self.id, "state": 'proposal',
                 #                                   "datetime": datetime.now.strftime("%m/%d/%Y, %H:%M:%S"),
                 #                                   "user": self.write_uid})
@@ -362,29 +371,35 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'proposal',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'proposal')]).id
 
     def survey_confirm(self):
         self.write({'state': 'offer'})
         self.env['state.history'].create({"application_id": self.id, "state": 'offer',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'offer')]).id
 
     def survey_required(self):
         self.write({'state': 'survey_required'})
         self.env['state.history'].create({"application_id": self.id, "state": 'survey_required',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'survey_required')]).id
 
     def reinsurance_confirm(self):
             self.write({'state': 'reinsurance'})
             self.env['state.history'].create({"application_id": self.id, "state": 'reinsurance',
                                               "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                               "user": self.write_uid.id})
+            self.test_state = self.env['state.setup'].search([('status', '=', 'reinsurance')]).id
+
     def assign_surveyor(self):
         self.write({'state': 'surveyor'})
         self.env['state.history'].create({"application_id": self.id, "state": 'surveyor',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'surveyor')]).id
     # def pricing(self):
     #     self.write({'state': 'price'})
     #     self.env['state.history'].create({"application_id": self.id, "state": 'price',
@@ -396,11 +411,19 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'submitted',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'submitted')]).id
     def submit_survey_required(self):
         self.write({'state': 'survey'})
         self.env['state.history'].create({"application_id": self.id, "state": 'survey',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'survey')]).id
+    def submit_survey(self):
+        self.write({'state': 'survey_complete'})
+        self.env['state.history'].create({"application_id": self.id, "state": 'survey_complete',
+                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                          "user": self.write_uid.id})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'survey_complete')]).id
         # if self.lob.line_of_business == 'Medical':
         #     self.write({'state': 'price'})
         #     self.env['state.history'].create({"application_id": self.id, "state": 'price',
@@ -427,6 +450,7 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'offer_ready',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'offer_ready')]).id
 
     # def approve(self):
     #     self.write({'state': 'policy_pending'})
@@ -439,6 +463,7 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'application',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'application')]).id
 
     def issued(self):
 
@@ -446,6 +471,7 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'issued',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'issued')]).id
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'wizard.insurance.quotation',
@@ -466,6 +492,8 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'cancel',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'cancel')]).id
+
 
     # @api.onchange('application')
     # def application_uploaded(self):
@@ -575,6 +603,7 @@ class stateHistory(models.Model):
         ('survey_required', 'Survey Required'),
         ('surveyor', 'Surveyor Assigned'),
         ('survey', 'Survey Report'),
+        ('survey_complete', 'Survey Complete'),
         ('reinsurance', 'Reinsurance'),
         ('offer', 'To Offer'),
         ('offer_ready', 'Offer Ready'),

@@ -28,6 +28,7 @@
         'views/insurance_application.xml',
         'views/actions.xml',
         'views/policy_num_wizard.xml',
+        'views/state.xml',
         'views/menu_item.xml',
 
     ],
