@@ -8,7 +8,7 @@
             <field name="comment">the user will have access to his Documents</field>
         </record>
         <record id="managers_group" model="res.groups">
-            <field name="name">Manager</field>
+            <field name="name">manager</field>
             <field name="category_id" ref="base.module_category_arope"/>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
             <field name="comment">the user will have access All Broker Document</field>
