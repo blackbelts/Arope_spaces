@@ -125,3 +125,6 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
     min-width: 160px !important;
 }
 
+.o_rtl .dropdown-menu {
+    right:0;
+}
