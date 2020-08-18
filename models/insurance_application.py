@@ -152,47 +152,6 @@ class Quotation(models.Model):
                    self.price = self.sum_insured * rate.rate
 
 
-    # @api.onchange('package')
-    # def product_domain(self):
-    #     if self.package == 'individual' or 'family':
-    #         return [('package', '=', 'individual')]
-    #     else:
-    #         return [('package', '=', 'sme')]
-
-
-
-
-
-        # file = self.product_id.questionnaire_file
-        # file_decode = base64.decodestring(file)
-        # image_result = open('questionnaire.docx', 'wb')  # create a writable image and write the decoding result
-        # image_result.write(file_decode)
-        # with codecs.open('questionnaire.docx', 'w') as f:
-        #     f.write(file_decode)
-        # pdf = self.product_id.questionnaire_file
-        # pdf = base64.b64decode(pdf)
-        # with open('file.pdf', 'wb') as fout:
-        #     fout.write(pdf)
-        # bytes = b64decode(base64, validate=True)
-        # if bytes[0:4] != b'%PDF':
-        #     raise ValueError('Missing the PDF file signature')
-        #
-        # # Write the PDF contents to a local file
-        # f = open('file.pdf', 'wb')
-        # f.write(bytes)
-        # f.close()
-        # return {
-        #     # 'name': 'FEC',
-        #     'type': 'ir.actions.act_url',
-        #     'url': "web/content/?model=insurance.quotation&id=" + str(
-        #         self.id) + "&filename_field=file_name&field=questionnaire&download=true&filename=questionnaire.pdf",
-        #     'target': 'self',
-        # }
-        # response = werkzeug.wrappers.Response()
-        # slide_slide_obj = request.env['slide.slide'].sudo().search([('id', '=', id)])
-        # response.data = slide_slide_obj.datas and slide_slide_obj.datas.decode('base64') or ''
-        # response.mimetype = 'application/pdf'
-        # return response
 
     @api.onchange('final_application_ids')
     def policy_pending(self):
@@ -218,57 +177,10 @@ class Quotation(models.Model):
                 # print('Medical')
                 self.write({'state': 'quick_quote'})
                 self.test_state = self.env['state.setup'].search([('status', '=', 'quick_quote')]).id
-                # if self.text_questions_ids:
-                #     for question in self.text_questions_ids:
-                #         question.unlink()
-                # if self.choose_questions_ids:
-                #     for question in self.choose_questions_ids:
-                #         question.unlink()
-                # if self.numerical_questions_ids:
-                #     for question in self.numerical_questions_ids:
-                #         question.unlink()
-                # if self.survey_report_ids:
-                #     for question in self.survey_report_ids:
-                #         question.unlink()
-                # if self.final_application_ids:
-                #     for question in self.final_application_ids:
-                #         question.unlink()
-                # related_questions = self.env["questionnaire.line.setup"].search(
-                #     [("product_id.product_name", "=", 'Medical')])
-                # if related_questions:
-                #     for question in related_questions:
-                #         if question.question_type == 'choose':
-                #             self.choose_questions_ids.create(
-                #                 {"question": question.id, "choose_application_id": self.id})
-                #         elif question.question_type == 'numerical':
-                #             self.numerical_questions_ids.create(
-                #                 {"question": question.id, "numerical_application_id": self.id})
-                #         else:
-                #             self.text_questions_ids.create(
-                #                 {"question": question.id, "text_application_id": self.id})
-                #
-                # related_survey_questions = self.env["survey.line.setup"].search(
-                #     [("product_id.product_name", "=", 'Medical')])
-                # if related_survey_questions:
-                #     for question in related_survey_questions:
-                #         self.env['survey.report'].create(
-                #             {"question": question.id, "desc": question.desc, "application_id": self.id})
-                # related_documents = self.env["final.application.setup"].search(
-                #     [("product_id.product_name", "=", 'Medical')])
-                # if related_documents:
-                #     for question in related_documents:
-                #         self.env['final.application'].create(
-                #             {"description": question.id, "application_id": self.id})
 
-                # self.env['state.history'].create({"application_id": self.id, "state": 'quick_quote',
-                #                                   "datetime": datetime.now.strftime("%m/%d/%Y, %H:%M:%S"), "user": self.create_uid})
             else:
                 self.write({'state': 'proposal'})
                 self.test_state = self.env['state.setup'].search([('status', '=', 'proposal')]).id
-                # self.test_state. = 1
-                # self.env['state.history'].create({"application_id": self.id, "state": 'proposal',
-                #                                   "datetime": datetime.now.strftime("%m/%d/%Y, %H:%M:%S"),
-                #                                   "user": self.write_uid})
 
 
 
@@ -342,18 +254,6 @@ class Quotation(models.Model):
             currentYear = datetime.today().strftime("%Y")
             self.write({"quote_trials" : self.lob.line_of_business.upper() + '/' + currentYear[2:4] + '/' + number})
 
-    # @api.onchange('lob')
-    # def default_state(self):
-    #     if self.lob:
-
-
-
-    # @api.depends('insurance_type')
-    # def filter_domain(self):
-    #     if self.insurance_type == 'medical':
-    #         return [('id', '=', 20)]
-    #     else:
-    #         return [('id', '!=', 20)]
 
     def calculate_age(self, DOB):
         ages = []
@@ -413,84 +313,6 @@ class Quotation(models.Model):
                                     price += rec.price
                     self.write({"price": price})
 
-    # @api.onchange('family_age')
-    # def calculate_price3(self):
-    #     if self.lob.line_of_business == 'Medical':
-    #         if self.package == 'individual':
-    #             if self.product:
-    #                 dprice = {}
-    #                 price = 0
-    #                 ages = []
-    #                 ages.append(self.dob)
-    #                 # if data.get('type') == 'individual':
-    #                 age = self.calculate_age(ages)
-    #                 for record in self.env['medical.price'].search([('package', '=', 'individual'),
-    #                                                                 ('product_name', '=', self.product.product_name)]):
-    #                     for rec in record.price_lines:
-    #                         if rec.from_age <= age[0] and rec.to_age >= age[0]:
-    #                             price = rec.price
-    #                 self.write({"price": price})
-    #         elif self.package == 'family':
-    #             if self.product:
-    #                 for record in self.env['medical.price'].search([('package', '=', 'individual')]):
-    #                     price = 0.0
-    #                     for age in self.calculate_age(self.get_family_ages()):
-    #                         for rec in record.price_lines:
-    #                             if rec.from_age <= age and rec.to_age >= age:
-    #                                 price += rec.price
-    #                 self.write({"price": price})
-    #         else:
-    #             if self.product:
-    #                 for record in self.env['medical.price'].search([('package', '=', 'sme')]):
-    #                     price = 0.0
-    #                     for age in self.calculate_age(self.get_family_ages()):
-    #                         for rec in record.price_lines:
-    #                             if rec.from_age <= age and rec.to_age >= age:
-    #                                 price += rec.price
-    #                 self.write({"price": price})
-    #
-    # @api.onchange('product')
-    # def calculate_price2(self):
-    #     if self.lob.line_of_business == 'Medical':
-    #         if self.package == 'individual':
-    #             if self.product:
-    #                 dprice = {}
-    #                 price = 0
-    #                 ages = []
-    #                 ages.append(self.dob)
-    #                 # if data.get('type') == 'individual':
-    #                 age = self.calculate_age(ages)
-    #                 for record in self.env['medical.price'].search([('package', '=', 'individual'),
-    #                                                                 ('product_name', '=', self.product.product_name)]):
-    #                     for rec in record.price_lines:
-    #                         if rec.from_age <= age[0] and rec.to_age >= age[0]:
-    #                             price = rec.price
-    #                 self.write({"price": price})
-    #         elif self.package == 'family':
-    #             if self.product:
-    #                 for record in self.env['medical.price'].search([('package', '=', 'individual')]):
-    #                     price = 0.0
-    #                     for age in self.calculate_age(self.get_family_ages()):
-    #                         for rec in record.price_lines:
-    #                             if rec.from_age <= age and rec.to_age >= age:
-    #                                 price += rec.price
-    #                 self.write({"price": price})
-    #         else:
-    #             if self.product:
-    #                 for record in self.env['medical.price'].search([('package', '=', 'sme')]):
-    #                     price = 0.0
-    #                     for age in self.calculate_age(self.get_family_ages()):
-    #                         for rec in record.price_lines:
-    #                             if rec.from_age <= age and rec.to_age >= age:
-    #                                 price += rec.price
-    #                 self.write({"price": price})
-
-    # @api.onchange('insurance_type')
-    # def default_state(self):
-    #     if self.insurance_type == 'medical':
-    #         self.write({'state': 'init'})
-    #     else:
-    #         self.write({'state': 'proposal'})
 
     def approve_medical_price(self):
         self.write({'state': 'proposal'})
@@ -550,26 +372,7 @@ class Quotation(models.Model):
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'survey_complete')]).id
-        # if self.lob.line_of_business == 'Medical':
-        #     self.write({'state': 'price'})
-        #     self.env['state.history'].create({"application_id": self.id, "state": 'price',
-        #                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        #                                       "user": self.write_uid.id})
-        # else:
-        #     self.write({'state': 'survey'})
-        #     self.env['state.history'].create({"application_id": self.id, "state": 'survey',
-        #                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        #                                       "user": self.write_uid.id})
 
-    # def question_type(self,i):
-    #
-    #     for rec in self.questions_ids.search([], limit=i):
-    #         return rec.question
-
-    # @api.onchange('questionnaire')
-    # def questionnaire_uploaded(self):
-    #     if self.questionnaire != False:
-    #         self.write({'state': 'final'})
 
     def final_confirm(self):
         self.write({'state': 'offer_ready'})
@@ -578,11 +381,7 @@ class Quotation(models.Model):
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'offer_ready')]).id
 
-    # def approve(self):
-    #     self.write({'state': 'policy_pending'})
-    #     self.env['state.history'].create({"application_id": self.id, "state": 'policy_pending',
-    #                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    #                                       "user": self.write_uid.id})
+
 
     def accept_offer(self):
         self.write({'state': 'application'})
@@ -621,10 +420,6 @@ class Quotation(models.Model):
         self.test_state = self.env['state.setup'].search([('status', '=', 'cancel')]).id
 
 
-    # @api.onchange('application')
-    # def application_uploaded(self):
-    #     if self.application != False:
-    #         self.write({'state': 'review'})
 
 
 class Members(models.Model):
@@ -786,8 +581,8 @@ class SelectionOptions(models.Model):
     _name = 'selection.options'
     _rec_name = 'option'
     option = fields.Char('Option')
-    # survey_id = fields.Many2one('survey.line.setup', ondelete='cascade')
-    # questionnaire_id = fields.Many2one('questionnaire.line.setup', ondelete='cascade')
+    survey_id = fields.Many2one('survey.line.setup', ondelete='cascade')
+    questionnaire_id = fields.Many2one('questionnaire.line.setup', ondelete='cascade')
 
 class WizardInsuranceQuotation(models.TransientModel):
     _name = 'wizard.insurance.quotation'

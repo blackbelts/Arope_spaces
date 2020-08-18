@@ -12,7 +12,7 @@ class QuestionnaireLineSetup(models.Model):
     _rec_name= 'question'
     question = fields.Char('Question')
     # questionnaire = fields.Many2many('insurance.product', string="Related Questions")
-    options = fields.Many2one('selection.options', sting="Selections")
+    options = fields.Many2many('selection.options', sting="Selections")
     desc = fields.Char('Description')
     question_type = fields.Selection([('text', 'Text'), ('numerical', 'Numerical'), ('choose', 'Choose')],
                                      'Question Type', default='text')
@@ -75,7 +75,7 @@ class SurveyLineSetup(models.Model):
     _name = 'survey.line.setup'
     _rec_name = 'question'
     question = fields.Char('Question')
-    options = fields.Many2one('selection.options', sting="Selections")
+    options = fields.Many2many('selection.options', sting="Selections")
 
     desc = fields.Char('Description')
     # question_type = fields.Selection([('text', 'Text'), ('numerical', 'Numerical'), ('choose', 'Choose')],
