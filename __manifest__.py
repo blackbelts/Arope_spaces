@@ -9,7 +9,7 @@
     'version': '0.1',
     'license': 'AGPL-3',
     # any module necessary for this one to work correctly
-    'depends': ['base','sales_team'],
+    'depends': ['base','sales_team', 'motor', 'medical'],
 
     # always loaded
     'data': [
@@ -23,8 +23,13 @@
         'views/price_setup.xml',
         'views/targets.xml',
 	    'views/dashboard_views.xml',
+        # 'views/selection_question.xml',
+        'views/medical_price_setup.xml',
+        'views/insurance_application.xml',
         'views/actions.xml',
         'views/claim.xml',
+        'views/policy_num_wizard.xml',
+        'views/state.xml',
         'views/menu_item.xml',
 
     ],
