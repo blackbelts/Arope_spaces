@@ -137,7 +137,7 @@ class Quotation(models.Model):
                      ('sum_insured_from', '<=', self.sum_insured), ('sum_insure_to', '>=', self.sum_insured)])
               self.price = self.sum_insured*rate.rate
         else:
-             
+
              if self.brand == 'all brands':
                     rate = self.env['motor.rating.table'].search([('brand','=', self.brand),
                                                                    ('deductible', '=', self.deductible),
@@ -214,7 +214,7 @@ class Quotation(models.Model):
             self.write({'application_number' : self.lob.line_of_business.upper() + '/' + currentYear[2:4] + '/' + currentMonth +
                                                '/' + number})
 
-            if self.lob.line_of_business == 'Medical':
+            if self.lob.line_of_business == 'Medical' or 'Motor':
                 # print('Medical')
                 self.write({'state': 'quick_quote'})
                 self.test_state = self.env['state.setup'].search([('status', '=', 'quick_quote')]).id
