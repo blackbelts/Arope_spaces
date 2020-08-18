@@ -377,7 +377,7 @@ class Quotation(models.Model):
             DOB.append(rec.DOB)
         return DOB
 
-    @api.onchange('dob')
+    @api.onchange('dob','family_age','product')
     def calculate_price(self):
         if self.lob.line_of_business == 'Medical':
             if self.package == 'individual':
@@ -413,77 +413,77 @@ class Quotation(models.Model):
                                     price += rec.price
                     self.write({"price": price})
 
-    @api.onchange('family_age')
-    def calculate_price3(self):
-        if self.lob.line_of_business == 'Medical':
-            if self.package == 'individual':
-                if self.product:
-                    dprice = {}
-                    price = 0
-                    ages = []
-                    ages.append(self.dob)
-                    # if data.get('type') == 'individual':
-                    age = self.calculate_age(ages)
-                    for record in self.env['medical.price'].search([('package', '=', 'individual'),
-                                                                    ('product_name', '=', self.product.product_name)]):
-                        for rec in record.price_lines:
-                            if rec.from_age <= age[0] and rec.to_age >= age[0]:
-                                price = rec.price
-                    self.write({"price": price})
-            elif self.package == 'family':
-                if self.product:
-                    for record in self.env['medical.price'].search([('package', '=', 'individual')]):
-                        price = 0.0
-                        for age in self.calculate_age(self.get_family_ages()):
-                            for rec in record.price_lines:
-                                if rec.from_age <= age and rec.to_age >= age:
-                                    price += rec.price
-                    self.write({"price": price})
-            else:
-                if self.product:
-                    for record in self.env['medical.price'].search([('package', '=', 'sme')]):
-                        price = 0.0
-                        for age in self.calculate_age(self.get_family_ages()):
-                            for rec in record.price_lines:
-                                if rec.from_age <= age and rec.to_age >= age:
-                                    price += rec.price
-                    self.write({"price": price})
-
-    @api.onchange('product')
-    def calculate_price2(self):
-        if self.lob.line_of_business == 'Medical':
-            if self.package == 'individual':
-                if self.product:
-                    dprice = {}
-                    price = 0
-                    ages = []
-                    ages.append(self.dob)
-                    # if data.get('type') == 'individual':
-                    age = self.calculate_age(ages)
-                    for record in self.env['medical.price'].search([('package', '=', 'individual'),
-                                                                    ('product_name', '=', self.product.product_name)]):
-                        for rec in record.price_lines:
-                            if rec.from_age <= age[0] and rec.to_age >= age[0]:
-                                price = rec.price
-                    self.write({"price": price})
-            elif self.package == 'family':
-                if self.product:
-                    for record in self.env['medical.price'].search([('package', '=', 'individual')]):
-                        price = 0.0
-                        for age in self.calculate_age(self.get_family_ages()):
-                            for rec in record.price_lines:
-                                if rec.from_age <= age and rec.to_age >= age:
-                                    price += rec.price
-                    self.write({"price": price})
-            else:
-                if self.product:
-                    for record in self.env['medical.price'].search([('package', '=', 'sme')]):
-                        price = 0.0
-                        for age in self.calculate_age(self.get_family_ages()):
-                            for rec in record.price_lines:
-                                if rec.from_age <= age and rec.to_age >= age:
-                                    price += rec.price
-                    self.write({"price": price})
+    # @api.onchange('family_age')
+    # def calculate_price3(self):
+    #     if self.lob.line_of_business == 'Medical':
+    #         if self.package == 'individual':
+    #             if self.product:
+    #                 dprice = {}
+    #                 price = 0
+    #                 ages = []
+    #                 ages.append(self.dob)
+    #                 # if data.get('type') == 'individual':
+    #                 age = self.calculate_age(ages)
+    #                 for record in self.env['medical.price'].search([('package', '=', 'individual'),
+    #                                                                 ('product_name', '=', self.product.product_name)]):
+    #                     for rec in record.price_lines:
+    #                         if rec.from_age <= age[0] and rec.to_age >= age[0]:
+    #                             price = rec.price
+    #                 self.write({"price": price})
+    #         elif self.package == 'family':
+    #             if self.product:
+    #                 for record in self.env['medical.price'].search([('package', '=', 'individual')]):
+    #                     price = 0.0
+    #                     for age in self.calculate_age(self.get_family_ages()):
+    #                         for rec in record.price_lines:
+    #                             if rec.from_age <= age and rec.to_age >= age:
+    #                                 price += rec.price
+    #                 self.write({"price": price})
+    #         else:
+    #             if self.product:
+    #                 for record in self.env['medical.price'].search([('package', '=', 'sme')]):
+    #                     price = 0.0
+    #                     for age in self.calculate_age(self.get_family_ages()):
+    #                         for rec in record.price_lines:
+    #                             if rec.from_age <= age and rec.to_age >= age:
+    #                                 price += rec.price
+    #                 self.write({"price": price})
+    #
+    # @api.onchange('product')
+    # def calculate_price2(self):
+    #     if self.lob.line_of_business == 'Medical':
+    #         if self.package == 'individual':
+    #             if self.product:
+    #                 dprice = {}
+    #                 price = 0
+    #                 ages = []
+    #                 ages.append(self.dob)
+    #                 # if data.get('type') == 'individual':
+    #                 age = self.calculate_age(ages)
+    #                 for record in self.env['medical.price'].search([('package', '=', 'individual'),
+    #                                                                 ('product_name', '=', self.product.product_name)]):
+    #                     for rec in record.price_lines:
+    #                         if rec.from_age <= age[0] and rec.to_age >= age[0]:
+    #                             price = rec.price
+    #                 self.write({"price": price})
+    #         elif self.package == 'family':
+    #             if self.product:
+    #                 for record in self.env['medical.price'].search([('package', '=', 'individual')]):
+    #                     price = 0.0
+    #                     for age in self.calculate_age(self.get_family_ages()):
+    #                         for rec in record.price_lines:
+    #                             if rec.from_age <= age and rec.to_age >= age:
+    #                                 price += rec.price
+    #                 self.write({"price": price})
+    #         else:
+    #             if self.product:
+    #                 for record in self.env['medical.price'].search([('package', '=', 'sme')]):
+    #                     price = 0.0
+    #                     for age in self.calculate_age(self.get_family_ages()):
+    #                         for rec in record.price_lines:
+    #                             if rec.from_age <= age and rec.to_age >= age:
+    #                                 price += rec.price
+    #                 self.write({"price": price})
 
     # @api.onchange('insurance_type')
     # def default_state(self):
