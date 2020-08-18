@@ -87,7 +87,7 @@ class Quotation(models.Model):
     price = fields.Float('Premium')
     # member_ids = fields.One2many('members', 'quotation_id', 'Members')
     dob = fields.Date('Date OF Birth', default=datetime.today())
-    product = fields.Many2one('medical.price', 'Product', required=True, domain="[('package', '=', package)]"
+    product = fields.Many2one('medical.price', 'Product', domain="[('package', '=', package)]"
                               )
     application = fields.Binary("Application")
     final_price = fields.Float('Final Premium')
