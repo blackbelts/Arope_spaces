@@ -87,8 +87,8 @@ class Quotation(models.Model):
     price = fields.Float('Premium')
     # member_ids = fields.One2many('members', 'quotation_id', 'Members')
     dob = fields.Date('Date OF Birth', default=datetime.today())
-    product = fields.Many2one('medical.price', 'Product', required=True,
-                              default=lambda self: self.env['medical.price'].search([('product_name', '=', 'Elite')]))
+    product = fields.Many2one('medical.price', 'Product', required=True, domain="[('package', '=', package)]"
+                              )
     application = fields.Binary("Application")
     final_price = fields.Float('Final Premium')
     # final_price = fields.Float('Final Price')
@@ -103,6 +103,20 @@ class Quotation(models.Model):
     offer_ids = fields.One2many('final.offer', 'application_id')
     surveyor = fields.Many2one('res.users', 'Surveyor')
     policy_number = fields.Char('Policy Num')
+    family_age = fields.One2many('medical.family', 'application_id', string='Members')
+    package = fields.Selection([('individual', 'Individual'),
+                                ('family', 'Family'),
+                                ('sme', 'SME'), ],
+                               'Package For',
+                               default='individual')
+    # motor_product = fields.Many2one('product.covers', 'Product')
+    brand = fields.Selection([('all brands', 'All Brands (except Chinese & East Asia)'),
+                              ('chinese cars & east asia', 'Chinese Cars & East Asia'), ('all models', 'All Models')],
+                             'Brand')
+    deductible = fields.Selection([('250 EGP', '250 EGP'),
+                                   ('4 Per Thousand', '4 Per Thousand')],
+                                  'Deductible')
+
 
     @api.onchange('state')
     def compute_state(self):
@@ -114,6 +128,39 @@ class Quotation(models.Model):
             'url': 'http://207.154.195.214/questionnaire.docx',
             'target': 'self',
         }
+    @api.onchange('brand','deductible','sum_insured')
+    def calculate_motor_price(self):
+
+        if self.brand == 'all models':
+              rate = self.env['motor.rating.table'].search(
+                    [('brand', '=', 'all models'),
+                     ('sum_insured_from', '<=', self.sum_insured), ('sum_insure_to', '>=', self.sum_insured)])
+              self.price = self.sum_insured*rate.rate
+        else:
+             
+             if self.brand == 'all brands':
+                    rate = self.env['motor.rating.table'].search([('brand','=', self.brand),
+                                                                   ('deductible', '=', self.deductible),
+                                                      ('sum_insured_from','<=', self.sum_insured),
+                                                                   ('sum_insure_to', '>=', self.sum_insured)])
+                    self.price = self.sum_insured * rate.rate
+             else:
+                   rate = self.env['motor.rating.table'].search(
+                         [('brand', '=', self.brand),
+                          ('sum_insured_from', '<=', self.sum_insured),
+                          ('sum_insure_to', '>=', self.sum_insured)])
+                   self.price = self.sum_insured * rate.rate
+
+
+    # @api.onchange('package')
+    # def product_domain(self):
+    #     if self.package == 'individual' or 'family':
+    #         return [('package', '=', 'individual')]
+    #     else:
+    #         return [('package', '=', 'sme')]
+
+
+
 
 
         # file = self.product_id.questionnaire_file
@@ -324,40 +371,119 @@ class Quotation(models.Model):
 
     # @api.onchange('dob')
     # @api.onchange('product')
+    def get_family_ages(self):
+        DOB = []
+        for rec in self.family_age:
+            DOB.append(rec.DOB)
+        return DOB
+
     @api.onchange('dob')
     def calculate_price(self):
         if self.lob.line_of_business == 'Medical':
-            if self.product:
+            if self.package == 'individual':
+                if self.product:
+                    dprice = {}
+                    price = 0
+                    ages = []
+                    ages.append(self.dob)
+                    # if data.get('type') == 'individual':
+                    age = self.calculate_age(ages)
+                    for record in self.env['medical.price'].search([('package', '=', 'individual'),
+                                                                    ('product_name', '=', self.product.product_name)]):
+                        for rec in record.price_lines:
+                            if rec.from_age <= age[0] and rec.to_age >= age[0]:
+                                price = rec.price
+                    self.write({"price": price})
+            elif self.package == 'family':
+                if self.product:
+                    for record in self.env['medical.price'].search([('package', '=', 'individual')]):
+                        price = 0.0
+                        for age in self.calculate_age(self.get_family_ages()):
+                            for rec in record.price_lines:
+                                if rec.from_age <= age and rec.to_age >= age:
+                                    price += rec.price
+                    self.write({"price": price})
+            else:
+                if self.product:
+                    for record in self.env['medical.price'].search([('package', '=', 'sme')]):
+                        price = 0.0
+                        for age in self.calculate_age(self.get_family_ages()):
+                            for rec in record.price_lines:
+                                if rec.from_age <= age and rec.to_age >= age:
+                                    price += rec.price
+                    self.write({"price": price})
 
-                dprice = {}
-                price = 0
-                ages = []
-                ages.append(self.dob)
-                # if data.get('type') == 'individual':
-                age = self.calculate_age(ages)
-                for record in self.env['medical.price'].search([('package', '=', 'individual'),
-                                                                ('product_name', '=', self.product.product_name)]):
-                    for rec in record.price_lines:
-                        if rec.from_age <= age[0] and rec.to_age >= age[0]:
-                            price = rec.price
-                self.write({"price": price})
+    @api.onchange('family_age')
+    def calculate_price3(self):
+        if self.lob.line_of_business == 'Medical':
+            if self.package == 'individual':
+                if self.product:
+                    dprice = {}
+                    price = 0
+                    ages = []
+                    ages.append(self.dob)
+                    # if data.get('type') == 'individual':
+                    age = self.calculate_age(ages)
+                    for record in self.env['medical.price'].search([('package', '=', 'individual'),
+                                                                    ('product_name', '=', self.product.product_name)]):
+                        for rec in record.price_lines:
+                            if rec.from_age <= age[0] and rec.to_age >= age[0]:
+                                price = rec.price
+                    self.write({"price": price})
+            elif self.package == 'family':
+                if self.product:
+                    for record in self.env['medical.price'].search([('package', '=', 'individual')]):
+                        price = 0.0
+                        for age in self.calculate_age(self.get_family_ages()):
+                            for rec in record.price_lines:
+                                if rec.from_age <= age and rec.to_age >= age:
+                                    price += rec.price
+                    self.write({"price": price})
+            else:
+                if self.product:
+                    for record in self.env['medical.price'].search([('package', '=', 'sme')]):
+                        price = 0.0
+                        for age in self.calculate_age(self.get_family_ages()):
+                            for rec in record.price_lines:
+                                if rec.from_age <= age and rec.to_age >= age:
+                                    price += rec.price
+                    self.write({"price": price})
 
     @api.onchange('product')
     def calculate_price2(self):
         if self.lob.line_of_business == 'Medical':
-            if self.product:
-                dprice = {}
-                price = 0
-                ages = []
-                ages.append(self.dob)
-                # if data.get('type') == 'individual':
-                age = self.calculate_age(ages)
-                for record in self.env['medical.price'].search([('package', '=', 'individual'),
-                                                                ('product_name', '=', self.product.product_name)]):
-                    for rec in record.price_lines:
-                        if rec.from_age <= age[0] and rec.to_age >= age[0]:
-                            price = rec.price
-                self.write({"price": price})
+            if self.package == 'individual':
+                if self.product:
+                    dprice = {}
+                    price = 0
+                    ages = []
+                    ages.append(self.dob)
+                    # if data.get('type') == 'individual':
+                    age = self.calculate_age(ages)
+                    for record in self.env['medical.price'].search([('package', '=', 'individual'),
+                                                                    ('product_name', '=', self.product.product_name)]):
+                        for rec in record.price_lines:
+                            if rec.from_age <= age[0] and rec.to_age >= age[0]:
+                                price = rec.price
+                    self.write({"price": price})
+            elif self.package == 'family':
+                if self.product:
+                    for record in self.env['medical.price'].search([('package', '=', 'individual')]):
+                        price = 0.0
+                        for age in self.calculate_age(self.get_family_ages()):
+                            for rec in record.price_lines:
+                                if rec.from_age <= age and rec.to_age >= age:
+                                    price += rec.price
+                    self.write({"price": price})
+            else:
+                if self.product:
+                    for record in self.env['medical.price'].search([('package', '=', 'sme')]):
+                        price = 0.0
+                        for age in self.calculate_age(self.get_family_ages()):
+                            for rec in record.price_lines:
+                                if rec.from_age <= age and rec.to_age >= age:
+                                    price += rec.price
+                    self.write({"price": price})
 
     # @api.onchange('insurance_type')
     # def default_state(self):
@@ -515,6 +641,7 @@ class MedicalPriceTable(models.Model):
     _description = 'Set up Price tables'
     _rec_name = 'product_name'
     package = fields.Selection([('individual', 'Individual'),
+                                ('family', 'Family'),
                                 ('sme', 'SME'), ],
                                'Package For',
                                default='individual')
@@ -659,8 +786,8 @@ class SelectionOptions(models.Model):
     _name = 'selection.options'
     _rec_name = 'option'
     option = fields.Char('Option')
-    survey_id = fields.Many2one('survey.line.setup', ondelete='cascade')
-    questionnaire_id = fields.Many2one('questionnaire.line.setup', ondelete='cascade')
+    # survey_id = fields.Many2one('survey.line.setup', ondelete='cascade')
+    # questionnaire_id = fields.Many2one('questionnaire.line.setup', ondelete='cascade')
 
 class WizardInsuranceQuotation(models.TransientModel):
     _name = 'wizard.insurance.quotation'
@@ -671,4 +798,39 @@ class WizardInsuranceQuotation(models.TransientModel):
         self.insurance_app_id.write({'policy_number' : self.policy_number})
 
 
+class FamilyAge(models.Model):
+    _name = 'medical.family'
+
+
+    name=fields.Char('name',required=True)
+    type=fields.Selection([('spouse', 'Spouse'),
+                           ('kid', 'kid'),
+                           ('brother','brother'),
+                           ('sister','sister'),
+                           ('parent', 'parent'),
+                           ('grandparents', 'grandparents'),
+                           ],default='spouse')
+
+    gender = fields.Selection([('M', 'Male'), ('F', 'Female')])
+    age=fields.Float('age')
+    DOB = fields.Date('Date Of Birth',required=True)
+    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+
+    @api.model
+    @api.onchange('DOB')
+    def get_age(self):
+        if self.DOB:
+            # date1 = datetime.strptime(self.issue_date, '%Y-%m-%d %H:%M:%S').date()
+            # date2 = datetime.strptime(self.DOB, '%Y-%m-%d').date()
+            today = datetime.today().date()
+            difference = relativedelta(today, self.DOB)
+            age = difference.years
+            months = difference.months
+            days = difference.days
+            if months or days != 0:
+                age += 1
+            self.age = age
+
+# class inhertMotor(models.Model):
+#     _inherit = 'product.covers'
 

@@ -26,7 +26,7 @@
                         <button style="margin-left: 3px;" name="accept_offer" string="Approve" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer_ready')]}" groups="Arope-spaces.broker_space_group"/>
                         <button style="margin-left: 3px;" name="issued" attrs="{'invisible': [('state', '!=', 'policy_pending')]}" string="Issued"  type="object" class="oe_highlight" groups="Arope-spaces.managers_group"/>
                         <button style="margin-left: 3px;" name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['proposal', 'submitted'])]}" groups="Arope-spaces.managers_group,Arope-spaces.broker_space_group"/>
-                        <button style="margin-left: 3px;" name="submit_survey" string="Submit Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', 'survey')]}" groups="Arope-spaces.surveyor_group"/>
+                        <button style="margin-left: 3px;" name="submit_survey" string="Submit Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey')]}" groups="Arope-spaces.surveyor_group"/>
                     </div>
                     <h3>Insurance Application Form</h3>
                     <h2 attrs="{'invisible': [('state', '!=', 'quick_quote')]}">Enter quick quote required info and get instant result</h2>
@@ -69,10 +69,35 @@
                     </group>
 
                      <notebook>
-                        <page string="Quick Quote" attrs="{'invisible': [('lob', '!=', 1)]}">
-                            <group>
-                                <field name="dob" force_save="1" attrs="{'readonly': [('state', '!=', 'quick_quote')]}"/>
+                        <page string="Quick Quote" attrs="{'invisible': [('lob', 'not in', [1, 3])]}">
+                            <group attrs="{'invisible': [('lob', '!=', 1)]}">
+                                <field name="package" force_save="1" attrs="{'readonly': [('state', '!=','quick_quote')]}" />
+                                <field name="dob" force_save="1" attrs="{'invisible': [('package', '!=', 'individual')]}" />
                                 <field name="product" force_save="1" attrs="{'readonly': [('state', '!=', 'quick_quote')]}"/>
+                            </group >
+                            <group attrs="{'invisible': [('lob', '!=', 3)]}">
+                                <group>
+                                    <field name="brand" force_save="1" attrs="{'readonly': [('state', '!=','quick_quote')]}" />
+                                    <field name="deductible" force_save="1" attrs="{'invisible': [('brand', '!=', 'all brands')]}"/>
+
+                                </group>
+                                <group>
+                                    <field name="sum_insured" force_save="1" attrs="{'readonly': [('state', '!=', 'quick_quote')]}"/>
+                                </group>
+                            </group>
+
+                            <group attrs="{'invisible': ['|',('package', '=', 'individual'),('lob', '!=', 1)]}">
+                                <field name="family_age">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="type"/>
+                                        <field name="gender"/>
+                                        <field name="DOB"/>
+                                        <field name="age"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
                                 <field name="price" force_save="1" attrs="{'readonly': [('state', '!=', 'offer')]}"/>
                             </group>
                         </page>
@@ -157,7 +182,7 @@
 
                          </page>
 
-                        <page string="Offer" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'submitted','survey_required', 'surveyor'])]}">
+                        <page string="Offer" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'submitted','survey_required', 'surveyor', 'survey_complete'])]}">
                             <field name="offer_ids">
                                     <tree editable="bottom">
                                         <field name="question"/>
@@ -167,7 +192,7 @@
                                     </tree>
                                 </field>
                         </page>
-                        <page string="Scanned Application" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'offer', 'submitted','survey_required', 'surveyor','offer_ready'])]}">
+                        <page string="Scanned Application" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey', 'offer', 'submitted','survey_required', 'surveyor','offer_ready','survey_complete'])]}">
                             <field name="final_application_ids">
                                 <tree editable="bottom">
                                     <field name="description"/>

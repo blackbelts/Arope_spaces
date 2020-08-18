@@ -31,9 +31,7 @@ access_setup23,setup.setup23,model_selection_options,base.group_user,1,1,1,1
 access_setup24,setup.setup24,model_offer_setup,base.group_user,1,1,1,1
 access_setup25,setup.setup25,model_final_offer,base.group_user,1,1,1,1
 access_setup26,setup.setup26,model_state_setup,base.group_user,1,1,1,1
-
-
-
+access_setup27,setup.setup27,model_medical_family,base.group_user,1,1,1,1
 
 
 
