@@ -24,6 +24,7 @@
         'views/targets.xml',
 	    'views/dashboard_views.xml',
         'views/actions.xml',
+        'views/claim.xml',
         'views/menu_item.xml',
 
     ],

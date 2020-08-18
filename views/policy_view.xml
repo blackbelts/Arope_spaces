@@ -3,13 +3,14 @@
         <field name="name">Policy Tree</field>
         <field name="model">policy.arope</field>
         <field name="arch" type="xml">
-            <tree decoration-warning="policy_status == 'pending'" decoration-danger="policy_status == 'canceled'"
-                  string="Policies">
+            <tree>
                 <field name="policy_num" string="Policy No"/>
                 <field name="line_of_bussines" string="LOB"/>
                 <field name="product" string="Product"/>
                 <field name="broker" string="Broker"/>
+                <field name="broker_pin" string="Broker PIN"/>
                 <field name="customer" string="Customer"/>
+                <field name="customer_pin" string="Customer PIN"/>
                 <field name="endorsement_no" string="End"/>
                 <field name="is_renewal" string="R"/>
                 <field name="issue_date"/>
@@ -25,151 +26,161 @@
             </tree>
         </field>
     </record>
-    <record id="policy_form_view" model="ir.ui.view">
-        <field name="name">Policy Form</field>
-        <field name="model">policy.arope</field>
-        <field name="arch" type="xml">
-            <form>
-            <header>
-                    <field name="policy_status" widget="statusbar" statusbar_visible="pending,approved"/>
-                       <button name="testyy" string="Tesr" type="object"
-                            class="oe_highlight"/>
-                </header>
-                <sheet>
-                <!-- <xpath expr="//link[@rel='stylesheet']" position="after">
-                    <link rel="stylesheet" href="/travel_quotation/static/src/css/main.css"/>
-                </xpath>
-                 -->
-                <div class="oe_title">
-                    <h1>
-                        <label for="policy_num"/>
-                    </h1>
-                    <div class="o_row">
-                        <h1>
-                            <field name="policy_num" placeholder="e.g. Policy No." required="1"/>
-                        </h1>
-                    </div>
-                </div>
-                <group >
-                    <group>
-                        <field name="customer"/>
-                        <field name="broker" />
-                        <field name="issue_date" />
-                        <field name="start_date" />
-                        <field name="end_date" />
-                    </group>
-                    <group>
-                        <field name="line_of_bussines" />
-                        <field name="ins_type" />
-                        <field name="product"/>
-                        <field name="policy_type"  />
-                        <field name="endorsement_no" />
-                        <field name="endorsement_reason" />
-                        <field name="endorsement_type" />
-                        <field name="index" />
-                    </group>
-                </group>
-                <group>
-                    <group>
-                        <field name="currency_id"/>
-                        <field name="total_sum_insured"/>
-                    </group>
-                    <group>
+<!--    <record id="policy_form_view" model="ir.ui.view">-->
+<!--        <field name="name">Policy Form</field>-->
+<!--        <field name="model">policy.arope</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <header>-->
+<!--                    <field name="policy_status" widget="statusbar" statusbar_visible="pending,approved"/>-->
+<!--                    <button name="testyy" string="Tesr" type="object"-->
+<!--                            class="oe_highlight"/>-->
+<!--                </header>-->
+<!--                <sheet>-->
+<!--                    &lt;!&ndash; <xpath expr="//link[@rel='stylesheet']" position="after">-->
+<!--                        <link rel="stylesheet" href="/travel_quotation/static/src/css/main.css"/>-->
+<!--                    </xpath>-->
+<!--                     &ndash;&gt;-->
+<!--                    <div class="oe_title">-->
+<!--                        <h1>-->
+<!--                            <label for="policy_num"/>-->
+<!--                        </h1>-->
+<!--                        <div class="o_row">-->
+<!--                            <h1>-->
+<!--                                <field name="policy_num" placeholder="e.g. Policy No." required="1"/>-->
+<!--                            </h1>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <group >-->
+<!--                        <group>-->
+<!--                            <field name="customer"/>-->
+<!--                            <field name="broker" />-->
+<!--                            <field name="issue_date" />-->
+<!--                            <field name="start_date" />-->
+<!--                            <field name="end_date" />-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="line_of_bussines" />-->
+<!--                            <field name="ins_type" />-->
+<!--                            <field name="product"/>-->
+<!--                            <field name="policy_type"  />-->
+<!--                            <field name="endorsement_no" />-->
+<!--                            <field name="endorsement_reason" />-->
+<!--                            <field name="endorsement_type" />-->
+<!--                            <field name="index" />-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="currency_id"/>-->
+<!--                            <field name="total_sum_insured"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
 
-                        <field name="net_premium" />
-                        <field name="gross_premium" />
-                        <field name="term"/>
-                    </group>
+<!--                            <field name="net_premium" />-->
+<!--                            <field name="gross_premium" />-->
+<!--                            <field name="term"/>-->
+<!--                        </group>-->
 
-                </group>
-                <notebook>
-                    <page string="Risks">
+<!--                    </group>-->
+<!--                    <notebook>-->
+<!--                        <page string="Risks">-->
 
-                            <field name="risk_ids" nolabel="1"
-                                   >
-                                <tree>
-                                    <field name="risk_description"/>
-                                    <field name="sum_insured"/>
-                                    <field name="limitone"/>
-                                    <field name="limittotal"/>
-                                </tree>
-                                <form>
-                                    <group string="Vehicle Risk" attrs="{'invisible': [('test', '!=', 'vehicle')]}">
-                                        <group>
-                                            <field name="car_tybe" />
-                                            <field name="Man"
-                                                  />
-                                            <field name="model"
-                                                />
-                                            <field name="year_of_made"/>
-                                            <field name="license_expire_date"/>
-                                            <field name="country_id"/>
-                                        </group>
-                                        <group>
-                                            <field name="motor_cc"/>
-                                            <field name="state_type"/>
-                                            <field name="chassis_no"/>
-                                            <field name="plate_no"/>
-                                            <field name="engine"/>
-                                        </group>
-                                    </group>
-                                    <group string="Person Risk" attrs="{'invisible': [('test', '!=', 'person')]}">
-                                        <field name="name"/>
-                                        <field name="note"/>
-                                        <field name="DOB"/>
-                                        <field name="job" />
-                                        <field name="family_member"/>
-                                    </group>
+<!--                            <field name="risk_ids" nolabel="1"-->
+<!--                            >-->
+<!--                                <tree>-->
+<!--                                    <field name="risk_description"/>-->
+<!--                                    <field name="sum_insured"/>-->
+<!--                                    <field name="limitone"/>-->
+<!--                                    <field name="limittotal"/>-->
+<!--                                </tree>-->
+<!--                                <form>-->
+<!--                                    <group string="Vehicle Risk" attrs="{'invisible': [('test', '!=', 'vehicle')]}">-->
+<!--                                        <group>-->
+<!--                                            <field name="car_tybe" />-->
+<!--                                            <field name="Man"-->
+<!--                                            />-->
+<!--                                            <field name="model"-->
+<!--                                            />-->
+<!--                                            <field name="year_of_made"/>-->
+<!--                                            <field name="license_expire_date"/>-->
+<!--                                            <field name="country_id"/>-->
+<!--                                        </group>-->
+<!--                                        <group>-->
+<!--                                            <field name="motor_cc"/>-->
+<!--                                            <field name="state_type"/>-->
+<!--                                            <field name="chassis_no"/>-->
+<!--                                            <field name="plate_no"/>-->
+<!--                                            <field name="engine"/>-->
+<!--                                        </group>-->
+<!--                                    </group>-->
+<!--                                    <group string="Person Risk" attrs="{'invisible': [('test', '!=', 'person')]}">-->
+<!--                                        <field name="name"/>-->
+<!--                                        <field name="note"/>-->
+<!--                                        <field name="DOB"/>-->
+<!--                                        <field name="job" />-->
+<!--                                        <field name="family_member"/>-->
+<!--                                    </group>-->
 
-                                    <group string="Cargo Risk" attrs="{'invisible': [('test', '!=', 'cargo')]}">
-                                        <field name="cargo_type" />
-                                        <field name="From"/>
-                                        <field name="To"/>
-                                    </group>
-                                    <group string="Location Risk" attrs="{'invisible': [('test', '!=', 'location')]}">
-                                        <field name="type" />
-                                        <field name="address"/>
-                                        <field name="risk_details"/>
-                                    </group>
-                                    <group attrs="{'invisible': [('test', '!=', 'Group')]}">
-                                        <field name="group_category"/>
-                                        <field name="group_count"/>
-                                        <field name="cover_codes"/>
+<!--                                    <group string="Cargo Risk" attrs="{'invisible': [('test', '!=', 'cargo')]}">-->
+<!--                                        <field name="cargo_type" />-->
+<!--                                        <field name="From"/>-->
+<!--                                        <field name="To"/>-->
+<!--                                    </group>-->
+<!--                                    <group string="Location Risk" attrs="{'invisible': [('test', '!=', 'location')]}">-->
+<!--                                        <field name="type" />-->
+<!--                                        <field name="address"/>-->
+<!--                                        <field name="risk_details"/>-->
+<!--                                    </group>-->
+<!--                                    <group attrs="{'invisible': [('test', '!=', 'Group')]}">-->
+<!--                                        <field name="group_category"/>-->
+<!--                                        <field name="group_count"/>-->
+<!--                                        <field name="cover_codes"/>-->
 
-                                        <field name="group_premium" invisible="1"/>
-                                        <!--attrs="{'readonly': [('risks_method', '=', 'members')]}"-->
-                                    </group>
-                                    <group string="Project Risk" attrs="{'invisible': [('test', '!=', 'Project')]}">
+<!--                                        <field name="group_premium" invisible="1"/>-->
+<!--                                        &lt;!&ndash;attrs="{'readonly': [('risks_method', '=', 'members')]}"&ndash;&gt;-->
+<!--                                    </group>-->
+<!--                                    <group string="Project Risk" attrs="{'invisible': [('test', '!=', 'Project')]}">-->
 
-                                        <field name="proj_name" string="Project Name"/>
-                                        <field name="machine_id"/>
-                                        <field name="proj_start_date"/>
-                                        <field name="proj_end_date"/>
-                                        <field name="proj_description"/>
-                                    </group>
-                                    <group>
-                                        <field name="sum_insured"/>
-                                        <!--                                        <field name="si_deff"/>-->
-                                        <field name="limitone"/>
-                                        <field name="limittotal"/>
-                                    </group>
-                                    <group attrs="{'invisible': ['|',('test', '!=', 'vehicle')]}">
-                                        <field name="add_info"/>
-                                    </group>
-                                    <group>
-                                        <field name="risk_description" invisible="1" force_save="1"/>
-                                        <field name="policy_risk_id" invisible="1"/>
-                                        <field name="test" invisible="1"/>
-                                    </group>
-                                </form>
-                            </field>
-                    </page>
-                </notebook>
-                
-            </sheet>
-            </form>
-        </field>
-    </record>
+<!--                                        <field name="proj_name" string="Project Name"/>-->
+<!--                                        <field name="machine_id"/>-->
+<!--                                        <field name="proj_start_date"/>-->
+<!--                                        <field name="proj_end_date"/>-->
+<!--                                        <field name="proj_description"/>-->
+<!--                                    </group>-->
+<!--                                    <group>-->
+<!--                                        <field name="sum_insured"/>-->
+<!--                                        &lt;!&ndash;                                        <field name="si_deff"/>&ndash;&gt;-->
+<!--                                        <field name="limitone"/>-->
+<!--                                        <field name="limittotal"/>-->
+<!--                                    </group>-->
+<!--                                    <group attrs="{'invisible': ['|',('test', '!=', 'vehicle')]}">-->
+<!--                                        <field name="add_info"/>-->
+<!--                                    </group>-->
+<!--                                    <group>-->
+<!--                                        <field name="risk_description" invisible="1" force_save="1"/>-->
+<!--                                        <field name="policy_risk_id" invisible="1"/>-->
+<!--                                        <field name="test" invisible="1"/>-->
+<!--                                    </group>-->
+<!--                                </form>-->
+<!--                            </field>-->
+<!--                        </page>-->
+<!--                        <page string="forms" widget="html">-->
+<!--                            <form>-->
+<!--&lt;!&ndash;                            <template id="t12" xml:space="preserve">&ndash;&gt;-->
+
+<!--            <p>rrrrrrrrrrrrrrrrrrrrrrrrrrr</p>-->
+
+<!--&lt;!&ndash;                            </template>&ndash;&gt;-->
+<!--                            </form>-->
+
+<!--                        </page>-->
+<!--                    </notebook>-->
+
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <record id="policy_form_action" model="ir.actions.act_window">
         <field name="name">Policy</field>

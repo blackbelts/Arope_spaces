@@ -53,7 +53,7 @@ class TeamTarget(models.Model):
 
     @api.onchange('member')
     def set_member(self):
-        return {'domain': {'member': [('id', 'in', self.channel_id.member_ids.ids)]}}
+            return {'domain': {'member': [('id', 'in', self.channel_id.member_ids.ids)]}}
 
 #
 class TargetRules(models.Model):

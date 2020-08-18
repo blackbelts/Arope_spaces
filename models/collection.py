@@ -6,13 +6,15 @@ from datetime import timedelta, datetime
 
 class AropeCollection(models.Model):
     _name='collection.arope'
-    policy=fields.Many2one('policy.arope',string='Policy')
-    customer=fields.Many2one(related='policy.customer' ,store=True ,string='Customer')
-    collect_date=fields.Date(string='Collected Date',related='policy.issue_date',store=True)
-    net_premium=fields.Float(string='Net Premium',related='policy.net_premium',store=True)
-    gross_premium=fields.Float(string='Gross Premium',related='policy.gross_premium',store=True)
-    broker=fields.Many2one(related='policy.broker',string='Broker')
-    state = fields.Selection([('outstanding', 'Outstanding'),
-                               ('paid', 'Paid'),
-                              ('canceled', 'Canceled')],
-                             'State', required=True, default='outstanding')
+    # policy=fields.Many2one('policy.arope',string='Policy')
+    policy_num = fields.Char(string="Policy Number", copy=True,required=True)
+    customer=fields.Char(string='Customer')
+    customer_pin=fields.Integer(string='Customer PIN')
+    prem_date=fields.Date(string='prem Date')
+    net_premium=fields.Float(string='Net Premium')
+    gross_premium=fields.Float(string='Gross Premium')
+    broker=fields.Char(string='Broker')
+    broker_pin=fields.Integer(string='Broker PIN')
+    state = fields.Char('State')
+    endorsement_no = fields.Char(string="Endorsement No.")
+    endorsement_type = fields.Char(string="Endorsement Type.")

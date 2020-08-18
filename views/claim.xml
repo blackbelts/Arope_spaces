@@ -1,0 +1,29 @@
+<odoo>
+    <record id="claim_tree_view" model="ir.ui.view">
+        <field name="name">Claims Tree</field>
+        <field name="model">claim.arope</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="policy_num" string="Policy No"/>
+                <field name="line_of_bussines" string="LOB"/>
+                <field name="product" string="Product"/>
+<!--                <field name="broker" string="Broker"/>-->
+                <field name="customer" string="Customer"/>
+                <field name="customer_pin" string="Customer PIN"/>
+                <field name="endorsement_no" string="End No"/>
+                <field name="claim_num"/>
+                <field name="intimation_num"/>
+                <field name="intimation_date"/>
+                <field name="status" />
+                <field name="paid_amount" />
+            </tree>
+        </field>
+    </record>
+      <record id="claim_arope_action" model="ir.actions.act_window">
+        <field name="name">Claims</field>
+        <field name="res_model">claim.arope</field>
+        <field name="view_mode">tree,form,kanban,pivot</field>
+        <!--        <field name="context">{"search_default_active":1}</field>-->
+        <field name="view_id" ref="claim_tree_view"/>
+    </record>
+</odoo>
