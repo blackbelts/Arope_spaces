@@ -7,17 +7,13 @@ class StateSetup(models.Model):
     status = fields.Selection([
         ('quick_quote', 'Quote'),
         ('proposal', 'Fill Form'),
-        ('submitted', 'Form Complete'),
         ('survey_required', 'Survey Required'),
-        ('surveyor', 'Surveyor Assigned'),
+        ('surveyor', 'Assign Surveyor'),
         ('survey', 'Survey Report'),
-        ('survey_complete', 'Survey Complete'),
         ('reinsurance', 'Reinsurance'),
-        ('offer', 'To Offer'),
-        ('offer_ready', 'Offer Ready'),
+        ('offer', 'Offer'),
         ('application', 'Upload Documents'),
-        ('policy_pending', 'Policy Pending'),
-        ('issued', 'Issued'),
+        ('policy', 'Policy'),
         ('cancel', 'Rejected')], string='State')
     state = fields.Char('State')
     # lob = fields.Many2one('insurance.line.business', 'LOB', required=True)

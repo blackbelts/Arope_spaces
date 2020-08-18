@@ -53,23 +53,20 @@ class Quotation(models.Model):
     main_phone = fields.Char('Mobile Number (Main)')
     spare_phone = fields.Char('Mobile Number (Spare)')
     state = fields.Selection([
-        ('quick_quote', 'Quick Quote'),
+        ('quick_quote', 'Quote'),
         ('proposal', 'Fill Form'),
-        ('submitted', 'Form Complete'),
         ('survey_required', 'Survey Required'),
-        ('surveyor', 'Surveyor Assigned'),
+        ('surveyor', 'Assign Surveyor'),
         ('survey', 'Survey Report'),
-        ('survey_complete', 'Survey Complete'),
         ('reinsurance', 'Reinsurance'),
-        ('offer', 'To Offer'),
-        ('offer_ready', 'Offer Ready'),
+        ('offer', 'Offer'),
         ('application', 'Upload Documents'),
-        ('policy_pending', 'Policy Pending'),
-        ('issued', 'Issued'),
-        ('cancel', 'Rejected')], string='Status', readonly=True, default='quick_quote')
+        ('policy', 'Policy'),
+        ('cancel', 'Rejected')], string='State')
     rejection_reason = fields.Selection([('price', 'Price'), ('benefits', 'Benefit')], sting="Reason")
     comment = fields.Text('Comment')
     recomm = fields.Text('Recommendation')
+    sub_state = fields.Selection([('pending', 'Pending'), ('complete', 'Complete')], string="Sub State", readonly=True)
 
 
     address = fields.Char('Full Address')
@@ -116,6 +113,9 @@ class Quotation(models.Model):
     deductible = fields.Selection([('250 EGP', '250 EGP'),
                                    ('4 Per Thousand', '4 Per Thousand')],
                                   'Deductible')
+    survey_date = fields.Datetime('Appointment')
+
+
 
 
     @api.onchange('state')
@@ -159,10 +159,20 @@ class Quotation(models.Model):
         for rec in self.final_application_ids:
             res.append(rec.application_files)
         if all(res):
-            self.write({'state': 'policy_pending'})
-            self.env['state.history'].create({"application_id": self.id, "state": 'policy_pending',
+            self.write({'state': 'policy'})
+            self.env['state.history'].create({"application_id": self.id, "state": 'policy',
                                               "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                               "user": self.write_uid.id})
+
+    def complete_and_proceed(self):
+        self.write({'sub_state': 'complete'})
+        if self.state == 'application':
+            self.write({'state': 'policy'})
+            self.env['state.history'].create({"application_id": self.id, "state": 'policy',
+                                              "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                              "user": self.write_uid.id})
+            self.test_state = self.env['state.setup'].search([('status', '=', 'policy')]).id
+            self.write({'sub_state': 'pending'})
 
     @api.onchange('lob')
     def compute_application_number(self):
@@ -173,19 +183,21 @@ class Quotation(models.Model):
             self.write({'application_number' : self.lob.line_of_business.upper() + '/' + currentYear[2:4] + '/' + currentMonth +
                                                '/' + number})
 
-            if self.lob.line_of_business == 'Medical' or 'Motor':
-                # print('Medical')
-                self.write({'state': 'quick_quote'})
-                self.test_state = self.env['state.setup'].search([('status', '=', 'quick_quote')]).id
 
-            else:
-                self.write({'state': 'proposal'})
-                self.test_state = self.env['state.setup'].search([('status', '=', 'proposal')]).id
 
 
 
     @api.onchange('product_id')
     def get_questions(self):
+        if self.lob.line_of_business == ('Medical' or 'Motor'):
+            # print('Medical')
+            self.write({'state': 'quick_quote'})
+            self.write({"test_state": self.env['state.setup'].search([('status', '=', 'quick_quote')]).id})
+
+        else:
+            self.write({'state': 'proposal'})
+            self.write({"test_state": self.env['state.setup'].search([('status', '=', 'proposal')]).id})
+            self.write({'sub_state': 'pending'})
         if self.text_questions_ids:
             for question in self.text_questions_ids:
                 question.unlink()
@@ -238,6 +250,7 @@ class Quotation(models.Model):
                 for question in related_offer_items:
                     self.offer_ids.create(
                         {"question": question.id, "application_id": self.id})
+
 
 
     @api.onchange('dob')
@@ -320,6 +333,7 @@ class Quotation(models.Model):
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'proposal')]).id
+        self.write({'sub_state': 'pending'})
 
     def survey_confirm(self):
         self.write({'state': 'offer'})
@@ -327,6 +341,7 @@ class Quotation(models.Model):
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'offer')]).id
+        self.write({'sub_state': 'pending'})
 
     def survey_required(self):
         self.write({'state': 'survey_required'})
@@ -334,6 +349,7 @@ class Quotation(models.Model):
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'survey_required')]).id
+        self.write({'sub_state': 'pending'})
 
     def reinsurance_confirm(self):
             self.write({'state': 'reinsurance'})
@@ -341,6 +357,7 @@ class Quotation(models.Model):
                                               "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                               "user": self.write_uid.id})
             self.test_state = self.env['state.setup'].search([('status', '=', 'reinsurance')]).id
+            self.write({'sub_state': 'pending'})
 
     def assign_surveyor(self):
         self.write({'state': 'surveyor'})
@@ -348,6 +365,7 @@ class Quotation(models.Model):
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'surveyor')]).id
+        self.write({'sub_state': 'pending'})
     # def pricing(self):
     #     self.write({'state': 'price'})
     #     self.env['state.history'].create({"application_id": self.id, "state": 'price',
@@ -355,17 +373,21 @@ class Quotation(models.Model):
     #                                       "user": self.write_uid.id})
 
     def submit_questionnaire(self):
+
         self.write({'state': 'submitted'})
         self.env['state.history'].create({"application_id": self.id, "state": 'submitted',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'submitted')]).id
+        # self.write({'sub_state': 'complete'})
+        # self.test_state = self.env['state.setup'].search([('status', '=', '')]).id
     def submit_survey_required(self):
         self.write({'state': 'survey'})
         self.env['state.history'].create({"application_id": self.id, "state": 'survey',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'survey')]).id
+        self.write({'sub_state': 'pending'})
+
     def submit_survey(self):
         self.write({'state': 'survey_complete'})
         self.env['state.history'].create({"application_id": self.id, "state": 'survey_complete',
@@ -389,14 +411,16 @@ class Quotation(models.Model):
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'application')]).id
+        self.write({'sub_state': 'pending'})
 
     def issued(self):
 
-        self.write({'state': 'issued'})
-        self.env['state.history'].create({"application_id": self.id, "state": 'issued',
+        self.write({'state': 'policy'})
+        self.env['state.history'].create({"application_id": self.id, "state": 'policy',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'issued')]).id
+        self.test_state = self.env['state.setup'].search([('status', '=', 'policy')]).id
+        self.write({"sub_state":'complete'})
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'wizard.insurance.quotation',
@@ -519,20 +543,30 @@ class stateHistory(models.Model):
     _name = 'state.history'
 
     state = fields.Selection([
-        ('quick_quote', 'Quick Quote'),
+        ('quick_quote', 'Quote'),
         ('proposal', 'Fill Form'),
-        ('submitted', 'Form Complete'),
         ('survey_required', 'Survey Required'),
-        ('surveyor', 'Surveyor Assigned'),
+        ('surveyor', 'Assign Surveyor'),
         ('survey', 'Survey Report'),
-        ('survey_complete', 'Survey Complete'),
         ('reinsurance', 'Reinsurance'),
-        ('offer', 'To Offer'),
-        ('offer_ready', 'Offer Ready'),
+        ('offer', 'Offer'),
         ('application', 'Upload Documents'),
-        ('policy_pending', 'Policy Pending'),
-        ('issued', 'Issued'),
-        ('cancel', 'Rejected')], string='Status', readonly=True)
+        ('policy', 'Policy'),
+        ('cancel', 'Rejected')], string='State')
+    # ('quick_quote', 'Quick Quote'),
+    # ('proposal', 'Fill Form'),
+    # ('submitted', 'Form Complete'),
+    # ('survey_required', 'Survey Required'),
+    # ('surveyor', 'Surveyor Assigned'),
+    # ('survey', 'Survey Report'),
+    # ('survey_complete', 'Survey Complete'),
+    # ('reinsurance', 'Reinsurance'),
+    # ('offer', 'To Offer'),
+    # ('offer_ready', 'Offer Ready'),
+    # ('application', 'Upload Documents'),
+    # ('policy_pending', 'Policy Pending'),
+    # ('issued', 'Issued'),
+    # ('cancel', 'Rejected')], string = 'Status', readonly = True, default = 'quick_quote')
     datetime = fields.Datetime('Date')
     user = fields.Many2one('res.users', ondelete='cascade')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
