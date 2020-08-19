@@ -163,16 +163,37 @@ class Quotation(models.Model):
             self.env['state.history'].create({"application_id": self.id, "state": 'policy',
                                               "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                               "user": self.write_uid.id})
+            self.test_state = self.env['state.setup'].search([('status', '=', 'policy')]).id
+            self.write({'sub_state': 'pending'})
 
     def complete_and_proceed(self):
         self.write({'sub_state': 'complete'})
         if self.state == 'application':
-            self.write({'state': 'policy'})
-            self.env['state.history'].create({"application_id": self.id, "state": 'policy',
+
+            return {
+                'type': 'ir.actions.act_window',
+                'res_model': 'wizard.insurance.quotation',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'target': 'new',
+                'context': {
+                               'default_insurance_app_id': self.id
+                           }
+            }
+        elif self.state == 'surveyor':
+            self.write({'state': 'survey'})
+            self.env['state.history'].create({"application_id": self.id, "state": 'survey',
                                               "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                               "user": self.write_uid.id})
-            self.test_state = self.env['state.setup'].search([('status', '=', 'policy')]).id
+            self.test_state = self.env['state.setup'].search([('status', '=', 'survey')]).id
             self.write({'sub_state': 'pending'})
+        # if self.state == 'application':
+        #     self.write({'state': 'policy'})
+        #     self.env['state.history'].create({"application_id": self.id, "state": 'policy',
+        #                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        #                                       "user": self.write_uid.id})
+        #     self.test_state = self.env['state.setup'].search([('status', '=', 'policy')]).id
+        #     self.write({'sub_state': 'pending'})
 
     @api.onchange('lob')
     def compute_application_number(self):
@@ -416,9 +437,9 @@ class Quotation(models.Model):
     def issued(self):
 
         self.write({'state': 'policy'})
-        self.env['state.history'].create({"application_id": self.id, "state": 'policy',
-                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                          "user": self.write_uid.id})
+        # self.env['state.history'].create({"application_id": self.id, "state": 'policy',
+        #                                   "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        #                                   "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'policy')]).id
         self.write({"sub_state":'complete'})
         return {
@@ -496,7 +517,30 @@ class Answers(models.Model):
     text_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     choose_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     numerical_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
-    options = fields.Many2one('selection.options', 'Choose',ondelete='cascade', domain="[('questionnaire_id', '=', question)]")
+    options = fields.Many2one('selection.options', 'Choose',ondelete='cascade')
+    filter_options = fields.Many2many('selection.options', compute='compute_options', store=True)
+
+
+    @api.depends('question')
+    def compute_options(self):
+        self.filter_options = self.question.options
+
+    @api.onchange('options')
+    def set_member(self):
+        ids = []
+        for rec in self.question.options:
+            ids.append(rec.id)
+        # print(ids)
+        # return ids
+        return {'domain': {'options': [('id', 'in', ids)]}}
+
+    # @api.model
+    # def create(self, vals):
+    #     res = super(Answers, self).create(vals)
+    #     self.set_member()
+    #     # res.set_member()  # call your method
+
+
 
 class SurveyReport(models.Model):
     _name = 'survey.report'
@@ -615,8 +659,8 @@ class SelectionOptions(models.Model):
     _name = 'selection.options'
     _rec_name = 'option'
     option = fields.Char('Option')
-    survey_id = fields.Many2one('survey.line.setup', ondelete='cascade')
-    questionnaire_id = fields.Many2one('questionnaire.line.setup', ondelete='cascade')
+    # survey_id = fields.Many2one('survey.line.setup', ondelete='cascade')
+    # questionnaire_id = fields.Many2one('questionnaire.line.setup', ondelete='cascade')
 
 class WizardInsuranceQuotation(models.TransientModel):
     _name = 'wizard.insurance.quotation'

@@ -103,3 +103,6 @@ class OfferSetup(models.Model):
     offer = fields.Char('Offer Item')
     # application_files = fields.Binary('File')
     product_id = fields.Many2one('insurance.product', ondelele='cascade', index=True)
+
+# class MedicalSubQutionnaire(models.Model):
+#     _name =
