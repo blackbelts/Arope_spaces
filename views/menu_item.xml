@@ -33,7 +33,7 @@
         <menuitem id="price_menu_family" name="Family Package" parent="policy_config"
                   action="quotation_price_action_family" sequence="5"/>
     <menuitem id="broker_menu" name="Brokers" parent="policy_config"
-                  action="brokers_arope_action" sequence="6"/>
+                  action="brokers_arope_action" />
 <!--        <menuitem id="selection_setup" name="Selection Answer Setup" parent="policy_config"-->
 <!--                  action="selection_questions_action" sequence="15"/>-->
 <!--        <menuitem id="application_form" name="Application Form Setup" parent="policy_config"-->
