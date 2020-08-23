@@ -13,129 +13,129 @@ class policyrisks(models.Model):
     _name = "policy.risk"
     _rec_name = 'risk_description'
 
-    # def get_policy(self, cr, uid, view_id=None, view_type='form',
-    #                     context=None, toolbar=False, submenu=False):
-    #     if context is None:
-    #         context = {}
-    #     res = super(policyrisks, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type,
-    #                                                          context=context, toolbar=toolbar, submenu=False)
-    #     return res
-
-    # @api.multi
-    # def get_policy(self):
-    #     print("skdjsjhfjkdshkhjdj5555555555555")
-    #     return {
-    #         'name': ('get policy'),
-    #         'view_type': 'form',
-    #         'view_mode': 'form',
-    #         'res_model': 'policy.broker',
-    #         'view_id': [(self.env.ref('smart_policy.policy_form_view').id), 'form'],
-    #         'type': 'ir.actions.act_window',
-    #         'target': 'current',
-    #         # 'domain': [('id', '=', self.policy_risk_id.id)],
-    #         'res_id': self.policy_risk_id.id,
+    # # def get_policy(self, cr, uid, view_id=None, view_type='form',
+    # #                     context=None, toolbar=False, submenu=False):
+    # #     if context is None:
+    # #         context = {}
+    # #     res = super(policyrisks, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type,
+    # #                                                          context=context, toolbar=toolbar, submenu=False)
+    # #     return res
     #
-    #     }
-
-    # @api.multi
-    # def set_claim(self):
-    #     print("skdjsjhfjkdshkhjdj5555555555555")
-    #     return {
-    #         'name': ('get policy'),
-    #         'view_type': 'form',
-    #         'view_mode': 'form',
-    #         'res_model': 'policy.broker',
-    #         'view_id': [(self.env.ref('smart_policy.policy_form_view').id), 'form'],
-    #         'type': 'ir.actions.act_window',
-    #         'target': 'current',
-    #         # 'domain': [('id', '=', self.policy_risk_id.id)],
-    #         'res_id': self.policy_risk_id.id,
+    # # @api.multi
+    # # def get_policy(self):
+    # #     print("skdjsjhfjkdshkhjdj5555555555555")
+    # #     return {
+    # #         'name': ('get policy'),
+    # #         'view_type': 'form',
+    # #         'view_mode': 'form',
+    # #         'res_model': 'policy.broker',
+    # #         'view_id': [(self.env.ref('smart_policy.policy_form_view').id), 'form'],
+    # #         'type': 'ir.actions.act_window',
+    # #         'target': 'current',
+    # #         # 'domain': [('id', '=', self.policy_risk_id.id)],
+    # #         'res_id': self.policy_risk_id.id,
+    # #
+    # #     }
     #
-    #     }
-
-    # @api.multi
-    # def create_claim(self):
-    #     tree = self.env.ref('smart_claim.tree_insurance_claim')
-    #     form = self.env.ref('smart_claim.form_insurance_claim')
-    #     return {
-    #         'name': ('Claim'),
-    #         'view_type': 'form',
-    #         'view_mode': 'tree, form',
-    #         'res_model': 'insurance.claim',
-    #         # 'view_id': [(self.env.ref('smart_claim.tree_insurance_claim').id), 'tree'],
-    #         'views': [(tree.id, 'tree'),
-    #                   (form.id, 'form')],
-    #         'type': 'ir.actions.act_window',
-    #         'target': 'current',
+    # # @api.multi
+    # # def set_claim(self):
+    # #     print("skdjsjhfjkdshkhjdj5555555555555")
+    # #     return {
+    # #         'name': ('get policy'),
+    # #         'view_type': 'form',
+    # #         'view_mode': 'form',
+    # #         'res_model': 'policy.broker',
+    # #         'view_id': [(self.env.ref('smart_policy.policy_form_view').id), 'form'],
+    # #         'type': 'ir.actions.act_window',
+    # #         'target': 'current',
+    # #         # 'domain': [('id', '=', self.policy_risk_id.id)],
+    # #         'res_id': self.policy_risk_id.id,
+    # #
+    # #     }
     #
-    #         'context': {'default_policy_number': self.policy_risk_id.id,
-    #                     'default_lob': self.policy_risk_id.line_of_bussines.id, 'default_chassis_no': self.chassis_no,
-    #                     'default_maker': self.Man.id,'default_model': self.model.id,'default_plate_no': self.plate_no,
-    #                     'default_engine': self.engine,
-    #                     'create': True},
-    #         'domain': [('policy_number', '=', self.policy_risk_id.id)]
+    # # @api.multi
+    # # def create_claim(self):
+    # #     tree = self.env.ref('smart_claim.tree_insurance_claim')
+    # #     form = self.env.ref('smart_claim.form_insurance_claim')
+    # #     return {
+    # #         'name': ('Claim'),
+    # #         'view_type': 'form',
+    # #         'view_mode': 'tree, form',
+    # #         'res_model': 'insurance.claim',
+    # #         # 'view_id': [(self.env.ref('smart_claim.tree_insurance_claim').id), 'tree'],
+    # #         'views': [(tree.id, 'tree'),
+    # #                   (form.id, 'form')],
+    # #         'type': 'ir.actions.act_window',
+    # #         'target': 'current',
+    # #
+    # #         'context': {'default_policy_number': self.policy_risk_id.id,
+    # #                     'default_lob': self.policy_risk_id.line_of_bussines.id, 'default_chassis_no': self.chassis_no,
+    # #                     'default_maker': self.Man.id,'default_model': self.model.id,'default_plate_no': self.plate_no,
+    # #                     'default_engine': self.engine,
+    # #                     'create': True},
+    # #         'domain': [('policy_number', '=', self.policy_risk_id.id)]
+    # #
+    # #     }
     #
-    #     }
-
-    # @api.one
-    @api.depends('policy_risk_id')
-    def _compute_risk_descriptionn(self):
-        if self.policy_risk_id:
-            if self.test == "person":
-                self.risk_description = (str(self.job) if self.job else " " + "_") + "   " + (
-                    str(self.name) + " - " if self.name else " " + "_") + "   " + (
-                                            str(self.DOB) + " - " if self.DOB else " " + "_") + "   " + "   " + (
-                                            str(self.family_member) if self.family_member else " " + "_")+ "   " + (
-                    str(self.note) + " - " if self.note else " " + "_")
-
-            if self.test == "vehicle":
-                self.risk_description = (str(
-                    self.car_tybe) + ' - ' if self.car_tybe else " " + "_") + "   " + (
-                                            str(
-                                                self.Man) + " - " if self.Man else " " + "_") + "  " + (
-                                            str(
-                                                self.model) + " - " if self.model else " " + "_") + "   " + (
-                                            str(
-                                                self.country_id) + " - " if self.country_id else " " + "_") + "   " + (
-                                            str(
-                                                self.year_of_made) + " - " if self.year_of_made else " " + "_") + "  " + "VCC: " + (
-                                            str(self.motor_cc) if self.motor_cc else " " + "_") + "  " + "PN: " + (
-                                            str(
-                                                self.plate_no) + ' - ' if self.plate_no else " " + "_") + "  " + "CH: " + (
-                                            str(
-                                                self.chassis_no) + ' - ' if self.chassis_no else " " + "_") + "  " + "EN: " + (
-                                            str(
-                                                self.engine) + ' - ' if self.engine else " " + "_") + "   " + (
-                                            str(
-                                                self.license_expire_date) + " - " if self.license_expire_date else " " + "_") + "   " + "Type: " + (
-                                            str(
-                                                self.state_type) + " - " if self.state_type else " " + "_")
-
-            if self.test == "cargo":
-                self.risk_description = (str(
-                    self.cargo_type) + " - " if self.cargo_type else " " + "_") + "  " + "FRM: " + (
-                                            str(self.From) + " - " if self.From else " " + "_") + "   " + "TO: " + (
-                                            str(self.To) + " - " if self.To else " " + "_")
-            if self.test == "location":
-                self.risk_description = (
-                                            str(
-                                                self.type) if self.type else " " + "_") + "  " + "ADD: " + (
-                                            str(self.address) + " - " if self.address else " " + "_")
-
-            if self.test == 'Group':
-                self.risk_description = (str(
-                    self.group_category) + " - " if self.group_category else " " + "_") + "   " + (
-                                            str(self.group_count) + " - " if self.group_count else " " + "_") + (
-                                            str(
-                                                self.policy_risk_id.line_of_bussines.object) + " - " if self.policy_risk_id.line_of_bussines.object else " " + "_") + "   " +(
-                                            str(
-                                                self.cover_codes) + " - " if self.cover_codes else " ")
-            if self.test == 'Project':
-                self.risk_description = (str(
-                    self.proj_name) + " - " if self.proj_name else " " + "_") + "   " + (
-                                            str(self.machine_id) + " - " if self.machine_id else " " + "_")
-        else:
-            self.risk_description = "something is wrong"
+    # # @api.one
+    # @api.depends('policy_risk_id')
+    # def _compute_risk_descriptionn(self):
+    #     if self.policy_risk_id:
+    #         if self.test == "person":
+    #             self.risk_description = (str(self.job) if self.job else " " + "_") + "   " + (
+    #                 str(self.name) + " - " if self.name else " " + "_") + "   " + (
+    #                                         str(self.DOB) + " - " if self.DOB else " " + "_") + "   " + "   " + (
+    #                                         str(self.family_member) if self.family_member else " " + "_")+ "   " + (
+    #                 str(self.note) + " - " if self.note else " " + "_")
+    #
+    #         if self.test == "vehicle":
+    #             self.risk_description = (str(
+    #                 self.car_tybe) + ' - ' if self.car_tybe else " " + "_") + "   " + (
+    #                                         str(
+    #                                             self.Man) + " - " if self.Man else " " + "_") + "  " + (
+    #                                         str(
+    #                                             self.model) + " - " if self.model else " " + "_") + "   " + (
+    #                                         str(
+    #                                             self.country_id) + " - " if self.country_id else " " + "_") + "   " + (
+    #                                         str(
+    #                                             self.year_of_made) + " - " if self.year_of_made else " " + "_") + "  " + "VCC: " + (
+    #                                         str(self.motor_cc) if self.motor_cc else " " + "_") + "  " + "PN: " + (
+    #                                         str(
+    #                                             self.plate_no) + ' - ' if self.plate_no else " " + "_") + "  " + "CH: " + (
+    #                                         str(
+    #                                             self.chassis_no) + ' - ' if self.chassis_no else " " + "_") + "  " + "EN: " + (
+    #                                         str(
+    #                                             self.engine) + ' - ' if self.engine else " " + "_") + "   " + (
+    #                                         str(
+    #                                             self.license_expire_date) + " - " if self.license_expire_date else " " + "_") + "   " + "Type: " + (
+    #                                         str(
+    #                                             self.state_type) + " - " if self.state_type else " " + "_")
+    #
+    #         if self.test == "cargo":
+    #             self.risk_description = (str(
+    #                 self.cargo_type) + " - " if self.cargo_type else " " + "_") + "  " + "FRM: " + (
+    #                                         str(self.From) + " - " if self.From else " " + "_") + "   " + "TO: " + (
+    #                                         str(self.To) + " - " if self.To else " " + "_")
+    #         if self.test == "location":
+    #             self.risk_description = (
+    #                                         str(
+    #                                             self.type) if self.type else " " + "_") + "  " + "ADD: " + (
+    #                                         str(self.address) + " - " if self.address else " " + "_")
+    #
+    #         if self.test == 'Group':
+    #             self.risk_description = (str(
+    #                 self.group_category) + " - " if self.group_category else " " + "_") + "   " + (
+    #                                         str(self.group_count) + " - " if self.group_count else " " + "_") + (
+    #                                         str(
+    #                                             self.policy_risk_id.line_of_bussines.object) + " - " if self.policy_risk_id.line_of_bussines.object else " " + "_") + "   " +(
+    #                                         str(
+    #                                             self.cover_codes) + " - " if self.cover_codes else " ")
+    #         if self.test == 'Project':
+    #             self.risk_description = (str(
+    #                 self.proj_name) + " - " if self.proj_name else " " + "_") + "   " + (
+    #                                         str(self.machine_id) + " - " if self.machine_id else " " + "_")
+    #     else:
+    #         self.risk_description = "something is wrong"
 
     # premium
     sum_insured = fields.Float(string='Sum Insured')
@@ -147,12 +147,12 @@ class policyrisks(models.Model):
     old_id_end = fields.Integer()
     policy_risk_id = fields.Many2one("policy.arope", copy=True)
 
-    test = fields.Char(related="policy_risk_id.check_item")
+    # test = fields.Char(related="policy_risk_id")
     # get_type = fields.Char(related="policy_risk_id.type_char")
-    risk_description = fields.Char("Risk Description", compute="_compute_risk_descriptionn", store=True)
+    risk_description = fields.Char("Risk Description", )
     # insured_object_type = fields.Char(compute='_compute_insured')
-    customer = fields.Many2one(related='policy_risk_id.customer')
-    broker = fields.Many2one(related='policy_risk_id.broker')
+    # customer = fields.Many2one(related='policy_risk_id.customer')
+    # broker = fields.C(related='policy_risk_id.broker')
     # product_policy = fields.Many2one('insurance.product', compute='get_policy_info')
     # is_renewal = fields.Boolean(compute='get_policy_info')
     # endorsement_no = fields.Char(compute='get_policy_info')
