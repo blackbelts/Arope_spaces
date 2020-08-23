@@ -13,7 +13,6 @@ access_setup8,setup.setup8,model_team_target,base.group_user,1,1,1,1
 access_setup9,setup.setup9,model_target_policy,base.group_user,1,1,1,1
 access_setup10,setup.setup10,model_target_rules,base.group_user,1,1,1,1
 access_setup11,setup.setup11,model_system_notify,base.group_user,1,1,1,1
-access_setup12,setup.setup12,model_brokers,base.group_user,1,1,1,1
 
 
 
@@ -34,6 +33,7 @@ access_setup24,setup.setup24,model_offer_setup,base.group_user,1,1,1,1
 access_setup25,setup.setup25,model_final_offer,base.group_user,1,1,1,1
 access_setup26,setup.setup26,model_state_setup,base.group_user,1,1,1,1
 access_setup27,setup.setup27,model_medical_family,base.group_user,1,1,1,1
+access_setup28,setup.setup28,model_table_b,base.group_user,1,1,1,1
 
 
 
