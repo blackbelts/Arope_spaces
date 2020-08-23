@@ -32,5 +32,28 @@
             </xpath>
         </field>
     </record>
+     <record id="brokers_tree_view" model="ir.ui.view">
+        <field name="name">brokers Tree</field>
+        <field name="model">brokers</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="name" />
+               <field name="fra_no" />
+                <field name="expire_date" />
+                <field name="national_id" />
+                <field name="com_reg" />
+                <field name="pin" />
+                <field name="expire_date" />
+                <field name="agent_code" />
+            </tree>
+        </field>
+    </record>
+      <record id="brokers_arope_action" model="ir.actions.act_window">
+        <field name="name">brokers</field>
+        <field name="res_model">brokers</field>
+        <field name="view_mode">tree,form,kanban,pivot</field>
+        <!--        <field name="context">{"search_default_active":1}</field>-->
+        <field name="view_id" ref="brokers_tree_view"/>
+    </record>
 
 </odoo>

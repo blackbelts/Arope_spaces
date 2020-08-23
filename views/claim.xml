@@ -10,6 +10,9 @@
 <!--                <field name="broker" string="Broker"/>-->
                 <field name="customer" string="Customer"/>
                 <field name="customer_pin" string="Customer PIN"/>
+                 <field name="broker" string="Broker"/>
+                <field name="broker_pin" string="Broker PIN"/>
+                <field name="agent_code" string="Agent Code"/>
                 <field name="endorsement_no" string="End No"/>
                 <field name="claim_num"/>
                 <field name="intimation_num"/>
