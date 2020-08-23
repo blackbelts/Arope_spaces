@@ -1,17 +1,36 @@
 <odoo>
-     <record id="view_partner_form_inherit" model="ir.ui.view">
+    <record id="view_partner_form_inherit" model="ir.ui.view">
         <field name="name">res.partner.form</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group/group" position="inside">
-                <field name="broker" />
-                <field name="broker_id" attrs="{'invisible': [('broker','!=',True)]}"/>
-                <field name="fra_no" attrs="{'invisible': [('broker','!=',True)]}"/>
-                <field name="expire_date" attrs="{'invisible': [('broker','!=',True)]}"/>
+<!--                <field name="broker" />-->
+<!--                <field name="broker_id" attrs="{'invisible': [('broker','!=',True)]}"/>-->
+                <field name="fra_no" />
+                <field name="expire_date" />
                 <field name="national_id" />
                 <field name="com_reg" />
             </xpath>
         </field>
-     </record>
+    </record>
+    <record model="ir.ui.view" id="res_user_agent_access">
+        <field name="model">res.users</field>
+        <field name="name">res.users.form</field>
+
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login']" position="after">
+                <div class="oe_title">
+                    <label for="is_broker" string="Broker" />
+                    <field name="is_broker" />
+                </div>
+                <div class="oe_title">
+                    <label for="agent_code" string="Agent Code"/>
+                    <field name="agent_code" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+
 </odoo>

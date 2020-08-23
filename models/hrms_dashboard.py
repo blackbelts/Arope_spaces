@@ -18,16 +18,18 @@ class Brokers(models.Model):
     def get_production(self, id):
         total = 0
         ids=[]
-        for prod in self.env['policy.arope'].search([('broker.id', '=', id)]):
+        agent_code=self.env['res.users'].search([('id', '=',id)],limit=1).agent_code
+        for prod in self.env['policy.arope'].search([('agent_code', '=', agent_code)]):
             total += prod.gross_premium
             ids.append(prod.id)
         return {"total":total,"ids":ids}
 
     def get_all_production(self):
         prod = {}
-        for user in self.env['res.users'].search([('partner_id.broker', '=', True)]):
+
+        for user in self.env['res.users'].search([]):
             total = 0.0
-            for pro in self.env['policy.arope'].search([('broker.id', '=', user.id)]):
+            for pro in self.env['policy.arope'].search([('agent_code', '=', user.agent_code)]):
                 total += pro.gross_premium
             prod[user.id] = total
         print(prod)
@@ -55,12 +57,14 @@ class Brokers(models.Model):
         result1 = {}
         finalTarget = []
         finalProduction = []
+        agent_code=self.env['res.users'].search([('id', '=',id)],limit=1).agent_code
+
         months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         for target in self.env['team.target'].search([('member.id', '=', id)]):
             for rule in target.targets:
                 total = 0.0
                 for pol in self.env['policy.arope'].search(
-                        [('broker.id', '=', id), ('start_date', '>=', rule.from_date),
+                        [('agent_code', '=', agent_code), ('start_date', '>=', rule.from_date),
                          ('start_date', '<=', rule.to_date)]):
                     total += pol.gross_premium
                 result[rule.name] = [rule.amount, total]
@@ -89,14 +93,15 @@ class Brokers(models.Model):
         current_prod = []
         last_total = 0.0
         last_prod = []
+        agent_code=self.env['res.users'].search([('id', '=',id)],limit=1).agent_code
         for i in range(12):
             for pol in self.env['policy.arope'].search(
-                    [('broker.id', '=', id), ('start_date', '>=', date3),
+                    [('agent_code', '=', agent_code), ('start_date', '>=', date3),
                      ('start_date', '<', date3 + relativedelta(months=1))]):
                 current_total += pol.gross_premium
             current_prod.append(current_total)
             for pol in self.env['policy.arope'].search(
-                    [('broker.id', '=', id), ('start_date', '>=', date_last_year),
+                    [('agent_code', '=', agent_code), ('start_date', '>=', date_last_year),
                      ('start_date', '<', date_last_year + relativedelta(months=1))]):
                 last_total += pol.gross_premium
             last_prod.append(last_total)
@@ -109,23 +114,24 @@ class Brokers(models.Model):
     def get_renew(self, id):
         result={}
         ids = []
-        
+        agent_code=self.env['res.users'].search([('id', '=',id)],limit=1).agent_code
+
         for rec in self.env['system.notify'].search([('type','=','Renewal')]):
             if rec.color=='Green':
                 ids=[]
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['policy.arope'].search([('broker.id', '=', id),('end_date', '>=', datetime.today().date()),('end_date', '<=', date1),]):
+                for prod in self.env['policy.arope'].search([('agent_code', '=', agent_code),('end_date', '>=', datetime.today().date()),('end_date', '<=', date1),]):
                     total += prod.gross_premium
                     ids.append(prod.id)
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
-            
+
             elif rec.color=='Orange':
                 ids=[]
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['policy.arope'].search([('broker.id', '=', id), ('end_date', '<=', datetime.today().date()),('end_date', '>=', date1)]):
+                for prod in self.env['policy.arope'].search([('agent_code', '=', id), ('end_date', '<=', datetime.today().date()),('end_date', '>=', date1)]):
                     total += prod.gross_premium
                     ids.append(prod.id)
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
@@ -135,7 +141,7 @@ class Brokers(models.Model):
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
                 for prod in self.env['policy.arope'].search(
-                        [('broker.id', '=', id), ('end_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Renewal'),('color','=','Orange')],limit=1).no_days)),
+                        [('agent_code', '=', agent_code), ('end_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Renewal'),('color','=','Orange')],limit=1).no_days)),
                          ]):
                     total += prod.gross_premium
                     ids.append(prod.id)
@@ -148,22 +154,23 @@ class Brokers(models.Model):
         result = {}
         ids = []
         colors=[]
+        agent_code=self.env['res.users'].search([('id', '=',id)],limit=1).agent_code
         for rec in self.env['system.notify'].search([('type', '=', 'Collection')]):
             if rec.color == 'Green':
                 ids = []
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('broker.id', '=', id), ('state', '=', 'outstanding'),('collect_date', '>=', datetime.today().date()),('collect_date', '<=', date1) ]):
+                for prod in self.env['collection.arope'].search([('agent_code', '=', agent_code), ('state', '=', 'outstanding'),('collect_date', '>=', datetime.today().date()),('collect_date', '<=', date1) ]):
                     total += prod.gross_premium
                     ids.append(prod.id)
                 result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
-                
+
             elif rec.color=='Orange':
                 ids = []
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('broker.id', '=', id), ('state', '=', 'outstanding'), ('collect_date', '<=', datetime.today().date()),('collect_date', '>=', date1)]):
+                for prod in self.env['collection.arope'].search([('agent_code', '=', id), ('state', '=', 'outstanding'), ('collect_date', '<=', datetime.today().date()),('collect_date', '>=', date1)]):
                     total += prod.gross_premium
                     ids.append(prod.id)
                 result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
@@ -172,7 +179,7 @@ class Brokers(models.Model):
                 ids = []
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('broker.id', '=', id), ('state', '=', 'outstanding'),('collect_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Orange')],limit=1).no_days)), ]):
+                for prod in self.env['collection.arope'].search([('agent_code', '=', id), ('state', '=', 'outstanding'),('collect_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Orange')],limit=1).no_days)), ]):
                 # for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('collect_date', '<=', date.today() - relativedelta(days=self.env['collection.arope'].search([('type','=','Collection'),('color','=','Orange')])))]):
                 # self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('collect_date', '<=', datetime.today().date() - relativedelta(days=self.env['collection.arope'].search([('type','=','collect_date'),('color','=','Orange')]), ]):
                     total += prod.policy.gross_premium

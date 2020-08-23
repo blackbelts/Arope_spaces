@@ -141,7 +141,7 @@
 
 
                         </page>
-                         <page string="Required For Survey"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'submitted'])]}">
+                         <page string="Required For Survey"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'submitted'])],'autofocus':[('state', 'in', ['survey_required'])]}">
                             <group>
                                 <group>
                                     <field name="name_of_contact_person"/>

@@ -29,6 +29,8 @@ class AropePolicy(models.Model):
 
     broker = fields.Char('Broker', copy=True,)
     broker_pin = fields.Integer('Broker PIN', copy=True,)
+    agent_code = fields.Integer('Agent Code', copy=True,)
+
 
     policy_type = fields.Char()
     is_renewal = fields.Boolean(string="Renewal")
