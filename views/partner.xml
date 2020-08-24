@@ -40,11 +40,12 @@
                 <field name="name" />
                <field name="fra_no" />
                 <field name="expire_date" />
-                <field name="national_id" />
-                <field name="com_reg" />
-                <field name="pin" />
+                <field name="card_id" />
+                <field name="com_reg" widget="char" />
+                <field name="pin" widget="char" />
                 <field name="expire_date" />
                 <field name="agent_code" />
+                <field name="mobile" />
             </tree>
         </field>
     </record>
