@@ -15,7 +15,7 @@ class AropeCollection(models.Model):
     gross_premium=fields.Float(string='Gross Premium')
     broker=fields.Char(string='Broker')
     broker_pin=fields.Integer(string='Broker PIN')
-    agent_code=fields.Integer(string='Agent_code')
+    agent_code=fields.Char(string='Agent_code')
 
     state = fields.Char('State')
     endorsement_no = fields.Char(string="Endorsement No.")

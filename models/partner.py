@@ -18,11 +18,11 @@ class InheritBrokers(models.Model):
     _rec_name='name'
     name=fields.Char(string='Broker Name')
     national_id = fields.Char(string='National ID')
-    com_reg = fields.Char(string='Commerical Register')
+    com_reg = fields.Integer(string='Commerical Register')
     pin = fields.Integer(string='PIN')
     fra_no = fields.Char(string='FRA No')
     expire_date = fields.Date(string='Expiration Date')
-    agent_code = fields.Integer(string='Agent Code')
+    agent_code = fields.Char(string='Agent Code')
 
 
 

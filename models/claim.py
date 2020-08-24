@@ -16,7 +16,7 @@ class AropeClaim(models.Model):
     customer_pin = fields.Char('Customer PIN', copy=True)
     broker = fields.Char('Broker', copy=True, )
     broker_pin = fields.Integer('Broker PIN', copy=True, )
-    agent_code = fields.Integer('Agent Code', copy=True, )
+    agent_code = fields.Char('Agent Code', copy=True, )
     endorsement_no = fields.Char(string="Endorsement No.")
     claim_num = fields.Char(string="Claim Number", copy=True, )
     intimation_num = fields.Char(string="Intimation Number", copy=True, )
