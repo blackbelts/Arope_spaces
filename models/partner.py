@@ -25,6 +25,9 @@ class InheritBrokers(models.Model):
     expire_date = fields.Date(string='Expiration Date')
     agent_code = fields.Char(string='Agent Code')
     mobile = fields.Char(string='Mobile')
+    def generate_users(self):
+        self.env['res.users'].create({'name': self.name, 'login': self.name,'password':'123', 'groups_id': [
+            self.env['res.groups'].search([('name', '=', 'Broker')]).id]})
 
 
 

@@ -5,8 +5,8 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group/group" position="inside">
-<!--                <field name="broker" />-->
-<!--                <field name="broker_id" attrs="{'invisible': [('broker','!=',True)]}"/>-->
+                <!--                <field name="broker" />-->
+                <!--                <field name="broker_id" attrs="{'invisible': [('broker','!=',True)]}"/>-->
                 <field name="fra_no" />
                 <field name="expire_date" />
                 <field name="national_id" />
@@ -32,13 +32,13 @@
             </xpath>
         </field>
     </record>
-     <record id="brokers_tree_view" model="ir.ui.view">
+    <record id="brokers_tree_view" model="ir.ui.view">
         <field name="name">brokers Tree</field>
         <field name="model">table.b</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree editable="bottom">
                 <field name="name" />
-               <field name="fra_no" />
+                <field name="fra_no" />
                 <field name="expire_date" />
                 <field name="card_id" />
                 <field name="com_reg" widget="char" />
@@ -46,10 +46,12 @@
                 <field name="expire_date" />
                 <field name="agent_code" />
                 <field name="mobile" />
+                <button  name="generate_users" string="Create User" type="object" class="oe_highlight" />
+
             </tree>
         </field>
     </record>
-      <record id="broker_action" model="ir.actions.act_window">
+    <record id="broker_action" model="ir.actions.act_window">
         <field name="name">Brokers</field>
         <field name="res_model">table.b</field>
         <field name="view_mode">tree,form,kanban,pivot</field>
