@@ -214,11 +214,13 @@ class Quotation(models.Model):
 
     @api.onchange('product_id')
     def get_questions(self):
-        if self.lob.line_of_business == ('Medical' or 'Motor'):
+        if self.lob.line_of_business == 'Medical':
             # print('Medical')
             self.write({'state': 'quick_quote'})
             self.write({"test_state": self.env['state.setup'].search([('status', '=', 'quick_quote')]).id})
-
+        elif self.lob.line_of_business == 'Motor':
+            self.write({'state': 'quick_quote'})
+            self.write({"test_state": self.env['state.setup'].search([('status', '=', 'quick_quote')]).id})
         else:
             self.write({'state': 'proposal'})
             self.write({"test_state": self.env['state.setup'].search([('status', '=', 'proposal')]).id})
