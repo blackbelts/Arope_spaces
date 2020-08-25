@@ -1,0 +1,40 @@
+<odoo>
+
+    <!-- Add a custom form view -->
+    <record id="sub_questionnaire_answers_view_form" model="ir.ui.view">
+		<field name="name">Sub Questionnaire Answers</field>
+		<field name="model">sub.questionnaire.answers</field>
+		<field name="arch" type="xml">
+			<form>
+                <sheet>
+                    <group>
+                        <field name="main_question"/>
+                    </group>
+                    <notebook>
+                        <page string="Questions">
+                            <field name="answers" >
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="text"/>
+                                    <field name="value"/>
+                                    <field name="options"/>
+                                    <field name="file"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sub_questionnaire_answers_action">
+            <field name="name">Sub Questionnaire Answers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sub.questionnaire.answers</field>
+            <field name="view_id" ref="sub_questionnaire_answers_view_form"/>
+            <field name="view_mode">form</field>
+    </record>
+</odoo>

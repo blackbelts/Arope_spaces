@@ -66,7 +66,7 @@ class Quotation(models.Model):
     rejection_reason = fields.Selection([('price', 'Price'), ('benefits', 'Benefit')], sting="Reason")
     comment = fields.Text('Comment')
     recomm = fields.Text('Recommendation')
-    sub_state = fields.Selection([('pending', 'Pending'), ('complete', 'Complete')], string="Sub State", readonly=True)
+    sub_state = fields.Selection([('pending', 'Pending'), ('complete', 'Complete'), ('update', 'Update')], string="Sub State", readonly=True)
 
 
     address = fields.Char('Full Address')
@@ -114,6 +114,9 @@ class Quotation(models.Model):
                                    ('4 Per Thousand', '4 Per Thousand')],
                                   'Deductible')
     survey_date = fields.Datetime('Appointment')
+    sub_answer_questionnaire = fields.Many2one('sub.questionnaire.answers', 'Sub Questionnaire')
+
+
 
 
 
@@ -187,6 +190,7 @@ class Quotation(models.Model):
                                               "user": self.write_uid.id})
             self.test_state = self.env['state.setup'].search([('status', '=', 'survey')]).id
             self.write({'sub_state': 'pending'})
+
         # if self.state == 'application':
         #     self.write({'state': 'policy'})
         #     self.env['state.history'].create({"application_id": self.id, "state": 'policy',
@@ -248,6 +252,7 @@ class Quotation(models.Model):
                     if question.question_type == 'choose':
                         self.choose_questions_ids.create(
                             {"question": question.id, "choose_application_id": self.id})
+
                     elif question.question_type == 'numerical':
                         self.numerical_questions_ids.create(
                             {"question": question.id, "numerical_application_id": self.id})
@@ -273,6 +278,17 @@ class Quotation(models.Model):
                         {"question": question.id, "application_id": self.id})
 
 
+    # @api.onchange('choose_questions_ids')
+    # def get_sub_questionnaire(self):
+    #     for rec in self.choose_questions_ids:
+    #
+    #             question = self.env['questionnaire.line.setup'].search([('id', '=', rec.question.id)])
+    #             if question.sub_questionnaire_id != False:
+    #
+    #                 self.choose_questions_ids.sub_answer_id =  rec.question.id
+    #                 for rec in question.sub_questionnaire_id.questionnaire_ids:
+    #                     self.choose_questions_ids.sub_answer_id.answers.create({"question": rec.id})
+    #                     print('120120123659595555555555555555555558444444444444444444')
 
     @api.onchange('dob')
     def compute_trial_number(self):
@@ -517,16 +533,26 @@ class Answers(models.Model):
     text_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     choose_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     numerical_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    # sub_text_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    # sub_choose_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    # sub_numerical_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     options = fields.Many2one('selection.options', 'Choose',ondelete='cascade')
-    filter_options = fields.Many2many('selection.options', compute='compute_options', store=True)
+    sub_answer_id = fields.Many2one('sub.questionnaire.answers', 'Sub Questionnaire', ondelete='cascade')
 
 
-    @api.depends('question')
-    def compute_options(self):
-        self.filter_options = self.question.options
+
+
 
     @api.onchange('options')
     def set_member(self):
+        if self.options.display_name == 'Yes' and self.question.sub_questionnaire_id != False:
+            self.sub_answer_id = self.env['sub.questionnaire.answers'].create({'main_question' : self.question.id}).id
+            print(self.sub_answer_id)
+            for rec in self.question.sub_questionnaire_id.questionnaire_ids:
+                if self.sub_answer_id.answers == False:
+                    self.sub_answer_id.answers.create({"question": rec.id})
+                    print('15151515151516')
+
         ids = []
         for rec in self.question.options:
             ids.append(rec.id)
@@ -541,6 +567,12 @@ class Answers(models.Model):
     #     # res.set_member()  # call your method
 
 
+class SubQuestionnaireAnswers(models.Model):
+    _name = 'sub.questionnaire.answers'
+    _rec_name = 'main_question'
+
+    main_question = fields.Many2one('questionnaire.line.setup', 'Main Question')
+    answers = fields.One2many('insurances.answers', 'sub_answer_id')
 
 class SurveyReport(models.Model):
     _name = 'survey.report'
@@ -597,63 +629,13 @@ class stateHistory(models.Model):
         ('application', 'Upload Documents'),
         ('policy', 'Policy'),
         ('cancel', 'Rejected')], string='State')
-    # ('quick_quote', 'Quick Quote'),
-    # ('proposal', 'Fill Form'),
-    # ('submitted', 'Form Complete'),
-    # ('survey_required', 'Survey Required'),
-    # ('surveyor', 'Surveyor Assigned'),
-    # ('survey', 'Survey Report'),
-    # ('survey_complete', 'Survey Complete'),
-    # ('reinsurance', 'Reinsurance'),
-    # ('offer', 'To Offer'),
-    # ('offer_ready', 'Offer Ready'),
-    # ('application', 'Upload Documents'),
-    # ('policy_pending', 'Policy Pending'),
-    # ('issued', 'Issued'),
-    # ('cancel', 'Rejected')], string = 'Status', readonly = True, default = 'quick_quote')
+
     datetime = fields.Datetime('Date')
     user = fields.Many2one('res.users', ondelete='cascade')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
 
 
-# class MedicalCovers(models.Model):
-#       _name = 'medical.cover'
-#
-#       benefit = fields.Text(string='Benefit')
-#       value = fields.Text(string='Value')
-#       en_benefit = fields.Text(string='English Benefit')
-#       en_value = fields.Text(string='English Value')
-#       sort = fields.Integer('Sort')
-#       cover_id = fields.Many2one('medical.price', ondelete='cascade')
-#
-#
-# class InternalHospitalTreatment(models.Model):
-#     _name = 'medical.internal.hospital.treatment'
-#
-#     benefit = fields.Text(string='Benefit')
-#     value = fields.Text(string='Value')
-#     en_benefit = fields.Text(string='English Benefit')
-#     en_value = fields.Text(string='English Value')
-#     sort = fields.Integer('Sort')
-#     internal_id = fields.Many2one('medical.price', ondelete='cascade')
-#
-# class OutpatientServices(models.Model):
-#     _name = 'medical.outpatient.services'
-#
-#     benefit = fields.Text(string='Benefit')
-#     value = fields.Text(string='Value')
-#     en_benefit = fields.Text(string='English Benefit')
-#     en_value = fields.Text(string='English Value')
-#     sort = fields.Integer('Sort')
-#     outpatient_id = fields.Many2one('medical.price', ondelete='cascade')
-
-# class SelectionQuestions(models.Model):
-#     _name = 'selection.questions'
-#     _rec_name = 'quotation'
-#     product = fields.Many2one('insurance.product', 'Product')
-#     quotation = fields.Char('Question')
-#     options_ids = fields.One2many('selection.options', 'question_id')
 
 class SelectionOptions(models.Model):
     _name = 'selection.options'
@@ -673,7 +655,6 @@ class WizardInsuranceQuotation(models.TransientModel):
 
 class FamilyAge(models.Model):
     _name = 'medical.family'
-
 
     name=fields.Char('name',required=True)
     type=fields.Selection([('spouse', 'Spouse'),
