@@ -549,7 +549,7 @@ class Answers(models.Model):
             self.sub_answer_id = self.env['sub.questionnaire.answers'].create({'main_question' : self.question.id}).id
             print(self.sub_answer_id)
             for rec in self.question.sub_questionnaire_id.questionnaire_ids:
-                if self.sub_answer_id.answers == False:
+                # if self.sub_answer_id.answers == False:
                     self.sub_answer_id.answers.create({"question": rec.id})
                     print('15151515151516')
 
