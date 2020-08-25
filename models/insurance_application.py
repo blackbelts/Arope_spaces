@@ -545,7 +545,7 @@ class Answers(models.Model):
 
     @api.onchange('options')
     def set_member(self):
-        if self.options.display_name == 'Yes' and self.question.sub_questionnaire_id != False:
+        if self.options.display_name == 'نعم' and self.question.sub_questionnaire_id != False:
             self.sub_answer_id = self.env['sub.questionnaire.answers'].create({'main_question' : self.question.id}).id
             print(self.sub_answer_id)
             for rec in self.question.sub_questionnaire_id.questionnaire_ids:
