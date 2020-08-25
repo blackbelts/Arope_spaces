@@ -550,7 +550,7 @@ class Answers(models.Model):
             print(self.sub_answer_id)
             for rec in self.question.sub_questionnaire_id.questionnaire_ids:
                 # if self.sub_answer_id.answers == False:
-                    self.sub_answer_id.answers.create({"question": rec.id})
+                    self.env['insurances.answers'].create({"question": rec.id, "sub_answer_id": self.sub_answer_id})
                     print('15151515151516')
 
         ids = []
