@@ -159,15 +159,16 @@ class Quotation(models.Model):
     @api.onchange('final_application_ids')
     def policy_pending(self):
         res = []
-        for rec in self.final_application_ids:
-            res.append(rec.application_files)
-        if all(res):
-            self.write({'state': 'policy'})
-            self.env['state.history'].create({"application_id": self.id, "state": 'policy',
-                                              "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                              "user": self.write_uid.id})
-            self.test_state = self.env['state.setup'].search([('status', '=', 'policy')]).id
-            self.write({'sub_state': 'pending'})
+        if self.final_application_ids:
+            for rec in self.final_application_ids:
+                res.append(rec.application_files)
+            if all(res):
+                self.write({'state': 'policy'})
+                self.env['state.history'].create({"application_id": self.id, "state": 'policy',
+                                                  "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                                  "user": self.write_uid.id})
+                self.test_state = self.env['state.setup'].search([('status', '=', 'policy')]).id
+                self.write({'sub_state': 'pending'})
 
     def complete_and_proceed(self):
         self.write({'sub_state': 'complete'})
@@ -214,8 +215,6 @@ class Quotation(models.Model):
 
     @api.onchange('product_id')
     def get_questions(self):
-        for rec in self.state_history_ids:
-            rec.unlink()
         if self.lob.line_of_business == 'Medical':
             # print('Medical')
             self.write({'state': 'quick_quote'})
