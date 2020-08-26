@@ -38,7 +38,7 @@ class Quotation(models.Model):
     #     ('non-medical', 'Non-Medical')], string='Insurance Type', default='medical', )
     lob = fields.Many2one('insurance.line.business', 'LOB', required=True)
     product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
-    test_state = fields.Many2one('state.setup', domain="[('product_ids', 'in', product_id)]", default=None)
+    test_state = fields.Many2one('state.setup', domain="[('product_ids', 'in', product_id)]")
     # domain = "[('id', '!=', 26)]"
     name = fields.Char('Name', required=True)
     # contact = fields.Char('Contact', required=True)
