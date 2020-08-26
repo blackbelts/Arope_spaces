@@ -218,18 +218,18 @@ class Quotation(models.Model):
             # print('Medical')
             self.write({'state': 'quick_quote'})
             self.write({"test_state": self.env['state.setup'].search([('status', '=', 'quick_quote')]).id})
-            # if self.state_history_ids:
-            #     for rec in self.state_history_ids:
-            #         rec.unlink()
+            if self.state_history_ids:
+                for rec in self.state_history_ids:
+                    rec.unlink()
             self.env['state.history'].create({"application_id": self.id, "state": 'quick_quote',
                                               "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                               "user": self.write_uid.id})
         elif self.lob.line_of_business == 'Motor':
             self.write({'state': 'quick_quote'})
             self.write({"test_state": self.env['state.setup'].search([('status', '=', 'quick_quote')]).id})
-            # if self.state_history_ids:
-            #     for rec in self.state_history_ids:
-            #         rec.unlink()
+            if self.state_history_ids:
+                for rec in self.state_history_ids:
+                    rec.unlink()
             self.env['state.history'].create({"application_id": self.id, "state": 'quick_quote',
                                               "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                               "user": self.write_uid.id})
@@ -237,9 +237,9 @@ class Quotation(models.Model):
             self.write({'state': 'proposal'})
             self.write({"test_state": self.env['state.setup'].search([('status', '=', 'proposal')]).id})
             self.write({'sub_state': 'pending'})
-            # if self.state_history_ids:
-            #     for rec in self.state_history_ids:
-            #         rec.unlink()
+            if self.state_history_ids:
+                for rec in self.state_history_ids:
+                    rec.unlink()
             self.env['state.history'].create({"application_id": self.id, "state": 'proposal',
                                               "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                               "user": self.write_uid.id})
