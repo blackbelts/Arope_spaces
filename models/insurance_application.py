@@ -121,9 +121,9 @@ class Quotation(models.Model):
 
 
 
-    # @api.onchange('state')
-    # def compute_state(self):
-    #     self.test_state = self.env['state.setup'].search([('status', '=', self.state)]).id
+    @api.onchange('state')
+    def compute_state(self):
+        self.test_state = self.env['state.setup'].search([('status', '=', self.state)]).id
 
     def create_pdf(self):
         return {
@@ -214,6 +214,8 @@ class Quotation(models.Model):
 
     @api.onchange('product_id')
     def get_questions(self):
+        for rec in self.state_history_ids:
+            rec.unlink()
         if self.lob.line_of_business == 'Medical':
             # print('Medical')
             self.write({'state': 'quick_quote'})
