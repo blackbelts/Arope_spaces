@@ -62,7 +62,7 @@ class Quotation(models.Model):
         ('offer', 'Offer'),
         ('application', 'Upload Documents'),
         ('policy', 'Policy'),
-        ('cancel', 'Rejected')], string='State')
+        ('cancel', 'Rejected')], string='State', default=None)
     rejection_reason = fields.Selection([('price', 'Price'), ('benefits', 'Benefit')], sting="Reason")
     comment = fields.Text('Comment')
     recomm = fields.Text('Recommendation')
