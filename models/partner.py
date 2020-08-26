@@ -9,6 +9,7 @@ class inhertResPartner(models.Model):
     pin = fields.Integer(string='PIN')
     fra_no = fields.Char(string='FRA No')
     expire_date = fields.Date(string='Expiration Date')
+    # access_setup28, setup.setup28, model_table_b, base.group_user, 1, 1, 1, 1
 class inhertResUser(models.Model):
     _inherit = 'res.users'
 

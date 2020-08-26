@@ -18,7 +18,7 @@
         'views/setup.xml',
         'views/policy_view.xml',
         'views/collection.xml',
-        'views/partner.xml',
+        # 'views/partner.xml',
         'views/get_a_quote.xml',
         'views/price_setup.xml',
         'views/targets.xml',
