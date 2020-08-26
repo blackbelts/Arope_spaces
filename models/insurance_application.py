@@ -62,7 +62,7 @@ class Quotation(models.Model):
         ('offer', 'Offer'),
         ('application', 'Upload Documents'),
         ('policy', 'Policy'),
-        ('cancel', 'Rejected')], string='State', default=None)
+        ('cancel', 'Rejected')], string='State')
     rejection_reason = fields.Selection([('price', 'Price'), ('benefits', 'Benefit')], sting="Reason")
     comment = fields.Text('Comment')
     recomm = fields.Text('Recommendation')
@@ -121,9 +121,9 @@ class Quotation(models.Model):
 
 
 
-    @api.onchange('state')
-    def compute_state(self):
-        self.test_state = self.env['state.setup'].search([('status', '=', self.state)]).id
+    # @api.onchange('state')
+    # def compute_state(self):
+    #     self.test_state = self.env['state.setup'].search([('status', '=', self.state)]).id
 
     def create_pdf(self):
         return {
