@@ -13,7 +13,7 @@ class inhertResUser(models.Model):
     _inherit = 'res.users'
 
     is_broker = fields.Boolean(string='Broker',default=True)
-    agent_code = fields.Integer(string='Agent Code')
+    agent_code = fields.Char(string='Agent Code')
 class InheritBrokers(models.Model):
     _name = 'table.b'
     _rec_name='name'
