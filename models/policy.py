@@ -13,7 +13,7 @@ class AropePolicy(models.Model):
     term = fields.Char()
     total_sum_insured = fields.Float(digits=(12, 2), string='Total Sum Insured')
     net_premium= fields.Float(string="Net Premium", copy=True)
-    gross_premium= fields.Float(string="Gross Premium", copy=True)
+    c= fields.Float(string="Gross Premium", copy=True)
     currency_id = fields.Char("Currency", copy=True)
     policy_status = fields.Char(string='Status' ,copy=False)
     endorsement_no = fields.Char(string="Endorsement No.")
