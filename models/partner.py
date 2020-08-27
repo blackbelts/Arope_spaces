@@ -11,6 +11,7 @@ class inhertResPartner(models.Model):
     expire_date = fields.Date(string='Expiration Date')
 class inhertResUser(models.Model):
     _inherit = 'res.users'
+
     is_broker = fields.Boolean(string='Broker',default=True)
     agent_code = fields.Integer(string='Agent Code')
 class InheritBrokers(models.Model):

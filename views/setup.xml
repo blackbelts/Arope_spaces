@@ -75,6 +75,8 @@
                                     <field name="question"/>
                                     <field name="question_type"/>
                                     <field name="options" widget="many2many_tags"/>
+                                    <field name="sub_questionnaire_id"/>
+
 <!--                                    <field name="questionnaire"/>-->
 <!--                                    <field name="desc"/>-->
                                 </tree>
