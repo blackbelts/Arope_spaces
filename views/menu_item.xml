@@ -9,8 +9,8 @@
                   action="policy_form_action" parent="arope_space"/>
       <menuitem id="claim_view" name="Claims"
                   action="claim_arope_action" parent="arope_space"/>
-<!--       <menuitem id="b_menu" name="Brokers"-->
-<!--                  action="broker_action" />-->
+       <menuitem id="b_menu" name="Brokers"
+                  action="broker_action" />
         <menuitem id="policy_config" name="Configuration"
                    parent="arope_space"/>
             <menuitem id="policy_collection" name="Collections"
