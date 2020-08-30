@@ -294,15 +294,8 @@ class Quotation(models.Model):
     #                     self.choose_questions_ids.sub_answer_id.answers.create({"question": rec.id})
     #                     print('120120123659595555555555555555555558444444444444444444')
 
-    @api.onchange('dob')
+    @api.onchange('dob','product')
     def compute_trial_number(self):
-        if self.lob:
-            number = self.env['ir.sequence'].next_by_code('trial_number')
-            currentYear = datetime.today().strftime("%Y")
-            self.write({"quote_trials" : self.lob.line_of_business.upper() + '/' + currentYear[2:4] + '/' + number})
-
-    @api.onchange('product')
-    def compute_trial_number2(self):
         if self.lob:
             number = self.env['ir.sequence'].next_by_code('trial_number')
             currentYear = datetime.today().strftime("%Y")
