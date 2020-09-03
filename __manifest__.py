@@ -31,6 +31,7 @@
         'views/policy_num_wizard.xml',
         'views/state.xml',
         'views/answer.xml',
+        'reports/offer.xml',
         'views/menu_item.xml',
 
     ],

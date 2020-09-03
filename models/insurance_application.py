@@ -192,14 +192,6 @@ class Quotation(models.Model):
             self.test_state = self.env['state.setup'].search([('status', '=', 'survey')]).id
             self.write({'sub_state': 'pending'})
 
-        # if self.state == 'application':
-        #     self.write({'state': 'policy'})
-        #     self.env['state.history'].create({"application_id": self.id, "state": 'policy',
-        #                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        #                                       "user": self.write_uid.id})
-        #     self.test_state = self.env['state.setup'].search([('status', '=', 'policy')]).id
-        #     self.write({'sub_state': 'pending'})
-
     @api.onchange('lob')
     def compute_application_number(self):
         if self.lob:
@@ -281,18 +273,6 @@ class Quotation(models.Model):
                     self.offer_ids.create(
                         {"question": question.id, "application_id": self.id})
 
-
-    # @api.onchange('choose_questions_ids')
-    # def get_sub_questionnaire(self):
-    #     for rec in self.choose_questions_ids:
-    #
-    #             question = self.env['questionnaire.line.setup'].search([('id', '=', rec.question.id)])
-    #             if question.sub_questionnaire_id != False:
-    #
-    #                 self.choose_questions_ids.sub_answer_id =  rec.question.id
-    #                 for rec in question.sub_questionnaire_id.questionnaire_ids:
-    #                     self.choose_questions_ids.sub_answer_id.answers.create({"question": rec.id})
-    #                     print('120120123659595555555555555555555558444444444444444444')
 
     @api.onchange('dob','product')
     def compute_trial_number(self):
@@ -400,11 +380,6 @@ class Quotation(models.Model):
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'surveyor')]).id
         self.write({'sub_state': 'pending'})
-    # def pricing(self):
-    #     self.write({'state': 'price'})
-    #     self.env['state.history'].create({"application_id": self.id, "state": 'price',
-    #                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    #                                       "user": self.write_uid.id})
 
     def submit_questionnaire(self):
 
@@ -412,8 +387,7 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'submitted',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        # self.write({'sub_state': 'complete'})
-        # self.test_state = self.env['state.setup'].search([('status', '=', '')]).id
+
     def submit_survey_required(self):
         self.write({'state': 'survey'})
         self.env['state.history'].create({"application_id": self.id, "state": 'survey',
@@ -450,9 +424,7 @@ class Quotation(models.Model):
     def issued(self):
 
         self.write({'state': 'policy'})
-        # self.env['state.history'].create({"application_id": self.id, "state": 'policy',
-        #                                   "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        #                                   "user": self.write_uid.id})
+
         self.test_state = self.env['state.setup'].search([('status', '=', 'policy')]).id
         self.write({"sub_state":'complete'})
         return {
@@ -502,9 +474,7 @@ class MedicalPriceTable(models.Model):
     product_name = fields.Char(string='Product Name')
 
     price_lines = fields.One2many('medical.price.line', 'price_id', string='Prices')
-    # cover_lines = fields.One2many('medical.cover','cover_id',string='Covers')
-    # internal_lines = fields.One2many('medical.internal.hospital.treatment', 'internal_id', string='Internal Hospital Treatment')
-    # outpatient_lines = fields.One2many('medical.outpatient.services', 'outpatient_id', string='Outpatient Services')
+
 
 
 class MedicalPriceTableLines(models.Model):
@@ -519,7 +489,6 @@ class Answers(models.Model):
     _name = 'insurances.answers'
 
     question = fields.Many2one('questionnaire.line.setup','Question')
-    # selection_question = fields.Many2one('selection.questions', ondelele='cascade')
     question_type = fields.Selection([('text', 'Text'), ('numerical', 'Numerical'), ('choose', 'Choose')],
                                      'Question Type', default='text')
     desc = fields.Char('Description')
@@ -530,9 +499,6 @@ class Answers(models.Model):
     text_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     choose_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     numerical_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
-    # sub_text_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
-    # sub_choose_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
-    # sub_numerical_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     options = fields.Many2one('selection.options', 'Choose',ondelete='cascade')
     sub_answer_id = fields.Many2one('sub.questionnaire.answers', 'Sub Questionnaire', ondelete='cascade')
 
@@ -553,15 +519,8 @@ class Answers(models.Model):
         ids = []
         for rec in self.question.options:
             ids.append(rec.id)
-        # print(ids)
-        # return ids
-        return {'domain': {'options': [('id', 'in', ids)]}}
 
-    # @api.model
-    # def create(self, vals):
-    #     res = super(Answers, self).create(vals)
-    #     self.set_member()
-    #     # res.set_member()  # call your method
+        return {'domain': {'options': [('id', 'in', ids)]}}
 
 
 class SubQuestionnaireAnswers(models.Model):
@@ -587,12 +546,9 @@ class FinalOffer(models.Model):
     _name = 'final.offer'
 
     question = fields.Many2one('offer.setup','Offer Item')
-    # options = fields.Many2one('selection.options', 'Choose', ondelete='cascade', domain="[('survey_id', '=', question)]")
-    # desc = fields.Char('Description')
     text = fields.Text('Value')
     file = fields.Binary('File')
     value = fields.Float('Value')
-    # boolean = fields.Boolean('True Or False Answer', default=False)
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
 
@@ -638,8 +594,7 @@ class SelectionOptions(models.Model):
     _name = 'selection.options'
     _rec_name = 'option'
     option = fields.Char('Option')
-    # survey_id = fields.Many2one('survey.line.setup', ondelete='cascade')
-    # questionnaire_id = fields.Many2one('questionnaire.line.setup', ondelete='cascade')
+
 
 class WizardInsuranceQuotation(models.TransientModel):
     _name = 'wizard.insurance.quotation'
@@ -671,8 +626,7 @@ class FamilyAge(models.Model):
     @api.onchange('DOB')
     def get_age(self):
         if self.DOB:
-            # date1 = datetime.strptime(self.issue_date, '%Y-%m-%d %H:%M:%S').date()
-            # date2 = datetime.strptime(self.DOB, '%Y-%m-%d').date()
+
             today = datetime.today().date()
             difference = relativedelta(today, self.DOB)
             age = difference.years
@@ -682,6 +636,4 @@ class FamilyAge(models.Model):
                 age += 1
             self.age = age
 
-# class inhertMotor(models.Model):
-#     _inherit = 'product.covers'
 
