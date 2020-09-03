@@ -5,16 +5,17 @@
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
             <tree string="Collecctions " editable="bottom">
-                <field name="policy_num"/>
-                <field name="customer"/>
-                <field name="customer_pin"/>
-                <field name="prem_date"/>
-                <field name="net_premium"/>
-                <field name="gross_premium"/>
-                <field name="broker"/>
-                <field name="broker_pin"/>
-                <field name="agent_code"/>
-                <field name="state"/>
+                <field name="policy_no"/>
+                <field name="refer_no"/>
+                <field name="cur_code" />
+                <field name="pin"/>
+                <field name="agent_code" string="Agent Code"/>
+                <field name="total_lc"/>
+                <field name="paid_lc"/>
+                <field name="uncleare_lc"/>
+                <field name="paid_date"/>
+                <field name="due_date"/>
+                <field name="prm_status"/>
 
             </tree>
         </field>
