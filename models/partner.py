@@ -26,7 +26,8 @@ class InheritBrokers(models.Model):
     agent_code = fields.Char(string='Agent Code')
     mobile = fields.Char(string='Mobile')
     def generate_users(self):
-        self.env['res.users'].create({'name': self.name, 'login': self.name,'password':'123', 'groups_id': [
+        self.env['res.users'].create({'name': self.name, 'login': self.name,'password':'123','agent_code':self.agent_code,
+                                      'is_broker':True,'groups_id': [
             self.env['res.groups'].search([('name', '=', 'Broker')]).id]})
 
 
