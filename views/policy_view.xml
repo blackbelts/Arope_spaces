@@ -4,7 +4,7 @@
         <field name="model">policy.arope</field>
         <field name="arch" type="xml">
             <tree editable="bottom">
-                <field name="policy_num" string="Policy No" widget="Integer" />
+                <field name="policy_num" string="Policy No" widget='char' />
                 <field name="product" string="Product"/>
                 <field name="rec_type"/>
                 <field name="endorsement_no" />
