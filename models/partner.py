@@ -25,10 +25,26 @@ class InheritBrokers(models.Model):
     expire_date = fields.Date(string='Expiration Date')
     agent_code = fields.Char(string='Agent Code')
     mobile = fields.Char(string='Mobile')
-    def generate_users(self):
-        self.env['res.users'].create({'name': self.name, 'login': self.name,'password':'123','agent_code':self.agent_code,
-                                      'is_broker':True,'groups_id': [
-            self.env['res.groups'].search([('name', '=', 'Broker')]).id]})
+
+    def create_broker_user(self):
+        form = self.env.ref('Arope-spaces.brokers_user_wizard')
+        self.user = True
+
+        return {
+            'name': ('Users'),
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'broker.user.wizard',
+            # 'view_id': [(self.env.ref('smart_claim.tree_insurance_claim').id), 'tree'],
+            'views': [(form.id, 'form')],
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+
+            'context': {'default_name': self.name,
+                        'default_agent_code': self.agent_code}
+
+        }
+
 
 
 

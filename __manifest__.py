@@ -33,6 +33,7 @@
         'views/answer.xml',
         'reports/offer.xml',
         'views/menu_item.xml',
+        'wizard/users.xml',
 
     ],
     'qweb': ["static/src/xml/hrms_dashboard.xml"],

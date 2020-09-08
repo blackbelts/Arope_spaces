@@ -46,7 +46,7 @@
                 <field name="expire_date" />
                 <field name="agent_code" />
                 <field name="mobile" />
-                <button  name="generate_users" string="Create User" type="object" class="oe_highlight" />
+                <button  name="create_broker_user" string="Create User" type="object" class="oe_highlight" />
 
             </tree>
         </field>
