@@ -4,14 +4,14 @@
         <field name="model">claim.arope</field>
         <field name="arch" type="xml">
             <tree >
-                <field name="policy_no" string="Policy No"/>
-                <field name="policy_serno"/>
+                <field name="policy_no" string="Policy No" widget="char"/>
+                <field name="policy_serno" widget="char"/>
                 <field name="product" string="Product"/>
                 <field name="sub_journal" />
                 <field name="claim_year" />
-                <field name="claimNo" />
-                <field name="claim_serNo" />
-                <field name="pin"/>
+                <field name="claimNo" widget="char" />
+                <field name="claim_serNo" widget="char" />
+                <field name="pin" widget="char"/>
                 <field name="agent_code" string="Agent Code"/>
                 <field name="date_declared"/>
                 <field name="date_occured"/>

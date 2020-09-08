@@ -8,6 +8,7 @@ class AropeCollection(models.Model):
     _name='collection.arope'
     # policy=fields.Many2one('policy.arope',string='Policy')
     policy_no = fields.Integer(string="Policy No", copy=True)
+    product = fields.Char(string="Product", copy=True,)
     refer_no = fields.Char(string="Policy No", copy=True)
     pin=fields.Integer(string='PIN')
     cur_code = fields.Char("Cur-Code", copy=True)

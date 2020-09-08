@@ -4,14 +4,14 @@
         <field name="model">policy.arope</field>
         <field name="arch" type="xml">
             <tree editable="bottom">
-                <field name="policy_num" string="Policy No"/>
+                <field name="policy_num" string="Policy No" widget="char"/>
                 <field name="product" string="Product"/>
                 <field name="rec_type"/>
-                <field name="endorsement_no" />
-                <field name="policy_seq" />
-                <field name="policy_serno" />
+                <field name="endorsement_no" widget="char"/>
+                <field name="policy_seq"  widget="char"/>
+                <field name="policy_serno" widget="char" />
                 <field name="agent_code" string="Agent Code"/>
-                <field name="customer_pin"/>
+                <field name="customer_pin" widget="char"/>
                 <field name="issue_date"/>
                 <field name="first_inception_date" />
                 <field name="inception_date" />

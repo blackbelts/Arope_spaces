@@ -5,11 +5,12 @@
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
             <tree string="Collecctions " editable="bottom">
-                <field name="policy_no"/>
-                <field name="refer_no"/>
+                <field name="policy_no"  widget="char"/>
+                <field name="product" string="Product"/>
+                <field name="refer_no"  widget="char"/>
                 <field name="cur_code" />
-                <field name="pin"/>
-                <field name="agent_code" string="Agent Code"/>
+                <field name="pin"  widget="char"/>
+<!--                <field name="agent_code" string="Agent Code"/>-->
                 <field name="total_lc"/>
                 <field name="paid_lc"/>
                 <field name="uncleare_lc"/>
