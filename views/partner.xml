@@ -29,6 +29,10 @@
                     <label for="agent_code" string="Agent Code"/>
                     <field name="agent_code"  attrs="{'invisible': [('is_broker','!=',True)]}" />
                 </div>
+                <div class="oe_title">
+                    <label for="card_id" string="Broker Card"/>
+                    <field name="card_id"  attrs="{'invisible': [('is_broker','!=',True)]}" />
+                </div>
             </xpath>
         </field>
     </record>

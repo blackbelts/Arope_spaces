@@ -12,8 +12,10 @@ class inhertResPartner(models.Model):
 class inhertResUser(models.Model):
     _inherit = 'res.users'
 
-    is_broker = fields.Boolean(string='Broker',default=True)
+    is_broker = fields.Boolean(string='Broker',default=False)
     agent_code = fields.Char(string='Agent Code')
+    card_id = fields.Char(string='Broker Card')
+
 class InheritBrokers(models.Model):
     _name = 'table.b'
     _rec_name='name'
@@ -25,6 +27,10 @@ class InheritBrokers(models.Model):
     expire_date = fields.Date(string='Expiration Date')
     agent_code = fields.Char(string='Agent Code')
     mobile = fields.Char(string='Mobile')
+    is_broker = fields.Boolean(string='Broker',default=False)
+    is_customer = fields.Boolean(string='customer',default=False)
+
+
 
     def create_broker_user(self):
         form = self.env.ref('Arope-spaces.brokers_user_wizard')
@@ -41,7 +47,7 @@ class InheritBrokers(models.Model):
             'target': 'new',
 
             'context': {'default_name': self.name,
-                        'default_agent_code': self.agent_code}
+                        'default_agent_code': self.agent_code,'default_card_id': self.card_id}
 
         }
 
