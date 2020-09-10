@@ -21,7 +21,7 @@ class Brokers(models.Model):
         ids=[]
         agents_codes=[]
         card=self.env['res.users'].search([('id', '=',id)],limit=1).card_id
-        for rec in self.env['table.b'].search([('card_id','=',card)]):
+        for rec in self.env['persons'].search([('card_id','=',card)]):
             agents_codes.append(rec.agent_code)
         for prod in self.env['policy.arope'].search([('agent_code', 'in', agents_codes)]):
             total += prod.totoal_premium
@@ -34,7 +34,7 @@ class Brokers(models.Model):
         for user in self.env['res.users'].search([('is_broker','=',True)]):
             total = 0.0
             agents_codes = []
-            for rec in self.env['table.b'].search([('card_id', '=', user.card_id)]):
+            for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
                 agents_codes.append(rec.agent_code)
             for pro in self.env['policy.arope'].search([('agent_code', 'in', agents_codes)]):
                 total += pro.totoal_premium
@@ -66,7 +66,7 @@ class Brokers(models.Model):
         finalProduction = []
         agents_codes = []
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
-        for rec in self.env['table.b'].search([('card_id', '=', card)]):
+        for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
         months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         for target in self.env['team.target'].search([('member.id', '=', id)]):
@@ -104,7 +104,7 @@ class Brokers(models.Model):
         last_prod = []
         agents_codes = []
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
-        for rec in self.env['table.b'].search([('card_id', '=', card)]):
+        for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
         for i in range(12):
             for pol in self.env['policy.arope'].search(
@@ -128,7 +128,7 @@ class Brokers(models.Model):
         ids = []
         agents_codes = []
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
-        for rec in self.env['table.b'].search([('card_id', '=', card)]):
+        for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
 
         for rec in self.env['system.notify'].search([('type','=','Renewal')]):
@@ -171,7 +171,7 @@ class Brokers(models.Model):
         colors=[]
         agents_codes = []
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
-        for rec in self.env['table.b'].search([('card_id', '=', card)]):
+        for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
         for rec in self.env['system.notify'].search([('type', '=', 'Collection')]):
             if rec.color == 'Green':

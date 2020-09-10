@@ -17,7 +17,7 @@ class inhertResUser(models.Model):
     card_id = fields.Char(string='Broker Card')
 
 class InheritBrokers(models.Model):
-    _name = 'table.b'
+    _name = 'persons'
     _rec_name='name'
     name=fields.Char(string='Broker Name')
     card_id = fields.Char(string='Card ID')

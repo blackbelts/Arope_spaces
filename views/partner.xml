@@ -38,7 +38,7 @@
     </record>
     <record id="brokers_tree_view" model="ir.ui.view">
         <field name="name">brokers Tree</field>
-        <field name="model">table.b</field>
+        <field name="model">persons</field>
         <field name="arch" type="xml">
             <tree editable="bottom">
                 <field name="name" />
@@ -50,6 +50,8 @@
                 <field name="expire_date" />
                 <field name="agent_code" />
                 <field name="mobile" />
+                <field name="is_broker" invisible="1"/>
+                <field name="is_customer" invisible="1"/>
                 <button  name="create_broker_user" string="Create User" type="object" class="oe_highlight" />
 
             </tree>
@@ -57,8 +59,17 @@
     </record>
     <record id="broker_action" model="ir.actions.act_window">
         <field name="name">Brokers</field>
-        <field name="res_model">table.b</field>
+        <field name="res_model">persons</field>
         <field name="view_mode">tree,form,kanban,pivot</field>
+        <!--        <field name="context">{"search_default_active":1}</field>-->
+        <field name="view_id" ref="brokers_tree_view"/>
+        <field name='domain'>[('is_broker','=',True)]</field>
+    </record>
+      <record id="customers_action" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="res_model">persons</field>
+        <field name="view_mode">tree,form,kanban,pivot</field>
+          <field name='domain'>[('is_customer','=',True)]</field>
         <!--        <field name="context">{"search_default_active":1}</field>-->
         <field name="view_id" ref="brokers_tree_view"/>
     </record>
