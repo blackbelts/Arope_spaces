@@ -167,52 +167,21 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
 
             var user = session.uid
             var self = this;
-            var get_production = rpc.query({
+            var get_dashboard=rpc.query({
                 model: "arope.broker",
-                method: "get_production",
+                method: "get_dashboard",
                 args: [user]
             }).then(function (res) {
-                console.log(res)
-                self.brokerProduction = res
-            })
-            var get_rank = rpc.query({
-                model: "arope.broker",
-                method: "get_rank",
-                args: [user]
-            }).then(function (res) {
-                self.brokerRank = res + 1
+                self.brokerProduction=res.production
+                self.target_production=res.targetVsProduction
+                self.brokerRank =res.rank
+                self.collections_statistics=res.collections
+                self.renew_statistics=res.renews
+                self.production_compare = res.lastVsCurrentYear
+//                self.collections_statistics=res
+                console.log("get_dashboard",res)
             });
-            var get_target_production = rpc.query({
-                model: "arope.broker",
-                method: "get_target_production",
-                args: [user]
-            }).then(function (res) {
-                self.target_production = res
-            });
-            var get_production_compare = rpc.query({
-                model: "arope.broker",
-                method: "get_production_compare",
-                args: [user]
-            }).then(function (res) {
-                self.production_compare = res
-            });
-            var get_renew=rpc.query({
-                model: "arope.broker",
-                method: "get_renew",
-                args: [user]
-            }).then(function (res) {
-                self.renew_statistics=res
-                console.log("get_renew",res)
-            });
-            var get_collections=rpc.query({
-                model: "arope.broker",
-                method: "get_collections",
-                args: [user]
-            }).then(function (res) {
-                self.collections_statistics=res
-                console.log("get_collections",res)
-            });
-            return $.when(get_rank, get_production, get_target_production, get_production_compare,get_renew,get_collections);
+            return $.when(get_dashboard);
         },
         makeNumber: function (x) {
             return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
