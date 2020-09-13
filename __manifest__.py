@@ -31,7 +31,7 @@
         'views/policy_num_wizard.xml',
         'views/state.xml',
         'views/answer.xml',
-        # 'views/help_desk.xml',
+        'views/help_desk.xml',
         'reports/offer.xml',
         'views/menu_item.xml',
         'wizard/users.xml',
