@@ -13,3 +13,4 @@ from . import claim
 from . import questionnaire
 from . import insurance_application
 from . import state
+from . import help_desk

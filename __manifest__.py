@@ -9,7 +9,7 @@
     'version': '0.1',
     'license': 'AGPL-3',
     # any module necessary for this one to work correctly
-    'depends': ['base','sales_team', 'motor', 'medical'],
+    'depends': ['base','sales_team','helpdesk_inherit'],
 
     # always loaded
     'data': [
@@ -31,6 +31,7 @@
         'views/policy_num_wizard.xml',
         'views/state.xml',
         'views/answer.xml',
+        'views/help_desk.xml',
         'reports/offer.xml',
         'views/menu_item.xml',
         'wizard/users.xml',
