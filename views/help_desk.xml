@@ -24,7 +24,7 @@
         <field name="inherit_id" ref="helpdesk_inherit.help_desk_quoate"/>
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
-                <button  name="create_application" string="Create Insurance App" type="object" class="oe_highlight" />
+                <button  name="create_application" string="Create Insurance App" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=','won')]}"/>
             </xpath>
             <xpath expr="//field[@name='contact_name']" position="after">
                 <!-- Add your fields or attributes here -->

@@ -7,7 +7,11 @@ class HelpDeskComplains(models.Model):
     lob = fields.Many2one('insurance.line.business', 'LOB',)
     partner_id = fields.Many2one('persons',string='Customer',domain="[('is_customer', '=', True)]")
     card_id = fields.Char(related='partner_id.card_id',string='Customer')
-
+    product = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
+    print('Write Method')
+class HelpDeskQuotes(models.Model):
+    _inherit = 'quoate'
+    lob = fields.Many2one('insurance.line.business', 'LOB',)
     product = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
     def create_application(self):
         self.env['insurance.quotation'].create({'name': self.contact_name,
