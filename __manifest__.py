@@ -31,7 +31,9 @@
         'views/policy_num_wizard.xml',
         'views/state.xml',
         'views/answer.xml',
+        'views/claim_app.xml',
         'reports/offer.xml',
+        'reports/questionnaire.xml',
         'views/menu_item.xml',
 
     ],

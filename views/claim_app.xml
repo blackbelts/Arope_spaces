@@ -1,0 +1,232 @@
+<odoo>
+    <!--Claim Setup -->
+    <record model="ir.ui.view" id="tree_claim_setup">
+        <field name="name">claim.setup</field>
+        <field name="model">claim.setup</field>
+        <field name="arch" type="xml">
+            <tree string="Claim Setup">
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="form_claim_setup">
+        <field name="name">claim.setup</field>
+        <field name="model">claim.setup</field>
+        <field name="arch" type="xml">
+            <form string="Claim Setup form">
+                <sheet>
+
+                    <group>
+
+                        <field name="type"/>
+
+                    </group>
+                    <notebook>
+                        <page string="Claim Declaration Setup" >
+                            <field name="claim_declaration_lines">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="type" context="{'default_type':'declaration'}"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Invoice Setup" >
+                            <field name="claim_invoice_lines">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="type" context="{'default_type':'invoice'}"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Survey Setup" >
+                            <field name="claim_survey_lines">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="type" context="{'default_type':'survey'}"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="claim_setup_action">
+        <field name="name">Claim</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">claim.setup</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="tree_claim_setup"/>
+        <field name="view_mode">form,tree,kanban</field>
+    </record>
+    <!--Claim Setup Finished-->
+    <!--Maintenance Centers Start -->
+    <!-- Add a custom form view -->
+    <record model="ir.ui.view" id="tree_maintenance_center">
+        <field name="name">tree.maintenance.center</field>
+        <field name="model">maintenance.center</field>
+        <field name="arch" type="xml">
+            <tree string="Maintenance Center" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="form_maintenance_center">
+        <field name="name">form.maintenance.center</field>
+        <field name="model">maintenance.center</field>
+        <field name="arch" type="xml">
+            <form string="Maintenance Center form">
+                <sheet>
+                    <group>
+                        <field name="name" string="Name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="maintenance_center_action">
+        <field name="name">Maintenance Center</field>
+        <field name="res_model">maintenance.center</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Maintenance Center
+            </p>
+        </field>
+    </record>
+    <!--Maintenance Centers Finished -->
+
+    <!--Claim App Start -->
+    <record model="ir.ui.view" id="form_claim_app">
+        <field name="name">Claim App</field>
+        <field name="model">claim.app</field>
+        <field name="arch" type="xml">
+            <form string="Claim App form">
+                 <header>
+                     <field name="state" widget="statusbar"/>
+                     <button  name="invoice_details" string="Invoice Details" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'initial_invoice'),('sub_state', '!=', 'complete')]}"/>
+                     <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', 'not in', ['initial_invoice', 'survey']),('sub_state', '!=', 'complete')]}"/>
+                     <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoice_details'),('sub_state', '!=', 'complete')]}"/>
+                     <button  name="total_loss" string="Total Loss" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'survey'),('sub_state', '!=', 'complete')]}"/>
+                     <button  name="complete_and_proceed" string="Repair Completed" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'repair'),('sub_state', '!=', 'pending')]}"/>
+                     <button  name="take_cheque" string="Take Cheque" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'survey_after_repair'),('sub_state', '!=', 'complete')]}"/>
+                     <button  name="car_release" string="Car Release" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'survey_after_repair'),('sub_state', '!=', 'complete')]}"/>
+
+                 </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="status" invisible="1"/>
+                            <field name="sub_state"/>
+                            <field name="type"/>
+                            <field name="name"/>
+                            <field name="policy_num"/>
+                            <field name="date"/>
+
+
+                        </group>
+                        <group attrs="{'invisible': [('type', '!=', 'motor')]}">
+                            <field name="car_num" />
+                            <field name="maintenance_centers_in_or_out"/>
+                            <field name="maintenance_centers" attrs="{'invisible': [('maintenance_centers_in_or_out', '!=', 'in')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Claim Declaration" >
+                            <field name="declaration_ids">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="text"/>
+                                    <field name="file" widget="many2many_binary"/>
+                                </tree>
+                            </field>
+                            <button attrs="{'invisible': ['|',('status', '!=', 'claim_declaration'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>
+
+                        </page>
+                        <page string="Invoice" attrs="{'invisible': [('status', '=', 'claim_declaration')]}">
+                            <field name="invoice_ids">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="text"/>
+                                    <field name="file" widget="many2many_binary"/>
+                                </tree>
+                            </field>
+                            <group>
+                                <field name="net_premium"/>
+                            </group>
+                            <button attrs="{'invisible': ['|',('status', 'not in', ['initial_invoice', 'invoice_details']),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>
+                        </page>
+                        <page string="Surveyor" attrs="{'invisible': [('status', 'in', ['claim_declaration','initial_invoice','invoice_details'])]}">
+                             <group>
+                                 <field name="surveyor"/>
+                                 <field name="survey_date"/>
+                             </group>
+                            <button attrs="{'invisible': ['|',('status', '!=', 'surveyor'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>
+                         </page>
+                        <page string="Survey" attrs="{'invisible': [('status', 'in', ['claim_declaration','initial_invoice','invoice_details','surveyor'])]}">
+                            <field name="survey_ids">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="text"/>
+                                    <field name="file" widget="many2many_binary"/>
+                                </tree>
+                            </field>
+                            <group>
+                                <field name="recommendation"/>
+                                <field name="comment"/>
+                            </group>
+                            <button attrs="{'invisible': ['|',('status', '!=', 'survey'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>
+                        </page>
+                        <page string="Second Survey" attrs="{'invisible': [('status', 'in', ['claim_declaration','initial_invoice','invoice_details','surveyor', 'survey', 'repair'])]}">
+                            <group>
+                                <group>
+                                    <field name="recommendation"/>
+                                    <field name="comment"/>
+                                </group>
+                            </group>
+                            <button attrs="{'invisible': ['|',('status', '!=', 'survey_after_repair'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Add a custom Tree (List) view -->
+    <record id="claim_app_tree" model="ir.ui.view">
+		<field name="name">claim.app</field>
+		<field name="model">claim.app</field>
+		<field name="arch" type="xml">
+			<tree>
+                <field name="name"/>
+                <field name="type"/>
+                <field name="name"/>
+                <field name="policy_num"/>
+                <field name="date"/>
+                <field name="state"/>
+                <field name="sub_state"/>
+
+			</tree>
+		</field>
+	</record>
+    <record id="claim_app_view_search" model="ir.ui.view">
+        <field name="name">claim.app</field>
+        <field name="model">claim.app</field>
+        <field name="arch" type="xml">
+            <search string="Claim App">
+                <group expand="0" string="Group By">
+                    <filter string="State" name="groupby_state" context="{'group_by': 'state'}"/>
+                    <filter string="State" name="groupby_sub_state" context="{'group_by': 'sub_state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="claim_app_action">
+            <field name="name">claim.app</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">claim.app</field>
+            <field name="context">{'search_default_groupby_state': 1,'search_default_groupby_sub_state': 1}</field>
+            <field name="view_id" ref="claim_app_tree"/>
+            <field name="view_mode">form,tree,kanban</field>
+    </record>
+    <!--Claim App Finished -->
+</odoo>

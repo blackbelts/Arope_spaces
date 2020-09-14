@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+        <report id="questionnaire"
+                string="Questionnaire"
+                model="insurance.quotation"
+                report_type="qweb-pdf"
+                name="Arope-spaces.questionnaire"
+        />
+
+        <template id="questionnaire">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Homemade+Apple"/>
+                    <style>
+                        table {
+                        width: 100%;
+                        border: 1px solid #000 !important;
+                        text-align: right;
+                        direction: rtl !important;
+                        }
+
+                        table td,
+                        table th {
+                        font-size: 12px;
+                        border: 1px solid #000 !important;
+                        padding: 3px !important;
+                        text-align: right !important;
+                        }
+
+                        .table,
+                        .table th,
+                        .table td {
+                        border: 1px solid #000 !important;
+                        border-collapse: collapse;
+                        padding: 3px !important;
+                        text-align: right !important;
+                        }
+                        th {
+                        color: #073e89 !important;
+                        text-align: right !important;
+                        }
+                        tr:nth-child(even) {background-color: #f2f2f2;}
+
+                    </style>
+                        <div class="header" style="height: 100px !important;">
+                            <img class="img"  style="width: 100%;" src="/smart_travel_agency/static/img/3.jpg"/>
+                            <p style="color: #073e89; text-align:center;" t-field="o.lob"/>
+                            <p style="color: #073e89; text-align:center;" t-field="o.product_id"/>
+                        </div>
+                        <div class="page" style="unicode-bidi: bidi-override !important; direction: unset !important;text-align:right !important;">
+                            <div t-foreach="o.text_questions_ids" t-as="question">
+                                <p style="color: #073e89;" t-field="question.question"/>
+                                <p t-field="question.text"/>
+                            </div>
+                            <div t-foreach="o.choose_questions_ids" t-as="question">
+                                <p style="color: #073e89;" t-field="question.question"/>
+                                <t>
+                                    <input  type="radio" checked="true"/>
+                                    <label for="male" t-field="question.options"/><br/>
+                                </t>
+                            </div>
+                            <div t-foreach="o.numerical_questions_ids" t-as="question">
+                                <p style="color: #073e89;" t-field="question.question"/>
+                                <p  t-field="question.value"/>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
