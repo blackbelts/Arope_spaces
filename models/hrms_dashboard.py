@@ -50,7 +50,7 @@ class Brokers(models.Model):
         print(id)
         result = self.get_all_production()
         if id in list(result.keys()):
-            return list(result.keys()).index(id)
+            return (list(result.keys()).index(id))+1
         # if id in result.items():
         #    return
         else:
@@ -73,8 +73,8 @@ class Brokers(models.Model):
             for rule in target.targets:
                 total = 0.0
                 for pol in self.env['policy.arope'].search(
-                        [('agent_code', 'in', agents_codes), ('first_inception_date', '>=', rule.from_date),
-                         ('first_inception_date', '<=', rule.to_date)]):
+                        [('agent_code', 'in', agents_codes), ('issue_date', '>=', rule.from_date),
+                         ('issue_date', '<=', rule.to_date)]):
                     total += pol.totoal_premium
                 result[rule.name] = [rule.amount, total]
         #del result[False]
@@ -108,13 +108,13 @@ class Brokers(models.Model):
             agents_codes.append(rec.agent_code)
         for i in range(12):
             for pol in self.env['policy.arope'].search(
-                    [('agent_code', 'in', agents_codes), ('first_inception_date', '>=', date3),
-                     ('first_inception_date', '<', date3 + relativedelta(months=1))]):
+                    [('agent_code', 'in', agents_codes), ('issue_date', '>=', date3),
+                     ('issue_date', '<', date3 + relativedelta(months=1))]):
                 current_total += pol.totoal_premium
             current_prod.append(current_total)
             for pol in self.env['policy.arope'].search(
-                    [('agent_code', 'in', agents_codes), ('first_inception_date', '>=', date_last_year),
-                     ('first_inception_date', '<', date_last_year + relativedelta(months=1))]):
+                    [('agent_code', 'in', agents_codes), ('issue_date', '>=', date_last_year),
+                     ('issue_date', '<', date_last_year + relativedelta(months=1))]):
                 last_total += pol.totoal_premium
             last_prod.append(last_total)
 
