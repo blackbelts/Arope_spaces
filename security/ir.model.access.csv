@@ -39,6 +39,13 @@ access_setup30,setup.setup30,model_sub_questionnaire_answers,base.group_user,1,1
 access_setup31,setup.setup31,model_broker_user_wizard,base.group_user,1,1,1,1
 
 
+access_setup31,setup.setup31,model_claim_app,base.group_user,1,1,1,1
+access_setup32,setup.setup32,model_maintenance_center,base.group_user,1,1,1,1
+access_setup33,setup.setup33,model_claim_setup,base.group_user,1,1,1,1
+access_setup34,setup.setup34,model_claim_setup_lines,base.group_user,1,1,1,1
+access_setup35,setup.setup35,model_claim_lines,base.group_user,1,1,1,1
+
+
 
 
 

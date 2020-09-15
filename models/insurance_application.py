@@ -1,11 +1,6 @@
 from odoo import api, fields, models
-from odoo.exceptions import UserError
-from datetime import timedelta, datetime
-from odoo.http import request
 from datetime import datetime
-# from base64 import b64decode
-import codecs
-import requests
+
 
 
 
@@ -123,7 +118,7 @@ class Quotation(models.Model):
 
     @api.onchange('state')
     def compute_state(self):
-        self.test_state = self.env['state.setup'].search([('status', '=', self.state)]).id
+        self.test_state = self.env['state.setup'].search([('status', '=', self.state),('type', '=', 'insurance_app')]).id
 
     def create_pdf(self):
         return {
@@ -167,7 +162,7 @@ class Quotation(models.Model):
                 self.env['state.history'].create({"application_id": self.id, "state": 'policy',
                                                   "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                                   "user": self.write_uid.id})
-                self.test_state = self.env['state.setup'].search([('status', '=', 'policy')]).id
+                self.test_state = self.env['state.setup'].search([('status', '=', 'policy'),('type', '=', 'insurance_app')]).id
                 self.write({'sub_state': 'pending'})
 
     def complete_and_proceed(self):
@@ -189,7 +184,7 @@ class Quotation(models.Model):
             self.env['state.history'].create({"application_id": self.id, "state": 'survey',
                                               "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                               "user": self.write_uid.id})
-            self.test_state = self.env['state.setup'].search([('status', '=', 'survey')]).id
+            self.test_state = self.env['state.setup'].search([('status', '=', 'survey'),('type', '=', 'insurance_app')]).id
             self.write({'sub_state': 'pending'})
 
     @api.onchange('lob')
@@ -210,14 +205,14 @@ class Quotation(models.Model):
         if self.lob.line_of_business == 'Medical':
             # print('Medical')
             self.write({'state': 'quick_quote'})
-            self.write({"test_state": self.env['state.setup'].search([('status', '=', 'quick_quote')]).id})
+            self.write({"test_state": self.env['state.setup'].search([('status', '=', 'quick_quote'),('type', '=', 'insurance_app')]).id})
 
         elif self.lob.line_of_business == 'Motor':
             self.write({'state': 'quick_quote'})
-            self.write({"test_state": self.env['state.setup'].search([('status', '=', 'quick_quote')]).id})
+            self.write({"test_state": self.env['state.setup'].search([('status', '=', 'quick_quote'),('type', '=', 'insurance_app')]).id})
         else:
             self.write({'state': 'proposal'})
-            self.write({"test_state": self.env['state.setup'].search([('status', '=', 'proposal')]).id})
+            self.write({"test_state": self.env['state.setup'].search([('status', '=', 'proposal'),('type', '=', 'insurance_app')]).id})
             self.write({'sub_state': 'pending'})
         if self.text_questions_ids:
             for question in self.text_questions_ids:
@@ -346,7 +341,7 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'proposal',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'proposal')]).id
+        self.test_state = self.env['state.setup'].search([('status', '=', 'proposal'),('type', '=', 'insurance_app')]).id
         self.write({'sub_state': 'pending'})
 
     def survey_confirm(self):
@@ -354,7 +349,7 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'offer',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'offer')]).id
+        self.test_state = self.env['state.setup'].search([('status', '=', 'offer'),('type', '=', 'insurance_app')]).id
         self.write({'sub_state': 'pending'})
 
     def survey_required(self):
@@ -362,7 +357,7 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'survey_required',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'survey_required')]).id
+        self.test_state = self.env['state.setup'].search([('status', '=', 'survey_required'),('type', '=', 'insurance_app')]).id
         self.write({'sub_state': 'pending'})
 
     def reinsurance_confirm(self):
@@ -370,7 +365,7 @@ class Quotation(models.Model):
             self.env['state.history'].create({"application_id": self.id, "state": 'reinsurance',
                                               "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                               "user": self.write_uid.id})
-            self.test_state = self.env['state.setup'].search([('status', '=', 'reinsurance')]).id
+            self.test_state = self.env['state.setup'].search([('status', '=', 'reinsurance'),('type', '=', 'insurance_app')]).id
             self.write({'sub_state': 'pending'})
 
     def assign_surveyor(self):
@@ -378,7 +373,7 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'surveyor',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'surveyor')]).id
+        self.test_state = self.env['state.setup'].search([('status', '=', 'surveyor'),('type', '=', 'insurance_app')]).id
         self.write({'sub_state': 'pending'})
 
     def submit_questionnaire(self):
@@ -393,7 +388,7 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'survey',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'survey')]).id
+        self.test_state = self.env['state.setup'].search([('status', '=', 'survey'),('type', '=', 'insurance_app')]).id
         self.write({'sub_state': 'pending'})
 
     def submit_survey(self):
@@ -401,7 +396,7 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'survey_complete',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'survey_complete')]).id
+        self.test_state = self.env['state.setup'].search([('status', '=', 'survey_complete'),('type', '=', 'insurance_app')]).id
 
 
     def final_confirm(self):
@@ -409,7 +404,7 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'offer_ready',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'offer_ready')]).id
+        self.test_state = self.env['state.setup'].search([('status', '=', 'offer_ready'),('type', '=', 'insurance_app')]).id
 
 
 
@@ -418,14 +413,14 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'application',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'application')]).id
+        self.test_state = self.env['state.setup'].search([('status', '=', 'application'),('type', '=', 'insurance_app')]).id
         self.write({'sub_state': 'pending'})
 
     def issued(self):
 
         self.write({'state': 'policy'})
 
-        self.test_state = self.env['state.setup'].search([('status', '=', 'policy')]).id
+        self.test_state = self.env['state.setup'].search([('status', '=', 'policy'),('type', '=', 'insurance_app')]).id
         self.write({"sub_state":'complete'})
         return {
             'type': 'ir.actions.act_window',
@@ -447,8 +442,18 @@ class Quotation(models.Model):
         self.env['state.history'].create({"application_id": self.id, "state": 'cancel',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'cancel')]).id
+        self.test_state = self.env['state.setup'].search([('status', '=', 'cancel'),('type', '=', 'insurance_app')]).id
 
+
+    def get_options_of_question(self):
+        result = []
+        options = []
+        for rec in self.choose_questions_ids:
+            for option in rec.question.options:
+                options.append(option.option)
+
+            result.append({'question': rec.question.question, 'options': options})
+        return result
 
 
 

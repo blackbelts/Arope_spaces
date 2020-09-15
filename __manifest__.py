@@ -31,8 +31,10 @@
         'views/policy_num_wizard.xml',
         'views/state.xml',
         'views/answer.xml',
-        'views/help_desk.xml',
+        'views/claim_app.xml',
+        # 'views/help_desk.xml',
         'reports/offer.xml',
+        'reports/questionnaire.xml',
         'views/menu_item.xml',
         'wizard/users.xml',
 

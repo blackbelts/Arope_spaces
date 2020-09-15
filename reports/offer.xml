@@ -4,10 +4,10 @@
                 string="Offer"
                 model="insurance.quotation"
                 report_type="qweb-pdf"
-                name="Arope-spaces.questionnaire"
+                name="Arope-spaces.offer"
         />
 
-        <template id="questionnaire">
+        <template id="offer">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.basic_layout">

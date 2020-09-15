@@ -142,31 +142,7 @@
 
 
                         </page>
-<!--                         <page string="Sub Application Form" attrs="{'invisible': ['|',('lob', '!=', 1),('state', '=', 'quick_quote')]}">-->
-<!--                            <field name="text_sub_questions_ids" >-->
-<!--                                <tree editable="bottom">-->
-<!--                                    <field name="question"/>-->
-<!--                                    <field name="text"/>-->
-<!--                                    <field name="file"/>-->
-<!--                                </tree>-->
-<!--                            </field>-->
 
-<!--                            <field name="numerical_sub_questions_ids">-->
-<!--                                <tree editable="bottom">-->
-<!--                                    <field name="question"/>-->
-<!--                                    <field name="value"/>-->
-<!--                                    <field name="file"/>-->
-<!--                                </tree>-->
-<!--                            </field>-->
-
-<!--                            <field name="choose_sub_questions_ids">-->
-<!--                                <tree editable="bottom">-->
-<!--                                    <field name="question"/>-->
-<!--                                    <field name="options"/>-->
-<!--                                    <field name="file"/>-->
-<!--                                </tree>-->
-<!--                            </field>-->
-<!--                         </page>-->
                          <page string="Required For Survey"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'submitted'])],'autofocus':[('state', 'in', ['survey_required'])]}">
                             <group>
                                 <group>
