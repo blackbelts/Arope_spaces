@@ -1,0 +1,39 @@
+<odoo>
+    <record id="help_desk_inherit" model="ir.ui.view">
+        <field name="name">Help Disk</field>
+        <field name="model">helpdesk_lite.ticket</field>
+        <field name="inherit_id" ref="helpdesk_lite.helpdesk_ticket_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='contact_name']" position="after">
+                <!-- Add your fields or attributes here -->
+                <field name="lob"/>
+                <field name="product"/>
+                <field name="card_id"/>
+            </xpath>
+                        <xpath expr="//field[@name='partner_id']" position="replace">
+                            <field name="partner_id"/>
+                        </xpath>
+
+
+        </field>
+    </record>
+    <record id="help_desk_inherit_quoate_arope" model="ir.ui.view">
+        <field name="name">Help Disk</field>
+        <field name="model">quoate</field>
+        <field name="inherit_id" ref="helpdesk_inherit.help_desk_quoate"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button  name="create_application" string="Create Insurance App" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=','won')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='contact_name']" position="after">
+                <!-- Add your fields or attributes here -->
+                <field name="lob"/>
+                <field name="product"/>
+
+
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

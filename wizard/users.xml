@@ -1,0 +1,28 @@
+<odoo>
+<!--    <data>-->
+        <record model="ir.ui.view" id="brokers_user_wizard">
+            <field name="name">broker.user.wizard</field>
+            <field name="model">broker.user.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group string="Agent Users">
+                            <field name="name"  required="1"/>
+                            <field name="username" required="1" />
+                            <field name="password" required="1"/>
+                            <field name="agent_code" readonly="1"/>
+                            <field name="card_id" readonly="1"/>
+
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="generate_broker_users" type="object"
+                                string="Create" class="oe_highlight" />
+                           or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+<!--    </data>-->
+</odoo>

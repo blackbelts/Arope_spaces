@@ -4,25 +4,29 @@
         <field name="model">claim.arope</field>
         <field name="arch" type="xml">
             <tree >
-                <field name="policy_num" string="Policy No"/>
-                <field name="line_of_bussines" string="LOB"/>
+                <field name="policy_no" string="Policy No" widget="char"/>
+                <field name="policy_serno" widget="char"/>
                 <field name="product" string="Product"/>
-<!--                <field name="broker" string="Broker"/>-->
-                <field name="customer" string="Customer"/>
-                <field name="customer_pin" string="Customer PIN"/>
-                 <field name="broker" string="Broker"/>
-                <field name="broker_pin" string="Broker PIN"/>
+                <field name="sub_journal" />
+                <field name="claim_year" />
+                <field name="claimNo" widget="char" />
+                <field name="claim_serNo" widget="char" />
+                <field name="pin" widget="char"/>
                 <field name="agent_code" string="Agent Code"/>
-                <field name="endorsement_no" string="End No"/>
-                <field name="claim_num"/>
-                <field name="intimation_num"/>
-                <field name="intimation_date"/>
-                <field name="status" />
-                <field name="paid_amount" />
+                <field name="date_declared"/>
+                <field name="date_occured"/>
+                <field name="date_declared"/>
+                <field name="cur_code" />
+                <field name="claim_eval" />
+                <field name="fees_eval" />
+                <field name="recoveryamt_eval" />
+                <field name="claim_paid" />
+
+
             </tree>
         </field>
     </record>
-      <record id="claim_arope_action" model="ir.actions.act_window">
+    <record id="claim_arope_action" model="ir.actions.act_window">
         <field name="name">Claims</field>
         <field name="res_model">claim.arope</field>
         <field name="view_mode">tree,form,kanban,pivot</field>

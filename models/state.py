@@ -16,13 +16,10 @@ class StateSetup(models.Model):
         ('application', 'Upload Documents'),
         ('policy', 'Policy'),
         ('cancel', 'Rejected')], string='State')
-    claim_status = fields.Selection([('claim_declaration', 'Claim Declaration'),
-                                     ('initial_invoice', 'Initial Invoice'),
-                                     ('invoice_details', 'Invoice Details'),
-                                     ('surveyor', 'Assign Surveyor'),
-                                     ('survey', 'Survey'),
-                                     ('repair', 'Repair'),
-                                     ('survey_after_repair', 'Survey After Repair'),
+    claim_status = fields.Selection([('claim_intimation', 'Claim Intimation'),
+                                     ('invoicing', 'Invoicing'),
+                                     ('repair', 'Start Repair'),
+                                     ('survey_after_repair', 'Confirm Repair'),
                                      ('total_loss', 'Total Loss'),
                                      ('cheque', 'Take Cheque'),
                                      ('car_release', 'Car Release')], string='State')

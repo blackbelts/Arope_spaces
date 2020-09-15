@@ -7,30 +7,36 @@ class AropeClaim(models.Model):
     type = fields.Selection([('motor', 'Motor'),('non-motor', 'Non Motor')], string="Type")
     name = fields.Char('Customer Name', required=True)
     policy_num = fields.Char(string="Policy Number", copy=True)
-    car_num = fields.Char(string="Car Number", copy=True)
+    car_num = fields.Char(string="Plate No", copy=True)
+    chasse_num = fields.Char(string="Chasse No", copy=True)
     state = fields.Many2one('state.setup', domain="[('type', '=', 'claim'),('claim_type', '=', type)]")
-    sub_state = fields.Selection([('pending', 'Pending'), ('complete', 'Complete')], string="Sub State", readonly=True)
-    maintenance_centers_in_or_out = fields.Selection([('in', 'IN'), ('out', 'Out')], string='Maintenance Center In Or Out')
-    maintenance_centers = fields.Many2one('maintenance.center', 'Maintenance Center')
-    date = fields.Date('Notification Date', default=datetime.today())
+    sub_state = fields.Selection([('pending', 'Pending'), ('initial_invoice', 'Initial Invoice'),
+                                  ('invoice_details', 'Invoice Details'),('surveyor', 'Assign Surveyor'),
+                                  ('survey', 'Survey'),('complete', 'Complete')], string="Sub State", readonly=True)
+    maintenance_centers_in_or_out = fields.Selection([('in', 'Arope Network'), ('out', 'Outside Arope Network')], string='Service Center Network')
+    maintenance_centers = fields.Many2one('maintenance.center', 'Service Center')
+    date = fields.Date('Intimation Date', default=datetime.today())
     surveyor = fields.Many2one('res.users', 'Surveyor')
     survey_date = fields.Datetime('Appointment')
+    second_surveyor = fields.Many2one('res.users', 'Surveyor')
+    second_survey_date = fields.Datetime('Appointment')
     comment = fields.Text('Comment')
     recommendation = fields.Text('Recommendation')
     declaration_ids = fields.One2many('claim.lines', 'claim_declaration_id')
     invoice_ids = fields.One2many('claim.lines', 'claim_invoice_id')
     survey_ids = fields.One2many('claim.lines', 'claim_survey_id')
-    status = fields.Selection([('claim_declaration', 'Claim Declaration'),
-                                     ('initial_invoice', 'Initial Invoice'),
-                                     ('invoice_details', 'Invoice Details'),
-                                     ('surveyor', 'Assign Surveyor'),
-                                     ('survey', 'Survey'),
-                                     ('repair', 'Repair'),
-                                     ('survey_after_repair', 'Survey After Repair'),
+    status = fields.Selection([('claim_intimation', 'Claim Intimation'),
+                                     ('invoicing', 'Invoicing'),
+                                     ('repair', 'Start Repair'),
+                                     ('survey_after_repair', 'Confirm Repair'),
                                      ('total_loss', 'Total Loss'),
                                      ('cheque', 'Take Cheque'),
                                      ('car_release', 'Car Release')], string='State')
-    net_premium = fields.Float('Net Premium')
+    total_invoice = fields.Float('Total Invoice')
+    initial_invoice = fields.Many2many('ir.attachment', string="Upload Initial Invoice",relation="claim_app_initial_invoice")
+    invoice_detail = fields.Many2many('ir.attachment', string="Upload Invoice Details", relation="claim_app_invoice_details")
+    total_initial_invoice = fields.Float('Total Initial Invoice')
+    survey_report = fields.Many2many('ir.attachment', string="Upload Survey Report", relation="claim_app_survey_report")
 
     # @api.onchange('state')
     # def compute_status(self):
@@ -41,8 +47,8 @@ class AropeClaim(models.Model):
     def get_questions(self):
 
         self.write({"state": self.env['state.setup'].search(
-            [('claim_status', '=', 'claim_declaration'), ('type', '=', 'claim')]).id})
-        self.write({"status": "claim_declaration"})
+            [('claim_status', '=', 'claim_intimation'), ('type', '=', 'claim')]).id})
+        self.write({"status": "claim_intimation"})
         self.write({"sub_state": "pending"})
         if self.declaration_ids:
             for question in self.declaration_ids:
@@ -76,11 +82,11 @@ class AropeClaim(models.Model):
                     {"question": question.id, "claim_survey_id": self.id})
 
     def complete_and_proceed(self):
-        if self.status == 'claim_declaration':
+        if self.status == 'claim_intimation':
             self.write({"state": self.env['state.setup'].search(
-                [('claim_status', '=', 'initial_invoice'), ('type', '=', 'claim')]).id})
-            self.write({"status": "initial_invoice"})
-            self.write({"sub_state": "pending"})
+                [('claim_status', '=', 'invoicing'), ('type', '=', 'claim')]).id})
+            self.write({"status": "invoicing"})
+            self.write({"sub_state": "initial_invoice"})
         elif self.status == 'surveyor':
             self.write({"state": self.env['state.setup'].search(
                 [('claim_status', '=', 'survey'), ('type', '=', 'claim')]).id})
@@ -95,10 +101,7 @@ class AropeClaim(models.Model):
             self.write({'sub_state': 'complete'})
 
     def invoice_details(self):
-        self.write({"state": self.env['state.setup'].search(
-            [('claim_status', '=', 'invoice_details'), ('type', '=', 'claim')]).id})
-        self.write({"status": "invoice_details"})
-        self.write({"sub_state": "pending"})
+        self.write({"sub_state": "invoice_details"})
 
 
     def start_repair(self):
@@ -108,10 +111,10 @@ class AropeClaim(models.Model):
         self.write({"sub_state": "pending"})
 
     def assign_surveyor(self):
-        self.write({"state": self.env['state.setup'].search(
-            [('claim_status', '=', 'surveyor'), ('type', '=', 'claim')]).id})
-        self.write({"status": "surveyor"})
-        self.write({"sub_state": "pending"})
+        self.write({"sub_state": "surveyor"})
+
+    def survey_reports(self):
+        self.write({"sub_state": "survey"})
 
     def total_loss(self):
         self.write({"state": self.env['state.setup'].search(

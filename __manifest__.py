@@ -9,7 +9,7 @@
     'version': '0.1',
     'license': 'AGPL-3',
     # any module necessary for this one to work correctly
-    'depends': ['base','sales_team', 'motor', 'medical'],
+    'depends': ['base','sales_team','helpdesk_inherit'],
 
     # always loaded
     'data': [
@@ -32,9 +32,11 @@
         'views/state.xml',
         'views/answer.xml',
         'views/claim_app.xml',
+        # 'views/help_desk.xml',
         'reports/offer.xml',
         'reports/questionnaire.xml',
         'views/menu_item.xml',
+        'wizard/users.xml',
 
     ],
     'qweb': ["static/src/xml/hrms_dashboard.xml"],
