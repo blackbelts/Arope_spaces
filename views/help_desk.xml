@@ -8,12 +8,26 @@
                 <field name="lob"/>
                 <field name="product"/>
             </xpath>
-             <xpath expr="//field[@name='contact_name']" position="after">
-                <field name="policy"/>
-                <field name="customer"/>
-                <field name="card_id"/>
+            <xpath expr="//field[@name='contact_name']" position="after">
+                <!--                <field name="policy"/>-->
+                <label for="policy"/>
+                <div class="o_row">
+
+                    <field name="policy" />
+                    <strong>/</strong>
+                    <field name="policy_no" />
+
+                </div>
+                <field name="customer" readonly="1"/>
+                <field name="card_id" readonly="1"/>
 
             </xpath>
+            <!--            <xpath expr="//div[2]" position="after">-->
+
+            <!--               -->
+
+            <!--                &lt;!&ndash;                <field name="complain_number"/>&ndash;&gt;-->
+            <!--            </xpath>-->
 
             <xpath expr="//field[@name='partner_id']" position="attributes">
                 <attribute name="invisible">1</attribute>

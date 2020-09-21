@@ -16,11 +16,10 @@ class Brokers(models.Model):
     _name = 'arope.broker'
 
     @api.model
-    def get_production(self, id):
+    def get_production(self,card):
         total = 0
         ids=[]
         agents_codes=[]
-        card=self.env['res.users'].search([('id', '=',id)],limit=1).card_id
         for rec in self.env['persons'].search([('card_id','=',card)]):
             agents_codes.append(rec.agent_code)
         for prod in self.env['policy.arope'].search([('agent_code', 'in', agents_codes)]):
@@ -30,7 +29,6 @@ class Brokers(models.Model):
 
     def get_all_production(self):
         prod = {}
-
         for user in self.env['res.users'].search([('is_broker','=',True)]):
             total = 0.0
             agents_codes = []
@@ -53,8 +51,8 @@ class Brokers(models.Model):
             return (list(result.keys()).index(id))+1
         # if id in result.items():
         #    return
-        else:
-            raise exceptions.ValidationError('Broker no Production')
+        # else:
+        #     raise exceptions.ValidationError('Broker no Production')
 
     @api.model
     def get_target_production(self, id):
@@ -94,7 +92,7 @@ class Brokers(models.Model):
         return result1
 
     @api.model
-    def get_production_compare(self, id):
+    def get_production_compare(self, card):
         date_last_year = date(date.today().year, 1, 1) - relativedelta(years=1)
         date_start = date(date.today().year, 1, 1)
         date3 = date_start
@@ -103,7 +101,7 @@ class Brokers(models.Model):
         last_total = 0.0
         last_prod = []
         agents_codes = []
-        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+        # card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
         for i in range(12):
@@ -123,11 +121,11 @@ class Brokers(models.Model):
         return {'current_year': current_prod, 'last_year': last_prod}
 
     @api.model
-    def get_renew(self, id):
+    def get_renew(self, card):
         result={}
         ids = []
         agents_codes = []
-        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+        # card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
 
@@ -165,12 +163,12 @@ class Brokers(models.Model):
         return result
 
     @api.model
-    def get_collections(self, id):
+    def get_collections(self, card):
         result = {}
         ids = []
         colors=[]
         agents_codes = []
-        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+        # card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
         for rec in self.env['system.notify'].search([('type', '=', 'Collection')]):
@@ -207,10 +205,10 @@ class Brokers(models.Model):
     def get_dashboard(self, id):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         return {
-            "production": self.get_production(id),
+            "production": self.get_production(card),
             'rank': self.get_rank(id),
             'targetVsProduction': self.get_target_production(id),
-            'lastVsCurrentYear': self.get_production_compare(id),
-            'collections':self.get_collections(id),
-            'renews':self.get_renew(id)
+            'lastVsCurrentYear': self.get_production_compare(card),
+            'collections':self.get_collections(card),
+            'renews':self.get_renew(card)
         }

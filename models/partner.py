@@ -29,13 +29,14 @@ class InheritBrokers(models.Model):
     mobile = fields.Char(string='Mobile')
     is_broker = fields.Boolean(string='Broker',default=False)
     is_customer = fields.Boolean(string='customer',default=False)
+    is_user = fields.Boolean(string='User',default=False)
+
 
 
 
     def create_broker_user(self):
         form = self.env.ref('Arope-spaces.brokers_user_wizard')
-        self.user = True
-
+        self.is_user = True
         return {
             'name': ('Users'),
             'view_type': 'form',

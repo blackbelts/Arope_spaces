@@ -52,7 +52,8 @@
                 <field name="mobile" />
                 <field name="is_broker" invisible="1"/>
                 <field name="is_customer" invisible="1"/>
-                <button  name="create_broker_user" string="Create User" type="object" class="oe_highlight" />
+                <field name="is_user" invisible="1"/>
+                <button  name="create_broker_user" string="Create User" type="object" class="oe_highlight" attrs="{'invisible': [('is_user','=',True)]}" />
 
             </tree>
         </field>

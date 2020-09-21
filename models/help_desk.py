@@ -8,15 +8,18 @@ class HelpDeskComplains(models.Model):
     customer = fields.Char(string='Customer')
     card_id = fields.Char(string='Card ID')
     policy = fields.Char(string='Policy')
+    policy_no = fields.Integer(string='Policy')
+
     product = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
     print('Write Method')
 
-    # @api.onchange('policy')
-    # def get_policy(self):
-    #     self.env['insurance.quotation'].create({'name': self.contact_name,
-    #                                             'lob': self.lob.id, 'product_id': self.product_id.id,
-    #                                             'phone': self.phone,
-    #                                             'email': self.email_from})
+    @api.onchange('policy','policy_no')
+    def get_policy(self):
+        if self.policy and self.policy_no:
+            pol=self.env['policy.arope'].search([('product','=', self.policy),('policy_num','=', self.policy_no)
+                                                    ],limit=1)
+            self.customer=pol.customer
+            self.card_id = pol.card_id
 class HelpDeskQuotes(models.Model):
     _inherit = 'quoate'
     lob = fields.Many2one('insurance.line.business', 'LOB',)
