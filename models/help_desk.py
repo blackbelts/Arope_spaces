@@ -19,7 +19,7 @@ class HelpDeskComplains(models.Model):
             pol=self.env['policy.arope'].search([('product','=', self.policy),('policy_num','=', self.policy_no)
                                                     ],limit=1)
             self.customer=str(pol.customer_pin)
-            self.card_id = pol.card_id
+
 class HelpDeskQuotes(models.Model):
     _inherit = 'quoate'
     lob = fields.Many2one('insurance.line.business', 'LOB',)
