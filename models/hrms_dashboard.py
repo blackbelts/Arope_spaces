@@ -17,7 +17,7 @@ class Brokers(models.Model):
 
     @api.model
     def get_production(self,card):
-        total = 0.0
+        total = 10
         ids=[]
         agents_codes=[]
         for rec in self.env['persons'].search([('card_id','=','28009212103431')]):
