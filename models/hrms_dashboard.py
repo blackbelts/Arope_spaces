@@ -25,7 +25,7 @@ class Brokers(models.Model):
         for prod in self.env['policy.arope'].search([('agent_code', 'in', agents_codes)]):
             total += prod.totoal_premium
             ids.append(prod.id)
-        return {"total":total,"ids":ids}
+        return {"total":500,"ids":ids}
 
     def get_all_production(self):
         prod = {}
