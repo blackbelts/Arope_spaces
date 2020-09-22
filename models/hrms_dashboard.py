@@ -20,8 +20,8 @@ class Brokers(models.Model):
         total = 10
         ids=[]
         agents_codes=[]
-        for rec in self.env['persons'].search([('card_id','=','28009212103431')]):
-            total=10
+        for rec in self.env['persons'].search([]):
+            total+=10
             agents_codes.append(rec.agent_code)
         # for prod in self.env['policy.arope'].search([('agent_code', 'in', agents_codes)]):
         #     total += prod.totoal_premium
