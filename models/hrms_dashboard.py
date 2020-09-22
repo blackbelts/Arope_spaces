@@ -21,11 +21,12 @@ class Brokers(models.Model):
         ids=[]
         agents_codes=[]
         for rec in self.env['persons'].search([('card_id','=',card)]):
+            total+=10
             agents_codes.append(rec.agent_code)
         for prod in self.env['policy.arope'].search([('agent_code', 'in', agents_codes)]):
             total += prod.totoal_premium
             ids.append(prod.id)
-        return {"total":agents_codes[0],"ids":ids}
+        return {"total":total,"ids":ids}
 
     def get_all_production(self):
         prod = {}
