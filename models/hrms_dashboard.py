@@ -190,14 +190,20 @@ class Brokers(models.Model):
     def get_lob_and_products(self):
         lob = []
         products = []
-        attachment_ids = []
+        quote = []
         for rec in self.env['insurance.line.business'].search([]):
             lob.append({'id':rec.id, 'name':rec.line_of_business})
         for product in self.env['insurance.product'].search([]):
             products.append({'id': product.id,'name':product.product_name, 'lob_id': product.line_of_bus.id})
-        for attach in self.env['claim.app'].search([('id', '=', 1)]).initial_invoice:
-            attachment_ids.append(attach.id)
-        return {'lob': lob, 'products': products, 'ids': attachment_ids}
+        for rec in self.env['state.setup'].search([('status', '=', 'quick_quote'),('type', '=', 'insurance_app')]).product_ids:
+            if rec.line_of_bus.line_of_business == 'Motor':
+                for product in self.env['product.covers'].search([]):
+                    quote.append({'name': product.product_name, 'id': product.id, 'lob_id': rec.line_of_bus.id})
+            elif rec.line_of_bus.line_of_business == 'Medical':
+                for product in self.env['medical.price'].search([]):
+                    quote.append({'name': product.product_name, 'package': product.package, 'id': product.id, 'lob_id': rec.line_of_bus.id})
+
+        return {'lob': lob, 'products': products, 'quote': quote}
 
     @api.model
     def get_dashboard(self, id):
