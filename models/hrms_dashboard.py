@@ -203,6 +203,8 @@ class Brokers(models.Model):
                 result[rec.color] = result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
         return result
 
+    
+
     @api.model
     def get_dashboard(self, id):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
