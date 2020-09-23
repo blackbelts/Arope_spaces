@@ -212,6 +212,9 @@ class Brokers(models.Model):
         Model = request.env['ir.attachment']
         attachment = Model.create({
             'name': 'test',
+            'datas_fname': 'test',
+            'res_name': 'test',
+            'type': 'binary',
             'datas': data,
         })
         return attachment.id
