@@ -16,12 +16,9 @@ class Brokers(models.Model):
     _name = 'arope.broker'
 
     @api.model
-    def get_production(self,card):
+    def get_production(self,agents_codes):
         total = 0.0
         ids=[]
-        agents_codes=[]
-        for rec in self.env['persons'].search([('card_id','=',card)]):
-            agents_codes.append(rec.agent_code)
         for prod in self.env['policy.arope'].search([('agent_code', 'in', agents_codes)]):
             total += prod.totoal_premium
             ids.append(prod.id)
@@ -92,7 +89,7 @@ class Brokers(models.Model):
         return result1
 
     @api.model
-    def get_production_compare(self, card):
+    def get_production_compare(self, agents_codes):
         date_last_year = date(date.today().year, 1, 1) - relativedelta(years=1)
         date_start = date(date.today().year, 1, 1)
         date3 = date_start
@@ -100,10 +97,7 @@ class Brokers(models.Model):
         current_prod = []
         last_total = 0.0
         last_prod = []
-        agents_codes = []
-        # card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
-        for rec in self.env['persons'].search([('card_id', '=', card)]):
-            agents_codes.append(rec.agent_code)
+
         for i in range(12):
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('issue_date', '>=', date3),
@@ -121,14 +115,9 @@ class Brokers(models.Model):
         return {'current_year': current_prod, 'last_year': last_prod}
 
     @api.model
-    def get_renew(self, card):
+    def get_renew(self, agents_codes):
         result={}
         ids = []
-        agents_codes = []
-        # card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
-        for rec in self.env['persons'].search([('card_id', '=', card)]):
-            agents_codes.append(rec.agent_code)
-
         for rec in self.env['system.notify'].search([('type','=','Renewal')]):
             if rec.color=='Green':
                 ids=[]
@@ -163,14 +152,10 @@ class Brokers(models.Model):
         return result
 
     @api.model
-    def get_collections(self, card):
+    def get_collections(self, agents_codes):
         result = {}
         ids = []
         colors=[]
-        agents_codes = []
-        # card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
-        for rec in self.env['persons'].search([('card_id', '=', card)]):
-            agents_codes.append(rec.agent_code)
         for rec in self.env['system.notify'].search([('type', '=', 'Collection')]):
             if rec.color == 'Green':
                 ids = []
@@ -204,11 +189,14 @@ class Brokers(models.Model):
     @api.model
     def get_dashboard(self, id):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+        agents_codes = []
+        for rec in self.env['persons'].search([('card_id', '=', card)]):
+            agents_codes.append(rec.agent_code)
         return {
-            "production": self.get_production(card),
+            "production": self.get_production(agents_codes),
             'rank': self.get_rank(id),
             'targetVsProduction': self.get_target_production(id),
-            'lastVsCurrentYear': self.get_production_compare(card),
-            'collections':self.get_collections(card),
-            'renews':self.get_renew(card)
+            'lastVsCurrentYear': self.get_production_compare(agents_codes),
+            'collections':self.get_collections(agents_codes),
+            'renews':self.get_renew(agents_codes)
         }
