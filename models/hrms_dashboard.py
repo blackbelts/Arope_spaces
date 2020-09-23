@@ -186,8 +186,16 @@ class Brokers(models.Model):
                 result[rec.color] = result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
         return result
 
+    @api.model
+    def get_lob_and_products(self):
+        lob = []
+        products = []
+        for rec in self.env['insurance.line.business'].search([]):
+            lob.append({'id':rec.id, 'name':rec.line_of_business})
+        for product in self.env['insurance.product'].search([]):
+            products.append({'id': product.id,'name':product.product_name, 'lob_id': product.line_of_bus.id})
+        return {'lob': lob, 'products': products}
     
-
     @api.model
     def get_dashboard(self, id):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
