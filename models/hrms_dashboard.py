@@ -212,7 +212,7 @@ class Brokers(models.Model):
         Model = request.env['ir.attachment']
         attachment = Model.create({
             'name': 'test',
-            'datas': base64.encodestring(data.get('file').read()),
+            'datas': data.get('file'),
         })
         return attachment.id
 
