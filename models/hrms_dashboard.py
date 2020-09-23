@@ -8,6 +8,8 @@ from odoo import models, fields, api, _
 from odoo.http import request
 from collections import OrderedDict
 from odoo.tools import float_utils
+import base64
+
 
 ROUNDING_FACTOR = 16
 
@@ -206,6 +208,15 @@ class Brokers(models.Model):
         return {'lob': lob, 'products': products, 'quote': quote}
 
     @api.model
+    def upload_document(self, data):
+        Model = request.env['ir.attachment']
+        attachment = Model.create({
+            'name': 'test',
+            'datas': base64.encodestring(data.get('file').read()),
+        })
+        return attachment.id
+
+    @api.model
     def get_dashboard(self, id):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         agents_codes = []
@@ -219,6 +230,7 @@ class Brokers(models.Model):
             'collections':self.get_collections(agents_codes),
             'renews':self.get_renew(agents_codes)
         }
+
     @api.model
     def get_policy(self,id):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
