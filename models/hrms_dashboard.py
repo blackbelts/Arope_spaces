@@ -200,3 +200,18 @@ class Brokers(models.Model):
             'collections':self.get_collections(agents_codes),
             'renews':self.get_renew(agents_codes)
         }
+    @api.model
+    def get_policy(self,id):
+        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+        agents_codes = []
+        for rec in self.env['persons'].search([('card_id', '=', card)]):
+            agents_codes.append(rec.agent_code)
+        return self.env['policy.arope'].search_read([('agent_code', 'in', agents_codes)])
+
+    @api.model
+    def get_claim(self, id):
+        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+        agents_codes = []
+        for rec in self.env['persons'].search([('card_id', '=', card)]):
+            agents_codes.append(rec.agent_code)
+        return self.env['claim.arope'].search_read([('agent_code', 'in', agents_codes)])
