@@ -249,7 +249,7 @@ class Brokers(models.Model):
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
         if policy_num:
-            domain=[('agent_code', 'in', agents_codes),('policy_num','=',policy_num)]
+            domain=[('agent_code', 'in', agents_codes),('policy_num','ilike',policy_num)]
         else:
             domain=[('agent_code', 'in', agents_codes)]
         return {'policies':self.env['policy.arope'].search_read(domain,limit=limit,offset=offset),'count':self.env['policy.arope'].search_count([('agent_code', 'in', agents_codes)])}
@@ -261,7 +261,7 @@ class Brokers(models.Model):
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
         if claim_no:
-                domain = [('agent_code', 'in', agents_codes), ('policy_num', '=', claim_no)]
+                domain = [('agent_code', 'in', agents_codes), ('claimNo', 'ilike', claim_no)]
         else:
                 domain = [('agent_code', 'in', agents_codes)]
         return {'claims':self.env['claim.arope'].search_read(domain,limit=limit,offset=offset),'count':self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes)])}
