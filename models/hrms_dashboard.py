@@ -244,7 +244,7 @@ class Brokers(models.Model):
             domain=[('agent_code', 'in', agents_codes),('policy_num','ilike',parms['policy_num'])]
         else:
             domain=[('agent_code', 'in', agents_codes)]
-        return {'policies':self.env['policy.arope'].search_read(domain,limit=parms['limit'],offset=parms['offset']),'count':self.env['policy.arope'].search_count([('agent_code', 'in', agents_codes)])}
+        return {'policies':self.env['policy.arope'].search_read(domain,limit=parms['limit'],offset=parms['offset']),'count':self.env['policy.arope'].search_count(domain)}
 
     @api.model
     def get_claim(self, parms):
@@ -256,4 +256,4 @@ class Brokers(models.Model):
                 domain = [('agent_code', 'in', agents_codes), ('claimNo', 'ilike', parms['claim_no'])]
         else:
                 domain = [('agent_code', 'in', agents_codes)]
-        return {'claims':self.env['claim.arope'].search_read(domain,limit=parms['limit'],offset=parms['offset']),'count':self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes)])}
+        return {'claims':self.env['claim.arope'].search_read(domain,limit=parms['limit'],offset=parms['offset']),'count':self.env['claim.arope'].search_count(domain)}
