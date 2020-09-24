@@ -240,7 +240,7 @@ class Brokers(models.Model):
         agents_codes = []
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
-        return {'policies':self.env['policy.arope'].search_read([('agent_code', 'in', agents_codes)],limit=limit,offset=offset),'count':self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes)])}
+        return {'policies':self.env['policy.arope'].search_read([('agent_code', 'in', agents_codes)],limit=limit,offset=offset),'count':self.env['policy.arope'].search_count([('agent_code', 'in', agents_codes)])}
 
     @api.model
     def get_claim(self, id,limit,offset):
