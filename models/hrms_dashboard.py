@@ -235,25 +235,25 @@ class Brokers(models.Model):
         }
 
     @api.model
-    def get_policy(self,id,limit,offset,policy_num):
-        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+    def get_policy(self,id,limit,offset,policy_num,parms):
+        card = self.env['res.users'].search([('id', '=', parms['id'])], limit=1).card_id
         agents_codes = []
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
-        if policy_num:
-            domain=[('agent_code', 'in', agents_codes),('policy_num','ilike',policy_num)]
+        if parms['policy_num']:
+            domain=[('agent_code', 'in', agents_codes),('policy_num','ilike',parms['policy_num'])]
         else:
             domain=[('agent_code', 'in', agents_codes)]
-        return {'policies':self.env['policy.arope'].search_read(domain,limit=limit,offset=offset),'count':self.env['policy.arope'].search_count([('agent_code', 'in', agents_codes)])}
+        return {'policies':self.env['policy.arope'].search_read(domain,limit=parms['limit'],offset=parms['offset']),'count':self.env['policy.arope'].search_count([('agent_code', 'in', agents_codes)])}
 
     @api.model
-    def get_claim(self, id,limit,offset,claim_no):
-        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+    def get_claim(self, parms):
+        card = self.env['res.users'].search([('id', '=', parms['id'])], limit=1).card_id
         agents_codes = []
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
-        if claim_no:
-                domain = [('agent_code', 'in', agents_codes), ('claimNo', 'ilike', claim_no)]
+        if parms['claim_no']:
+                domain = [('agent_code', 'in', agents_codes), ('claimNo', 'ilike', parms['claim_no'])]
         else:
                 domain = [('agent_code', 'in', agents_codes)]
-        return {'claims':self.env['claim.arope'].search_read(domain,limit=limit,offset=offset),'count':self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes)])}
+        return {'claims':self.env['claim.arope'].search_read(domain,limit=parms['limit'],offset=parms['offset']),'count':self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes)])}
