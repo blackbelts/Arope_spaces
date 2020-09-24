@@ -257,3 +257,16 @@ class Brokers(models.Model):
         else:
                 domain = [('agent_code', 'in', agents_codes)]
         return {'claims':self.env['claim.arope'].search_read(domain,limit=parms['limit'],offset=parms['offset']),'count':self.env['claim.arope'].search_count(domain)}
+
+    @api.model
+    def get_unpaid(self, parms):
+        card = self.env['res.users'].search([('id', '=', parms['id'])], limit=1).card_id
+        agents_codes = []
+        for rec in self.env['persons'].search([('card_id', '=', card)]):
+            agents_codes.append(rec.agent_code)
+        if parms['claim_no']:
+            domain = [('agent_code', 'in', agents_codes), ('policy_num', 'ilike', parms['policy_num'])]
+        else:
+            domain = [('agent_code', 'in', agents_codes)]
+        return {'unpaids': self.env['collection.arope'].search_read(domain, limit=parms['limit'], offset=parms['offset']),
+                'count': self.env['collection.arope'].search_count(domain)}
