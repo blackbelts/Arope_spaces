@@ -265,7 +265,7 @@ class Brokers(models.Model):
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
         if parms['policy_num']:
-            domain = [('agent_code', 'in', agents_codes), ('policy_num', 'ilike', parms['policy_num'])]
+            domain = [('agent_code', 'in', agents_codes), ('policy_no', 'ilike', parms['policy_num'])]
         else:
             domain = [('agent_code', 'in', agents_codes)]
         return {'unpaids': self.env['collection.arope'].search_read(domain, limit=parms['limit'], offset=parms['offset']),
