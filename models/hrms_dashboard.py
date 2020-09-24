@@ -183,7 +183,7 @@ class Brokers(models.Model):
                 for prod in self.env['collection.arope'].search([('agent_code', 'in',agents_codes),('due_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Orange')],limit=1).no_days)), ]):
                 # for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('prem_date', '<=', date.today() - relativedelta(days=self.env['collection.arope'].search([('type','=','Collection'),('color','=','Orange')])))]):
                 # self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('prem_date', '<=', datetime.today().date() - relativedelta(days=self.env['collection.arope'].search([('type','=','prem_date'),('color','=','Orange')]), ]):
-                    total += prod.policy.total_lc
+                    total += prod.total_lc
                     ids.append(prod.id)
                 result[rec.color] = result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
         return result
