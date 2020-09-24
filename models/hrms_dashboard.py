@@ -220,17 +220,17 @@ class Brokers(models.Model):
             'renews':self.get_renew(agents_codes)
         }
     @api.model
-    def get_policy(self,id):
+    def get_policy(self,id,limit,offset):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         agents_codes = []
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
-        return self.env['policy.arope'].search_read([('agent_code', 'in', agents_codes)])
+        return {'policies':self.env['policy.arope'].search_read([('agent_code', 'in', agents_codes)],limit=limit,offset=offset),'count':self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes)])}
 
     @api.model
-    def get_claim(self, id):
+    def get_claim(self, id,limit,offset):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         agents_codes = []
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
-        return self.env['claim.arope'].search_read([('agent_code', 'in', agents_codes)])
+        return {'claims':self.env['claim.arope'].search_read([('agent_code', 'in', agents_codes)],limit=limit,offset=offset),'count':self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes)])}
