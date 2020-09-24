@@ -235,7 +235,7 @@ class Brokers(models.Model):
         }
 
     @api.model
-    def get_policy(self,id,limit,offset,policy_num,parms):
+    def get_policy(self,parms):
         card = self.env['res.users'].search([('id', '=', parms['id'])], limit=1).card_id
         agents_codes = []
         for rec in self.env['persons'].search([('card_id', '=', card)]):
