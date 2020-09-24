@@ -235,14 +235,6 @@ class Brokers(models.Model):
         }
 
     @api.model
-    def search_policy(self, id, policy_num,limit, offset):
-        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
-        agents_codes = []
-        for rec in self.env['persons'].search([('card_id', '=', card)]):
-            agents_codes.append(rec.agent_code)
-        return self.env['policy.arope'].search_read([('agent_code', 'in', agents_codes)],limit=limit,offset=offset)
-
-    @api.model
     def get_policy(self,id,limit,offset,policy_num):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         agents_codes = []
