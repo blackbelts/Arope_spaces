@@ -21,4 +21,4 @@ class AgentUsersWizard(models.TransientModel):
              'card_id': self.card_id,
              'is_broker': True, 'groups_id': [
                 self.env['res.groups'].search([('name', '=', 'Broker')]).id]})
-        self.env['persons'].write({'related_user':id})
+        self.env['persons'].write({'related_user':self.env['res.users'].search([('id','=',id)]).id})
