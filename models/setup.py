@@ -28,7 +28,7 @@ class Product(models.Model):
     _sql_constraints = [
         ('product_unique', 'unique(product_name,line_of_bus)', 'Product already exists!')]
 
-    questionnaire_file = fields.Binary('Upload Questionnaire')
+    questionnaire_file = fields.Many2many('ir.attachment', string="Upload File")
     file_name = fields.Char("File Name")
 
     questionnaire_ids = fields.One2many('questionnaire.line.setup', 'product_id')

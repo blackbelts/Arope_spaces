@@ -20,6 +20,10 @@
                             <field name="claim_type" attrs="{'invisible': [('type', '!=', 'claim')]}" />
 
                         </group>
+                        <group>
+                            <field name="state_for"/>
+                            <field name="message"/>
+                        </group>
                    </group>
                 </sheet>
 

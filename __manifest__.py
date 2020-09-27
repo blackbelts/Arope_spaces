@@ -9,9 +9,10 @@
     'version': '0.1',
     'license': 'AGPL-3',
     # any module necessary for this one to work correctly
+
     'depends': ['base','sales_team','helpdesk_inherit',
                 'smart_travel_agency','personal_acciedent',
-               'motor','medical' ],
+               'motor','medical' , 'mail'],
 
     # always loaded
     'data': [

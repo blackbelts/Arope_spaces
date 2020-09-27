@@ -42,7 +42,7 @@ class Brokers(models.Model):
         return {k: v for k, v in sorted(prod.items(), key=lambda item: item[1], reverse=True)}
 
     @api.model
-    def get_rank(self, id):
+    def get_rank(self,id):
         print('''''''''''''''''''''''''''''''''''')
         print(id)
         result = self.get_all_production()
