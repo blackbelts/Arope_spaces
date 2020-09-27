@@ -40,17 +40,18 @@
         <field name="name">brokers Tree</field>
         <field name="model">persons</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <tree >
                 <field name="name" />
                 <field name="fra_no" />
                 <field name="expire_date" />
                 <field name="card_id" />
-                <field name="com_reg" widget="char" />
-                <field name="pin" widget="char" />
+                <field name="com_reg" />
+                <field name="pin"  />
                 <field name="expire_date" />
                 <field name="agent_code" />
                 <field name="mobile" />
                 <field name="type"/>
+                <field name="related_user" readonly="1"/>
 <!--                <field name="is_broker" invisible="1"/>-->
 <!--                <field name="is_customer" invisible="1"/>-->
                 <field name="is_user" invisible="1"/>
