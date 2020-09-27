@@ -32,7 +32,7 @@ class Brokers(models.Model):
         for user in self.env['persons'].search([('is_user','=',True), ('type', '=', 'broker')]):
            for pro in self.env['policy.arope'].search([('agent_code', 'in', user.agent_code)]):
                 total += pro.totoal_premium
-        prod[user.related_user.id] = total
+           prod[user.related_user.id] = total
         print(prod)
         print('''''''''''''''''''''''''''''''''''')
         print({k: v for k, v in sorted(prod.items(), key=lambda item: item[1])})
