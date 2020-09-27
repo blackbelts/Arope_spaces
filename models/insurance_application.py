@@ -57,7 +57,7 @@ class Quotation(models.Model):
         ('survey', 'Survey'),
         ('offer', 'Offering'),
         ('application', 'Issue In Progress'),
-        ('policy', 'Policy'),
+        ('policy', 'Policy Issued'),
         ('cancel', 'Lost')], string='State')
     rejection_reason = fields.Selection([('price', 'Price'), ('benefits', 'Benefit')], sting="Reason")
     comment = fields.Text('Comment')
@@ -607,7 +607,7 @@ class stateHistory(models.Model):
         ('survey', 'Survey'),
         ('offer', 'Offering'),
         ('application', 'Issue In Progress'),
-        ('policy', 'Policy'),
+        ('policy', 'Policy Issued'),
         ('cancel', 'Lost')], string='State')
     sub_state = fields.Selection([('pending', 'Pending'),('surveyor', 'Assign Surveyor'), ('complete', 'Submitted'),
                                   ('accepted', 'Accepted'),('cancel', 'Rejected')], string="Sub State", readonly=True)
