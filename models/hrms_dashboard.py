@@ -284,6 +284,8 @@ class Brokers(models.Model):
                                                              'test_state': self.env['state.setup'].search(
                                                                  [('state', '=', 'Quick Quote')]).id,
                                                              'target_price': data['target_price'], 'brand': data['brand'], 'sum_insured': data['sum_insured']})
+                record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
+                return {'steps': states, 'app': record}
             else:
                 record = self.env['insurance.quotation'].search_read([('id', '=', data['id'])])
                 record.id.write({'lob': data['lob'], 'product_id': data['product_id'],
