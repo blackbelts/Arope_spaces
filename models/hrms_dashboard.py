@@ -160,7 +160,7 @@ class Brokers(models.Model):
                 ids = []
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('agent_code', 'in', agents_codes),('prem_date', '>=', datetime.today().date()),('prem_date', '<=', date1) ]):
+                for prod in self.env['collection.arope'].search([('agent_code', 'in', agents_codes),('prem_date', '>=', datetime.today().date()),('due_date', '<=', date1) ]):
                     total += prod.total_lc
                     ids.append(prod.id)
                 result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
@@ -169,7 +169,7 @@ class Brokers(models.Model):
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('agent_code', 'in',agents_codes ), ('prem_date', '<=', datetime.today().date()),('prem_date', '>=', date1)]):
+                for prod in self.env['collection.arope'].search([('agent_code', 'in',agents_codes ), ('prem_date', '<=', datetime.today().date()),('due_date', '>=', date1)]):
                     total += prod.total_lc
                     ids.append(prod.id)
                 result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
@@ -177,10 +177,10 @@ class Brokers(models.Model):
                 ids = []
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('agent_code', 'in',agents_codes),('prem_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Orange')],limit=1).no_days)), ]):
+                for prod in self.env['collection.arope'].search([('agent_code', 'in',agents_codes),('due_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Orange')],limit=1).no_days)), ]):
                 # for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('prem_date', '<=', date.today() - relativedelta(days=self.env['collection.arope'].search([('type','=','Collection'),('color','=','Orange')])))]):
                 # self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('prem_date', '<=', datetime.today().date() - relativedelta(days=self.env['collection.arope'].search([('type','=','prem_date'),('color','=','Orange')]), ]):
-                    total += prod.policy.total_lc
+                    total += prod.total_lc
                     ids.append(prod.id)
                 result[rec.color] = result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
         return result
@@ -232,17 +232,38 @@ class Brokers(models.Model):
         }
 
     @api.model
-    def get_policy(self,id):
-        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+    def get_policy(self,parms):
+        card = self.env['res.users'].search([('id', '=', parms['id'])], limit=1).card_id
         agents_codes = []
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
-        return self.env['policy.arope'].search_read([('agent_code', 'in', agents_codes)])
+        if parms['policy_num']:
+            domain=[('agent_code', 'in', agents_codes),('policy_num','ilike',parms['policy_num'])]
+        else:
+            domain=[('agent_code', 'in', agents_codes)]
+        return {'policies':self.env['policy.arope'].search_read(domain,limit=parms['limit'],offset=parms['offset']),'count':self.env['policy.arope'].search_count(domain)}
 
     @api.model
-    def get_claim(self, id):
-        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+    def get_claim(self, parms):
+        card = self.env['res.users'].search([('id', '=', parms['id'])], limit=1).card_id
         agents_codes = []
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
-        return self.env['claim.arope'].search_read([('agent_code', 'in', agents_codes)])
+        if parms['claim_no']:
+                domain = [('agent_code', 'in', agents_codes), ('claimNo', 'ilike', parms['claim_no'])]
+        else:
+                domain = [('agent_code', 'in', agents_codes)]
+        return {'claims':self.env['claim.arope'].search_read(domain,limit=parms['limit'],offset=parms['offset']),'count':self.env['claim.arope'].search_count(domain)}
+
+    @api.model
+    def get_unpaid(self, parms):
+        card = self.env['res.users'].search([('id', '=', parms['id'])], limit=1).card_id
+        agents_codes = []
+        for rec in self.env['persons'].search([('card_id', '=', card)]):
+            agents_codes.append(rec.agent_code)
+        if parms['policy_num']:
+            domain = [('agent_code', 'in', agents_codes), ('policy_no', 'ilike', parms['policy_num'])]
+        else:
+            domain = [('agent_code', 'in', agents_codes)]
+        return {'unpaids': self.env['collection.arope'].search_read(domain, limit=parms['limit'], offset=parms['offset']),
+                'count': self.env['collection.arope'].search_count(domain)}
