@@ -281,8 +281,8 @@ class Brokers(models.Model):
         else:
             id = self.env['insurance.quotation'].create({'lob': data['lob'],'product_id': data['product_id'],
                                                 'name': data['name'], 'phone': data['phone'], 'email': data['email'],
-                                                    'target_price': data['target_price']})
-            record = self.env['insurance.quotation'].search_read([('id', '=', id)])
+                                                  'test_state': self.env['state.setup'].search([('state', '=', 'Request For Offer')]).id,  'target_price': data['target_price']})
+            record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
         return {'steps': states, 'app': record}
 
     def get_insurance_app_list(self, parms):
