@@ -27,7 +27,7 @@ class InheritBrokers(models.Model):
     expire_date = fields.Date(string='Expiration Date')
     agent_code = fields.Char(string='Agent Code')
     mobile = fields.Char(string='Mobile')
-    related_user=fields.Mant2one('res.users',string='Persons User')
+    related_user=fields.Many2one('res.users',string='Persons User')
     is_user = fields.Boolean(string='User',default=False)
     type = fields.Selection([('broker', 'Broker'),
                                   ('surveyor', 'Surveyor'), ('customer', 'Customer')], default='broker' ,string='Type')
