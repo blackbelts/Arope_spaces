@@ -270,3 +270,13 @@ class Brokers(models.Model):
             domain = [('agent_code', 'in', agents_codes)]
         return {'unpaids': self.env['collection.arope'].search_read(domain, limit=parms['limit'], offset=parms['offset']),
                 'count': self.env['collection.arope'].search_count(domain)}
+
+    @api.model
+    def get_insurance_app_list(self, parms):
+        if parms['app_num']:
+            domain = [('create_uid', '=', parms['id']), ('application_number', 'ilike', parms['app_num'])]
+        else:
+            domain = [('create_uid', '=', parms['id'])]
+        return {
+            'apps': self.env['insurance.quotation'].search_read(domain, limit=parms['limit'], offset=parms['offset']),
+            'count': self.env['insurance.quotation'].search_count(domain)}
