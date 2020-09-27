@@ -267,3 +267,20 @@ class Brokers(models.Model):
             domain = [('agent_code', 'in', agents_codes)]
         return {'unpaids': self.env['collection.arope'].search_read(domain, limit=parms['limit'], offset=parms['offset']),
                 'count': self.env['collection.arope'].search_count(domain)}
+
+    @api.model
+    def create_insurance_app(self,data):
+        card = self.env['res.users'].search([('id', '=', data['user_id'])], limit=1).card_id
+        states= []
+        for rec in self.env['state.setup'].search([('product_ids', '=', data['product_id']),
+                                                   ('type', '=', 'insurance_app'),
+                                                   ('state_for', '=', 'broker')]):
+            states.append(rec.state)
+        if 'Quick Quote' in states:
+            print('10')
+        else:
+            id = self.env['insurance.quotation'].create({'lob': data['lob'],'product_id': data['product_id'],
+                                                'name': data['name'], 'phone': data['phone'], 'email': data['email'],
+                                                    'target_price': data['target_price']})
+            record = self.env['insurance.quotation'].search_read([('id', '=', id)])
+        return {'steps': states, 'app': record}
