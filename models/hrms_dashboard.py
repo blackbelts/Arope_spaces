@@ -272,7 +272,7 @@ class Brokers(models.Model):
     def create_insurance_app(self,data):
         card = self.env['res.users'].search([('id', '=', data['user_id'])], limit=1).card_id
         states= []
-        for rec in self.env['state.setup'].search([('product_ids', '=', data['product_id']),
+        for rec in self.env['state.setup'].search([('product_ids', 'in', data['product_id']),
                                                    ('type', '=', 'insurance_app'),
                                                    ('state_for', '=', 'broker')]):
             states.append(rec.state)
@@ -281,8 +281,8 @@ class Brokers(models.Model):
         else:
             id = self.env['insurance.quotation'].create({'lob': data['lob'],'product_id': data['product_id'],
                                                 'name': data['name'], 'phone': data['phone'], 'email': data['email'],
-                                                    'target_price': data['target_price']})
-            record = self.env['insurance.quotation'].search_read([('id', '=', id)])
+                                                  'test_state': self.env['state.setup'].search([('state', '=', 'Request For Offer')]).id,  'target_price': data['target_price']})
+            record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
         return {'steps': states, 'app': record}
 
     def get_insurance_app_list(self, parms):
