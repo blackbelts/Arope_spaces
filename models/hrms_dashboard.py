@@ -32,14 +32,14 @@ class Brokers(models.Model):
         for user in self.env['persons'].search([('is_user','=',True), ('type', '=', 'broker')]):
            for pro in self.env['policy.arope'].search([('agent_code', 'in', user.agent_code)]):
                 total += pro.totoal_premium
-        prod[user.id] = total
+           prod[user.related_user.id] = total
         print(prod)
         print('''''''''''''''''''''''''''''''''''')
         print({k: v for k, v in sorted(prod.items(), key=lambda item: item[1])})
         return {k: v for k, v in sorted(prod.items(), key=lambda item: item[1], reverse=True)}
 
     @api.model
-    def get_rank(self, id):
+    def get_rank(self,id):
         print('''''''''''''''''''''''''''''''''''')
         print(id)
         result = self.get_all_production()
@@ -284,3 +284,13 @@ class Brokers(models.Model):
                                                     'target_price': data['target_price']})
             record = self.env['insurance.quotation'].search_read([('id', '=', id)])
         return {'steps': states, 'app': record}
+
+    def get_insurance_app_list(self, parms):
+        if parms['app_num']:
+            domain = [('create_uid', '=', parms['id']), ('application_number', 'ilike', parms['app_num'])]
+        else:
+            domain = [('create_uid', '=', parms['id'])]
+        return {
+            'apps': self.env['insurance.quotation'].search_read(domain, limit=parms['limit'], offset=parms['offset']),
+            'count': self.env['insurance.quotation'].search_count(domain)}
+
