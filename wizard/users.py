@@ -16,9 +16,15 @@ class AgentUsersWizard(models.TransientModel):
 
 
     def generate_broker_users(self):
+        context = self.env.context
+        record = self.env[context['active_model']].browse(
+            context['active_id'])
+        if context['active_model'] == 'persons':
+            person = record
+
         user=self.env['res.users'].create(
             {'name': self.name, 'login':self.card_id, 'password':self.password, 'agent_code': self.agent_code,
              'card_id': self.card_id,
              'is_broker': True, 'groups_id': [
                 self.env['res.groups'].search([('name', '=', 'Broker')]).id]})
-        self.env['persons'].write({'related_user':user.id})
+        person.write({'related_user':user.id})
