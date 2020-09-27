@@ -285,9 +285,9 @@ class Brokers(models.Model):
                                                                  [('state', '=', 'Quick Quote')]).id,'state': 'quick_quote',
                                                              'target_price': data['target_price'], 'brand': data['brand'], 'sum_insured': data['sum_insured']})
                 record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
-                id.calculate_motor_price()
-                id.compute_application_number()
-                id.get_questions()
+                self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_motor_price()
+                self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
+                self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
                 return {'steps': states, 'app': record}
             else:
                 record = self.env['insurance.quotation'].search_read([('id', '=', data['id'])])
