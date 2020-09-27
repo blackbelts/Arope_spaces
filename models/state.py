@@ -6,16 +6,13 @@ class StateSetup(models.Model):
     _rec_name = 'state'
 
     status = fields.Selection([
-        ('quick_quote', 'Quote'),
-        ('proposal', 'Fill Form'),
-        ('survey_required', 'Survey Required'),
-        ('surveyor', 'Assign Surveyor'),
-        ('survey', 'Survey Report'),
-        ('reinsurance', 'Reinsurance'),
-        ('offer', 'Offer'),
-        ('application', 'Upload Documents'),
+        ('quick_quote', 'Quick Quote'),
+        ('proposal', 'Request For Offer'),
+        ('survey', 'Survey'),
+        ('offer', 'Offering'),
+        ('application', 'Issue In Progress'),
         ('policy', 'Policy'),
-        ('cancel', 'Rejected')], string='State')
+        ('cancel', 'Lost')], string='State')
     claim_status = fields.Selection([('claim_intimation', 'Claim Intimation'),
                                      ('invoicing', 'Invoicing'),
                                      ('repair', 'Start Repair'),
@@ -29,6 +26,9 @@ class StateSetup(models.Model):
     claim_type = fields.Selection([('motor', 'Motor'),('non-motor', 'Non Motor')], string="Claim Type")
     # lob = fields.Many2one('insurance.line.business', 'LOB', required=True)
     product_ids = fields.Many2many('insurance.product', string='Product')
+    state_for = fields.Selection([('broker', 'Broker'),
+                                  ('surveyor', 'Surveyor'),('underwriter', 'Underwriter')], string='State For')
+    message = fields.Text('Message')
 
     @api.onchange('status', 'claim_status')
     def compute_status(self):

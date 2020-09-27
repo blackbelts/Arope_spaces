@@ -50,8 +50,9 @@
                 <field name="expire_date" />
                 <field name="agent_code" />
                 <field name="mobile" />
-                <field name="is_broker" invisible="1"/>
-                <field name="is_customer" invisible="1"/>
+                <field name="type"/>
+<!--                <field name="is_broker" invisible="1"/>-->
+<!--                <field name="is_customer" invisible="1"/>-->
                 <field name="is_user" invisible="1"/>
                 <button  name="create_broker_user" string="Create User" type="object" class="oe_highlight" attrs="{'invisible': [('is_user','=',True)]}" />
 
@@ -64,13 +65,21 @@
         <field name="view_mode">tree,form,kanban,pivot</field>
         <!--        <field name="context">{"search_default_active":1}</field>-->
         <field name="view_id" ref="brokers_tree_view"/>
-        <field name='domain'>[('is_broker','=',True)]</field>
+        <field name='domain'>[('type','=','broker')]</field>
     </record>
       <record id="customers_action" model="ir.actions.act_window">
         <field name="name">Customers</field>
         <field name="res_model">persons</field>
         <field name="view_mode">tree,form,kanban,pivot</field>
-          <field name='domain'>[('is_customer','=',True)]</field>
+          <field name='domain'>[('type','=','customer')]</field>
+        <!--        <field name="context">{"search_default_active":1}</field>-->
+        <field name="view_id" ref="brokers_tree_view"/>
+    </record>
+    <record id="surveyors_action" model="ir.actions.act_window">
+        <field name="name">Surveyors</field>
+        <field name="res_model">persons</field>
+        <field name="view_mode">tree,form,kanban,pivot</field>
+          <field name='domain'>[('type','=','surveyor')]</field>
         <!--        <field name="context">{"search_default_active":1}</field>-->
         <field name="view_id" ref="brokers_tree_view"/>
     </record>

@@ -25,15 +25,19 @@ time = [('12:00 AM', '12:00 AM'), ('12:30 AM', '12:30 AM'), ('01:00 AM', '01:00 
              ('08:00 PM', '08:00 PM'), ('08:30 PM', '08:30 PM'), ('09:00 PM', '09:00 PM'), ('09:30 PM', '09:30 PM'),
              ('10:00 PM', '10:00 PM'), ('10:30 PM', '10:30 PM'), ('11:00 PM', '11:00 PM'), ('11:30 PM', '11:30 PM')]
 
+
 class Quotation(models.Model):
     _name = 'insurance.quotation'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+
     _rec_name = 'application_number'
     # insurance_type = fields.Selection([
     #     ('medical', 'Medical'),
     #     ('non-medical', 'Non-Medical')], string='Insurance Type', default='medical', )
     lob = fields.Many2one('insurance.line.business', 'LOB', required=True)
     product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
-    test_state = fields.Many2one('state.setup', domain="[('product_ids', 'in', product_id)]")
+    test_state = fields.Many2one('state.setup', domain="[('product_ids', 'in', product_id),"
+                                                       "('type', '=', 'insurance_app')]")
     # domain = "[('id', '!=', 26)]"
     name = fields.Char('Name', required=True)
     # contact = fields.Char('Contact', required=True)
@@ -48,20 +52,18 @@ class Quotation(models.Model):
     main_phone = fields.Char('Mobile Number (Main)')
     spare_phone = fields.Char('Mobile Number (Spare)')
     state = fields.Selection([
-        ('quick_quote', 'Quote'),
-        ('proposal', 'Fill Form'),
-        ('survey_required', 'Survey Required'),
-        ('surveyor', 'Assign Surveyor'),
-        ('survey', 'Survey Report'),
-        ('reinsurance', 'Reinsurance'),
-        ('offer', 'Offer'),
-        ('application', 'Upload Documents'),
+        ('quick_quote', 'Quick Quote'),
+        ('proposal', 'Request For Offer'),
+        ('survey', 'Survey'),
+        ('offer', 'Offering'),
+        ('application', 'Issue In Progress'),
         ('policy', 'Policy'),
-        ('cancel', 'Rejected')], string='State')
+        ('cancel', 'Lost')], string='State')
     rejection_reason = fields.Selection([('price', 'Price'), ('benefits', 'Benefit')], sting="Reason")
     comment = fields.Text('Comment')
     recomm = fields.Text('Recommendation')
-    sub_state = fields.Selection([('pending', 'Pending'), ('complete', 'Complete'), ('update', 'Update')], string="Sub State", readonly=True)
+    sub_state = fields.Selection([('pending', 'Pending'),('surveyor', 'Assign Surveyor'), ('complete', 'Submitted'),
+                                  ('accepted', 'Accepted'),('cancel', 'Rejected')], string="Sub State", readonly=True)
 
 
     address = fields.Char('Full Address')
@@ -73,9 +75,9 @@ class Quotation(models.Model):
     # available_time_from = fields.Datetime('Available Time From')
     # available_time_to = fields.Datetime('To')
     # image = fields.Binary("Image", help="Select image here")
-    questionnaire = fields.Binary("Upload Application")
+    questionnaire = fields.Many2many('ir.attachment', string="Application Form",relation="insurance_quotation_questionnaire")
     file_name = fields.Char("File Name")
-    edit_questionnaire = fields.Binary("Questionnaire Edited")
+    upload_questionnaire = fields.Many2many('ir.attachment', string="Upload Scanned Form",relation="insurance_quotation_issued_questionnaire")
     price = fields.Float('Premium')
     # member_ids = fields.One2many('members', 'quotation_id', 'Members')
     dob = fields.Date('Date OF Birth', default=datetime.today())
@@ -110,11 +112,23 @@ class Quotation(models.Model):
                                   'Deductible')
     survey_date = fields.Datetime('Appointment')
     sub_answer_questionnaire = fields.Many2one('sub.questionnaire.answers', 'Sub Questionnaire')
+    quote_state = fields.Selection([('pending', 'Pending'), ('sent', 'Sent')], string='Quote State', default='pending')
+    request_for_ofer_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted')],
+                                              string='Application Offer State', default='pending')
+    survey_state = fields.Selection([('surveyor', 'Assign Surveyor'),('pending', 'Pending'),
+                                     ('complete', 'Submitted')], string='Survey State', default='surveyor')
+    offer_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted'),
+                                    ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='Offer State', default='pending')
+    issue_in_progress_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted')],
+                                               string='Issue In Progress State', default='pending')
 
 
-
-
-
+    # @api.onchange('','')
+    # def
+    @api.onchange('surveyor')
+    def change_survey_state(self):
+        if self.surveyor:
+            self.write({"survey_state": 'pending'})
 
     @api.onchange('state')
     def compute_state(self):
@@ -158,12 +172,12 @@ class Quotation(models.Model):
             for rec in self.final_application_ids:
                 res.append(rec.application_files)
             if all(res):
-                self.write({'state': 'policy'})
-                self.env['state.history'].create({"application_id": self.id, "state": 'policy',
-                                                  "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                                  "user": self.write_uid.id})
-                self.test_state = self.env['state.setup'].search([('status', '=', 'policy'),('type', '=', 'insurance_app')]).id
-                self.write({'sub_state': 'pending'})
+                # self.write({'state': 'policy'})
+                # self.env['state.history'].create({"application_id": self.id, "state": 'policy',
+                #                                   "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                #                                   "user": self.write_uid.id})
+                # self.test_state = self.env['state.setup'].search([('status', '=', 'policy'),('type', '=', 'insurance_app')]).id
+                self.write({'sub_state': 'complete'})
 
     def complete_and_proceed(self):
         self.write({'sub_state': 'complete'})
@@ -196,12 +210,15 @@ class Quotation(models.Model):
             self.write({'application_number' : self.lob.line_of_business.upper() + '/' + currentYear[2:4] + '/' + currentMonth +
                                                '/' + number})
 
-
-
+    # # @api.multi
+    # def send_mail_template(self):
+    #     # Find the e-mail template
+    #     template = self.env.ref('mail_template_demo.example_email_template')
 
 
     @api.onchange('product_id')
     def get_questions(self):
+        self.questionnaire = self.product_id.questionnaire_file
         if self.lob.line_of_business == 'Medical':
             # print('Medical')
             self.write({'state': 'quick_quote'})
@@ -352,13 +369,13 @@ class Quotation(models.Model):
         self.test_state = self.env['state.setup'].search([('status', '=', 'offer'),('type', '=', 'insurance_app')]).id
         self.write({'sub_state': 'pending'})
 
-    def survey_required(self):
-        self.write({'state': 'survey_required'})
-        self.env['state.history'].create({"application_id": self.id, "state": 'survey_required',
+    def survey(self):
+        self.write({'state': 'survey'})
+        self.env['state.history'].create({"application_id": self.id, "state": 'survey',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'survey_required'),('type', '=', 'insurance_app')]).id
-        self.write({'sub_state': 'pending'})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'survey'),('type', '=', 'insurance_app')]).id
+        self.write({'sub_state': 'surveyor'})
 
     def reinsurance_confirm(self):
             self.write({'state': 'reinsurance'})
@@ -369,12 +386,12 @@ class Quotation(models.Model):
             self.write({'sub_state': 'pending'})
 
     def assign_surveyor(self):
-        self.write({'state': 'surveyor'})
-        self.env['state.history'].create({"application_id": self.id, "state": 'surveyor',
-                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                          "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'surveyor'),('type', '=', 'insurance_app')]).id
         self.write({'sub_state': 'pending'})
+        # self.env['state.history'].create({"application_id": self.id, "state": 'surveyor',
+        #                                   "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        #                                   "user": self.write_uid.id})
+        # self.test_state = self.env['state.setup'].search([('status', '=', 'surveyor'),('type', '=', 'insurance_app')]).id
+        # self.write({'sub_state': 'pending'})
 
     def submit_questionnaire(self):
 
@@ -416,6 +433,11 @@ class Quotation(models.Model):
         self.test_state = self.env['state.setup'].search([('status', '=', 'application'),('type', '=', 'insurance_app')]).id
         self.write({'sub_state': 'pending'})
 
+    def offer_accept(self):
+        # self.write({'state': 'offer'})
+        self.write({'sub_state': 'accepted'})
+        # self.sub_state = 'accepted'
+
     def issued(self):
 
         self.write({'state': 'policy'})
@@ -438,11 +460,14 @@ class Quotation(models.Model):
 
 
     def reject(self):
-        self.write({'state': 'cancel'})
-        self.env['state.history'].create({"application_id": self.id, "state": 'cancel',
-                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                          "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'cancel'),('type', '=', 'insurance_app')]).id
+        if self.state == 'offer':
+            self.write({'sub_state': 'cancel'})
+        else:
+            self.write({'state': 'cancel'})
+            self.env['state.history'].create({"application_id": self.id, "state": 'cancel',
+                                              "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                              "user": self.write_uid.id})
+            self.test_state = self.env['state.setup'].search([('status', '=', 'cancel'),('type', '=', 'insurance_app')]).id
 
 
     def get_options_of_question(self):
@@ -498,7 +523,7 @@ class Answers(models.Model):
                                      'Question Type', default='text')
     desc = fields.Char('Description')
     text = fields.Text('Answer')
-    file = fields.Binary('File')
+    file = fields.Many2many('ir.attachment', string="Upload File")
     value = fields.Float('Value')
     boolean = fields.Boolean('True Or False Answer', default=False)
     text_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
@@ -542,7 +567,7 @@ class SurveyReport(models.Model):
     options = fields.Many2one('selection.options', 'Choose', ondelete='cascade', domain="[('survey_id', '=', question)]")
     desc = fields.Char('Description')
     text = fields.Text('Answer')
-    file = fields.Binary('File')
+    file = fields.Many2many('ir.attachment', string="Upload File")
     value = fields.Float('Value')
     boolean = fields.Boolean('True Or False Answer', default=False)
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
@@ -552,7 +577,7 @@ class FinalOffer(models.Model):
 
     question = fields.Many2one('offer.setup','Offer Item')
     text = fields.Text('Value')
-    file = fields.Binary('File')
+    file = fields.Many2many('ir.attachment', string="Upload File")
     value = fields.Float('Value')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
@@ -561,7 +586,7 @@ class FinalApplication(models.Model):
     _name = 'final.application'
 
     description = fields.Many2one('final.application.setup', 'Document Name')
-    application_files = fields.Binary('File')
+    application_files = fields.Many2many('ir.attachment', string="Upload File")
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
 class AvailableTime(models.Model):
@@ -577,16 +602,15 @@ class stateHistory(models.Model):
     _name = 'state.history'
 
     state = fields.Selection([
-        ('quick_quote', 'Quote'),
-        ('proposal', 'Fill Form'),
-        ('survey_required', 'Survey Required'),
-        ('surveyor', 'Assign Surveyor'),
-        ('survey', 'Survey Report'),
-        ('reinsurance', 'Reinsurance'),
-        ('offer', 'Offer'),
-        ('application', 'Upload Documents'),
+        ('quick_quote', 'Quick Quote'),
+        ('proposal', 'Request For Offer'),
+        ('survey', 'Survey'),
+        ('offer', 'Offering'),
+        ('application', 'Issue In Progress'),
         ('policy', 'Policy'),
-        ('cancel', 'Rejected')], string='State')
+        ('cancel', 'Lost')], string='State')
+    sub_state = fields.Selection([('pending', 'Pending'),('surveyor', 'Assign Surveyor'), ('complete', 'Submitted'),
+                                  ('accepted', 'Accepted'),('cancel', 'Rejected')], string="Sub State", readonly=True)
 
     datetime = fields.Datetime('Date')
     user = fields.Many2one('res.users', ondelete='cascade')

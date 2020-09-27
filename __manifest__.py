@@ -9,7 +9,7 @@
     'version': '0.1',
     'license': 'AGPL-3',
     # any module necessary for this one to work correctly
-    'depends': ['base','sales_team','helpdesk_inherit'],
+    'depends': ['base','sales_team','helpdesk_inherit', 'mail'],
 
     # always loaded
     'data': [
@@ -32,7 +32,7 @@
         'views/state.xml',
         'views/answer.xml',
         'views/claim_app.xml',
-        'views/help_desk.xml',
+        # 'views/help_desk.xml',
         'reports/offer.xml',
         'reports/questionnaire.xml',
         'views/menu_item.xml',

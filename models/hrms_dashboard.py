@@ -28,14 +28,11 @@ class Brokers(models.Model):
 
     def get_all_production(self):
         prod = {}
-        for user in self.env['res.users'].search([('is_broker','=',True)]):
-            total = 0.0
-            agents_codes = []
-            for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
-                agents_codes.append(rec.agent_code)
-            for pro in self.env['policy.arope'].search([('agent_code', 'in', agents_codes)]):
+        total = 0.0
+        for user in self.env['persons'].search([('is_user','=',True), ('type', '=', 'broker')]):
+           for pro in self.env['policy.arope'].search([('agent_code', 'in', user.agent_code)]):
                 total += pro.totoal_premium
-            prod[user.id] = total
+        prod[user.id] = total
         print(prod)
         print('''''''''''''''''''''''''''''''''''')
         print({k: v for k, v in sorted(prod.items(), key=lambda item: item[1])})

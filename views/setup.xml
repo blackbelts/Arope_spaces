@@ -64,8 +64,7 @@
 
                         <field name="line_of_bus"/>
                         <field name="product_name"/>
-                        <field name="questionnaire_file" filename="file_name"/>
-                        <field name="file_name" invisible="1"/>
+                        <field name="questionnaire_file"  widget="many2many_binary"/>
 
                     </group>
                     <notebook>
