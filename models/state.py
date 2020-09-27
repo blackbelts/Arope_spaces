@@ -11,7 +11,7 @@ class StateSetup(models.Model):
         ('survey', 'Survey'),
         ('offer', 'Offering'),
         ('application', 'Issue In Progress'),
-        ('policy', 'Policy'),
+        ('policy', 'Policy Issued'),
         ('cancel', 'Lost')], string='State')
     claim_status = fields.Selection([('claim_intimation', 'Claim Intimation'),
                                      ('invoicing', 'Invoicing'),
