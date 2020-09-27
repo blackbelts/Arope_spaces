@@ -272,7 +272,7 @@ class Brokers(models.Model):
     def create_insurance_app(self,data):
         card = self.env['res.users'].search([('id', '=', data['user_id'])], limit=1).card_id
         states= []
-        for rec in self.env['state.setup'].search([('product_ids', 'in', data['product_id']),
+        for rec in self.env['state.setup'].search([('product_ids', 'in', [data['product_id']]),
                                                    ('type', '=', 'insurance_app'),
                                                    ('state_for', '=', 'broker')]):
             states.append(rec.state)
