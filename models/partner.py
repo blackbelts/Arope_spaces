@@ -14,6 +14,7 @@ class inhertResUser(models.Model):
 
     agent_code = fields.Char(string='Agent Code')
     card_id = fields.Char(string='Broker Card')
+    related_person = fields.Many2one('persons',string='Related Person')
 
 class InheritBrokers(models.Model):
     _name = 'persons'
