@@ -270,18 +270,45 @@ class Brokers(models.Model):
 
     @api.model
     def create_insurance_app(self,data):
-        card = self.env['res.users'].search([('id', '=', data['user_id'])], limit=1).card_id
+        # card = self.env['res.users'].search([('id', '=', data['user_id'])], limit=1).card_id
         states= []
         for rec in self.env['state.setup'].search([('product_ids', 'in', [data['product_id']]),
                                                    ('type', '=', 'insurance_app'),
                                                    ('state_for', '=', 'broker')]):
             states.append(rec.state)
         if 'Quick Quote' in states:
-            print('10')
+            if data['id'] == False:
+                id = self.env['insurance.quotation'].create({'lob': data['lob'], 'product_id': data['product_id'],
+                                                             'name': data['name'], 'phone': data['phone'],
+                                                             'email': data['email'],
+                                                             'test_state': self.env['state.setup'].search(
+                                                                 [('state', '=', 'Quick Quote')]).id,'state': 'quick_quote', 'deductible': data['deductible'],
+                                                             'target_price': data['target_price'], 'brand': data['brand'], 'sum_insured': data['sum_insured']})
+
+                self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_motor_price()
+                self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
+                self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
+                record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
+                return {'steps': states, 'app': record}
+            else:
+                id = self.env['insurance.quotation'].search([('id', '=', data['id'])])[0]
+                id.write({'lob': data['lob'], 'product_id': data['product_id'],
+                                                             'name': data['name'], 'phone': data['phone'],
+                                                             'email': data['email'],
+                                                             'test_state': self.env['state.setup'].search(
+                                                                 [('state', '=', 'Quick Quote')]).id,'state': 'quick_quote',
+                                                             'target_price': data['target_price'], 'brand': data['brand'], 'sum_insured': data['sum_insured']})
+                self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_motor_price()
+                self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
+                self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
+                record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
+
+                return {'steps': states, 'app': record}
+
         else:
             id = self.env['insurance.quotation'].create({'lob': data['lob'],'product_id': data['product_id'],
                                                 'name': data['name'], 'phone': data['phone'], 'email': data['email'],
-                                                  'test_state': self.env['state.setup'].search([('state', '=', 'Request For Offer')]).id,  'target_price': data['target_price']})
+                                                  'test_state': self.env['state.setup'].search([('state', '=', 'Request For Offer')]).id,'state': 'proposal',  'target_price': data['target_price']})
             record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
         return {'steps': states, 'app': record}
 
