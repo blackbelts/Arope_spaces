@@ -373,15 +373,22 @@ class Brokers(models.Model):
         self.env['insurance.quotation'].search([('id', '=', id)]).write(
             {'test_state': self.env['state.setup'].search([('status', '=', 'proposal'),
                                                            ('type', '=', 'insurance_app')]).id,
-             'quote_state': 'accepted', 'request_for_ofer_state': 'pending'})
-        self.write({'state': 'proposal'})
+             'quote_state': 'accepted', 'request_for_ofer_state': 'pending', 'state': 'proposal'})
         self.env['state.history'].create({"application_id": id, "state": 'quick_quote', 'sub_state': 'accepted',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.env['insurance.quotation'].search([('id', '=', id)]).write_uid.id})
         self.env['state.history'].create({"application_id": id, "state": 'proposal', 'sub_state': 'pending',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.env['insurance.quotation'].search([('id', '=', id)]).write_uid.id})
-
-
         return True
+
+    @api.model
+    def reject_price(self, id):
+        self.env['insurance.quotation'].search([('id', '=', id)]).write({'quote_state': 'cancel'})
+        self.env['state.history'].create({"application_id": id, "state": 'quick_quote', 'sub_state': 'cancel',
+                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                          "user": self.env['insurance.quotation'].search(
+                                              [('id', '=', id)]).write_uid.id})
+        return True
+
 
