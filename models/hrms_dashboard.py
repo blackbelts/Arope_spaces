@@ -29,8 +29,9 @@ class Brokers(models.Model):
     def get_all_production(self):
         prod = {}
         total = 0.0
+
         for user in self.env['persons'].search([('is_user','=',True), ('type', '=', 'broker')]):
-           for pro in self.env['policy.arope'].search([('agent_code', 'in', user.agent_code)]):
+           for pro in self.env['policy.arope'].search([('agent_code', '=', user.agent_code)]):
                 total += pro.totoal_premium
            prod[user.related_user.id] = total
         print(prod)
