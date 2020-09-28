@@ -59,6 +59,8 @@
                             <field name="expire_date" />
                             <field name="mobile" />
                             <field name="type" required="1"/>
+                                            <field name="is_user" />
+
                         </group>
                         <group>
                             <field name="card_id" />
