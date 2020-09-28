@@ -418,4 +418,15 @@ class Brokers(models.Model):
                                               [('id', '=', id)]).write_uid.id})
         return True
 
+    @api.model
+    def get_status(self,id):
+        status = []
+        rec = self.env['insurance.quotation'].search_read([('id', '=', id)])[0]
+        for rec in self.env['state.setup'].search([('product_ids', 'in', [rec.product_id.id]),
+                                                   ('type', '=', 'insurance_app'),
+                                                   ('state_for', '=', 'broker')]):
+            status.append(rec.state)
+        return {'status': status, 'app': rec}
+
+
 
