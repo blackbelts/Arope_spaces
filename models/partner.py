@@ -12,7 +12,6 @@ class inhertResPartner(models.Model):
 class inhertResUser(models.Model):
     _inherit = 'res.users'
 
-    is_broker = fields.Boolean(string='Broker',default=False)
     agent_code = fields.Char(string='Agent Code')
     card_id = fields.Char(string='Broker Card')
 
