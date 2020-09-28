@@ -24,11 +24,11 @@
 
                 <div class="oe_title">
                     <label for="agent_code" string="Agent Code"/>
-                    <field name="agent_code"  attrs="{'invisible': [('is_broker','!=',True)]}" />
+                    <field name="agent_code"  />
                 </div>
                 <div class="oe_title">
                     <label for="card_id" string="Broker Card"/>
-                    <field name="card_id"  attrs="{'invisible': [('is_broker','!=',True)]}" />
+                    <field name="card_id"   />
                 </div>
             </xpath>
         </field>
