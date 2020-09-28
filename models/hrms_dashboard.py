@@ -206,16 +206,43 @@ class Brokers(models.Model):
         return {'lob': lob, 'products': products, 'quote': quote}
 
     @api.model
-    def upload_document(self, data):
+    def upload_questionnaire(self, data):
         Model = request.env['ir.attachment']
         attachment = Model.create({
             'name': 'test',
-            'datas_fname': 'test',
-            'res_name': 'test',
+            'datas_fname': 'questionnaire',
+            'res_name': 'questionnaire',
             'type': 'binary',
-            'datas': data,
+            'datas': data['file'],
         })
-        return attachment.id
+        self.env['insurance.quotation'].search([('id', '=', data['id'])]).write({'questionnaire': [(6,0,[attachment.id])],
+                                                                                 'request_for_ofer_state': 'complete',})
+        self.env['state.history'].create({"application_id": data['id'], "state": 'proposal', 'sub_state': 'complete',
+                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                          "user": self.env['insurance.quotation'].search(
+                                              [('id', '=', data['id'])]).write_uid.id})
+        return True
+
+    @api.model
+    def upload_documents(self,data):
+        documents = data['documents']
+        for rec in documents:
+            Model = request.env['ir.attachment']
+            attachment = Model.create({
+                'name': 'test',
+                'datas_fname': 'questionnaire',
+                'res_name': 'questionnaire',
+                'type': 'binary',
+                'datas': rec['file'],
+            })
+            self.env['final.application'].search([('id', '=', rec['id'])]).write({'application_files': [(6,0, [attachment.id])]})
+        self.self.env['insurance.quotation'].search([('id', '=', data['id'])]).write({'offer_state': 'complete'})
+        self.env['state.history'].create({"application_id": data['id'], "state": 'offer', 'sub_state': 'complete',
+                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                          "user": self.env['insurance.quotation'].search(
+                                              [('id', '=', data['id'])]).write_uid.id})
+
+        return True
 
     @api.model
     def get_dashboard(self, id):
