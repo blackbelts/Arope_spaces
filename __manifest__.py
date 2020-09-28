@@ -12,7 +12,7 @@
 
     'depends': ['base','sales_team','helpdesk_inherit',
                 'smart_travel_agency','personal_acciedent',
-               'motor','medical' , 'mail', 'ir_attachment'],
+               'motor','medical' , 'mail'],
 
     # always loaded
     'data': [
