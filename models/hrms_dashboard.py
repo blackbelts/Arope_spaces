@@ -336,10 +336,15 @@ class Brokers(models.Model):
                 elif self.env['insurance.quotation'].search([('id', '=', id.id)]).lob.line_of_business == 'Medical':
                     if data['family_age']:
                         for rec in self.env['medical.family'].search([('application_id', '=', id.id)]):
-                            rec.write({'name': rec['name'], 'DOB': rec['dob'],
+                            rec.unlink()
+                        for rec in data['family_age']:
+                            f = self.env['medical.family'].create(
+                                {'name': rec['name'], 'DOB': rec['dob'],
                                  'type': rec['type'],
                                  'gender': rec['gender'], 'application_id': id.id})
-                            self.env['medical.family'].search([('id', '=', rec.id)]).get_age()
+
+                            self.env['medical.family'].search([('id', '=', f.id)]).get_age()
+                            
                     self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_price()
                 # self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
                 self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
