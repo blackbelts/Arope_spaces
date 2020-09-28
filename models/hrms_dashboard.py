@@ -291,6 +291,7 @@ class Brokers(models.Model):
                 record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
                 return {'steps': states, 'app': record}
             else:
+
                 id = self.env['insurance.quotation'].search([('id', '=', data['id'])])[0]
                 id.write({'lob': data['lob'], 'product_id': data['product_id'],
                                                              'name': data['name'], 'phone': data['phone'],
