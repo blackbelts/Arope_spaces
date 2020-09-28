@@ -107,7 +107,7 @@ class Quotation(models.Model):
     brand = fields.Selection([('all brands', 'All Brands (except Chinese & East Asia)'),
                               ('chinese cars & east asia', 'Chinese Cars & East Asia'), ('all models', 'All Models')],
                              'Brand')
-    calculate_motor_price = fields.Selection([('250 EGP', '250 EGP'),
+    deductible = fields.Selection([('250 EGP', '250 EGP'),
                                    ('4 Per Thousand', '4 Per Thousand')],
                                   'Deductible')
     survey_date = fields.Datetime('Appointment')
