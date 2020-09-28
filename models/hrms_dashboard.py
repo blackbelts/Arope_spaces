@@ -312,7 +312,7 @@ class Brokers(models.Model):
                                                   'test_state': self.env['state.setup'].search([('state', '=', 'Request For Offer')]).id,'state': 'proposal',  'target_price': data['target_price']})
             record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
         return {'steps': states, 'app': record}
-
+    @api.model
     def get_insurance_app_list(self, parms):
         if parms['app_num']:
             domain = [('create_uid', '=', parms['id']), ('application_number', 'ilike', parms['app_num'])]
