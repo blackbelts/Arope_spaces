@@ -357,7 +357,7 @@ class Quotation(models.Model):
         self.write({'state': 'proposal'})
         self.env['state.history'].create({"application_id": self.id, "state": 'quick_quote','sub_state': 'accepted',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                          "user": self.write_uid.id,})
+                                          "user": self.write_uid.id})
         self.env['state.history'].create({"application_id": self.id, "state": 'proposal','sub_state': 'pending',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
@@ -366,6 +366,8 @@ class Quotation(models.Model):
         self.write({'quote_state': 'accepted'})
         self.write({'request_for_ofer_state': 'pending'})
         return True
+
+
 
     def survey_confirm(self):
         self.write({'state': 'offer'})
