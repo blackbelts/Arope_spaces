@@ -279,28 +279,74 @@ class Brokers(models.Model):
             states.append(rec.state)
         if 'Quick Quote' in states:
             if data['id'] == False:
-                id = self.env['insurance.quotation'].create({'lob': data['lob'], 'product_id': data['product_id'],
-                                                             'name': data['name'], 'phone': data['phone'],
-                                                             'email': data['email'],
-                                                             'test_state': self.env['state.setup'].search(
-                                                                 [('state', '=', 'Quick Quote')]).id,'state': 'quick_quote', 'deductible': data['deductible'],
-                                                             'target_price': data['target_price'], 'brand': data['brand'], 'sum_insured': data['sum_insured']})
+                if self.env['insurance.line.business'].search([('id', '=', data['lob'])]).line_of_business == 'Motor':
+                    id = self.env['insurance.quotation'].create({'lob': data['lob'], 'product_id': data['product_id'],
+                                                                 'name': data['name'], 'phone': data['phone'],
+                                                                 'email': data['email'],
+                                                                 'test_state': self.env['state.setup'].search(
+                                                                     [('state', '=', 'Quick Quote')]).id,'state': 'quick_quote', 'deductible': data['deductible'],
+                                                                 'target_price': data['target_price'], 'brand': data['brand'], 'sum_insured': data['sum_insured']})
 
-                self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_motor_price()
-                self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
-                self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
-                record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
-                return {'steps': states, 'app': record}
+
+                    self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_motor_price()
+                    self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
+                    self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
+                    record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
+                    return {'steps': states, 'app': record}
+                elif self.env['insurance.line.business'].search([('id', '=', data['lob'])]).line_of_business == 'Medical':
+                    id = self.env['insurance.quotation'].create({'lob': data['lob'], 'product_id': data['product_id'],
+                                                                 'name': data['name'], 'phone': data['phone'],
+                                                                 'email': data['email'],
+                                                                 'test_state': self.env['state.setup'].search(
+                                                                     [('state', '=', 'Quick Quote')]).id,
+                                                                 'state': 'quick_quote',
+                                                                 'target_price': data['target_price'],
+                                                                 'package': data['package'], 'product': data['product'],
+                                                                 'dob': data['dob']
+                                                                 })
+                    if data['family_age']:
+                        for rec in data['family_age']:
+                            f = self.env['medical.family'].create(
+                                {'name': rec['name'], 'DOB': rec['dob'],
+                                 'type': rec['type'],
+                                 'gender': rec['gender'], 'application_id': id.id})
+
+                            self.env['medical.family'].search([('id', '=', f.id)]).get_age()
+                    self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_price()
+                    self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
+                    self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
+                    record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
+                    return {'steps': states, 'app': record}
+
+
             else:
+
                 id = self.env['insurance.quotation'].search([('id', '=', data['id'])])[0]
                 id.write({'lob': data['lob'], 'product_id': data['product_id'],
                                                              'name': data['name'], 'phone': data['phone'],
-                                                             'email': data['email'],
+                                                             'email': data['email'],'deductible': data['deductible'],
                                                              'test_state': self.env['state.setup'].search(
                                                                  [('state', '=', 'Quick Quote')]).id,'state': 'quick_quote',
-                                                             'target_price': data['target_price'], 'brand': data['brand'], 'sum_insured': data['sum_insured']})
-                self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_motor_price()
-                self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
+                                                             'target_price': data['target_price'], 'brand': data['brand'],
+                                                                'sum_insured': data['sum_insured'],'package': data['package'],
+                                                                'product': data['product'],
+                                                                 'dob': data['dob']})
+                if self.env['insurance.quotation'].search([('id', '=', id.id)]).lob.line_of_business == 'Motor':
+                    self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_motor_price()
+                elif self.env['insurance.quotation'].search([('id', '=', id.id)]).lob.line_of_business == 'Medical':
+                    if data['family_age']:
+                        for rec in self.env['medical.family'].search([('application_id', '=', id.id)]):
+                            rec.unlink()
+                        for rec in data['family_age']:
+                            f = self.env['medical.family'].create(
+                                {'name': rec['name'], 'DOB': rec['dob'],
+                                 'type': rec['type'],
+                                 'gender': rec['gender'], 'application_id': id.id})
+
+                            self.env['medical.family'].search([('id', '=', f.id)]).get_age()
+
+                    self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_price()
+                # self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
                 self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
                 record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
 
