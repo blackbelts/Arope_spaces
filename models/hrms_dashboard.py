@@ -286,14 +286,13 @@ class Brokers(models.Model):
                                                                  'test_state': self.env['state.setup'].search(
                                                                      [('state', '=', 'Quick Quote')]).id,'state': 'quick_quote', 'deductible': data['deductible'],
                                                                  'target_price': data['target_price'], 'brand': data['brand'], 'sum_insured': data['sum_insured']})
-                    return id
 
-                    # self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_motor_price()
-                    # self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
-                    # self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
-                    # record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
-                    # return {'steps': states, 'app': record}
-                elif self.env['insurance.line.business'].search([('id', '=', data['lob'])]).line_of_business == 'Medical':
+                    self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_motor_price()
+                    self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
+                    self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
+                    record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
+                    return {'steps': states, 'app': record}
+                elif self.env['insurance.line.business'].search([('id', '=', data['lob'])]).line_of_business == 'Motor':
                     print('10000')
             else:
 
@@ -302,7 +301,7 @@ class Brokers(models.Model):
                                                              'name': data['name'], 'phone': data['phone'],
                                                              'email': data['email'],
                                                              'test_state': self.env['state.setup'].search(
-                                                                 [('state', '=', 'Quick Quote')]).id,'state': 'quick_quote', 'deductible': data['deductible'],
+                                                                 [('state', '=', 'Quick Quote')]).id,'state': 'quick_quote',
                                                              'target_price': data['target_price'], 'brand': data['brand'], 'sum_insured': data['sum_insured']})
                 self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_motor_price()
                 self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
