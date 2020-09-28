@@ -292,14 +292,14 @@ class Brokers(models.Model):
                     self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
                     record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
                     return {'steps': states, 'app': record}
-                elif self.env['insurance.line.business'].search([('id', '=', data['lob'])]).line_of_business == 'Motor':
+                elif self.env['insurance.line.business'].search([('id', '=', data['lob'])]).line_of_business == 'Medical':
                     print('10000')
             else:
 
                 id = self.env['insurance.quotation'].search([('id', '=', data['id'])])[0]
                 id.write({'lob': data['lob'], 'product_id': data['product_id'],
                                                              'name': data['name'], 'phone': data['phone'],
-                                                             'email': data['email'],
+                                                             'email': data['email'],'deductible': data['deductible'],
                                                              'test_state': self.env['state.setup'].search(
                                                                  [('state', '=', 'Quick Quote')]).id,'state': 'quick_quote',
                                                              'target_price': data['target_price'], 'brand': data['brand'], 'sum_insured': data['sum_insured']})
