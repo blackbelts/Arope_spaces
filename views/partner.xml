@@ -21,14 +21,17 @@
         <field name="inherit_id" ref="base.view_users_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='login']" position="after">
-
+                <div class="oe_title">
+                    <label for="is_broker" string="Broker" />
+                    <field name="is_broker" />
+                </div>
                 <div class="oe_title">
                     <label for="agent_code" string="Agent Code"/>
-                    <field name="agent_code"  />
+                    <field name="agent_code"  attrs="{'invisible': [('is_broker','!=',True)]}" />
                 </div>
                 <div class="oe_title">
                     <label for="card_id" string="Broker Card"/>
-                    <field name="card_id"   />
+                    <field name="card_id"  attrs="{'invisible': [('is_broker','!=',True)]}" />
                 </div>
             </xpath>
         </field>
