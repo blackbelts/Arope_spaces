@@ -70,12 +70,12 @@ class Quotation(models.Model):
     bussines_activity = fields.Char('Client business activity')
     sum_insured = fields.Float('Sum Insured')
 
-    name_of_contact_person = fields.Char('Name OF Contact Person')
+    name_of_contact_person = fields.Char('Survey Contact Person')
     # inspection_address = fields.Char('Full Inspection Address')
     # available_time_from = fields.Datetime('Available Time From')
     # available_time_to = fields.Datetime('To')
     # image = fields.Binary("Image", help="Select image here")
-    questionnaire = fields.Many2many('ir.attachment', string="Application Form",relation="insurance_quotation_questionnaire")
+    questionnaire = fields.Many2many('ir.attachment', string="Download Application Form",relation="insurance_quotation_questionnaire")
     file_name = fields.Char("File Name")
     upload_questionnaire = fields.Many2many('ir.attachment', string="Upload Scanned Form",relation="insurance_quotation_issued_questionnaire")
     price = fields.Float('Premium')
@@ -113,10 +113,10 @@ class Quotation(models.Model):
     survey_date = fields.Datetime('Appointment')
     sub_answer_questionnaire = fields.Many2one('sub.questionnaire.answers', 'Sub Questionnaire')
     quote_state = fields.Selection([('pending', 'Pending'), ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='Quote State', default='pending')
-    request_for_ofer_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted')],
+    request_for_ofer_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted'),('accepted', 'Accepted')],
                                               string='Application Offer State', default='pending')
-    survey_state = fields.Selection([('surveyor', 'Assign Surveyor'),('pending', 'Pending'),
-                                     ('complete', 'Submitted')], string='Survey State', default='surveyor')
+    survey_state = fields.Selection([('pending', 'Pending'),('surveyor', 'Surveyor Assigned'),
+                                     ('complete', 'Submitted'), ('accepted', 'Accepted')], string='Survey State', default='surveyor')
     offer_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted'),
                                     ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='Offer State', default='pending')
     issue_in_progress_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted')],
@@ -247,9 +247,9 @@ class Quotation(models.Model):
         if self.final_application_ids:
             for question in self.final_application_ids:
                 question.unlink()
-        if self.offer_ids:
-            for question in self.offer_ids:
-                question.unlink()
+        # if self.offer_ids:
+        #     for question in self.offer_ids:
+        #         question.unlink()
         if self.product_id:
             # print(self.product_id)
             # self.questionnaire = self.product_id.questionnaire_file
@@ -278,12 +278,12 @@ class Quotation(models.Model):
                 for question in related_documents:
                     self.env['final.application'].create(
                         {"description": question.id, "application_id": self.id})
-            related_offer_items = self.env["offer.setup"].search(
-                [("product_id.id", "=", self.product_id.id)])
-            if related_offer_items:
-                for question in related_offer_items:
-                    self.offer_ids.create(
-                        {"question": question.id, "application_id": self.id})
+            # related_offer_items = self.env["offer.setup"].search(
+            #     [("product_id.id", "=", self.product_id.id)])
+            # if related_offer_items:
+            #     for question in related_offer_items:
+            #         self.offer_ids.create(
+            #             {"question": question.id, "application_id": self.id})
 
 
     @api.onchange('dob','product')
@@ -583,9 +583,10 @@ class SurveyReport(models.Model):
 class FinalOffer(models.Model):
     _name = 'final.offer'
 
-    question = fields.Many2one('offer.setup','Offer Item')
+    # question = fields.Many2one('offer.setup','Offer Item')
+    type = fields.Selection([('initial', 'Initial Offer'), ('final', 'Final Offer')])
     text = fields.Text('Value')
-    file = fields.Many2many('ir.attachment', string="Upload File")
+    file = fields.Many2many('ir.attachment', string="Upload Offer")
     value = fields.Float('Value')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
