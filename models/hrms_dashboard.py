@@ -344,7 +344,7 @@ class Brokers(models.Model):
                                  'gender': rec['gender'], 'application_id': id.id})
 
                             self.env['medical.family'].search([('id', '=', f.id)]).get_age()
-                            
+
                     self.env['insurance.quotation'].search([('id', '=', id.id)]).calculate_price()
                 # self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
                 self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()

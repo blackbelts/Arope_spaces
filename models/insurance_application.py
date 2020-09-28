@@ -112,7 +112,7 @@ class Quotation(models.Model):
                                   'Deductible')
     survey_date = fields.Datetime('Appointment')
     sub_answer_questionnaire = fields.Many2one('sub.questionnaire.answers', 'Sub Questionnaire')
-    quote_state = fields.Selection([('pending', 'Pending'), ('sent', 'Sent')], string='Quote State', default='pending')
+    quote_state = fields.Selection([('pending', 'Pending'), ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='Quote State', default='pending')
     request_for_ofer_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted')],
                                               string='Application Offer State', default='pending')
     survey_state = fields.Selection([('surveyor', 'Assign Surveyor'),('pending', 'Pending'),
@@ -352,14 +352,20 @@ class Quotation(models.Model):
                                     price += rec.price
                     self.write({"price": price})
 
-
-    def approve_medical_price(self):
+    @api.model
+    def approve_price(self):
         self.write({'state': 'proposal'})
-        self.env['state.history'].create({"application_id": self.id, "state": 'proposal',
+        self.env['state.history'].create({"application_id": self.id, "state": 'quick_quote','sub_state': 'accepted',
+                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                          "user": self.write_uid.id,})
+        self.env['state.history'].create({"application_id": self.id, "state": 'proposal','sub_state': 'pending',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
-        self.test_state = self.env['state.setup'].search([('status', '=', 'proposal'),('type', '=', 'insurance_app')]).id
-        self.write({'sub_state': 'pending'})
+        self.test_state = self.env['state.setup'].search([('status', '=', 'proposal'),
+                                                          ('type', '=', 'insurance_app')]).id
+        self.write({'quote_state': 'accepted'})
+        self.write({'request_for_ofer_state': 'pending'})
+        return True
 
     def survey_confirm(self):
         self.write({'state': 'offer'})
