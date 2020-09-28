@@ -16,6 +16,10 @@
                     <label for="card_id" string="Broker Card"/>
                     <field name="card_id"   />
                 </div>
+                    <div class="oe_title">
+                    <label for="related_person" string="Related Person"/>
+                    <field name="related_person"   />
+                </div>
             </xpath>
         </field>
     </record>
@@ -55,6 +59,8 @@
                             <field name="expire_date" />
                             <field name="mobile" />
                             <field name="type" required="1"/>
+                                            <field name="is_user" />
+
                         </group>
                         <group>
                             <field name="card_id" />

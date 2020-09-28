@@ -4,7 +4,7 @@
 
 
    <menuitem id="menu_hrms_dashboard" name="Dashboard" action="hr_action_dashboard"
-            parent="arope_space" />
+            parent="arope_space" groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group" />
          <menuitem id="policy_view" name="Policies"
                   action="policy_form_action" parent="arope_space"/>
       <menuitem id="claim_view" name="Claims"
