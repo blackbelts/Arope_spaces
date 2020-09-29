@@ -452,9 +452,13 @@ class Brokers(models.Model):
 
                 offers.append({"id": offer.id,"file_id": ids, "type": dict(offer._fields['type'].selection).get(offer.type),
                                "state": offer.offer_state})
-        # for doc in self.env['insurance.quotation'].search([('id', '=', id)]).final_application_ids:
-        #     document.append()
-        return {'status': status, 'app': rec, 'offers': offers}
+        for doc in self.env['insurance.quotation'].search([('id', '=', id)]).final_application_ids:
+            doc_ids = []
+            for file in doc.application_files:
+                doc_ids.append(file.id)
+            document.append({"id": doc.id, "file_id": doc_ids, "state": doc.issue_in_progress_state, "attachment": doc.description})
+
+        return {'status': status, 'app': rec, 'offers': offers, "attachment": document}
 
     @api.model
     def accept_offer(self,id):
