@@ -212,7 +212,7 @@ class Brokers(models.Model):
     @api.model
     def upload_questionnaire(self, data):
         Model = request.env['ir.attachment']
-        attachment = request.env['ir.attachment'].super().create({
+        attachment = super().request.env['ir.attachment'].create({
             'name': 'test',
             'datas_fname': 'questionnaire',
             'res_name': 'questionnaire',
