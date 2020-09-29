@@ -11,6 +11,8 @@ from odoo import http
 from odoo.http import request
 from odoo.tools import float_utils
 import base64
+import requests
+
 
 
 ROUNDING_FACTOR = 16
@@ -437,12 +439,14 @@ class Brokers(models.Model):
 
     @api.model
     def downloadFile(self,id):
-        return {
-            'name': 'Questionnaire',
-            'type': 'ir.actions.act_url',
-            'url': "web/content/" + id + "?download=true" ,
-            'target': 'self'
-        }
+        url = 'http://207.154.195.214:7070/web/content/'+id+'?download=true'
+        return requests.get(url, allow_redirects=True)
+        # return {
+        #     'name': 'Questionnaire',
+        #     'type': 'ir.actions.act_url',
+        #     'url': "web/content/" + id + "?download=true" ,
+        #     'target': 'self'
+        # }
 
 
 
