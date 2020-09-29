@@ -425,8 +425,9 @@ class Brokers(models.Model):
     def get_app_info(self, id):
         # return id
         status = []
+        product = self.env['insurance.quotation'].search([('id', '=', id)]).product_id
         rec = self.env['insurance.quotation'].search_read([('id', '=', id)])
-        for record in self.env['state.setup'].search([('product_ids', 'in', [rec[0].product_id]),
+        for record in self.env['state.setup'].search([('product_ids', 'in', product),
                                                       ('type', '=', 'insurance_app'),
                                                       ('state_for', '=', 'broker')]):
             status.append({"name": record.state, "message": record.message})
