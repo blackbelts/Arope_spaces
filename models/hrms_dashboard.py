@@ -452,8 +452,8 @@ class Brokers(models.Model):
 
                 offers.append({"id": offer.id,"file_id": ids, "type": dict(offer._fields['type'].selection).get(offer.type),
                                "state": offer.offer_state})
-        for doc in self.env['insurance.quotation'].search([('id', '=', id)]).final_application_ids:
-            document.append()
+        # for doc in self.env['insurance.quotation'].search([('id', '=', id)]).final_application_ids:
+        #     document.append()
         return {'status': status, 'app': rec, 'offers': offers}
 
     @api.model
@@ -465,6 +465,10 @@ class Brokers(models.Model):
 
     @api.model
     def reject_offer(self, id):
+        offer = self.env['final.offer'].search([('id', '=', id)])
+        for rec in offer:
+            rec.write({'type': 'accepted'})
+        return True
         self.env['final.offer'].search([('id', '=', id)])[0].write({'type': 'cancel'})
         return True
     
