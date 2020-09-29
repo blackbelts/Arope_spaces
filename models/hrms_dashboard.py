@@ -246,7 +246,7 @@ class Brokers(models.Model):
                 'res_name': 'questionnaire',
                 'type': 'binary',
                 'datas': rec['file'],
-            })], 'offer_state': 'complete'})
+            })], 'issue_in_progress_state': 'complete'})
         # self.self.env['insurance.quotation'].search([('id', '=', data['id'])]).write({})
         self.env['state.history'].create({"application_id": data['id'], "state": 'offer', 'sub_state': 'complete',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
