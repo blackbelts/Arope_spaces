@@ -444,7 +444,10 @@ class Brokers(models.Model):
                                                       ('state_for', '=', 'broker')]):
             status.append({"name": record.state, "message": record.message})
         for offer in self.env['insurance.quotation'].search([('id', '=', id)]).offer_ids:
-            offers.append({"file_id": offer.file, "type": dict(offer._fields['type'].selection).get(offer.type),
+            ids = []
+            for file in offer.file:
+                ids.append(file.id)
+            offers.append({"file_id": ids, "type": dict(offer._fields['type'].selection).get(offer.type),
                            "state": offer.offer_state})
         return {'status': status, 'app': rec, 'offers': offers}
 
