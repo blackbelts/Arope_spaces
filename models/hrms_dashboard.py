@@ -219,7 +219,7 @@ class Brokers(models.Model):
             'type': 'binary',
             'datas': data['file'],
         })
-        self.env['insurance.quotation'].search([('id', '=', data['id'])]).write({'questionnaire': (4,attachment.id),
+        self.env['insurance.quotation'].search([('id', '=', data['id'])]).write({
                                                                                  'request_for_ofer_state': 'complete',})
         self.env['state.history'].create({"application_id": data['id'], "state": 'proposal', 'sub_state': 'complete',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
