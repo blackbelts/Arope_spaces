@@ -455,7 +455,7 @@ class Brokers(models.Model):
                                "state": offer.offer_state})
 
         for doc in self.env['insurance.quotation'].search([('id', '=', id)]).final_application_ids:
-            document.append({"id": doc.id})
+            document.append({"id": doc.id, "file_id": doc.application_files.ids,})
 
         return {'status': status, 'app': rec, 'offers': offers, "attachment": document}
 
