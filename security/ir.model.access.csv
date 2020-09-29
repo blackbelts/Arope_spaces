@@ -45,7 +45,7 @@ access_setup32,setup.setup32,model_maintenance_center,base.group_user,1,1,1,1
 access_setup33,setup.setup33,model_claim_setup,base.group_user,1,1,1,1
 access_setup34,setup.setup34,model_claim_setup_lines,base.group_user,1,1,1,1
 access_setup35,setup.setup35,model_claim_lines,base.group_user,1,1,1,1
-access_setup35,setup.setup35,model_Attachment,base.group_user,1,1,1,1
+access_setup36,setup.setup36,model_Attachment,base.group_user,1,1,1,1
 
 access_mail_activity_type_sale_manager,mail.activity.type.sale.manager,mail.model_mail_activity_type,base.group_user,1,1,1,1
 
