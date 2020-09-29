@@ -432,7 +432,7 @@ class Brokers(models.Model):
         offers = []
         # product = self.env['insurance.quotation'].search([('id', '=', id)]).product_id.id
         rec = self.env['insurance.quotation'].search_read([('id', '=', id)])
-        for rec in self.env['state.setup'].search([('status', '=', rec[0].state)]):
+        for rec in self.env['state.setup'].search([('status', '=', rec[0]['state'])]):
             message = rec.message
         rec[0]['message'] = message
         # for record in self.env['state.setup'].search([('product_ids', 'in', [product]),
