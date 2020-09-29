@@ -212,16 +212,18 @@ class Brokers(models.Model):
     @api.model
     def upload_questionnaire(self, data):
 
-        attachment = request.env['ir.attachment'].sudo().create({
-            'name': 'test',
+        # attachment = request.env['ir.attachment'].sudo().create({
+        #     'name': 'test',
+        #     # 'datas_fname': 'questionnaire',
+        #     'res_name': 'questionnaire',
+        #     'type': 'binary',
+        #     'datas': data['file'],
+        # })
+        self.env['insurance.quotation'].search([('id', '=', data['id'])]).write({'upload_questionnaire':[(0,0,{'name': 'test',
             # 'datas_fname': 'questionnaire',
             'res_name': 'questionnaire',
             'type': 'binary',
-            'datas': data['file'],
-        })
-        test=self.env['insurance.quotation'].search([('id', '=', data['id'])],limit=1)
-        test.questionnaire+=attachment
-
+            'datas': data['file']})] ,'request_for_ofer_state': 'complete',})
         self.env['state.history'].create({"application_id": data['id'], "state": 'proposal', 'sub_state': 'complete',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.env['insurance.quotation'].search(
