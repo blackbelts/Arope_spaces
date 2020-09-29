@@ -452,7 +452,7 @@ class Brokers(models.Model):
 
                 offers.append({"id": offer.id,"file_id": ids, "type": dict(offer._fields['type'].selection).get(offer.type),
                                "state": offer.offer_state})
-        for doc in self.env['insurance.quotation'].search([('id', '=', id)]).final_application_ids:
+        for doc in self.env['insurance.quotation'].search([('id', '=', id)])[0].final_application_ids:
             doc_ids = []
             for app in doc.application_files:
                 doc_ids.append(app.id)
