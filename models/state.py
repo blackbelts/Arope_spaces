@@ -41,5 +41,3 @@ class StateSetup(models.Model):
 
 
 
-
-

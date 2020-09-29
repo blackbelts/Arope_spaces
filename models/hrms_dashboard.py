@@ -7,8 +7,12 @@ from pytz import utc
 from odoo import models, fields, api, _
 from odoo.http import request
 from collections import OrderedDict
+from odoo import http
+from odoo.http import request
 from odoo.tools import float_utils
 import base64
+import requests
+
 
 
 ROUNDING_FACTOR = 16
@@ -206,16 +210,46 @@ class Brokers(models.Model):
         return {'lob': lob, 'products': products, 'quote': quote}
 
     @api.model
-    def upload_document(self, data):
-        Model = request.env['ir.attachment']
-        attachment = Model.create({
-            'name': 'test',
-            'datas_fname': 'test',
-            'res_name': 'test',
+    def upload_questionnaire(self, data):
+
+        # attachment = request.env['ir.attachment'].sudo().create({
+        #     'name': 'Questionnaire',
+        #     # 'datas_fname': 'questionnaire',
+        #     'res_name': 'questionnaire',
+        #     'type': 'binary',
+        #     'datas': data['file'],
+        # })
+        self.env['insurance.quotation'].search([('id', '=', data['id'])]).write({'upload_questionnaire':[(0,0,{'name': 'Questionnaire',
+            # 'datas_fname': 'questionnaire',
+            'res_name': 'questionnaire',
             'type': 'binary',
-            'datas': data,
-        })
-        return attachment.id
+            'datas': data['file']})],'request_for_ofer_state': 'complete'})
+        self.env['state.history'].create({"application_id": data['id'], "state": 'proposal', 'sub_state': 'complete',
+                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                          "user": self.env['insurance.quotation'].search(
+                                              [('id', '=', data['id'])]).write_uid.id})
+        return True
+
+    @api.model
+    def upload_documents(self,data):
+        documents = data['documents']
+        for rec in documents:
+            Model = request.env['ir.attachment']
+            attachment = Model.create({
+                'name': 'test',
+                'datas_fname': 'questionnaire',
+                'res_name': 'questionnaire',
+                'type': 'binary',
+                'datas': rec['file'],
+            })
+            self.env['final.application'].search([('id', '=', rec['id'])]).write({'application_files': [(6,0, [attachment.id])]})
+        self.self.env['insurance.quotation'].search([('id', '=', data['id'])]).write({'offer_state': 'complete'})
+        self.env['state.history'].create({"application_id": data['id'], "state": 'offer', 'sub_state': 'complete',
+                                          "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                          "user": self.env['insurance.quotation'].search(
+                                              [('id', '=', data['id'])]).write_uid.id})
+
+        return True
 
     @api.model
     def get_dashboard(self, id):
@@ -382,6 +416,8 @@ class Brokers(models.Model):
                                           "user": self.env['insurance.quotation'].search([('id', '=', id)]).write_uid.id})
         return True
 
+
+
     @api.model
     def reject_price(self, id):
         self.env['insurance.quotation'].search([('id', '=', id)]).write({'quote_state': 'cancel'})
@@ -390,5 +426,22 @@ class Brokers(models.Model):
                                           "user": self.env['insurance.quotation'].search(
                                               [('id', '=', id)]).write_uid.id})
         return True
+
+
+    @api.model
+    def get_app_info(self, id):
+        # return id
+        status = []
+        product = self.env['insurance.quotation'].search([('id', '=', id)]).product_id.id
+        rec = self.env['insurance.quotation'].search_read([('id', '=', id)])
+        for record in self.env['state.setup'].search([('product_ids', 'in', [product]),
+                                                      ('type', '=', 'insurance_app'),
+                                                      ('state_for', '=', 'broker')]):
+            status.append({"name": record.state, "message": record.message})
+        return {'status': status, 'app': rec}
+
+    
+
+
 
 
