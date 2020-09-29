@@ -234,15 +234,19 @@ class Brokers(models.Model):
     def upload_documents(self,data):
         documents = data['documents']
         for rec in documents:
-            Model = request.env['ir.attachment']
-            attachment = Model.create({
-                'name': 'test',
-                'datas_fname': 'questionnaire',
+            # Model = request.env['ir.attachment']
+            # attachment = Model.create({
+            #     'name': 'File',
+            #     'res_name': 'questionnaire',
+            #     'type': 'binary',
+            #     'datas': rec['file'],
+            # })
+            self.env['final.application'].search([('id', '=', rec['id'])]).write({'application_files': [(0,0, {{
+                'name': 'File',
                 'res_name': 'questionnaire',
                 'type': 'binary',
                 'datas': rec['file'],
-            })
-            self.env['final.application'].search([('id', '=', rec['id'])]).write({'application_files': [(6,0, [attachment.id])]})
+            }})]})
         self.self.env['insurance.quotation'].search([('id', '=', data['id'])]).write({'offer_state': 'complete'})
         self.env['state.history'].create({"application_id": data['id'], "state": 'offer', 'sub_state': 'complete',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -440,7 +444,7 @@ class Brokers(models.Model):
                                                       ('state_for', '=', 'broker')]):
             status.append({"name": record.state, "message": record.message})
         for offer in self.env['insurance.quotation'].search([('id', '=', id)]).offer_ids:
-            offers.append({"file_id": offer.id, "type": dict(offer._fields['type'].selection).get(offer.type),
+            offers.append({"file_id": offer.file, "type": dict(offer._fields['type'].selection).get(offer.type),
                            "state": offer.offer_state})
         return {'status': status, 'app': rec, 'offers': offers}
 
