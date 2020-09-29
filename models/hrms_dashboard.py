@@ -460,14 +460,14 @@ class Brokers(models.Model):
     def accept_offer(self,id):
         offer = self.env['final.offer'].search([('id', '=', id)])
         for rec in offer:
-            rec.write({'type': 'accepted'})
+            rec.write({'offer_state': 'accepted'})
         return True
 
     @api.model
     def reject_offer(self, id):
         offer = self.env['final.offer'].search([('id', '=', id)])
         for rec in offer:
-            rec.write({'type': 'cancel'})
+            rec.write({'offer_state': 'cancel'})
         return True
         # self.env['final.offer'].search([('id', '=', id)])[0].write({'type': ''})
         # return True
