@@ -444,13 +444,22 @@ class Brokers(models.Model):
                                                       ('state_for', '=', 'broker')]):
             status.append({"name": record.state, "message": record.message})
         for offer in self.env['insurance.quotation'].search([('id', '=', id)]).offer_ids:
-            ids = []
-            for file in offer.file:
-                ids.append(file.id)
-            offers.append({"file_id": ids, "type": dict(offer._fields['type'].selection).get(offer.type),
-                           "state": offer.offer_state})
+            if offer.type != "pending":
+                ids = []
+                for file in offer.file:
+                    ids.append(file.id)
+
+                offers.append({"id": offer.id,"file_id": ids, "type": dict(offer._fields['type'].selection).get(offer.type),
+                               "state": offer.offer_state})
         return {'status': status, 'app': rec, 'offers': offers}
 
+    @api.model
+    def accept_offer(self,id):
+        self.env['final.offer'].search([('id', '=', id)])[0].write({'type': 'accepted'})
+
+    @api.model
+    def reject_offer(self, id):
+        self.env['final.offer'].search([('id', '=', id)])[0].write({'type': 'cancel'})
     
 
 
