@@ -214,7 +214,7 @@ class Brokers(models.Model):
 
         attachment = request.env['ir.attachment'].sudo().create({
             'name': 'test',
-            'datas_fname': 'questionnaire',
+            # 'datas_fname': 'questionnaire',
             'res_name': 'questionnaire',
             'type': 'binary',
             'datas': data['file'],
