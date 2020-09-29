@@ -426,7 +426,7 @@ class Brokers(models.Model):
         # return id
         status = []
         rec = self.env['insurance.quotation'].search_read([('id', '=', id)])
-        for record in self.env['state.setup'].search([('product_ids', 'in', [rec[0].product_id.id]),
+        for record in self.env['state.setup'].search([('product_ids', 'in', [rec[0].product_id]),
                                                       ('type', '=', 'insurance_app'),
                                                       ('state_for', '=', 'broker')]):
             status.append({"name": record.state, "message": record.message})
