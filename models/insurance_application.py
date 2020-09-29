@@ -117,10 +117,6 @@ class Quotation(models.Model):
                                               string='Application Offer State', default='pending')
     survey_state = fields.Selection([('pending', 'Pending'),('surveyor', 'Surveyor Assigned'),
                                      ('complete', 'Submitted'), ('accepted', 'Accepted')], string='Survey State', default='surveyor')
-    offer_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted'),
-                                    ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='Offer State', default='pending')
-    issue_in_progress_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted')],
-                                               string='Issue In Progress State', default='pending')
 
 
     # @api.onchange('','')
@@ -589,6 +585,9 @@ class FinalOffer(models.Model):
     file = fields.Many2many('ir.attachment', string="Upload Offer")
     value = fields.Float('Value')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    offer_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted'),
+                                    ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='State',
+                                   default='pending')
 
 
 class FinalApplication(models.Model):
@@ -596,6 +595,10 @@ class FinalApplication(models.Model):
 
     description = fields.Many2one('final.application.setup', 'Document Name')
     application_files = fields.Many2many('ir.attachment', string="Upload File")
+    issue_in_progress_state = fields.Selection(
+        [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
+        string='State', default='pending')
+
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
 class AvailableTime(models.Model):

@@ -227,26 +227,24 @@
 <!--                            <group>-->
 <!--                                <h3 style="color: brown;">Final Offer</h3>-->
 <!--                                <br/>-->
-                            <group>
-                                <field name="offer_state"/>
-                            </group>
+
                                 <field name="offer_ids">
                                         <tree editable="bottom">
                                             <field name="type"/>
                                             <field name="file" widget="many2many_binary"/>
+                                            <field name="offer_state"/>
                                         </tree>
                                 </field>
 <!--                                <button attrs="{'invisible':['|',('state', '!=', 'offer'),('offer_state', '=', 'complete')]}" name="complete_and_proceed" string="Submit" type="object" class="oe_highlight"  groups="Arope-spaces.managers_group"/>-->
 <!--                            </group>-->
                         </page>
                         <page string="Scanned Documents">
-                            <group>
-                                <field name="issue_in_progress_state"/>
-                            </group>
+
                             <field name="final_application_ids">
                                 <tree editable="bottom">
                                     <field name="description"/>
                                     <field name="application_files" widget="many2many_binary"/>
+                                    <field name="issue_in_progress_state"/>
                                 </tree>
                             </field>
 <!--                            <button  name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"  groups="Arope-spaces.managers_group,Arope-spaces.surveyor_group,Arope-spaces.broker_space_group"/>-->
