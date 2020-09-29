@@ -241,11 +241,12 @@ class Brokers(models.Model):
             #     'type': 'binary',
             #     'datas': rec['file'],
             # })
+            file = rec['file']
             self.env['final.application'].search([('id', '=', rec['id'])]).write({'application_files': [(0,0, {{
                 'name': 'File',
                 'res_name': 'questionnaire',
                 'type': 'binary',
-                'datas': rec['file'],
+                'datas': file,
             }})], 'offer_state': 'complete'})
         # self.self.env['insurance.quotation'].search([('id', '=', data['id'])]).write({})
         self.env['state.history'].create({"application_id": data['id'], "state": 'offer', 'sub_state': 'complete',
