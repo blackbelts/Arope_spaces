@@ -232,21 +232,13 @@ class Brokers(models.Model):
 
     @api.model
     def upload_documents(self,data):
-        documents = data['documents']
-        for rec in documents:
-            # Model = request.env['ir.attachment']
-            # attachment = Model.create({
-            #     'name': 'File',
-            #     'res_name': 'questionnaire',
-            #     'type': 'binary',
-            #     'datas': rec['file'],
-            # })
-            self.env['final.application'].search([('id', '=', rec['id'])]).write({'application_files': [(0,0, {
-                'name': 'File',
-                'res_name': 'questionnaire',
-                'type': 'binary',
-                'datas': rec['file'],
-            })], 'issue_in_progress_state': 'complete'})
+
+        self.env['final.application'].search([('id', '=', data['file_id'])]).write({'application_files': [(0,0, {
+            'name': 'File',
+            'res_name': 'questionnaire',
+            'type': 'binary',
+            'datas': data['file'],
+        })], 'issue_in_progress_state': 'complete'})
         # self.self.env['insurance.quotation'].search([('id', '=', data['id'])]).write({})
         self.env['state.history'].create({"application_id": data['id'], "state": 'offer', 'sub_state': 'complete',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -436,14 +428,17 @@ class Brokers(models.Model):
     def get_app_info(self, id):
         # return id
         document = []
-        status = []
+        # status = []
         offers = []
-        product = self.env['insurance.quotation'].search([('id', '=', id)]).product_id.id
+        # product = self.env['insurance.quotation'].search([('id', '=', id)]).product_id.id
         rec = self.env['insurance.quotation'].search_read([('id', '=', id)])
-        for record in self.env['state.setup'].search([('product_ids', 'in', [product]),
-                                                      ('type', '=', 'insurance_app'),
-                                                      ('state_for', '=', 'broker')]):
-            status.append({"name": record.state, "message": record.message})
+        for rec in self.env['state.setup'].search([('status', '=', rec[0].state)]):
+            message = rec.message
+        rec[0]['message'] = message
+        # for record in self.env['state.setup'].search([('product_ids', 'in', [product]),
+        #                                               ('type', '=', 'insurance_app'),
+        #                                               ('state_for', '=', 'broker')]):
+        #     status.append({"name": record.state, "message": record.message})
         for offer in self.env['insurance.quotation'].search([('id', '=', id)]).offer_ids:
             ids = []
             if offer.offer_state != "pending":
@@ -458,7 +453,8 @@ class Brokers(models.Model):
             description = self.env['final.application.setup'].search([("id", "=", doc.description.id)]).description
             document.append({"id": doc.id, "file_id": doc.application_files.ids, "state": doc.issue_in_progress_state, "attachment": description})
 
-        return {'status': status, 'app': rec, 'offers': offers, "attachment": document}
+
+        return {'app': rec, 'offers': offers, "attachment": document}
 
     @api.model
     def accept_offer(self,id):
