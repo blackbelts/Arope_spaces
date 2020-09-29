@@ -437,16 +437,7 @@ class Brokers(models.Model):
             status.append({"name": record.state, "message": record.message})
         return {'status': status, 'app': rec}
 
-    @api.model
-    def downloadFile(self,id):
-        url = 'http://207.154.195.214:7070/web/content/'+id+'?download=true'
-        return requests.get(url, allow_redirects=True)
-        # return {
-        #     'name': 'Questionnaire',
-        #     'type': 'ir.actions.act_url',
-        #     'url': "web/content/" + id + "?download=true" ,
-        #     'target': 'self'
-        # }
+    
 
 
 
