@@ -445,7 +445,7 @@ class Brokers(models.Model):
                                                       ('state_for', '=', 'broker')]):
             status.append({"name": record.state, "message": record.message})
         for offer in self.env['insurance.quotation'].search([('id', '=', id)]).offer_ids:
-            if offer.type != "pending":
+            if offer.offer_state != "pending":
                 ids = []
                 for file in offer.file:
                     ids.append(file.id)
