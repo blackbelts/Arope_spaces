@@ -7,6 +7,8 @@ from pytz import utc
 from odoo import models, fields, api, _
 from odoo.http import request
 from collections import OrderedDict
+from odoo import http
+from odoo.http import request
 from odoo.tools import float_utils
 import base64
 
@@ -432,6 +434,15 @@ class Brokers(models.Model):
                                                       ('state_for', '=', 'broker')]):
             status.append({"name": record.state, "message": record.message})
         return {'status': status, 'app': rec}
+
+    @api.model
+    def downloadFile(self,id):
+        return {
+            'name': 'Questionnaire',
+            'type': 'ir.actions.act_url',
+            'url': "web/content/" + id + "?download=true" ,
+            'target': 'self'
+        }
 
 
 
