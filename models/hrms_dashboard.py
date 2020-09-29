@@ -432,13 +432,17 @@ class Brokers(models.Model):
     def get_app_info(self, id):
         # return id
         status = []
+        offers = []
         product = self.env['insurance.quotation'].search([('id', '=', id)]).product_id.id
         rec = self.env['insurance.quotation'].search_read([('id', '=', id)])
         for record in self.env['state.setup'].search([('product_ids', 'in', [product]),
                                                       ('type', '=', 'insurance_app'),
                                                       ('state_for', '=', 'broker')]):
             status.append({"name": record.state, "message": record.message})
-        return {'status': status, 'app': rec}
+        for offer in self.env['insurance.quotation'].search([('id', '=', id)]).offer_ids:
+            offers.append({"file_id": offer.id, "type": offer.dict(offer._fields['type'].selection).get(offer.type),
+                           "state": offer.offer_state})
+        return {'status': status, 'app': rec, 'offers': offers}
 
     
 
