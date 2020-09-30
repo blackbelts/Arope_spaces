@@ -146,7 +146,7 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
 .o_chatter .o_chatter_topbar > .o_topbar_right_area {
     display: none !important;
 }
-.btn btn-link o_chatter_button_log_note{
+.o_chatter .o_chatter_topbar .o_chatter_button_log_note{
     display: none !important;
 }
 #wrapwrap{
