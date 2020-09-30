@@ -214,7 +214,7 @@ class Quotation(models.Model):
 
     @api.onchange('product_id')
     def get_questions(self):
-        self.questionnaire = self.product_id.questionnaire_file
+        # self.questionnaire = self.product_id.questionnaire_file
         if self.lob.line_of_business == 'Medical':
             # print('Medical')
             self.write({'state': 'quick_quote'})
@@ -268,12 +268,12 @@ class Quotation(models.Model):
             if related_survey_questions:
                 for question in related_survey_questions:
                     self.env['survey.report'].create({"question": question.id, "desc": question.desc, "application_id": self.id})
-            related_documents = self.env["final.application.setup"].search(
-                [("product_id.id", "=", self.product_id.id)])
-            if related_documents:
-                for question in related_documents:
-                    self.env['final.application'].create(
-                        {"description": question.id, "application_id": self.id})
+            # related_documents = self.env["final.application.setup"].search(
+            #     [("product_id.id", "=", self.product_id.id)])
+            # if related_documents:
+            #     for question in related_documents:
+            #         self.env['final.application'].create(
+            #             {"description": question.id, "application_id": self.id})
             # related_offer_items = self.env["offer.setup"].search(
             #     [("product_id.id", "=", self.product_id.id)])
             # if related_offer_items:
@@ -595,7 +595,7 @@ class FinalApplication(models.Model):
 
     description = fields.Many2one('final.application.setup', 'Document Name')
     application_files = fields.Many2many('ir.attachment', string="Upload File", relation="final_application_to_upload")
-    download_file = fields.Many2many('ir.attachment', string="Download File", relation="final_application_to_Download")
+    download_file = fields.Many2many('ir.attachment', string="Download File", relation="final_application_Download")
     issue_in_progress_state = fields.Selection(
         [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
         string='State', default='pending')
