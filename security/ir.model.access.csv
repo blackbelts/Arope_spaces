@@ -6,7 +6,7 @@ access_setup2,setup.setup2,model_insurance_product,base.group_user,1,1,1,1
 access_setup3,setup.setup3,model_collection_arope,base.group_user,1,1,1,1
 access_setup4,setup.setup4,model_claim_arope,base.group_user,1,1,1,1
 
-access_setup5,setup.setup5,model_travel_quotation,base.group_user,1,1,1,1
+access_setup5,setup.setup5,model_quotation_service,base.group_user,1,1,1,1
 access_setup6,setup.setup6,model_quotation_price_setup,base.group_user,1,1,1,1
 access_setup7,setup.setup7,model_quotation_price_line,base.group_user,1,1,1,1
 access_setup8,setup.setup8,model_team_target,base.group_user,1,1,1,1

@@ -175,7 +175,5 @@ class TravelQuotation(models.Model):
         period = (to - when).days
         return period
 
-    
 
 
-    

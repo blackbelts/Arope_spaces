@@ -3,128 +3,122 @@
     <!-- Add a custom form view -->
     <record id="get_a_quote_view_form" model="ir.ui.view">
 		<field name="name">Get A Quote</field>
-		<field name="model">travel.quotation</field>
+		<field name="model">quotation.service</field>
 		<field name="arch" type="xml">
+
 			<form>
-                <header>
-                    <field name="state" widget="statusbar" statusbar_visible="step_1,step_2,step_3"/>
-                </header>
+
                 <sheet>
-                    <h3>Get A Quote</h3>
-                    <field attrs="{'invisible': [('state', '=','step_3')]}" name="package" widget="radio"/>
-                    <group attrs="{'invisible': [('state', '=','step_3')]}">
-                        <group>
-                            <field name="geographical_coverage" attrs="{'readonly': [('state', '!=','step_1')]}"/>
-                            <field name="coverage_from" attrs="{'readonly': [('state', '!=','step_1')]}"/>
-                            <field name="days" attrs="{'readonly': [('state', '!=','step_1')]}"/>
-                        </group>
-                        <group>
-                            <field name="DOB" attrs="{'readonly': [('state', '!=','step_1')]}"/>
-                            <field name="coverage_to" attrs="{'readonly': [('state', '!=','step_1')]}"/>
-                        </group>
-                    </group>
-                    <group attrs="{'invisible': [('state', '!=','step_3')]}">
-                        <group>
-                            <field name="insured"/>
-                            <field name="address"/>
-                            <field name="national_id"/>
-                        </group>
-                        <group>
-                            <field name="gender"/>
-                            <field name="address"/>
-                            <field name="phone"/>
-                        </group>
-                    </group>
+                    <div name="button_box" class="oe_button_box">
+                        <button class="oe_stat_button" string="Motor" type="object" name="motor"
+                            icon="fa-car">
+                        </button>
+                        <button class="oe_stat_button" string="Medical" type="object" name="medical"
+                            icon="fa-stethoscope">
+                        </button>
+                        <button class="oe_stat_button" string="Travel" type="object" name="test"
+                            icon="fa-plane">
+                        </button>
+                    </div>
+<!--                    <h3>Quick Quote</h3>-->
 
-                    <!-- <notebook attrs="{'invisible': [('state', '!=', 'step_2')]}">
-                        <page string="Billing Info">
-                            <h3>Billing Information</h3>
 
+                        <field name="lob"  invisible="1"/>
+
+
+                        <group attrs="{'invisible': [('lob', '!=', 1)]}">
+                                <field name="package" />
+                                <field name="dob"/>
+                                <field name="product" />
+                        </group >
+                        <group attrs="{'invisible': [('lob', '!=', 3)]}">
                             <group>
-
-                                <group>
-                                    <field name="currency_id"/>
-                                    <field name="net_premium"/>
-                                    <field name="gross_premium"/>
-                                    <field name="supervisory_stamp"/>
-                                  
-                                </group>
-                                <group>
-                                    
-                                    <field name="issue_fees"/>
-                                    <field name="proportional_stamp"/>
-                                    <field name="dimensional_stamp"/>
-                                    <field name="admin_fees"/>
-                                </group>
+                                    <field name="brand" />
+                                    <field name="deductible"/>
                             </group>
-                            
-                            <button type="object" string="Edit" name="edit_data" class="btn btn-warning edit_btn"/>
-                            <button type="object" string="Buy" name="go_to_traveller_info" class="btn btn-success buy_btn"/>
-                        </page>
-                    </notebook> -->
-                    <div style="width: 253px; margin: 0 auto;" class="card mb-5 mb-lg-0" attrs="{'invisible': [('state', '!=', 'step_2')]}">
-                        <div class="card-body">
-                            <h4 class="card-title text-muted text-uppercase text-center">Your Total Quote</h4>
-                            <h2 class="card-price text-center">$ <field name="gross_premium"/><span class="period">/month</span></h2>
-                            <hr/>
-                            <div class="text-center">
-                                <button type="object" string="Edit" name="edit_data" class="btn btn-warning edit_btn"/>
-                                <button type="object" string="Buy" name="go_to_traveller_info" class="btn btn-success buy_btn"/>
+                            <group>
+                                    <field name="sum_insured"/>
+                            </group>
+
+                        </group>
+                    <div class="container">
+                        <div class="row">
+                            <div  class="card mb-4 mb-lg-0 col" >
+                                    <div class="card-body">
+                                        <h4 class="card-title text-muted text-uppercase text-center">الماسة</h4>
+                                        <h2 class="card-price text-center">$ <field readonly="1" force_save="1" name="price"/></h2>
+                                        <hr/>
+                                        <div class="text-center">
+                                            <button type="object" string="Create Application" class="oe_highlight"/>
+                                        </div>
+                                    </div>
                             </div>
-                            <!-- <ul class="fa-ul">
-                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Single User</li>
-                            <li><span class="fa-li"><i class="fas fa-check"></i></span>5GB Storage</li>
-                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Public Projects</li>
-                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Community Access</li>
-                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Unlimited Private Projects</li>
-                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Dedicated Phone Support</li>
-                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Free Subdomain</li>
-                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Monthly Status Reports</li>
-                            </ul> -->
-                            <!-- <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a> -->
+                            <div class="card mb-4 mb-lg-0 col" >
+                                    <div class="card-body">
+                                        <h4 class="card-title text-muted text-uppercase text-center">أمان</h4>
+                                        <h2 class="card-price text-center">$ <field readonly="1" force_save="1" name="price"/></h2>
+                                        <hr/>
+                                        <div class="text-center">
+                                            <button type="object" string="Create Application" class="oe_highlight"/>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="card mb-4 mb-lg-0 col" >
+                                    <div class="card-body">
+                                        <h4 class="card-title text-muted text-uppercase text-center">الذهبية</h4>
+                                        <h2 class="card-price text-center">$ <field readonly="1" force_save="1" name="price"/></h2>
+                                        <hr/>
+                                        <div class="text-center">
+                                            <button type="object" string="Create Application" class="oe_highlight"/>
+                                        </div>
+                                    </div>
+                            </div>
                         </div>
                     </div>
-                    <button attrs="{'invisible': [('state', '!=', 'step_3')]}" string="PAY" type="object" class="btn btn-secondary btn-lg btn-block"/>
-                    <button attrs="{'invisible': [('state', '!=', 'step_1')]}" string="Get A Quote" name="get_financial_data" type="object" class="btn btn-secondary btn-lg btn-block"/>
+
+
+
+
+
                 </sheet>
-                    
-                   
+
+
                 <!-- <xpath expr="." position="inside">
                     <link rel="stylesheet" href="/Arope-spaces/static/src/css/main.css"/>
                 </xpath> -->
-                
+
 			</form>
 		</field>
 	</record>
-    <!-- Add a custom Tree (List) view -->
-    <record id="get_a_quote_view_tree" model="ir.ui.view">
-		<field name="name">Get A Quote</field>
-		<field name="model">travel.quotation</field>
-		<field name="arch" type="xml">
-			<tree>
-				<field name="package"/>
-                <field name="geographical_coverage"/>
-                <field name="DOB"/>
-                <field name="coverage_from"/>
-                <field name="coverage_to"/>
-                <field name="days"/>
-
-			</tree>
-		</field>
-	</record>
-    <record model="ir.actions.act_window" id="get_a_quote_action">
-            <field name="name">Get A Quote</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">travel.quotation</field>
-            <field name="view_id" ref="get_a_quote_view_tree"/>
-            <field name="view_mode">form,tree</field>
-    </record>
-    
     <template id="assets_backend" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <link rel="stylesheet" href="/Arope-spaces/static/src/css/main.css"/>
         </xpath>
     </template>
-  
+    <!-- Add a custom Tree (List) view -->
+    <record id="get_a_quote_view_tree" model="ir.ui.view">
+		<field name="name">Get A Quote</field>
+		<field name="model">quotation.service</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="lob"/>
+                <field name="package"/>
+                <field name="dob"/>
+                <field name="product"/>
+
+			</tree>
+		</field>
+	</record>
+    <record model="ir.actions.act_window" id="quick_quote_action">
+            <field name="name">Quick Quote</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">quotation.service</field>
+            <field name='domain'>[('lob','=','1')]</field>
+            <field name="view_id" ref="get_a_quote_view_tree"/>
+            <field name="view_mode">form,tree</field>
+    </record>
+
+
+
 
 </odoo>

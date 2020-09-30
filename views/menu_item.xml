@@ -69,6 +69,7 @@
                   action="claim_setup_action" sequence="8000"/>
 
 
-
+    <menuitem id="quick_quote_view" name="Quick Quote"
+                  action="quick_quote_action" parent="arope_space"/>
 
 </odoo>

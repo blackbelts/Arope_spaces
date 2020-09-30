@@ -6,7 +6,7 @@
         <field name="model">medical.price</field>
         <field name="arch" type="xml">
             <form>
-                <button name="price" type="object" string="Price " class="oe_highlight"  />
+<!--                <button name="price" type="object" string="Price " class="oe_highlight"  />-->
                 <sheet>
                     <group>
                         <group>
