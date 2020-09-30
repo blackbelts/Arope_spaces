@@ -120,5 +120,22 @@
 
 
 
+    <template id="assets_login" inherit_id="web.login">
+
+        <xpath expr="//form/input" position="before">
+            <img src="/Arope-spaces/static/src/img/logo.png"/>
+            <h1>Arope partners Portal </h1>
+        <link rel="stylesheet" href="/Arope-spaces/static/src/css/main.css"/>
+        </xpath>
+    </template>
+    <template id="assets_reset_password" inherit_id="auth_signup.reset_password">
+
+        <xpath expr="//form/input" position="before">
+            <img src="/Arope-spaces/static/src/img/logo.png"/>
+            <h1>Arope partners Portal </h1>
+        <link rel="stylesheet" href="/Arope-spaces/static/src/css/main.css"/>
+        </xpath>
+    </template>
+  
 
 </odoo>

@@ -36,8 +36,8 @@
         'views/answer.xml',
         'views/claim_app.xml',
         # 'views/help_desk.xml',
-        'reports/offer.xml',
-        'reports/questionnaire.xml',
+        #'reports/offer.xml',
+        #'reports/questionnaire.xml',
         'views/menu_item.xml',
         'wizard/users.xml',
 

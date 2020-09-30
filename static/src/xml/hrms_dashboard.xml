@@ -115,27 +115,26 @@
                                             <h2 class="header-title mb-0">Permium under collection</h2>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="single-report mb-xs-30 cursor" id="green_collection">
+                                             <di class="col-md-4">
+                                                <div class="single-report cursor" id="red_collection">
                                                     <div class="s-report-inner pr--20 pt--30 mb-3">
-                                                        <div class="icon green"></div>
+                                                        <div class="icon red"></div>
                                                         <div class="s-report-title d-flex justify-content-between">
-                                                            <h4 class="header-title permium mb-0">
-                                                               <span class="greenspan"> Count : <t t-esc="widget.collections_statistics.Green.count" /></span>
+                                                           <h4 class="header-title permium mb-0">
+                                                               <span class="redspan">Count : <t t-esc="widget.collections_statistics.Red.count" /></span>
                                                                 <br/><br/>
-                                                                Total : <t t-esc="widget.makeNumber(widget.collections_statistics.Green.total)" /> $
+                                                                Total : <t t-esc="widget.makeNumber(widget.collections_statistics.Red.total)" /> $
                                                             </h4>
-                                                            <!--<p>24 H</p>-->
                                                         </div>
 <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-<!--                                                            <h2>-->
-<!--                                                                <t t-esc="widget.brokerRank" />-->
-<!--                                                            </h2>-->
+<!--                                                            <h2>$ 4567809,987</h2>-->
+<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
 <!--                                                        </div>-->
                                                     </div>
 
                                                 </div>
-                                            </div>
+                                            </di>
+
                                             <div class="col-md-4">
                                                 <div class="single-report mb-xs-30 cursor" id="orange_collection">
                                                     <div class="s-report-inner pr--20 pt--30 mb-3">
@@ -158,25 +157,27 @@
 
                                                 </div>
                                             </div>
-                                            <di class="col-md-4">
-                                                <div class="single-report cursor" id="red_collection">
+                                            <div class="col-md-4">
+                                                <div class="single-report mb-xs-30 cursor" id="green_collection">
                                                     <div class="s-report-inner pr--20 pt--30 mb-3">
-                                                        <div class="icon red"></div>
+                                                        <div class="icon green"></div>
                                                         <div class="s-report-title d-flex justify-content-between">
-                                                           <h4 class="header-title permium mb-0">
-                                                               <span class="redspan">Count : <t t-esc="widget.collections_statistics.Red.count" /></span>
+                                                            <h4 class="header-title permium mb-0">
+                                                               <span class="greenspan"> Count : <t t-esc="widget.collections_statistics.Green.count" /></span>
                                                                 <br/><br/>
-                                                                Total : <t t-esc="widget.makeNumber(widget.collections_statistics.Red.total)" /> $
+                                                                Total : <t t-esc="widget.makeNumber(widget.collections_statistics.Green.total)" /> $
                                                             </h4>
+                                                            <!--<p>24 H</p>-->
                                                         </div>
 <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-<!--                                                            <h2>$ 4567809,987</h2>-->
-<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
+<!--                                                            <h2>-->
+<!--                                                                <t t-esc="widget.brokerRank" />-->
+<!--                                                            </h2>-->
 <!--                                                        </div>-->
                                                     </div>
 
                                                 </div>
-                                            </di>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -191,30 +192,28 @@
                                 <div class="card custom-card">
                                     <div class="card-body">
                                         <div class="d-sm-flex justify-content-between align-items-center">
-                                            <h2 class="header-title mb-0">Renewals</h2>
+                                            <h2 class="header-title mb-0">Complaints</h2>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="single-report mb-xs-30 cursor" id="green_renew">
+                                            <di class="col-md-4">
+                                                <div class="single-report cursor" id="red_renew">
                                                     <div class="s-report-inner pr--20 pt--30 mb-3">
-                                                        <div class="icon green"></div>
+                                                        <div class="icon red"></div>
                                                         <div class="s-report-title d-flex justify-content-between">
-                                                           <h4 class="header-title permium mb-0">
-                                                               <span class="greenspan">Count : <t t-esc="widget.renew_statistics.Green.count" /></span>
+                                                            <h4 class="header-title permium mb-0">
+                                                                <span class="redspan">Count : <t t-esc="widget.renew_statistics.Red.count" /></span>
                                                                 <br/><br/>
-                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" /> $
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Red.total)" /> $
                                                             </h4>
                                                         </div>
 <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-<!--                                                            <h2>-->
-<!--                                                                <t t-esc="widget.brokerRank" />-->
-<!--                                                            </h2>-->
+<!--                                                            <h2>$ 4567809,987</h2>-->
 <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
 <!--                                                        </div>-->
                                                     </div>
 
                                                 </div>
-                                            </div>
+                                            </di>
                                             <div class="col-md-4">
                                                 <div class="single-report mb-xs-30 cursor" id="orange_renew">
                                                     <div class="s-report-inner pr--20 pt--30 mb-3">
@@ -236,6 +235,45 @@
 
                                                 </div>
                                             </div>
+                                             <div class="col-md-4">
+                                                <div class="single-report mb-xs-30 cursor" id="green_renew">
+                                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                                        <div class="icon green"></div>
+                                                        <div class="s-report-title d-flex justify-content-between">
+                                                           <h4 class="header-title permium mb-0">
+                                                               <span class="greenspan">Count : <t t-esc="widget.renew_statistics.Green.count" /></span>
+                                                                <br/><br/>
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" /> $
+                                                            </h4>
+                                                        </div>
+<!--                                                        <div class="d-flex justify-content-between pb-2">-->
+<!--                                                            <h2>-->
+<!--                                                                <t t-esc="widget.brokerRank" />-->
+<!--                                                            </h2>-->
+<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="sales-report-area mt-3 mb-1">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div class="d-sm-flex justify-content-between align-items-center">
+                                            <h2 class="header-title mb-0">Renewals</h2>
+                                        </div>
+                                        <div class="row">
                                             <di class="col-md-4">
                                                 <div class="single-report cursor" id="red_renew">
                                                     <div class="s-report-inner pr--20 pt--30 mb-3">
@@ -255,6 +293,49 @@
 
                                                 </div>
                                             </di>
+                                            <div class="col-md-4">
+                                                <div class="single-report mb-xs-30 cursor" id="orange_renew">
+                                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                                        <div class="icon orange"></div>
+                                                        <div class="s-report-title d-flex justify-content-between">
+                                                           <h4 class="header-title permium mb-0">
+                                                               <span class="orangespan">Count : <t t-esc="widget.renew_statistics.Orange.count" /></span>
+                                                                <br/><br/>
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Orange.total)" /> $
+                                                            </h4>
+                                                        </div>
+<!--                                                        <div class="d-flex justify-content-between pb-2">-->
+<!--                                                            <h2>-->
+<!--                                                                <t t-esc="widget.makeNumber(widget.brokerProduction)" />-->
+<!--                                                                $</h2>-->
+<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                             <div class="col-md-4">
+                                                <div class="single-report mb-xs-30 cursor" id="green_renew">
+                                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                                        <div class="icon green"></div>
+                                                        <div class="s-report-title d-flex justify-content-between">
+                                                           <h4 class="header-title permium mb-0">
+                                                               <span class="greenspan">Count : <t t-esc="widget.renew_statistics.Green.count" /></span>
+                                                                <br/><br/>
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" /> $
+                                                            </h4>
+                                                        </div>
+<!--                                                        <div class="d-flex justify-content-between pb-2">-->
+<!--                                                            <h2>-->
+<!--                                                                <t t-esc="widget.brokerRank" />-->
+<!--                                                            </h2>-->
+<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

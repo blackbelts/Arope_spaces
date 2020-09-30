@@ -145,3 +145,32 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
         background-color: white !important;
 }
 
+#wrapwrap{
+ background-image: url(../img/background-img.jpg);
+    }
+    .oe_login_form, .oe_signup_form, .oe_reset_password_form {
+    max-width: 40%;
+    position: relative;
+    margin: 50px auto;
+    background-color: white;
+    padding: 15px;
+        margin-top:5rem;
+
+    border-radius: 15px;
+}
+.oe_reset_password_form img,
+.oe_login_form img{
+margin-bottom:1rem;
+width:100%
+}
+.oe_reset_password_form h1,
+.oe_login_form h1{
+text-align:center
+}
+.oe_reset_password_form .small,
+.oe_login_form .small{
+font-size:100%;
+text-align:center;
+margin:1rem !important;
+display:block !important;
+}
