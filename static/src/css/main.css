@@ -127,22 +127,23 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
     right:0;
 }
 .o_form_view .oe_button_box .oe_stat_button .o_button_icon {
-    color: #073e89 !important;
+    color: white !important;
 }
-.o_form_view .oe_button_box .btn.oe_stat_button > .o_button_icon {
-        width: 1% !important;
 
-}
 .o_form_view .oe_button_box {
     text-align: center !important;
 }
 .o_form_view .oe_button_box .btn.oe_stat_button > .o_stat_info, .o_form_view .oe_button_box .btn.oe_stat_button > span {
-    color: #073e89 !important;
-    margin-left: 30% !important;
+    color: white !important;
+
 }
 .o_chatter_position_sided .o_content .o_form_view:not(.o_form_nosheet) .o_chatter, .o_chatter_position_sided .modal-content .o_form_view:not(.o_form_nosheet) .o_chatter {
         flex: 0 0 25% !important;
         background-color: white !important;
+}
+.o_form_view .oe_button_box .btn.oe_stat_button {
+    background-color: #073e89 !important;
+    opacity: 1;
 }
 
 #wrapwrap{
@@ -173,4 +174,13 @@ font-size:100%;
 text-align:center;
 margin:1rem !important;
 display:block !important;
+}
+.o_form_view .o_form_uri > span:first-child {
+    color: #073e89 !important;
+}
+a {
+    color: #073e89 !important;
+}
+.o_main_navbar > .o_menu_brand:hover{
+    background-color: transparent !important;
 }

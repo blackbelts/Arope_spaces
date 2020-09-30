@@ -594,7 +594,8 @@ class FinalApplication(models.Model):
     _name = 'final.application'
 
     description = fields.Many2one('final.application.setup', 'Document Name')
-    application_files = fields.Many2many('ir.attachment', string="Upload File")
+    application_files = fields.Many2many('ir.attachment', string="Upload File", relation="final_application_to_upload")
+    download_file = fields.Many2many('ir.attachment', string="Download File", relation="final_application_to_Download")
     issue_in_progress_state = fields.Selection(
         [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
         string='State', default='pending')

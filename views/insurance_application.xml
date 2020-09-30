@@ -57,7 +57,7 @@
 <!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'issued'),('sub_state', '!=', 'pending')]}">Policy is issued</h2>-->
 <!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'survey_required'),('sub_state', '!=', 'pending')]}">Fill in survey required information</h2>-->
 <!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'quick_quote'),('sub_state', '!=', 'pending')]}">Pending on reinsurance agreement</h2>-->
-
+                    <h3 style="color: #073e89 !important">Application Info</h3>
                     <group>
                         <group>
                             <field name="state" invisible="1"/>
@@ -73,7 +73,7 @@
                         </group>
                     </group>
                     <br/>
-                    <h3 style="color: #073e89 !important">Customer Information</h3>
+                    <h3 style="color: #073e89 !important">Customer Info</h3>
                     <group>
                         <group>
 
@@ -102,16 +102,7 @@
 <!--                    </group>-->
 <!--                    <br/>-->
 
-                    <h3 style="color: #073e89 !important">Required Policy To Download</h3>
-                    <p>Please fill out the following application, sign the customer and re-upload it.</p>
-                    <group>
-                        <group>
-                            <field name="questionnaire" widget="many2many_binary" readonly="1" force_save="1"/>
-                        </group>
-                        <group>
-                            <field name="upload_questionnaire" widget="many2many_binary"/>
-                        </group>
-                    </group>
+
 <!--                    <group>-->
 <!--                        <field name="final_application_ids">-->
 <!--                                <tree editable="bottom">-->
@@ -122,12 +113,14 @@
 <!--                        </field>-->
 <!--                    </group>-->
                     <br/>
-                    <h3 style="color: #073e89 !important">Documents To Upload</h3>
+                    <h3 style="color: #073e89 !important">Policy Required Documents</h3>
+                    <p>Please fill out the following application, sign the customer and re-upload it.</p>
                     <p>Please Upload All Scanned Documents.</p>
 <!--                    <group>-->
                         <field name="final_application_ids">
                                 <tree editable="bottom">
                                     <field name="description"/>
+                                    <field name="download_file"/>
                                     <field name="application_files" widget="many2many_binary"/>
                                     <field name="issue_in_progress_state"/>
                                 </tree>
