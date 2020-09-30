@@ -130,9 +130,7 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
     color: white !important;
 }
 
-.o_form_view .oe_button_box {
-    text-align: center !important;
-}
+
 .o_form_view .oe_button_box .btn.oe_stat_button > .o_stat_info, .o_form_view .oe_button_box .btn.oe_stat_button > span {
     color: white !important;
 
@@ -145,7 +143,12 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
     background-color: #073e89 !important;
     opacity: 1;
 }
-
+.o_chatter .o_chatter_topbar > .o_topbar_right_area {
+    display: none !important;
+}
+.btn btn-link o_chatter_button_log_note{
+    display: none !important;
+}
 #wrapwrap{
  background-image: url(../img/background-img.jpg);
     }
@@ -178,7 +181,7 @@ display:block !important;
 .o_form_view .o_form_uri > span:first-child {
     color: #073e89 !important;
 }
-a {
+.o_control_panel .breadcrumb > li > a {
     color: #073e89 !important;
 }
 .o_main_navbar > .o_menu_brand:hover{
