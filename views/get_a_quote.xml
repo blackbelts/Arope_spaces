@@ -34,10 +34,10 @@
                         </group>
                     </group >
                     <field name="members" attrs="{'invisible': ['|',('medical_package', '=', 'individual'),('lob', '!=', 1)]}">
-                        <tree editable="bottom">-->
+                        <tree editable="bottom">
                             <field name="type"/>
                             <field name="dob"/>
-                            <field name="age"/>
+                            <field name="age" readonly="1" force_save="1"/>
                         </tree>
                     </field>
                     <group attrs="{'invisible': [('lob', '!=', 3)]}">
@@ -94,7 +94,7 @@
 		<field name="arch" type="xml">
 			<tree>
 				<field name="lob"/>
-                <field name="package"/>
+<!--                <field name="package"/>-->
                 <field name="dob"/>
 <!--                <field name="product"/>-->
 

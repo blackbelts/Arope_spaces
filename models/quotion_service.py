@@ -20,10 +20,14 @@ class QuotationService(models.Model):
                                               ('zone 3', 'Worldwide'), ],
                                              'Zone',
                                              default='zone 1')
-    age = fields.Integer('Age', compute='compute_age', store=True)
+    age = fields.Integer('Age', store=True)
+    issue_date = fields.Datetime(string='Issue Date', readonly=True, default=lambda self:fields.datetime.today())
+
+    # compute = 'compute_age'
     coverage_from = fields.Date('From', default=datetime.today(), required=True)
     coverage_to = fields.Date('To')
-    days = fields.Integer('Day(s)', compute='compute_days', store='True', required=True)
+    days = fields.Integer('Day(s)', store='True', required=True, compute='compute_days')
+    #compute='compute_days'
     # motor_product = fields.Many2one('product.covers', 'Product')
     brand = fields.Selection([('all brands', 'All Brands (except Chinese & East Asia)'),
                               ('chinese cars & east asia', 'Chinese Cars & East Asia'), ('all models', 'All Models')],
@@ -40,13 +44,15 @@ class QuotationService(models.Model):
 
     @api.depends('coverage_from', 'coverage_to')
     def compute_days(self):
-        if self.coverage_from and self.coverage_to:
-            # date1 = datetime.strptime(self.coverage_from, '%Y-%m-%d').date()
-            # date2 = datetime.strptime(self.coverage_to, '%Y-%m-%d').date()
-            date3 = (self.coverage_to - self.coverage_from).days
-            self.days = date3
+        for rec in self:
+            if rec.coverage_from and rec.coverage_to:
+                # date1 = datetime.strptime(self.coverage_from, '%Y-%m-%d').date()
+                # date2 = datetime.strptime(self.coverage_to, '%Y-%m-%d').date()
+                date3 = (rec.coverage_to - rec.coverage_from).days
+                self.days = date3
 
-    @api.depends('dob')
+
+    @api.onchange('dob')
     def compute_age(self):
         if self.dob:
             # date1 = datetime.strptime(str(self.issue_date), '%Y-%m-%d %H:%M:%S').date()
