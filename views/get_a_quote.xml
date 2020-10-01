@@ -87,7 +87,7 @@
 				<field name="lob"/>
                 <field name="package"/>
                 <field name="dob"/>
-                <field name="product"/>
+<!--                <field name="product"/>-->
 
 			</tree>
 		</field>
