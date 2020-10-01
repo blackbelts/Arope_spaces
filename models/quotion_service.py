@@ -175,15 +175,30 @@ class QuotationService(models.Model):
                                 if rec.from_age <= age and rec.to_age >= age:
                                     price += rec.price
                     self.write({"price": price})
-    #
-    # def calculate_travel_price(self):
-    #     if self.age and self.geographical_coverage and self.days:
-    #         if self.travel_package == "individual":
-    #             result = {}
-    #             kid_dob = []
-    #             if self.days > 0:
-    #
-    #         elif self.travel_package == "family":
+
+    @api.onchange('age', 'geographical_coverage', 'days', 'members')
+    def calculate_travel_price(self):
+        if self.age and self.geographical_coverage and self.days:
+            if self.travel_package == "individual":
+                result = {}
+                kid_dob = []
+                if self.days > 0:
+                    for rec in self.members:
+                        if rec.type == 'kid':
+                            kid_dob.append(rec.DOB)
+                    if self.travel_package == 'individual':
+                        result = self.env['policy.travel'].get_individual(
+                            {'z': self.geographical_coverage, 'd': [self.dob], 'p_from': self.coverage_from,
+                             'p_to': self.coverage_to})
+                    elif self.travel_package == 'family':
+                        result = self.env['policy.travel'].get_family(
+                            {'z': self.geographical_coverage, 'p_from': self.coverage_from, 'p_to': self.coverage_to,
+                             'kid_dob': kid_dob})
+                    if result:
+                        self.price = result.get('gross')
+
+
+
 
 
     def motor(self):
@@ -191,6 +206,9 @@ class QuotationService(models.Model):
 
     def medical(self):
         self.write({"lob": 1})
+
+    def travel(self):
+        self.write({"lob": 4})
 
 class Members(models.Model):
     _name = 'members'

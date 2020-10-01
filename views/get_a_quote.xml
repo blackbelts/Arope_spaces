@@ -16,7 +16,7 @@
                         <button class="oe_stat_button" string="Medical" type="object" name="medical"
                             icon="fa-stethoscope">
                         </button>
-                        <button class="oe_stat_button" string="Travel" type="object" name="test"
+                        <button class="oe_stat_button" string="Travel" type="object" name="travel"
                             icon="fa-plane">
                         </button>
                     </div>
@@ -52,8 +52,28 @@
                         </group>
 
                     </group>
-<!--                    <div class="container">-->
-<!--                        <div class="row">-->
+                    <group attrs="{'invisible': [('lob', '!=', 4)]}">
+                        <group>
+                                <field name="travel_package" />
+                                <field name="geographical_coverage"/>
+                                <field name="dob" attrs="{'invisible': [('travel_package', '!=', 'individual')]}"/>
+                                <field name="age" readonly="1" force_save="1" attrs="{'invisible': [('travel_package', '!=', 'individual')]}"/>
+                        </group>
+                        <group>
+                                <field name="coverage_from"/>
+                                <field name="coverage_to"/>
+                                <field name="days"/>
+                        </group>
+
+                    </group>
+                    <field name="members" attrs="{'invisible': ['|',('travel_package', '=', 'individual'),('lob', '!=', 4)]}">
+                        <tree editable="bottom">
+                            <field name="type"/>
+                            <field name="dob"/>
+                            <field name="age" readonly="1" force_save="1"/>
+                        </tree>
+                    </field>
+
                     <div style="width: 235px; margin: 0 auto;"  class="card mb-4 mb-lg-0" >
                             <div class="card-body">
                                 <h4 class="card-title text-muted text-uppercase text-center">Your Total Quote</h4>
@@ -65,8 +85,6 @@
                             </div>
                     </div>
 
-<!--                        </div>-->
-<!--                    </div>-->
 
 
 
