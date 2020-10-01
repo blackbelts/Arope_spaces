@@ -21,8 +21,7 @@ access_setup12,setup.setup12,model_survey_line_setup,base.group_user,1,1,1,1
 access_setup13,setup.setup13,model_questionnaire_line_setup,base.group_user,1,1,1,1
 
 access_setup14,setup.setup14,model_insurance_quotation,base.group_user,1,1,1,1
-access_setup15,setup.setup15,model_medical_price,base.group_user,1,1,1,1
-access_setup16,setup.setup16,model_medical_price_line,base.group_user,1,1,1,1
+
 access_setup17,setup.setup17,model_survey_report,base.group_user,1,1,1,1
 access_setup18,setup.setup18,model_final_application,base.group_user,1,1,1,1
 access_setup19,setup.setup19,model_insurances_answers,base.group_user,1,1,1,1
@@ -33,7 +32,6 @@ access_setup23,setup.setup23,model_selection_options,base.group_user,1,1,1,1
 access_setup24,setup.setup24,model_offer_setup,base.group_user,1,1,1,1
 access_setup25,setup.setup25,model_final_offer,base.group_user,1,1,1,1
 access_setup26,setup.setup26,model_state_setup,base.group_user,1,1,1,1
-access_setup27,setup.setup27,model_medical_family,base.group_user,1,1,1,1
 access_setup28,setup.setup28,model_persons,base.group_user,1,1,1,1
 access_setup29,setup.setup29,model_sub_questionnaire,base.group_user,1,1,1,1
 access_setup30,setup.setup30,model_sub_questionnaire_answers,base.group_user,1,1,1,1

@@ -14,8 +14,7 @@ class QuotationService(models.Model):
     package = fields.Selection([('individual', 'Individual'),
                                 ('family', 'Family'),
                                 ('sme', 'SME'), ],
-                               'Package For',
-                               default='individual')
+                               'Package For')
     # motor_product = fields.Many2one('product.covers', 'Product')
     brand = fields.Selection([('all brands', 'All Brands (except Chinese & East Asia)'),
                               ('chinese cars & east asia', 'Chinese Cars & East Asia'), ('all models', 'All Models')],
@@ -23,12 +22,19 @@ class QuotationService(models.Model):
     deductible = fields.Selection([('250 EGP', '250 EGP'),
                                    ('4 Per Thousand', '4 Per Thousand')],
                                   'Deductible')
-    medical_product = fields.Many2one('medical.price', 'Product', domain="[('package', '=', package)]")
-    motor_product = fields.Many2one('')
+    medical_product = fields.Many2one('medical.price', 'Product')
+    motor_product = fields.Many2one('product.covers', 'Product')
     price = fields.Float('Premium')
     dob = fields.Date('Date OF Birth', default=datetime.today())
     sum_insured = fields.Float('Sum Insured')
 
+    @api.onchange('package')
+    def product_domain(self):
+        if self.package == 'family':
+            return {'domain': {'medical_product': [('package', '=', 'individual')]}}
+        else:
+            return {'domain': {'medical_product': [('package', '=', self.package)]}}
+        
     @api.onchange('brand', 'deductible', 'sum_insured')
     def calculate_motor_price(self):
 
