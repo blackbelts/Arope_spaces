@@ -27,7 +27,7 @@
                     <group attrs="{'invisible': [('lob', '!=', 1)]}">
                         <group>
                             <field name="medical_package" />
-                            <field name="dob"/>
+                            <field name="dob" attrs="{'invisible': [('medical_package', '!=', 'individual')]}"/>
                         </group>
                         <group>
                             <field name="medical_product" />
