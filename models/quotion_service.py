@@ -57,7 +57,7 @@ class QuotationService(models.Model):
         if self.dob:
             # date1 = datetime.strptime(str(self.issue_date), '%Y-%m-%d %H:%M:%S').date()
             # date2 = datetime.strptime(str(self.DOB), '%Y-%m-%d' ).date()
-            difference = relativedelta(self.issue_date, self.DOB)
+            difference = relativedelta(self.issue_date, self.dob)
             age = difference.years
             months = difference.months
             days = difference.days
