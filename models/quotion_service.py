@@ -208,7 +208,7 @@ class QuotationService(models.Model):
         self.write({"lob": 1})
 
     def travel(self):
-        self.write({"lob": 4})
+        self.write({"lob.line_of_business": "Travel"})
 
 class Members(models.Model):
     _name = 'members'
