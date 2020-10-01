@@ -191,7 +191,7 @@ class QuotationService(models.Model):
                 if self.days > 0:
                     for rec in self.members:
                         if rec.type == 'kid':
-                            kid_dob.append(rec.DOB)
+                            kid_dob.append(rec.dob)
                     if self.travel_package == 'individual':
                         result = self.env['policy.travel'].get_individual(
                             {'z': self.geographical_coverage, 'd': [self.dob], 'p_from': self.coverage_from,
