@@ -34,7 +34,7 @@ class QuotationService(models.Model):
             return {'domain': {'medical_product': [('package', '=', 'individual')]}}
         else:
             return {'domain': {'medical_product': [('package', '=', self.package)]}}
-        
+
     @api.onchange('brand', 'deductible', 'sum_insured')
     def calculate_motor_price(self):
 
@@ -80,11 +80,11 @@ class QuotationService(models.Model):
             DOB.append(rec.DOB)
         return DOB
 
-    @api.onchange('dob','family_age','product')
+    @api.onchange('dob','family_age','medical_product')
     def calculate_price(self):
         if self.lob.line_of_business == 'Medical':
             if self.package == 'individual':
-                if self.product:
+                if self.medical_product:
                     dprice = {}
                     price = 0
                     ages = []
@@ -92,14 +92,15 @@ class QuotationService(models.Model):
                     # if data.get('type') == 'individual':
                     age = self.calculate_age(ages)
                     for record in self.env['medical.price'].search([('package', '=', 'individual'),
-                                                                    ('product_name', '=', self.product.product_name)]):
+                                                                    ('product_name', '=', self.medical_product.product_name)]):
                         for rec in record.price_lines:
                             if rec.from_age <= age[0] and rec.to_age >= age[0]:
                                 price = rec.price
                     self.write({"price": price})
             elif self.package == 'family':
-                if self.product:
-                    for record in self.env['medical.price'].search([('package', '=', 'individual')]):
+                if self.medical_product:
+                    for record in self.env['medical.price'].search([('package', '=', 'individual'),
+                                                                    ('product_name', '=', self.medical_product.product_name)]):
                         price = 0.0
                         for age in self.calculate_age(self.get_family_ages()):
                             for rec in record.price_lines:
@@ -107,8 +108,9 @@ class QuotationService(models.Model):
                                     price += rec.price
                     self.write({"price": price})
             else:
-                if self.product:
-                    for record in self.env['medical.price'].search([('package', '=', 'sme')]):
+                if self.medical_product:
+                    for record in self.env['medical.price'].search([('package', '=', 'sme'),
+                                                                    ('product_name', '=', self.medical_product.product_name)]):
                         price = 0.0
                         for age in self.calculate_age(self.get_family_ages()):
                             for rec in record.price_lines:
@@ -122,6 +124,14 @@ class QuotationService(models.Model):
 
     def medical(self):
         self.write({"lob": 1})
+
+class Members(models.Model):
+    _name = 'members'
+
+    name = fields.Char('Name')
+    dob = fields.Date('Date OF Birth')
+    relationship = fields.Char('Relationship')
+    quotation_id = fields.Many2one('insurance.quotation')
 
 
 

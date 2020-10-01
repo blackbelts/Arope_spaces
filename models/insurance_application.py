@@ -486,13 +486,7 @@ class Quotation(models.Model):
 
 
 
-class Members(models.Model):
-    _name = 'members'
 
-    name = fields.Char('Name')
-    dob = fields.Date('Date OF Birth')
-    relationship = fields.Char('Relationship')
-    quotation_id = fields.Many2one('insurance.quotation')
 
 #
 # class MedicalPriceTable(models.Model):
