@@ -494,30 +494,30 @@ class Members(models.Model):
     relationship = fields.Char('Relationship')
     quotation_id = fields.Many2one('insurance.quotation')
 
+#
+# class MedicalPriceTable(models.Model):
+#     _name = 'medical.price'
+#     _description = 'Set up Price tables'
+#     _rec_name = 'product_name'
+#     package = fields.Selection([('individual', 'Individual'),
+#                                 ('family', 'Family'),
+#                                 ('sme', 'SME'), ],
+#                                'Package For',
+#                                default='individual')
+#
+#     product_name = fields.Char(string='Product Name')
+#
+#     price_lines = fields.One2many('medical.price.line', 'price_id', string='Prices')
 
-class MedicalPriceTable(models.Model):
-    _name = 'medical.price'
-    _description = 'Set up Price tables'
-    _rec_name = 'product_name'
-    package = fields.Selection([('individual', 'Individual'),
-                                ('family', 'Family'),
-                                ('sme', 'SME'), ],
-                               'Package For',
-                               default='individual')
-
-    product_name = fields.Char(string='Product Name')
-
-    price_lines = fields.One2many('medical.price.line', 'price_id', string='Prices')
-
-
-
-class MedicalPriceTableLines(models.Model):
-    _name = 'medical.price.line'
-
-    from_age = fields.Float('From Age')
-    to_age = fields.Float('To Age')
-    price = fields.Float('Price')
-    price_id = fields.Many2one('medical.price', ondelete='cascade')
+#
+#
+# class MedicalPriceTableLines(models.Model):
+#     _name = 'medical.price.line'
+#
+#     from_age = fields.Float('From Age')
+#     to_age = fields.Float('To Age')
+#     price = fields.Float('Price')
+#     price_id = fields.Many2one('medical.price', ondelete='cascade')
 
 class Answers(models.Model):
     _name = 'insurances.answers'

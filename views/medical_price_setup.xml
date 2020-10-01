@@ -1,79 +1,79 @@
 <odoo>
 
     <!-- Add a custom form view -->
-    <record id="medical_price_view_form" model="ir.ui.view">
-        <field name="name">Medical Price Form</field>
-        <field name="model">medical.price</field>
-        <field name="arch" type="xml">
-            <form>
-<!--                <button name="price" type="object" string="Price " class="oe_highlight"  />-->
-                <sheet>
-                    <group>
-                        <group>
-                            <field name="package"/>
-                            <field name="product_name"/>
-                        </group>
-                    </group>
-                    <notebook>
-                        <page string="Price" >
-                            <field name="price_lines">
-                                <tree editable="bottom">
-                                    <field name="from_age"/>
-                                    <field name="to_age"/>
-                                    <field name="price"/>
-                                </tree>
-                            </field>
-                        </page>
-<!--                        <page string="Covers" >-->
-<!--                            <field name="cover_lines">-->
+<!--    <record id="medical_price_view_form" model="ir.ui.view">-->
+<!--        <field name="name">Medical Price Form</field>-->
+<!--        <field name="model">medical.price</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--&lt;!&ndash;                <button name="price" type="object" string="Price " class="oe_highlight"  />&ndash;&gt;-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="package"/>-->
+<!--                            <field name="product_name"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <notebook>-->
+<!--                        <page string="Price" >-->
+<!--                            <field name="price_lines">-->
 <!--                                <tree editable="bottom">-->
-<!--                                    <field name="benefit"/>-->
-<!--                                    <field name="value"/>-->
-<!--                                    <field name="en_benefit"/>-->
-<!--                                    <field name="en_value"/>-->
-<!--                                    <field name="sort"/>-->
+<!--                                    <field name="from_age"/>-->
+<!--                                    <field name="to_age"/>-->
+<!--                                    <field name="price"/>-->
 <!--                                </tree>-->
 <!--                            </field>-->
 <!--                        </page>-->
-<!--                        <page string="Internal Hospital Treatment" >-->
-<!--                            <field name="internal_lines">-->
-<!--                                <tree editable="bottom">-->
-<!--                                    <field name="benefit"/>-->
-<!--                                    <field name="value"/>-->
-<!--                                    <field name="en_benefit"/>-->
-<!--                                    <field name="en_value"/>-->
-<!--                                    <field name="sort"/>-->
-<!--                                </tree>-->
-<!--                            </field>-->
-<!--                        </page>-->
-<!--                        <page string="Outpatient Services" >-->
-<!--                            <field name="outpatient_lines">-->
-<!--                                <tree editable="bottom">-->
-<!--                                    <field name="benefit"/>-->
-<!--                                    <field name="value"/>-->
-<!--                                    <field name="en_benefit"/>-->
-<!--                                    <field name="en_value"/>-->
-<!--                                    <field name="sort"/>-->
-<!--                                </tree>-->
-<!--                            </field>-->
-<!--                        </page>-->
+<!--&lt;!&ndash;                        <page string="Covers" >&ndash;&gt;-->
+<!--&lt;!&ndash;                            <field name="cover_lines">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <tree editable="bottom">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="benefit"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="value"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="en_benefit"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="en_value"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="sort"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </tree>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </field>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </page>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <page string="Internal Hospital Treatment" >&ndash;&gt;-->
+<!--&lt;!&ndash;                            <field name="internal_lines">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <tree editable="bottom">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="benefit"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="value"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="en_benefit"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="en_value"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="sort"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </tree>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </field>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </page>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <page string="Outpatient Services" >&ndash;&gt;-->
+<!--&lt;!&ndash;                            <field name="outpatient_lines">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <tree editable="bottom">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="benefit"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="value"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="en_benefit"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="en_value"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="sort"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </tree>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </field>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </page>&ndash;&gt;-->
 
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
-    <!-- Add a custom Tree (List) view -->
-    <record id="medical_price_view_tree" model="ir.ui.view">
-        <field name="name">Medical Price List</field>
-        <field name="model">medical.price</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="package"/>
-                <field name="product_name"/>
-            </tree>
-        </field>
-    </record>
+<!--                    </notebook>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--    &lt;!&ndash; Add a custom Tree (List) view &ndash;&gt;-->
+<!--    <record id="medical_price_view_tree" model="ir.ui.view">-->
+<!--        <field name="name">Medical Price List</field>-->
+<!--        <field name="model">medical.price</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree>-->
+<!--                <field name="package"/>-->
+<!--                <field name="product_name"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <record model="ir.actions.act_window" id="medical_price_action">
         <field name="name">Medical Price Table</field>
