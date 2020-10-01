@@ -23,29 +23,31 @@
 <!--                    <h3>Quick Quote</h3>-->
 
 
-                        <field name="lob"  invisible="1"/>
-
-
-                        <group attrs="{'invisible': [('lob', '!=', 1)]}">
-                                <field name="package" />
-                                <field name="dob"/>
-                                <field name="product" />
-                        </group >
-                        <group attrs="{'invisible': [('lob', '!=', 3)]}">
-                            <group>
-                                    <field name="brand" />
-                                    <field name="deductible"/>
-                            </group>
-                            <group>
-                                    <field name="sum_insured"/>
-                            </group>
-
+                    <field name="lob"  invisible="1"/>
+                    <group attrs="{'invisible': [('lob', '!=', 1)]}">
+                        <group>
+                            <field name="package" />
+                            <field name="dob"/>
                         </group>
+                        <group>
+                            <field name="medical_product" />
+                        </group>
+                    </group >
+                    <group attrs="{'invisible': [('lob', '!=', 3)]}">
+                        <group>
+                                <field name="brand" />
+                                <field name="deductible" attrs="{'invisible': [('brand', '!=', 'all brands')]}"/>
+                        </group>
+                        <group>
+                                <field name="sum_insured"/>
+                        </group>
+
+                    </group>
                     <div class="container">
                         <div class="row">
                             <div  class="card mb-4 mb-lg-0 col" >
                                     <div class="card-body">
-                                        <h4 class="card-title text-muted text-uppercase text-center">الماسة</h4>
+                                        <h4 class="card-title text-muted text-uppercase text-center">Your Total Quote</h4>
                                         <h2 class="card-price text-center">$ <field readonly="1" force_save="1" name="price"/></h2>
                                         <hr/>
                                         <div class="text-center">
@@ -53,26 +55,7 @@
                                         </div>
                                     </div>
                             </div>
-                            <div class="card mb-4 mb-lg-0 col" >
-                                    <div class="card-body">
-                                        <h4 class="card-title text-muted text-uppercase text-center">أمان</h4>
-                                        <h2 class="card-price text-center">$ <field readonly="1" force_save="1" name="price"/></h2>
-                                        <hr/>
-                                        <div class="text-center">
-                                            <button type="object" string="Create Application" class="oe_highlight"/>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="card mb-4 mb-lg-0 col" >
-                                    <div class="card-body">
-                                        <h4 class="card-title text-muted text-uppercase text-center">الذهبية</h4>
-                                        <h2 class="card-price text-center">$ <field readonly="1" force_save="1" name="price"/></h2>
-                                        <hr/>
-                                        <div class="text-center">
-                                            <button type="object" string="Create Application" class="oe_highlight"/>
-                                        </div>
-                                    </div>
-                            </div>
+
                         </div>
                     </div>
 

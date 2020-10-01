@@ -23,8 +23,8 @@ class QuotationService(models.Model):
     deductible = fields.Selection([('250 EGP', '250 EGP'),
                                    ('4 Per Thousand', '4 Per Thousand')],
                                   'Deductible')
-    product = fields.Many2one('medical.price', 'Product', domain="[('package', '=', package)]"
-                              )
+    medical_product = fields.Many2one('medical.price', 'Product', domain="[('package', '=', package)]")
+    motor_product = fields.Many2one('')
     price = fields.Float('Premium')
     dob = fields.Date('Date OF Birth', default=datetime.today())
     sum_insured = fields.Float('Sum Insured')
@@ -117,7 +117,6 @@ class QuotationService(models.Model):
     def medical(self):
         self.write({"lob": 1})
 
-    # def travel(self):
-    #     self.write({"lob": 3})
+
 
 

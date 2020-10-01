@@ -70,7 +70,7 @@
                             <field name="application_number" readonly="1" force_save="1"/>
                             <field name="policy_number" readonly="1" force_save="1" attrs="{'invisible': [('policy_number', '=', False)]}"/>
                             <field name="application_date" />
-                            <field name="final_application_to_download" readonly="1" force_save="1"/>
+<!--                            <field name="final_application_to_download" readonly="1" force_save="1"/>-->
                         </group>
                     </group>
                     <br/>
