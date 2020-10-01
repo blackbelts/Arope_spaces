@@ -8,7 +8,9 @@ import  math
 
 class QuotationService(models.Model):
     _name = 'quotation.service'
+    _rec_name = 'lob'
 
+    # lob_id = fields.Char('id')
     lob = fields.Many2one('insurance.line.business', 'LOB', required=True, default=3)
     travel_package = fields.Selection([('individual', 'Individual'), ('family', 'Family')], 'Package For', default='individual')
     medical_package = fields.Selection([('individual', 'Individual'),
@@ -41,6 +43,10 @@ class QuotationService(models.Model):
     dob = fields.Date('Date OF Birth', default=datetime.today())
     sum_insured = fields.Float('Sum Insured')
     members = fields.One2many('members', 'quotation_id', string="Members")
+
+        # @api.onchange('lob')
+        # def get_lob_id(self):
+        #    self.write({"lob_id":str(self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id)})
 
     @api.depends('coverage_from', 'coverage_to')
     def compute_days(self):

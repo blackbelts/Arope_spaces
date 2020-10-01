@@ -6,7 +6,7 @@ from datetime import timedelta, datetime
 
 class Aropelinebusiness(models.Model):
     _name = "insurance.line.business"
-    _rec_name = 'line_of_business'
+    # _rec_name = 'line_of_business'
     line_of_business = fields.Char(string='Line of Business', required=True)
     object = fields.Selection([('person', 'Person'),
                                ('vehicle', 'Vehicle'),
