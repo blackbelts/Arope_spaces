@@ -214,8 +214,8 @@ class QuotationService(models.Model):
         self.write({"lob": 1})
 
     def travel(self):
-        id = self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id
-        self.write({"lob": id})
+        # id = self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id
+        self.write({"lob": 6})
 
 class Members(models.Model):
     _name = 'members'
