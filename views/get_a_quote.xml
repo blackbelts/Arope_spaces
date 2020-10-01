@@ -26,13 +26,20 @@
                     <field name="lob"  invisible="1"/>
                     <group attrs="{'invisible': [('lob', '!=', 1)]}">
                         <group>
-                            <field name="package" />
+                            <field name="medical_package" />
                             <field name="dob"/>
                         </group>
                         <group>
                             <field name="medical_product" />
                         </group>
                     </group >
+                    <field name="members" attrs="{'invisible': ['|',('medical_package', '=', 'individual'),('lob', '!=', 1)]}">
+                        <tree editable="bottom">-->
+                            <field name="type"/>
+                            <field name="dob"/>
+                            <field name="age"/>
+                        </tree>
+                    </field>
                     <group attrs="{'invisible': [('lob', '!=', 3)]}">
                         <group>
                                 <field name="brand" />
