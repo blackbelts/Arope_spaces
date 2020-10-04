@@ -1,19 +1,12 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
-access_setup,setup.setup,model_policy_arope,base.group_user,1,1,1,1
-access_setup1,setup.setup1,model_insurance_line_business,base.group_user,1,1,1,1
-access_setup2,setup.setup2,model_insurance_product,base.group_user,1,1,1,1
-access_setup3,setup.setup3,model_collection_arope,base.group_user,1,1,1,1
-access_setup4,setup.setup4,model_claim_arope,base.group_user,1,1,1,1
+
 
 access_setup5,setup.setup5,model_quotation_service,base.group_user,1,1,1,1
-access_setup6,setup.setup6,model_quotation_price_setup,base.group_user,1,1,1,1
-access_setup7,setup.setup7,model_quotation_price_line,base.group_user,1,1,1,1
 access_setup8,setup.setup8,model_team_target,base.group_user,1,1,1,1
 
 access_setup9,setup.setup9,model_target_policy,base.group_user,1,1,1,1
 access_setup10,setup.setup10,model_target_rules,base.group_user,1,1,1,1
-access_setup11,setup.setup11,model_system_notify,base.group_user,1,1,1,1
 
 
 
@@ -32,10 +25,8 @@ access_setup23,setup.setup23,model_selection_options,base.group_user,1,1,1,1
 access_setup24,setup.setup24,model_offer_setup,base.group_user,1,1,1,1
 access_setup25,setup.setup25,model_final_offer,base.group_user,1,1,1,1
 access_setup26,setup.setup26,model_state_setup,base.group_user,1,1,1,1
-access_setup28,setup.setup28,model_persons,base.group_user,1,1,1,1
 access_setup29,setup.setup29,model_sub_questionnaire,base.group_user,1,1,1,1
 access_setup30,setup.setup30,model_sub_questionnaire_answers,base.group_user,1,1,1,1
-access_setup31,setup.setup31,model_broker_user_wizard,base.group_user,1,1,1,1
 
 
 access_setup31,setup.setup31,model_claim_app,base.group_user,1,1,1,1

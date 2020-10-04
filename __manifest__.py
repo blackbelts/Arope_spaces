@@ -12,25 +12,21 @@
 
     'depends': ['base','sales_team','helpdesk_inherit',
                 'smart_travel_agency','personal_acciedent',
-               'motor','medical' , 'mail'],
+               'motor','medical' , 'mail','arope-conf'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',
         'views/setup.xml',
-        'views/policy_view.xml',
-        'views/collection.xml',
-        'views/partner.xml',
         'views/get_a_quote.xml',
-        'views/price_setup.xml',
+        # 'views/price_setup.xml',
         'views/targets.xml',
 	    'views/dashboard_views.xml',
         'views/sub_questionnaire.xml',
         # 'views/medical_price_setup.xml',
         'views/insurance_application.xml',
         'views/actions.xml',
-        'views/claim.xml',
         'views/policy_num_wizard.xml',
         'views/state.xml',
         'views/answer.xml',
@@ -39,7 +35,6 @@
         #'reports/offer.xml',
         #'reports/questionnaire.xml',
         'views/menu_item.xml',
-        'wizard/users.xml',
 
     ],
     'qweb': ["static/src/xml/hrms_dashboard.xml"],
