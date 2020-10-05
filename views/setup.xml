@@ -1,0 +1,146 @@
+<odoo>
+
+    <!-- Add a custom form view -->
+    <record model="ir.ui.view" id="tree_line_business">
+        <field name="name">tree.line.business</field>
+        <field name="model">insurance.line.business</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <tree string="Line Business" editable="bottom">
+                <field name="line_of_business"/>
+                <field name="object"/>
+                <field name="desc"/>
+<!--                <field name="product_ids"  widget="many2many_tags" />-->
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="form_line_business">
+        <field name="name">form.line.business</field>
+        <field name="model">insurance.line.business</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <form string="Idea form">
+                <sheet>
+                    <group>
+                        <field name="line_of_business" placeholder="Line of Business" string="Name"/>
+                        <field name="object"/>
+                        <field name="desc"/>
+                        <field name="product_ids"  widget="many2many_tags" />
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="insurance_line_business_action">
+        <field name="name">Line of Business</field>
+        <field name="res_model">insurance.line.business</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Line of Business
+            </p>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="tree_product">
+        <field name="name">tree.product</field>
+        <field name="model">insurance.product</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <tree string="list">
+                <field name="product_name"/>
+                <field name="line_of_bus"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="form_product">
+        <field name="name">form.product</field>
+        <field name="model">insurance.product</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <form string="Idea form">
+                <sheet>
+
+                    <group>
+
+                        <field name="line_of_bus"/>
+                        <field name="product_name"/>
+                        <field name="questionnaire_file"  widget="many2many_binary"/>
+
+                    </group>
+                    <notebook>
+                        <page string="Questionnaire Setup" >
+                            <field name="questionnaire_ids">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="question_type"/>
+                                    <field name="options" widget="many2many_tags"/>
+                                    <field name="sub_questionnaire_id"/>
+
+<!--                                    <field name="questionnaire"/>-->
+<!--                                    <field name="desc"/>-->
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Survey Setup" >
+                            <field name="survey_ids">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="options" widget="many2many_tags"/>
+<!--                                    <field name="desc"/>-->
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Document Required" >
+                            <field name="final_application_ids">
+                                <tree editable="bottom">
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Offer Setup" >
+                            <field name="offer_setup_ids">
+                                <tree editable="bottom">
+                                    <field name="offer"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                    </notebook>
+
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="insurance_Products_action">
+        <field name="name">Product</field>
+        <field name="res_model">insurance.product</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Notifications
+            </p>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="tree_notify">
+        <field name="name">tree.notify</field>
+        <field name="model">system.notify</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <tree string="list" editable="bottom">
+                <field name="type"/>
+                <field name="color"/>
+                <field name="no_days"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="insurance_notify_action">
+        <field name="name">Notifications</field>
+        <field name="res_model">system.notify</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Products
+            </p>
+        </field>
+    </record>
+
+</odoo>

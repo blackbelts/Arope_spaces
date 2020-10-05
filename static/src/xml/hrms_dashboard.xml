@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="HrDashboardMain">
+
+        <div class="oh_dashboards">
+            <div class="container-fluid o_hr_dashboard">
+            </div>
+        </div>
+    </t>
+    <t t-name="HrDashboardMain2">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/Arope-spaces/static/src/css/themify-icons.css" />
+            <link rel="stylesheet" href="/Arope-spaces/static/src/css/metisMenu.css" />
+            <link rel="stylesheet" href="/Arope-spaces/static/src/css/owl.carousel.min.css" />
+            <link rel="stylesheet" href="/Arope-spaces/static/src/css/slicknav.min.css" />
+            <!-- amchart css -->
+            <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css"
+                media="all" />
+            <!-- others css -->
+                        <link rel="stylesheet" href="/Arope-spaces/static/src/css/all.min.css" />
+
+            <link rel="stylesheet" href="/Arope-spaces/static/src/css/typography.css" />
+            <link rel="stylesheet" href="/Arope-spaces/static/src/css/default-css.css" />
+            <link rel="stylesheet" href="/Arope-spaces/static/src/css/styles.css" />
+            <link rel="stylesheet" href="/Arope-spaces/static/src/css/responsive.css" />
+            <script src="/Arope-spaces/static/src/js/modernizr-2.8.3.min.js"></script>
+        </xpath>
+        <!--[if lt IE 8]>
+                    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+                 <![endif]-->
+        <!-- preloader area start -->
+        <!--                <div id="preloader">-->
+        <!--                    <div class="loader"></div>-->
+        <!--                </div>-->
+        <!-- preloader area end -->
+        <!-- page container area start -->
+        <div class="page-container">
+
+            <!-- main content area start -->
+            <div class="main-content">
+
+                <!-- page title area start -->
+                <div class="page-title-area">
+                </div>
+                <!-- page title area end -->
+                <div class="main-content-inner">
+                    <div class="sales-report-area top-sales-report mt-3 mb-1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="single-report mb-xs-30" id="rank">
+                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                        <div class="icon"><i class='fas fa-medal'/></div>
+                                        <div class="s-report-title d-flex justify-content-between">
+                                            <h4 class="header-title mb-0 new-header">Your Rank</h4>
+                                            <!--<p>24 H</p>-->
+                                        </div>
+                                        <div class="d-flex justify-content-between pb-2">
+                                            <h2 class="larage">
+                                                <t t-esc="widget.brokerRank" />
+                                            </h2>
+                                            <!--<span>- 45.87</span>-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="single-report mb-xs-30 cursor" id="production">
+                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                        <div class="icon"><i class="fas fa-money"></i></div>
+                                        <div class="s-report-title d-flex justify-content-between">
+                                            <h4 class="header-title new-header mb-0">Total Production</h4>
+                                            <!--<p>24 H</p>-->
+                                        </div>
+                                        <div class="d-flex justify-content-between pb-2">
+                                            <h2 class="larage">
+                                                <t t-esc="widget.makeNumber(widget.brokerProduction.total)" /> $</h2>
+                                            <!--<span>- 45.87</span>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 mt-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-sm-flex justify-content-between align-items-center">
+                                            <h2 class="header-title mb-0">Target Vs Production</h2>
+                                        </div>
+                                    <div id="ambarchart2"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mt-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-sm-flex justify-content-between align-items-center">
+                                            <h2 class="header-title mb-0">Current Year Vs Last Year</h2>
+                                        </div>
+                                    <div id="ambarchart1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sales-report-area mt-5 mb-1">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div class="d-sm-flex justify-content-between align-items-center">
+                                            <h2 class="header-title mb-0">Permium under collection</h2>
+                                        </div>
+                                        <div class="row">
+                                             <di class="col-md-4">
+                                                <div class="single-report cursor" id="red_collection">
+                                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                                        <div class="icon red"></div>
+                                                        <div class="s-report-title d-flex justify-content-between">
+                                                           <h4 class="header-title permium mb-0">
+                                                               <span class="redspan">Count : <t t-esc="widget.collections_statistics.Red.count" /></span>
+                                                                <br/><br/>
+                                                                Total : <t t-esc="widget.makeNumber(widget.collections_statistics.Red.total)" /> $
+                                                            </h4>
+                                                        </div>
+<!--                                                        <div class="d-flex justify-content-between pb-2">-->
+<!--                                                            <h2>$ 4567809,987</h2>-->
+<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </di>
+
+                                            <div class="col-md-4">
+                                                <div class="single-report mb-xs-30 cursor" id="orange_collection">
+                                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                                        <div class="icon orange"></div>
+                                                        <div class="s-report-title d-flex justify-content-between">
+                                                            <h4 class="header-title permium mb-0">
+                                                                <span class="orangespan">Count : <t t-esc="widget.collections_statistics.Orange.count" /></span>
+                                                                <br/><br/>
+                                                                Total : <t t-esc="widget.makeNumber(widget.collections_statistics.Orange.total)" /> $
+                                                            </h4>
+                                                            <!--<p>24 H</p>-->
+                                                        </div>
+<!--                                                        <div class="d-flex justify-content-between pb-2">-->
+<!--                                                            <h2>-->
+<!--                                                                <t t-esc="widget.makeNumber(widget.brokerProduction)" />-->
+<!--                                                                $</h2>-->
+<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="single-report mb-xs-30 cursor" id="green_collection">
+                                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                                        <div class="icon green"></div>
+                                                        <div class="s-report-title d-flex justify-content-between">
+                                                            <h4 class="header-title permium mb-0">
+                                                               <span class="greenspan"> Count : <t t-esc="widget.collections_statistics.Green.count" /></span>
+                                                                <br/><br/>
+                                                                Total : <t t-esc="widget.makeNumber(widget.collections_statistics.Green.total)" /> $
+                                                            </h4>
+                                                            <!--<p>24 H</p>-->
+                                                        </div>
+<!--                                                        <div class="d-flex justify-content-between pb-2">-->
+<!--                                                            <h2>-->
+<!--                                                                <t t-esc="widget.brokerRank" />-->
+<!--                                                            </h2>-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="sales-report-area mt-3 mb-1">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div class="d-sm-flex justify-content-between align-items-center">
+                                            <h2 class="header-title mb-0">Complaints</h2>
+                                        </div>
+                                        <div class="row">
+                                            <di class="col-md-4">
+                                                <div class="single-report cursor" id="red_renew">
+                                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                                        <div class="icon red"></div>
+                                                        <div class="s-report-title d-flex justify-content-between">
+                                                            <h4 class="header-title permium mb-0">
+                                                                <span class="redspan">Count : <t t-esc="widget.renew_statistics.Red.count" /></span>
+                                                                <br/><br/>
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Red.total)" /> $
+                                                            </h4>
+                                                        </div>
+<!--                                                        <div class="d-flex justify-content-between pb-2">-->
+<!--                                                            <h2>$ 4567809,987</h2>-->
+<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </di>
+                                            <div class="col-md-4">
+                                                <div class="single-report mb-xs-30 cursor" id="orange_renew">
+                                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                                        <div class="icon orange"></div>
+                                                        <div class="s-report-title d-flex justify-content-between">
+                                                           <h4 class="header-title permium mb-0">
+                                                               <span class="orangespan">Count : <t t-esc="widget.renew_statistics.Orange.count" /></span>
+                                                                <br/><br/>
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Orange.total)" /> $
+                                                            </h4>
+                                                        </div>
+<!--                                                        <div class="d-flex justify-content-between pb-2">-->
+<!--                                                            <h2>-->
+<!--                                                                <t t-esc="widget.makeNumber(widget.brokerProduction)" />-->
+<!--                                                                $</h2>-->
+<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                             <div class="col-md-4">
+                                                <div class="single-report mb-xs-30 cursor" id="green_renew">
+                                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                                        <div class="icon green"></div>
+                                                        <div class="s-report-title d-flex justify-content-between">
+                                                           <h4 class="header-title permium mb-0">
+                                                               <span class="greenspan">Count : <t t-esc="widget.renew_statistics.Green.count" /></span>
+                                                                <br/><br/>
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" /> $
+                                                            </h4>
+                                                        </div>
+<!--                                                        <div class="d-flex justify-content-between pb-2">-->
+<!--                                                            <h2>-->
+<!--                                                                <t t-esc="widget.brokerRank" />-->
+<!--                                                            </h2>-->
+<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="sales-report-area mt-3 mb-1">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div class="d-sm-flex justify-content-between align-items-center">
+                                            <h2 class="header-title mb-0">Renewals</h2>
+                                        </div>
+                                        <div class="row">
+                                            <di class="col-md-4">
+                                                <div class="single-report cursor" id="red_renew">
+                                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                                        <div class="icon red"></div>
+                                                        <div class="s-report-title d-flex justify-content-between">
+                                                            <h4 class="header-title permium mb-0">
+                                                                <span class="redspan">Count : <t t-esc="widget.renew_statistics.Red.count" /></span>
+                                                                <br/><br/>
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Red.total)" /> $
+                                                            </h4>
+                                                        </div>
+<!--                                                        <div class="d-flex justify-content-between pb-2">-->
+<!--                                                            <h2>$ 4567809,987</h2>-->
+<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </di>
+                                            <div class="col-md-4">
+                                                <div class="single-report mb-xs-30 cursor" id="orange_renew">
+                                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                                        <div class="icon orange"></div>
+                                                        <div class="s-report-title d-flex justify-content-between">
+                                                           <h4 class="header-title permium mb-0">
+                                                               <span class="orangespan">Count : <t t-esc="widget.renew_statistics.Orange.count" /></span>
+                                                                <br/><br/>
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Orange.total)" /> $
+                                                            </h4>
+                                                        </div>
+<!--                                                        <div class="d-flex justify-content-between pb-2">-->
+<!--                                                            <h2>-->
+<!--                                                                <t t-esc="widget.makeNumber(widget.brokerProduction)" />-->
+<!--                                                                $</h2>-->
+<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                             <div class="col-md-4">
+                                                <div class="single-report mb-xs-30 cursor" id="green_renew">
+                                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                                        <div class="icon green"></div>
+                                                        <div class="s-report-title d-flex justify-content-between">
+                                                           <h4 class="header-title permium mb-0">
+                                                               <span class="greenspan">Count : <t t-esc="widget.renew_statistics.Green.count" /></span>
+                                                                <br/><br/>
+                                                                Total : <t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" /> $
+                                                            </h4>
+                                                        </div>
+<!--                                                        <div class="d-flex justify-content-between pb-2">-->
+<!--                                                            <h2>-->
+<!--                                                                <t t-esc="widget.brokerRank" />-->
+<!--                                                            </h2>-->
+<!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- main content area end -->
+            <!-- footer area start-->
+            <footer>
+                <div class="footer-area">
+                    <p>© Copyright 2020. All right reserved. Template by
+                        <a href="https://colorlib.com/wp/">BlackBelts</a>.
+                    </p>
+                </div>
+            </footer>
+            <!-- footer area end-->
+        </div>
+        <!-- page container area end -->
+        <xpath expr="." position="inside">
+            <script src="/Arope-spaces/static/src/js/popper.min.js"></script>
+            <script src="/Arope-spaces/static/src/js/owl.carousel.min.js"></script>
+            <script src="/Arope-spaces/static/src/js/metisMenu.min.js"></script>
+            <script src="/Arope-spaces/static/src/js/jquery.slimscroll.min.js"></script>
+            <script src="/Arope-spaces/static/src/js/jquery.slicknav.min.js"></script>
+            <script src="/Arope-spaces/static/src/js/amcharts.js"></script>
+            <script src="/Arope-spaces/static/src/js/serial.js"></script>
+            <script src="/Arope-spaces/static/src/js/export.min.js"></script>
+            <script src="/Arope-spaces/static/src/js/light.js"></script>
+            <script src="/Arope-spaces/static/src/js/plugins.js"></script>
+            <script src="/Arope-spaces/static/src/js/scripts.js"></script>
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,150 @@
+<odoo>
+
+    <!-- Add a custom form view -->
+    <record id="get_a_quote_view_form" model="ir.ui.view">
+		<field name="name">Get A Quote</field>
+		<field name="model">quotation.service</field>
+		<field name="arch" type="xml">
+
+			<form>
+
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button class="oe_stat_button" string="Motor" type="object" name="motor"
+                            icon="fa-car">
+                        </button>
+                        <button class="oe_stat_button" string="Medical" type="object" name="medical"
+                            icon="fa-stethoscope">
+                        </button>
+                        <button class="oe_stat_button" string="Travel" type="object" name="travel"
+                            icon="fa-plane">
+                        </button>
+                    </div>
+<!--                    <h3>Quick Quote</h3>-->
+
+
+                    <field name="lob"  invisible="1"/>
+                    <group attrs="{'invisible': [('lob', '!=', 1)]}">
+                        <group>
+                            <field name="medical_package" />
+                            <field name="dob" attrs="{'invisible': [('medical_package', '!=', 'individual')]}"/>
+                        </group>
+                        <group>
+                            <field name="medical_product" />
+                        </group>
+                    </group >
+                    <field name="members" attrs="{'invisible': ['|',('medical_package', '=', 'individual'),('lob', '!=', 1)]}">
+                        <tree editable="bottom">
+                            <field name="type"/>
+                            <field name="dob"/>
+                            <field name="age" readonly="1" force_save="1"/>
+                        </tree>
+                    </field>
+                    <group attrs="{'invisible': [('lob', '!=', 3)]}">
+                        <group>
+                                <field name="brand" />
+                                <field name="deductible" attrs="{'invisible': [('brand', '!=', 'all brands')]}"/>
+                                <field name="motor_product"/>
+                        </group>
+                        <group>
+
+                                <field name="sum_insured"/>
+                        </group>
+
+                    </group>
+                    <group attrs="{'invisible': [('lob', '!=', 6)]}">
+                        <group>
+                                <field name="travel_package" />
+                                <field name="geographical_coverage"/>
+                                <field name="dob" attrs="{'invisible': [('travel_package', '!=', 'individual')]}"/>
+                                <field name="age" readonly="1" force_save="1" attrs="{'invisible': [('travel_package', '!=', 'individual')]}"/>
+                        </group>
+                        <group>
+                                <field name="coverage_from"/>
+                                <field name="coverage_to"/>
+                                <field name="days"/>
+                        </group>
+
+                    </group>
+                    <field name="members" attrs="{'invisible': ['|',('travel_package', '=', 'individual'),('lob', '!=', 6)]}">
+                        <tree editable="bottom">
+                            <field name="type"/>
+                            <field name="dob"/>
+                            <field name="age" readonly="1" force_save="1"/>
+                        </tree>
+                    </field>
+
+                    <div style="width: 235px; margin: 0 auto;"  class="card mb-4 mb-lg-0" >
+                            <div class="card-body">
+                                <h4 class="card-title text-muted text-uppercase text-center">Your Total Quote</h4>
+                                <h2 class="card-price text-center">$ <field readonly="1" force_save="1" name="price"/></h2>
+                                <hr/>
+                                <div class="text-center">
+                                    <button type="object" name="create_app" string="Create Application" class="oe_highlight"/>
+                                </div>
+                            </div>
+                    </div>
+
+
+
+
+
+
+                </sheet>
+
+
+                <!-- <xpath expr="." position="inside">
+                    <link rel="stylesheet" href="/Arope-spaces/static/src/css/main.css"/>
+                </xpath> -->
+
+			</form>
+		</field>
+	</record>
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/Arope-spaces/static/src/css/main.css"/>
+        </xpath>
+    </template>
+    <!-- Add a custom Tree (List) view -->
+    <record id="get_quote_view_tree" model="ir.ui.view">
+		<field name="name">Get A Quote</field>
+		<field name="model">quotation.service</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="lob"/>
+<!--                <field name="package"/>-->
+                <field name="dob"/>
+<!--                <field name="product"/>-->
+
+			</tree>
+		</field>
+	</record>
+    <record model="ir.actions.act_window" id="quickQuoteAction">
+            <field name="name">Quick Quote</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">quotation.service</field>
+            <field name="view_id" ref="get_quote_view_tree"/>
+            <field name="view_mode">form,tree</field>
+    </record>
+
+
+
+    <template id="assets_login" inherit_id="web.login">
+
+        <xpath expr="//form/input" position="before">
+            <img src="/Arope-spaces/static/src/img/logo.png"/>
+            <h1>Arope partners Portal </h1>
+        <link rel="stylesheet" href="/Arope-spaces/static/src/css/main.css"/>
+        </xpath>
+    </template>
+    <template id="assets_reset_password" inherit_id="auth_signup.reset_password">
+
+        <xpath expr="//form/input" position="before">
+            <img src="/Arope-spaces/static/src/img/logo.png"/>
+            <h1>Arope partners Portal </h1>
+        <link rel="stylesheet" href="/Arope-spaces/static/src/css/main.css"/>
+        </xpath>
+    </template>
+  
+
+</odoo>

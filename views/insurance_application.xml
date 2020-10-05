@@ -1,0 +1,398 @@
+<odoo>
+    <template id="assets_frontend" inherit_id="web.assets_frontend">
+      <xpath expr="." position="inside">
+          <link rel="stylesheet" href="/Arope-space/static/src/css/main.css"/>
+      </xpath>
+    </template>
+    <!-- Add a custom form view -->
+    <record id="insurance_view_form" model="ir.ui.view">
+		<field name="name">Insurance Application</field>
+		<field name="model">insurance.quotation</field>
+		<field name="arch" type="xml">
+			<form>
+                <header>
+
+                    <field name="test_state" widget="statusbar"/>
+                    <button  name="approve_price" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'quick_quote')]}" groups="Arope-spaces.broker_space_group"/>
+<!--                        <button style="margin-left: 3px;" type="object" string="Submit" name="submit_questionnaire" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}" groups="Arope-spaces.broker_space_group"/>-->
+<!--                    <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state', '!=', 'survey_required'),('sub_state', '!=', 'complete')]}" groups="Arope-spaces.managers_group"/>-->
+<!--                    <button  name="reinsurance_confirm" string="Reinsurance" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state', '!=', 'survey'),('sub_state', '!=', 'complete')]}" groups="Arope-spaces.managers_group"/>-->
+                    <button  name="survey_confirm" string="Offering" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['reinsurance','survey'])]}" groups="Arope-spaces.managers_group"/>
+                    <button  name="survey" string="Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=',  'offer')]}" groups="Arope-spaces.managers_group"/>
+                    <button  name="survey" string="Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=',  'proposal')]}" groups="Arope-spaces.managers_group"/>
+
+                    <!--                    <button  name="submit_survey_required" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state', '!=', 'surveyor'),('sub_state', '!=', 'complete')]}" groups="Arope-spaces.broker_space_group"/>-->
+                    <button  name="survey_confirm" string="Offering" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}" groups="Arope-spaces.managers_group"/>
+<!--                        <button style="margin-left: 3px;" name="final_confirm" string="Confirm Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer')]}" groups="Arope-spaces.managers_group"/>-->
+                    <button  name="accept_offer" string="Upload Document" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer')]}" groups="Arope-spaces.broker_space_group"/>
+<!--                    <button name="offer_accept" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer')]}" groups="Arope-spaces.broker_space_group"/>-->
+
+                    <button  name="issued" attrs="{'invisible': [('state', '!=', 'application')]}" string="Issued"  type="object" class="oe_highlight" groups="Arope-spaces.managers_group"/>
+<!--                        <button style="margin-left: 3px;" name="submit_survey" string="Submit Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'survey')]}" groups="Arope-spaces.surveyor_group"/>-->
+                    <button  name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'reinsurance')]}"  groups="Arope-spaces.managers_group"/>
+
+                    <button  name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['proposal', 'policy'])]}" groups="Arope-spaces.managers_group,Arope-spaces.broker_space_group"/>
+
+
+                </header>
+
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-dollar" string="Quick Quote" name="motor">
+                        </button>
+                        <button class="oe_stat_button" string="Survey" icon="fa-file" type="object" name="medical"
+                            >
+                        </button>
+                        <button class="oe_stat_button" icon="fa-history" string="State History" type="object" name="test"
+                            >
+                        </button>
+                    </div>
+
+
+<!--                    <h2 style="color:red;" attrs="{'invisible': [('state', '!=', 'quick_quote')]}">Enter quick quote required info and get instant result</h2>-->
+<!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'proposal'),('sub_state', '!=', 'pending')]}">Kindly answer application form questions</h2>-->
+<!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'offer_ready'),('sub_state', '!=', 'pending')]}">Offer is ready. You can print</h2>-->
+<!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'application'),('sub_state', '!=', 'pending')]}">Kindly upload documents as per below list</h2>-->
+<!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'policy'),('sub_state', '!=', 'pending')]}">Policy issue is in progress</h2>-->
+<!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'issued'),('sub_state', '!=', 'pending')]}">Policy is issued</h2>-->
+<!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'survey_required'),('sub_state', '!=', 'pending')]}">Fill in survey required information</h2>-->
+<!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'quick_quote'),('sub_state', '!=', 'pending')]}">Pending on reinsurance agreement</h2>-->
+                    <h3 style="color: #073e89 !important">Application Info</h3>
+                    <group>
+                        <group>
+                            <field name="state" invisible="1"/>
+<!--                            <field name="sub_state" invisible="1"/>-->
+                            <field name="lob"/>
+                            <field  name="product_id"/>
+                        </group>
+                        <group>
+
+                            <field name="application_number" readonly="1" force_save="1"/>
+                            <field name="policy_number" readonly="1" force_save="1" attrs="{'invisible': [('policy_number', '=', False)]}"/>
+                            <field name="application_date" />
+<!--                            <field name="final_application_to_download" readonly="1" force_save="1"/>-->
+                        </group>
+                    </group>
+                    <br/>
+                    <h3 style="color: #073e89 !important">Customer Info</h3>
+                    <group>
+                        <group>
+
+                            <field name="name" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+                            <field name="phone" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+
+                        </group>
+                        <group>
+                            <field name="email" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+                            <field name="target_price" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+
+                        </group>
+
+                    </group>
+                    <br/>
+<!--                    <h3 style="color: #073e89 !important">Required Information</h3>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="request_for_ofer_state"/>-->
+<!--                            <field name="name_of_contact_person"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="main_phone"/>-->
+<!--                            <field name="spare_phone"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <br/>-->
+
+
+<!--                    <group>-->
+<!--                        <field name="final_application_ids">-->
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="description"/>-->
+<!--                                    <field name="application_files" widget="many2many_binary"/>-->
+<!--                                    <field name="issue_in_progress_state"/>-->
+<!--                                </tree>-->
+<!--                        </field>-->
+<!--                    </group>-->
+                    <br/>
+                    <h3 style="color: #073e89 !important">Policy Required Documents</h3>
+                    <p>Please fill out the following application, sign the customer and re-upload it.</p>
+                    <p>Please Upload All Scanned Documents.</p>
+<!--                    <group>-->
+                        <field name="final_application_ids">
+                                <tree editable="bottom">
+                                    <field name="description"/>
+                                    <field name="download_file"/>
+                                    <field name="application_files" widget="many2many_binary"/>
+                                    <field name="issue_in_progress_state"/>
+                                </tree>
+                        </field>
+<!--                    </group>-->
+                    <br/>
+                    <h3 style="color: #073e89 !important">Offering</h3>
+
+                    <field name="offer_ids">
+                            <tree editable="bottom">
+                                <field name="type"/>
+                                <field name="file" widget="many2many_binary"/>
+                                <field name="offer_state"/>
+                            </tree>
+                    </field>
+
+<!--                     <notebook>-->
+<!--                        <page string="Quick Quote" attrs="{'invisible': [('lob', 'not in', [1, 3])]}">-->
+
+<!--                            <group attrs="{'invisible': [('lob', '!=', 1)]}">-->
+<!--                                <field name="quote_state"/>-->
+<!--                                <field name="package" force_save="1" attrs="{'readonly': [('state', '!=','quick_quote')]}" />-->
+<!--                                <field name="dob" force_save="1" attrs="{'invisible': [('package', '!=', 'individual')]}" />-->
+<!--                                <field name="product" force_save="1" attrs="{'readonly': [('state', '!=', 'quick_quote')]}"/>-->
+<!--                            </group >-->
+<!--                            <group attrs="{'invisible': [('lob', '!=', 3)]}">-->
+<!--                                <group>-->
+<!--                                    <field name="quote_state"/>-->
+<!--                                    <field name="brand" force_save="1" attrs="{'readonly': [('state', '!=','quick_quote')]}" />-->
+<!--                                    <field name="deductible" force_save="1" attrs="{'invisible': [('brand', '!=', 'all brands')]}"/>-->
+
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="sum_insured" force_save="1" attrs="{'readonly': [('state', '!=', 'quick_quote')]}"/>-->
+<!--                                </group>-->
+<!--                            </group>-->
+
+<!--                            <group attrs="{'invisible': ['|',('package', '=', 'individual'),('lob', '!=', 1)]}">-->
+<!--                                <field name="family_age">-->
+<!--                                    <tree editable="bottom">-->
+<!--                                        <field name="name"/>-->
+<!--                                        <field name="type"/>-->
+<!--                                        <field name="gender"/>-->
+<!--                                        <field name="DOB"/>-->
+<!--                                        <field name="age"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                            </group>-->
+<!--                            <group>-->
+<!--                                <field name="price" force_save="1" attrs="{'readonly': [('state', '!=', 'offer')]}"/>-->
+<!--                            </group>-->
+<!--                            <button name="send_mail_template" string="Send e-mail" type="object" class="oe_highlight"/>-->
+
+<!--                        </page>-->
+<!--                        <page string="Download Form"  attrs="{'invisible': [('state', '=', 'quick_quote')]}">-->
+<!--                             <button name="create_pdf" string="Download Application" type="object" class="oe_highlight"/>-->
+<!--                            <group>-->
+<!--                                <field name="questionnaire" filename="file_name"/>-->
+<!--                                <field name="file_name" invisible="1"/>-->
+
+<!--                            </group>-->
+<!--                        </page>-->
+
+<!--                        <page string="Application Form">-->
+<!--                            <group>-->
+<!--                                <group>-->
+<!--                                        <field name="request_for_ofer_state"/>-->
+<!--                                        <field name="name_of_contact_person"/>-->
+<!--                                        <field name="main_phone"/>-->
+<!--                                        <field name="spare_phone"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field widget="many2many_binary" name="questionnaire" readonly="1" force_save="1"/>-->
+<!--                                    <field widget="many2many_binary" name="upload_questionnaire"/>-->
+<!--                                </group>-->
+<!--                            </group>-->
+
+<!--                            <field name="text_questions_ids" attrs="{'invisible': [('choose_questions_ids', '=', False)]}">-->
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="question"/>-->
+<!--                                    <field name="text"/>-->
+<!--                                    <field name="file"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+
+<!--                            <field name="numerical_questions_ids" attrs="{'invisible': [('choose_questions_ids', '=', False)]}">-->
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="question"/>-->
+<!--                                    <field name="value"/>-->
+<!--                                    <field name="file"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+
+<!--                            <field name="choose_questions_ids" attrs="{'invisible': [('choose_questions_ids', '=', False)]}">-->
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="question"/>-->
+<!--                                    <field name="options"/>-->
+<!--                                    <field name="sub_answer_id" readonly="1" force_save="1"/>-->
+<!--                                    <field name="file"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+
+<!--                            <button attrs="{'invisible': ['|',('state', '!=', 'proposal'),('request_for_ofer_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"  groups="Arope-spaces.broker_space_group"/>-->
+
+
+<!--                        </page>-->
+
+<!--                         <page string="Required For Survey"  attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'submitted'])],'autofocus':[('state', 'in', ['survey_required'])]}">-->
+<!--                            <group>-->
+<!--                                <group>-->
+<!--                                    <field name="name_of_contact_person"/>-->
+<!--                                    <field name="main_phone"/>-->
+<!--                                    <field name="spare_phone"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="address"/>-->
+<!--                                    <field name="sum_insured"/>-->
+<!--                                </group>-->
+
+
+<!--                            </group>-->
+
+<!--                            <group>-->
+<!--                                <field name="available_time_ids">-->
+<!--                                    <tree editable="bottom">-->
+<!--                                            <field name="date"/>-->
+<!--                                            <field name="date_to"/>-->
+<!--                                            <field name="time_from"/>-->
+<!--                                            <field name="time_to"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                            </group>-->
+<!--                             <button attrs="{'invisible': ['|',('state', '!=', 'survey_required'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"  groups="Arope-spaces.broker_space_group"/>-->
+<!--                         </page>-->
+<!--                         <page string="Surveyor" attrs="{'invisible': [('state', 'in', ['quick_quote','proposal', 'survey_required'])]}"  groups="Arope-spaces.managers_group,Arope-spaces.surveyor_group">-->
+<!--                             <group>-->
+
+<!--                                 <field name="surveyor" groups="Arope-spaces.managers_group"/>-->
+<!--                                 <field name="survey_date" groups="Arope-spaces.surveyor_group"/>-->
+<!--                             </group>-->
+<!--                             <button attrs="{'invisible': ['|',('state', '!=', 'surveyor'),('sub_state', '=', 'complete')]}"  name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"  groups="Arope-spaces.managers_group"/>-->
+<!--                         </page>-->
+<!--                         <page string="Survey" >-->
+<!--                             <group>-->
+<!--                                 <field name="survey_state"/>-->
+<!--                                 <field name="surveyor" groups="Arope-spaces.managers_group"/>-->
+<!--                             </group>-->
+<!--                             <button attrs="{'invisible': ['|',('state', '!=', 'survey'),('survey_state', '!=', 'surveyor')]}"  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight"  groups="Arope-spaces.managers_group"/>-->
+<!--                             <group attrs="{'invisible': [('survey_state', '=', 'surveyor')]}">-->
+<!--                                <field name="survey_report_ids">-->
+<!--                                    <tree editable="bottom">-->
+<!--                                        <field name="question"/>-->
+<!--                                        <field name="file" widget="many2many_binary"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                                <group>-->
+<!--                                  <field name="recomm"/>-->
+<!--                                </group>-->
+<!--                             </group>-->
+<!--&lt;!&ndash;                             <button attrs="{'invisible': ['|',('state', '!=', 'survey'),('survey_state', 'in', ['complete','surveyor'])]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"  groups="Arope-spaces.surveyor_group"/>&ndash;&gt;-->
+
+
+<!--                         </page>-->
+
+<!--                        <page string="Offering">-->
+<!--                            <group>-->
+<!--                                <h3 style="color: brown;">Final Offer</h3>-->
+<!--                                <br/>-->
+
+
+<!--                                <button attrs="{'invisible':['|',('state', '!=', 'offer'),('offer_state', '=', 'complete')]}" name="complete_and_proceed" string="Submit" type="object" class="oe_highlight"  groups="Arope-spaces.managers_group"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Scanned Documents">-->
+
+<!--                            <field name="final_application_ids">-->
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="description"/>-->
+<!--                                    <field name="application_files" widget="many2many_binary"/>-->
+<!--                                    <field name="issue_in_progress_state"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--&lt;!&ndash;                            <button  name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"  groups="Arope-spaces.managers_group,Arope-spaces.surveyor_group,Arope-spaces.broker_space_group"/>&ndash;&gt;-->
+<!--                        </page>-->
+<!--                         <page string="Rejection Reason" attrs="{'invisible': [('state', '!=', 'cancel')]}">-->
+<!--                            <group>-->
+<!--                                <field name="rejection_reason"/>-->
+<!--                                <field name="comment"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                         <page string="State History" >-->
+<!--                            <field name="state_history_ids">-->
+<!--                                 <tree editable="bottom">-->
+<!--                                        <field name="state" readonly="1" force_save="1"/>-->
+<!--                                        <field name="sub_state" readonly="1" force_save="1"/>-->
+<!--                                        <field name="datetime" readonly="1" force_save="1"/>-->
+<!--                                        <field name="user" readonly="1" force_save="1"/>-->
+<!--                                    </tree>-->
+<!--                            </field>-->
+<!--                        </page>-->
+
+<!--                    </notebook>-->
+
+
+                </sheet>
+                <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+<!--                        <field name="activity_ids" widget="mail_activity"/>-->
+                </div>
+
+			</form>
+		</field>
+	</record>
+    <!-- Add a custom Tree (List) view -->
+    <record id="insurance_view_tree" model="ir.ui.view">
+		<field name="name">Insurance Application</field>
+		<field name="model">insurance.quotation</field>
+		<field name="arch" type="xml">
+			<tree>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="application_number"/>
+                <field name="application_date"/>
+				<field name="lob"/>
+                <field name="product"/>
+                <field name="target_price"/>
+                <field name="final_price"/>
+                <field name="state"/>
+<!--                <field name="sub_state"/>-->
+
+			</tree>
+		</field>
+	</record>
+    <record id="insurance_view_search" model="ir.ui.view">
+        <field name="name">insurance.search</field>
+        <field name="model">insurance.quotation</field>
+        <field name="arch" type="xml">
+            <search string="Insurance">
+                <group expand="0" string="Group By">
+                    <filter string="State" name="groupby_state" context="{'group_by': 'state'}"/>
+<!--                    <filter string="State" name="groupby_sub_state" context="{'group_by': 'sub_state'}"/>-->
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="insurance_action">
+            <field name="name">Insurance Application</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">insurance.quotation</field>
+            <field name="context">{'search_default_groupby_state': 1}</field>
+            <field name="view_id" ref="insurance_view_tree"/>
+            <field name="view_mode">form,tree,kanban</field>
+    </record>
+     <record id="sequence_application_number" model="ir.sequence">
+        <field name="name">application_number</field>
+        <field name="code">application_number</field>
+<!--        <field name="prefix"><field name="lob.name"/></field>-->
+        <field name="padding">6</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+    <record id="sequence_trial_number" model="ir.sequence">
+        <field name="name">trial_number</field>
+        <field name="code">trial_number</field>
+<!--        <field name="prefix"><field name="lob.name"/></field>-->
+        <field name="padding">6</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+
+</odoo>
