@@ -100,7 +100,7 @@ class QuotationService(models.Model):
                 rate = self.env['motor.rating.table'].search(
                     [('brand', '=', 'all models'),
                      ('sum_insured_from', '<=', self.sum_insured), ('sum_insure_to', '>=', self.sum_insured),
-                     ('product_id', '=', self.motor_product)])
+                     ('product_id', '=', self.motor_product.id)])
                 self.price = self.sum_insured * rate.rate
         else:
 
@@ -110,7 +110,7 @@ class QuotationService(models.Model):
                                                                   ('deductible', '=', self.deductible),
                                                                   ('sum_insured_from', '<=', self.sum_insured),
                                                                   ('sum_insure_to', '>=', self.sum_insured),
-                                                                  ('product_id', '=', self.motor_product)])
+                                                                  ('product_id', '=', self.motor_product.id)])
                     self.price = self.sum_insured * rate.rate
             else:
                 if self.sum_insured and self.motor_product:
@@ -118,7 +118,7 @@ class QuotationService(models.Model):
                         [('brand', '=', self.brand),
                          ('sum_insured_from', '<=', self.sum_insured),
                          ('sum_insure_to', '>=', self.sum_insured),
-                         ('product_id', '=', self.motor_product)])
+                         ('product_id', '=', self.motor_product.id)])
                     self.price = self.sum_insured * rate.rate
 
     def calculate_age(self, DOB):
@@ -221,10 +221,10 @@ class QuotationService(models.Model):
 
     def create_app(self):
         form_view_id = self.env.ref("Arope-spaces.insurance_view_form").id
-        ctx = dict(self.env.context)
-        ctx.update({
-            'quotation_id': self.id,'name':'test', 'lob': self.lob
-        })
+        # ctx = dict(self.env.context)
+        # ctx.update({
+        #     'quotation_id': self.id,'name':'test', 'lob': self.lob
+        # })
         return {
             'type': 'ir.actions.act_window',
             # 'name': 'My Action Name',

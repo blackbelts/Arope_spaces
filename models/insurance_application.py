@@ -214,14 +214,16 @@ class Quotation(models.Model):
 
     # First Function To Update
 
+
     @api.onchange('product_id')
     def get_questions(self):
         self.write({'state': 'proposal'})
         self.write({"test_state": self.env['state.setup'].search(
             [('status', '=', 'proposal'), ('type', '=', 'insurance_app')]).id})
-        if self.survey_report_ids:
-            for question in self.survey_report_ids:
-                question.unlink()
+
+        # if self.survey_report_ids:
+        #     for question in self.survey_report_ids:
+        #         question.unlink()
         if self.final_application_ids:
             for question in self.final_application_ids:
                 question.unlink()
@@ -242,11 +244,7 @@ class Quotation(models.Model):
             #         else:
             #             self.text_questions_ids.create(
             #                 {"question": question.id, "text_application_id": self.id})
-            related_survey_questions = self.env["survey.line.setup"].search([("product_id.id", "=", self.product_id.id)])
 
-            if related_survey_questions:
-                for question in related_survey_questions:
-                    self.env['survey.report'].create({"question": question.id, "desc": question.desc, "application_id": self.id})
             related_documents = self.env["final.application.setup"].search(
                 [("product_id.id", "=", self.product_id.id)])
             print(related_documents)
@@ -366,12 +364,22 @@ class Quotation(models.Model):
         self.write({'sub_state': 'pending'})
 
     def survey(self):
-        self.write({'state': 'survey'})
+        related_survey_questions = self.env["survey.line.setup"].search([("product_id.id", "=", self.product_id.id)])
+
+        if related_survey_questions:
+            for question in related_survey_questions:
+                print('c')
+                id = self.env['survey.report'].create(
+                    {"name": "Survey", "survey_report_ids": [(0, 0, {"question": question.id})],
+                     "application_id": self.id})
+                print(id)
+                print(id.application_id)
+        self.write({"state":'survey'})
         self.env['state.history'].create({"application_id": self.id, "state": 'survey',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'survey'),('type', '=', 'insurance_app')]).id
-        self.write({'sub_state': 'surveyor'})
+
 
     def reinsurance_confirm(self):
             self.write({'state': 'reinsurance'})
@@ -419,6 +427,41 @@ class Quotation(models.Model):
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'offer_ready'),('type', '=', 'insurance_app')]).id
 
+    def get_history(self):
+        # tree_view_id = self.env.ref("Arope-spaces.state_history_view_tree").id
+        # ctx = dict(self.env.context)
+        # ctx.update({
+        #     'quotation_id': self.id,'name':'test', 'lob': self.lob
+        # })
+        self.ensure_one()
+        return {
+            'name': 'State History',
+            'res_model': 'state.history',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'domain': [('application_id', '=', self.id)],
+            'context': {
+                "create": False,
+            },
+        }
+
+    def get_survey(self):
+        # tree_view_id = self.env.ref("Arope-spaces.state_history_view_tree").id
+        # ctx = dict(self.env.context)
+        # ctx.update({
+        #     'quotation_id': self.id,'name':'test', 'lob': self.lob
+        # })
+        self.ensure_one()
+        return {
+            'name': 'Survey Report',
+            'res_model': 'survey.report',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'domain': [('application_id', '=', self.id)],
+            'context': {
+                "create": False,
+            },
+        }
 
 
     def accept_offer(self):
@@ -550,17 +593,12 @@ class SubQuestionnaireAnswers(models.Model):
     main_question = fields.Many2one('questionnaire.line.setup', 'Main Question')
     answers = fields.One2many('insurances.answers', 'sub_answer_id')
 
-class SurveyReport(models.Model):
-    _name = 'survey.report'
+class SurveyReportLine(models.Model):
+    _name = 'survey.report.line'
 
     question = fields.Many2one('survey.line.setup','Survey Area')
-    options = fields.Many2one('selection.options', 'Choose', ondelete='cascade', domain="[('survey_id', '=', question)]")
-    desc = fields.Char('Description')
-    text = fields.Text('Answer')
     file = fields.Many2many('ir.attachment', string="Upload File")
-    value = fields.Float('Value')
-    boolean = fields.Boolean('True Or False Answer', default=False)
-    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    survey_id = fields.Many2one('survey.report', ondelete='cascade')
 
 class FinalOffer(models.Model):
     _name = 'final.offer'
@@ -571,7 +609,7 @@ class FinalOffer(models.Model):
     file = fields.Many2many('ir.attachment', string="Offer")
     value = fields.Float('Value')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
-    offer_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted'),
+    offer_state = fields.Selection([('pending', 'Pending'),
                                     ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='State',
                                    default='pending')
 
@@ -580,13 +618,22 @@ class FinalApplication(models.Model):
     _name = 'final.application'
 
     description = fields.Many2one('final.application.setup', 'Document Name')
-    application_file = fields.Many2one('ir.attachment', string="Upload File")
+    application_file = fields.Many2many('ir.attachment', string="Upload File", relation="final_application_uploads")
     download_files = fields.Many2many('ir.attachment', string="Download File")
     issue_in_progress_state = fields.Selection(
         [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
         string='State', default='pending')
 
     quotation_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+
+    @api.onchange('application_file')
+    def change_state(self):
+        if self.application_file:
+            self.write({"issue_in_progress_state": 'complete'})
+
+#
+# class FinalApplication(models.Model):
+#     _name = 'final.applications'
 
 class AvailableTime(models.Model):
     _name = 'available.time'
@@ -628,9 +675,20 @@ class WizardInsuranceQuotation(models.TransientModel):
     _name = 'wizard.insurance.quotation'
     insurance_app_id = fields.Many2one('insurance.quotation')
     policy_number = fields.Char('Policy Num')
+    policy_issue_date = fields.Date('Policy Issue Date')
 
     def policy_num(self):
         self.insurance_app_id.write({'policy_number' : self.policy_number})
+
+class SurveyReport(models.Model):
+
+    _name = 'survey.report'
+    name = fields.Char("Survey Report")
+    surveyor = fields.Many2one('res.users', 'Surveyor')
+
+    survey_report_ids = fields.One2many('survey.report.line', 'survey_id')
+    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+
 
 
 class FamilyAge(models.Model):
