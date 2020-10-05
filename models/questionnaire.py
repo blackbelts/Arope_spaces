@@ -17,8 +17,7 @@ class QuestionnaireLineSetup(models.Model):
 class SurveyLineSetup(models.Model):
     _name = 'survey.line.setup'
     _rec_name = 'question'
-    question = fields.Char('Question')
-    options = fields.Many2many('selection.options', sting="Selections")
+    question = fields.Char('Document Name')
 
     desc = fields.Char('Description')
     product_id = fields.Many2one('insurance.product', ondelele='cascade', index=True)
@@ -27,6 +26,7 @@ class FinalApplicationSetup(models.Model):
     _name = 'final.application.setup'
     _rec_name = 'description'
     description = fields.Char('Document Name')
+    file = fields.Many2many('ir.attachment', string="File")
     product_id = fields.Many2one('insurance.product', ondelele='cascade', index=True)
 
 class OfferSetup(models.Model):

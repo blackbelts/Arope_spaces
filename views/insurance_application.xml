@@ -1,9 +1,9 @@
 <odoo>
-    <template id="assets_frontend" inherit_id="web.assets_frontend">
-      <xpath expr="." position="inside">
-          <link rel="stylesheet" href="/Arope-space/static/src/css/main.css"/>
-      </xpath>
-    </template>
+<!--    <template id="assets_frontend" inherit_id="web.assets_frontend">-->
+<!--      <xpath expr="." position="inside">-->
+<!--          <link rel="stylesheet" href="/Arope-space/static/src/css/main.css"/>-->
+<!--      </xpath>-->
+<!--    </template>-->
     <!-- Add a custom form view -->
     <record id="insurance_view_form" model="ir.ui.view">
 		<field name="name">Insurance Application</field>
@@ -121,8 +121,8 @@
                         <field name="final_application_ids">
                                 <tree editable="bottom">
                                     <field name="description"/>
-                                    <field name="download_file"/>
-                                    <field name="application_files" widget="many2many_binary"/>
+                                    <field name="download_files"/>
+                                    <field name="application_file" widget="many2many_binary"/>
                                     <field name="issue_in_progress_state"/>
                                 </tree>
                         </field>

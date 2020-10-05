@@ -4,7 +4,7 @@ from . import setup
 from . import team_target
 from . import hrms_dashboard
 # from . import get_a_qoute
-# from . import price_setup
+from . import price_setup
 from . import team_target
 from . import hrms_dashboard
 # from . import claim

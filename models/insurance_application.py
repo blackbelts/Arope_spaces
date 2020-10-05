@@ -85,7 +85,7 @@ class Quotation(models.Model):
     application = fields.Binary("Application")
     final_price = fields.Float('Final Premium')
     # final_price = fields.Float('Final Price')
-    final_application_ids = fields.One2many('final.application', 'application_id')
+    final_application_ids = fields.One2many('final.application', 'quotation_id')
     # questions_ids = fields.One2many('insurances.answers', 'text_application_id')
     text_questions_ids = fields.One2many('insurances.answers', 'text_application_id')
     choose_questions_ids = fields.One2many('insurances.answers', 'choose_application_id')
@@ -128,7 +128,8 @@ class Quotation(models.Model):
 
     @api.onchange('state')
     def compute_state(self):
-        self.test_state = self.env['state.setup'].search([('status', '=', self.state),('type', '=', 'insurance_app')]).id
+        if self.state:
+            self.test_state = self.env['state.setup'].search([('status', '=', self.state),('type', '=', 'insurance_app')]).id
 
     def create_pdf(self):
         return {
@@ -161,19 +162,19 @@ class Quotation(models.Model):
 
 
 
-    @api.onchange('final_application_ids')
-    def policy_pending(self):
-        res = []
-        if self.final_application_ids:
-            for rec in self.final_application_ids:
-                res.append(rec.application_files)
-            if all(res):
-                # self.write({'state': 'policy'})
-                # self.env['state.history'].create({"application_id": self.id, "state": 'policy',
-                #                                   "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                #                                   "user": self.write_uid.id})
-                # self.test_state = self.env['state.setup'].search([('status', '=', 'policy'),('type', '=', 'insurance_app')]).id
-                self.write({'sub_state': 'complete'})
+    # @api.onchange('final_application_ids')
+    # def policy_pending(self):
+    #     res = []
+    #     if self.final_application_ids:
+    #         for rec in self.final_application_ids:
+    #             res.append(rec.application_files)
+    #         if all(res):
+    #             # self.write({'state': 'policy'})
+    #             # self.env['state.history'].create({"application_id": self.id, "state": 'policy',
+    #             #                                   "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    #             #                                   "user": self.write_uid.id})
+    #             # self.test_state = self.env['state.setup'].search([('status', '=', 'policy'),('type', '=', 'insurance_app')]).id
+    #             self.write({'sub_state': 'complete'})
 
     def complete_and_proceed(self):
         self.write({'sub_state': 'complete'})
@@ -215,68 +216,56 @@ class Quotation(models.Model):
 
     @api.onchange('product_id')
     def get_questions(self):
-        # self.questionnaire = self.product_id.questionnaire_file
-        if self.lob.line_of_business == 'Medical':
-            # print('Medical')
-            self.write({'state': 'proposal'})
-            self.write({"test_state": self.env['state.setup'].search([('status', '=', 'proposal'),('type', '=', 'insurance_app')]).id})
-
-        elif self.lob.line_of_business == 'Motor':
-            self.write({'state': 'proposal'})
-            self.write({"test_state": self.env['state.setup'].search([('status', '=', 'proposal'),('type', '=', 'insurance_app')]).id})
-
-
-        else:
-            self.write({'state': 'proposal'})
-            self.write({"test_state": self.env['state.setup'].search([('status', '=', 'proposal'),('type', '=', 'insurance_app')]).id})
-            self.write({'sub_state': 'pending'})
-        if self.text_questions_ids:
-            for question in self.text_questions_ids:
-                question.unlink()
-        if self.choose_questions_ids:
-            for question in self.choose_questions_ids:
-                question.unlink()
-
-        if self.numerical_questions_ids:
-            for question in self.numerical_questions_ids:
-                question.unlink()
+        self.write({'state': 'proposal'})
+        self.write({"test_state": self.env['state.setup'].search(
+            [('status', '=', 'proposal'), ('type', '=', 'insurance_app')]).id})
         if self.survey_report_ids:
             for question in self.survey_report_ids:
                 question.unlink()
         if self.final_application_ids:
             for question in self.final_application_ids:
                 question.unlink()
-        # if self.offer_ids:
-        #     for question in self.offer_ids:
-        #         question.unlink()
         if self.product_id:
             # print(self.product_id)
             # self.questionnaire = self.product_id.questionnaire_file
             # self.file_name = self.product_id.file_name
-            related_questions = self.env["questionnaire.line.setup"].search([("product_id.id", "=", self.product_id.id)])
-            if related_questions:
-                for question in related_questions:
-                    if question.question_type == 'choose':
-                        self.choose_questions_ids.create(
-                            {"question": question.id, "choose_application_id": self.id})
-
-                    elif question.question_type == 'numerical':
-                        self.numerical_questions_ids.create(
-                            {"question": question.id, "numerical_application_id": self.id})
-                    else:
-                        self.text_questions_ids.create(
-                            {"question": question.id, "text_application_id": self.id})
+            # related_questions = self.env["questionnaire.line.setup"].search([("product_id.id", "=", self.product_id.id)])
+            # if related_questions:
+            #     for question in related_questions:
+            #         if question.question_type == 'choose':
+            #             self.choose_questions_ids.create(
+            #                 {"question": question.id, "choose_application_id": self.id})
+            #
+            #         elif question.question_type == 'numerical':
+            #             self.numerical_questions_ids.create(
+            #                 {"question": question.id, "numerical_application_id": self.id})
+            #         else:
+            #             self.text_questions_ids.create(
+            #                 {"question": question.id, "text_application_id": self.id})
             related_survey_questions = self.env["survey.line.setup"].search([("product_id.id", "=", self.product_id.id)])
 
             if related_survey_questions:
                 for question in related_survey_questions:
                     self.env['survey.report'].create({"question": question.id, "desc": question.desc, "application_id": self.id})
-            # related_documents = self.env["final.application.setup"].search(
-            #     [("product_id.id", "=", self.product_id.id)])
-            # if related_documents:
-            #     for question in related_documents:
-            #         self.env['final.application'].create(
-            #             {"description": question.id, "application_id": self.id})
+            related_documents = self.env["final.application.setup"].search(
+                [("product_id.id", "=", self.product_id.id)])
+            print(related_documents)
+            if related_documents:
+                for question in related_documents:
+                    if question.file:
+                        id= self.env['final.application'].create(
+                            {"description": question.id,'download_files': [question.file.id],
+                             "quotation_id": self.id})
+                        print(id)
+                        print(id.quotation_id)
+                    else:
+                        self.env['final.application'].create(
+                            {"description": question.id,
+                             "quotation_id": self.id})
+                    # id.write({'download_file':
+                    #         [(0,0,{'name': 'Questionnaire', 'res_name': 'questionnaire',
+                    #                                                         'type': 'binary',
+                    #                                                         'datas': question.file[0].datas})],})
             # related_offer_items = self.env["offer.setup"].search(
             #     [("product_id.id", "=", self.product_id.id)])
             # if related_offer_items:
@@ -591,13 +580,13 @@ class FinalApplication(models.Model):
     _name = 'final.application'
 
     description = fields.Many2one('final.application.setup', 'Document Name')
-    application_files = fields.Many2many('ir.attachment', string="Upload File", relation="final_application_to_upload")
-    download_file = fields.Many2many('ir.attachment', string="Download File", relation="final_application_Download")
+    application_file = fields.Many2one('ir.attachment', string="Upload File")
+    download_files = fields.Many2many('ir.attachment', string="Download File")
     issue_in_progress_state = fields.Selection(
         [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
         string='State', default='pending')
 
-    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    quotation_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
 class AvailableTime(models.Model):
     _name = 'available.time'
