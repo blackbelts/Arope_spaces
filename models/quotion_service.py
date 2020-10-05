@@ -238,8 +238,6 @@ class QuotationService(models.Model):
             'context': {'quotation_id': self.id,'name':'test', 'lob': self.lob},
         }
 
-
-
 class Members(models.Model):
     _name = 'members'
 

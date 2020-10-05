@@ -81,6 +81,7 @@
                                 <hr/>
                                 <div class="text-center">
                                     <button type="object" name="create_app" string="Create Application" class="oe_highlight"/>
+
                                 </div>
                             </div>
                     </div>
@@ -124,6 +125,7 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">quotation.service</field>
             <field name="view_id" ref="get_quote_view_tree"/>
+
             <field name="view_mode">form,tree</field>
     </record>
 

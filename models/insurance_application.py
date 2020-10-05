@@ -212,6 +212,7 @@ class Quotation(models.Model):
     #     template = self.env.ref('mail_template_demo.example_email_template')
 
     # First Function To Update
+
     @api.onchange('product_id')
     def get_questions(self):
         # self.questionnaire = self.product_id.questionnaire_file
@@ -223,6 +224,8 @@ class Quotation(models.Model):
         elif self.lob.line_of_business == 'Motor':
             self.write({'state': 'proposal'})
             self.write({"test_state": self.env['state.setup'].search([('status', '=', 'proposal'),('type', '=', 'insurance_app')]).id})
+
+
         else:
             self.write({'state': 'proposal'})
             self.write({"test_state": self.env['state.setup'].search([('status', '=', 'proposal'),('type', '=', 'insurance_app')]).id})
@@ -609,6 +612,7 @@ class stateHistory(models.Model):
     _name = 'state.history'
 
     state = fields.Selection([
+
         ('proposal', 'Request For Offer'),
         ('survey', 'Survey'),
         ('offer', 'Offering'),

@@ -1,6 +1,7 @@
 <odoo>
 
     <!-- Add a custom form view -->
+<<<<<<< HEAD
     <record model="ir.ui.view" id="tree_line_business">
         <field name="name">tree.line.business</field>
         <field name="model">insurance.line.business</field>
@@ -143,4 +144,56 @@
         </field>
     </record>
 
+=======
+
+    <record model="ir.ui.view" id="form_product_inherit">
+        <field name="name">form.product</field>
+        <field name="model">insurance.product</field>
+        <field name="priority" eval="16"/>
+        <field name="inherit_id" ref="arope-conf.form_product"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet" position="inside">
+                <notebook>
+                    <page string="Questionnaire Setup" >
+                        <field name="questionnaire_ids">
+                            <tree editable="bottom">
+                                <field name="question"/>
+                                <field name="question_type"/>
+                                <field name="options" widget="many2many_tags"/>
+                                <field name="sub_questionnaire_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Survey Setup" >
+                        <field name="survey_ids">
+                            <tree editable="bottom">
+                                <field name="question"/>
+                                <field name="options" widget="many2many_tags"/>
+                                <!--                                    <field name="desc"/>-->
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Document Required" >
+                        <field name="final_application_ids">
+                            <tree editable="bottom">
+                                <field name="description"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Offer Setup" >
+                        <field name="offer_setup_ids">
+                            <tree editable="bottom">
+                                <field name="offer"/>
+                            </tree>
+                        </field>
+                    </page>
+
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+
+>>>>>>> 1aa7a965a46b9ba2a4e2f92ba6048b54f5e5e28a
 </odoo>
