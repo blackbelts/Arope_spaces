@@ -252,7 +252,7 @@ class Brokers(models.Model):
         lob_dict = {}
         for lob in self.env['insurance.line.business'].search([]):
             count = self.env['policy.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)])
-            lob_dict[lob.name] = count
+            lob_dict[lob.line_of_business] = count
         return lob_dict
 
     @api.model
@@ -260,7 +260,7 @@ class Brokers(models.Model):
         lob_dict = {}
         for lob in self.env['insurance.line.business'].search([]):
             count = self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)])
-            lob_dict[lob.name] = count
+            lob_dict[lob.line_of_business] = count
         return lob_dict
 
     @api.model
