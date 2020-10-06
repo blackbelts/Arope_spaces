@@ -101,7 +101,8 @@ class QuotationService(models.Model):
                     [('brand', '=', 'all models'),
                      ('sum_insured_from', '<=', self.sum_insured), ('sum_insure_to', '>=', self.sum_insured),
                      ('product_id', '=', self.motor_product.id)])
-                self.price = self.sum_insured * rate.rate
+                for rec in rate:
+                    self.price = self.sum_insured * rec.rate
         else:
 
             if self.brand == 'all brands':
@@ -111,7 +112,8 @@ class QuotationService(models.Model):
                                                                   ('sum_insured_from', '<=', self.sum_insured),
                                                                   ('sum_insure_to', '>=', self.sum_insured),
                                                                   ('product_id', '=', self.motor_product.id)])
-                    self.price = self.sum_insured * rate.rate
+                    for rec in rate:
+                        self.price = self.sum_insured * rec.rate
             else:
                 if self.sum_insured and self.motor_product:
                     rate = self.env['motor.rating.table'].search(
@@ -119,7 +121,9 @@ class QuotationService(models.Model):
                          ('sum_insured_from', '<=', self.sum_insured),
                          ('sum_insure_to', '>=', self.sum_insured),
                          ('product_id', '=', self.motor_product.id)])
-                    self.price = self.sum_insured * rate.rate
+                    for rec in rate:
+                        self.price = self.sum_insured * rec.rate
+
 
     def calculate_age(self, DOB):
         ages = []

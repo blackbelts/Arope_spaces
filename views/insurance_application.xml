@@ -38,12 +38,12 @@
 
                 <sheet>
                     <div name="button_box" class="oe_button_box">
-                        <button class="oe_stat_button" type="object" icon="fa-dollar" string="Quick Quote" name="motor">
+                        <button class="oe_stat_button" type="object" icon="fa-dollar" string="Related Quick Quote" name="related_quote">
                         </button>
-                        <button class="oe_stat_button" string="Survey" icon="fa-file" type="object" name="get_survey"
+                        <button class="oe_stat_button" string="Survey Report" icon="fa-file" type="object" name="get_survey"
                             >
                         </button>
-                        <button class="oe_stat_button" icon="fa-history"  string="State History" type="object" name="get_history"
+                        <button class="oe_stat_button" icon="fa-history"  string="Time To Issue" type="object" name="get_history"
                             >
                         </button>
                     </div>
@@ -57,20 +57,28 @@
 <!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'issued'),('sub_state', '!=', 'pending')]}">Policy is issued</h2>-->
 <!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'survey_required'),('sub_state', '!=', 'pending')]}">Fill in survey required information</h2>-->
 <!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'quick_quote'),('sub_state', '!=', 'pending')]}">Pending on reinsurance agreement</h2>-->
-                    <h3 style="color: #073e89 !important">Application Info</h3>
+                    <h3 style="color: #073e89 !important">Insurance Application Info</h3>
                     <group>
                         <group>
                             <field name="state" invisible="1"/>
-<!--                            <field name="sub_state" invisible="1"/>-->
                             <field name="lob"/>
                             <field  name="product_id"/>
+                            <field name="name" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+                            <field name="phone" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+                            <field name="email" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+                            <field name="target_price" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+
+
                         </group>
                         <group>
-
+                            <field name="name_of_contact_person"/>
+                            <field name="main_phone"/>
+                            <field name="spare_phone"/>
                             <field name="application_number" readonly="1" force_save="1"/>
-                            <field name="policy_number" readonly="1" force_save="1" attrs="{'invisible': [('policy_number', '=', False)]}"/>
                             <field name="application_date" />
-<!--                            <field name="final_application_to_download" readonly="1" force_save="1"/>-->
+                            <field name="policy_number" readonly="1" force_save="1" attrs="{'invisible': [('policy_number', '=', False)]}"/>
+                            <field name="policy_issue_date" readonly="1" force_save="1" attrs="{'invisible': [('policy_issue_date', '=', False)]}"/>
+
                         </group>
                     </group>
                     <br/>
@@ -78,8 +86,6 @@
                     <group>
                         <group>
 
-                            <field name="name" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
-                            <field name="phone" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
 
                         </group>
                         <group>
