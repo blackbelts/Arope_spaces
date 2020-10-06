@@ -330,7 +330,12 @@ class Brokers(models.Model):
             'collections':self.get_collections(agents_codes),
             'renews':self.get_renew(agents_codes)
         }
-
+    @api.model
+    def get_user_groups(self,id):
+        groups=[]
+        for rec in self.env['res.groups'].search([('users','=',[id]),('category_id','=','arope')]):
+            groups.append(rec.name)
+        return groups
     # @api.model
     # def get_customer_dashboard(self, id):
     #     card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
