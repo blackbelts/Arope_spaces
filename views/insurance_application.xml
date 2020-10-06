@@ -63,10 +63,10 @@
                             <field name="state" invisible="1"/>
                             <field name="lob"/>
                             <field  name="product_id"/>
-                            <field name="name" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
-                            <field name="phone" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
-                            <field name="email" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
-                            <field name="target_price" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal'])]}"/>
+                            <field name="name" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal', 'application_form'])]}"/>
+                            <field name="phone" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal', 'application_form'])]}"/>
+                            <field name="email" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal', 'application_form'])]}"/>
+                            <field name="target_price" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal', 'application_form'])]}"/>
 
 
                         </group>
