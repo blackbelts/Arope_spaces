@@ -11,21 +11,21 @@
         <field name="arch" type="xml">
             <xpath expr="/form/sheet" position="inside">
                 <notebook>
-                    <page string="Questionnaire Setup" >
-                        <field name="questionnaire_ids">
-                            <tree editable="bottom">
-                                <field name="question"/>
-                                <field name="question_type"/>
-                                <field name="options" widget="many2many_tags"/>
-                                <field name="sub_questionnaire_id"/>
-                            </tree>
-                        </field>
-                    </page>
+<!--                    <page string="Questionnaire Setup" >-->
+<!--                        <field name="questionnaire_ids">-->
+<!--                            <tree editable="bottom">-->
+<!--                                <field name="question"/>-->
+<!--                                <field name="question_type"/>-->
+<!--                                <field name="options" widget="many2many_tags"/>-->
+<!--                                <field name="sub_questionnaire_id"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </page>-->
                     <page string="Survey Setup" >
                         <field name="survey_ids">
                             <tree editable="bottom">
                                 <field name="question"/>
-                                <field name="options" widget="many2many_tags"/>
+<!--                                <field name="options" widget="many2many_tags"/>-->
                                 <!--                                    <field name="desc"/>-->
                             </tree>
                         </field>
@@ -34,16 +34,17 @@
                         <field name="final_application_ids">
                             <tree editable="bottom">
                                 <field name="description"/>
+                                <field name="file" widget="many2many_binary"/>
                             </tree>
                         </field>
                     </page>
-                    <page string="Offer Setup" >
-                        <field name="offer_setup_ids">
-                            <tree editable="bottom">
-                                <field name="offer"/>
-                            </tree>
-                        </field>
-                    </page>
+<!--                    <page string="Offer Setup" >-->
+<!--                        <field name="offer_setup_ids">-->
+<!--                            <tree editable="bottom">-->
+<!--                                <field name="offer"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </page>-->
 
                 </notebook>
             </xpath>

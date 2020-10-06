@@ -80,7 +80,8 @@
                                 <h2 class="card-price text-center">$ <field readonly="1" force_save="1" name="price"/></h2>
                                 <hr/>
                                 <div class="text-center">
-                                    <button type="object" string="Create Application" class="oe_highlight"/>
+                                    <button type="object" name="create_app" string="Create Application" class="oe_highlight"/>
+
                                 </div>
                             </div>
                     </div>
@@ -106,7 +107,7 @@
         </xpath>
     </template>
     <!-- Add a custom Tree (List) view -->
-    <record id="get_a_quote_view_tree" model="ir.ui.view">
+    <record id="get_quote_view_tree" model="ir.ui.view">
 		<field name="name">Get A Quote</field>
 		<field name="model">quotation.service</field>
 		<field name="arch" type="xml">
@@ -119,12 +120,12 @@
 			</tree>
 		</field>
 	</record>
-    <record model="ir.actions.act_window" id="quick_quote_action">
+    <record model="ir.actions.act_window" id="quickQuoteAction">
             <field name="name">Quick Quote</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">quotation.service</field>
-            <field name='domain'>[('lob','=','1')]</field>
-            <field name="view_id" ref="get_a_quote_view_tree"/>
+            <field name="view_id" ref="get_quote_view_tree"/>
+
             <field name="view_mode">form,tree</field>
     </record>
 

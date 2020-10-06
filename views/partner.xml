@@ -1,0 +1,101 @@
+<odoo>
+
+    <record model="ir.ui.view" id="res_user_agent_access">
+        <field name="model">res.users</field>
+        <field name="name">res.users.form</field>
+
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login']" position="after">
+
+                <div class="oe_title">
+                    <label for="agent_code" string="Agent Code"/>
+                    <field name="agent_code"   />
+                </div>
+                <div class="oe_title">
+                    <label for="card_id" string="Broker Card"/>
+                    <field name="card_id"   />
+                </div>
+                    <div class="oe_title">
+                    <label for="related_person" string="Related Person"/>
+                    <field name="related_person"   />
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="brokers_tree_view" model="ir.ui.view">
+        <field name="name">brokers Tree</field>
+        <field name="model">persons</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="name" />
+                <field name="fra_no" />
+                <field name="expire_date" />
+                <field name="card_id" />
+                <field name="com_reg" />
+                <field name="pin"  />
+                <field name="agent_code" />
+                <field name="mobile" />
+                <field name="type"/>
+                <field name="related_user" readonly="1"/>
+                <!--                <field name="is_broker" invisible="1"/>-->
+                <!--                <field name="is_customer" invisible="1"/>-->
+                <field name="is_user" invisible="1"/>
+                <button  name="create_broker_user" string="Create User" type="object" class="oe_highlight" attrs="{'invisible': [('is_user','=',True)]}" />
+
+            </tree>
+        </field>
+    </record>
+    <record id="person_form_view" model="ir.ui.view">
+        <field name="name">persons Form</field>
+        <field name="model">persons</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="fra_no" />
+                            <field name="expire_date" />
+                            <field name="mobile" />
+                            <field name="type" required="1"/>
+                                            <field name="is_user" />
+
+                        </group>
+                        <group>
+                            <field name="card_id" />
+                            <field name="com_reg" />
+                            <field name="pin"  />
+                            <field name="agent_code" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="broker_action" model="ir.actions.act_window">
+        <field name="name">Brokers</field>
+        <field name="res_model">persons</field>
+        <field name="view_mode">tree,form,kanban,pivot</field>
+        <!--        <field name="context">{"search_default_active":1}</field>-->
+        <field name="view_id" ref="brokers_tree_view"/>
+        <field name='domain'>[('type','=','broker')]</field>
+    </record>
+    <record id="customers_action" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="res_model">persons</field>
+        <field name="view_mode">tree,form,kanban,pivot</field>
+        <field name='domain'>[('type','=','customer')]</field>
+        <!--        <field name="context">{"search_default_active":1}</field>-->
+        <field name="view_id" ref="brokers_tree_view"/>
+    </record>
+    <record id="surveyors_action" model="ir.actions.act_window">
+        <field name="name">Surveyors</field>
+        <field name="res_model">persons</field>
+        <field name="view_mode">tree,form,kanban,pivot</field>
+        <field name='domain'>[('type','=','surveyor')]</field>
+        <!--        <field name="context">{"search_default_active":1}</field>-->
+        <field name="view_id" ref="brokers_tree_view"/>
+    </record>
+
+</odoo>

@@ -9,11 +9,12 @@
                         <group>
                             <field name="insurance_app_id"  readonly="1" force_save="1"/>
                             <field name="policy_number" required="1" />
+                            <field name="policy_issue_date" required="1" />
                         </group>
                     </group>
                     <footer>
                         <button name="policy_num" type="object"
-                                string="Create" class="oe_highlight"/>
+                                string="Save" class="oe_highlight"/>
                     </footer>
                 </form>
             </field>

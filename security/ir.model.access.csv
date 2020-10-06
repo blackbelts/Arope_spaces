@@ -10,21 +10,24 @@ access_setup10,setup.setup10,model_target_rules,base.group_user,1,1,1,1
 
 
 
+
 access_setup12,setup.setup12,model_survey_line_setup,base.group_user,1,1,1,1
 access_setup13,setup.setup13,model_questionnaire_line_setup,base.group_user,1,1,1,1
 
 access_setup14,setup.setup14,model_insurance_quotation,base.group_user,1,1,1,1
 
 access_setup17,setup.setup17,model_survey_report,base.group_user,1,1,1,1
-access_setup18,setup.setup18,model_final_application,base.group_user,1,1,1,1
+access_setup600,setup.setup600,model_final_application,base.group_user,1,1,1,1
 access_setup19,setup.setup19,model_insurances_answers,base.group_user,1,1,1,1
 access_setup20,setup.setup20,model_available_time,base.group_user,1,1,1,1
 access_setup21,setup.setup21,model_state_history,base.group_user,1,1,1,1
-access_setup22,setup.setup22,model_final_application_setup,base.group_user,1,1,1,1
+access_setup500,setup.setup500,model_final_application_setup,base.group_user,1,1,1,1
 access_setup23,setup.setup23,model_selection_options,base.group_user,1,1,1,1
 access_setup24,setup.setup24,model_offer_setup,base.group_user,1,1,1,1
 access_setup25,setup.setup25,model_final_offer,base.group_user,1,1,1,1
 access_setup26,setup.setup26,model_state_setup,base.group_user,1,1,1,1
+
+
 access_setup29,setup.setup29,model_sub_questionnaire,base.group_user,1,1,1,1
 access_setup30,setup.setup30,model_sub_questionnaire_answers,base.group_user,1,1,1,1
 
@@ -35,6 +38,7 @@ access_setup33,setup.setup33,model_claim_setup,base.group_user,1,1,1,1
 access_setup34,setup.setup34,model_claim_setup_lines,base.group_user,1,1,1,1
 access_setup35,setup.setup35,model_claim_lines,base.group_user,1,1,1,1
 access_setup36,setup.setup36,model_members,base.group_user,1,1,1,1
+access_setup40,setup.setup40,model_survey_report_line,base.group_user,1,1,1,1
 
 access_mail_activity_type_sale_manager,mail.activity.type.sale.manager,mail.model_mail_activity_type,base.group_user,1,1,1,1
 

@@ -28,7 +28,7 @@ class QuotationService(models.Model):
     # compute = 'compute_age'
     coverage_from = fields.Date('From', default=datetime.today(), required=True)
     coverage_to = fields.Date('To')
-    days = fields.Integer('Day(s)', store='True', required=True, compute='compute_days')
+    days = fields.Integer('Day(s)', store='True', required=True)
     #compute='compute_days'
     # motor_product = fields.Many2one('product.covers', 'Product')
     brand = fields.Selection([('all brands', 'All Brands (except Chinese & East Asia)'),
@@ -48,7 +48,7 @@ class QuotationService(models.Model):
         # def get_lob_id(self):
         #    self.write({"lob_id":str(self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id)})
 
-    @api.depends('coverage_from', 'coverage_to')
+    @api.onchange('coverage_from', 'coverage_to')
     def compute_days(self):
         for rec in self:
             if rec.coverage_from and rec.coverage_to:
@@ -100,7 +100,7 @@ class QuotationService(models.Model):
                 rate = self.env['motor.rating.table'].search(
                     [('brand', '=', 'all models'),
                      ('sum_insured_from', '<=', self.sum_insured), ('sum_insure_to', '>=', self.sum_insured),
-                     ('product_id', '=', self.motor_product)])
+                     ('product_id', '=', self.motor_product.id)])
                 self.price = self.sum_insured * rate.rate
         else:
 
@@ -110,7 +110,7 @@ class QuotationService(models.Model):
                                                                   ('deductible', '=', self.deductible),
                                                                   ('sum_insured_from', '<=', self.sum_insured),
                                                                   ('sum_insure_to', '>=', self.sum_insured),
-                                                                  ('product_id', '=', self.motor_product)])
+                                                                  ('product_id', '=', self.motor_product.id)])
                     self.price = self.sum_insured * rate.rate
             else:
                 if self.sum_insured and self.motor_product:
@@ -118,7 +118,7 @@ class QuotationService(models.Model):
                         [('brand', '=', self.brand),
                          ('sum_insured_from', '<=', self.sum_insured),
                          ('sum_insure_to', '>=', self.sum_insured),
-                         ('product_id', '=', self.motor_product)])
+                         ('product_id', '=', self.motor_product.id)])
                     self.price = self.sum_insured * rate.rate
 
     def calculate_age(self, DOB):
@@ -218,6 +218,25 @@ class QuotationService(models.Model):
     def travel(self):
         # id = self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id
         self.write({"lob": 6})
+
+    def create_app(self):
+        form_view_id = self.env.ref("Arope-spaces.insurance_view_form").id
+        # ctx = dict(self.env.context)
+        # ctx.update({
+        #     'quotation_id': self.id,'name':'test', 'lob': self.lob
+        # })
+        return {
+            'type': 'ir.actions.act_window',
+            # 'name': 'My Action Name',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'insurance.quotation',
+
+            # 'domain': [('quotation_id', '=', self.id),('lob', '=', self.lob)],
+            'views': [(form_view_id, 'form')],
+            'target': 'current',
+            'context': {'default_quotation_id': self.id, 'default_lob': self.lob.id},
+        }
 
 class Members(models.Model):
     _name = 'members'

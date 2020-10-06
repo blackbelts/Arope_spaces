@@ -1,9 +1,9 @@
 <odoo>
-    <template id="assets_frontend" inherit_id="web.assets_frontend">
-      <xpath expr="." position="inside">
-          <link rel="stylesheet" href="/Arope-space/static/src/css/main.css"/>
-      </xpath>
-    </template>
+<!--    <template id="assets_frontend" inherit_id="web.assets_frontend">-->
+<!--      <xpath expr="." position="inside">-->
+<!--          <link rel="stylesheet" href="/Arope-space/static/src/css/main.css"/>-->
+<!--      </xpath>-->
+<!--    </template>-->
     <!-- Add a custom form view -->
     <record id="insurance_view_form" model="ir.ui.view">
 		<field name="name">Insurance Application</field>
@@ -40,10 +40,10 @@
                     <div name="button_box" class="oe_button_box">
                         <button class="oe_stat_button" type="object" icon="fa-dollar" string="Quick Quote" name="motor">
                         </button>
-                        <button class="oe_stat_button" string="Survey" icon="fa-file" type="object" name="medical"
+                        <button class="oe_stat_button" string="Survey" icon="fa-file" type="object" name="get_survey"
                             >
                         </button>
-                        <button class="oe_stat_button" icon="fa-history" string="State History" type="object" name="test"
+                        <button class="oe_stat_button" icon="fa-history"  string="State History" type="object" name="get_history"
                             >
                         </button>
                     </div>
@@ -115,14 +115,16 @@
 <!--                    </group>-->
                     <br/>
                     <h3 style="color: #073e89 !important">Policy Required Documents</h3>
-                    <p>Please fill out the following application, sign the customer and re-upload it.</p>
-                    <p>Please Upload All Scanned Documents.</p>
+                    <span>Please fill out the following application, sign the customer and re-upload it.</span>
+                    <br/>
+                    <span>Please Upload All Scanned Documents.</span>
+                    <br/>
 <!--                    <group>-->
                         <field name="final_application_ids">
                                 <tree editable="bottom">
                                     <field name="description"/>
-                                    <field name="download_file"/>
-                                    <field name="application_files" widget="many2many_binary"/>
+                                    <field name="download_files" widget="many2many_binary"/>
+                                    <field name="application_file" widget="many2many_binary"/>
                                     <field name="issue_in_progress_state"/>
                                 </tree>
                         </field>
@@ -356,6 +358,8 @@
 			</tree>
 		</field>
 	</record>
+
+
     <record id="insurance_view_search" model="ir.ui.view">
         <field name="name">insurance.search</field>
         <field name="model">insurance.quotation</field>
@@ -382,8 +386,6 @@
         <field name="code">application_number</field>
 <!--        <field name="prefix"><field name="lob.name"/></field>-->
         <field name="padding">6</field>
-        <field name="number_next">1</field>
-        <field name="number_increment">1</field>
     </record>
     <record id="sequence_trial_number" model="ir.sequence">
         <field name="name">trial_number</field>
@@ -393,6 +395,50 @@
         <field name="number_next">1</field>
         <field name="number_increment">1</field>
     </record>
+    <!-- Add a custom Tree (List) view -->
+    <record id="state_history_view_tree" model="ir.ui.view">
+		<field name="name">State History</field>
+		<field name="model">state.history</field>
+		<field name="arch" type="xml">
+			<tree>
+                <field name="state"/>
+                <field name="datetime"/>
+                <field name="user"/>
+			</tree>
+		</field>
+	</record>
+    <record id="survey_report_view_tree" model="ir.ui.view">
+		<field name="name">Survey Report</field>
+		<field name="model">survey.report</field>
+		<field name="arch" type="xml">
+			<tree>
+                <field name="name"/>
+                <field name="surveyor"/>
+<!--                <field name="application_id"/>-->
+			</tree>
+		</field>
+	</record>
+    <record id="survey_report_view_form" model="ir.ui.view">
+		<field name="name">Survey Report</field>
+		<field name="model">survey.report</field>
+		<field name="arch" type="xml">
+			<form>
+                <sheet>
+                    <group>
+                        <field name="surveyor"/>
+                    </group>
+
+                    <field name="survey_report_ids">
+                        <tree editable="bottom">
+                            <field name="question"/>
+                            <field name="file" widget="many2many_binary"/>
+                        </tree>
+                    </field>
+                </sheet>
+			</form>
+		</field>
+	</record>
+
 
 
 </odoo>

@@ -6,7 +6,7 @@ class StateSetup(models.Model):
     _rec_name = 'state'
 
     status = fields.Selection([
-        ('quick_quote', 'Quick Quote'),
+
         ('proposal', 'Request For Offer'),
         ('survey', 'Survey'),
         ('offer', 'Offering'),
