@@ -128,8 +128,8 @@ class Quotation(models.Model):
             offers = []
             for rec in self.offer_ids:
                 offers.append(rec)
-            if offers[0].offer_state == 'accepted':
-                if offers[0].type == 'initial':
+            if offers[-1].offer_state == 'accepted':
+                if offers[-1].type == 'initial':
                     self.write({'state': 'application_form'})
                     self.env['state.history'].create({"application_id": self.id, "state": 'application_form',
                                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -152,7 +152,7 @@ class Quotation(models.Model):
                                     self.env['final.application'].create(
                                         {"description": question.id,
                                          "quotation_id": self.id})
-                elif  offers[0].type == 'final':
+                elif  offers[-1].type == 'final':
                     self.write({'state': 'application'})
                     self.env['state.history'].create({"application_id": self.id, "state": 'application',
                                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
