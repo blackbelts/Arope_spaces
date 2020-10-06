@@ -249,34 +249,34 @@ class Brokers(models.Model):
 
     @api.model
     def get_lob_count_policy(self, agents_codes):
-        lob_dict = {}
+        lob_list = []
         for lob in self.env['insurance.line.business'].search([]):
             count = self.env['policy.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)])
             if count>0:
-             lob_dict[lob.line_of_business] = count
+             lob_list.append({'name':lob.line_of_business,'count':count,'icon':lob.image})
             else:continue
 
-        return lob_dict
+        return lob_list
 
     @api.model
     def get_lob_count_claim(self, agents_codes):
-        lob_dict = {}
+        lob_list = {}
         for lob in self.env['insurance.line.business'].search([]):
             count = self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)])
             if count > 0:
-                lob_dict[lob.line_of_business] = count
+                lob_list.append({'name': lob.line_of_business, 'count': count, 'icon': lob.image})
             else:
                 continue
-        return lob_dict
+        return lob_list
 
     @api.model
     def get_complaint_count(self, agents_codes):
-        complaint_dict = {}
+        complaint_list = {}
         for stage in self.env['helpdesk_lite.stage'].search([]):
             count = self.env['helpdesk_lite.ticket'].search_count(
                 [('agent_code', 'in', agents_codes), ('stage_id', '=', stage.id)])
-            complaint_dict[stage.name] = count
-        return complaint_dict
+            complaint_list.append({'stage':stage.name,'count':count})
+        return complaint_list
 
     @api.model
     def get_dashboard(self, id):
