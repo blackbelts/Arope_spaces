@@ -22,10 +22,17 @@ class Brokers(models.Model):
     _name = 'arope.broker'
 
     @api.model
-    def get_production(self,agents_codes):
+    def get_production(self,agents_codes,type):
+        if type=='broker':
+            domain=[('agent_code', 'in', agents_codes)]
+        elif type=='customer':
+            domain=[('customerpin', 'in', agents_codes)]
+        else:
+            domain=[]
+
         total = 0.0
         ids=[]
-        for prod in self.env['policy.arope'].search([('agent_code', 'in', agents_codes)]):
+        for prod in self.env['policy.arope'].search([domain]):
             total += prod.totoal_premium
             ids.append(prod.id)
         return {"total":total,"ids":ids}
@@ -248,47 +255,80 @@ class Brokers(models.Model):
         return True
 
     @api.model
-    def get_lob_count_policy(self, agents_codes):
-        lob_dict = {}
+    def get_lob_count_policy(self, agents_codes,type):
+        if type=='broker':
+            policy_ids= self.env['policy.arope'].search([('agent_code', 'in', agents_codes)]).ids
+        elif type=='customer':
+            policy_ids=self.env['policy.arope'].search([('customer_pin', 'in', agents_codes)]).ids
+        else:
+            policy_ids=[]
+        lob_list = []
         for lob in self.env['insurance.line.business'].search([]):
-            count = self.env['policy.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)])
+            count = self.env['policy.arope'].search_count([('id', 'in', policy_ids), ('lob', '=', lob.line_of_business)])
             if count>0:
-             lob_dict[lob.line_of_business] = count
+             lob_list.append({'name':lob.line_of_business,'count':count,'icon':lob.image})
             else:continue
 
-        return lob_dict
+        return lob_list
 
     @api.model
     def get_lob_count_claim(self, agents_codes):
-        lob_dict = {}
+        lob_list = []
         for lob in self.env['insurance.line.business'].search([]):
             count = self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)])
             if count > 0:
-                lob_dict[lob.line_of_business] = count
+                lob_list.append({'name': lob.line_of_business, 'count': count, 'icon': lob.image})
             else:
                 continue
-        return lob_dict
+        return lob_list
 
     @api.model
     def get_complaint_count(self, agents_codes):
-        complaint_dict = {}
+        complaint_list = []
         for stage in self.env['helpdesk_lite.stage'].search([]):
             count = self.env['helpdesk_lite.ticket'].search_count(
                 [('agent_code', 'in', agents_codes), ('stage_id', '=', stage.id)])
-            complaint_dict[stage.name] = count
-        return complaint_dict
+            complaint_list.append({'stage':stage.name,'count':count})
+        return complaint_list
 
     @api.model
-    def get_dashboard(self, id):
+    def get_collection_ratio(self, agents_codes):
+        complaint_list = []
+        collections=0.0
+        for coll in self.env['collection.arope'].search([('agent_code', 'in', agents_codes)]):
+          collections+=coll.paid_lc
+        prod=self.get_production(agents_codes)['total']
+        if prod>0:
+            ratio=(collections/prod)
+            return  ratio
+        else:
+            return 0.0
+
+    @api.model
+    def get_claim_ratio(self, agents_codes):
+        claims = 0.0
+        for claim in self.env['claim.arope'].search([('agent_code', 'in', agents_codes)]):
+            claims += claim.claim_paid
+        prod = self.get_production(agents_codes)['total']
+        if prod > 0:
+            ratio = (claims / prod)
+            return ratio
+        else:
+            return 0.0
+
+    @api.model
+    def get_broker_dashboard(self, id):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         agents_codes = []
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
         return {
-            "production": self.get_production(agents_codes),
-            "policy_lob": self.get_lob_count_policy(agents_codes),
+            "production": self.get_production(agents_codes,'broker'),
+            "policy_lob": self.get_lob_count_policy(agents_codes,'broker'),
             "claim_lob": self.get_lob_count_claim(agents_codes),
             "complaint_count": self.get_complaint_count(agents_codes),
+            "collection_ratio": self.get_collection_ratio(agents_codes),
+            "claims_ratio": self.get_claim_ratio(agents_codes),
             'rank': self.get_rank(id),
             'targetVsProduction': self.get_target_production(id),
             'lastVsCurrentYear': self.get_production_compare(agents_codes),
@@ -296,6 +336,32 @@ class Brokers(models.Model):
             'renews':self.get_renew(agents_codes)
         }
 
+    @api.model
+    def get_customer_dashboard(self, id):
+        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+        agents_codes = []
+        for rec in self.env['persons'].search([('card_id', '=', card)]):
+            agents_codes.append(rec.pin)
+        return {
+            "production": self.get_production(agents_codes,'customer'),
+            "policy_lob": self.get_lob_count_policy(agents_codes,'customer'),
+            "claim_lob": self.get_lob_count_claim(agents_codes),
+            "complaint_count": self.get_complaint_count(agents_codes),
+            "collection_ratio": self.get_collection_ratio(agents_codes),
+            "claims_ratio": self.get_claim_ratio(agents_codes),
+            'rank': self.get_rank(id),
+            'targetVsProduction': self.get_target_production(id),
+            'lastVsCurrentYear': self.get_production_compare(agents_codes),
+            'collections': self.get_collections(agents_codes),
+            'renews': self.get_renew(agents_codes)
+        }
+
+    @api.model
+    def get_user_groups(self, id):
+        groups=[]
+        for rec in self.env['res.groups'].sudo().search([('users','=',[id]),('category_id','=','arope')]):
+            groups.append(rec.name)
+        return groups
     @api.model
     def get_policy(self,parms):
         card = self.env['res.users'].search([('id', '=', parms['id'])], limit=1).card_id
