@@ -264,6 +264,15 @@ class Brokers(models.Model):
         return lob_dict
 
     @api.model
+    def get_complaint_count(self, agents_codes):
+        complaint_dict = {}
+        for stage in self.env['helpdesk_lite.stage'].search([]):
+            count = self.env['helpdesk_lite.ticket'].search_count(
+                [('agent_code', 'in', agents_codes), ('stage_id', '=', stage.id)])
+            complaint_dict[stage.name] = count
+        return complaint_dict
+
+    @api.model
     def get_dashboard(self, id):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         agents_codes = []
@@ -273,6 +282,7 @@ class Brokers(models.Model):
             "production": self.get_production(agents_codes),
             "policy_lob": self.get_lob_count_policy(agents_codes),
             "claim_lob": self.get_lob_count_claim(agents_codes),
+            "complaint_count": self.get_complaint_count(agents_codes),
             'rank': self.get_rank(id),
             'targetVsProduction': self.get_target_production(id),
             'lastVsCurrentYear': self.get_production_compare(agents_codes),
