@@ -503,7 +503,7 @@ class Quotation(models.Model):
             'res_model': 'quotation.service',
             'type': 'ir.actions.act_window',
             'view_mode': 'tree,form',
-            'domain': [('id', '=', self.quotation_id)],
+            'domain': [('id', '=', self.quotation_id.id)],
             'context': {
                 "create": False,
             },
@@ -648,6 +648,7 @@ class FinalApplication(models.Model):
 #
 # class FinalApplication(models.Model):
 #     _name = 'final.applications'
+
 
 class AvailableTime(models.Model):
     _name = 'available.time'
