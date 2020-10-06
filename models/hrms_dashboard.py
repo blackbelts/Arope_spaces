@@ -333,7 +333,7 @@ class Brokers(models.Model):
     @api.model
     def get_user_groups(self,id):
         groups=[]
-        for rec in self.env['res.groups'].search([('users','=',[id]),('category_id','=','arope')]):
+        for rec in self.env['res.groups'].sudo().search([('users','=',[id]),('category_id','=','arope')]):
             groups.append(rec.name)
         return groups
     # @api.model
