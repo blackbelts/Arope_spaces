@@ -248,6 +248,22 @@ class Brokers(models.Model):
         return True
 
     @api.model
+    def get_lob_count_policy(self, agents_codes):
+        lob_dict = {}
+        for lob in self.env['insurance.line.business'].search([]):
+            count = self.env['policy.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.name)])
+            lob_dict[lob.name] = count
+        return lob_dict
+
+    @api.model
+    def get_lob_count_claim(self, agents_codes):
+        lob_dict = {}
+        for lob in self.env['insurance.line.business'].search([]):
+            count = self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.name)])
+            lob_dict[lob.name] = count
+        return lob_dict
+
+    @api.model
     def get_dashboard(self, id):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         agents_codes = []
@@ -255,6 +271,8 @@ class Brokers(models.Model):
             agents_codes.append(rec.agent_code)
         return {
             "production": self.get_production(agents_codes),
+            "policy_lob": self.get_lob_count_policy(agents_codes),
+            "claim_lob": self.get_lob_count_claim(agents_codes),
             'rank': self.get_rank(id),
             'targetVsProduction': self.get_target_production(id),
             'lastVsCurrentYear': self.get_production_compare(agents_codes),
@@ -471,7 +489,8 @@ class Brokers(models.Model):
         return True
         # self.env['final.offer'].search([('id', '=', id)])[0].write({'type': ''})
         # return True
-    
+
+
 
 
 
