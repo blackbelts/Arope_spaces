@@ -66,7 +66,7 @@
                             <field name="name" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal', 'application_form'])]}"/>
                             <field name="phone" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal', 'application_form'])]}"/>
                             <field name="email" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal', 'application_form'])]}"/>
-                            <field name="target_price" force_save="1" attrs="{'readonly': [('state', 'not in', ['quick_quote', 'proposal', 'application_form'])]}"/>
+                            <field name="target_price"/>
 
 
                         </group>
