@@ -358,7 +358,10 @@ class Brokers(models.Model):
 
     @api.model
     def get_user_groups(self, id):
-        return self.env['res.groups'].sudo().search([('users','=',[id]),('category_id','=','arope')]).ids
+        groups=[]
+        for rec in self.env['res.groups'].sudo().search([('users','=',[id]),('category_id','=','arope')]):
+            groups.append(rec.name)
+        return groups
     @api.model
     def get_policy(self,parms):
         card = self.env['res.users'].search([('id', '=', parms['id'])], limit=1).card_id
