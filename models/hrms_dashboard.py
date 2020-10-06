@@ -260,7 +260,7 @@ class Brokers(models.Model):
 
     @api.model
     def get_lob_count_claim(self, agents_codes):
-        lob_list = {}
+        lob_list = []
         for lob in self.env['insurance.line.business'].search([]):
             count = self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)])
             if count > 0:
@@ -271,7 +271,7 @@ class Brokers(models.Model):
 
     @api.model
     def get_complaint_count(self, agents_codes):
-        complaint_list = {}
+        complaint_list = []
         for stage in self.env['helpdesk_lite.stage'].search([]):
             count = self.env['helpdesk_lite.ticket'].search_count(
                 [('agent_code', 'in', agents_codes), ('stage_id', '=', stage.id)])
