@@ -96,6 +96,7 @@ class Quotation(models.Model):
     offer_ids = fields.One2many('final.offer', 'application_id')
     surveyor = fields.Many2one('res.users', 'Surveyor')
     policy_number = fields.Char('Policy Num')
+    policy_issue_date = fields.Date('Policy Issue Date')
     family_age = fields.One2many('medical.family', 'application_id', string='Members')
     package = fields.Selection([('individual', 'Individual'),
                                 ('family', 'Family'),
@@ -495,6 +496,19 @@ class Quotation(models.Model):
 
         }
 
+    def related_quote(self):
+        self.ensure_one()
+        return {
+            'name': 'Related Quick Quote',
+            'res_model': 'quotation.service',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'domain': [('id', '=', self.quotation_id)],
+            'context': {
+                "create": False,
+            },
+        }
+
 
 
 
@@ -675,10 +689,10 @@ class WizardInsuranceQuotation(models.TransientModel):
     _name = 'wizard.insurance.quotation'
     insurance_app_id = fields.Many2one('insurance.quotation')
     policy_number = fields.Char('Policy Num')
-    policy_issue_date = fields.Date('Policy Issue Date')
+    policy_issue_date = fields.Date('Policy Issue Date', default=datetime.today())
 
     def policy_num(self):
-        self.insurance_app_id.write({'policy_number' : self.policy_number})
+        self.insurance_app_id.write({'policy_number' : self.policy_number, "policy_issue_date": self.policy_issue_date})
 
 class SurveyReport(models.Model):
 

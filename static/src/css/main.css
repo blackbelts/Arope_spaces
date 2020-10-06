@@ -24,9 +24,9 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
     width: auto;
 }
 .o_form_view .o_form_sheet_bg > .o_form_sheet {
-    background-color: rgba(255,255,255,.7);
+    background-color: rgba(255,255,255,.8);
     opacity: 1;
-    width: 80%;
+    width: 100%;
 }
 .o_form_view .o_form_statusbar > .o_statusbar_status{
     margin: 0 auto;
