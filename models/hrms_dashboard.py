@@ -251,7 +251,7 @@ class Brokers(models.Model):
     def get_lob_count_policy(self, agents_codes):
         lob_dict = {}
         for lob in self.env['insurance.line.business'].search([]):
-            count = self.env['policy.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.name)])
+            count = self.env['policy.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)])
             lob_dict[lob.name] = count
         return lob_dict
 
