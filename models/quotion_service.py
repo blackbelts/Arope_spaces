@@ -224,7 +224,7 @@ class QuotationService(models.Model):
         self.write({"lob": 6})
 
     def create_app(self):
-        product = self.env['insurance.product'].search([('lob', '=', self.lob.id)]).id
+        product = self.env['insurance.product'].search([('line_of_bus', '=', self.lob.id)]).id
 
         form_view_id = self.env.ref("Arope-spaces.insurance_view_form").id
         # ctx = dict(self.env.context)
