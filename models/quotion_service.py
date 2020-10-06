@@ -94,7 +94,7 @@ class QuotationService(models.Model):
 
     @api.onchange('brand', 'deductible', 'sum_insured','motor_product')
     def calculate_motor_price(self):
-
+        # print('1010')
         if self.brand == 'all models':
             if self.sum_insured and self.motor_product:
                 rate = self.env['motor.rating.table'].search(
@@ -224,6 +224,8 @@ class QuotationService(models.Model):
         self.write({"lob": 6})
 
     def create_app(self):
+        product = self.env['insurance.product'].search([('lob', '=', self.lob.id)]).id
+
         form_view_id = self.env.ref("Arope-spaces.insurance_view_form").id
         # ctx = dict(self.env.context)
         # ctx.update({
@@ -239,7 +241,7 @@ class QuotationService(models.Model):
             # 'domain': [('quotation_id', '=', self.id),('lob', '=', self.lob)],
             'views': [(form_view_id, 'form')],
             'target': 'current',
-            'context': {'default_quotation_id': self.id, 'default_lob': self.lob.id},
+            'context': {'default_quotation_id': self.id, 'default_lob': self.lob.id, 'default_product_id': product},
         }
 
 class Members(models.Model):

@@ -35,6 +35,8 @@
                             <tree editable="bottom">
                                 <field name="description"/>
                                 <field name="file" widget="many2many_binary"/>
+                                <field name="state"/>
+
                             </tree>
                         </field>
                     </page>

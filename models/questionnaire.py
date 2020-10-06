@@ -27,6 +27,13 @@ class FinalApplicationSetup(models.Model):
     _rec_name = 'description'
     description = fields.Char('Document Name')
     file = fields.Many2many('ir.attachment', string="File")
+    state = fields.Selection([
+        ('proposal', 'Request For Offer'),
+        ('initial_offer', 'Initial Offer'),
+        ('application_form', 'Application Form'),
+        ('survey', 'Survey'),
+        ('final_offer', 'Final Offer'),
+        ('application', 'Issue In Progress')], string='State')
     product_id = fields.Many2one('insurance.product', ondelele='cascade', index=True)
 
 class OfferSetup(models.Model):

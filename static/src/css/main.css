@@ -24,7 +24,7 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
     width: auto;
 }
 .o_form_view .o_form_sheet_bg > .o_form_sheet {
-    background-color: rgba(255,255,255,.8);
+    background-color: rgba(255,255,255,.9);
     opacity: 1;
     width: 100%;
 }
@@ -140,7 +140,7 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
         background-color: white !important;
 }
 .o_form_view .oe_button_box .btn.oe_stat_button {
-    background-color: #073e89 !important;
+    background-color: #078282FF !important;
     opacity: 1;
 }
 .o_chatter .o_chatter_topbar > .o_topbar_right_area {
