@@ -43,7 +43,7 @@ class Quotation(models.Model):
     # contact = fields.Char('Contact', required=True)
     phone = fields.Char('Mobile', required=True)
     email = fields.Char('Email', required=True)
-    target_price = fields.Float('Target Premium')
+    target_price = fields.Text('Requirements')
     application_number = fields.Char(string='Application Number', copy=False, index=True)
     application_date = fields.Date('Application Date', default=datetime.today(), readonly=True)
     quote_trials = fields.Char(string='Quote Trials')
@@ -128,52 +128,53 @@ class Quotation(models.Model):
             offers = []
             for rec in self.offer_ids:
                 offers.append(rec)
-            if offers[0].offer_state == 'accepted' and offers[0].type == 'initial':
-                self.write({'state': 'application_form'})
-                self.env['state.history'].create({"application_id": self.id, "state": 'application_form',
-                                                  "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                                  "user": self.write_uid.id})
-                self.test_state = self.env['state.setup'].search(
-                    [('status', '=', 'application_form'), ('type', '=', 'insurance_app')]).id
-                related_documents = self.env["final.application.setup"].search(
-                    [("product_id.id", "=", self.product_id.id)])
-                if related_documents:
-                    for question in related_documents:
-                        if question.state == 'application_form':
-                            if question.file:
+            if offers[0].offer_state == 'accepted':
+                if offers[0].type == 'initial':
+                    self.write({'state': 'application_form'})
+                    self.env['state.history'].create({"application_id": self.id, "state": 'application_form',
+                                                      "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                                      "user": self.write_uid.id})
+                    self.test_state = self.env['state.setup'].search(
+                        [('status', '=', 'application_form'), ('type', '=', 'insurance_app')]).id
+                    related_documents = self.env["final.application.setup"].search(
+                        [("product_id.id", "=", self.product_id.id)])
+                    if related_documents:
+                        for question in related_documents:
+                            if question.state == 'application_form':
+                                if question.file:
 
-                                id = self.env['final.application'].create(
-                                    {"description": question.id, 'download_files': [question.file.id],
-                                     "quotation_id": self.id})
-                                print(id)
-                                print(id.quotation_id)
-                            else:
-                                self.env['final.application'].create(
-                                    {"description": question.id,
-                                     "quotation_id": self.id})
-            elif offers[0].offer_state == 'accepted' and offers[0].type == 'final':
-                self.write({'state': 'application'})
-                self.env['state.history'].create({"application_id": self.id, "state": 'application',
-                                                  "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                                  "user": self.write_uid.id})
-                self.test_state = self.env['state.setup'].search(
-                    [('status', '=', 'application'), ('type', '=', 'insurance_app')]).id
-                related_documents = self.env["final.application.setup"].search(
-                    [("product_id.id", "=", self.product_id.id)])
-                if related_documents:
-                    for question in related_documents:
-                        if question.state == 'application':
-                            if question.file:
+                                    id = self.env['final.application'].create(
+                                        {"description": question.id, 'download_files': [question.file.id],
+                                         "quotation_id": self.id})
+                                    print(id)
+                                    print(id.quotation_id)
+                                else:
+                                    self.env['final.application'].create(
+                                        {"description": question.id,
+                                         "quotation_id": self.id})
+                elif  offers[0].type == 'final':
+                    self.write({'state': 'application'})
+                    self.env['state.history'].create({"application_id": self.id, "state": 'application',
+                                                      "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                                      "user": self.write_uid.id})
+                    self.test_state = self.env['state.setup'].search(
+                        [('status', '=', 'application'), ('type', '=', 'insurance_app')]).id
+                    related_documents = self.env["final.application.setup"].search(
+                        [("product_id.id", "=", self.product_id.id)])
+                    if related_documents:
+                        for question in related_documents:
+                            if question.state == 'application':
+                                if question.file:
 
-                                id = self.env['final.application'].create(
-                                    {"description": question.id, 'download_files': [question.file.id],
-                                     "quotation_id": self.id})
-                                print(id)
-                                print(id.quotation_id)
-                            else:
-                                self.env['final.application'].create(
-                                    {"description": question.id,
-                                     "quotation_id": self.id})
+                                    id = self.env['final.application'].create(
+                                        {"description": question.id, 'download_files': [question.file.id],
+                                         "quotation_id": self.id})
+                                    print(id)
+                                    print(id.quotation_id)
+                                else:
+                                    self.env['final.application'].create(
+                                        {"description": question.id,
+                                         "quotation_id": self.id})
 
     @api.onchange('surveyor')
     def change_survey_state(self):
