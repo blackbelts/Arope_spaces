@@ -65,7 +65,7 @@
                     <div>
                         <img style="height: 50px;width: 50px;float: left;" src="/Arope-spaces/static/src/img/call.png"/>
                         <span style="float: left; margin-left: 10px;font-size: 30px; color: #078282FF !important;"><i class="fa fa-comment"></i></span>
-                        <div style="float: left; margin-left: 10px; color: #078282FF !important; font-weight: 900; padding: 4px; border: solid .5px #078282FF;">
+                        <div style="float: left; margin-left: 10px; color: #078282FF !important; font-weight: 900; padding: 4px; border: solid 1px lightgray;">
                             <span attrs="{'invisible': [('message', '!=', False)]}">Welcome to AROPE Egypt Self Service, I am here to help you until your policy is issued.<br/>
                             You can message me any time using the messaging board at the right section</span>
                             <field attrs="{'invisible': [('message', '=', False)]}" name="message" readonly="1" force_save="1"/>
