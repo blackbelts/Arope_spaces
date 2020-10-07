@@ -153,9 +153,7 @@
                     </div>
                     <br/>
                     <h3 style="color: #073e89 !important">Required Documents</h3>
-                    <span>Please fill out the following application, sign the customer and re-upload it.</span>
-                    <br/>
-                    <span>Please Upload All Scanned Documents.</span>
+
                     <br/>
 <!--                    <group>-->
                         <field name="final_application_ids">
@@ -170,11 +168,6 @@
                     <br/>
                     <div>
                         <h3 style="color: #073e89 !important">Offering</h3>
-
-
-                        <span attrs="{'invisible': [('offer_ids', '=', False)]}">We are working on preparing an offer . Be patient.</span>
-                        <br/>
-                        <span attrs="{'invisible': [('offer_ids', '!=', False)]}">We await acceptance of the submitted offer.</span>
                         <br/>
                         <field name="offer_ids" >
                                 <tree editable="bottom" decoration-danger="offer_state == 'pending'">
