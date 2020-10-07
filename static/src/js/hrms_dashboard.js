@@ -222,6 +222,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
         self.collection_ratio=res.collection_ratio
         self.claims_ratio=res.claims_ratio
         self.policy_lob=res.policy_lob
+        self.claim_lob=res.claim_lob
         res.complaint_count.forEach(function(e,i){
             if(e.stage=="Canceled")
                 res.complaint_count.splice(i,1)
