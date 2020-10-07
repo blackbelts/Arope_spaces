@@ -496,8 +496,15 @@ class Quotation(models.Model):
         related_survey_questions = self.env["survey.line.setup"].search([("product_id.id", "=", self.product_id.id)])
 
         if related_survey_questions:
+            number = self.env['ir.sequence'].next_by_code('survey')
+            currentYear = datetime.today().strftime("%Y")
+            currentMonth = datetime.today().strftime("%m")
+            self.write(
+                {'application_number': self.lob.line_of_business.upper() + '/' + currentYear[2:4] + '/' + currentMonth +
+                                       '/' + number})
             id = self.env['survey.report'].create(
-                {"name": "Survey",
+                {"name": "Survey"+ '/' + currentYear[2:4] + '/' + currentMonth +
+                                       '/' + number ,
                  "application_id": self.id})
             for question in related_survey_questions:
                 print('c')
@@ -831,10 +838,14 @@ class WizardInsuranceQuotation(models.TransientModel):
 class SurveyReport(models.Model):
 
     _name = 'survey.report'
-    name = fields.Char("Survey Report")
+    name = fields.Char("Survey Number", required=True, copy=False, index=True,
+                             default=lambda self: self.env['ir.sequence'].next_by_code('survey'), readonly=True)
     surveyor = fields.Many2one('res.users', 'Surveyor')
+    comment = fields.Text('Comment')
+    recomm = fields.Text('Recommendation')
 
     survey_report_ids = fields.One2many('survey.report.line', 'survey_id')
+
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
 
