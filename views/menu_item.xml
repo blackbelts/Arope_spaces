@@ -136,7 +136,7 @@
     <menuitem id="arope_space" name="My Space" web_icon="Arope-spaces,static/description/icon.png"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group,Arope-spaces.managers_group,Arope-spaces.surveyor_group" sequence="-100"/>
 
 
-    <menuitem id="menu_hrms_dashboard" name="Dashboard" action="hr_action_dashboard"
+    <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="hr_action_dashboard"
               parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />
 
 
@@ -167,7 +167,7 @@
               parent="arope_space"
               action="insurance_action"
               sequence="2"/>
-    <menuitem name="Claim Application"
+    <menuitem name="Claims Management"
               id="claim"
               parent="arope_space"
               action="claim_app_action"
