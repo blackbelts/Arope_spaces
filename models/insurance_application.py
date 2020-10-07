@@ -126,7 +126,7 @@ class Quotation(models.Model):
     def get_message(self):
         if self.test_state:
             print('hhhhhhhhh')
-            self.write({"message":  self.test_state.message})
+            self.message = self.test_state.message
 
     @api.onchange('offer_ids')
     def change_offer(self):
