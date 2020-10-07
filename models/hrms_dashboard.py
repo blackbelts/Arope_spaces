@@ -289,14 +289,12 @@ class Brokers(models.Model):
     def get_lob_count_ins_app(self, id):
         lob_list = []
         for lob in self.env['insurance.line.business'].search([]):
-
-            count=self.env['insurance.quotation'].search_count(
-                    [('create_uid', '=', id), ('lob', '=', lob.id)])
-            if count > 0:
-                lob_list.append({'name': lob.line_of_business, 'count': count,'icon': lob.image})
-            else:
-                continue
-        return lob_list
+            count=self.env['insurance.quotation'].search([('create_uid', '=', id), ('lob', '=', lob.id)])
+            # if count > 0:
+            #     lob_list.append({'name': lob.line_of_business, 'count': count,'icon': lob.image})
+            # else:
+            #     continue
+            return count
 
     @api.model
     def get_complaint_count(self, agents_codes):
