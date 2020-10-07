@@ -31,12 +31,12 @@ class QuotationService(models.Model):
     days = fields.Integer('Day(s)', store='True', required=True)
     #compute='compute_days'
     # motor_product = fields.Many2one('product.covers', 'Product')
-    brand = fields.Selection([('all brands', 'All Brands (except Chinese & East Asia)'),
-                              ('chinese cars & east asia', 'Chinese Cars & East Asia'), ('all models', 'All Models')],
-                             'Brand')
-    deductible = fields.Selection([('250 EGP', '250 EGP'),
-                                   ('4 Per Thousand', '4 Per Thousand')],
-                                  'Deductible')
+    # brand = fields.Selection([('all brands', 'All Brands (except Chinese & East Asia)'),
+    #                           ('chinese cars & east asia', 'Chinese Cars & East Asia'), ('all models', 'All Models')],
+    #                          'Brand')
+    # deductible = fields.Selection([('250 EGP', '250 EGP'),
+    #                                ('4 Per Thousand', '4 Per Thousand')],
+    #                               'Deductible')
     medical_product = fields.Many2one('medical.price', 'Product')
     motor_product = fields.Many2one('product.covers', 'Product')
     price = fields.Float('Premium')
@@ -92,37 +92,36 @@ class QuotationService(models.Model):
         else:
             return {'domain': {'medical_product': [('package', '=', self.medical_package)]}}
 
-    @api.onchange('brand', 'deductible', 'sum_insured','motor_product')
+    @api.onchange('sum_insured','motor_product')
     def calculate_motor_price(self):
         # print('1010')
-        if self.brand == 'all models':
+        # if self.brand == 'all models':
             if self.sum_insured and self.motor_product:
                 rate = self.env['motor.rating.table'].search(
-                    [('brand', '=', 'all models'),
-                     ('sum_insured_from', '<=', self.sum_insured), ('sum_insure_to', '>=', self.sum_insured),
+                    [('sum_insured_from', '<=', self.sum_insured), ('sum_insure_to', '>=', self.sum_insured),
                      ('product_id', '=', self.motor_product.id)])
                 for rec in rate:
                     self.price = self.sum_insured * rec.rate
-        else:
-
-            if self.brand == 'all brands':
-                if self.sum_insured and self.motor_product and self.deductible:
-                    rate = self.env['motor.rating.table'].search([('brand', '=', self.brand),
-                                                                  ('deductible', '=', self.deductible),
-                                                                  ('sum_insured_from', '<=', self.sum_insured),
-                                                                  ('sum_insure_to', '>=', self.sum_insured),
-                                                                  ('product_id', '=', self.motor_product.id)])
-                    for rec in rate:
-                        self.price = self.sum_insured * rec.rate
-            else:
-                if self.sum_insured and self.motor_product:
-                    rate = self.env['motor.rating.table'].search(
-                        [('brand', '=', self.brand),
-                         ('sum_insured_from', '<=', self.sum_insured),
-                         ('sum_insure_to', '>=', self.sum_insured),
-                         ('product_id', '=', self.motor_product.id)])
-                    for rec in rate:
-                        self.price = self.sum_insured * rec.rate
+        # else:
+        #
+        # #     if self.brand == 'all brands':
+        #         if self.sum_insured and self.motor_product:
+        #             rate = self.env['motor.rating.table'].search([('brand', '=', self.brand),
+        #                                                           ('deductible', '=', self.deductible),
+        #                                                           ('sum_insured_from', '<=', self.sum_insured),
+        #                                                           ('sum_insure_to', '>=', self.sum_insured),
+        #                                                           ('product_id', '=', self.motor_product.id)])
+        #             for rec in rate:
+        #                 self.price = self.sum_insured * rec.rate
+        #     else:
+        #         if self.sum_insured and self.motor_product:
+        #             rate = self.env['motor.rating.table'].search(
+        #                 [('brand', '=', self.brand),
+        #                  ('sum_insured_from', '<=', self.sum_insured),
+        #                  ('sum_insure_to', '>=', self.sum_insured),
+        #                  ('product_id', '=', self.motor_product.id)])
+        #             for rec in rate:
+        #                 self.price = self.sum_insured * rec.rate
 
 
     def calculate_age(self, DOB):
