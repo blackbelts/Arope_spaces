@@ -22,17 +22,17 @@ class Brokers(models.Model):
     _name = 'arope.broker'
 
     @api.model
-    def get_production(self,agents_codes):
+    def get_production(self,agents_codes,type):
         if type=='broker':
             domain=[('agent_code', 'in', agents_codes)]
         elif type=='customer':
             domain=[('customerpin', 'in', agents_codes)]
-        # else:
-        #     domain=[]
+        else:
+            domain=[]
 
         total = 0.0
         ids=[]
-        for prod in self.env['policy.arope'].search([domain]):
+        for prod in self.env['policy.arope'].search(domain):
             total += prod.totoal_premium
             ids.append(prod.id)
         return {"total":total,"ids":ids}
@@ -312,23 +312,25 @@ class Brokers(models.Model):
             return 0.0
 
     @api.model
-    def get_broker_dashboard(self, id):
-        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+    def get_dashboard(self, id):
+        user = self.env['res.users'].search_read([('id', '=', id)], limit=1)[0]
         agents_codes = []
-        for rec in self.env['persons'].search([('card_id', '=', card)]):
+        for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
             agents_codes.append(rec.agent_code)
+
         return {
+            "user": self.env['persons'].search_read([('card_id', '=', user.card_id)],limit=1)[0],
             "production": self.get_production(agents_codes,'broker'),
-            # "policy_lob": self.get_lob_count_policy(agents_codes),
-            # "claim_lob": self.get_lob_count_claim(agents_codes),
-            # "complaint_count": self.get_complaint_count(agents_codes),
-            # "collection_ratio": self.get_collection_ratio(agents_codes),
-            # "claims_ratio": self.get_claim_ratio(agents_codes),
-            # 'rank': self.get_rank(id),
-            # 'targetVsProduction': self.get_target_production(id),
-            # 'lastVsCurrentYear': self.get_production_compare(agents_codes),
-            # 'collections':self.get_collections(agents_codes),
-            # 'renews':self.get_renew(agents_codes)
+            "policy_lob": self.get_lob_count_policy(agents_codes),
+            "claim_lob": self.get_lob_count_claim(agents_codes),
+            "complaint_count": self.get_complaint_count(agents_codes),
+            "collection_ratio": self.get_collection_ratio(agents_codes),
+            "claims_ratio": self.get_claim_ratio(agents_codes),
+            'rank': self.get_rank(id),
+            'targetVsProduction': self.get_target_production(id),
+            'lastVsCurrentYear': self.get_production_compare(agents_codes),
+            'collections':self.get_collections(agents_codes),
+            'renews':self.get_renew(agents_codes)
         }
     @api.model
     def get_user_groups(self,id):
@@ -336,14 +338,14 @@ class Brokers(models.Model):
         for rec in self.env['res.groups'].sudo().search([('users','=',[id]),('category_id','=','arope')]):
             groups.append(rec.name)
         return groups
-    @api.model
-    def get_customer_dashboard(self, id):
-        card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
-        agents_codes = []
-        for rec in self.env['persons'].search([('card_id', '=', card)]):
-            agents_codes.append(rec.pin)
-        return {
-            "production": self.get_production(agents_codes,'customer'),
+    # @api.model
+    # def get_customer_dashboard(self, id):
+    #     card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
+    #     agents_codes = []
+    #     for rec in self.env['persons'].search([('card_id', '=', card)]):
+    #         agents_codes.append(rec.pin)
+    #     return {
+    #         "production": self.get_production(agents_codes,'customer'),
             # "policy_lob": self.get_lob_count_policy(agents_codes),
             # "claim_lob": self.get_lob_count_claim(agents_codes),
             # "complaint_count": self.get_complaint_count(agents_codes),
@@ -354,7 +356,7 @@ class Brokers(models.Model):
             # 'lastVsCurrentYear': self.get_production_compare(agents_codes),
             # 'collections': self.get_collections(agents_codes),
             # 'renews': self.get_renew(agents_codes)
-        }
+        # }
 
     @api.model
     def get_policy(self,parms):
