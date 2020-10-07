@@ -499,7 +499,7 @@ class Quotation(models.Model):
             number = self.env['ir.sequence'].next_by_code('survey')
             currentYear = datetime.today().strftime("%Y")
             currentMonth = datetime.today().strftime("%m")
-            
+
             id = self.env['survey.report'].create(
                 {"name": "Survey"+ '/' + currentYear[2:4] + '/' + currentMonth +
                                        '/' + number ,

@@ -57,7 +57,7 @@
 <!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'issued'),('sub_state', '!=', 'pending')]}">Policy is issued</h2>-->
 <!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'survey_required'),('sub_state', '!=', 'pending')]}">Fill in survey required information</h2>-->
 <!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'quick_quote'),('sub_state', '!=', 'pending')]}">Pending on reinsurance agreement</h2>-->
-                    <h3 style="color: #073e89 !important">Insurance Application Info</h3>
+                    <h3 style="color: #073e89 !important">Insurance Application</h3>
                     <group>
                         <group>
                             <field name="state" invisible="1"/>
