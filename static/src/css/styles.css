@@ -660,7 +660,7 @@
 
 .page-title-area {
     padding: 0 30px;
-    background: #fff;
+    background: transparent;
     position: relative;
 }
 
@@ -821,10 +821,11 @@ ul.breadcrumbs {
     background: #fff;
     overflow: hidden;
     position: relative;
+    min-height:180px
 }
 
 .s-report-inner {
-    padding-left: 85px;
+    padding-left: 60px;
 }
 
 .single-report .icon {
@@ -2891,7 +2892,10 @@ table.dataTable thead td {
     font-weight: bold;
 }
 .top-sales-report .larage{
-font-size: 5rem !important;
+font-size: 4rem !important;
+}
+.top-sales-report .text{
+font-size:2rem !important;
 }
 .top-sales-report .larage {
   margin: 0.3em 0 0;
@@ -2905,6 +2909,7 @@ font-size: 5rem !important;
 }
 .cursor{
     cursor: pointer;
+    margin-bottom:1rem !important
 }
 .single-report .icon {
     font-size: 28px !important;
@@ -2917,4 +2922,17 @@ font-size: 5rem !important;
 }
 .card-body{
     padding:0.5rem
+}
+
+.new-title{
+margin-top: 27px !important;
+}
+.fixed-height{
+    min-height: 400px;
+}
+.white-background{
+    background-color:white
+}
+.card{
+    min-height: 100%;
 }
