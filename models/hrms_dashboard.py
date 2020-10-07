@@ -258,7 +258,6 @@ class Brokers(models.Model):
     def get_lob_count_policy(self, agents_codes):
 
         lob_list = []
-
         for lob in self.env['insurance.line.business'].search([]):
             total=0.0
             count=0
