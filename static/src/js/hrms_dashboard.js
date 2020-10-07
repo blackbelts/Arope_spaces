@@ -39,7 +39,6 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
       var self = this;
       this.fetch_data().then(function () {
         if (self.user.length!=0&&self.user[0].type == "broker") {
-          console.log("if")
           self.$('.o_hr_dashboard').prepend(QWeb.render("broker", {
             widget: self
           }));
@@ -166,11 +165,15 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
                     value:e.amount
                 })
             })
-            var chart = AmCharts.makeChart("ambarchart3", {
+            var piechart = AmCharts.makeChart("ambarchart3", {
               "type": "pie",
+              "labelRadius": -35,
               "theme": "light",
+              "legend":{
+                "position":"right"
+              },
               colors: ["#FCC133", "#3EB650", "#3EB650","#3778C2","#292930"],
-              "labelText": "[[title]] [[value]] EGP",
+              "labelText": "",
               "dataProvider": lobs,
               "titleField": "title",
               "valueField": "value",
@@ -179,7 +182,6 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
               },
               "color": "blue"
             });
-
           })
 
         } else if (self.user.length!=0&&self.user[0].type == "customer") {
@@ -220,14 +222,21 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
         self.collection_ratio=res.collection_ratio
         self.claims_ratio=res.claims_ratio
         self.policy_lob=res.policy_lob
-        res.complaint_count.forEach(function(e){
-            console.log(e)
+        res.complaint_count.forEach(function(e,i){
             if(e.stage=="Canceled")
+                res.complaint_count.splice(i,1)
+            else if(e.stage=="New"){
                 e.class="icon red"
-            else if(e.stage=="Solved")
+                e.subClass="redspan"
+            }
+            else if(e.stage=="Solved"){
                 e.class="icon green"
-            else
-                e.class="icon orange"
+                e.subClass="greenspan"
+            }
+            else{
+                 e.class="icon orange"
+                 e.subClass="orangespan"
+            }
         })
         self.complaint_count=res.complaint_count
         //                self.collections_statistics=res

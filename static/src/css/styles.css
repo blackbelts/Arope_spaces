@@ -825,7 +825,7 @@ ul.breadcrumbs {
 }
 
 .s-report-inner {
-    padding-left: 60px;
+    padding-left: 80px;
 }
 
 .single-report .icon {
@@ -844,7 +844,7 @@ ul.breadcrumbs {
 }
 
 .s-report-title {
-    margin-bottom: 25px;
+    margin-bottom: 10px;
 }
 
 .header-title {
@@ -2879,7 +2879,7 @@ table.dataTable thead td {
     font-weight: bold !important;
 }
 .redspan{
-   /* color: #E12B38 !important;*/
+   color: #E12B38 !important;
     font-size: 2rem!important;
     font-weight: bold !important;
 }
