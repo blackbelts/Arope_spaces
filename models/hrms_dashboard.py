@@ -292,7 +292,7 @@ class Brokers(models.Model):
         collections=0.0
         for coll in self.env['collection.arope'].search([('agent_code', 'in', agents_codes)]):
           collections+=coll.paid_lc
-        prod=self.get_production(agents_codes)['total']
+        prod=self.get_production(agents_codes,'broker')['total']
         if prod>0:
             ratio=(collections/prod)
             return  ratio
@@ -304,7 +304,7 @@ class Brokers(models.Model):
         claims = 0.0
         for claim in self.env['claim.arope'].search([('agent_code', 'in', agents_codes)]):
             claims += claim.claim_paid
-        prod = self.get_production(agents_codes)['total']
+        prod = self.get_production(agents_codes,'broker')['total']
         if prod > 0:
             ratio = (claims / prod)
             return ratio
@@ -319,7 +319,7 @@ class Brokers(models.Model):
             agents_codes.append(rec.agent_code)
 
         return {
-            "user": self.env['persons'].search_read([('card_id', '=', user.card_id)],limit=1)[0],
+            "user": self.env['persons'].search_read([('card_id', '=', user.card_id)],limit=1),
             "production": self.get_production(agents_codes,'broker'),
             "policy_lob": self.get_lob_count_policy(agents_codes),
             "claim_lob": self.get_lob_count_claim(agents_codes),
