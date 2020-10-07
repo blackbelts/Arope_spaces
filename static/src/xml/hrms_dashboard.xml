@@ -458,7 +458,7 @@
                             <tr t-foreach="widget.policy_lob" t-as="lob">
                               <td><t t-esc="lob.name" /></td>
                               <td><img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
-                              <td><t t-esc="lob.name" /></td>
+                              <td><t t-esc="lob.count" /></td>
                               <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>
                             </tr>
                           </tbody>
@@ -487,7 +487,7 @@
                             <tr t-foreach="widget.claim_lob" t-as="lob">
                               <td><t t-esc="lob.name" /></td>
                               <td><img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
-                              <td><t t-esc="lob.name" /></td>
+                              <td><t t-esc="lob.count" /></td>
                               <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>
                             </tr>
                           </tbody>
@@ -516,7 +516,7 @@
                             <tr t-foreach="widget.policy_lob" t-as="lob">
                               <td><t t-esc="lob.name" /></td>
                               <td><img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
-                              <td><t t-esc="lob.name" /></td>
+                              <td><t t-esc="lob.count" /></td>
                               <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>
                             </tr>
                           </tbody>
