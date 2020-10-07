@@ -57,11 +57,13 @@
 <!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'issued'),('sub_state', '!=', 'pending')]}">Policy is issued</h2>-->
 <!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'survey_required'),('sub_state', '!=', 'pending')]}">Fill in survey required information</h2>-->
 <!--                    <h2 style="color:red;" attrs="{'invisible': ['|',('state', '!=', 'quick_quote'),('sub_state', '!=', 'pending')]}">Pending on reinsurance agreement</h2>-->
-                    <h3 style="color: #073e89 !important">Insurance Application</h3>
                     <div>
-                        <field name="message" readonly="1" force_save="1"/>
+                        <img style="height: 50px;width: 50px;float: left;" src="/Arope-spaces/static/src/img/call.png"/>
+                        <div style="float: left; margin-top: 14px;margin-left: 10px;">
+                            <field name="message" readonly="1" force_save="1"/>
+                        </div>
                     </div>
-                    <br/>
+
                     <group>
                         <group>
                             <field name="state" invisible="1"/>
