@@ -42,14 +42,12 @@
                     </field>
                     <group attrs="{'invisible': [('lob', '!=', 3)]}">
                         <group>
-                                <field name="brand" />
-                                <field name="deductible" attrs="{'invisible': [('brand', '!=', 'all brands')]}"/>
+<!--                                <field name="brand" />-->
+<!--                                <field name="deductible" attrs="{'invisible': [('brand', '!=', 'all brands')]}"/>-->
+                                <field name="sum_insured"/>
                                 <field name="motor_product"/>
                         </group>
-                        <group>
 
-                                <field name="sum_insured"/>
-                        </group>
 
                     </group>
                     <group attrs="{'invisible': [('lob', '!=', 6)]}">
