@@ -276,7 +276,7 @@ class Brokers(models.Model):
         for lob in self.env['insurance.line.business'].search([]):
             total = 0.0
             count = 0
-            for rec in self.env['claim.arope'].search([('agent_code', 'in', agents_codes)]):
+            for rec in self.env['claim.arope'].search([('agent_code', 'in', agents_codes), ('lob', 'in', [str(lob.line_of_business)])]):
                 total+=rec.claim_paid
                 count+=1
             if count > 0:
