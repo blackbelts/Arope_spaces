@@ -22,7 +22,7 @@
                     <button  name="survey" string="Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=',  'application_form')]}" groups="Arope-spaces.managers_group"/>
 
                     <!--                    <button  name="submit_survey_required" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state', '!=', 'surveyor'),('sub_state', '!=', 'complete')]}" groups="Arope-spaces.broker_space_group"/>-->
-                    <button  name="initial_offer" string="Initial Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}" groups="Arope-spaces.managers_group"/>
+<!--                    <button  name="initial_offer" string="Initial Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}" groups="Arope-spaces.managers_group"/>-->
 <!--                        <button style="margin-left: 3px;" name="final_confirm" string="Confirm Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer')]}" groups="Arope-spaces.managers_group"/>-->
 <!--                    <button  name="accept_offer" string="Accept Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer')]}" groups="Arope-spaces.broker_space_group"/>-->
 <!--                    <button name="offer_accept" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'offer')]}" groups="Arope-spaces.broker_space_group"/>-->
@@ -65,7 +65,7 @@
                     <div>
                         <img style="height: 50px;width: 50px;float: left;" src="/Arope-spaces/static/src/img/call.png"/>
                         <span style="float: left; margin-left: 10px;font-size: 30px; color: #078282FF !important;"><i class="fa fa-comment"></i></span>
-                        <div style="float: left; margin-left: 10px; color: #078282FF !important; font-weight: 900; padding: 4px; border: solid .5px #078282FF;">
+                        <div style="float: left; margin-left: 10px; color: #078282FF !important; font-weight: 900; padding: 4px; border: solid 1px lightgray;">
                             <span attrs="{'invisible': [('message', '!=', False)]}">Welcome to AROPE Egypt Self Service, I am here to help you until your policy is issued.<br/>
                             You can message me any time using the messaging board at the right section</span>
                             <field attrs="{'invisible': [('message', '=', False)]}" name="message" readonly="1" force_save="1"/>
@@ -163,7 +163,7 @@
                         </field>
 <!--                    </group>-->
                     <br/>
-                    <div attrs="{'invisible': [('state', '=', 'proposal')]}">
+                    <div>
                         <h3 style="color: #073e89 !important">Offering</h3>
 
 

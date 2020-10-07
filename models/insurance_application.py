@@ -134,7 +134,32 @@ class Quotation(models.Model):
             offers = []
             for rec in self.offer_ids:
                 offers.append(rec)
-            if offers[-1].offer_state == 'accepted':
+            if  offers[-1].offer_state == 'submitted':
+                if offers[-1].type == 'initial':
+                    self.write({'state': 'initial_offer'})
+                    self.env['state.history'].create({"application_id": self.id, "state": 'initial_offer',
+                                                      "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                                      "user": self.write_uid.id})
+                    self.test_state = self.env['state.setup'].search(
+                        [('status', '=', 'initial_offer'), ('type', '=', 'insurance_app')]).id
+                    related_documents = self.env["final.application.setup"].search(
+                        [("product_id.id", "=", self.product_id.id)])
+                    if related_documents:
+                        for question in related_documents:
+                            if question.state == 'initial_offer':
+                                if question.file:
+
+                                    id = self.env['final.application'].create(
+                                        {"description": question.id, 'download_files': [question.file.id],
+                                         "quotation_id": self.id})
+                                    print(id)
+                                    print(id.quotation_id)
+                                else:
+                                    self.env['final.application'].create(
+                                        {"description": question.id,
+                                         "quotation_id": self.id})
+
+            elif offers[-1].offer_state == 'accepted':
                 if offers[-1].type == 'initial':
                     self.write({'state': 'application_form'})
                     self.env['state.history'].create({"application_id": self.id, "state": 'application_form',
@@ -773,10 +798,13 @@ class FinalOffer(models.Model):
     file = fields.Many2many('ir.attachment', string="Offer")
     value = fields.Float('Value')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
-    offer_state = fields.Selection([('pending', 'Pending For Acceptance'),
-                                    ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='State',
-                                   default='pending')
+    offer_state = fields.Selection([('submitted', 'Submitted'),
+                                    ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='State')
 
+    @api.onchange('file')
+    def change_state(self):
+        if self.file:
+            self.offer_state = 'submitted'
 
 class FinalApplication(models.Model):
     _name = 'final.application'
