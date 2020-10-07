@@ -496,7 +496,7 @@ class Quotation(models.Model):
         related_survey_questions = self.env["survey.line.setup"].search([("product_id.id", "=", self.product_id.id)])
 
         if related_survey_questions:
-            number = self.env['ir.sequence'].next_by_code('survey')
+            number = self.env['ir.sequence'].next_by_code('survies')
             currentYear = datetime.today().strftime("%Y")
             currentMonth = datetime.today().strftime("%m")
 
@@ -749,7 +749,14 @@ class SurveyReportLine(models.Model):
 
     question = fields.Many2one('survey.line.setup','Survey Area')
     file = fields.Many2many('ir.attachment', string="Upload File")
+    state = fields.Selection([('pending', 'Pending'), ('submitted', 'Submitted'),
+                              ('accepted', 'Accepted'),('rejected', 'Rejected')], 'State')
     survey_id = fields.Many2one('survey.report', ondelete='cascade')
+
+    @api.onchange('file')
+    def change_state(self):
+        if self.file != False:
+            self.state = 'submitted'
 
 class FinalOffer(models.Model):
     _name = 'final.offer'
@@ -836,8 +843,11 @@ class WizardInsuranceQuotation(models.TransientModel):
 class SurveyReport(models.Model):
 
     _name = 'survey.report'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     name = fields.Char("Survey Number", required=True, copy=False, index=True,
                              default=lambda self: self.env['ir.sequence'].next_by_code('survey'), readonly=True)
+    state = fields.Selection([('pending', 'Pending'), ('surveyor', 'Surveyor Assigned'),
+                            ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending')
     surveyor = fields.Many2one('res.users', 'Surveyor')
     comment = fields.Text('Comment')
     recomm = fields.Text('Recommendation')
@@ -845,6 +855,28 @@ class SurveyReport(models.Model):
     survey_report_ids = fields.One2many('survey.report.line', 'survey_id')
 
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+
+    @api.onchange('survey_report_ids')
+    def survey_submitted(self):
+        if self.survey_report_ids:
+            res = []
+            for rec in self.survey_report_ids:
+                res.append(rec.file)
+            if all(res):
+                # self.write({'state': 'policy'})
+                # self.env['state.history'].create({"application_id": self.id, "state": 'policy',
+                #                                   "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                #                                   "user": self.write_uid.id})
+                # self.test_state = self.env['state.setup'].search([('status', '=', 'policy'),('type', '=', 'insurance_app')]).id
+                self.write({'state': 'submitted'})
+
+    def assign_surveyor(self):
+        self.write({'state': 'surveyor'})
+        self.application_id.write({'surveyor': self.surveyor.id})
+
+    def accept_survey(self):
+        self.write({'state': 'accepted'})
+
 
 
 

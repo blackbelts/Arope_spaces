@@ -258,10 +258,15 @@ class Brokers(models.Model):
     def get_lob_count_policy(self, agents_codes):
 
         lob_list = []
+
         for lob in self.env['insurance.line.business'].search([]):
-            count = self.env['policy.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)])
+            total=0.0
+            count=0
+            for rec in self.env['policy.arope'].search([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)]):
+                  total+=rec.totoal_premium
+                  count+=1
             if count>0:
-             lob_list.append({'name':lob.line_of_business,'count':count,'icon':lob.image})
+             lob_list.append({'name':lob.line_of_business,'count':count,'amount':total,'icon':lob.image})
             else:continue
 
         return lob_list
@@ -270,9 +275,13 @@ class Brokers(models.Model):
     def get_lob_count_claim(self, agents_codes):
         lob_list = []
         for lob in self.env['insurance.line.business'].search([]):
-            count = self.env['claim.arope'].search_count([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)])
+            total = 0.0
+            count = 0
+            for rec in self.env['claim.arope'].search([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)]):
+                total+=rec.claim_paid
+                count+=1
             if count > 0:
-                lob_list.append({'name': lob.line_of_business, 'count': count, 'icon': lob.image})
+                lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image})
             else:
                 continue
         return lob_list
