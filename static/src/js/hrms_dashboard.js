@@ -20,13 +20,13 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
     ],
     events: {
 
-      'click #production': 'production_list',
-      'click #green_collection': 'green_collection',
-      'click #orange_collection': 'orange_collection',
-      'click #red_collection': 'red_collection',
-      'click #green_renew': 'green_renew',
-      'click #orange_renew': 'orange_renew',
-      'click #red_renew': 'red_renew',
+//      'click #production': 'production_list',
+//      'click #green_collection': 'green_collection',
+//      'click #orange_collection': 'orange_collection',
+//      'click #red_collection': 'red_collection',
+//      'click #green_renew': 'green_renew',
+//      'click #orange_renew': 'orange_renew',
+//      'click #red_renew': 'red_renew',
     },
     init: function (parent, context) {
       this._super(parent, context);
@@ -223,6 +223,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
         self.claims_ratio=res.claims_ratio
         self.policy_lob=res.policy_lob
         self.claim_lob=res.claim_lob
+        self.App_count=res.App_count
         res.complaint_count.forEach(function(e,i){
             if(e.stage=="Canceled")
                 res.complaint_count.splice(i,1)
