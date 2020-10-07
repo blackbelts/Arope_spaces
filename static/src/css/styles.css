@@ -821,7 +821,7 @@ ul.breadcrumbs {
     background: #fff;
     overflow: hidden;
     position: relative;
-    min-height:180px
+    /*min-height:180px*/
 }
 
 .s-report-inner {
@@ -2879,7 +2879,7 @@ table.dataTable thead td {
     font-weight: bold !important;
 }
 .redspan{
-    color: #E12B38 !important;
+   /* color: #E12B38 !important;*/
     font-size: 2rem!important;
     font-weight: bold !important;
 }

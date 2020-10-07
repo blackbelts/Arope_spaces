@@ -159,22 +159,19 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
               }
 
             });
+            var lobs=[]
+            self.policy_lob.forEach(function(e){
+                lobs.push({
+                    title:e.name,
+                    value:e.amount
+                })
+            })
             var chart = AmCharts.makeChart("ambarchart3", {
               "type": "pie",
               "theme": "light",
-              colors: ["red", "green", "yellow"],
-              "labelText": "[[title]] [[value]] %",
-              "dataProvider": [{
-                "title": "New",
-                "value": 4852
-              }, {
-                "title": "Returning",
-                "value": 9899
-              }, {
-                "title": "Returning",
-                "value": 9899,
-                /*  color:"#f00" */
-              }],
+              colors: ["#FCC133", "#3EB650", "#3EB650","#3778C2","#292930"],
+              "labelText": "[[title]] [[value]] EGP",
+              "dataProvider": lobs,
               "titleField": "title",
               "valueField": "value",
               "export": {
@@ -223,6 +220,16 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
         self.collection_ratio=res.collection_ratio
         self.claims_ratio=res.claims_ratio
         self.policy_lob=res.policy_lob
+        res.complaint_count.forEach(function(e){
+            console.log(e)
+            if(e.stage=="Canceled")
+                e.class="icon red"
+            else if(e.stage=="Solved")
+                e.class="icon green"
+            else
+                e.class="icon orange"
+        })
+        self.complaint_count=res.complaint_count
         //                self.collections_statistics=res
         console.log("get_dashboard", res)
       });
