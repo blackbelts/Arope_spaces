@@ -420,6 +420,13 @@
 			</tree>
 		</field>
 	</record>
+    <record id="seq_survey" model="ir.sequence">
+        <field name="name">Survey</field>
+        <field name="code">survey</field>
+        <field name="prefix">Survey/</field>
+        <field name="padding">4</field>
+        <!--<field name="company_id" eval="False"/>-->
+    </record>
     <record id="survey_report_view_tree" model="ir.ui.view">
 		<field name="name">Survey Report</field>
 		<field name="model">survey.report</field>
@@ -438,6 +445,7 @@
 			<form>
                 <sheet>
                     <group>
+                        <field name="name"/>
                         <field name="surveyor"/>
                     </group>
 
@@ -447,6 +455,14 @@
                             <field name="file" widget="many2many_binary"/>
                         </tree>
                     </field>
+                    <group>
+                        <group>
+                            <field name="recomm"/>
+                        </group>
+                        <group>
+                            <field name="comment"/>
+                        </group>
+                    </group>
                 </sheet>
 			</form>
 		</field>

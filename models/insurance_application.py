@@ -831,10 +831,14 @@ class WizardInsuranceQuotation(models.TransientModel):
 class SurveyReport(models.Model):
 
     _name = 'survey.report'
-    name = fields.Char("Survey Report")
+    name = fields.Char("Survey Number", required=True, copy=False, index=True,
+                             default=lambda self: self.env['ir.sequence'].next_by_code('survey'), readonly=True)
     surveyor = fields.Many2one('res.users', 'Surveyor')
+    comment = fields.Text('Comment')
+    recomm = fields.Text('Recommendation')
 
     survey_report_ids = fields.One2many('survey.report.line', 'survey_id')
+
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
 
 
