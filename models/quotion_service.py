@@ -43,6 +43,7 @@ class QuotationService(models.Model):
     dob = fields.Date('Date OF Birth', default=datetime.today())
     sum_insured = fields.Float('Sum Insured')
     members = fields.One2many('members', 'quotation_id', string="Members")
+    hide_button = fields.Boolean('hidden', default=False)
 
         # @api.onchange('lob')
         # def get_lob_id(self):
@@ -223,6 +224,7 @@ class QuotationService(models.Model):
         self.write({"lob": 6})
 
     def create_app(self):
+        self.hide_button = True
         product = self.env['insurance.product'].search([('line_of_bus', '=', self.lob.id)]).id
 
         form_view_id = self.env.ref("Arope-spaces.insurance_view_form").id

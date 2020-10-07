@@ -92,9 +92,10 @@
                             <field name="policy_issue_date" readonly="1" force_save="1" attrs="{'invisible': [('policy_issue_date', '=', False)]}"/>
 
                         </group>
-                        <group>
-                            <field name="target_price"/>
-                        </group>
+
+                    </group>
+                    <group>
+                        <field name="target_price"/>
                     </group>
 <!--                    <br/>-->
 <!--                    <h3 style="color: #073e89 !important">Customer Info</h3>-->
@@ -394,7 +395,7 @@
                 <field name="application_date"/>
 				<field name="lob"/>
                 <field name="product"/>
-                <field name="target_price"/>
+<!--                <field name="target_price"/>-->
                 <field name="final_price"/>
                 <field name="state"/>
 <!--                <field name="sub_state"/>-->
