@@ -289,9 +289,9 @@ class Brokers(models.Model):
     def get_lob_count_ins_app(self, id):
         lob_list = []
         for lob in self.env['insurance.line.business'].search([]):
-
-            count=self.env['insurance.quotation'].search_count(
-                    [('create_uid', '=', id), ('lob', '=', lob.id)])
+            count = 0
+            for rec in self.env['insurance.quotation'].search([('create_uid', '=', id), ('lob', '=', lob.id)]):
+                count+=1
             if count > 0:
                 lob_list.append({'name': lob.line_of_business, 'count': count,'icon': lob.image})
             else:

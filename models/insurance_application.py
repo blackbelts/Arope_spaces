@@ -506,6 +506,7 @@ class Quotation(models.Model):
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search(
             [('status', '=', 'final_offer'), ('type', '=', 'insurance_app')]).id
+        self.message = self.test_state.message
         related_documents = self.env["final.application.setup"].search(
             [("product_id.id", "=", self.product_id.id)])
         if related_documents:
@@ -545,6 +546,7 @@ class Quotation(models.Model):
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'survey'),('type', '=', 'insurance_app')]).id
+        self.message = self.test_state.message
 
 
     def reinsurance_confirm(self):
@@ -681,14 +683,15 @@ class Quotation(models.Model):
 
 
     def reject(self):
-        if self.state == 'offer':
-            self.write({'sub_state': 'cancel'})
-        else:
+        # if self.state == 'offer':
+        #     self.write({'sub_state': 'cancel'})
+        # else:
             self.write({'state': 'cancel'})
             self.env['state.history'].create({"application_id": self.id, "state": 'cancel',
                                               "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                               "user": self.write_uid.id})
             self.test_state = self.env['state.setup'].search([('status', '=', 'cancel'),('type', '=', 'insurance_app')]).id
+            self.message = self.test_state.message
 
 
     def get_options_of_question(self):
