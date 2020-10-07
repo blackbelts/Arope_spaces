@@ -39,10 +39,10 @@ class Quotation(models.Model):
     test_state = fields.Many2one('state.setup', domain="[('product_ids', 'in', product_id),"
                                                        "('type', '=', 'insurance_app')]")
     # domain = "[('id', '!=', 26)]"
-    name = fields.Char('Name', required=True)
+    name = fields.Char('Customer Name', required=True)
     # contact = fields.Char('Contact', required=True)
-    phone = fields.Char('Mobile', required=True)
-    email = fields.Char('Email', required=True)
+    phone = fields.Char('Customer Mobile', required=True)
+    email = fields.Char('Customer Email', required=True)
     target_price = fields.Text('Requirements')
     application_number = fields.Char(string='Application Number', copy=False, index=True)
     application_date = fields.Date('Application Date', default=datetime.today(), readonly=True)
@@ -122,10 +122,11 @@ class Quotation(models.Model):
     quotation_id = fields.Many2one('quotation.service')
     message = fields.Text('Description')
 
-    @api.onchange('test_state')
+    @api.onchange('test_state','product_id')
     def get_message(self):
         if self.test_state:
-            self.message =  self.test_state.message
+            print('hhhhhhhhh')
+            self.write({"message":  self.test_state.message})
 
     @api.onchange('offer_ids')
     def change_offer(self):
@@ -795,8 +796,8 @@ class FinalApplication(models.Model):
             self.write({"issue_in_progress_state": 'complete'})
 
 
-# class FinalApplication(models.Model):
-#     _name = 'final.applications'
+class FinalApplication(models.Model):
+    _name = 'final.applications'
 
 
 class AvailableTime(models.Model):
