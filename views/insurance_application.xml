@@ -423,7 +423,6 @@
     <record id="seq_survey" model="ir.sequence">
         <field name="name">Survey</field>
         <field name="code">survey</field>
-        <field name="prefix">Survey/</field>
         <field name="padding">4</field>
         <!--<field name="company_id" eval="False"/>-->
     </record>
