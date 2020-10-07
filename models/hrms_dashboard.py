@@ -319,7 +319,7 @@ class Brokers(models.Model):
             agents_codes.append(rec.agent_code)
 
         return {
-            "user": self.env['persons'].search_read([('card_id', '=', user.card_id)],limit=1)[0],
+            "user": self.env['persons'].search_read([('card_id', '=', user.card_id)],limit=1),
             "production": self.get_production(agents_codes,'broker'),
             "policy_lob": self.get_lob_count_policy(agents_codes),
             "claim_lob": self.get_lob_count_claim(agents_codes),
