@@ -120,7 +120,12 @@ class Quotation(models.Model):
     survey_state = fields.Selection([('pending', 'Pending'),('surveyor', 'Surveyor Assigned'),
                                      ('complete', 'Submitted'), ('accepted', 'Accepted')], string='Survey State', default='surveyor')
     quotation_id = fields.Many2one('quotation.service')
+    message = fields.Text('Description')
 
+    @api.onchange('test_state')
+    def get_message(self):
+        if self.test_state:
+            self.message =  self.test_state.message
 
     @api.onchange('offer_ids')
     def change_offer(self):
