@@ -41,7 +41,7 @@
         <div class="main-content-inner">
           <div class="sales-report-area top-sales-report mt-3 mb-1">
             <div class="row">
-              <div class="col-md-4 mt-5">
+              <div class="col-md-3 mt-5">
                 <div class="single-report mb-xs-30" id="rank">
                   <div class="s-report-inner pr--20 pt--30 mb-3">
                     <div class="icon">
@@ -62,43 +62,42 @@
 
                 </div>
               </div>
-              <div class="col-md-4 mt-5">
-                <div class="single-report mb-xs-30 cursor" id="production">
-                  <div class="s-report-inner pr--20 pt--30 mb-3">
-                    <div class="icon">
-                      <i class="fas fa-money"></i>
-                    </div>
-                    <div class="s-report-title d-flex justify-content-between">
-                      <h4 class="header-title new-header mb-0">Licence Code</h4>
-                    </div>
-                    <div class="d-flex justify-content-between pb-2">
-                      <h2 class="larage">
-                       <t t-esc="widget.user[0].fra_no" />
-                      </h2>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4 mt-5">
-                <div class="single-report mb-xs-30" id="rank">
-                  <div class="s-report-inner pr--20 pt--30 mb-3">
-                    <div class="icon">
-                      <i class='fas fa-medal' />
-                    </div>
-                    <div class="s-report-title d-flex justify-content-between">
-                      <h4 class="header-title mb-0 new-header">Expired On</h4>
-                      <!--<p>24 H</p>-->
-                    </div>
-                    <div class="d-flex justify-content-between pb-2">
-                      <h2 class="larage">
-                       <t t-esc="widget.user[0].expire_date" />
-                      </h2>
-                    </div>
+<!--              <div class="col-md-4 mt-5">-->
+<!--                <div class="single-report mb-xs-30 cursor" id="production">-->
+<!--                  <div class="s-report-inner pr&#45;&#45;20 pt&#45;&#45;30 mb-3">-->
+<!--                    <div class="icon">-->
+<!--                      <i class="fas fa-money"></i>-->
+<!--                    </div>-->
+<!--                    <div class="s-report-title d-flex justify-content-between">-->
+<!--                      <h4 class="header-title new-header mb-0">Licence Code</h4>-->
+<!--                    </div>-->
+<!--                    <div class="d-flex justify-content-between pb-2">-->
+<!--                      <h2 class="larage">-->
+<!--                       <t t-esc="widget.user[0].fra_no" />-->
+<!--                      </h2>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 mt-5">-->
+<!--                <div class="single-report mb-xs-30" id="rank">-->
+<!--                  <div class="s-report-inner pr&#45;&#45;20 pt&#45;&#45;30 mb-3">-->
+<!--                    <div class="icon">-->
+<!--                      <i class='fas fa-medal' />-->
+<!--                    </div>-->
+<!--                    <div class="s-report-title d-flex justify-content-between">-->
+<!--                      <h4 class="header-title mb-0 new-header">Expired On</h4>-->
+<!--                    </div>-->
+<!--                    <div class="d-flex justify-content-between pb-2">-->
+<!--                      <h2 class="larage">-->
+<!--                       <t t-esc="widget.user[0].expire_date" />-->
+<!--                      </h2>-->
+<!--                    </div>-->
 
-                  </div>
+<!--                  </div>-->
 
-                </div>
-              </div>
+<!--                </div>-->
+<!--              </div>-->
 <!--              <div class="col-md-3 mt-5">-->
 <!--                <div class="single-report mb-xs-30 cursor" id="production">-->
 <!--                  <div class="s-report-inner pr&#45;&#45;10 pt&#45;&#45;30 mb-3">-->
@@ -115,66 +114,37 @@
 <!--                  </div>-->
 <!--                </div>-->
 <!--              </div>-->
-              <div class="col-lg-6 mt-5">
+              <div class="col-lg-3 mt-5">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-sm-flex justify-content-between align-items-center">
-                      <h2 class="header-title mb-0">Production per LOB</h2>
+                      <h2 class="header-title mb-0">Production per LOB in EGP</h2>
                     </div>
-                    <div id="ambarchart3"></div>
+                    <div id="ambarchart3" style="width: 100%; height: 250px;"></div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="header-title">Policies count per LOB</h4>
-                    <div class="single-table">
-                      <div class="table-responsive">
-                        <table class="table table-hover text-center">
-                          <thead class="text-uppercase">
-                            <tr>
-                              <th scope="col">LOB Name</th>
-                              <th scope="col">Icon</th>
-                              <th scope="col">Count</th>
-                              <th scope="col">Production</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr t-foreach="widget.policy_lob" t-as="lob">
-                              <td><t t-esc="lob.name" /></td>
-                              <td><img t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
-                              <td><t t-esc="lob.name" /></td>
-                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 mt-5">
+               <div class="col-lg-3 mt-5">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-sm-flex justify-content-between align-items-center">
                       <h2 class="header-title mb-0">Target Vs Production</h2>
                     </div>
-                    <div id="ambarchart2"></div>
+                    <div id="ambarchart2" style="width: 100%; height: 250px;"></div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 mt-5">
+              <div class="col-lg-3 mt-5">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-sm-flex justify-content-between align-items-center">
                       <h2 class="header-title mb-0">Current Year Vs Last Year</h2>
                     </div>
-                    <div id="ambarchart1" height="200"></div>
+                    <div id="ambarchart1" style="width: 100%; height: 250px;"></div>
                   </div>
                 </div>
               </div>
-              <div class="col-4 mt-5">
+              <div class="col-lg-4 mt-5">
                 <div class="sales-report-area mt-3 mb-1">
                   <div class="row">
                     <div class="col-12">
@@ -186,7 +156,7 @@
                           <div class="row">
                             <di class="col-md-12">
                               <div class="single-report cursor" id="red_collection">
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
+                                <div class="s-report-inner pr--20 pt--10 mb-3">
                                   <div class="icon red"></div>
                                   <div class="s-report-title d-flex justify-content-between">
                                     <h4 class="header-title permium mb-0">
@@ -194,7 +164,6 @@
                                         Count :
                                         <t t-esc="widget.collections_statistics.Red.count" />
                                       </span>
-                                      <br />
                                       <br />
                                       Total :
                                       <t t-esc="widget.makeNumber(widget.collections_statistics.Red.total)" />
@@ -212,7 +181,7 @@
 
                             <div class="col-md-12">
                               <div class="single-report mb-xs-30 cursor" id="orange_collection">
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
+                                <div class="s-report-inner pr--20 pt--10 mb-3">
                                   <div class="icon orange"></div>
                                   <div class="s-report-title d-flex justify-content-between">
                                     <h4 class="header-title permium mb-0">
@@ -220,7 +189,6 @@
                                         Count :
                                         <t t-esc="widget.collections_statistics.Orange.count" />
                                       </span>
-                                      <br />
                                       <br />
                                       Total :
                                       <t t-esc="widget.makeNumber(widget.collections_statistics.Orange.total)" />
@@ -240,7 +208,7 @@
                             </div>
                             <div class="col-md-12">
                               <div class="single-report mb-xs-30 cursor" id="green_collection">
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
+                                <div class="s-report-inner pr--20 pt--10 mb-3">
                                   <div class="icon green"></div>
                                   <div class="s-report-title d-flex justify-content-between">
                                     <h4 class="header-title permium mb-0">
@@ -248,7 +216,6 @@
                                         Count :
                                         <t t-esc="widget.collections_statistics.Green.count" />
                                       </span>
-                                      <br />
                                       <br />
                                       Total :
                                       <t t-esc="widget.makeNumber(widget.collections_statistics.Green.total)" />
@@ -274,7 +241,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-4  mt-5">
+              <div class="col-lg-4  mt-5">
                 <div class="sales-report-area mt-3 mb-1">
                   <div class="row">
                     <div class="col-12">
@@ -286,17 +253,17 @@
                           <div class="row">
                             <di class="col-md-12" t-foreach="widget.complaint_count" t-as="com">
                               <div class="single-report cursor" id="red_renew">
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
+                                <div class="s-report-inner pr--20 pt--10 mb-3">
                                   <div t-att-class="com.class"></div>
                                   <div class="s-report-title d-flex justify-content-between">
                                     <h4 class="header-title permium mb-0">
-                                      <span class="redspan">
-                                        Stage:
+                                      <span t-att-class="com.subClass">
                                         <t t-esc="com.stage" />
                                         <br/>
+
+                                      </span>
                                         Count :
                                         <t t-esc="com.count" />
-                                      </span>
 
                                     </h4>
                                   </div>
@@ -317,7 +284,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-4  mt-5">
+              <div class="col-lg-4  mt-5">
                 <div class="sales-report-area mt-3 mb-1">
                   <div class="row">
                     <div class="col-12">
@@ -329,7 +296,7 @@
                           <div class="row">
                             <di class="col-md-12">
                               <div class="single-report cursor" id="red_renew">
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
+                                <div class="s-report-inner pr--20 pt--10 mb-3">
                                   <div class="icon red"></div>
                                   <div class="s-report-title d-flex justify-content-between">
                                     <h4 class="header-title permium mb-0">
@@ -337,7 +304,6 @@
                                         Count :
                                         <t t-esc="widget.renew_statistics.Red.count" />
                                       </span>
-                                      <br />
                                       <br />
                                       Total :
                                       <t t-esc="widget.makeNumber(widget.renew_statistics.Red.total)" />
@@ -354,7 +320,7 @@
                             </di>
                             <div class="col-md-12">
                               <div class="single-report mb-xs-30 cursor" id="orange_renew">
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
+                                <div class="s-report-inner pr--20 pt--10 mb-3">
                                   <div class="icon orange"></div>
                                   <div class="s-report-title d-flex justify-content-between">
                                     <h4 class="header-title permium mb-0">
@@ -362,7 +328,6 @@
                                         Count :
                                         <t t-esc="widget.renew_statistics.Orange.count" />
                                       </span>
-                                      <br />
                                       <br />
                                       Total :
                                       <t t-esc="widget.makeNumber(widget.renew_statistics.Orange.total)" />
@@ -381,7 +346,7 @@
                             </div>
                             <div class="col-md-12">
                               <div class="single-report mb-xs-30 cursor" id="green_renew">
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
+                                <div class="s-report-inner pr--20 pt--10 mb-3">
                                   <div class="icon green"></div>
                                   <div class="s-report-title d-flex justify-content-between">
                                     <h4 class="header-title permium mb-0">
@@ -389,7 +354,6 @@
                                         Count :
                                         <t t-esc="widget.renew_statistics.Green.count" />
                                       </span>
-                                      <br />
                                       <br />
                                       Total :
                                       <t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" />
@@ -416,58 +380,27 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 mt-5">
+              <div class="col-lg-4 mt-5">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="header-title">Hoverable Rows</h4>
+                    <h4 class="header-title">Policies count per LOB</h4>
                     <div class="single-table">
                       <div class="table-responsive">
                         <table class="table table-hover text-center">
                           <thead class="text-uppercase">
                             <tr>
-                              <th scope="col">ID</th>
-                              <th scope="col">Name</th>
-                              <th scope="col">date</th>
-                              <th scope="col">price</th>
-                              <th scope="col">action</th>
+                              <th scope="col">LOB Name</th>
+                              <th scope="col">Icon</th>
+                              <th scope="col">Count</th>
+                              <th scope="col">Production</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>09 / 07 / 2018</td>
-                              <td>$120</td>
-                              <td>
-                                <i class="ti-trash"></i>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>jone</td>
-                              <td>09 / 07 / 2018</td>
-                              <td>$150</td>
-                              <td>
-                                <i class="ti-trash"></i>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>09 / 07 / 2018</td>
-                              <td>$120</td>
-                              <td>
-                                <i class="ti-trash"></i>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>jone</td>
-                              <td>09 / 07 / 2018</td>
-                              <td>$150</td>
-                              <td>
-                                <i class="ti-trash"></i>
-                              </td>
+                            <tr t-foreach="widget.policy_lob" t-as="lob">
+                              <td><t t-esc="lob.name" /></td>
+                              <td><img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
+                              <td><t t-esc="lob.name" /></td>
+                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>
                             </tr>
                           </tbody>
                         </table>
@@ -476,58 +409,56 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 mt-5">
+              <div class="col-lg-4 mt-5">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="header-title">Hoverable Rows</h4>
+                    <h4 class="header-title">Policies count per LOB</h4>
                     <div class="single-table">
                       <div class="table-responsive">
                         <table class="table table-hover text-center">
                           <thead class="text-uppercase">
                             <tr>
-                              <th scope="col">ID</th>
-                              <th scope="col">Name</th>
-                              <th scope="col">date</th>
-                              <th scope="col">price</th>
-                              <th scope="col">action</th>
+                              <th scope="col">LOB Name</th>
+                              <th scope="col">Icon</th>
+                              <th scope="col">Count</th>
+                              <th scope="col">Production</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>09 / 07 / 2018</td>
-                              <td>$120</td>
-                              <td>
-                                <i class="ti-trash"></i>
-                              </td>
+                            <tr t-foreach="widget.policy_lob" t-as="lob">
+                              <td><t t-esc="lob.name" /></td>
+                              <td><img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
+                              <td><t t-esc="lob.name" /></td>
+                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>
                             </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 mt-5">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="header-title">Policies count per LOB</h4>
+                    <div class="single-table">
+                      <div class="table-responsive">
+                        <table class="table table-hover text-center">
+                          <thead class="text-uppercase">
                             <tr>
-                              <th scope="row">1</th>
-                              <td>jone</td>
-                              <td>09 / 07 / 2018</td>
-                              <td>$150</td>
-                              <td>
-                                <i class="ti-trash"></i>
-                              </td>
+                              <th scope="col">LOB Name</th>
+                              <th scope="col">Icon</th>
+                              <th scope="col">Count</th>
+                              <th scope="col">Production</th>
                             </tr>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>09 / 07 / 2018</td>
-                              <td>$120</td>
-                              <td>
-                                <i class="ti-trash"></i>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>jone</td>
-                              <td>09 / 07 / 2018</td>
-                              <td>$150</td>
-                              <td>
-                                <i class="ti-trash"></i>
-                              </td>
+                          </thead>
+                          <tbody>
+                            <tr t-foreach="widget.policy_lob" t-as="lob">
+                              <td><t t-esc="lob.name" /></td>
+                              <td><img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
+                              <td><t t-esc="lob.name" /></td>
+                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>
                             </tr>
                           </tbody>
                         </table>
