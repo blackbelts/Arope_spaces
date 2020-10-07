@@ -65,9 +65,9 @@
                <div class="col-md-3 mt-5">
                 <div class="single-report mb-xs-30" id="rank">
                   <div class="s-report-inner pr--20 pt--30 mb-3">
-                    <!-- <div class="icon">
-                    <i class='fas fa-medal' />
-                  </div> -->
+                    <div class="icon">
+                      <i class='fas fa-medal' />
+                    </div>
                     <div class="s-report-title d-flex justify-content-between">
                       <h4 class="header-title mb-0 new-header">Loss Ratio</h4>
                       <!--<p>24 H</p>-->
@@ -86,9 +86,9 @@
               <div class="col-md-3 mt-5">
                 <div class="single-report mb-xs-30 cursor" id="production">
                   <div class="s-report-inner pr--20 pt--30 mb-3">
-                    <!-- <div class="icon">
+                    <div class="icon">
                       <i class="fas fa-money"></i>
-                    </div> -->
+                    </div>
                     <div class="s-report-title d-flex justify-content-between">
                       <h4 class="header-title new-header mb-0">Renewal Ratio</h4>
                       <!--<p>24 H</p>-->
@@ -106,6 +106,9 @@
               <div class="col-md-3 mt-5">
                 <div class="single-report mb-xs-30" id="rank">
                   <div class="s-report-inner pr--20 pt--30 mb-3">
+                     <div class="icon">
+                      <i class="fas fa-money"></i>
+                    </div>
                     <div class="s-report-title d-flex justify-content-between">
                       <h4 class="header-title mb-0 new-header">Collection Ratio</h4>
                       <!--<p>24 H</p>-->
