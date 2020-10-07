@@ -313,7 +313,7 @@ class Brokers(models.Model):
 
     @api.model
     def get_dashboard(self, id):
-        user = self.env['res.users'].search_read([('id', '=', id)], limit=1)[0]
+        user = self.env['res.users'].search([('id', '=', id)], limit=1)
         agents_codes = []
         for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
             agents_codes.append(rec.agent_code)
