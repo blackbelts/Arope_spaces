@@ -33,7 +33,7 @@ class StateSetup(models.Model):
     #                               ('surveyor', 'Surveyor'),('underwriter', 'Underwriter')], string='State For')
     message = fields.Text('Message')
 
-    @api.onchange('status', 'claim_status')
+    @api.onchange('status', 'claim_status', 'survey_status')
     def compute_status(self):
         if self.status:
             self.state = dict(self._fields['status'].selection).get(self.status)
