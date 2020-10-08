@@ -652,6 +652,7 @@ class Quotation(models.Model):
         self.write({'state': 'policy'})
 
         self.test_state = self.env['state.setup'].search([('status', '=', 'policy'),('type', '=', 'insurance_app')]).id
+        self.message = self.test_state.message
         self.write({"sub_state":'complete'})
         self.env['state.history'].create({"application_id": self.id, "state": 'policy',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
