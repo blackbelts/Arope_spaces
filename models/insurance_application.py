@@ -533,9 +533,8 @@ class Quotation(models.Model):
             currentMonth = datetime.today().strftime("%m")
 
             id = self.env['survey.report'].create(
-                {"name": "Survey"+ '/' + currentYear[2:4] + '/' + currentMonth +
-                                       '/' + number ,
-                 "application_id": self.id, 'state': self.env['state.setup'].search([('survey_status', '=', 'pending'),('type', '=', 'survey')]).id,
+                {"name": "Survey"+ '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
+                 "application_id": self.id,'state': 'pending', 'status': self.env['state.setup'].search([('survey_status', '=', 'pending'),('type', '=', 'survey')]).id,
                  'message':self.env['state.setup'].search([('survey_status', '=', 'pending'),('type', '=', 'survey')]).message,
                  "lob": self.lob.id, 'product_id': self.product_id.id,"customer_name": self.name, 'phone': self.phone, 'email': self.email,
                  'application_date': self.application_date})
@@ -894,9 +893,9 @@ class SurveyReport(models.Model):
     name = fields.Char("Survey Number", required=True, copy=False, index=True,
                              default=lambda self: self.env['ir.sequence'].next_by_code('survey'), readonly=True)
 
-    # state = fields.Selection([('pending', 'Pending'), ('surveyor', 'Surveyor Assigned'),
-    #                         ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending')
-    state = fields.Many2one('state.setup', domain="[('type', '=', 'survey')]")
+    state = fields.Selection([('pending', 'Pending'), ('surveyor', 'Surveyor Assigned'),
+                            ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending')
+    status = fields.Many2one('state.setup', domain="[('type', '=', 'survey')]")
     surveyor = fields.Many2one('res.users', 'Surveyor')
     comment = fields.Text('Comment')
     recomm = fields.Text('Recommendation')
@@ -906,10 +905,10 @@ class SurveyReport(models.Model):
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade', string='Application')
     message = fields.Text('Description')
 
-    @api.onchange('state')
+    @api.onchange('status')
     def get_message(self):
-        if self.state:
-            self.message = self.state.message
+        if self.status:
+            self.message = self.status.message
 
 
     @api.onchange('survey_report_ids')
@@ -919,24 +918,20 @@ class SurveyReport(models.Model):
             for rec in self.survey_report_ids:
                 res.append(rec.file)
             if all(res):
-                # self.write({'state': 'policy'})
-                # self.env['state.history'].create({"application_id": self.id, "state": 'policy',
-                #                                   "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                #                                   "user": self.write_uid.id})
-                # self.test_state = self.env['state.setup'].search([('status', '=', 'policy'),('type', '=', 'insurance_app')]).id
-                self.state = self.env['state.setup'].search([('survey_status', '=', 'submitted'),('type', '=', 'survey')]).id
-                self.message = self.state.message
+                self.state = 'submitted'
+                self.status = self.env['state.setup'].search([('survey_status', '=', 'submitted'),('type', '=', 'survey')]).id
+                self.message = self.status.message
 
     def assign_surveyor(self):
-        # self.write({'state': 'surveyor'})
-        self.state = self.env['state.setup'].search([('survey_status', '=', 'surveyor'), ('type', '=', 'survey')]).id
+        self.write({'state': 'surveyor'})
+        self.status = self.env['state.setup'].search([('survey_status', '=', 'surveyor'), ('type', '=', 'survey')]).id
         self.application_id.write({'surveyor': self.surveyor.id})
-        self.message = self.state.message
+        self.message = self.status.message
 
     def accept_survey(self):
-        # self.write({'state': 'accepted'})
-        self.state = self.env['state.setup'].search([('survey_status', '=', 'accepted'), ('type', '=', 'survey')]).id
-        self.message = self.state.message
+        self.write({'state': 'accepted'})
+        self.status = self.env['state.setup'].search([('survey_status', '=', 'accepted'), ('type', '=', 'survey')]).id
+        self.message = self.status.message
 
 
 
