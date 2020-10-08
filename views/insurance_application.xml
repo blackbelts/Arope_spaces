@@ -469,7 +469,7 @@
 			<form>
                 <header>
 
-                    <field name="state" widget="statusbar"/>
+                    <field name="status" widget="statusbar"/>
                     <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'pending')]}" groups="Arope-spaces.managers_group"/>
                     <button  name="accept_survey" string="Accept Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}" groups="Arope-spaces.managers_group"/>
 
@@ -501,7 +501,7 @@
                             <field name="surveyor"/>
                         </group>
                     </group>
-                    <group>
+                    <group attrs="{'invisible': [('state', '=', 'pending')]}">
                         <group>
                             <field name="recomm"/>
                         </group>
@@ -510,7 +510,7 @@
                         </group>
                     </group>
 
-                    <field name="survey_report_ids">
+                    <field attrs="{'invisible': [('state', '=', 'pending')]}" name="survey_report_ids">
                         <tree editable="bottom" decoration-danger="state == 'pending'">
                             <field name="question"/>
                             <field name="file" widget="many2many_binary"/>
