@@ -475,20 +475,33 @@
 
 
                 </header>
+                <div attrs="{'invisible': [('message', '=', False)]}">
+                        <img style="height: 50px;width: 50px;float: left;" src="/Arope-spaces/static/src/img/call.png"/>
+                        <span style="float: left; margin-left: 10px;font-size: 30px; color: #078282FF !important;"><i class="fa fa-comment"></i></span>
+                        <div style="float: left; margin-left: 10px; color: #078282FF !important; font-weight: 900; padding: 4px; border: solid 1px lightgray;">
+                            <field name="message" readonly="1" force_save="1"/>
+                        </div>
+                </div>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="surveyor"/>
-                    </group>
+                        <group>
+                            <field readonly="1" force_save="1" name="lob"/>
+                            <field readonly="1" force_save="1" name="product_id"/>
+                            <field readonly="1" force_save="1" name="customer_name"/>
+                            <field readonly="1" force_save="1" name="phone"/>
+                            <field readonly="1" force_save="1" name="email"/>
+                        </group>
+                        <group>
+                            <field readonly="1" force_save="1" name="application_id"/>
+                            <field readonly="1" force_save="1" name="application_date"/>
+                            <field name="name"/>
 
-                    <field attrs="{'invisible': [('state', '=', 'pending')]}" name="survey_report_ids">
-                        <tree editable="bottom" decoration-danger="state == 'pending'">
-                            <field name="question"/>
-                            <field name="file" widget="many2many_binary"/>
-                            <field name="state"/>
-                        </tree>
-                    </field>
-                    <group attrs="{'invisible': [('state', '=', 'pending')]}">
+                        </group>
+                        <group>
+                            <field name="surveyor"/>
+                        </group>
+                    </group>
+                    <group>
                         <group>
                             <field name="recomm"/>
                         </group>
@@ -496,6 +509,15 @@
                             <field name="comment"/>
                         </group>
                     </group>
+
+                    <field name="survey_report_ids">
+                        <tree editable="bottom" decoration-danger="state == 'pending'">
+                            <field name="question"/>
+                            <field name="file" widget="many2many_binary"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+
                 </sheet>
                 <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
