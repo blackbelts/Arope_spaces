@@ -92,9 +92,10 @@
                             <field name="policy_issue_date" readonly="1" force_save="1" attrs="{'invisible': [('policy_issue_date', '=', False)]}"/>
 
                         </group>
-                        <group>
-                            <field name="target_price"/>
-                        </group>
+
+                    </group>
+                    <group>
+                        <field name="target_price"/>
                     </group>
 <!--                    <br/>-->
 <!--                    <h3 style="color: #073e89 !important">Customer Info</h3>-->
@@ -152,9 +153,7 @@
                     </div>
                     <br/>
                     <h3 style="color: #073e89 !important">Required Documents</h3>
-                    <span>Please fill out the following application, sign the customer and re-upload it.</span>
-                    <br/>
-                    <span>Please Upload All Scanned Documents.</span>
+
                     <br/>
 <!--                    <group>-->
                         <field name="final_application_ids">
@@ -168,12 +167,7 @@
 <!--                    </group>-->
                     <br/>
                     <div>
-                        <h3 style="color: #073e89 !important">Offering</h3>
-
-
-                        <span attrs="{'invisible': [('offer_ids', '=', False)]}">We are working on preparing an offer . Be patient.</span>
-                        <br/>
-                        <span attrs="{'invisible': [('offer_ids', '!=', False)]}">We await acceptance of the submitted offer.</span>
+                        <h3 style="color: #073e89 !important">Offers</h3>
                         <br/>
                         <field name="offer_ids" >
                                 <tree editable="bottom" decoration-danger="offer_state == 'pending'">
@@ -394,7 +388,7 @@
                 <field name="application_date"/>
 				<field name="lob"/>
                 <field name="product"/>
-                <field name="target_price"/>
+<!--                <field name="target_price"/>-->
                 <field name="final_price"/>
                 <field name="state"/>
 <!--                <field name="sub_state"/>-->
@@ -475,16 +469,47 @@
 			<form>
                 <header>
 
-                    <field name="state" widget="statusbar"/>
+                    <field name="status" widget="statusbar"/>
                     <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'pending')]}" groups="Arope-spaces.managers_group"/>
                     <button  name="accept_survey" string="Accept Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}" groups="Arope-spaces.managers_group"/>
 
 
                 </header>
+
                 <sheet>
+                    <div attrs="{'invisible': [('message', '=', False)]}">
+                        <img style="height: 50px;width: 50px;float: left;" src="/Arope-spaces/static/src/img/call.png"/>
+                        <span style="float: left; margin-left: 10px;font-size: 30px; color: #078282FF !important;"><i class="fa fa-comment"></i></span>
+                        <div style="float: left; margin-left: 10px; color: #078282FF !important; font-weight: 900; padding: 4px; border: solid 1px lightgray;">
+                            <field name="message" readonly="1" force_save="1"/>
+                        </div>
+                    </div>
                     <group>
-                        <field name="name"/>
-                        <field name="surveyor"/>
+                        <group>
+                            <field name="state" invisible="1"/>
+                            <field readonly="1" force_save="1" name="lob"/>
+                            <field readonly="1" force_save="1" name="product_id"/>
+                            <field readonly="1" force_save="1" name="customer_name"/>
+                            <field readonly="1" force_save="1" name="phone"/>
+                            <field readonly="1" force_save="1" name="email"/>
+                        </group>
+                        <group>
+                            <field readonly="1" force_save="1" name="application_id"/>
+                            <field readonly="1" force_save="1" name="application_date"/>
+                            <field name="name"/>
+
+                        </group>
+                        <group>
+                            <field name="surveyor"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('state', '=', 'pending')]}">
+                        <group>
+                            <field name="recomm"/>
+                        </group>
+                        <group>
+                            <field name="comment"/>
+                        </group>
                     </group>
 
                     <field attrs="{'invisible': [('state', '=', 'pending')]}" name="survey_report_ids">
@@ -494,14 +519,7 @@
                             <field name="state"/>
                         </tree>
                     </field>
-                    <group attrs="{'invisible': [('state', '=', 'pending')]}">
-                        <group>
-                            <field name="recomm"/>
-                        </group>
-                        <group>
-                            <field name="comment"/>
-                        </group>
-                    </group>
+
                 </sheet>
                 <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
