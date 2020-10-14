@@ -25,6 +25,10 @@
         'views/price_setup.xml',
         'views/targets.xml',
 	    'views/dashboard_views.xml',
+        'views/newdashboard.xml',
+        'views/customer_dashboard_view.xml',
+        'views/broker_dashboard_view.xml',
+        'views/surveyor_dashboard_view.xml',
         'views/sub_questionnaire.xml',
         # 'views/medical_price_setup.xml',
         'views/insurance_application.xml',
@@ -41,7 +45,13 @@
 
 
     ],
-    'qweb': ["static/src/xml/hrms_dashboard.xml"],
+    'qweb': [
+        "static/src/xml/hrms_dashboard.xml",
+        "static/src/xml/new_dashboard.xml",
+        "static/src/xml/broker_dash.xml",
+        "static/src/xml/surveyor_dash.xml",
+        "static/src/xml/customer_dash.xml"
+    ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+  <t t-name="SurveyorDashboardMain">
+
+    <div class="oh_dashboards">
+      <div class="container-fluid o_hr_dashboard"></div>
+    </div>
+  </t>
+  <t t-name="Surveyordash">
+    <xpath expr="." position="inside">
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/themify-icons.css" />
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/metisMenu.css" />
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/owl.carousel.min.css" />
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/slicknav.min.css" />
+      <!-- amchart css -->
+      <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+      <!-- others css -->
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/all.min.css" />
+
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/typography.css" />
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/default-css.css" />
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/styles.css" />
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/responsive.css" />
+      <script src="/Arope-spaces/static/src/js/modernizr-2.8.3.min.js"></script>
+    </xpath>
+    <!--[if lt IE 8]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- page container area start -->
+      <!-- main content area start -->
+        <!-- page title area start -->
+        <div class="page-title-area">
+          <div class="breadcrumbs-area clearfix">
+            <h4 class="page-title pull-left">Dashboard / 2020</h4>
+          </div>
+        </div>
+        <!-- page title area end -->
+
+    <!-- page container area end -->
+    <xpath expr="." position="inside">
+      <script src="/Arope-spaces/static/src/js/popper.min.js"></script>
+      <script src="/Arope-spaces/static/src/js/owl.carousel.min.js"></script>
+      <script src="/Arope-spaces/static/src/js/metisMenu.min.js"></script>
+      <script src="/Arope-spaces/static/src/js/jquery.slimscroll.min.js"></script>
+      <script src="/Arope-spaces/static/src/js/jquery.slicknav.min.js"></script>
+      <script src="/Arope-spaces/static/src/js/amcharts.js"></script>
+      <script src="/Arope-spaces/static/src/js/serial.js"></script>
+      <script src="/Arope-spaces/static/src/js/pie.js"></script>
+      <script src="/Arope-spaces/static/src/js/export.min.js"></script>
+      <script src="/Arope-spaces/static/src/js/light.js"></script>
+      <script src="/Arope-spaces/static/src/js/plugins.js"></script>
+      <script src="/Arope-spaces/static/src/js/scripts.js"></script>
+    </xpath>
+  </t>
+
+</templates>
