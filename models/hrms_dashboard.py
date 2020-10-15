@@ -416,7 +416,7 @@ class Brokers(models.Model):
     #     for rec in self.env['persons'].search([('card_id', '=', card)]):
     #         agents_codes.append(rec.pin)
     #     return {
-    #         "production": self.get_production(agents_codes,'customer'),
+    #         "production": self.get_production(agents_get_broker_dashboardcodes,'customer'),
             # "policy_lob": self.get_lob_count_policy(agents_codes),
             # "claim_lob": self.get_lob_count_claim(agents_codes),
             # "complaint_count": self.get_complaint_count(agents_codes),

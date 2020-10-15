@@ -1,4 +1,4 @@
-odoo.define('hrms_dashboard.Dashboard', function (require) {
+odoo.define('broker_dashboard.BrokerDashboard', function (require) {
   "use strict";
 
   var AbstractAction = require('web.AbstractAction');
@@ -10,8 +10,8 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
   var _t = core._t;
   var QWeb = core.qweb;
 
-  var HrDashboard = AbstractAction.extend({
-    template: 'HrDashboardMain',
+  var BrokerDashboard = AbstractAction.extend({
+    template: 'BrokerDashboardMain',
     cssLibs: [
       '/Arope-spaces/static/src/css/lib/nv.d3.css'
     ],
@@ -20,13 +20,13 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
     ],
     events: {
 
-//      'click #production': 'production_list',
-//      'click #green_collection': 'green_collection',
-//      'click #orange_collection': 'orange_collection',
-//      'click #red_collection': 'red_collection',
-//      'click #green_renew': 'green_renew',
-//      'click #orange_renew': 'orange_renew',
-//      'click #red_renew': 'red_renew',
+      'click #production': 'production_list',
+      'click #green_collection': 'green_collection',
+      'click #orange_collection': 'orange_collection',
+      'click #red_collection': 'red_collection',
+      'click #green_renew': 'green_renew',
+      'click #orange_renew': 'orange_renew',
+      'click #red_renew': 'red_renew',
     },
     init: function (parent, context) {
       this._super(parent, context);
@@ -37,9 +37,12 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
     start: function () {
       var user = session.uid
       var self = this;
-      this.fetch_data().then(function () {
-        if (self.user.length!=0&&self.user[0].type == "broker") {
-          self.$('.o_hr_dashboard').prepend(QWeb.render("broker", {
+//      self.$('.o_hr_dashboard').prepend(QWeb.render("brokerdash", {
+//            widget: self
+//          }));
+
+      this.fetch_data().then(function(){
+      self.$('.o_hr_dashboard').prepend(QWeb.render("brokerdash", {
             widget: self
           }));
           $("document").ready(function () {
@@ -183,21 +186,6 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
               "color": "blue"
             });
           })
-
-        } else if (self.user.length!=0&&self.user[0].type == "customer") {
-          self.$('.o_hr_dashboard').prepend(QWeb.render("customer", {
-            widget: self
-          }));
-        } else if (self.user.length!=0&&self.user[0].type == "surveyor") {
-          self.$('.o_hr_dashboard').prepend(QWeb.render("surveyor", {
-            widget: self
-          }));
-        } else {
-          self.$('.o_hr_dashboard').prepend(QWeb.render("general", {
-            widget: self
-          }));
-        }
-
       })
 
 
@@ -212,7 +200,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
         method: "get_dashboard",
         args: [user]
       }).then(function (res) {
-        self.brokerProduction = res.production
+       self.brokerProduction = res.production
         self.target_production = res.targetVsProduction
         self.brokerRank = res.rank
         self.collections_statistics = res.collections
@@ -241,8 +229,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
             }
         })
         self.complaint_count=res.complaint_count
-        //                self.collections_statistics=res
-        console.log("get_dashboard", res)
+        console.log("get_broker_dashboard", res)
       });
       return $.when(get_dashboard);
     },
@@ -356,26 +343,14 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
     red_renew: function () {
       var self = this;
       this.do_action({
-        name: _t("Policy Tree"),
-        type: 'ir.actions.act_window',
-        res_model: 'policy.arope',
-        view_mode: 'tree,form,calendar',
-        views: [
-          [false, 'list'],
-          [false, 'form']
-        ],
-        domain: [
-          ['id', 'in', this.renew_statistics.Red.ids]
-        ],
-        target: 'current'
       })
     },
 
   });
 
 
-  core.action_registry.add('hr_dashboard', HrDashboard);
+  core.action_registry.add('broker_dashboard', BrokerDashboard);
 
-  return HrDashboard;
+  return BrokerDashboard;
 
 });

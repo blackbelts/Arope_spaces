@@ -11,17 +11,17 @@
                         <group>
                             <field name="type"/>
                             <field name="state" invisible="1"/>
-                            <field name="status" attrs="{'invisible': [('type', '=', 'claim')]}"/>
+                            <field name="status" attrs="{'invisible': [('type', '!=', 'insurance_app')]}"/>
                             <field name="claim_status" attrs="{'invisible': [('type', '!=', 'claim')]}"/>
+                            <field name="survey_status" attrs="{'invisible': [('type', '!=', 'survey')]}"/>
 
                         </group>
                         <group>
-                            <field name="product_ids" widget="many2many_tags" attrs="{'invisible': [('type', '=', 'claim')]}"/>
+                            <field name="product_ids" widget="many2many_tags" attrs="{'invisible': [('type', '!=', 'insurance_app')]}"/>
                             <field name="claim_type" attrs="{'invisible': [('type', '!=', 'claim')]}" />
 
                         </group>
                         <group>
-                            <field name="state_for"/>
                             <field name="message"/>
                         </group>
                    </group>

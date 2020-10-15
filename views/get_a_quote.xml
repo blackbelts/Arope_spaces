@@ -24,6 +24,7 @@
 
 
                     <field name="lob"  invisible="1"/>
+                    <field name="hide_button" invisible="1"/>
                     <group attrs="{'invisible': [('lob', '!=', 1)]}">
                         <group>
                             <field name="medical_package" />
@@ -45,7 +46,10 @@
 <!--                                <field name="brand" />-->
 <!--                                <field name="deductible" attrs="{'invisible': [('brand', '!=', 'all brands')]}"/>-->
                                 <field name="sum_insured"/>
-                                <field name="motor_product"/>
+
+                        </group>
+                        <group>
+                            <field name="motor_product"/>
                         </group>
 
 
@@ -78,7 +82,7 @@
                                 <h2 class="card-price text-center">$ <field readonly="1" force_save="1" name="price"/></h2>
                                 <hr/>
                                 <div class="text-center">
-                                    <button type="object" name="create_app" string="Create Application" class="oe_highlight"/>
+                                    <button attrs="{'invisible': ['|',('price', '=', 0),('hide_button','=', True)]}"  type="object" name="create_app" string="Create Application" class="oe_highlight"/>
 
                                 </div>
                             </div>

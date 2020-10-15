@@ -9,18 +9,24 @@ window.addEventListener('locationchange', function () {
         console.log(action)
         if (action != -1) {
             menuItem = document.querySelector('[data-action-id="' + actionId + '"]')
-            menuItem.style.backgroundColor = "#073e89"
-            menuItem.style.color = "white"
+            if(menuItem != null){
+                menuItem.style.backgroundColor = "#073e89"
+                menuItem.style.color = "white"
+            }
         }
     }
     /*  console.log(menuItem) */
     if (menuItem != null) {
         console.log("if 2")
+       if(action!=-1){
         menuItem.style.backgroundColor = "transparent"
         menuItem.style.color = "black"
         menuItem = document.querySelector('[data-action-id="' + actionId + '"]')
-        menuItem.style.backgroundColor = "#073e89"
-        menuItem.style.color = "white"
+        if(menuItem != null){
+            menuItem.style.backgroundColor = "#073e89"
+            menuItem.style.color = "white"
+        }
+       }
         /*         console.log("if")
          */
 
