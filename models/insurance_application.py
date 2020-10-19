@@ -800,7 +800,8 @@ class FinalOffer(models.Model):
 
     # question = fields.Many2one('offer.setup','Offer Item')
     type = fields.Selection([('initial', 'Initial Offer'), ('final', 'Final Offer')])
-    text = fields.Text('Value')
+    date = fields.Date('Offer Date',default=lambda self:fields.datetime.today())
+    comment = fields.Text('Comment')
     file = fields.Many2many('ir.attachment', string="Offer")
     value = fields.Float('Value')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')

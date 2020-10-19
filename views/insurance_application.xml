@@ -172,8 +172,10 @@
                         <field name="offer_ids" >
                                 <tree editable="bottom" decoration-danger="offer_state == 'pending'">
                                     <field name="type"/>
+                                    <field name="date"/>comment
                                     <field name="file" widget="many2many_binary"/>
                                     <field name="offer_state"/>
+                                    <field name="comment"/>
                                 </tree>
                         </field>
                     </div>
@@ -367,11 +369,11 @@
 
 
                 </sheet>
-                <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
-                        <field name="message_ids" widget="mail_thread"/>
-<!--                        <field name="activity_ids" widget="mail_activity"/>-->
-                </div>
+<!--                <div class="oe_chatter">-->
+<!--                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>-->
+<!--                        <field name="message_ids" widget="mail_thread"/>-->
+<!--&lt;!&ndash;                        <field name="activity_ids" widget="mail_activity"/>&ndash;&gt;-->
+<!--                </div>-->
 
 			</form>
 		</field>
@@ -512,13 +514,13 @@
                         </group>
                     </group>
 
-                    <field attrs="{'invisible': [('state', '=', 'pending')]}" name="survey_report_ids">
-                        <tree editable="bottom" decoration-danger="state == 'pending'">
-                            <field name="question"/>
-                            <field name="file" widget="many2many_binary"/>
-                            <field name="state"/>
-                        </tree>
-                    </field>
+<!--                    <field attrs="{'invisible': [('state', '=', 'pending')]}" name="survey_report_ids">-->
+<!--                        <tree editable="bottom" decoration-danger="state == 'pending'">-->
+<!--                            <field name="question"/>-->
+<!--                            <field name="file" widget="many2many_binary"/>-->
+<!--                            <field name="state"/>-->
+<!--                        </tree>-->
+<!--                    </field>-->
 
                 </sheet>
                 <div class="oe_chatter">
