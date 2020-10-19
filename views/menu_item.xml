@@ -142,7 +142,7 @@
 
 
     <menuitem id="policy_config" name="Configuration"
-              parent="arope_space" sequence="4" groups="Arope-spaces.managers_group"/>
+              parent="arope_space" sequence="4" />
 
 
 
