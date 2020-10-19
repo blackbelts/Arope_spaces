@@ -186,10 +186,10 @@
               action="maintenance_center_action" sequence="7000"/>
     <menuitem id="claim_setup" name="Claim Setup" parent="policy_config"
               action="claim_setup_action" sequence="8000"/>
-<!--    <menuitem id="end_request" name="Endorsement Requests"-->
-<!--                action="request_action_end" parent="arope_space" />-->
-<!--    <menuitem id="renew_request" name="Renewal Requests"-->
-<!--                action="request_action_renew" parent="arope_space" />-->
+    <menuitem id="end_request" name="Endorsement Requests"
+                action="request_action_end" parent="arope_space" />
+    <menuitem id="renew_request" name="Renewal Requests"
+                action="request_action_renew" parent="arope_space" />
 
     <menuitem id="quick_quote_view" name="Quick Quote"
               action="quickQuoteAction" parent="arope_space"  sequence="0"/>
