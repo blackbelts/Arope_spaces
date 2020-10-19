@@ -7,7 +7,6 @@ from . import hrms_dashboard
 from . import price_setup
 from . import team_target
 from . import hrms_dashboard
-# from . import claim
 from . import questionnaire
 from . import insurance_application
 from . import state
