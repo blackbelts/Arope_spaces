@@ -20,7 +20,7 @@
         'security/ir.model.access.csv',
         'security/security.xml',
         'views/setup.xml',
-        'views/renw_end_req.xml',
+        # 'views/renw_end_req.xml',
 
         'views/get_a_quote.xml',
         'views/price_setup.xml',

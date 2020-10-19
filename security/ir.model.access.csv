@@ -8,6 +8,7 @@ access_setup8,setup.setup8,model_team_target,base.group_user,1,1,1,1
 
 access_setup9,setup.setup9,model_target_policy,base.group_user,1,1,1,1
 access_setup10,setup.setup10,model_target_rules,base.group_user,1,1,1,1
+access_setup31_req01,setup.setup31_req01,model_policy_request,base.group_user,1,1,1,1
 
 
 
