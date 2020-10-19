@@ -8,8 +8,10 @@
             <button name="create_end_requset" string="Endorsement Request" type="object"
                     class="oe_highlight"/>
             <button name="create_renew_requset" string="Renewal Request" type="object"
-                    class="oe_highlight"/>            </xpath>
+                    class="oe_highlight"/>
+        </xpath>
     </field>
+    </record>
 
     <record id="request_form_view" model="ir.ui.view">
         <field name="name">Policy Form</field>
