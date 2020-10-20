@@ -48,7 +48,7 @@
     'qweb': [
         "static/src/xml/hrms_dashboard.xml",
         "static/src/xml/new_dashboard.xml",
-        "static/src/xml/broker_dash.xml",
+        "static/src/xml/broker_dash2.xml",
         "static/src/xml/surveyor_dash.xml",
         "static/src/xml/customer_dash.xml"
     ],
