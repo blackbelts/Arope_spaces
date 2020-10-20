@@ -39,6 +39,7 @@
         'views/answer.xml',
         'views/claim_app.xml',
         'views/survey_setup.xml',
+        'views/required_document_wizard.xml',
         # 'views/help_desk.xml',
         #'reports/offer.xml',
         #'reports/questionnaire.xml',

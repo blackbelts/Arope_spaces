@@ -143,22 +143,22 @@ class Quotation(models.Model):
                                                       "user": self.write_uid.id})
                     self.test_state = self.env['state.setup'].search(
                         [('status', '=', 'initial_offer'), ('type', '=', 'insurance_app')]).id
-                    related_documents = self.env["final.application.setup"].search(
-                        [("product_id.id", "=", self.product_id.id)])
-                    if related_documents:
-                        for question in related_documents:
-                            if question.state == 'initial_offer':
-                                if question.file:
-
-                                    id = self.env['final.application'].create(
-                                        {"description": question.id, 'download_files': [question.file.id],
-                                         "quotation_id": self.id})
-                                    print(id)
-                                    print(id.quotation_id)
-                                else:
-                                    self.env['final.application'].create(
-                                        {"description": question.id,
-                                         "quotation_id": self.id})
+                    # related_documents = self.env["final.application.setup"].search(
+                    #     [("product_id.id", "=", self.product_id.id)])
+                    # if related_documents:
+                    #     for question in related_documents:
+                    #         if question.state == 'initial_offer':
+                    #             if question.file:
+                    #
+                    #                 id = self.env['final.application'].create(
+                    #                     {"description": question.id,
+                    #                      "quotation_id": self.id})
+                    #                 print(id)
+                    #                 print(id.quotation_id)
+                    #             else:
+                    #                 self.env['final.application'].create(
+                    #                     {"description": question.id,
+                    #                      "quotation_id": self.id})
 
             elif offers[-1].offer_state == 'accepted':
                 if offers[-1].type == 'initial':
@@ -168,22 +168,22 @@ class Quotation(models.Model):
                                                       "user": self.write_uid.id})
                     self.test_state = self.env['state.setup'].search(
                         [('status', '=', 'application_form'), ('type', '=', 'insurance_app')]).id
-                    related_documents = self.env["final.application.setup"].search(
-                        [("product_id.id", "=", self.product_id.id)])
-                    if related_documents:
-                        for question in related_documents:
-                            if question.state == 'application_form':
-                                if question.file:
-
-                                    id = self.env['final.application'].create(
-                                        {"description": question.id, 'download_files': [question.file.id],
-                                         "quotation_id": self.id})
-                                    print(id)
-                                    print(id.quotation_id)
-                                else:
-                                    self.env['final.application'].create(
-                                        {"description": question.id,
-                                         "quotation_id": self.id})
+                    # related_documents = self.env["final.application.setup"].search(
+                    #     [("product_id.id", "=", self.product_id.id)])
+                    # if related_documents:
+                    #     for question in related_documents:
+                    #         if question.state == 'application_form':
+                    #             if question.file:
+                    #
+                    #                 id = self.env['final.application'].create(
+                    #                     {"description": question.id, 'download_files': [question.file.id],
+                    #                      "quotation_id": self.id})
+                    #                 print(id)
+                    #                 print(id.quotation_id)
+                    #             else:
+                    #                 self.env['final.application'].create(
+                    #                     {"description": question.id,
+                    #                      "quotation_id": self.id})
                 elif  offers[-1].type == 'final':
                     self.write({'state': 'application'})
                     self.env['state.history'].create({"application_id": self.id, "state": 'application',
@@ -191,22 +191,22 @@ class Quotation(models.Model):
                                                       "user": self.write_uid.id})
                     self.test_state = self.env['state.setup'].search(
                         [('status', '=', 'application'), ('type', '=', 'insurance_app')]).id
-                    related_documents = self.env["final.application.setup"].search(
-                        [("product_id.id", "=", self.product_id.id)])
-                    if related_documents:
-                        for question in related_documents:
-                            if question.state == 'application':
-                                if question.file:
-
-                                    id = self.env['final.application'].create(
-                                        {"description": question.id, 'download_files': [question.file.id],
-                                         "quotation_id": self.id})
-                                    print(id)
-                                    print(id.quotation_id)
-                                else:
-                                    self.env['final.application'].create(
-                                        {"description": question.id,
-                                         "quotation_id": self.id})
+                    # related_documents = self.env["final.application.setup"].search(
+                    #     [("product_id.id", "=", self.product_id.id)])
+                    # if related_documents:
+                    #     for question in related_documents:
+                    #         if question.state == 'application':
+                    #             if question.file:
+                    #
+                    #                 id = self.env['final.application'].create(
+                    #                     {"description": question.id, 'download_files': [question.file.id],
+                    #                      "quotation_id": self.id})
+                    #                 print(id)
+                    #                 print(id.quotation_id)
+                    #             else:
+                    #                 self.env['final.application'].create(
+                    #                     {"description": question.id,
+                    #                      "quotation_id": self.id})
 
     @api.onchange('surveyor')
     def change_survey_state(self):
@@ -309,26 +309,26 @@ class Quotation(models.Model):
             self.write({'state': 'application_form'})
             self.write({"test_state": self.env['state.setup'].search(
                 [('status', '=', 'application_form'), ('type', '=', 'insurance_app')]).id})
-            if self.final_application_ids:
-                for question in self.final_application_ids:
-                    question.unlink()
-            if self.product_id:
-                related_documents = self.env["final.application.setup"].search(
-                    [("product_id.id", "=", self.product_id.id)])
-                if related_documents:
-                    for question in related_documents:
-                        if question.state == 'application_form':
-                            if question.file:
-
-                                id = self.env['final.application'].create(
-                                    {"description": question.id, 'download_files': [question.file.id],
-                                     "quotation_id": self.id})
-                                print(id)
-                                print(id.quotation_id)
-                            else:
-                                self.env['final.application'].create(
-                                    {"description": question.id,
-                                     "quotation_id": self.id})
+            # if self.final_application_ids:
+            #     for question in self.final_application_ids:
+            #         question.unlink()
+            # if self.product_id:
+            #     related_documents = self.env["final.application.setup"].search(
+            #         [("product_id.id", "=", self.product_id.id)])
+            #     if related_documents:
+            #         for question in related_documents:
+            #             if question.state == 'application_form':
+            #                 if question.file:
+            #
+            #                     id = self.env['final.application'].create(
+            #                         {"description": question.id, 'download_files': [question.file.id],
+            #                          "quotation_id": self.id})
+            #                     print(id)
+            #                     print(id.quotation_id)
+            #                 else:
+            #                     self.env['final.application'].create(
+            #                         {"description": question.id,
+            #                          "quotation_id": self.id})
 
         else:
             self.write({'state': 'proposal'})
@@ -338,10 +338,10 @@ class Quotation(models.Model):
         # if self.survey_report_ids:
         #     for question in self.survey_report_ids:
         #         question.unlink()
-            if self.final_application_ids:
-                for question in self.final_application_ids:
-                    question.unlink()
-            if self.product_id:
+        #     if self.final_application_ids:
+        #         for question in self.final_application_ids:
+        #             question.unlink()
+            # if self.product_id:
                 # print(self.product_id)
                 # self.questionnaire = self.product_id.questionnaire_file
                 # self.file_name = self.product_id.file_name
@@ -359,22 +359,22 @@ class Quotation(models.Model):
                 #             self.text_questions_ids.create(
                 #                 {"question": question.id, "text_application_id": self.id})
 
-                related_documents = self.env["final.application.setup"].search(
-                    [("product_id.id", "=", self.product_id.id)])
-                if related_documents:
-                    for question in related_documents:
-                        if question.state == 'proposal':
-                            if question.file:
-
-                                id= self.env['final.application'].create(
-                                    {"description": question.id,'download_files': [question.file.id],
-                                     "quotation_id": self.id})
-                                print(id)
-                                print(id.quotation_id)
-                            else:
-                                self.env['final.application'].create(
-                                    {"description": question.id,
-                                     "quotation_id": self.id})
+                # related_documents = self.env["final.application.setup"].search(
+                #     [("product_id.id", "=", self.product_id.id)])
+                # if related_documents:
+                #     for question in related_documents:
+                #         if question.state == 'proposal':
+                #             if question.file:
+                #
+                #                 id= self.env['final.application'].create(
+                #                     {"description": question.id,'download_files': [question.file.id],
+                #                      "quotation_id": self.id})
+                #                 print(id)
+                #                 print(id.quotation_id)
+                #             else:
+                #                 self.env['final.application'].create(
+                #                     {"description": question.id,
+                #                      "quotation_id": self.id})
                     # id.write({'download_file':
                     #         [(0,0,{'name': 'Questionnaire', 'res_name': 'questionnaire',
                     #                                                         'type': 'binary',
@@ -484,22 +484,22 @@ class Quotation(models.Model):
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                                           "user": self.write_uid.id})
         self.test_state = self.env['state.setup'].search([('status', '=', 'initial_offer'),('type', '=', 'insurance_app')]).id
-        related_documents = self.env["final.application.setup"].search(
-            [("product_id.id", "=", self.product_id.id)])
-        if related_documents:
-            for question in related_documents:
-                if question.state == 'initial_offer':
-                    if question.file:
-
-                        id = self.env['final.application'].create(
-                            {"description": question.id, 'download_files': [question.file.id],
-                             "quotation_id": self.id})
-                        print(id)
-                        print(id.quotation_id)
-                    else:
-                        self.env['final.application'].create(
-                            {"description": question.id,
-                             "quotation_id": self.id})
+        # related_documents = self.env["final.application.setup"].search(
+        #     [("product_id.id", "=", self.product_id.id)])
+        # if related_documents:
+        #     for question in related_documents:
+        #         if question.state == 'initial_offer':
+        #             if question.file:
+        #
+        #                 id = self.env['final.application'].create(
+        #                     {"description": question.id, 'download_files': [question.file.id],
+        #                      "quotation_id": self.id})
+        #                 print(id)
+        #                 print(id.quotation_id)
+        #             else:
+        #                 self.env['final.application'].create(
+        #                     {"description": question.id,
+        #                      "quotation_id": self.id})
     def final_offer(self):
         self.write({'state': 'final_offer'})
         self.env['state.history'].create({"application_id": self.id, "state": 'final_offer',
@@ -508,22 +508,22 @@ class Quotation(models.Model):
         self.test_state = self.env['state.setup'].search(
             [('status', '=', 'final_offer'), ('type', '=', 'insurance_app')]).id
         self.message = self.test_state.message
-        related_documents = self.env["final.application.setup"].search(
-            [("product_id.id", "=", self.product_id.id)])
-        if related_documents:
-            for question in related_documents:
-                if question.state == 'final_offer':
-                    if question.file:
-
-                        id = self.env['final.application'].create(
-                            {"description": question.id, 'download_files': [question.file.id],
-                             "quotation_id": self.id})
-                        print(id)
-                        print(id.quotation_id)
-                    else:
-                        self.env['final.application'].create(
-                            {"description": question.id,
-                             "quotation_id": self.id})
+        # related_documents = self.env["final.application.setup"].search(
+        #     [("product_id.id", "=", self.product_id.id)])
+        # if related_documents:
+        #     for question in related_documents:
+        #         if question.state == 'final_offer':
+        #             if question.file:
+        #
+        #                 id = self.env['final.application'].create(
+        #                     {"description": question.id, 'download_files': [question.file.id],
+        #                      "quotation_id": self.id})
+        #                 print(id)
+        #                 print(id.quotation_id)
+        #             else:
+        #                 self.env['final.application'].create(
+        #                     {"description": question.id,
+        #                      "quotation_id": self.id})
 
     def survey(self):
         related_survey_questions = self.env["survey.line.setup"].search([("product_id.id", "=", self.product_id.id)])
@@ -832,8 +832,8 @@ class FinalApplication(models.Model):
     _name = 'final.application'
 
     description = fields.Many2one('final.application.setup', 'Document Name')
-    application_file = fields.Many2many('ir.attachment', string="Upload File", relation="final_application_uploads")
     download_files = fields.Many2many('ir.attachment', string="Download File")
+    application_file = fields.Many2many('ir.attachment', string="Upload File", relation="final_application_uploads")
     issue_in_progress_state = fields.Selection(
         [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
         string='State', default='pending')
@@ -846,8 +846,19 @@ class FinalApplication(models.Model):
             self.write({"issue_in_progress_state": 'complete'})
 
 
-class FinalApplication(models.Model):
+
+class FinalApplications(models.Model):
     _name = 'final.applications'
+
+# class Final(models.Model):
+#     _name = 'wizard.final.application'
+
+class WizardFinalApplication(models.TransientModel):
+    _name = 'wizard.required.documents'
+
+    insurance_app_id = fields.Many2one('insurance.quotation')
+    required_documents = fields.Many2many('final.application')
+
 
 
 class AvailableTime(models.Model):
@@ -1007,6 +1018,7 @@ class PersonsLines(models.Model):
     # survey_id = fields.Many2one('survey.survey', string="Survey", readonly=True)
     response_id = fields.Many2one('survey.user_input', "Response", ondelete="set null")
     partner_id = fields.Many2one('res.partner', "Contact", copy=False)
+
     def start_application(self):
         self.ensure_one()
         # create a response and link it to this applicant
@@ -1021,34 +1033,32 @@ class PersonsLines(models.Model):
         # grab the token of the response and start surveying
             return rec.with_context(survey_token=response.token).action_start_survey()
 
-    def action_print_survey(self):
-        """ Open the website page with the survey printable view """
-        self.ensure_one()
-        token = self.env.context.get('survey_token')
-        trail = "?answer_token=%s" % token if token else ""
-        for rec in self.env['survey.survey'].search([('product_id', '=', self.application_id.product_id.id)]):
-            access_token = rec.access_token
-            print(access_token)
+    def required_document(self):
+        ids = []
+        related_documents = self.env["final.application.setup"].search(
+            [("product_id.id", "=", self.application_id.product_id.id)])
+        if related_documents:
+            for question in related_documents:
+                id = self.env['final.application'].create(
+                    {"description": question.id,
+                     "quotation_id": self.id})
+                ids.append(id.id)
+
         return {
-            'type': 'ir.actions.act_url',
-            'name': "Print Survey",
+            'type': 'ir.actions.act_window',
+            'res_model': 'wizard.required.documents',
+            'view_type': 'form',
+            'view_mode': 'form',
             'target': 'new',
-            'url': '/survey/print/%s%s' % (access_token, trail)
+            'context': {
+                'default_insurance_app_id': self.application_id.id,
+                'default_required_documents': ids
+
+
+            }
         }
-    def start_applications(self):
-        print('hjkhkkjh')
-        self.ensure_one()
-        token = self.env.context.get('survey_token')
-        trail = "?answer_token=%s" % token if token else ""
-        for rec in self.env['survey.survey'].search([('product_id', '=', self.application_id.product_id.id)]):
-            url = rec.public_url
-            print(url)
-        return {
-            'type': 'ir.actions.act_url',
-            'name': "Start Survey",
-            'target': 'new',
-            'url': url + trail
-        }
+
+
 
 
 

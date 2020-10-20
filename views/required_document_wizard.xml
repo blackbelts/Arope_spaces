@@ -1,0 +1,19 @@
+<odoo>
+<!--    <data>-->
+        <record model="ir.ui.view" id="required_documents_wizard">
+            <field name="name">wizard.required.documents</field>
+            <field name="model">wizard.required.documents</field>
+            <field name="arch" type="xml">
+                <form>
+                   <field name="required_documents" widget='one2many'>
+                       <tree editable="bottom">
+                           <field name="description"/>
+                           <field name="application_file" widget="many2many_binary"/>
+                           <field name="issue_in_progress_state"/>
+                       </tree>
+                   </field>
+                </form>
+            </field>
+        </record>
+<!--    </data>-->
+</odoo>
