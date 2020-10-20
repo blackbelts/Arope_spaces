@@ -41,7 +41,7 @@ class AropePolicy(models.Model):
     _inherit = "policy.arope"
 
     def create_end_requset(self):
-        form = self.env.ref('arope-conf.request_form_view')
+        form = self.env.ref('Arope-spaces.request_form_view')
 
         return {
             'name': ('Request'),
@@ -58,7 +58,7 @@ class AropePolicy(models.Model):
         }
 
     def create_renew_requset(self):
-        form = self.env.ref('arope-conf.request_form_view')
+        form = self.env.ref('Arope-spaces.request_form_view')
         return {
             'name': ('Request'),
             'view_type': 'form',
