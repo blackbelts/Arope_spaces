@@ -4,7 +4,7 @@
         <field name="model">policy.arope</field>
         <field name="inherit_id" ref="arope-conf.policy_form_view"/>
         <field name="arch" type="xml">
-            <xpath expr="/form" position="inside">
+            <xpath expr="//sheet" position="before">
                   <header>
                     <button name="create_end_requset" string="Endorsement Request" type="object"
                             class="oe_highlight"/>
