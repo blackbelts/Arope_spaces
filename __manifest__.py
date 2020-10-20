@@ -38,7 +38,7 @@
         'views/state.xml',
         'views/answer.xml',
         'views/claim_app.xml',
-        'views/policy_view.xml',
+        # 'views/policy_view.xml',
         #'reports/offer.xml',
         #'reports/questionnaire.xml',
         'views/menu_item.xml',
