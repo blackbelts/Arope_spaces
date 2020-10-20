@@ -1,7 +1,7 @@
 <odoo>
     <record id="policy_arope_inherit" model="ir.ui.view">
         <field name="name">Policy</field>
-        <field name="model">poliocy.arope</field>
+        <field name="model">policy.arope</field>
         <field name="inherit_id" ref="arope-conf.policy_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="/form" position="inside">
