@@ -1,4 +1,21 @@
 <odoo>
+    <record id="policy_arope_inherit" model="ir.ui.view">
+        <field name="name">Help Disk</field>
+        <field name="model">helpdesk_lite.ticket</field>
+        <field name="inherit_id" ref="helpdesk_lite.helpdesk_ticket_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form" position="inside">
+                  <header>
+                    <button name="create_end_requset" string="Endorsement Request" type="object"
+                            class="oe_highlight"/>
+                    <button name="create_renew_requset" string="Renewal Request" type="object"
+                            class="oe_highlight"/>
+                </header>
+
+            </xpath>
+        </field>
+    </record>
+
  <record id="request_form_view" model="ir.ui.view">
         <field name="name">Policy Form</field>
         <field name="model">policy.request</field>
