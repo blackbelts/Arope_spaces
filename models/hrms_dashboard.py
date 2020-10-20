@@ -22,11 +22,11 @@ class Brokers(models.Model):
     _name = 'arope.broker'
 
     @api.model
-    def get_production(self,agents_codes,type):
+    def get_production(self,codes,type):
         if type=='broker':
-            domain=[('agent_code', 'in', agents_codes)]
+            domain=[('agent_code', 'in', codes)]
         elif type=='customer':
-            domain=[('customerpin', 'in', agents_codes)]
+            domain=[('customer_pin', 'in', codes)]
         else:
             domain=[]
 
@@ -255,13 +255,18 @@ class Brokers(models.Model):
         return True
 
     @api.model
-    def get_lob_count_policy(self, agents_codes):
+    def get_lob_count_policy(self,codes,type):
 
         lob_list = []
+        if type=='broker':
+            ids=self.env['policy.arope'].search([('agent_code', 'in', codes)]).ids
+        elif type=='customer':
+            ids=self.env['policy.arope'].search([('customer_pin', 'in', codes)]).ids
+
         for lob in self.env['insurance.line.business'].search([]):
             total=0.0
             count=0
-            for rec in self.env['policy.arope'].search([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)]):
+            for rec in self.env['policy.arope'].search([('id', 'in', ids), ('lob', '=', lob.line_of_business)]):
                   total+=rec.totoal_premium
                   count+=1
             if count>0:
@@ -271,12 +276,17 @@ class Brokers(models.Model):
         return lob_list
 
     @api.model
-    def get_lob_count_claim(self, agents_codes):
+    def get_lob_count_claim(self,codes,type):
         lob_list = []
+        if type == 'broker':
+            ids = self.env['claim.arope'].search([('agent_code', 'in', codes)]).ids
+        elif type == 'customer':
+            ids = self.env['claim.arope'].search([('pin', 'in', codes)]).ids
+
         for lob in self.env['insurance.line.business'].search([]):
             total = 0.0
             count = 0
-            for rec in self.env['claim.arope'].search([('agent_code', 'in', agents_codes), ('lob', '=', lob.line_of_business)]):
+            for rec in self.env['claim.arope'].search([('id', 'in', ids), ('lob', '=', lob.line_of_business)]):
                 total+=rec.claim_paid
                 count+=1
             if count > 0:
@@ -299,21 +309,30 @@ class Brokers(models.Model):
         return lob_list
 
     @api.model
-    def get_complaint_count(self, agents_codes):
+    def get_complaint_count(self, codes,type):
         complaint_list = []
+        if type == 'broker':
+            ids = self.env['helpdesk_lite.ticket'].search([('agent_code', 'in', codes)]).ids
+        elif type == 'customer':
+            ids = self.env['helpdesk_lite.ticket'].search([('customer_pin', 'in', codes)]).ids
         for stage in self.env['helpdesk_lite.stage'].search([]):
             count = self.env['helpdesk_lite.ticket'].search_count(
-                [('agent_code', 'in', agents_codes), ('stage_id', '=', stage.id)])
+                [('id', 'in', ids), ('stage_id', '=', stage.id)])
             complaint_list.append({'stage':stage.name,'count':count})
         return complaint_list
 
     @api.model
-    def get_collection_ratio(self, agents_codes):
+    def get_collection_ratio(self,codes,type):
         complaint_list = []
         collections=0.0
-        for coll in self.env['collection.arope'].search([('agent_code', 'in', agents_codes)]):
-          collections+=coll.paid_lc
-        prod=self.get_production(agents_codes,'broker')['total']
+        if type == 'broker':
+            domain = [('agent_code', 'in', codes)]
+        elif type == 'customer':
+            domain = [('pin', 'in', codes)]
+        for coll in self.env['collection.arope'].search(domain):
+                      collections+=coll.paid_lc
+        prod = self.get_production(codes,type)['total']
+
         if prod>0:
             ratio=(collections/prod)
             return  ratio
@@ -321,11 +340,15 @@ class Brokers(models.Model):
             return 0.0
 
     @api.model
-    def get_claim_ratio(self, agents_codes):
+    def get_claim_ratio(self, codes,type):
         claims = 0.0
-        for claim in self.env['claim.arope'].search([('agent_code', 'in', agents_codes)]):
+        if type == 'broker':
+            domain = [('agent_code', 'in', codes)]
+        elif type == 'customer':
+            domain = [('pin', 'in', codes)]
+        for claim in self.env['claim.arope'].search(domain):
             claims += claim.claim_paid
-        prod = self.get_production(agents_codes,'broker')['total']
+        prod = self.get_production(codes,type)['total']
         if prod > 0:
             ratio = (claims / prod)
             return ratio
@@ -333,7 +356,7 @@ class Brokers(models.Model):
             return 0.0
 
     @api.model
-    def get_dashboard(self, id):
+    def get_broker_dashboard(self, id):
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
         agents_codes = []
         for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
@@ -342,11 +365,11 @@ class Brokers(models.Model):
         return {
             "user": self.env['persons'].search_read([('card_id', '=', user.card_id)],limit=1),
             "production": self.get_production(agents_codes,'broker'),
-            "policy_lob": self.get_lob_count_policy(agents_codes),
-            "claim_lob": self.get_lob_count_claim(agents_codes),
-            "complaint_count": self.get_complaint_count(agents_codes),
-            "collection_ratio": self.get_collection_ratio(agents_codes),
-            "claims_ratio": self.get_claim_ratio(agents_codes),
+            "policy_lob": self.get_lob_count_policy(agents_codes,'broker'),
+            "claim_lob": self.get_lob_count_claim(agents_codes,'broker'),
+            "complaint_count": self.get_complaint_count(agents_codes,'broker'),
+            "collection_ratio": self.get_collection_ratio(agents_codes,'broker'),
+            "claims_ratio": self.get_claim_ratio(agents_codes,'broker'),
             "App_count": self.get_lob_count_ins_app(id),
 
             'rank': self.get_rank(id),
@@ -354,6 +377,31 @@ class Brokers(models.Model):
             'lastVsCurrentYear': self.get_production_compare(agents_codes),
             'collections':self.get_collections(agents_codes),
             'renews':self.get_renew(agents_codes)
+        }
+
+    @api.model
+    def get_customer_dashboard(self, id):
+        type='customer'
+        user = self.env['res.users'].search([('id', '=', id)], limit=1)
+        customer_pin = []
+        for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
+            customer_pin.append(rec.pin)
+
+        return {
+            "user": self.env['persons'].search_read([('card_id', '=', user.card_id)], limit=1),
+            "production": self.get_production(customer_pin, 'type'),
+            "policy_lob": self.get_lob_count_policy(customer_pin,'type'),
+            "claim_lob": self.get_lob_count_claim(customer_pin,'type'),
+            "complaint_count": self.get_complaint_count(customer_pin,'type'),
+            "collection_ratio": self.get_collection_ratio(customer_pin,'type'),
+            "claims_ratio": self.get_claim_ratio(customer_pin,type),
+            "App_count": self.get_lob_count_ins_app(id),
+
+            # 'rank': self.get_rank(id),
+            # 'targetVsProduction': self.get_target_production(id),
+            # 'lastVsCurrentYear': self.get_production_compare(agents_codes),
+            # 'collections': self.get_collections(agents_codes),
+            # 'renews': self.get_renew(agents_codes)
         }
     @api.model
     def get_user_groups(self,id):
@@ -368,7 +416,7 @@ class Brokers(models.Model):
     #     for rec in self.env['persons'].search([('card_id', '=', card)]):
     #         agents_codes.append(rec.pin)
     #     return {
-    #         "production": self.get_production(agents_codes,'customer'),
+    #         "production": self.get_production(agents_get_broker_dashboardcodes,'customer'),
             # "policy_lob": self.get_lob_count_policy(agents_codes),
             # "claim_lob": self.get_lob_count_claim(agents_codes),
             # "complaint_count": self.get_complaint_count(agents_codes),

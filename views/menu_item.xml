@@ -135,9 +135,10 @@
 <odoo>
     <menuitem id="arope_space" name="My Space" web_icon="Arope-spaces,static/description/icon.png"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group,Arope-spaces.managers_group,Arope-spaces.surveyor_group" sequence="-100"/>
 
-
-    <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="hr_action_dashboard"
+     <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="arope_action_dashboard"
               parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />
+<!--    <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="hr_action_dashboard"-->
+<!--              parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />-->
 
 
     <menuitem id="policy_config" name="Configuration"
@@ -189,5 +190,6 @@
 
     <menuitem id="quick_quote_view" name="Quick Quote"
               action="quickQuoteAction" parent="arope_space"  sequence="0"/>
+    <menuitem id="survey" name="Application Setup" action="survey.action_survey_form" parent="arope_space" sequence="9"/>
 
 </odoo>

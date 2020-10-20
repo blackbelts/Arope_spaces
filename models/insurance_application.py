@@ -121,6 +121,7 @@ class Quotation(models.Model):
                                      ('complete', 'Submitted'), ('accepted', 'Accepted')], string='Survey State', default='surveyor')
     quotation_id = fields.Many2one('quotation.service')
     message = fields.Text('Description')
+    persons = fields.One2many('persons.lines', 'application_id')
 
     @api.onchange('test_state','product_id')
     def get_message(self):
@@ -633,6 +634,21 @@ class Quotation(models.Model):
             },
         }
 
+    @api.model
+    def start_application(self):
+        print('hjkhkkjh')
+        self.ensure_one()
+        token = self.env.context.get('survey_token')
+        trail = "?answer_token=%s" % token if token else ""
+        for rec in self.env['survey.survey'].search([('product_id', '=', self.application_id.product_id.id)]):
+            url = rec.public_url
+            print(url)
+        return {
+            'type': 'ir.actions.act_url',
+            'name': "Start Survey",
+            'target': 'new',
+            'url': url + trail
+        }
 
     def accept_offer(self):
         self.write({'state': 'application'})
@@ -967,5 +983,75 @@ class FamilyAge(models.Model):
             if months or days != 0:
                 age += 1
             self.age = age
+            
+class SurveyQuestions(models.Model):
+
+    _inherit = 'survey.survey'
+    product_id = fields.Many2one('insurance.product', 'Product')
+
+    @api.onchange('product_id')
+    def get_title(self):
+        self.title = self.product_id.product_name
+
+
+
+
+class PersonsLines(models.Model):
+
+    _name = 'persons.lines'
+
+    insured = fields.Char("Insured", required=True, copy=False, index=True,
+                default=lambda self: self.env['ir.sequence'].next_by_code('insurer'), readonly=True)
+    comment = fields.Text('Comment')
+    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    # survey_id = fields.Many2one('survey.survey', string="Survey", readonly=True)
+    response_id = fields.Many2one('survey.user_input', "Response", ondelete="set null")
+    partner_id = fields.Many2one('res.partner', "Contact", copy=False)
+    def start_application(self):
+        self.ensure_one()
+        # create a response and link it to this applicant
+        user = self.env['res.users'].search([('id', '=', self._uid)])
+        if not self.response_id:
+            for rec in self.env['survey.survey'].search([('product_id', '=', self.application_id.product_id.id)]):
+                response = rec._create_answer(user=user)
+                self.response_id = response.id
+        else:
+            response = self.response_id
+        for rec in self.env['survey.survey'].search([('product_id', '=', self.application_id.product_id.id)]):
+        # grab the token of the response and start surveying
+            return rec.with_context(survey_token=response.token).action_start_survey()
+
+    def action_print_survey(self):
+        """ Open the website page with the survey printable view """
+        self.ensure_one()
+        token = self.env.context.get('survey_token')
+        trail = "?answer_token=%s" % token if token else ""
+        for rec in self.env['survey.survey'].search([('product_id', '=', self.application_id.product_id.id)]):
+            access_token = rec.access_token
+            print(access_token)
+        return {
+            'type': 'ir.actions.act_url',
+            'name': "Print Survey",
+            'target': 'new',
+            'url': '/survey/print/%s%s' % (access_token, trail)
+        }
+    def start_applications(self):
+        print('hjkhkkjh')
+        self.ensure_one()
+        token = self.env.context.get('survey_token')
+        trail = "?answer_token=%s" % token if token else ""
+        for rec in self.env['survey.survey'].search([('product_id', '=', self.application_id.product_id.id)]):
+            url = rec.public_url
+            print(url)
+        return {
+            'type': 'ir.actions.act_url',
+            'name': "Start Survey",
+            'target': 'new',
+            'url': url + trail
+        }
+
+
+
+
 
 

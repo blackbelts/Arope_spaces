@@ -5,7 +5,7 @@ from datetime import timedelta, datetime,date
 class HelpDeskComplains(models.Model):
     _inherit = 'helpdesk_lite.ticket'
     lob = fields.Many2one('insurance.line.business', 'LOB',)
-    customer = fields.Char(string='Customer')
+    customer_pin = fields.Integer(string='Customer')
     agent_code = fields.Char(string='Agent Code')
     card_id = fields.Char(string='Card ID')
     policy = fields.Char(string='Policy')

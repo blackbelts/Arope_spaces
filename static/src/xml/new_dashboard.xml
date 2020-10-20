@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+  <t t-name="AropeDashboardMain">
+
+    <div class="oh_dashboards">
+      <div class="container-fluid o_hr_dashboard"></div>
+    </div>
+  </t>
+  <t t-name="arope">
+    <xpath expr="." position="inside">
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/themify-icons.css" />
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/metisMenu.css" />
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/owl.carousel.min.css" />
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/slicknav.min.css" />
+      <!-- amchart css -->
+      <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+      <!-- others css -->
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/all.min.css" />
+
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/typography.css" />
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/default-css.css" />
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/styles.css" />
+      <link rel="stylesheet" href="/Arope-spaces/static/src/css/responsive.css" />
+      <script src="/Arope-spaces/static/src/js/modernizr-2.8.3.min.js"></script>
+    </xpath>
+    <!--[if lt IE 8]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- page container area start -->
+    <div class="page-container">
+      <!-- main content area start -->
+      <div class="main-content">
+        <!-- page title area start -->
+        <div class="page-title-area">
+          <div class="breadcrumbs-area clearfix">
+            <h4 class="page-title pull-left">Dashboard / 2020</h4>
+          </div>
+        </div>
+        <!-- page title area end -->
+        <div class="main-content-inner">
+          <div class="sales-report-area top-sales-report mt-3 mb-1">
+            <div class="row">
+              <t t-if="widget.broker">
+              <div class="col-md-6 mt-5">
+                <div class="single-report mb-xs-30 cursor" id="broker">
+                  <div class="s-report-inner pr--20 pt--30 mb-3">
+                    <div class="icon">
+                      <i class='fas fa-tachometer-alt' />
+                    </div>
+                    <div class="s-report-title d-flex justify-content-between">
+                      <h4 class="header-title mb-0 new-header">Broker Dashboard</h4>
+                      <!--<p>24 H</p>-->
+                    </div>
+                    <div class="d-flex justify-content-between pb-2">
+                      <h2 class="larage">
+                        <t t-esc="widget.brokerRank" />
+                      </h2>
+                      <!--<span>- 45.87</span>-->
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+              </t>
+               <t t-if="widget.client">
+              <div class="col-md-6 mt-5">
+                <div class="single-report mb-xs-30 cursor" id="customer">
+                  <div class="s-report-inner pr--20 pt--30 mb-3">
+                    <div class="icon">
+                      <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="s-report-title d-flex justify-content-between">
+                      <h4 class="header-title new-header mb-0">Customer Dashboard</h4>
+
+                    </div>
+                    <div class="d-flex justify-content-between pb-2">
+                      <h2 class="larage">
+<!--                        <i class="fas fa-money"></i>-->
+<!--                        <i class="fas fa-money"></i>-->
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+               </t>
+               <t t-if="widget.surveyor">
+              <div class="col-md-6 mt-5">
+                <div class="single-report mb-xs-30" id="surveyor">
+                  <div class="s-report-inner pr--20 pt--30 mb-3">
+                    <div class="icon">
+                      <i class='fas fa-tachometer-alt' />
+                    </div>
+                    <div class="s-report-title d-flex justify-content-between">
+                      <h4 class="header-title mb-0 new-header">Surveyor Dashboard</h4>
+                      <!--<p>24 H</p>-->
+                    </div>
+                    <div class="d-flex justify-content-between pb-2">
+<!--                      <h2 class="text">-->
+<!--                                                Company-->
+<!--                                            </h2>-->
+                      <!--<span>- 45.87</span>-->
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+               </t>
+               <t t-if="widget.manager">
+              <div class="col-md-6 mt-5">
+                <div class="single-report mb-xs-30 cursor" id="production">
+                  <div class="s-report-inner pr--10 pt--30 mb-3">
+                    <div class="icon">
+                      <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="s-report-title justify-content-between">
+                      <h4 class="header-title mb-0 new-header">Arope Dashboard</h4>
+<!--                      <h4 class="header-title new-header mb-0">License Code : 50225555</h4>-->
+<!--                      <br />-->
+<!--                      <h4 class="header-title new-header mb-0">expired On : 20-10-2222</h4>-->
+                      <!--<p>24 H</p>-->
+                    </div>
+                    <div class="d-flex justify-content-between pb-2">
+
+                      <!--<span>- 45.87</span>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+               </t>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- main content area end -->
+      <!-- footer area start-->
+      <footer>
+        <div class="footer-area">
+          <p>
+            © Copyright 2020. All right reserved. Template by
+            <a href="https://colorlib.com/wp/">BlackBelts</a>
+            .
+          </p>
+        </div>
+      </footer>
+      <!-- footer area end-->
+    </div>
+    <!-- page container area end -->
+    <xpath expr="." position="inside">
+      <script src="/Arope-spaces/static/src/js/popper.min.js"></script>
+      <script src="/Arope-spaces/static/src/js/owl.carousel.min.js"></script>
+      <script src="/Arope-spaces/static/src/js/metisMenu.min.js"></script>
+      <script src="/Arope-spaces/static/src/js/jquery.slimscroll.min.js"></script>
+      <script src="/Arope-spaces/static/src/js/jquery.slicknav.min.js"></script>
+      <script src="/Arope-spaces/static/src/js/amcharts.js"></script>
+      <script src="/Arope-spaces/static/src/js/serial.js"></script>
+      <script src="/Arope-spaces/static/src/js/pie.js"></script>
+      <script src="/Arope-spaces/static/src/js/export.min.js"></script>
+      <script src="/Arope-spaces/static/src/js/light.js"></script>
+      <script src="/Arope-spaces/static/src/js/plugins.js"></script>
+      <script src="/Arope-spaces/static/src/js/scripts.js"></script>
+    </xpath>
+  </t>
+
+</templates>
