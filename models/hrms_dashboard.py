@@ -389,11 +389,11 @@ class Brokers(models.Model):
 
         return {
             "user": self.env['persons'].search_read([('card_id', '=', user.card_id)], limit=1),
-            "production": self.get_production(customer_pin, 'type'),
-            "policy_lob": self.get_lob_count_policy(customer_pin,'type'),
-            "claim_lob": self.get_lob_count_claim(customer_pin,'type'),
-            "complaint_count": self.get_complaint_count(customer_pin,'type'),
-            "collection_ratio": self.get_collection_ratio(customer_pin,'type'),
+            "production": self.get_production(customer_pin, type),
+            "policy_lob": self.get_lob_count_policy(customer_pin,type),
+            "claim_lob": self.get_lob_count_claim(customer_pin,type),
+            "complaint_count": self.get_complaint_count(customer_pin,type),
+            "collection_ratio": self.get_collection_ratio(customer_pin,type),
             "claims_ratio": self.get_claim_ratio(customer_pin,type),
             "App_count": self.get_lob_count_ins_app(id),
 
@@ -406,7 +406,7 @@ class Brokers(models.Model):
     @api.model
     def get_user_groups(self,id):
         groups=[]
-        for rec in self.env['res.groups'].sudo().search([('users','=',[id]),('category_id','=','arope')]):
+        for rec in self.env['res.groups'].sudo().search([('users','=',[id]),('category_id','=','space')]):
             groups.append(rec.name)
         return groups
     # @api.model

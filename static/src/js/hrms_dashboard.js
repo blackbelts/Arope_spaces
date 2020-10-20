@@ -209,7 +209,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
       var self = this;
       var get_dashboard = rpc.query({
         model: "arope.broker",
-        method: "get_dashboard",
+        method: "get_broker_dashboard",
         args: [user]
       }).then(function (res) {
         self.brokerProduction = res.production

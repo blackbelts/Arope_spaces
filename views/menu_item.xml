@@ -135,14 +135,14 @@
 <odoo>
     <menuitem id="arope_space" name="My Space" web_icon="Arope-spaces,static/description/icon.png"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group,Arope-spaces.managers_group,Arope-spaces.surveyor_group" sequence="-100"/>
 
-     <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="arope_action_dashboard"
-              parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />
-<!--    <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="hr_action_dashboard"-->
+<!--     <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="arope_action_dashboard"-->
 <!--              parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />-->
+    <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="hr_action_dashboard"
+              parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />
 
 
     <menuitem id="policy_config" name="Configuration"
-              parent="arope_space" sequence="4" groups="Arope-spaces.managers_group"/>
+              parent="arope_space" sequence="4" groups="Arope-spaces.managers_group" />
 
 
 
@@ -172,7 +172,7 @@
               id="claim"
               parent="arope_space"
               action="claim_app_action"
-              sequence="3"/>
+              sequence="5"/>
 
     <menuitem id="main" name="Medical "
     />
@@ -186,7 +186,10 @@
               action="maintenance_center_action" sequence="7000"/>
     <menuitem id="claim_setup" name="Claim Setup" parent="policy_config"
               action="claim_setup_action" sequence="8000"/>
-
+    <menuitem id="end_request" name="Endorsement Requests"
+                action="request_action_end" parent="arope_space" />
+    <menuitem id="renew_request" name="Renewal Requests"
+                action="request_action_renew" parent="arope_space" />
 
     <menuitem id="quick_quote_view" name="Quick Quote"
               action="quickQuoteAction" parent="arope_space"  sequence="0"/>

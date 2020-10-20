@@ -5,7 +5,7 @@
     'description': """Spaces """,
     'author': "Black Belts Egypt",
     'website': "www.blackbelts-egypt.com",
-    'category': 'arope',
+    'category': 'space',
     'version': '0.1',
     'license': 'AGPL-3',
     # any module necessary for this one to work correctly
@@ -41,6 +41,7 @@
         'views/survey_setup.xml',
         'views/required_document_wizard.xml',
         # 'views/help_desk.xml',
+        'views/policy_view.xml',
         #'reports/offer.xml',
         #'reports/questionnaire.xml',
         'views/menu_item.xml',
@@ -50,7 +51,7 @@
     'qweb': [
         "static/src/xml/hrms_dashboard.xml",
         "static/src/xml/new_dashboard.xml",
-        "static/src/xml/broker_dash.xml",
+        "static/src/xml/broker_dash2.xml",
         "static/src/xml/surveyor_dash.xml",
         "static/src/xml/customer_dash.xml"
     ],
