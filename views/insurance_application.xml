@@ -163,20 +163,20 @@
                             <field name="comment"/>
                         </tree>
                     </field>
-                    <!--                    <br/>-->
-                    <!--                    <h3 style="color: #073e89 !important">Required Documents</h3>-->
+                    <br/>
+                    <h3 style="color: #073e89 !important">Required Documents</h3>
 
-                    <!--                    <br/>-->
-                    <!--                    <group>-->
-                    <!--                        <field name="final_application_ids">-->
-                    <!--                                <tree editable="bottom" decoration-danger="issue_in_progress_state == 'pending'">-->
-                    <!--                                    <field name="description"/>-->
-                    <!--&lt;!&ndash;                                    <field name="download_files" widget="many2many_binary"/>&ndash;&gt;-->
-                    <!--                                    <field name="application_file" widget="many2many_binary"/>-->
-                    <!--                                    <field name="issue_in_progress_state"/>-->
-                    <!--                                </tree>-->
-                    <!--                        </field>-->
-                    <!--                    </group>-->
+                    <br/>
+                    <group>
+                        <field name="final_application_ids">
+                                <tree editable="bottom" decoration-danger="issue_in_progress_state == 'pending'">
+                                    <field name="description"/>
+                                    <field name="download_files" widget="many2many_binary"/>
+                                    <field name="application_file" widget="many2many_binary"/>
+                                    <field name="issue_in_progress_state"/>
+                                </tree>
+                        </field>
+                    </group>
                     <br/>
                     <div>
                         <h3 style="color: #073e89 !important">Offers</h3>

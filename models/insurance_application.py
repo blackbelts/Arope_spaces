@@ -808,7 +808,7 @@ class FinalApplications(models.Model):
 # class Final(models.Model):
 #     _name = 'wizard.final.application'
 
-class WizardFinalApplication(models.TransientModel):
+class WizardFinalApplication(models.Model):
     _name = 'wizard.required.documents'
 
     insurance_app_id = fields.Many2one('insurance.quotation')
