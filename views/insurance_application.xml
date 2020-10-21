@@ -412,18 +412,18 @@
 	</record>
 
 
-    <record id="insurance_view_search" model="ir.ui.view">
-        <field name="name">insurance.search</field>
-        <field name="model">insurance.quotation</field>
-        <field name="arch" type="xml">
-            <search string="Insurance">
-                <group expand="0" string="Group By">
-                    <filter string="State" name="groupby_state" context="{'group_by': 'state'}"/>
-<!--                    <filter string="State" name="groupby_sub_state" context="{'group_by': 'sub_state'}"/>-->
-                </group>
-            </search>
-        </field>
-    </record>
+<!--    <record id="insurance_view_search" model="ir.ui.view">-->
+<!--        <field name="name">insurance.search</field>-->
+<!--        <field name="model">insurance.quotation</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search string="Insurance">-->
+<!--                <group expand="0" string="Group By">-->
+<!--                    <filter string="State" name="groupby_state" context="{'group_by': 'state'}"/>-->
+<!--&lt;!&ndash;                    <filter string="State" name="groupby_sub_state" context="{'group_by': 'sub_state'}"/>&ndash;&gt;-->
+<!--                </group>-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <record model="ir.actions.act_window" id="insurance_action">
             <field name="name">Insurance Application</field>
