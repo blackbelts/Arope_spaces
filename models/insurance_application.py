@@ -812,6 +812,7 @@ class WizardFinalApplication(models.Model):
     _name = 'wizard.required.documents'
 
     insurance_app_id = fields.Many2one('insurance.quotation')
+    insurer_id = fields.Many2one('persons.lines')
     required_documents = fields.Many2many('final.application')
 
 
@@ -989,15 +990,17 @@ class PersonsLines(models.Model):
             return rec.with_context(survey_token=response.token).action_start_survey()
 
     def required_document(self):
+
         ids = []
-        related_documents = self.env["final.application.setup"].search(
-            [("product_id.id", "=", self.application_id.product_id.id)])
-        if related_documents:
-            for question in related_documents:
-                id = self.env['final.application'].create(
-                    {"description": question.id,
-                     "quotation_id": self.id})
-                ids.append(id.id)
+        if not self.env['wizard.required.documents'].search([('insurer_id', '=', self.id)]):
+            related_documents = self.env["final.application.setup"].search(
+                [("product_id.id", "=", self.application_id.product_id.id)])
+            if related_documents:
+                for question in related_documents:
+                    id = self.env['final.application'].create(
+                        {"description": question.id,
+                         "quotation_id": self.id})
+                    ids.append(id.id)
 
         return {
             'type': 'ir.actions.act_window',
@@ -1005,7 +1008,9 @@ class PersonsLines(models.Model):
             'view_type': 'form',
             'view_mode': 'form',
             'target': 'new',
+            'domain': [('insurer_id', '=', self.id)],
             'context': {
+                'default_insurer_id':self.id,
                 'default_insurance_app_id': self.application_id.id,
                 'default_required_documents': ids
 
