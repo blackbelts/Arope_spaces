@@ -608,7 +608,7 @@ class Quotation(models.Model):
             },
         }
 
-    
+
 
     def accept_offer(self):
         self.write({'state': 'application'})
