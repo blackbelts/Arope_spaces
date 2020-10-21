@@ -17,8 +17,8 @@
 <!--                        <button style="margin-left: 3px;" type="object" string="Submit" name="submit_questionnaire" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}" groups="Arope-spaces.broker_space_group"/>-->
 <!--                    <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state', '!=', 'survey_required'),('sub_state', '!=', 'complete')]}" groups="Arope-spaces.managers_group"/>-->
 <!--                    <button  name="reinsurance_confirm" string="Reinsurance" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state', '!=', 'survey'),('sub_state', '!=', 'complete')]}" groups="Arope-spaces.managers_group"/>-->
-                    <button  name="final_offer" string="Final Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['application_form','survey'])]}" groups="Arope-spaces.managers_group"/>
-                    <button  name="survey" string="Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=',  'offer')]}" groups="Arope-spaces.managers_group"/>
+                    <button  name="final_offer" string="Final Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['initial_offer','survey'])]}" groups="Arope-spaces.managers_group"/>
+                    <button  name="survey" string="Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=',  'initial_offer')]}" groups="Arope-spaces.managers_group"/>
                     <button  name="survey" string="Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=',  'application_form')]}" groups="Arope-spaces.managers_group"/>
 
                     <!--                    <button  name="submit_survey_required" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state', '!=', 'surveyor'),('sub_state', '!=', 'complete')]}" groups="Arope-spaces.broker_space_group"/>-->

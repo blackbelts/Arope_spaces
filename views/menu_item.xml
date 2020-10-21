@@ -193,6 +193,6 @@
 
     <menuitem id="quick_quote_view" name="Quick Quote"
               action="quickQuoteAction" parent="arope_space"  sequence="0"/>
-    <menuitem id="survey" name="Application Setup" action="survey.action_survey_form" parent="arope_space" sequence="9"/>
+    <menuitem id="survey" name="Application Setup" action="survey.action_survey_form" parent="policy_config" sequence="1"/>
 
 </odoo>

@@ -52,9 +52,8 @@ class Quotation(models.Model):
     main_phone = fields.Char('Mobile Number (Main)')
     spare_phone = fields.Char('Mobile Number (Spare)')
     state = fields.Selection([
-        ('proposal', 'Request For Offer'),
-        ('initial_offer', 'Initial Offer'),
         ('application_form', 'Application Form'),
+        ('initial_offer', 'Initial Offer'),
         ('survey', 'Survey'),
         ('final_offer', 'Final Offer'),
         ('application', 'Issue In Progress'),
@@ -161,13 +160,13 @@ class Quotation(models.Model):
                     #                      "quotation_id": self.id})
 
             elif offers[-1].offer_state == 'accepted':
-                if offers[-1].type == 'initial':
-                    self.write({'state': 'application_form'})
-                    self.env['state.history'].create({"application_id": self.id, "state": 'application_form',
-                                                      "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                                                      "user": self.write_uid.id})
-                    self.test_state = self.env['state.setup'].search(
-                        [('status', '=', 'application_form'), ('type', '=', 'insurance_app')]).id
+                # if offers[-1].type == 'initial':
+                #     self.write({'state': 'application_form'})
+                #     self.env['state.history'].create({"application_id": self.id, "state": 'application_form',
+                #                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                #                                       "user": self.write_uid.id})
+                #     self.test_state = self.env['state.setup'].search(
+                #         [('status', '=', 'application_form'), ('type', '=', 'insurance_app')]).id
                     # related_documents = self.env["final.application.setup"].search(
                     #     [("product_id.id", "=", self.product_id.id)])
                     # if related_documents:
@@ -184,7 +183,7 @@ class Quotation(models.Model):
                     #                 self.env['final.application'].create(
                     #                     {"description": question.id,
                     #                      "quotation_id": self.id})
-                elif  offers[-1].type == 'final':
+                if  offers[-1].type == 'final':
                     self.write({'state': 'application'})
                     self.env['state.history'].create({"application_id": self.id, "state": 'application',
                                                       "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -305,35 +304,10 @@ class Quotation(models.Model):
 
     @api.onchange('product_id')
     def get_questions(self):
-        if self.product_id.line_of_bus.line_of_business in ('Medical' , 'Travel' , 'Motor'):
-            self.write({'state': 'application_form'})
-            self.write({"test_state": self.env['state.setup'].search(
-                [('status', '=', 'application_form'), ('type', '=', 'insurance_app')]).id})
-            # if self.final_application_ids:
-            #     for question in self.final_application_ids:
-            #         question.unlink()
-            # if self.product_id:
-            #     related_documents = self.env["final.application.setup"].search(
-            #         [("product_id.id", "=", self.product_id.id)])
-            #     if related_documents:
-            #         for question in related_documents:
-            #             if question.state == 'application_form':
-            #                 if question.file:
-            #
-            #                     id = self.env['final.application'].create(
-            #                         {"description": question.id, 'download_files': [question.file.id],
-            #                          "quotation_id": self.id})
-            #                     print(id)
-            #                     print(id.quotation_id)
-            #                 else:
-            #                     self.env['final.application'].create(
-            #                         {"description": question.id,
-            #                          "quotation_id": self.id})
+        self.write({'state': 'application_form'})
+        self.write({"test_state": self.env['state.setup'].search(
+            [('status', '=', 'application_form'), ('type', '=', 'insurance_app')]).id})
 
-        else:
-            self.write({'state': 'proposal'})
-            self.write({"test_state": self.env['state.setup'].search(
-                [('status', '=', 'proposal'), ('type', '=', 'insurance_app')]).id})
 
         # if self.survey_report_ids:
         #     for question in self.survey_report_ids:
@@ -634,21 +608,7 @@ class Quotation(models.Model):
             },
         }
 
-    @api.model
-    def start_application(self):
-        print('hjkhkkjh')
-        self.ensure_one()
-        token = self.env.context.get('survey_token')
-        trail = "?answer_token=%s" % token if token else ""
-        for rec in self.env['survey.survey'].search([('product_id', '=', self.application_id.product_id.id)]):
-            url = rec.public_url
-            print(url)
-        return {
-            'type': 'ir.actions.act_url',
-            'name': "Start Survey",
-            'target': 'new',
-            'url': url + trail
-        }
+    
 
     def accept_offer(self):
         self.write({'state': 'application'})
@@ -875,9 +835,8 @@ class stateHistory(models.Model):
     _name = 'state.history'
 
     state = fields.Selection([
-        ('proposal', 'Request For Offer'),
-        ('initial_offer', 'Initial Offer'),
         ('application_form', 'Application Form'),
+        ('initial_offer', 'Initial Offer'),
         ('survey', 'Survey'),
         ('final_offer', 'Final Offer'),
         ('application', 'Issue In Progress'),
