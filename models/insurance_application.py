@@ -1002,21 +1002,33 @@ class PersonsLines(models.Model):
                          "quotation_id": self.id})
                     ids.append(id.id)
 
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'wizard.required.documents',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'target': 'new',
-            'domain': [('insurer_id', '=', self.id)],
-            'context': {
-                'default_insurer_id':self.id,
-                'default_insurance_app_id': self.application_id.id,
-                'default_required_documents': ids
 
+            return {
+                'type': 'ir.actions.act_window',
+                'res_model': 'wizard.required.documents',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'target': 'new',
+                # 'domain': [('insurer_id', '=', self.id)],
+                'context': {
+                    'default_insurer_id':self.id,
+                    'default_insurance_app_id': self.application_id.id,
+                    'default_required_documents': ids
+
+
+                }
+            }
+        else:
+            self.ensure_one()
+            return {
+                'target': 'new',
+                'res_model': 'wizard.required.documents',
+                'type': 'ir.actions.act_window',
+                'view_mode': 'form',
+                'view_type': 'form',
+                'domain': [('insurer_id', '=', self.id)],
 
             }
-        }
 
 
 
