@@ -427,10 +427,10 @@
 
     <record model="ir.actions.act_window" id="insurance_action">
             <field name="name">Insurance Application</field>
-            <field name="type">ir.actions.act_window</field>
+<!--            <field name="type">ir.actions.act_window</field>-->
             <field name="res_model">insurance.quotation</field>
 <!--            <field name="context">{'search_default_groupby_state': 1}</field>-->
-<!--            <field name="view_id" ref="insurance_view_tree"/>-->
+            <field name="view_id" ref="insurance_view_tree"/>
             <field name="view_mode">tree,form,kanban</field>
     </record>
      <record id="sequence_application_number" model="ir.sequence">
