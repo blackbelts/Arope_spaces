@@ -17,9 +17,9 @@
                     <!--                        <button style="margin-left: 3px;" type="object" string="Submit" name="submit_questionnaire" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}" groups="Arope-spaces.broker_space_group"/>-->
                     <!--                    <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state', '!=', 'survey_required'),('sub_state', '!=', 'complete')]}" groups="Arope-spaces.managers_group"/>-->
                     <!--                    <button  name="reinsurance_confirm" string="Reinsurance" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state', '!=', 'survey'),('sub_state', '!=', 'complete')]}" groups="Arope-spaces.managers_group"/>-->
-<!--                    <button  name="final_offer" string="Final Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['initial_offer','survey'])]}" groups="Arope-spaces.managers_group"/>-->
-<!--                    <button  name="survey" string="Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=',  'initial_offer')]}" groups="Arope-spaces.managers_group"/>-->
-<!--                    <button  name="survey" string="Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=',  'application_form')]}" groups="Arope-spaces.managers_group"/>-->
+                    <button  name="final_offer" string="Final Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['initial_offer','survey'])]}" groups="Arope-spaces.managers_group"/>
+                    <button  name="survey" string="Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=',  'initial_offer')]}" groups="Arope-spaces.managers_group"/>
+                    <button  name="survey" string="Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=',  'application_form')]}" groups="Arope-spaces.managers_group"/>
 
                     <!--                    <button  name="submit_survey_required" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state', '!=', 'surveyor'),('sub_state', '!=', 'complete')]}" groups="Arope-spaces.broker_space_group"/>-->
                     <!--                    <button  name="initial_offer" string="Initial Offer" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'proposal')]}" groups="Arope-spaces.managers_group"/>-->
@@ -184,7 +184,7 @@
                         <field name="offer_ids" >
                             <tree editable="bottom" decoration-danger="offer_state == 'pending'">
                                 <field name="type"/>
-                                <field name="date"/>comment
+                                <field name="date"/>
                                 <field name="file" widget="many2many_binary"/>
                                 <field name="offer_state"/>
                                 <field name="comment"/>
@@ -408,18 +408,18 @@
     </record>
 
 
-    <!--    <record id="insurance_view_search" model="ir.ui.view">-->
-    <!--        <field name="name">insurance.search</field>-->
-    <!--        <field name="model">insurance.quotation</field>-->
-    <!--        <field name="arch" type="xml">-->
-    <!--            <search string="Insurance">-->
-    <!--                <group expand="0" string="Group By">-->
-    <!--                    <filter string="State" name="groupby_state" context="{'group_by': 'state'}"/>-->
-    <!--&lt;!&ndash;                    <filter string="State" name="groupby_sub_state" context="{'group_by': 'sub_state'}"/>&ndash;&gt;-->
-    <!--                </group>-->
-    <!--            </search>-->
-    <!--        </field>-->
-    <!--    </record>-->
+    <record id="insurance_view_search" model="ir.ui.view">
+        <field name="name">insurance.search</field>
+        <field name="model">insurance.quotation</field>
+        <field name="arch" type="xml">
+            <search string="Insurance">
+                <group expand="0" string="Group By">
+                    <filter string="State" name="groupby_state" context="{'group_by': 'state'}"/>
+                    <!--                    <filter string="State" name="groupby_sub_state" context="{'group_by': 'sub_state'}"/>-->
+                </group>
+            </search>
+        </field>
+    </record>
 
     <record model="ir.actions.act_window" id="insurance_action">
         <field name="name">Insurance Application</field>
@@ -427,7 +427,7 @@
         <field name="view_mode">tree,form,kanban,pivot</field>
         <!--            <field name="type">ir.actions.act_window</field>-->
 
-        <!--            <field name="context">{'search_default_groupby_state': 1}</field>-->
+        <field name="context">{'search_default_groupby_state': 1}</field>
         <field name="view_id" ref="insurance_view_tree"/>
     </record>
     <record id="sequence_application_number" model="ir.sequence">
