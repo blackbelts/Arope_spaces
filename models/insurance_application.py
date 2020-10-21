@@ -1009,7 +1009,7 @@ class PersonsLines(models.Model):
                 'view_type': 'form',
                 'view_mode': 'form',
                 'target': 'new',
-                # 'domain': [('insurer_id', '=', self.id)],
+                'domain': [('insurer_id', '=', self.id)],
                 'context': {
                     'default_insurer_id':self.id,
                     'default_insurance_app_id': self.application_id.id,
@@ -1021,13 +1021,14 @@ class PersonsLines(models.Model):
         else:
             self.ensure_one()
             return {
-                'target': 'new',
+                'name': 'Related Quick Quote',
                 'res_model': 'wizard.required.documents',
                 'type': 'ir.actions.act_window',
-                'view_mode': 'form',
-                'view_type': 'form',
+                'view_mode': 'tree,form',
                 'domain': [('insurer_id', '=', self.id)],
-
+                'context': {
+                    "create": False,
+                },
             }
 
 
