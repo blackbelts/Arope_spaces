@@ -431,7 +431,7 @@
             <field name="res_model">insurance.quotation</field>
             <field name="context">{'search_default_groupby_state': 1}</field>
             <field name="view_id" ref="insurance_view_tree"/>
-            <field name="view_mode">form,tree,kanban</field>
+            <field name="view_mode">tree,form,kanban</field>
     </record>
      <record id="sequence_application_number" model="ir.sequence">
         <field name="name">application_number</field>
