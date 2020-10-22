@@ -23,6 +23,7 @@ class StateSetup(models.Model):
                                      ('cheque', 'Take Cheque'),
                                      ('car_release', 'Car Release'),
                                      ('reject','Reject')], string='State')
+    
     non_motor_claim_status = fields.Selection([('claim_intimation', 'Claim Intimation'),
                                                 ('pre_survey', 'Survey'),
                                                 ('estimation', 'Estimation'),
@@ -40,7 +41,7 @@ class StateSetup(models.Model):
     #                               ('surveyor', 'Surveyor'),('underwriter', 'Underwriter')], string='State For')
     message = fields.Text('Message')
 
-    @api.onchange('status', 'claim_status', 'survey_status', 'non_motor_claim_status')
+    @api.onchange('status', 'claim_status', 'survey_status')
     def compute_status(self):
         if self.status:
             self.state = dict(self._fields['status'].selection).get(self.status)
@@ -48,8 +49,14 @@ class StateSetup(models.Model):
             self.state = dict(self._fields['claim_status'].selection).get(self.claim_status)
         elif self.survey_status:
             self.state = dict(self._fields['survey_status'].selection).get(self.survey_status)
-        elif self.non_motor_claim_status:
+        # elif self.non_motor_claim_status:
+        #     self.state = dict(self._fields['non_motor_claim_status'].selection).get(self.non_motor_claim_status)
+
+    @api.onchange('non_motor_claim_status')
+    def non_compute_status(self):
+        if self.non_motor_claim_status:
             self.state = dict(self._fields['non_motor_claim_status'].selection).get(self.non_motor_claim_status)
+
 
 
 
