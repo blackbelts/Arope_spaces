@@ -64,38 +64,38 @@
         <field name="model">policy.request</field>
         <field name="arch" type="xml">
             <form>
-                 <group>
-                        <group>
+                 <div class="o_title">
+                        <h1 style="width:50% !important;">
                             <field name="name" readonly="1"/>
-                            <label for="policy"/>
-                            <div class="o_row">
+                        </h1>
+                    </div>
+                <group>
 
-                                <field name="policy" />
-                                <strong>/</strong>
-                                <field name="policy_seq" />
-                            </div>
-                        </group>
-                          <group>
-                            <field name="product" readonly="1"/>
-                            <field name="customer" readonly="1"/>
-                            <field name="start_date" readonly="1"/>
-
-                            <field name="end_date" readonly="1"/>
-                        </group>
+                    <group>
+                        <label for="policy"/>
+                        <div class="o_row">
+                            <field name="policy_seq" />
+                            <strong>/</strong>
+                            <field name="policy" />
+                        </div>
                     </group>
                     <group>
-                        <group>
-                            <field name="type" />
-                            <field name="end_reason" attrs="{'invisible': [('type', '!=', 'end')]}"/>
-                            <field name="cancel_reason" attrs="{'invisible': [('type', '!=', 'cancel')]}"/>
-                        </group>
+                        <field name="product" readonly="1"/>
+                        <field name="customer" readonly="1"/>
+                        <field name="start_date" readonly="1"/>
+
+                        <field name="end_date" readonly="1"/>
                     </group>
-
-
-                <footer>
-                    <button name="submit" string="Submit" type="object"
+                </group>
+                <group>
+                    <group>
+                        <field name="type" />
+                        <field name="end_reason" attrs="{'invisible': [('type', '!=', 'end')]}"/>
+                        <field name="cancel_reason" attrs="{'invisible': [('type', '!=', 'cancel')]}"/>
+                    </group>
+                       <button name="submit" string="Submit" type="object"
                             class="oe_highlight"/>
-                </footer>
+                </group>
             </form>
         </field>
     </record>
@@ -134,7 +134,7 @@
     </record>
 
     <record id="request_action_end_form" model="ir.actions.act_window">
-        <field name="name">Requests</field>
+        <field name="name"> Endorsement Requests</field>
         <field name="res_model">policy.request</field>
         <field name="view_mode">form</field>
         <field name="context">{'default_type': 'end'}</field>
@@ -145,7 +145,7 @@
         <field name="target">new</field>
     </record>
     <record id="request_action_renew_form" model="ir.actions.act_window">
-        <field name="name">Requests</field>
+        <field name="name"> Renewal Requests</field>
         <field name="res_model">policy.request</field>
         <field name="view_mode">form</field>
         <field name="context">{'default_type': 'renew'}</field>
@@ -154,7 +154,7 @@
     </record>
 
     <record id="request_action_cancel_form" model="ir.actions.act_window">
-        <field name="name">Requests</field>
+        <field name="name"> Canellation Requests</field>
         <field name="res_model">policy.request</field>
         <field name="view_mode">form</field>
         <field name="context">{'default_type': 'cancel'}</field>
