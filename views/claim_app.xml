@@ -92,8 +92,8 @@
 <!--                     <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'invoice_details')]}"/>-->
                      <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing','repair_completed'])]}"/>
 
-                     <button  name="total_loss" string="Total Loss" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', 'not in', ['initial_invoice','invoice_details'])]}"/>
-                     <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing'])]}"/>
+                     <button  name="total_loss" string="Total Loss" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing', 'pre_survey'])]}"/>
+                     <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing', 'pre_survey'])]}"/>
                      <button  name="complete_and_proceed" string="Repair Completed" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'repair'),('sub_state', '!=', 'pending')]}"/>
                      <button  name="take_cheque" string="Take Cheque" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'survey_after_repair'),('sub_state', '!=', 'complete')]}"/>
                      <button  name="car_release" string="Car Release" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'survey_after_repair'),('sub_state', '!=', 'complete')]}"/>
@@ -252,7 +252,6 @@
             <search string="Claim App">
                 <group expand="0" string="Group By">
                     <filter string="State" name="groupby_state" context="{'group_by': 'state'}"/>
-                    <filter string="State" name="groupby_sub_state" context="{'group_by': 'sub_state'}"/>
                 </group>
             </search>
         </field>
@@ -262,7 +261,7 @@
             <field name="name">claim.app</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">claim.app</field>
-            <field name="context">{'search_default_groupby_state': 1,'search_default_groupby_sub_state': 1}</field>
+            <field name="context">{'search_default_groupby_state': 1}</field>
             <field name="view_id" ref="claim_app_tree"/>
             <field name="view_mode">form,tree,kanban</field>
     </record>

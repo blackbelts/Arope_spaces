@@ -910,14 +910,10 @@ class SurveyReport(models.Model):
 
     @api.onchange('survey_report_ids')
     def survey_submitted(self):
-        if self.survey_report_ids:
-            res = []
-            for rec in self.survey_report_ids:
-                res.append(rec.file)
-            if all(res):
-                self.state = 'submitted'
-                self.status = self.env['state.setup'].search([('survey_status', '=', 'submitted'),('type', '=', 'survey')]).id
-                self.message = self.status.message
+        if self.survey_report:
+            self.state = 'submitted'
+            self.status = self.env['state.setup'].search([('survey_status', '=', 'submitted'),('type', '=', 'survey')]).id
+            self.message = self.status.message
 
     def assign_surveyor(self):
         self.write({'state': 'surveyor'})
