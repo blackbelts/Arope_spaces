@@ -36,7 +36,7 @@ class AropePolicyRequests(models.Model):
 
     @api.onchange('policy', 'policy_seq')
     def get_policy(self):
-        if self.policy and self.policy_no:
+        if self.policy and self.policy_seq:
             pol = self.env['policy.arope'].search([('product', '=', self.policy_seq.product_name), ('policy_num', '=', int(self.policy))
                                                    ], limit=1)
             self.customer = str(pol.pin)
