@@ -59,6 +59,7 @@ class AropeClaim(models.Model):
             number = self.env['ir.sequence'].next_by_code('claim_number')
             currentYear = datetime.today().strftime("%Y")
             currentMonth = datetime.today().strftime("%m")
+            person = ''
             self.write(
                 {'claim_number': self.type.upper() + '/' + self.product.product_name + '/' + self.policy_num +
                     '/'+ currentYear + '/' + currentMonth + '/' + number})
@@ -70,7 +71,7 @@ class AropeClaim(models.Model):
 
             for rec in self.env['persons'].search([('pin', '=', policy.customer_pin)]):
                 person = rec
-            if person:
+            if person != '':
                 self.write({'lob': lob, 'customer_name': person.name, 'phone': person.mobile})
             else:
                 self.write({'lob': lob})
@@ -152,7 +153,7 @@ class AropeClaim(models.Model):
         number = self.env['ir.sequence'].next_by_code('survies')
         currentYear = datetime.today().strftime("%Y")
         currentMonth = datetime.today().strftime("%m")
-
+        person = ''
         policy = self.env['policy.arope'].search(
             [('product', '=', self.product.product_name), ('policy_num', '=', int(self.policy_num))
              ], limit=1)
@@ -190,7 +191,7 @@ class AropeClaim(models.Model):
             self.write({"state": self.env['state.setup'].search(
                 [('claim_status', '=', 'survey_after_repair'), ('type', '=', 'claim')]).id})
             self.write({"status": "survey_after_repair"})
-        if person:
+        if person != '':
             self.env['survey.report'].create(
                 {"name": "Survey" + '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
                  "type": type, 'survey_type': survey_type,
