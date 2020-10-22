@@ -80,11 +80,11 @@
                         </div>
                     </group>
                     <group>
-                        <field name="product" readonly="1"/>
-                        <field name="customer" readonly="1"/>
-                        <field name="start_date" readonly="1"/>
+<!--                        <field name="product" readonly="1"/>-->
+<!--                        <field name="customer" readonly="1"/>-->
+                        <field name="start_date" />
 
-                        <field name="end_date" readonly="1"/>
+                        <field name="end_date" />
                     </group>
                 </group>
                 <group>
