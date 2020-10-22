@@ -307,58 +307,65 @@ class Quotation(models.Model):
         self.write({'state': 'application_form'})
         self.write({"test_state": self.env['state.setup'].search(
             [('status', '=', 'application_form'), ('type', '=', 'insurance_app')]).id})
-
-
         # if self.survey_report_ids:
         #     for question in self.survey_report_ids:
         #         question.unlink()
         #     if self.final_application_ids:
         #         for question in self.final_application_ids:
         #             question.unlink()
-            # if self.product_id:
-                # print(self.product_id)
-                # self.questionnaire = self.product_id.questionnaire_file
-                # self.file_name = self.product_id.file_name
-                # related_questions = self.env["questionnaire.line.setup"].search([("product_id.id", "=", self.product_id.id)])
-                # if related_questions:
-                #     for question in related_questions:
-                #         if question.question_type == 'choose':
-                #             self.choose_questions_ids.create(
-                #                 {"question": question.id, "choose_application_id": self.id})
-                #
-                #         elif question.question_type == 'numerical':
-                #             self.numerical_questions_ids.create(
-                #                 {"question": question.id, "numerical_application_id": self.id})
-                #         else:
-                #             self.text_questions_ids.create(
-                #                 {"question": question.id, "text_application_id": self.id})
+        # if self.product_id:
+        # print(self.product_id)
+        # self.questionnaire = self.product_id.questionnaire_file
+        # self.file_name = self.product_id.file_name
+        # related_questions = self.env["questionnaire.line.setup"].search([("product_id.id", "=", self.product_id.id)])
+        # if related_questions:
+        #     for question in related_questions:
+        #         if question.question_type == 'choose':
+        #             self.choose_questions_ids.create(
+        #                 {"question": question.id, "choose_application_id": self.id})
+        #
+        #         elif question.question_type == 'numerical':
+        #             self.numerical_questions_ids.create(
+        #                 {"question": question.id, "numerical_application_id": self.id})
+        #         else:
+        #             self.text_questions_ids.create(
+        #                 {"question": question.id, "text_application_id": self.id})
 
-                # related_documents = self.env["final.application.setup"].search(
-                #     [("product_id.id", "=", self.product_id.id)])
-                # if related_documents:
-                #     for question in related_documents:
-                #         if question.state == 'proposal':
-                #             if question.file:
-                #
-                #                 id= self.env['final.application'].create(
-                #                     {"description": question.id,'download_files': [question.file.id],
-                #                      "quotation_id": self.id})
-                #                 print(id)
-                #                 print(id.quotation_id)
-                #             else:
-                #                 self.env['final.application'].create(
-                #                     {"description": question.id,
-                #                      "quotation_id": self.id})
-                    # id.write({'download_file':
-                    #         [(0,0,{'name': 'Questionnaire', 'res_name': 'questionnaire',
-                    #                                                         'type': 'binary',
-                    #                                                         'datas': question.file[0].datas})],})
-            # related_offer_items = self.env["offer.setup"].search(
-            #     [("product_id.id", "=", self.product_id.id)])
-            # if related_offer_items:
-            #     for question in related_offer_items:
-            #         self.offer_ids.create(
-            #             {"question": question.id, "application_id": self.id})
+        # related_documents = self.env["final.application.setup"].search(
+        #     [("product_id.id", "=", self.product_id.id)])
+        # if related_documents:
+        #     for question in related_documents:
+        #         if question.state == 'proposal':
+        #             if question.file:
+        #
+        #                 id= self.env['final.application'].create(
+        #                     {"description": question.id,'download_files': [question.file.id],
+        #                      "quotation_id": self.id})
+        #                 print(id)
+        #                 print(id.quotation_id)
+        #             else:
+        #                 self.env['final.application'].create(
+        #                     {"description": question.id,
+        #                      "quotation_id": self.id})
+        # id.write({'download_file':
+        #         [(0,0,{'name': 'Questionnaire', 'res_name': 'questionnaire',
+        #                                                         'type': 'binary',
+        #                                                         'datas': question.file[0].datas})],})
+        # related_offer_items = self.env["offer.setup"].search(
+        #     [("product_id.id", "=", self.product_id.id)])
+        # if related_offer_items:
+        #     for question in related_offer_items:
+        #         self.offer_ids.create(
+        #             {"question": question.id, "application_id": self.id})
+
+    @api.onchange('persons')
+    def get_application_form(self):
+        all_persons = []
+        for rec in self.persons:
+            all_persons.append(rec)
+            rec.write({'download_files':
+                [(0,0,{'name': 'Questionnaire', 'res_name': 'questionnaire','type': 'binary','datas': self.product_id.questionnaire_file[0].datas})],
+                       'insured': 'Insurer'+ len(all_persons)})
 
 
     @api.onchange('dob','product')
@@ -967,27 +974,35 @@ class PersonsLines(models.Model):
 
     _name = 'persons.lines'
 
-    insured = fields.Char("Insured", required=True, copy=False, index=True,
-                default=lambda self: self.env['ir.sequence'].next_by_code('insurer'), readonly=True)
+    insured = fields.Char("Insured")
     comment = fields.Text('Comment')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
-    # survey_id = fields.Many2one('survey.survey', string="Survey", readonly=True)
-    response_id = fields.Many2one('survey.user_input', "Response", ondelete="set null")
-    partner_id = fields.Many2one('res.partner', "Contact", copy=False)
+    download_files = fields.Many2many('ir.attachment', string="Download File")
+    application_file = fields.Many2many('ir.attachment', string="Upload File",
+                                        relation="wizard_required_documents_uploads")
+    issue_in_progress_state = fields.Selection(
+        [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
+        string='State', default='pending')
 
-    def start_application(self):
-        self.ensure_one()
-        # create a response and link it to this applicant
-        user = self.env['res.users'].search([('id', '=', self._uid)])
-        if not self.response_id:
-            for rec in self.env['survey.survey'].search([('product_id', '=', self.application_id.product_id.id)]):
-                response = rec._create_answer(user=user)
-                self.response_id = response.id
-        else:
-            response = self.response_id
-        for rec in self.env['survey.survey'].search([('product_id', '=', self.application_id.product_id.id)]):
-        # grab the token of the response and start surveying
-            return rec.with_context(survey_token=response.token).action_start_survey()
+    @api.onchange('application_file')
+    def change_state(self):
+        if self.application_file:
+            self.write({"issue_in_progress_state": 'complete'})
+
+
+    # def start_application(self):
+    #     self.ensure_one()
+    #     # create a response and link it to this applicant
+    #     user = self.env['res.users'].search([('id', '=', self._uid)])
+    #     if not self.response_id:
+    #         for rec in self.env['survey.survey'].search([('product_id', '=', self.application_id.product_id.id)]):
+    #             response = rec._create_answer(user=user)
+    #             self.response_id = response.id
+    #     else:
+    #         response = self.response_id
+    #     for rec in self.env['survey.survey'].search([('product_id', '=', self.application_id.product_id.id)]):
+    #     # grab the token of the response and start surveying
+    #         return rec.with_context(survey_token=response.token).action_start_survey()
 
     def required_document(self):
 

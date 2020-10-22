@@ -136,7 +136,7 @@
                     <!--                        </field>-->
                     <!--                    </group>-->
 
-                    <div>
+                    <div attrs="{'invisible': [('state', '!=', 'survey')]}">
                         <br/>
                         <h3 style="color: #073e89 !important">Required For Survey</h3>
                         <group>
@@ -157,10 +157,12 @@
                     <br/>
                     <field name="persons">
                         <tree editable="bottom">
-                            <field name="insured"/>
-                            <button type="object" name="start_application" string="Application Form"  class="oe_highlight" />
+                            <field name="insured" readonly="1" force_save="1"/>
+                            <field name="download_files" widget="many2many_binary"/>
+                            <field name="application_file" widget="many2many_binary"/>
                             <button name="required_document" string="Required Documents" type="object" class="oe_highlight"/>
                             <field name="comment"/>
+                            <field name="issue_in_progress_state"/>
                         </tree>
                     </field>
                     <br/>
