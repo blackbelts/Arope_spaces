@@ -361,9 +361,13 @@ class Quotation(models.Model):
     @api.onchange('persons')
     def get_application_form(self):
         all_persons = []
+        ids = []
+        for rec in self.product_id.questionnaire_file:
+            ids.append(rec.id)
         for rec in self.persons:
             all_persons.append(rec)
-            rec.write({'download_files': self.product_id.questionnaire_file[0],
+
+            rec.write({'download_files': ids,
                        'insured': 'Insurer/'+ str(len(all_persons))})
 
 
