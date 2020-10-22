@@ -5,22 +5,22 @@ from datetime import timedelta, datetime,date
 class HelpDeskComplains(models.Model):
     _inherit = 'helpdesk_lite.ticket'
     lob = fields.Many2one('insurance.line.business', 'LOB',)
-    customer_pin = fields.Integer(string='Customer')
+    customer = fields.Integer(string='Customer')
     agent_code = fields.Char(string='Agent Code')
     card_id = fields.Char(string='Card ID')
-    policy = fields.Char(string='Policy')
+    policy_product = fields.Many2one('insurance.product',string='product')
     policy_no = fields.Integer(string='Policy')
 
-    product = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
+    product = fields.Char('Product')
     print('Write Method')
 
     @api.onchange('policy','policy_no')
     def get_policy(self):
         if self.policy and self.policy_no:
-            pol=self.env['policy.arope'].search([('product','=', self.policy),('policy_num','=', self.policy_no)
+            pol=self.env['policy.arope'].search([('product','=', self.policy.product_name),('policy_num','=', self.policy_no)
                                                     ],limit=1)
-            self.customer_pin=str(pol.pin)
-            self.agent_code=str(pol.pin)
+            self.customer=self.env['persons'].search([('type','=','customer'),('pin','=',pol.customer_pin)],limit=1).name
+            self.agent_code=str(pol.agent_code)
 
 
 

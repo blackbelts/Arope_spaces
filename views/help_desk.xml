@@ -6,19 +6,20 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='priority']" position="before">
                 <field name="lob"/>
-                <field name="product"/>
+<!--                <field name="product"/>-->
             </xpath>
             <xpath expr="//field[@name='contact_name']" position="after">
                 <!--                <field name="policy"/>-->
                 <label for="policy"/>
                 <div class="o_row">
 
-                    <field name="policy" />
+                    <field name="policy_product" />
                     <strong>/</strong>
                     <field name="policy_no" />
 
                 </div>
-                <field name="customer_pin" readonly="1"/>
+                <field name="customer" readonly="1"/>
+<!--                <field name="customer" readonly="1"/>-->
                 <field name="agent_code" readonly="1"/>
                 <field name="card_id" readonly="1"/>
 

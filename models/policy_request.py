@@ -14,6 +14,8 @@ class AropePolicyRequests(models.Model):
            r_type='End'
         elif vals.get('type') =='renew':
            r_type='Renew'
+        else:
+            r_type = 'Cancel'
         # merge code and serial number
         vals['name'] =  str(serial_no)+'/'+r_type
 
@@ -23,7 +25,7 @@ class AropePolicyRequests(models.Model):
     policy=fields.Char(string='Policy')
     policy_seq = fields.Many2one('insurance.product',string='product')
     product=fields.Char('Policy Product')
-    customer=fields.Char('Customer Pin')
+    customer=fields.Char('Customer')
     start_date=fields.Date('Effective From')
     end_date=fields.Date('Effective To')
 
@@ -34,11 +36,12 @@ class AropePolicyRequests(models.Model):
     state = fields.Selection([('pending', 'Pending'),
                               ('submitted', 'Submitted'), ('issued', 'Issued')], 'State', default='pending')
 
-    @api.onchange('policy_seq')
+    @api.onchange('policy')
     def get_policy(self):
-        if self.policy_seq:
-            pol = self.env['policy.arope'].search([], limit=1)
-            # self.customer = str(pol.pin)
+        if self.policy:
+            pol = self.env['policy.arope'].search([('product', '=', self.policy_seq.product_name),
+                                                   ('policy_num', '=',int(self.policy)) ], limit=1)
+            self.customer = self.env['persons'].search([('type','=','customer'),('pin','=',pol.customer_pin)],limit=1).name
             # self.agent_code = str(pol.pin)
             self.start_date=pol.inception_date
             self.end_date=pol.expiry_date
