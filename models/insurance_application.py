@@ -363,11 +363,11 @@ class Quotation(models.Model):
         all_persons = []
         ids = []
         for rec in self.product_id.questionnaire_file:
-            ids.append(rec.id)
+            ids.append(rec.datas)
         for rec in self.persons:
             all_persons.append(rec)
-
-            rec.write({'download_files': ids,
+            rec.write({'download_files':
+                [(0,0,{'name': 'Questionnaire', 'res_name': 'questionnaire','type': 'binary','datas': ids[0]})],
                        'insured': 'Insurer/'+ str(len(all_persons))})
 
 
