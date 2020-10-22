@@ -483,6 +483,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="type"/>
+                <field name="survey_type"/>
                 <field name="name"/>
                 <field name="surveyor"/>
                 <field name="state"/>
