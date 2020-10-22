@@ -23,7 +23,7 @@ class AropePolicyRequests(models.Model):
     policy=fields.Char(string='Policy')
     policy_seq = fields.Many2one('insurance.product',string='product')
     product=fields.Char('Policy Product')
-    customer=fields.Char('Customer Pin')
+    customer=fields.Char('Customer')
     start_date=fields.Date('Effective From')
     end_date=fields.Date('Effective To')
 
@@ -39,7 +39,7 @@ class AropePolicyRequests(models.Model):
         if self.policy:
             pol = self.env['policy.arope'].search([('product', '=', self.policy_seq.product_name),
                                                    ('policy_num', '=',int(self.policy)) ], limit=1)
-            # self.customer = str(pol.pin)
+            self.customer = self.env['persons'].search([('type','=','customer'),('pin','=',pol.customer_pin)],limit=1).name
             # self.agent_code = str(pol.pin)
             self.start_date=pol.inception_date
             self.end_date=pol.expiry_date
