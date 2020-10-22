@@ -64,9 +64,7 @@
         <field name="model">policy.request</field>
         <field name="arch" type="xml">
             <form>
-
-                <sheet>
-                    <group>
+                 <group>
                         <group>
                             <field name="name" readonly="1"/>
                             <label for="policy"/>
@@ -77,15 +75,15 @@
                                 <field name="policy_seq" />
                             </div>
                         </group>
-                    </group>
-                    <group>
-                        <group>
+                          <group>
                             <field name="product" readonly="1"/>
                             <field name="customer" readonly="1"/>
                             <field name="start_date" readonly="1"/>
 
                             <field name="end_date" readonly="1"/>
                         </group>
+                    </group>
+                    <group>
                         <group>
                             <field name="type" />
                             <field name="end_reason" attrs="{'invisible': [('type', '!=', 'end')]}"/>
@@ -93,7 +91,7 @@
                         </group>
                     </group>
 
-                </sheet>
+
                 <footer>
                     <button name="submit" string="Submit" type="object"
                             class="oe_highlight"/>
