@@ -233,9 +233,9 @@
 		<field name="model">claim.app</field>
 		<field name="arch" type="xml">
 			<tree>
-                <field name="name"/>
+<!--                <field name="name"/>-->
                 <field name="type"/>
-                <field name="name"/>
+<!--                <field name="name"/>-->
                 <field name="policy_num"/>
                 <field name="date"/>
                 <field name="state"/>
