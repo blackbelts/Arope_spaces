@@ -64,11 +64,11 @@
         <field name="model">policy.request</field>
         <field name="arch" type="xml">
             <form>
-                 <div class="o_title">
-                        <h1 style="width:50% !important;">
-                            <field name="name" readonly="1"/>
-                        </h1>
-                    </div>
+                <div class="o_title">
+                    <h1 style="width:50% !important;">
+                        <field name="name" readonly="1"/>
+                    </h1>
+                </div>
                 <group>
 
                     <group>
@@ -94,7 +94,7 @@
 
                 </group>
                 <footer>
-                     <button name="submit" string="Submit" type="object"
+                    <button name="submit" string="Submit" type="object"
                             class="oe_highlight"/>
                 </footer>
             </form>
@@ -119,7 +119,9 @@
         <field name="arch" type="xml">
             <search string="Request">
                 <group expand="0" string="Group By">
+                    <filter string="Type" name="groupby_type" context="{'group_by': 'type'}"/>
                     <filter string="State" name="groupby_state" context="{'group_by': 'state'}"/>
+
                     <!--                    <filter string="State" name="groupby_sub_state" context="{'group_by': 'sub_state'}"/>-->
                 </group>
             </search>
