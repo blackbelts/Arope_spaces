@@ -271,7 +271,7 @@ class AropeClaim(models.Model):
             'name': 'Related Policy',
             'res_model': 'policy.arope',
             'type': 'ir.actions.act_window',
-            'view_mode': 'form',
+            'view_mode': 'tree',
             'domain': [('id', '=', policy.id)],
             'context': {
                 "create": False,
