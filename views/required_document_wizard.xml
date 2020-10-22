@@ -5,6 +5,10 @@
             <field name="model">wizard.required.documents</field>
             <field name="arch" type="xml">
                 <form>
+                    <group>
+                        <field name="insurance_app_id" readonly="1" force_save="1"/>
+                    </group>
+
                    <field name="required_documents" widget='one2many'>
                        <tree editable="bottom">
                            <field name="description"/>
@@ -16,4 +20,15 @@
             </field>
         </record>
 <!--    </data>-->
+        <!-- Add a custom Tree (List) view -->
+        <record id="required_documents_view_tree" model="ir.ui.view">
+            <field name="name">Required Document</field>
+            <field name="model">wizard.required.documents</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="insurance_app_id"/>
+
+                </tree>
+            </field>
+        </record>
 </odoo>

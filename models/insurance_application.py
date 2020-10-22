@@ -500,24 +500,18 @@ class Quotation(models.Model):
         #                      "quotation_id": self.id})
 
     def survey(self):
-        related_survey_questions = self.env["survey.line.setup"].search([("product_id.id", "=", self.product_id.id)])
 
-        if related_survey_questions:
-            number = self.env['ir.sequence'].next_by_code('survies')
-            currentYear = datetime.today().strftime("%Y")
-            currentMonth = datetime.today().strftime("%m")
+        number = self.env['ir.sequence'].next_by_code('survies')
+        currentYear = datetime.today().strftime("%Y")
+        currentMonth = datetime.today().strftime("%m")
 
-            id = self.env['survey.report'].create(
-                {"name": "Survey"+ '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
-                 "application_id": self.id,'state': 'pending', 'status': self.env['state.setup'].search([('survey_status', '=', 'pending'),('type', '=', 'survey')]).id,
-                 'message':self.env['state.setup'].search([('survey_status', '=', 'pending'),('type', '=', 'survey')]).message,
-                 "lob": self.lob.id, 'product_id': self.product_id.id,"customer_name": self.name, 'phone': self.phone, 'email': self.email,
-                 'application_date': self.application_date})
-            for question in related_survey_questions:
-                print('c')
-                id.write({"survey_report_ids": [(0, 0, {"question": question.id})],})
-                print(id)
-                print(id.application_id)
+        self.env['survey.report'].create(
+            {"name": "Survey"+ '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
+             "application_id": self.id,'state': 'pending', 'status': self.env['state.setup'].search([('survey_status', '=', 'pending'),('type', '=', 'survey')]).id,
+             'message':self.env['state.setup'].search([('survey_status', '=', 'pending'),('type', '=', 'survey')]).message,
+             "lob": self.lob.id, 'product_id': self.product_id.id,"customer_name": self.name, 'phone': self.phone, 'email': self.email,
+             'application_date': self.application_date})
+
         self.write({"state":'survey'})
         self.env['state.history'].create({"application_id": self.id, "state": 'survey',
                                           "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -814,10 +808,11 @@ class FinalApplications(models.Model):
 # class Final(models.Model):
 #     _name = 'wizard.final.application'
 
-class WizardFinalApplication(models.TransientModel):
+class WizardFinalApplication(models.Model):
     _name = 'wizard.required.documents'
 
     insurance_app_id = fields.Many2one('insurance.quotation')
+    insurer_id = fields.Many2one('persons.lines')
     required_documents = fields.Many2many('final.application')
 
 
@@ -885,6 +880,7 @@ class SurveyReport(models.Model):
                             ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending')
     status = fields.Many2one('state.setup', domain="[('type', '=', 'survey')]")
     surveyor = fields.Many2one('res.users', 'Surveyor')
+    survey_report = fields.Many2many('ir.attachment', string='Upload Survey Report')
     comment = fields.Text('Comment')
     recomm = fields.Text('Recommendation')
 
@@ -994,29 +990,46 @@ class PersonsLines(models.Model):
             return rec.with_context(survey_token=response.token).action_start_survey()
 
     def required_document(self):
+
         ids = []
-        related_documents = self.env["final.application.setup"].search(
-            [("product_id.id", "=", self.application_id.product_id.id)])
-        if related_documents:
-            for question in related_documents:
-                id = self.env['final.application'].create(
-                    {"description": question.id,
-                     "quotation_id": self.id})
-                ids.append(id.id)
-
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'wizard.required.documents',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'target': 'new',
-            'context': {
-                'default_insurance_app_id': self.application_id.id,
-                'default_required_documents': ids
+        if not self.env['wizard.required.documents'].search([('insurer_id', '=', self.id)]):
+            related_documents = self.env["final.application.setup"].search(
+                [("product_id.id", "=", self.application_id.product_id.id)])
+            if related_documents:
+                for question in related_documents:
+                    id = self.env['final.application'].create(
+                        {"description": question.id,
+                         "quotation_id": self.id})
+                    ids.append(id.id)
 
 
+            return {
+                'type': 'ir.actions.act_window',
+                'res_model': 'wizard.required.documents',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'target': 'new',
+                'domain': [('insurer_id', '=', self.id)],
+                'context': {
+                    'default_insurer_id':self.id,
+                    'default_insurance_app_id': self.application_id.id,
+                    'default_required_documents': ids
+
+
+                }
             }
-        }
+        else:
+            self.ensure_one()
+            return {
+                'name': 'Related Quick Quote',
+                'res_model': 'wizard.required.documents',
+                'type': 'ir.actions.act_window',
+                'view_mode': 'tree,form',
+                'domain': [('insurer_id', '=', self.id)],
+                'context': {
+                    "create": False,
+                },
+            }
 
 
 
