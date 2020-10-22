@@ -40,7 +40,7 @@
         'views/claim_app.xml',
         'views/survey_setup.xml',
         'views/required_document_wizard.xml',
-        # 'views/help_desk.xml',
+        'views/help_desk.xml',
         'views/policy_view.xml',
         #'reports/offer.xml',
         #'reports/questionnaire.xml',

@@ -161,16 +161,18 @@
 
     <!--        <menuitem id="selection_setup" name="Selection Answer Setup" parent="policy_config"-->
     <!--                  action="selection_questions_action" sequence="15"/>-->
-    <!--        <menuitem id="application_form" name="Application Form Setup" parent="policy_config"-->
-    <!--                  action="questionnaire_action" sequence="7"/>-->
+            <menuitem id="new_buss" name="New Business" parent="arope_space"
+                       sequence="1"/>
+     <menuitem id="policy_service" name="Policy Services" parent="arope_space"
+                       sequence="2"/>
     <menuitem name="Insurance Application"
               id="inurance"
-              parent="arope_space"
+              parent="new_buss"
               action="insurance_action"
               sequence="2"/>
     <menuitem name="Claims Management"
               id="claim"
-              parent="arope_space"
+              parent="new_buss"
               action="claim_app_action"
               sequence="5"/>
 
@@ -186,13 +188,21 @@
               action="maintenance_center_action" sequence="7000"/>
     <menuitem id="claim_setup" name="Claim Setup" parent="policy_config"
               action="claim_setup_action" sequence="8000"/>
-    <menuitem id="end_request" name="Endorsement Requests"
-                action="request_action_end" parent="arope_space" />
-    <menuitem id="renew_request" name="Renewal Requests"
-                action="request_action_renew" parent="arope_space" />
+
+    <menuitem id="request" name="Requests"
+                action="request_action" parent="policy_service" groups="Arope-spaces.managers_group" />
+     <menuitem id="end_request_form" name=" Endorsement Requests"
+                action="request_action_renew_form" parent="policy_service" groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group" />
+    <menuitem id="renew_request_form" name="Renewal Requests"
+                action="request_action_end_form" parent="policy_service"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group"/>
+    <menuitem id="cancel_request_form" name="Cancellation Requests"
+                action="request_action_cancel_form" parent="policy_service" groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group"  />
+
+<menuitem id="complain_form" name="Complaints"
+                action="complaint_action_partner" parent="arope_space"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group"/>
 
     <menuitem id="quick_quote_view" name="Quick Quote"
-              action="quickQuoteAction" parent="arope_space"  sequence="0"/>
+              action="quickQuoteAction" parent="new_buss"  sequence="0"/>
     <menuitem id="survey" name="Application Setup" action="survey.action_survey_form" parent="policy_config" sequence="1"/>
 
 </odoo>
