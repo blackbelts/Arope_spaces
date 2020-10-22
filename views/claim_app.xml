@@ -120,6 +120,10 @@
                         </group>
                         <group>
                             <field name="sub_state" invisible="1"/>
+                            <field name="claim_number" readonly="1" force_save="1"/>
+                            <field name="lob" readonly="1" force_save="1"/>
+                            <field name="customer_name" readonly="1" force_save="1"/>
+                            <field name="phone" readonly="1" force_save="1"/>
                             <field name="date" readonly="1" force_save="1"/>
                         </group>
                         <group attrs="{'invisible': [('type', '!=', 'motor')]}">
@@ -265,6 +269,11 @@
             <field name="context">{'search_default_groupby_state': 1}</field>
             <field name="view_id" ref="claim_app_tree"/>
             <field name="view_mode">form,tree,kanban</field>
+    </record>
+    <record id="sequence_claim_number" model="ir.sequence">
+        <field name="name">claim_number</field>
+        <field name="code">claim_number</field>
+        <field name="padding">3</field>
     </record>
     <!--Claim App Finished -->
 </odoo>

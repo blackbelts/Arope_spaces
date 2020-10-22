@@ -4,6 +4,11 @@ from datetime import datetime
 class AropeClaim(models.Model):
     _name="claim.app"
 
+    claim_number = fields.Char(string='Claim Number', copy=False, index=True)
+    lob = fields.Many2one('insurance.line.business', 'LOB')
+    # product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
+    customer_name = fields.Char('Customer Name')
+    phone = fields.Char('Customer Mobile')
     type = fields.Selection([('motor', 'Motor'),('non-motor', 'Non Motor')], string="Type")
     # name = fields.Char('Customer Name', required=True)
     product = fields.Many2one('insurance.product', 'Product')
@@ -33,6 +38,7 @@ class AropeClaim(models.Model):
                                      ('repair_completed', 'Repair Comleted'),
                                      ('survey_after_repair', 'Survey After Repair'),
                                      ('total_loss', 'Total Loss'),
+                                     ('estimation', 'Estimation'),
                                      ('cheque', 'Take Cheque'),
                                      ('car_release', 'Car Release'),
                                      ('reject','Reject')], string='State')
@@ -47,7 +53,25 @@ class AropeClaim(models.Model):
     #     self.write({"status": self.state.claim_status})
     #     self.write({"sub_state": "pending"})
 
+    @api.onchange('type','product','policy_num')
+    def compute_claim_number(self):
+        if self.type and self.product and self.policy_num:
+            number = self.env['ir.sequence'].next_by_code('claim_number')
+            currentYear = datetime.today().strftime("%Y")
+            currentMonth = datetime.today().strftime("%m")
+            self.write(
+                {'claim_number': self.type.upper() + '/' + self.product.product_name + '/' + self.policy_num +
+                                  currentYear +  '/' + currentMonth + '/' + number})
+        elif self.policy_num and self.product:
+            policy = self.env['policy.arope'].search(
+                [('product', '=', self.product.product_name), ('policy_num', '=', int(self.policy_num))
+                 ], limit=1)
+            for rec in self.env['insurance.line.business'].search([('line_of_business', '=', policy.lob)]):
+                lob = rec.id
 
+            for rec in self.env['persons'].search([('pin', '=', policy.customer_pin)]):
+                person = rec
+            self.write({'lob':lob,'customer_name':person.name,'phone':person.mobile})
 
     @api.onchange('type')
     def get_questions(self):

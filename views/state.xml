@@ -12,7 +12,8 @@
                             <field name="type"/>
                             <field name="state" invisible="1"/>
                             <field name="status" attrs="{'invisible': [('type', '!=', 'insurance_app')]}"/>
-                            <field name="claim_status" attrs="{'invisible': [('type', '!=', 'claim')]}"/>
+                            <field name="claim_status" attrs="{'invisible': ['|',('type', '!=', 'claim'),('claim_type', '!=', 'motor')]}"/>
+                            <field name="non_motor_claim_status" attrs="{'invisible': ['|',('type', '!=', 'claim'),('claim_type', '!=', 'non-motor')]}"/>
                             <field name="survey_status" attrs="{'invisible': [('type', '!=', 'survey')]}"/>
 
                         </group>
