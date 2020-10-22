@@ -14,10 +14,10 @@ class HelpDeskComplains(models.Model):
     product = fields.Char('Product')
     print('Write Method')
 
-    @api.onchange('policy','policy_no')
+    @api.onchange('policy_product','policy_no')
     def get_policy(self):
-        if self.policy and self.policy_no:
-            pol=self.env['policy.arope'].search([('product','=', self.policy.product_name),('policy_num','=', self.policy_no)
+        if self.policy_product and self.policy_no:
+            pol=self.env['policy.arope'].search([('product','=', self.policy_product.product_name),('policy_num','=', self.policy_no)
                                                     ],limit=1)
             self.customer=self.env['persons'].search([('type','=','customer'),('pin','=',pol.customer_pin)],limit=1).name
             self.agent_code=str(pol.agent_code)
