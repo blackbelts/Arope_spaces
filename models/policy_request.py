@@ -14,6 +14,8 @@ class AropePolicyRequests(models.Model):
            r_type='End'
         elif vals.get('type') =='renew':
            r_type='Renew'
+        else:
+            r_type = 'Cancel'
         # merge code and serial number
         vals['name'] =  str(serial_no)+'/'+r_type
 
