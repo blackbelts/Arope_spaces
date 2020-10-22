@@ -95,8 +95,9 @@
                      <button  name="total_loss" string="Total Loss" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing', 'pre_survey'])]}"/>
                      <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing', 'pre_survey'])]}"/>
                      <button  name="complete_and_proceed" string="Repair Completed" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'repair'),('sub_state', '!=', 'pending')]}"/>
-                     <button  name="take_cheque" string="Take Cheque" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'survey_after_repair'),('sub_state', '!=', 'complete')]}"/>
-                     <button  name="car_release" string="Car Release" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'survey_after_repair'),('sub_state', '!=', 'complete')]}"/>
+                     <button  name="take_cheque" string="Take Cheque" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'survey_after_repair')]}"/>
+                     <button  name="car_release" string="Car Release" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'survey_after_repair')]}"/>
+                     <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('status', '=', 'survey_after_repair')]}"/>
 
                  </header>
                 <sheet>
@@ -240,7 +241,7 @@
                 <field name="policy_num"/>
                 <field name="date"/>
                 <field name="state"/>
-                <field name="sub_state"/>
+<!--                <field name="sub_state"/>-->
 
 			</tree>
 		</field>
