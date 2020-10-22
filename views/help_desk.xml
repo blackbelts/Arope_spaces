@@ -54,4 +54,13 @@
 
         </field>
     </record>
+        <record id="complaint_action_partner" model="ir.actions.act_window">
+        <field name="name">Complaint</field>
+        <field name="res_model">helpdesk_lite.ticket</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="helpdesk_lite.helpdesk_ticket_form_view"/>
+        <!--        <field name="context">{"search_default_active":1}</field>-->
+
+        <field name="target">new</field>
+    </record>
 </odoo>

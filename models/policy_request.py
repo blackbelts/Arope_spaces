@@ -21,14 +21,33 @@ class AropePolicyRequests(models.Model):
 
     name=fields.Char('Request')
     policy=fields.Integer('Policy Num')
+    policy_seq = fields.Char('Policy Num')
     product=fields.Char('Policy Product')
+    customer=fields.Char('Customer Pin')
+    start_date=fields.Date('Effective From')
+    end_date=fields.Date('Effective To')
+
+
+
+
     state = fields.Selection([('pending', 'Pending'),
                               ('submitted', 'Submitted'), ('issued', 'Issued')], 'State', default='pending')
 
+    @api.onchange('policy', 'policy_seq')
+    def get_policy(self):
+        if self.policy and self.policy_no:
+            pol = self.env['policy.arope'].search([('product', '=', self.policy_seq), ('policy_num', '=', self.policy)
+                                                   ], limit=1)
+            self.customer = str(pol.pin)
+            self.agent_code = str(pol.pin)
+            self.start_date=pol.inception_date
+            self.end_date=pol.expiry_date
 
     type =fields.Selection([('end', 'Endorsement'),
-                                ('renew', 'Renwal')],string='Request Type')
+                                ('renew', 'Renwal'),('cancel', 'Cancellation')],string='Request Type')
     end_reason= fields.Text(string='Endorsement Reason')
+    cancel_reason= fields.Text(string='Cancel Reason')
+
 
     def submit(self):
         self.state='submitted'
