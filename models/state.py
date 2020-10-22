@@ -23,7 +23,7 @@ class StateSetup(models.Model):
                                      ('cheque', 'Take Cheque'),
                                      ('car_release', 'Car Release'),
                                      ('reject','Reject')], string='State')
-    
+
     non_motor_claim_status = fields.Selection([('claim_intimation', 'Claim Intimation'),
                                                 ('pre_survey', 'Survey'),
                                                 ('estimation', 'Estimation'),

@@ -91,9 +91,11 @@
 <!--                     <button  name="invoice_details" string="Invoice Details" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'initial_invoice')]}"/>-->
 <!--                     <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'invoice_details')]}"/>-->
                      <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing','repair_completed'])]}"/>
-
+                     <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('type', '!=', 'non-motor')]}"/>
+                     <button  name="estimation" string="Estimation" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'pre_survey'),('type', '!=', 'non-motor')]}"/>
+                     <button  name="cheque_ready" string="Cheque Ready" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'estimation')]}"/>
                      <button  name="total_loss" string="Total Loss" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing', 'pre_survey'])]}"/>
-                     <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing', 'pre_survey'])]}"/>
+                     <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', 'not in', ['invoicing', 'pre_survey']),('type', '!=', 'motor')]}"/>
                      <button  name="complete_and_proceed" string="Repair Completed" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'repair'),('sub_state', '!=', 'pending')]}"/>
                      <button  name="take_cheque" string="Take Cheque" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'survey_after_repair')]}"/>
                      <button  name="car_release" string="Car Release" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'survey_after_repair')]}"/>
