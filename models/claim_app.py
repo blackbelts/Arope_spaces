@@ -131,7 +131,7 @@ class AropeClaim(models.Model):
             lob = rec.id
         for rec in self.env['insurance.product'].search([('product_name', '=', policy.product)]):
             product = rec.id
-        for rec in self.env['persons'].search([('customer_pin', '=', policy.pin)]):
+        for rec in self.env['persons'].search([('pin', '=', policy.customer_pin)]):
             person = rec
 
 
