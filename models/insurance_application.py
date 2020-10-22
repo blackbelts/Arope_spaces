@@ -513,6 +513,7 @@ class Quotation(models.Model):
 
         self.env['survey.report'].create(
             {"name": "Survey"+ '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
+             "type": 'insurance_application',
              "application_id": self.id,'state': 'pending', 'status': self.env['state.setup'].search([('survey_status', '=', 'pending'),('type', '=', 'survey')]).id,
              'message':self.env['state.setup'].search([('survey_status', '=', 'pending'),('type', '=', 'survey')]).message,
              "lob": self.lob.id, 'product_id': self.product_id.id,"customer_name": self.name, 'phone': self.phone, 'email': self.email,
@@ -872,11 +873,16 @@ class SurveyReport(models.Model):
 
     _name = 'survey.report'
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    lob = fields.Many2one('insurance.line.business', 'LOB', required=True)
+    type = fields.Selection([('insurance_application', 'Insurance Application'),
+                             ('motor_claim', 'Motor Claim'),
+                             ('non_motor_claim', 'Non Motor Claim')])
+    survey_type = fields.Selection([('pre_survey', 'Pre Survey'),
+                                    ('Survey_after_repair', 'Survey After Repair')])
+    lob = fields.Many2one('insurance.line.business', 'LOB')
     product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
-    customer_name = fields.Char('Customer Name', required=True)
-    phone = fields.Char('Customer Mobile', required=True)
-    email = fields.Char('Customer Email', required=True)
+    customer_name = fields.Char('Customer Name')
+    phone = fields.Char('Customer Mobile')
+    email = fields.Char('Customer Email')
     application_date = fields.Date('Application Date', default=datetime.today(), readonly=True)
 
     name = fields.Char("Survey Number", required=True, copy=False, index=True,
@@ -893,6 +899,7 @@ class SurveyReport(models.Model):
     survey_report_ids = fields.One2many('survey.report.line', 'survey_id')
 
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade', string='Application')
+    claim_id = fields.Many2one('claim.app', ondelete='cascade', string='Application')
     message = fields.Text('Description')
 
     @api.onchange('status')

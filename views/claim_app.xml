@@ -22,27 +22,12 @@
 
                     </group>
                     <notebook>
-                        <page string="Claim Declaration Setup" >
+                        <page string="Required Documents" >
                             <field name="claim_declaration_lines">
                                 <tree editable="bottom">
                                     <field name="question"/>
-                                    <field name="type" context="{'default_type':'declaration'}"/>
-                                </tree>
-                            </field>
-                        </page>
-                        <page string="Invoice Setup" >
-                            <field name="claim_invoice_lines">
-                                <tree editable="bottom">
-                                    <field name="question"/>
-                                    <field name="type" context="{'default_type':'invoice'}"/>
-                                </tree>
-                            </field>
-                        </page>
-                        <page string="Survey Setup" >
-                            <field name="claim_survey_lines">
-                                <tree editable="bottom">
-                                    <field name="question"/>
-                                    <field name="type" context="{'default_type':'survey'}"/>
+                                    <field name="file" widget="many2many_binary"/>
+                                    <field name="type"/>
                                 </tree>
                             </field>
                         </page>
@@ -103,9 +88,9 @@
             <form string="Claim App form">
                  <header>
                      <field name="state" widget="statusbar"/>
-                     <button  name="invoice_details" string="Invoice Details" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'initial_invoice')]}"/>
-                     <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'invoice_details')]}"/>
-                     <button  name="survey_reports" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'surveyor')]}"/>
+<!--                     <button  name="invoice_details" string="Invoice Details" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'initial_invoice')]}"/>-->
+<!--                     <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'invoice_details')]}"/>-->
+                     <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'invoicing')]}"/>
                      <button  name="total_loss" string="Total Loss" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', 'not in', ['initial_invoice','invoice_details'])]}"/>
                      <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing'])]}"/>
                      <button  name="complete_and_proceed" string="Repair Completed" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'repair'),('sub_state', '!=', 'pending')]}"/>
@@ -114,12 +99,18 @@
 
                  </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-dollar" string="Related Policy" name="related_policy">
+                        </button>
+                        <button class="oe_stat_button" string="Survey Report" icon="fa-file" type="object" name="get_survey">
+                        </button>
+                    </div>
                     <group>
                         <group>
                             <field name="status" invisible="1"/>
 
                             <field name="type"/>
-                            <field name="name"/>
+                            <field name="product"/>
                             <field name="policy_num"/>
 
 
@@ -130,7 +121,6 @@
                             <field name="date" readonly="1" force_save="1"/>
                         </group>
                         <group attrs="{'invisible': [('type', '!=', 'motor')]}">
-                            <field name="car_num" />
                             <field name="chasse_num"/>
                             <field name="maintenance_centers_in_or_out"/>
                             <field name="maintenance_centers" attrs="{'invisible': [('maintenance_centers_in_or_out', '!=', 'in')]}"/>
@@ -138,14 +128,16 @@
                     </group>
                     <notebook>
                         <page string="Required Document" >
-                            <h3 style="color: brown;">Upload Claim Intimation Form</h3>
-                            <h3 style="color: brown;">Upload Document</h3>
+<!--                            <h3 style="color: brown;">Upload Claim Intimation Form</h3>-->
+                            <h3 style="color: brown;">Required Documents</h3>
                             <br/>
                             <field name="declaration_ids">
                                 <tree editable="bottom">
                                     <field name="question"/>
-                                    <field name="text"/>
+                                    <field name="download_files" widget="many2many_binary"/>
                                     <field name="file" widget="many2many_binary"/>
+                                    <field name="state"/>
+                                    <field name="comment"/>
                                 </tree>
                             </field>
                             <button attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>

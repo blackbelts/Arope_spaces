@@ -5,9 +5,10 @@ class AropeClaim(models.Model):
     _name="claim.app"
 
     type = fields.Selection([('motor', 'Motor'),('non-motor', 'Non Motor')], string="Type")
-    name = fields.Char('Customer Name', required=True)
+    # name = fields.Char('Customer Name', required=True)
+    product = fields.Many2one('insurance.product', 'Product')
     policy_num = fields.Char(string="Policy Number", copy=True)
-    car_num = fields.Char(string="Plate No", copy=True)
+    # car_num = fields.Char(string="Plate No", copy=True)
     chasse_num = fields.Char(string="Chasse No", copy=True)
     state = fields.Many2one('state.setup', domain="[('type', '=', 'claim'),('claim_type', '=', type)]")
     sub_state = fields.Selection([('pending', 'Pending'), ('initial_invoice', 'Initial Invoice'),
@@ -23,15 +24,16 @@ class AropeClaim(models.Model):
     comment = fields.Text('Comment')
     recommendation = fields.Text('Recommendation')
     declaration_ids = fields.One2many('claim.lines', 'claim_declaration_id')
-    invoice_ids = fields.One2many('claim.lines', 'claim_invoice_id')
-    survey_ids = fields.One2many('claim.lines', 'claim_survey_id')
+    # invoice_ids = fields.One2many('claim.lines', 'claim_invoice_id')
+    # survey_ids = fields.One2many('claim.lines', 'claim_survey_id')
     status = fields.Selection([('claim_intimation', 'Claim Intimation'),
-                                     ('invoicing', 'Invoicing'),
+                                     ('invoicing', 'First Invoicing'),
                                      ('repair', 'Start Repair'),
                                      ('survey_after_repair', 'Confirm Repair'),
                                      ('total_loss', 'Total Loss'),
                                      ('cheque', 'Take Cheque'),
-                                     ('car_release', 'Car Release')], string='State')
+                                     ('car_release', 'Car Release'),
+                                    ('reject','Reject')], string='State')
     total_invoice = fields.Float('Total Invoice')
     initial_invoice = fields.Many2many('ir.attachment', string="Upload Initial Invoice",relation="claim_app_initial_invoice")
     invoice_detail = fields.Many2many('ir.attachment', string="Upload Invoice Details", relation="claim_app_invoice_details")
@@ -43,9 +45,10 @@ class AropeClaim(models.Model):
     #     self.write({"status": self.state.claim_status})
     #     self.write({"sub_state": "pending"})
 
+
+
     @api.onchange('type')
     def get_questions(self):
-
         self.write({"state": self.env['state.setup'].search(
             [('claim_status', '=', 'claim_intimation'), ('type', '=', 'claim')]).id})
         self.write({"status": "claim_intimation"})
@@ -53,33 +56,17 @@ class AropeClaim(models.Model):
         if self.declaration_ids:
             for question in self.declaration_ids:
                 question.unlink()
-        if self.invoice_ids:
-            for question in self.invoice_ids:
-                question.unlink()
-        if self.survey_ids:
-            for question in self.survey_ids:
-                question.unlink()
-
         declaration_question = self.env["claim.setup.lines"].search([("claim_declaration_id", "=", self.env['claim.setup'].search([('type', '=', self.type)]).id),
-                                                                     ('type', '=', 'declaration')])
+                                                                     ('type', '=', 'claim_intimation')])
         if declaration_question:
             for question in declaration_question:
+                if question.file:
                     self.declaration_ids.create(
-                        {"question": question.id, "claim_declaration_id": self.id})
-        invoice_question = self.env["claim.setup.lines"].search(
-            [("claim_invoice_id", "=", self.env['claim.setup'].search([('type', '=', self.type)]).id),
-             ('type', '=', 'invoice')])
-        if invoice_question:
-            for question in invoice_question:
-                self.invoice_ids.create(
-                    {"question": question.id, "claim_invoice_id": self.id})
-        survey_question = self.env["claim.setup.lines"].search(
-            [("claim_survey_id", "=", self.env['claim.setup'].search([('type', '=', self.type)]).id),
-             ('type', '=', 'survey')])
-        if survey_question:
-            for question in declaration_question:
-                self.survey_ids.create(
-                    {"question": question.id, "claim_survey_id": self.id})
+                        {"question": question.id,'download_files': [question.file.id],
+                         "claim_declaration_id": self.id})
+                else:
+                    self.declaration_ids.create(
+                        {"question": question.id,"claim_declaration_id": self.id})
 
     def complete_and_proceed(self):
         if self.status == 'claim_intimation':
@@ -87,6 +74,19 @@ class AropeClaim(models.Model):
                 [('claim_status', '=', 'invoicing'), ('type', '=', 'claim')]).id})
             self.write({"status": "invoicing"})
             self.write({"sub_state": "initial_invoice"})
+            declaration_question = self.env["claim.setup.lines"].search(
+                [("claim_declaration_id", "=", self.env['claim.setup'].search([('type', '=', self.type)]).id),
+                 ('type', '=', 'invoicing')])
+            if declaration_question:
+                for question in declaration_question:
+                    if question.file:
+                        self.declaration_ids.create(
+                            {"question": question.id, 'download_files': [question.file.id],
+                             "claim_declaration_id": self.id})
+                    else:
+                        self.declaration_ids.create(
+                            {"question": question.id, "claim_declaration_id": self.id})
+
         elif self.status == 'surveyor':
             self.write({"state": self.env['state.setup'].search(
                 [('claim_status', '=', 'survey'), ('type', '=', 'claim')]).id})
@@ -113,8 +113,37 @@ class AropeClaim(models.Model):
     def assign_surveyor(self):
         self.write({"sub_state": "surveyor"})
 
-    def survey_reports(self):
+    def survey_report(self):
         self.write({"sub_state": "survey"})
+        number = self.env['ir.sequence'].next_by_code('survies')
+        currentYear = datetime.today().strftime("%Y")
+        currentMonth = datetime.today().strftime("%m")
+        policy = self.env['policy.arope'].search([('product', '=', self.product.product_name), ('policy_num', '=', int(self.policy_num))
+                                                   ], limit=1)
+        if self.type == 'motor':
+            type = 'motor_claim'
+            survey_type = 'pre_survey'
+
+        else:
+            type = 'non_motor_claim'
+            survey_type = 'pre_survey'
+        for rec in self.env['insurance.line.business'].search([('line_of_business', '=', policy.lob)]):
+            lob = rec.id
+        for rec in self.env['insurance.product'].search([('product_name', '=', policy.product)]):
+            product = rec.id
+        for rec in self.env['persons'].search([('customer_pin', '=', policy.pin)]):
+            person = rec
+
+
+        self.env['survey.report'].create(
+            {"name": "Survey" + '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
+             "type": type, 'survey_type': survey_type,
+             "claim_id": self.id, 'state': 'pending',
+             'status': self.env['state.setup'].search([('survey_status', '=', 'pending'), ('type', '=', 'survey')]).id,
+             'message': self.env['state.setup'].search(
+                 [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).message,
+             "lob": lob, 'product_id': product, "customer_name": person.name, 'phone': person.mobile
+             })
 
     def total_loss(self):
         self.write({"state": self.env['state.setup'].search(
@@ -134,6 +163,34 @@ class AropeClaim(models.Model):
         self.write({"status": "car_release"})
         self.write({"sub_state": "complete"})
 
+    def get_survey(self):
+        self.ensure_one()
+        return {
+            'name': 'Survey Report',
+            'res_model': 'survey.report',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'domain': [('claim_id', '=', self.id)],
+            'context': {
+                "create": False,
+            },
+        }
+
+    def related_policy(self):
+        policy = self.env['policy.arope'].search([('product', '=', self.product.product_name), ('policy_num', '=', int(self.policy_num))
+                                                   ], limit=1)
+        self.ensure_one()
+        return {
+            'name': 'Related Policy',
+            'res_model': 'policy.arope',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'domain': [('id', '=', policy.id)],
+            'context': {
+                "create": False,
+            },
+        }
+
 class MaintenanceCenter(models.Model):
     _name = 'maintenance.center'
     _rec_name = 'name'
@@ -145,29 +202,38 @@ class ClaimSetup(models.Model):
     _rec_name = 'type'
     type = fields.Selection([('motor', 'Motor'), ('non-motor', 'Non Motor')], string="Type")
     claim_declaration_lines = fields.One2many('claim.setup.lines', 'claim_declaration_id', string='Claim Setup')
-    claim_invoice_lines = fields.One2many('claim.setup.lines', 'claim_invoice_id', string='Claim Setup')
-    claim_survey_lines = fields.One2many('claim.setup.lines', 'claim_survey_id', string='Claim Setup')
+
 
 class ClaimDeclarationLines(models.Model):
 
     _name = 'claim.setup.lines'
     _rec_name = 'question'
-    question = fields.Char('Question')
-    type = fields.Selection([('declaration', 'Claim Declaration'), ('invoice', 'Invoice'),
-                             ('survey', 'Survey')], string='Type')
+    question = fields.Char('Document Name')
+    file = fields.Many2many('ir.attachment', string="File")
+    type = fields.Selection([('claim_intimation', 'Claim Intimation'),
+                                     ('invoicing', 'First Invoicing')], string='State')
     claim_declaration_id = fields.Many2one('claim.setup', ondelele='cascade')
-    claim_invoice_id = fields.Many2one('claim.setup', ondelele='cascade')
-    claim_survey_id = fields.Many2one('claim.setup', ondelele='cascade')
+
 
 class ClaimLines(models.Model):
     _name = 'claim.lines'
 
-    question = fields.Many2one('claim.setup.lines', 'Question')
-    text = fields.Text('Answer')
-    file = fields.Many2many('ir.attachment', string="Upload File")
+    question = fields.Many2one('claim.setup.lines', 'Document Name')
+    # text = fields.Text('Answer')
+    download_files = fields.Many2many('ir.attachment', string="Download File")
+    file = fields.Many2many('ir.attachment', string="Upload File", relation="claim_lines_uploads")
     claim_declaration_id = fields.Many2one('claim.app', ondelete='cascade')
-    claim_invoice_id = fields.Many2one('claim.app', ondelete='cascade')
-    claim_survey_id = fields.Many2one('claim.app', ondelete='cascade')
+    state = fields.Selection(
+        [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
+        string='State', default='pending')
+    comment = fields.Text('Comment')
+
+    @api.onchange('file')
+    def change_state(self):
+        if self.file:
+            self.write({"state": 'complete'})
+    # claim_invoice_id = fields.Many2one('claim.app', ondelete='cascade')
+    # claim_survey_id = fields.Many2one('claim.app', ondelete='cascade')
 
 
 
