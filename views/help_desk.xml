@@ -10,7 +10,7 @@
             </xpath>
             <xpath expr="//field[@name='contact_name']" position="after">
                 <!--                <field name="policy"/>-->
-                <label for="policy"/>
+                <label for="policy_product"/>
                 <div class="o_row">
 
                     <field name="policy_product" />
