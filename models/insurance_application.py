@@ -908,7 +908,7 @@ class SurveyReport(models.Model):
             self.message = self.status.message
 
 
-    @api.onchange('survey_report_ids')
+    @api.onchange('survey_report')
     def survey_submitted(self):
         if self.survey_report:
             self.state = 'submitted'
