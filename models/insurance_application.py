@@ -363,7 +363,7 @@ class Quotation(models.Model):
         all_persons = []
         for rec in self.persons:
             all_persons.append(rec)
-            rec.write({'download_files': self.product_id.questionnaire_file,
+            rec.write({'download_files': self.product_id.questionnaire_file[0],
                        'insured': 'Insurer/'+ str(len(all_persons))})
 
 
