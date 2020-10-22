@@ -482,6 +482,7 @@
         <field name="model">survey.report</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="type"/>
                 <field name="name"/>
                 <field name="surveyor"/>
                 <field name="state"/>
@@ -514,6 +515,8 @@
                     <group>
                         <group>
                             <field name="state" invisible="1"/>
+                            <field readonly="1" force_save="1" name="type"/>
+                            <field attrs="{'invisible': [('type', '!=', 'motor_claim')]}" readonly="1" force_save="1" name="survey_type" />
                             <field readonly="1" force_save="1" name="lob"/>
                             <field readonly="1" force_save="1" name="product_id"/>
                             <field readonly="1" force_save="1" name="customer_name"/>
@@ -522,7 +525,7 @@
                         </group>
                         <group>
                             <field readonly="1" force_save="1" name="application_id"/>
-                            <field readonly="1" force_save="1" name="application_date"/>
+                            <field attrs="{'invisible': [('type', '!=', 'insurance_application')]}" readonly="1" force_save="1" name="application_date"/>
                             <field name="name"/>
 
                         </group>
