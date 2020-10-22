@@ -15,11 +15,14 @@ class StateSetup(models.Model):
         ('cancel', 'Lost')], string='State')
     claim_status = fields.Selection([('claim_intimation', 'Claim Intimation'),
                                      ('invoicing', 'Invoicing'),
+                                     ('pre_survey', 'Pre Survey'),
                                      ('repair', 'Start Repair'),
-                                     ('survey_after_repair', 'Confirm Repair'),
+                                     ('repair_completed', 'Repair Comleted'),
+                                     ('survey_after_repair', 'Survey After Repair'),
                                      ('total_loss', 'Total Loss'),
                                      ('cheque', 'Take Cheque'),
-                                     ('car_release', 'Car Release')], string='State')
+                                     ('car_release', 'Car Release'),
+                                     ('reject','Reject')], string='State')
     state = fields.Char('State')
     type = fields.Selection([('insurance_app', 'Insurance Application'),
                              ('claim', 'Claim'), ('survey', 'Survey')], string='Type')
