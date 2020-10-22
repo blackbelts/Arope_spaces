@@ -365,7 +365,7 @@ class Quotation(models.Model):
             all_persons.append(rec)
             rec.write({'download_files':
                 [(0,0,{'name': 'Questionnaire', 'res_name': 'questionnaire','type': 'binary','datas': self.product_id.questionnaire_file[0].datas})],
-                       'insured': 'Insurer'+ len(all_persons)})
+                       'insured': 'Insurer'+ str(len(all_persons))})
 
 
     @api.onchange('dob','product')
