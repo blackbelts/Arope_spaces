@@ -188,18 +188,15 @@
               action="maintenance_center_action" sequence="7000"/>
     <menuitem id="claim_setup" name="Claim Setup" parent="policy_config"
               action="claim_setup_action" sequence="8000"/>
-    <menuitem id="end_request" name="Endorsement Requests"
-                action="request_action_end" parent="policy_service"  groups="Arope-spaces.managers_group"/>
-    <menuitem id="renew_request" name="Renewal Requests"
-                action="request_action_renew" parent="policy_service" groups="Arope-spaces.managers_group" />
+
+    <menuitem id="request" name="Requests"
+                action="request_action" parent="policy_service" groups="Arope-spaces.managers_group" />
      <menuitem id="end_request_form" name=" Endorsement Requests"
                 action="request_action_renew_form" parent="policy_service" groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group" />
     <menuitem id="renew_request_form" name="Renewal Requests"
                 action="request_action_end_form" parent="policy_service"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group"/>
-     <menuitem id="cancel_request" name=" Cancellation Requests"
-                action="request_action_cancel" parent="policy_service" groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group" />
     <menuitem id="cancel_request_form" name="Cancellation Requests"
-                action="request_action_cancel_form" parent="policy_service"  groups="Arope-spaces.managers_group"/>
+                action="request_action_cancel_form" parent="policy_service"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group"/>
 
 <menuitem id="complain_form" name="Complaints"
                 action="complaint_action_partner" parent="arope_space"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group"/>
