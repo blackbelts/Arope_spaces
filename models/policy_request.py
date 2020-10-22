@@ -51,6 +51,7 @@ class AropePolicyRequests(models.Model):
 
     def submit(self):
         self.state='submitted'
+        return {'type': 'ir.actions.act_window_close'}
     def issue(self):
         self.state='submitted'
 
