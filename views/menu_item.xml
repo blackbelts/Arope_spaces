@@ -172,7 +172,7 @@
               sequence="2"/>
     <menuitem name="Claims Management"
               id="claim"
-              parent="new_buss"
+              parent="arope_space"
               action="claim_app_action"
               sequence="5"/>
 
