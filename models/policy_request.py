@@ -39,8 +39,8 @@ class AropePolicyRequests(models.Model):
         if self.policy and self.policy_seq:
             pol = self.env['policy.arope'].search([('product', '=', self.policy_seq.product_name)
                                                    ], limit=1)
-            self.customer = str(pol.pin)
-            self.agent_code = str(pol.pin)
+            # self.customer = str(pol.pin)
+            # self.agent_code = str(pol.pin)
             self.start_date=pol.inception_date
             self.end_date=pol.expiry_date
 
