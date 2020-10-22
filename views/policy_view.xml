@@ -64,7 +64,13 @@
         <field name="model">policy.request</field>
         <field name="arch" type="xml">
             <form>
+                 <div class="o_title">
+                        <h1 style="width:50% !important;">
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
                 <group>
+
                     <group>
                         <label for="policy"/>
                         <div class="o_row">
