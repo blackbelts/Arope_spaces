@@ -127,7 +127,7 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Required Document" >
+                        <page string="Required Documents" >
 <!--                            <h3 style="color: brown;">Upload Claim Intimation Form</h3>-->
                             <h3 style="color: brown;">Required Documents</h3>
                             <br/>
@@ -143,53 +143,53 @@
                             <button attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>
 
                         </page>
-                        <page string="Invoicing" attrs="{'invisible': [('status', '=', 'claim_intimation')]}">
-                            <h3 style="color: brown;">Initial Invoice</h3>
-                            <group>
+<!--                        <page string="Invoicing" attrs="{'invisible': [('status', '=', 'claim_intimation')]}">-->
+<!--                            <h3 style="color: brown;">Initial Invoice</h3>-->
+<!--                            <group>-->
 
 
-                                <group>
-                                    <field name="initial_invoice" widget="many2many_binary"/>
-                                </group>
-                                <group>
-                                    <field name="total_initial_invoice"/>
-                                </group>
+<!--                                <group>-->
+<!--                                    <field name="initial_invoice" widget="many2many_binary"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="total_initial_invoice"/>-->
+<!--                                </group>-->
 
-                            </group>
-                            <h3 style="color: brown;" attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', '=', 'initial_invoice')]}">Invoice Details</h3>
-                            <group attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', '=', 'initial_invoice')]}">
+<!--                            </group>-->
+<!--                            <h3 style="color: brown;" attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', '=', 'initial_invoice')]}">Invoice Details</h3>-->
+<!--                            <group attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', '=', 'initial_invoice')]}">-->
 
-                                <group>
-                                    <field name="invoice_detail" widget="many2many_binary"/>
-                                </group>
-                                <group>
-                                    <field name="total_invoice"/>
-                                </group>
-                            </group>
-                            <h3 style="color: brown;" attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', 'in', ['initial_invoice', 'invoice_details'])]}">Assign Surveyor</h3>
-                            <group attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', 'in', ['initial_invoice', 'invoice_details'])]}">
+<!--                                <group>-->
+<!--                                    <field name="invoice_detail" widget="many2many_binary"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="total_invoice"/>-->
+<!--                                </group>-->
+<!--                            </group>-->
+<!--                            <h3 style="color: brown;" attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', 'in', ['initial_invoice', 'invoice_details'])]}">Assign Surveyor</h3>-->
+<!--                            <group attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', 'in', ['initial_invoice', 'invoice_details'])]}">-->
 
-                                <group>
-                                    <field name="surveyor"/>
-                                </group>
-                                <group>
-                                    <field name="survey_date"/>
-                                </group>
-                            </group>
-                            <h3 style="color: brown;" attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', 'in', ['initial_invoice', 'invoice_details', 'surveyor'])]}">Survey Report</h3>
-                            <group attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', 'in', ['initial_invoice', 'invoice_details', 'surveyor'])]}">
+<!--                                <group>-->
+<!--                                    <field name="surveyor"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="survey_date"/>-->
+<!--                                </group>-->
+<!--                            </group>-->
+<!--                            <h3 style="color: brown;" attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', 'in', ['initial_invoice', 'invoice_details', 'surveyor'])]}">Survey Report</h3>-->
+<!--                            <group attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', 'in', ['initial_invoice', 'invoice_details', 'surveyor'])]}">-->
 
-                                <group>
-                                    <field name="survey_report" widget="many2many_binary"/>
-                                </group>
-                                <group>
-                                    <field name="recommendation"/>
-                                    <field name="comment"/>
-                                </group>
-                            </group>
+<!--                                <group>-->
+<!--                                    <field name="survey_report" widget="many2many_binary"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="recommendation"/>-->
+<!--                                    <field name="comment"/>-->
+<!--                                </group>-->
+<!--                            </group>-->
 
-<!--                            <button attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>-->
-                        </page>
+<!--&lt;!&ndash;                            <button attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>&ndash;&gt;-->
+<!--                        </page>-->
 <!--                        <page string="Surveyor" attrs="{'invisible': [('status', 'in', ['claim_intimation','invoicing',])]}">-->
 <!--                             <group>-->
 <!--                                 -->
@@ -210,18 +210,18 @@
 <!--                            </group>-->
 <!--                            <button attrs="{'invisible': ['|',('status', '!=', 'survey'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>-->
 <!--                        </page>-->
-                        <page string="Second Survey" attrs="{'invisible': [('status', 'in', ['claim_intimation','invoicing','surveyor', 'survey', 'repair'])]}">
-                                <group>
-                                    <field name="second_surveyor"/>
-                                    <field name="second_survey_date"/>
-                                </group>
-                                <group>
-                                    <field name="recommendation"/>
-                                    <field name="comment"/>
-                                </group>
+<!--                        <page string="Second Survey" attrs="{'invisible': [('status', 'in', ['claim_intimation','invoicing','surveyor', 'survey', 'repair'])]}">-->
+<!--                                <group>-->
+<!--                                    <field name="second_surveyor"/>-->
+<!--                                    <field name="second_survey_date"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="recommendation"/>-->
+<!--                                    <field name="comment"/>-->
+<!--                                </group>-->
 
-                            <button attrs="{'invisible': ['|',('status', '!=', 'survey_after_repair'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>
-                        </page>
+<!--                            <button attrs="{'invisible': ['|',('status', '!=', 'survey_after_repair'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>-->
+<!--                        </page>-->
                     </notebook>
                 </sheet>
             </form>
@@ -233,9 +233,9 @@
 		<field name="model">claim.app</field>
 		<field name="arch" type="xml">
 			<tree>
-                <field name="name"/>
+<!--                <field name="name"/>-->
                 <field name="type"/>
-                <field name="name"/>
+<!--                <field name="name"/>-->
                 <field name="policy_num"/>
                 <field name="date"/>
                 <field name="state"/>
