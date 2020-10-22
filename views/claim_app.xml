@@ -148,7 +148,7 @@
                                     <field name="comment"/>
                                 </tree>
                             </field>
-                            <button attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>
+                            <button attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('sub_state', '=', 'complete'),('type', '!=', 'motor')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>
 
                         </page>
 <!--                        <page string="Invoicing" attrs="{'invisible': [('status', '=', 'claim_intimation')]}">-->

@@ -70,7 +70,10 @@ class AropeClaim(models.Model):
 
             for rec in self.env['persons'].search([('pin', '=', policy.customer_pin)]):
                 person = rec
-            self.write({'lob': lob, 'customer_name': person.name, 'phone': person.mobile})
+            if person:
+                self.write({'lob': lob, 'customer_name': person.name, 'phone': person.mobile})
+            else:
+                self.write({'lob': lob})
 
     @api.onchange('type')
     def get_questions(self):
@@ -187,16 +190,26 @@ class AropeClaim(models.Model):
             self.write({"state": self.env['state.setup'].search(
                 [('claim_status', '=', 'survey_after_repair'), ('type', '=', 'claim')]).id})
             self.write({"status": "survey_after_repair"})
-
-        self.env['survey.report'].create(
-            {"name": "Survey" + '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
-             "type": type, 'survey_type': survey_type,
-             "claim_id": self.id, 'state': 'pending',
-             'status': self.env['state.setup'].search([('survey_status', '=', 'pending'), ('type', '=', 'survey')]).id,
-             'message': self.env['state.setup'].search(
-                 [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).message,
-             "lob": lob, 'product_id': product, "customer_name": person.name, 'phone': person.mobile
-             })
+        if person:
+            self.env['survey.report'].create(
+                {"name": "Survey" + '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
+                 "type": type, 'survey_type': survey_type,
+                 "claim_id": self.id, 'state': 'pending',
+                 'status': self.env['state.setup'].search([('survey_status', '=', 'pending'), ('type', '=', 'survey')]).id,
+                 'message': self.env['state.setup'].search(
+                     [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).message,
+                 "lob": lob, 'product_id': product, "customer_name": person.name, 'phone': person.mobile
+                 })
+        else:
+            self.env['survey.report'].create(
+                {"name": "Survey" + '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
+                 "type": type, 'survey_type': survey_type,
+                 "claim_id": self.id, 'state': 'pending',
+                 'status': self.env['state.setup'].search(
+                     [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).id,
+                 'message': self.env['state.setup'].search(
+                     [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).message,
+                 "lob": lob, 'product_id': product,})
 
     def total_loss(self):
         self.write({"state": self.env['state.setup'].search(
