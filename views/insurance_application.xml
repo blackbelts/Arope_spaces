@@ -443,15 +443,15 @@
         <!--        <field name="prefix"><field name="lob.name"/></field>-->
         <field name="padding">6</field>
     </record>
-    <record id="seq_insurer" model="ir.sequence">
-        <field name="name">insurer</field>
-        <field name="code">insurer</field>
-        <field name="prefix">Insurer/</field>
-        <field name="number_next">1</field>
-        <field name="number_increment">1</field>
-        <field name="padding">1</field>
-        <!--<field name="company_id" eval="False"/>-->
-    </record>
+<!--    <record id="seq_insurer" model="ir.sequence">-->
+<!--        <field name="name">insurer</field>-->
+<!--        <field name="code">insurer</field>-->
+<!--        <field name="prefix">Insurer/</field>-->
+<!--        <field name="number_next">1</field>-->
+<!--        <field name="number_increment">1</field>-->
+<!--        <field name="padding">1</field>-->
+<!--        &lt;!&ndash;<field name="company_id" eval="False"/>&ndash;&gt;-->
+<!--    </record>-->
     <record id="sequence_trial_number" model="ir.sequence">
         <field name="name">trial_number</field>
         <field name="code">trial_number</field>
