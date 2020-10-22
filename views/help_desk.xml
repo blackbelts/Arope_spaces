@@ -18,7 +18,7 @@
                     <field name="policy_no" />
 
                 </div>
-                <field name="customer" readonly="1"/>
+                <field name="customer_pin" readonly="1"/>
                 <field name="agent_code" readonly="1"/>
                 <field name="card_id" readonly="1"/>
 

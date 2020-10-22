@@ -19,7 +19,7 @@ class HelpDeskComplains(models.Model):
         if self.policy and self.policy_no:
             pol=self.env['policy.arope'].search([('product','=', self.policy),('policy_num','=', self.policy_no)
                                                     ],limit=1)
-            self.customer=str(pol.pin)
+            self.customer_pin=str(pol.pin)
             self.agent_code=str(pol.pin)
 
 
