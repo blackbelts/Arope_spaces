@@ -34,9 +34,9 @@ class AropePolicyRequests(models.Model):
     state = fields.Selection([('pending', 'Pending'),
                               ('submitted', 'Submitted'), ('issued', 'Issued')], 'State', default='pending')
 
-    @api.onchange('policy_seq','policy')
+    @api.onchange('policy')
     def get_policy(self):
-        if self.policy_seq and self.policy:
+        if self.policy:
             pol = self.env['policy.arope'].search([('product', '=', self.policy_seq.product_name),
                                                    ('policy_num', '=',int(self.policy)) ], limit=1)
             # self.customer = str(pol.pin)
