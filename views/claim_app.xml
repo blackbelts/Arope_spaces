@@ -90,7 +90,8 @@
                      <field name="state" widget="statusbar"/>
 <!--                     <button  name="invoice_details" string="Invoice Details" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'initial_invoice')]}"/>-->
 <!--                     <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'invoice_details')]}"/>-->
-                     <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'invoicing')]}"/>
+                     <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing','repair_completed'])]}"/>
+
                      <button  name="total_loss" string="Total Loss" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', 'not in', ['initial_invoice','invoice_details'])]}"/>
                      <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing'])]}"/>
                      <button  name="complete_and_proceed" string="Repair Completed" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'repair'),('sub_state', '!=', 'pending')]}"/>
@@ -117,7 +118,7 @@
 
                         </group>
                         <group>
-                            <field name="sub_state"/>
+                            <field name="sub_state" invisible="1"/>
                             <field name="date" readonly="1" force_save="1"/>
                         </group>
                         <group attrs="{'invisible': [('type', '!=', 'motor')]}">
