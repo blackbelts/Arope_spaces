@@ -91,12 +91,15 @@
 <!--                     <button  name="invoice_details" string="Invoice Details" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'initial_invoice')]}"/>-->
 <!--                     <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'invoice_details')]}"/>-->
                      <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing','repair_completed'])]}"/>
-
-                     <button  name="total_loss" string="Total Loss" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', 'not in', ['initial_invoice','invoice_details'])]}"/>
-                     <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing'])]}"/>
+                     <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('type', '!=', 'non-motor')]}"/>
+                     <button  name="estimation" string="Estimation" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'pre_survey'),('type', '!=', 'non-motor')]}"/>
+                     <button  name="cheque_ready" string="Cheque Ready" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'estimation')]}"/>
+                     <button  name="total_loss" string="Total Loss" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing', 'pre_survey'])]}"/>
+                     <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', 'not in', ['invoicing', 'pre_survey']),('type', '!=', 'motor')]}"/>
                      <button  name="complete_and_proceed" string="Repair Completed" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'repair'),('sub_state', '!=', 'pending')]}"/>
-                     <button  name="take_cheque" string="Take Cheque" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'survey_after_repair'),('sub_state', '!=', 'complete')]}"/>
-                     <button  name="car_release" string="Car Release" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'survey_after_repair'),('sub_state', '!=', 'complete')]}"/>
+                     <button  name="take_cheque" string="Take Cheque" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'survey_after_repair')]}"/>
+                     <button  name="car_release" string="Car Release" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'survey_after_repair')]}"/>
+                     <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('status', '=', 'survey_after_repair')]}"/>
 
                  </header>
                 <sheet>
@@ -119,6 +122,10 @@
                         </group>
                         <group>
                             <field name="sub_state" invisible="1"/>
+                            <field name="claim_number" readonly="1" force_save="1"/>
+                            <field name="lob" readonly="1" force_save="1"/>
+                            <field name="customer_name" readonly="1" force_save="1"/>
+                            <field name="phone" readonly="1" force_save="1"/>
                             <field name="date" readonly="1" force_save="1"/>
                         </group>
                         <group attrs="{'invisible': [('type', '!=', 'motor')]}">
@@ -141,7 +148,7 @@
                                     <field name="comment"/>
                                 </tree>
                             </field>
-                            <button attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>
+                            <button attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('sub_state', '=', 'complete'),('type', '!=', 'motor')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>
 
                         </page>
 <!--                        <page string="Invoicing" attrs="{'invisible': [('status', '=', 'claim_intimation')]}">-->
@@ -240,7 +247,7 @@
                 <field name="policy_num"/>
                 <field name="date"/>
                 <field name="state"/>
-                <field name="sub_state"/>
+<!--                <field name="sub_state"/>-->
 
 			</tree>
 		</field>
@@ -252,7 +259,6 @@
             <search string="Claim App">
                 <group expand="0" string="Group By">
                     <filter string="State" name="groupby_state" context="{'group_by': 'state'}"/>
-                    <filter string="State" name="groupby_sub_state" context="{'group_by': 'sub_state'}"/>
                 </group>
             </search>
         </field>
@@ -262,9 +268,14 @@
             <field name="name">claim.app</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">claim.app</field>
-            <field name="context">{'search_default_groupby_state': 1,'search_default_groupby_sub_state': 1}</field>
+            <field name="context">{'search_default_groupby_state': 1}</field>
             <field name="view_id" ref="claim_app_tree"/>
             <field name="view_mode">form,tree,kanban</field>
+    </record>
+    <record id="sequence_claim_number" model="ir.sequence">
+        <field name="name">claim_number</field>
+        <field name="code">claim_number</field>
+        <field name="padding">3</field>
     </record>
     <!--Claim App Finished -->
 </odoo>

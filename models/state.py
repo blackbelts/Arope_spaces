@@ -23,6 +23,12 @@ class StateSetup(models.Model):
                                      ('cheque', 'Take Cheque'),
                                      ('car_release', 'Car Release'),
                                      ('reject','Reject')], string='State')
+
+    non_motor_claim_status = fields.Selection([('claim_intimation', 'Claim Intimation'),
+                                                ('pre_survey', 'Survey'),
+                                                ('estimation', 'Estimation'),
+                                               ('cheque', 'Cheque Ready'),
+                                               ('reject', 'Reject')], string='State')
     state = fields.Char('State')
     type = fields.Selection([('insurance_app', 'Insurance Application'),
                              ('claim', 'Claim'), ('survey', 'Survey')], string='Type')
@@ -43,6 +49,14 @@ class StateSetup(models.Model):
             self.state = dict(self._fields['claim_status'].selection).get(self.claim_status)
         elif self.survey_status:
             self.state = dict(self._fields['survey_status'].selection).get(self.survey_status)
+        # elif self.non_motor_claim_status:
+        #     self.state = dict(self._fields['non_motor_claim_status'].selection).get(self.non_motor_claim_status)
+
+    @api.onchange('non_motor_claim_status')
+    def non_compute_status(self):
+        if self.non_motor_claim_status:
+            self.state = dict(self._fields['non_motor_claim_status'].selection).get(self.non_motor_claim_status)
+
 
 
 

@@ -4,6 +4,11 @@ from datetime import datetime
 class AropeClaim(models.Model):
     _name="claim.app"
 
+    claim_number = fields.Char(string='Claim Number', copy=False, index=True)
+    lob = fields.Many2one('insurance.line.business', 'LOB')
+    # product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
+    customer_name = fields.Char('Customer Name')
+    phone = fields.Char('Customer Mobile')
     type = fields.Selection([('motor', 'Motor'),('non-motor', 'Non Motor')], string="Type")
     # name = fields.Char('Customer Name', required=True)
     product = fields.Many2one('insurance.product', 'Product')
@@ -33,6 +38,7 @@ class AropeClaim(models.Model):
                                      ('repair_completed', 'Repair Comleted'),
                                      ('survey_after_repair', 'Survey After Repair'),
                                      ('total_loss', 'Total Loss'),
+                                     ('estimation', 'Estimation'),
                                      ('cheque', 'Take Cheque'),
                                      ('car_release', 'Car Release'),
                                      ('reject','Reject')], string='State')
@@ -47,14 +53,42 @@ class AropeClaim(models.Model):
     #     self.write({"status": self.state.claim_status})
     #     self.write({"sub_state": "pending"})
 
+    @api.onchange('type','product','policy_num')
+    def compute_claim_number(self):
+        if self.type and self.product and self.policy_num:
+            number = self.env['ir.sequence'].next_by_code('claim_number')
+            currentYear = datetime.today().strftime("%Y")
+            currentMonth = datetime.today().strftime("%m")
+            person = ''
+            self.write(
+                {'claim_number': self.type.upper() + '/' + self.product.product_name + '/' + self.policy_num +
+                    '/'+ currentYear + '/' + currentMonth + '/' + number})
+            policy = self.env['policy.arope'].search(
+                [('product', '=', self.product.product_name), ('policy_num', '=', int(self.policy_num))
+                 ], limit=1)
+            for rec in self.env['insurance.line.business'].search([('line_of_business', '=', policy.lob)]):
+                lob = rec.id
 
+            for rec in self.env['persons'].search([('pin', '=', policy.customer_pin)]):
+                person = rec
+            if person != '':
+                self.write({'lob': lob, 'customer_name': person.name, 'phone': person.mobile})
+            else:
+                self.write({'lob': lob})
 
     @api.onchange('type')
     def get_questions(self):
-        self.write({"state": self.env['state.setup'].search(
-            [('claim_status', '=', 'claim_intimation'), ('type', '=', 'claim')]).id})
-        self.write({"status": "claim_intimation"})
-        self.write({"sub_state": "pending"})
+        if self.type == 'motor':
+            self.write({"state": self.env['state.setup'].search(
+                [('claim_status', '=', 'claim_intimation'), ('type', '=', 'claim')]).id})
+            self.write({"status": "claim_intimation"})
+            self.write({"sub_state": "pending"})
+        else:
+            self.write({"state": self.env['state.setup'].search(
+                [('non_motor_claim_status', '=', 'claim_intimation'), ('type', '=', 'claim')]).id})
+            self.write({"status": "claim_intimation"})
+            self.write({"sub_state": "pending"})
+
         if self.declaration_ids:
             for question in self.declaration_ids:
                 question.unlink()
@@ -119,7 +153,7 @@ class AropeClaim(models.Model):
         number = self.env['ir.sequence'].next_by_code('survies')
         currentYear = datetime.today().strftime("%Y")
         currentMonth = datetime.today().strftime("%m")
-
+        person = ''
         policy = self.env['policy.arope'].search(
             [('product', '=', self.product.product_name), ('policy_num', '=', int(self.policy_num))
              ], limit=1)
@@ -129,16 +163,21 @@ class AropeClaim(models.Model):
             product = rec.id
         for rec in self.env['persons'].search([('pin', '=', policy.customer_pin)]):
             person = rec
-        if self.status == 'invoicing':
-            self.write({"state": self.env['state.setup'].search(
-                [('claim_status', '=', 'pre_survey'), ('type', '=', 'claim')]).id})
-            self.write({"status": "pre_survey"})
+
+        if self.status == 'invoicing' or self.status == 'claim_intimation':
+
 
             if self.type == 'motor':
+                self.write({"state": self.env['state.setup'].search(
+                    [('claim_status', '=', 'pre_survey'), ('type', '=', 'claim')]).id})
+                self.write({"status": "pre_survey"})
                 type = 'motor_claim'
                 survey_type = 'pre_survey'
 
             else:
+                self.write({"state": self.env['state.setup'].search(
+                    [('non_motor_claim_status', '=', 'pre_survey'), ('type', '=', 'claim')]).id})
+                self.write({"status": "pre_survey"})
                 type = 'non_motor_claim'
                 survey_type = 'pre_survey'
         elif self.status == 'repair_completed':
@@ -152,16 +191,26 @@ class AropeClaim(models.Model):
             self.write({"state": self.env['state.setup'].search(
                 [('claim_status', '=', 'survey_after_repair'), ('type', '=', 'claim')]).id})
             self.write({"status": "survey_after_repair"})
-
-        self.env['survey.report'].create(
-            {"name": "Survey" + '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
-             "type": type, 'survey_type': survey_type,
-             "claim_id": self.id, 'state': 'pending',
-             'status': self.env['state.setup'].search([('survey_status', '=', 'pending'), ('type', '=', 'survey')]).id,
-             'message': self.env['state.setup'].search(
-                 [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).message,
-             "lob": lob, 'product_id': product, "customer_name": person.name, 'phone': person.mobile
-             })
+        if person != '':
+            self.env['survey.report'].create(
+                {"name": "Survey" + '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
+                 "type": type, 'survey_type': survey_type,
+                 "claim_id": self.id, 'state': 'pending',
+                 'status': self.env['state.setup'].search([('survey_status', '=', 'pending'), ('type', '=', 'survey')]).id,
+                 'message': self.env['state.setup'].search(
+                     [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).message,
+                 "lob": lob, 'product_id': product, "customer_name": person.name, 'phone': person.mobile
+                 })
+        else:
+            self.env['survey.report'].create(
+                {"name": "Survey" + '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
+                 "type": type, 'survey_type': survey_type,
+                 "claim_id": self.id, 'state': 'pending',
+                 'status': self.env['state.setup'].search(
+                     [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).id,
+                 'message': self.env['state.setup'].search(
+                     [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).message,
+                 "lob": lob, 'product_id': product,})
 
     def total_loss(self):
         self.write({"state": self.env['state.setup'].search(
@@ -194,6 +243,26 @@ class AropeClaim(models.Model):
             },
         }
 
+    def estimation(self):
+        self.write({"state": self.env['state.setup'].search(
+            [('non_motor_claim_status', '=', 'estimation'), ('type', '=', 'claim')]).id})
+        self.write({"status": "estimation"})
+
+    def cheque_ready(self):
+        self.write({"state": self.env['state.setup'].search(
+            [('non_motor_claim_status', '=', 'cheque'), ('type', '=', 'claim')]).id})
+        self.write({"status": "cheque"})
+
+    def reject(self):
+        if self.type == 'motor':
+            self.write({"state": self.env['state.setup'].search(
+                [('claim_status', '=', 'reject'), ('type', '=', 'claim')]).id})
+            self.write({"status": "reject"})
+        else:
+            self.write({"state": self.env['state.setup'].search(
+                [('non_motor_claim_status', '=', 'reject'), ('type', '=', 'claim')]).id})
+            self.write({"status": "reject"})
+
     def related_policy(self):
         policy = self.env['policy.arope'].search([('product', '=', self.product.product_name), ('policy_num', '=', int(self.policy_num))
                                                    ], limit=1)
@@ -208,6 +277,7 @@ class AropeClaim(models.Model):
                 "create": False,
             },
         }
+
 
 class MaintenanceCenter(models.Model):
     _name = 'maintenance.center'
