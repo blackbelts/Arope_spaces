@@ -436,6 +436,10 @@ class Brokers(models.Model):
             "collection_ratio": self.get_collection_ratio(customer_pin,type),
             "claims_ratio": self.get_claim_ratio(customer_pin,type),
             "App_count": self.get_lob_count_ins_app(id),
+            'end_request': self.get_end_request(id),
+
+            'renew_request': self.get_renew_request(id),
+            'cancel_request': self.get_cancel_request(id),
 
             # 'rank': self.get_rank(id),
             # 'targetVsProduction': self.get_target_production(id),
