@@ -28,430 +28,266 @@
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- page container area start -->
-    <div class="page-container">
-      <!-- main content area start -->
-      <div class="main-content">
-        <!-- page title area start -->
-        <div class="page-title-area">
-          <div class="breadcrumbs-area clearfix">
-            <h4 class="page-title pull-left">Dashboard / 2020</h4>
+    <div id="o_partner_dashboard">
+      <section class="o_partner_dashboard_banner bg-white">
+        <div class="container">
+          <div class="row d-flex">
+            <div class="col-12 col-md-8 col-lg-7">
+              <h1 class="display-1 text-violet-dark mt32 mb32 fw_light">
+                <b>Partner</b>
+                Dashboard
+              </h1>
+              <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+                <span class="text-beta">
+                  <b>Have a Project right now?</b>
+                </span>
+                <p class="text-beta mt8 mb0">
+                  We can help you sell and deliver your first project.
+                  <br />
+                  Working together on your first project is the best way to success in Odoo.
+                  <br />
+                  Learn more by reading our
+                  <a href="https://www.odoo.com/r/Implementation_methodology" class="text-beta" target="_blank">
+                    <u>Implementation Methodology</u>
+                  </a>
+
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-        <!-- page title area end -->
-        <div class="main-content-inner">
-          <div class="sales-report-area top-sales-report mt-3 mb-1">
-            <div class="row">
-              <div class="col-md-3 mt-5">
-                <div class="single-report mb-xs-30" id="rank">
-                  <div class="s-report-inner pr--20 pt--30 mb-3">
-                    <div class="icon">
-                      <i class='fas fa-medal' />
-                    </div>
-                    <div class="s-report-title d-flex justify-content-between">
-                      <h4 class="header-title mb-0 new-header">Your Rank</h4>
-                      <!--<p>24 H</p>-->
-                    </div>
-                    <div class="d-flex justify-content-between pb-2">
-                      <h2 class="larage">
-                        <t t-esc="widget.brokerRank" />
-                      </h2>
-                      <!--<span>- 45.87</span>-->
-                    </div>
+      </section>
+      <section class="bg-gray-lighter">
+        <div class="container">
+          <div class="row d-lg-flex pt48">
 
-                  </div>
-
-                </div>
+            <div class="col-lg-7 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Company</h2>
               </div>
-               <div class="col-md-3 mt-5">
-                <div class="single-report mb-xs-30" id="rank">
-                  <div class="s-report-inner pr--20 pt--30 mb-3">
-                    <div class="icon">
-                      <i class='fas fa-medal' />
-                    </div>
-                    <div class="s-report-title d-flex justify-content-between">
-                      <h4 class="header-title mb-0 new-header">Loss Ratio</h4>
-                      <!--<p>24 H</p>-->
-                    </div>
-                    <div class="d-flex justify-content-between pb-2">
-                      <h2 class="larage">
-                        <t t-esc="widget.makeNumber(widget.claims_ratio*100)" />%
-                      </h2>
-                      <!--<span>- 45.87</span>-->
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-              <div class="col-md-3 mt-5">
-                <div class="single-report mb-xs-30 cursor" id="production">
-                  <div class="s-report-inner pr--20 pt--30 mb-3">
-                    <div class="icon">
-                      <i class="fas fa-money"></i>
-                    </div>
-                    <div class="s-report-title d-flex justify-content-between">
-                      <h4 class="header-title new-header mb-0">Renewal Ratio</h4>
-                      <!--<p>24 H</p>-->
-                    </div>
-                    <div class="d-flex justify-content-between pb-2">
-                      <h2 class="larage">
-                         <t t-esc="widget.makeNumber(0*100)" />%
-                        <!--<t t-esc="widget.brokerRank" />-->
-                      </h2>
-                      <!--<span>- 45.87</span>-->
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 mt-5">
-                <div class="single-report mb-xs-30" id="rank">
-                  <div class="s-report-inner pr--20 pt--30 mb-3">
-                     <div class="icon">
-                      <i class="fas fa-money"></i>
-                    </div>
-                    <div class="s-report-title d-flex justify-content-between">
-                      <h4 class="header-title mb-0 new-header">Collection Ratio</h4>
-                      <!--<p>24 H</p>-->
-                    </div>
-                    <div class="d-flex justify-content-between pb-2">
-                      <h2 class="larage">
-                        <t t-esc="widget.makeNumber(widget.collection_ratio*100)" />%
-                      </h2>
-                      <!--<span>- 45.87</span>-->
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-<!--              <div class="col-md-4 mt-5">-->
-<!--                <div class="single-report mb-xs-30 cursor" id="production">-->
-<!--                  <div class="s-report-inner pr&#45;&#45;20 pt&#45;&#45;30 mb-3">-->
-<!--                    <div class="icon">-->
-<!--                      <i class="fas fa-money"></i>-->
-<!--                    </div>-->
-<!--                    <div class="s-report-title d-flex justify-content-between">-->
-<!--                      <h4 class="header-title new-header mb-0">Licence Code</h4>-->
-<!--                    </div>-->
-<!--                    <div class="d-flex justify-content-between pb-2">-->
-<!--                      <h2 class="larage">-->
-<!--                       <t t-esc="widget.user[0].fra_no" />-->
-<!--                      </h2>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="col-md-4 mt-5">-->
-<!--                <div class="single-report mb-xs-30" id="rank">-->
-<!--                  <div class="s-report-inner pr&#45;&#45;20 pt&#45;&#45;30 mb-3">-->
-<!--                    <div class="icon">-->
-<!--                      <i class='fas fa-medal' />-->
-<!--                    </div>-->
-<!--                    <div class="s-report-title d-flex justify-content-between">-->
-<!--                      <h4 class="header-title mb-0 new-header">Expired On</h4>-->
-<!--                    </div>-->
-<!--                    <div class="d-flex justify-content-between pb-2">-->
-<!--                      <h2 class="larage">-->
-<!--                       <t t-esc="widget.user[0].expire_date" />-->
-<!--                      </h2>-->
-<!--                    </div>-->
-
-<!--                  </div>-->
-
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="col-md-3 mt-5">-->
-<!--                <div class="single-report mb-xs-30 cursor" id="production">-->
-<!--                  <div class="s-report-inner pr&#45;&#45;10 pt&#45;&#45;30 mb-3">-->
-<!--                    <div class="icon">-->
-<!--                      <i class="fas fa-money"></i>-->
-<!--                    </div>-->
-<!--                    <div class="s-report-title  new-title justify-content-between">-->
-<!--                      <h4 class="header-title new-header mb-0">License Code : 50225555</h4>-->
-<!--                      <br />-->
-<!--                      <h4 class="header-title new-header mb-0">expired On : 20-10-2222</h4>-->
-<!--                    </div>-->
-<!--                    <div class="d-flex justify-content-between pb-2">-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-              <div class="col-lg-4 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-sm-flex justify-content-between align-items-center">
-                      <h2 class="header-title mb-0">Production per LOB in EGP</h2>
-                    </div>
-                    <div id="ambarchart3" style="width: 100%; height: 250px;"></div>
-                  </div>
-                </div>
-              </div>
-               <div class="col-lg-4 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-sm-flex justify-content-between align-items-center">
-                      <h2 class="header-title mb-0">Target Vs Production</h2>
-                    </div>
-                    <div id="ambarchart2" style="width: 100%; height: 250px;"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-sm-flex justify-content-between align-items-center">
-                      <h2 class="header-title mb-0">Current Year Vs Last Year</h2>
-                    </div>
-                    <div id="ambarchart1" style="width: 100%; height: 250px;"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 mt-5">
-                <div class="sales-report-area mt-3 mb-1">
+              <div class="d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">
+                  <span class="mt0 mb0">Black Belts</span>
+                </h5>
+                <div class="o_partner_dashboard_box_body">
                   <div class="row">
-                    <div class="col-12">
-                      <div class="card custom-card">
-                        <div class="card-body">
-                          <div class="d-sm-flex justify-content-between align-items-center">
-                            <h2 class="header-title mb-0">Permium under collection</h2>
-                          </div>
-                          <div class="row">
-                            <di class="col-md-12">
-                              <div class="single-report cursor" id="red_collection">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div class="icon red"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span class="redspan">
-                                        Count :
-                                        <t t-esc="widget.collections_statistics.Red.count" />
-                                      </span>
-                                      <br />
-                                      Total :
-                                      <t t-esc="widget.makeNumber(widget.collections_statistics.Red.total)" />
-                                      $
-                                    </h4>
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>$ 4567809,987</h2>-->
-                                  <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
-                                  <!--                                                        </div>-->
-                                </div>
-
-                              </div>
-                            </di>
-
-                            <div class="col-md-12">
-                              <div class="single-report mb-xs-30 cursor" id="orange_collection">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div class="icon orange"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span class="orangespan">
-                                        Count :
-                                        <t t-esc="widget.collections_statistics.Orange.count" />
-                                      </span>
-                                      <br />
-                                      Total :
-                                      <t t-esc="widget.makeNumber(widget.collections_statistics.Orange.total)" />
-                                      $
-                                    </h4>
-                                    <!--<p>24 H</p>-->
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>-->
-                                  <!--                                                                <t t-esc="widget.makeNumber(widget.brokerProduction)" />-->
-                                  <!--                                                                $</h2>-->
-                                  <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
-                                  <!--                                                        </div>-->
-                                </div>
-
-                              </div>
-                            </div>
-                            <div class="col-md-12">
-                              <div class="single-report mb-xs-30 cursor" id="green_collection">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div class="icon green"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span class="greenspan">
-                                        Count :
-                                        <t t-esc="widget.collections_statistics.Green.count" />
-                                      </span>
-                                      <br />
-                                      Total :
-                                      <t t-esc="widget.makeNumber(widget.collections_statistics.Green.total)" />
-                                      $
-                                    </h4>
-                                    <!--<p>24 H</p>-->
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>-->
-                                  <!--                                                                <t t-esc="widget.brokerRank" />-->
-                                  <!--                                                            </h2>-->
-                                  <!--                                                        </div>-->
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                    <div class="col-md-5">
+                      <div></div>
+                    </div>
+                    <div class="col-md-5">
+                      <div></div>
+                    </div>
+                    <div class="col-md-2">
+                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">
+                        <img src="data:image/jpeg;base64,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" />
                       </div>
                     </div>
-
-
                   </div>
                 </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/partner/profile" class="btn btn-secondary" style="position: relative; overflow: hidden;">Update your profile</a>
+                </div>
               </div>
-              <div class="col-lg-4  mt-5">
-                <div class="sales-report-area mt-3 mb-1">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="card custom-card">
-                        <div class="card-body">
-                          <div class="d-sm-flex justify-content-between align-items-center">
-                            <h2 class="header-title mb-0">Complaints</h2>
-                          </div>
-                          <div class="row">
-                            <di class="col-md-12" t-foreach="widget.complaint_count" t-as="com">
-                              <div class="single-report cursor" id="red_renew">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div t-att-class="com.class"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span t-att-class="com.subClass">
-                                        <t t-esc="com.stage" />
-                                        <br/>
+            </div>
+            <div class="col-lg-5 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Grade</h2>
+              </div>
 
-                                      </span>
-                                        Count :
-                                        <t t-esc="com.count" />
+              <div class="d-flex flex-column o_partner_dashboard_box">
 
-                                    </h4>
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>$ 4567809,987</h2>-->
-                                  <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
-                                  <!--                                                        </div>-->
-                                </div>
+                <div class="o_partner_dashboard_box_body">
 
-                              </div>
-                            </di>
-                          </div>
-                        </div>
-                      </div>
+                  <ul class="wizard o_partner_dashboard_wizard d-flex mt32 mb32">
+
+                    <li class="o_partner_dashboard_grade_active_ready">
+                      Ready Partner
+                      <span class="chevron"></span>
+                    </li>
+                    <li class="pl-3 ">
+                      Silver Partner
+                      <span class="chevron"></span>
+                    </li>
+                    <li class="">Gold Partner</li>
+                  </ul>
+                  <p>
+                    You have
+                    <b>0</b>
+                    new Enterprise user(s) in the last 12 Months, you need
+                    <b>10</b>
+                    to remain a Ready Partner.
+                  </p>
+                  <p>
+                    You have
+                    <b>0</b>
+                    certified expert(s), you need
+                    <b>1</b>
+                    to remain Ready.
+                  </p>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/contactus" class="btn btn-secondary" style="position: relative; overflow: hidden;">Contact us</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex flex-wrap no-gutters pb64">
+            <div class="col-12">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Portfolio</h2>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Production per LOB in EGP</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div id="ambarchart3" style="width: 100%; height: 250px;"></div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Target Vs Production</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div id="ambarchart2" style="width: 100%; height: 250px;"></div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Current Year Vs Last Year</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div id="ambarchart1" style="width: 100%; height: 250px;"></div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex flex-wrap no-gutters pb64">
+            <div class="col-12">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Follow up list</h2>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Renewals</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">Total (EGP)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><img class="image" src="/Arope-spaces/static/src/img/red.png"/></td>
+                            <td><t t-esc="widget.renew_statistics.Red.count" /></td>
+                            <td><t t-esc="widget.makeNumber(widget.renew_statistics.Red.total)" /></td>
+                          </tr>
+                          <tr>
+                            <td><img class="image" src="/Arope-spaces/static/src/img/orange.png"/></td>
+                            <td><t t-esc="widget.renew_statistics.Orange.count" /></td>
+                            <td><t t-esc="widget.makeNumber(widget.renew_statistics.Orange.total)" /></td>
+                          </tr>
+                          <tr>
+                            <td><img class="image" src="/Arope-spaces/static/src/img/green.png"/></td>
+                            <td><t t-esc="widget.renew_statistics.Green.count" /></td>
+                            <td><t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" /></td>
+
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
-
-
                   </div>
                 </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
               </div>
-              <div class="col-lg-4  mt-5">
-                <div class="sales-report-area mt-3 mb-1">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="card custom-card">
-                        <div class="card-body">
-                          <div class="d-sm-flex justify-content-between align-items-center">
-                            <h2 class="header-title mb-0">Renewals</h2>
-                          </div>
-                          <div class="row">
-                            <di class="col-md-12">
-                              <div class="single-report cursor" id="red_renew">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div class="icon red"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span class="redspan">
-                                        Count :
-                                        <t t-esc="widget.renew_statistics.Red.count" />
-                                      </span>
-                                      <br />
-                                      Total :
-                                      <t t-esc="widget.makeNumber(widget.renew_statistics.Red.total)" />
-                                      $
-                                    </h4>
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>$ 4567809,987</h2>-->
-                                  <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
-                                  <!--                                                        </div>-->
-                                </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Permium under collection</h5>
+                <div class="o_partner_dashboard_box_body">
+                   <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">Total (EGP)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><img class="image" src="/Arope-spaces/static/src/img/red.png"/></td>
+                            <td><t t-esc="widget.collections_statistics.Red.count" /></td>
+                            <td><t t-esc="widget.makeNumber(widget.collections_statistics.Red.total)" /></td>
+                          </tr>
+                          <tr>
+                            <td><img class="image" src="/Arope-spaces/static/src/img/orange.png"/></td>
+                            <td><t t-esc="widget.collections_statistics.Orange.count" /></td>
+                            <td><t t-esc="widget.makeNumber(widget.collections_statistics.Orange.total)" /></td>
+                          </tr>
+                          <tr>
+                            <td><img class="image" src="/Arope-spaces/static/src/img/green.png"/></td>
+                            <td><t t-esc="widget.collections_statistics.Green.count" /></td>
+                            <td><t t-esc="widget.makeNumber(widget.collections_statistics.Green.total)" /></td>
 
-                              </div>
-                            </di>
-                            <div class="col-md-12">
-                              <div class="single-report mb-xs-30 cursor" id="orange_renew">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div class="icon orange"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span class="orangespan">
-                                        Count :
-                                        <t t-esc="widget.renew_statistics.Orange.count" />
-                                      </span>
-                                      <br />
-                                      Total :
-                                      <t t-esc="widget.makeNumber(widget.renew_statistics.Orange.total)" />
-                                      $
-                                    </h4>
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>-->
-                                  <!--                                                                <t t-esc="widget.makeNumber(widget.brokerProduction)" />-->
-                                  <!--                                                                $</h2>-->
-                                  <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
-                                  <!--                                                        </div>-->
-                                </div>
-
-                              </div>
-                            </div>
-                            <div class="col-md-12">
-                              <div class="single-report mb-xs-30 cursor" id="green_renew">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div class="icon green"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span class="greenspan">
-                                        Count :
-                                        <t t-esc="widget.renew_statistics.Green.count" />
-                                      </span>
-                                      <br />
-                                      Total :
-                                      <t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" />
-                                      $
-                                    </h4>
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>-->
-                                  <!--                                                                <t t-esc="widget.brokerRank" />-->
-                                  <!--                                                            </h2>-->
-                                  <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
-                                  <!--                                                        </div>-->
-                                </div>
-
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
-
-
                   </div>
                 </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
               </div>
-              <div class="col-lg-4 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="header-title">Policies count per LOB</h4>
-                    <div class="single-table">
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Complaints</h5>
+                <div class="o_partner_dashboard_box_body"></div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex flex-wrap no-gutters pb64">
+            <div class="col-12">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Portfolio</h2>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Policies count per LOB</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
                       <div class="table-responsive">
                         <table class="table table-hover text-center">
                           <thead class="text-uppercase">
                             <tr>
-                              <th scope="col">LOB Name</th>
+                              <th scope="col">LOB</th>
                               <th scope="col">Icon</th>
                               <th scope="col">Count</th>
                               <th scope="col">Production</th>
@@ -468,19 +304,22 @@
                         </table>
                       </div>
                     </div>
-                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
                 </div>
               </div>
-              <div class="col-lg-4 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="header-title">Claims count per LOB</h4>
-                    <div class="single-table">
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Claims count per LOB</h5>
+                <div class="o_partner_dashboard_box_body">
+                   <div class="single-table">
                       <div class="table-responsive">
                         <table class="table table-hover text-center">
                           <thead class="text-uppercase">
                             <tr>
-                              <th scope="col">LOB Name</th>
+                              <th scope="col">LOB </th>
                               <th scope="col">Icon</th>
                               <th scope="col">Count</th>
                               <th scope="col">Production</th>
@@ -497,19 +336,22 @@
                         </table>
                       </div>
                     </div>
-                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
                 </div>
               </div>
-              <div class="col-lg-4 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="header-title">Insurance applications count per LOB</h4>
-                    <div class="single-table">
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Insurance applications count per LOB</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
                       <div class="table-responsive">
                         <table class="table table-hover text-center">
                           <thead class="text-uppercase">
                             <tr>
-                              <th scope="col">LOB Name</th>
+                              <th scope="col">LOB </th>
                               <th scope="col">Icon</th>
                               <th scope="col">Count</th>
 <!--                              <th scope="col">Production</th>-->
@@ -526,26 +368,16 @@
                         </table>
                       </div>
                     </div>
-                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
                 </div>
               </div>
-
             </div>
           </div>
+
         </div>
-      </div>
-      <!-- main content area end -->
-      <!-- footer area start-->
-      <footer>
-        <div class="footer-area">
-          <p>
-            © Copyright 2020. All right reserved. Template by
-            <a href="https://colorlib.com/wp/">BlackBelts</a>
-            .
-          </p>
-        </div>
-      </footer>
-      <!-- footer area end-->
+      </section>
     </div>
     <!-- page container area end -->
     <xpath expr="." position="inside">

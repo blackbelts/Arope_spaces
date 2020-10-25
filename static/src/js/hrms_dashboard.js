@@ -228,15 +228,15 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
             if(e.stage=="Canceled")
                 res.complaint_count.splice(i,1)
             else if(e.stage=="New"){
-                e.class="icon red"
+                e.class="red"
                 e.subClass="redspan"
             }
             else if(e.stage=="Solved"){
-                e.class="icon green"
+                e.class="green"
                 e.subClass="greenspan"
             }
             else{
-                 e.class="icon orange"
+                 e.class="orange"
                  e.subClass="orangespan"
             }
         })
