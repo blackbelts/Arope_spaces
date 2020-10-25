@@ -38,7 +38,7 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
       var user = session.uid
       var self = this;
       this.fetch_data().then(function () {
-        if (self.user.length!=0&&self.user[0].type == "broker") {
+        if (self.user.length!=0&&self.user.type == "broker") {
           self.$('.o_hr_dashboard').prepend(QWeb.render("broker", {
             widget: self
           }));
@@ -184,11 +184,11 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
             });
           })
 
-        } else if (self.user.length!=0&&self.user[0].type == "customer") {
+        } else if (self.user.length!=0&&self.user.type == "customer") {
           self.$('.o_hr_dashboard').prepend(QWeb.render("customer", {
             widget: self
           }));
-        } else if (self.user.length!=0&&self.user[0].type == "surveyor") {
+        } else if (self.user.length!=0&&self.user.type == "surveyor") {
           self.$('.o_hr_dashboard').prepend(QWeb.render("surveyor", {
             widget: self
           }));
@@ -218,25 +218,29 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
         self.collections_statistics = res.collections
         self.renew_statistics = res.renews
         self.production_compare = res.lastVsCurrentYear
-        self.user = res.user
+        self.user = res.user[0]
         self.collection_ratio=res.collection_ratio
         self.claims_ratio=res.claims_ratio
         self.policy_lob=res.policy_lob
         self.claim_lob=res.claim_lob
         self.App_count=res.App_count
+        self.user_image=res.user_image
+        self.renew_request=res.renew_request
+        self.cancel_request=res.cancel_request
+        self.end_request=res.end_request
         res.complaint_count.forEach(function(e,i){
             if(e.stage=="Canceled")
                 res.complaint_count.splice(i,1)
             else if(e.stage=="New"){
-                e.class="red"
+                e.image="/Arope-spaces/static/src/img/red.png"
                 e.subClass="redspan"
             }
             else if(e.stage=="Solved"){
-                e.class="green"
+                e.image="/Arope-spaces/static/src/img/green.png"
                 e.subClass="greenspan"
             }
             else{
-                 e.class="orange"
+                 e.image="/Arope-spaces/static/src/img/orange.png"
                  e.subClass="orangespan"
             }
         })

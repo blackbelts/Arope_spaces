@@ -57,6 +57,9 @@
                 </p>
               </div>
             </div>
+            <div class="col-12 col-md-4 col-lg-5">
+              <img style="height: 320px; width:100%" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+            </div>
           </div>
         </div>
       </section>
@@ -66,25 +69,75 @@
 
             <div class="col-lg-7 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
-                <h2>Your Company</h2>
+                <h2>Your Profile</h2>
               </div>
               <div class="d-flex flex-column o_partner_dashboard_box">
                 <h5 class="o_partner_dashboard_box_title">
-                  <span class="mt0 mb0">Black Belts</span>
+                  <span class="mt0 mb0">
+                    <t t-esc="widget.user.name" />
+                  </span>
                 </h5>
                 <div class="o_partner_dashboard_box_body">
-                  <div class="row">
-                    <div class="col-md-5">
-                      <div></div>
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <h4>FRA No</h4>
+
                     </div>
-                    <div class="col-md-5">
-                      <div></div>
+                    <div class="col-md-6">
+                      <h4>
+                        <t t-esc="widget.user.fra_no" />
+                      </h4>
                     </div>
-                    <div class="col-md-2">
-                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">
-                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBggLDAsKDAkKCgr/2wBDAQICAgICAgUDAwUKBwYHCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr/wAARCAARAIADASIAAhEBAxEB/8QAHAABAAICAwEAAAAAAAAAAAAAAAcIBAUDBgkB/8QAKxAAAQMDBAIBBAIDAQAAAAAAAQIDBAUGBwAIERIJEyEUFSIxFzIWQYHS/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFxEBAQEBAAAAAAAAAAAAAAAAAAEhEf/aAAwDAQACEQMRAD8A9AMp7w9xFmXBu2pdEzwhVbxTVaQxh+2ptFgLTU5kujsTG6a8A2hyQl+U76AvuhTaD27fiVGXco5qz3b++TbtiNy6lUSkZAtO45172zHixpCPrKdFhvNttyFtlxKQ5IcSopV+aUJ46/JOhgbX9zFGyTubuRnHVkVSFm6dCFuxqxczhjx2maK3TFme0IiipJU2XfW337JV17JPzrCs/Y1nvEGStrsqgVyDeFJwPjWrW5X65W64uNOq8iZCiR0OtNFp0BKTFJPdzkJWkAqKSTnG4tje1zC0LYl15MUyHmkBESKnnl99ag200OATypxSE/8AdVjw55Ba7b3j1v8A3H7kqPHcvjCKLgpeT6LSEelt2r0kr/Fjn+rcpsxnmifjpKQf9akFy2dy+RsnNwcu40tVdhouRUtiI3dCpD7TDUJpEcra+kQl1RlqkPKT34QER+pUewEXXf47K3cufs4WnBotHp2Es+4xYpF4Q4VUKJ8O4GWHooqcaP6fWAuKtltZLnYuRWl8Ec6k4dSja1F3X3Nthi36zliM1k2rWumpt077Ux9jjT3mQ8mEhopDpYQVBoOqd7kp9iv2UajS49391Y18k10YEyDmFtq2l4yt6bZdpyEwY71QuGpT50QRmn1IC3CoRmylBUQklajykACR7MtzeJQNsbWFJSLbF90y2ftES/WqgsU6S42wGWqh9P197TqgErUx+SULJAdWkAmOsr+P+ubh922TbrzTblNkY4v3D9GtJh+FX1pq8OoQJ0ua3UGkhkBlxDshtbLiXCtDscL44IACyeJrav60bEi0rJ2SHrrrg7OTqu7BYjJUpR5DbbbDaEhtA4SCQVHjlR5PxR6u70t0lEszcLNs/Mceu31j7PTdqYrsmpUuAhuuRyzTHUQH+iG1qLn1UgGSFoLaUBZ5CFBVs9ndM3T2/gumWdvBl0Co3lR0GFIuS3563W64yglLU11tTTfokLbCS62nsj2dyhXUgCvrOzLc+7inc/ieVZNjPDPt8VapUabU7hdfjUmHNpcWAHJLKYoU480Y6ng22rhRKE+xHBUEHYtyG6S6sN7/AChY6vTO6rWxq7g+v3dXmDGghTcyBNhMpLb7zRX1Lb7pLYJ7KSkjj5B+7wMlbmdv2OMbyKJneQ5Mu3cTb1uO1JdBgl1Vv1aoJaMdaFMdEyGmyUpdSkHkAq7EnXC9snyzR90GOb1mQKVe9m2Xt9mY7rEq4q6W6jWn5DkFSpS2yytPVSYiwslzsVPcjkA85O5rb/u63CWVZtOVadoQ37S3BUC7oNOVdLhQzQKS9HdQwXRE5XKdUh48FPRBcAK1AaosFle3co3FCodLxnf7lvlFwx3K/UW4cd95ynIQ4XWWw+haErcUGk9+vKQVEcEar1tKyPujz7OyBUns2vFOPty9YtcwHaNASzOtyEplJYcIZCw/1dKvchSVEoA44J1PFvzs/VHLMmVcVsUam2cxbpTEZZrZkTJdTU+CSpPoSlppLSeoPdRKnDykBIJjTYlgDNWB2MvMZUpdGiqvvL9dvGiO0StqlFqPUC10Yd7st9XUer5KeyT2+D8akEfbMt3mQNzAh2RWM0MW9ma1bsV/MOIbhpTEV+n09L76FIhMqQHVx+noW1NQt1DqeexCl/hl+RzdRnbb9fdtUPFG8bbFjSNUKM8/Mp+d5slqbNcS8Eh2KGZDQLIH4q5BPbj51kZL2d5i3A13A155Ptu26VkbFF20ur1zKFIqJW9KiR2yJkCLw2h5Tc4no6091aQlS1DupKQdlvy2vboc9X5bdZwVbW3WbTYFNcYqrmZ8cPVuahangoCI42oBtvpzyk/tfB/WrgqwryRb5VKjKpvkp2HVFqRPZhmXR4NdnR4z7p4aTIdjyVojBZBCS6pAUUqAPweOCB5I93bT9SVTvK1sXLDlSSqCbou1EpXo9DYV6voHWAhsve1SEu93AgpClEgk9gp3jU8i0iFGc/wPZ0FQa9ImwE3Pipb8lpIWkxitVLbhx3VICT/Zk8Hg/v4GwHjn8kgHAx5sI4A4A/gSZ/70wekGmmmsqaaaaBpppoGmmmgaaaaBpppoGmmmgaaaaD//2Q==" />
-                      </div>
+                    <!--                    <div class="col-md-2">-->
+                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
+
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <h4>Expiration Date</h4>
                     </div>
+                    <div class="col-md-6">
+                      <h4>
+                        <t t-esc="widget.user.expire_date" />
+                      </h4>
+                    </div>
+                    <!--                    <div class="col-md-2">-->
+                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
+
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <h4>Mobile</h4>
+                    </div>
+                    <div class="col-md-6">
+                      <h4>
+                        <t t-esc="widget.user.mobile" />
+                      </h4>
+                    </div>
+                    <!--                    <div class="col-md-2">-->
+                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
+
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <h4>Email</h4>
+                    </div>
+                    <div class="col-md-6">
+                      <h4>
+                        <t t-esc="widget.user.mail" />
+                      </h4>
+                    </div>
+                    <!--                    <div class="col-md-2">-->
+                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
+
+                    <!--                      </div>-->
+                    <!--                    </div>-->
                   </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
@@ -196,19 +249,37 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td><img class="image" src="/Arope-spaces/static/src/img/red.png"/></td>
-                            <td><t t-esc="widget.renew_statistics.Red.count" /></td>
-                            <td><t t-esc="widget.makeNumber(widget.renew_statistics.Red.total)" /></td>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.renew_statistics.Red.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(widget.renew_statistics.Red.total)" />
+                            </td>
                           </tr>
                           <tr>
-                            <td><img class="image" src="/Arope-spaces/static/src/img/orange.png"/></td>
-                            <td><t t-esc="widget.renew_statistics.Orange.count" /></td>
-                            <td><t t-esc="widget.makeNumber(widget.renew_statistics.Orange.total)" /></td>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.renew_statistics.Orange.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(widget.renew_statistics.Orange.total)" />
+                            </td>
                           </tr>
                           <tr>
-                            <td><img class="image" src="/Arope-spaces/static/src/img/green.png"/></td>
-                            <td><t t-esc="widget.renew_statistics.Green.count" /></td>
-                            <td><t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" /></td>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.renew_statistics.Green.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" />
+                            </td>
 
                           </tr>
                         </tbody>
@@ -225,7 +296,7 @@
               <div class=" d-flex flex-column o_partner_dashboard_box">
                 <h5 class="o_partner_dashboard_box_title">Permium under collection</h5>
                 <div class="o_partner_dashboard_box_body">
-                   <div class="single-table">
+                  <div class="single-table">
                     <div class="table-responsive">
                       <table class="table table-hover text-center">
                         <thead class="text-uppercase">
@@ -237,19 +308,37 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td><img class="image" src="/Arope-spaces/static/src/img/red.png"/></td>
-                            <td><t t-esc="widget.collections_statistics.Red.count" /></td>
-                            <td><t t-esc="widget.makeNumber(widget.collections_statistics.Red.total)" /></td>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.collections_statistics.Red.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(widget.collections_statistics.Red.total)" />
+                            </td>
                           </tr>
                           <tr>
-                            <td><img class="image" src="/Arope-spaces/static/src/img/orange.png"/></td>
-                            <td><t t-esc="widget.collections_statistics.Orange.count" /></td>
-                            <td><t t-esc="widget.makeNumber(widget.collections_statistics.Orange.total)" /></td>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.collections_statistics.Orange.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(widget.collections_statistics.Orange.total)" />
+                            </td>
                           </tr>
                           <tr>
-                            <td><img class="image" src="/Arope-spaces/static/src/img/green.png"/></td>
-                            <td><t t-esc="widget.collections_statistics.Green.count" /></td>
-                            <td><t t-esc="widget.makeNumber(widget.collections_statistics.Green.total)" /></td>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.collections_statistics.Green.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(widget.collections_statistics.Green.total)" />
+                            </td>
 
                           </tr>
                         </tbody>
@@ -265,7 +354,34 @@
             <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
               <div class=" d-flex flex-column o_partner_dashboard_box">
                 <h5 class="o_partner_dashboard_box_title">Complaints</h5>
-                <div class="o_partner_dashboard_box_body"></div>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">Stage</th>
+                            <th scope="col">Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.complaint_count" t-as="com">
+                            <td>
+                              <img class="image" t-att-src="com.image" />
+                            </td>
+                            <td>
+                              <t t-esc="com.stage" />
+                            </td>
+                            <td>
+                              <t t-esc="com.count" />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
                 <div class="o_partner_dashboard_box_footer">
                   <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
                 </div>
@@ -283,27 +399,36 @@
                 <h5 class="o_partner_dashboard_box_title">Policies count per LOB</h5>
                 <div class="o_partner_dashboard_box_body">
                   <div class="single-table">
-                      <div class="table-responsive">
-                        <table class="table table-hover text-center">
-                          <thead class="text-uppercase">
-                            <tr>
-                              <th scope="col">LOB</th>
-                              <th scope="col">Icon</th>
-                              <th scope="col">Count</th>
-                              <th scope="col">Production</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr t-foreach="widget.policy_lob" t-as="lob">
-                              <td><t t-esc="lob.name" /></td>
-                              <td><img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
-                              <td><t t-esc="lob.count" /></td>
-                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">LOB</th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">Production</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.policy_lob" t-as="lob">
+                            <td>
+                              <t t-esc="lob.name" />
+                            </td>
+                            <td>
+                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon" />
+                            </td>
+                            <td>
+                              <t t-esc="lob.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(lob.amount)" />
+                              EGP
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
+                  </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
                   <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
@@ -314,28 +439,37 @@
               <div class=" d-flex flex-column o_partner_dashboard_box">
                 <h5 class="o_partner_dashboard_box_title">Claims count per LOB</h5>
                 <div class="o_partner_dashboard_box_body">
-                   <div class="single-table">
-                      <div class="table-responsive">
-                        <table class="table table-hover text-center">
-                          <thead class="text-uppercase">
-                            <tr>
-                              <th scope="col">LOB </th>
-                              <th scope="col">Icon</th>
-                              <th scope="col">Count</th>
-                              <th scope="col">Production</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr t-foreach="widget.claim_lob" t-as="lob">
-                              <td><t t-esc="lob.name" /></td>
-                              <td><img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
-                              <td><t t-esc="lob.count" /></td>
-                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">LOB </th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">Production</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.claim_lob" t-as="lob">
+                            <td>
+                              <t t-esc="lob.name" />
+                            </td>
+                            <td>
+                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon" />
+                            </td>
+                            <td>
+                              <t t-esc="lob.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(lob.amount)" />
+                              EGP
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
+                  </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
                   <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
@@ -347,27 +481,241 @@
                 <h5 class="o_partner_dashboard_box_title">Insurance applications count per LOB</h5>
                 <div class="o_partner_dashboard_box_body">
                   <div class="single-table">
-                      <div class="table-responsive">
-                        <table class="table table-hover text-center">
-                          <thead class="text-uppercase">
-                            <tr>
-                              <th scope="col">LOB </th>
-                              <th scope="col">Icon</th>
-                              <th scope="col">Count</th>
-<!--                              <th scope="col">Production</th>-->
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr t-foreach="widget.App_count" t-as="lob">
-                              <td><t t-esc="lob.name" /></td>
-                              <td><img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
-                              <td><t t-esc="lob.count" /></td>
-<!--                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>-->
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">LOB </th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Count</th>
+                            <!--                              <th scope="col">Production</th>-->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.App_count" t-as="lob">
+                            <td>
+                              <t t-esc="lob.name" />
+                            </td>
+                            <td>
+                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon" />
+                            </td>
+                            <td>
+                              <t t-esc="lob.count" />
+                            </td>
+                            <!--                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>-->
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex flex-wrap no-gutters pb64">
+            <div class="col-12">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Requests</h2>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">endorsements Requests</h5>
+                <div class="o_partner_dashboard_box_body">
+                 <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">Status </th>
+                            <th scope="col">Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                            </td>
+                            <td>Pending</td>
+                            <td >
+                              <t t-esc="widget.end_request.pending" />
+                              <t  t-if="widget.end_request.pending == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.end_request.pending" />
+                              </t>
+                            </td>
+
+                          </tr>
+                           <tr>
+                              <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                            </td>
+                            <td>Submitted</td>
+                            <td >
+                              <t  t-if="widget.end_request.submitted == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.end_request.submitted" />
+                              </t>
+                            </td>
+
+                          </tr>
+                           <tr>
+                              <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                            </td>
+                            <td>Issued</td>
+                            <td>
+                              <t  t-if="widget.end_request.issued == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.end_request.issued" />
+                              </t>
+
+                            </td>
+
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Cancellation Requests </h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">Status </th>
+                            <th scope="col">Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                             <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                            </td>
+                            <td>Pending</td>
+                            <td >
+                              <t t-esc="widget.cancel_request.pending" />
+                              <t  t-if="widget.cancel_request.pending == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.cancel_request.pending" />
+                              </t>
+                            </td>
+
+                          </tr>
+                           <tr>
+                              <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                            </td>
+                            <td>Submitted</td>
+                            <td >
+                              <t  t-if="widget.cancel_request.submitted == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.cancel_request.submitted" />
+                              </t>
+                            </td>
+
+                          </tr>
+                           <tr>
+                              <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                            </td>
+                            <td>Issued</td>
+                            <td>
+                              <t  t-if="widget.cancel_request.issued == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.cancel_request.issued" />
+                              </t>
+
+                            </td>
+
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Renewals Requests</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">Status </th>
+                            <th scope="col">Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                             <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                            </td>
+                            <td>Pending</td>
+                            <td >
+                              <t t-esc="widget.renew_request.pending" />
+                              <t  t-if="widget.renew_request.pending == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.renew_request.pending" />
+                              </t>
+                            </td>
+
+                          </tr>
+                           <tr>
+                              <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                            </td>
+                            <td>Submitted</td>
+                            <td >
+                              <t  t-if="widget.renew_request.submitted == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.renew_request.submitted" />
+                              </t>
+                            </td>
+
+                          </tr>
+                           <tr>
+                              <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                            </td>
+                            <td>Issued</td>
+                            <td>
+                              <t  t-if="widget.renew_request.issued == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.renew_request.issued" />
+                              </t>
+
+                            </td>
+
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
                   <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>

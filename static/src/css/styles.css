@@ -2992,12 +2992,12 @@ margin-top: 27px !important;
 		background-size: cover;
 	}
 	#o_partner_dashboard .o_partner_dashboard_banner .row, #o_partner_dashboard .o_partner_dashboard_banner .form-horizontal .form-group, .form-horizontal #o_partner_dashboard .o_partner_dashboard_banner .form-group{
-		height: 360px;
+		/*height: 360px;*/
 		display: -webkit-box;
 		display: -webkit-flex;
 		display: flex;
 		-ms-flex-align: center;
-		align-items: center;
+		/*align-items: center;*/
 	}
 }
 #o_partner_dashboard .o_partner_dashboard_box_header > h2{
@@ -3386,14 +3386,14 @@ ul.wizard li:last-child {
 }
 .display-1 {
     font-size: 3.4375rem;
-    font-weight: 600;
+    font-weight: 300;
     line-height: 1;
 }
 .o_web_client{
     background-color:#fff;
 }
 .single-table .image{
-width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
 }
