@@ -356,6 +356,41 @@ class Brokers(models.Model):
             return 0.0
 
     @api.model
+    def get_end_request(self,id):
+        end_request = []
+        end_dict={}
+
+        for rec in self.env['policy.request'].search([('create_uid', '=', id), ('type', '=', 'end')]):
+                if rec.state not in end_dict.keys():
+                    end_dict[rec.state]=1
+                else:
+                    end_dict[rec.state]+=1
+        return end_dict
+
+    @api.model
+    def get_renew_request(self, id):
+        renew_dict = {}
+
+        for rec in self.env['policy.request'].search([('create_uid', '=', id), ('type', '=', 'renew')]):
+            if rec.state not in renew_dict.keys():
+                renew_dict[rec.state] = 1
+            else:
+                renew_dict[rec.state] += 1
+        return renew_dict
+
+    @api.model
+    def get_canel_request(self, id):
+        cancel_dict = {}
+
+        for rec in self.env['policy.request'].search([('create_uid', '=', id), ('type', '=', 'cancel')]):
+            if rec.state not in cancel_dict.keys():
+                cancel_dict[rec.state] = 1
+            else:
+                cancel_dict[rec.state] += 1
+        return cancel_dict
+
+
+    @api.model
     def get_broker_dashboard(self, id):
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
         agents_codes = []
@@ -373,6 +408,11 @@ class Brokers(models.Model):
             "App_count": self.get_lob_count_ins_app(id),
 
             'rank': self.get_rank(id),
+            'end_request': self.get_end_request(id),
+
+            'renew_request': self.get_renew_request(id),
+            'cancel_request': self.get_cancel_request(id),
+
             'targetVsProduction': self.get_target_production(id),
             'lastVsCurrentYear': self.get_production_compare(agents_codes),
             'collections':self.get_collections(agents_codes),

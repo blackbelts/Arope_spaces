@@ -5,7 +5,7 @@ from datetime import timedelta, datetime,date
 class HelpDeskComplains(models.Model):
     _inherit = 'helpdesk_lite.ticket'
     lob = fields.Many2one('insurance.line.business', 'LOB',)
-    customer = fields.Integer(string='Customer')
+    customer = fields.Char(string='Customer')
     agent_code = fields.Char(string='Agent Code')
     card_id = fields.Char(string='Card ID')
     policy_product = fields.Many2one('insurance.product',string='product')
@@ -20,7 +20,7 @@ class HelpDeskComplains(models.Model):
             pol=self.env['policy.arope'].search([('product','=', self.policy_product.product_name),('policy_num','=', self.policy_no)
                                                     ],limit=1)
             self.customer=self.env['persons'].search([('type','=','customer'),('pin','=',pol.customer_pin)],limit=1).name
-            self.agent_code=str(pol.agent_code)
+            self.agent_code=pol.agent_code
 
 
 
