@@ -162,7 +162,7 @@
     <!--        <menuitem id="selection_setup" name="Selection Answer Setup" parent="policy_config"-->
     <!--                  action="selection_questions_action" sequence="15"/>-->
     <menuitem id="new_buss" name="New Business" parent="arope_space"
-              sequence="1"/>
+              sequence="2"/>
     <menuitem id="policy_service" name="Policy Services" parent="arope_space"
               sequence="2"/>
     <menuitem name="Insurance Application"

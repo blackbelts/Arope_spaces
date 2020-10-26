@@ -10,8 +10,11 @@ class InheritBrokers(models.Model):
 
     def view_dashboard(self):
         print('kkkkkkkkkkkkkkkkkk')
+
         # form = self.env.ref('Arope-spaces.brokers_user_wizard')
         # self.is_user = True
+        action = self.env.ref('Arope-spaces.arope_action_dashboard').read()[0]
+        return action
         # return {
         #     'name': ('Users'),
         #     'view_type': 'form',
