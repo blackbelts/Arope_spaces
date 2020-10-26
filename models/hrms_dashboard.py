@@ -126,15 +126,20 @@ class Brokers(models.Model):
         return {'current_year': current_prod, 'last_year': last_prod}
 
     @api.model
-    def get_renew(self, agents_codes):
+    def get_renew(self,codes,type):
         result={}
-        ids = []
+        pol_ids=[]
+        if type=='broker':
+            pol_ids=self.env['policy.arope'].search([('agent_code', 'in', codes)]).ids
+        elif type=='customer':
+            pol_ids=self.env['policy.arope'].search([('customer_pin', 'in', codes)]).ids
+
         for rec in self.env['system.notify'].search([('type','=','Renewal')]):
             if rec.color=='Green':
                 ids=[]
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['policy.arope'].search([('agent_code', 'in', agents_codes),('expiry_date', '>=', datetime.today().date()),('expiry_date', '<=', date1),]):
+                for prod in self.env['policy.arope'].search([('id', 'in', pol_ids),('expiry_date', '>=', datetime.today().date()),('expiry_date', '<=', date1),]):
                     total += prod.totoal_premium
                     ids.append(prod.id)
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
@@ -144,7 +149,7 @@ class Brokers(models.Model):
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['policy.arope'].search([('agent_code', 'in',agents_codes), ('expiry_date', '<=', datetime.today().date()),('expiry_date', '>=', date1)]):
+                for prod in self.env['policy.arope'].search([('pol_ids', 'in',pol_ids), ('expiry_date', '<=', datetime.today().date()),('expiry_date', '>=', date1)]):
                     total += prod.totoal_premium
                     ids.append(prod.id)
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
@@ -154,7 +159,7 @@ class Brokers(models.Model):
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
                 for prod in self.env['policy.arope'].search(
-                        [('agent_code', 'in', agents_codes), ('expiry_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Renewal'),('color','=','Orange')],limit=1).no_days)),
+                        [('pol_ids', 'in', pol_ids), ('expiry_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Renewal'),('color','=','Orange')],limit=1).no_days)),
                          ]):
                     total += prod.totoal_premium
                     ids.append(prod.id)
@@ -163,16 +168,22 @@ class Brokers(models.Model):
         return result
 
     @api.model
-    def get_collections(self, agents_codes):
+    def get_collections(self, codes,type):
+        coll_ids=[]
         result = {}
-        ids = []
         colors=[]
+        if type=='broker':
+            coll_ids=self.env['collection.arope'].search([('agent_code', 'in', codes)]).ids
+        elif type=='customer':
+            coll_ids=self.env['collection.arope'].search([('pin', 'in', codes)]).ids
+        # else:
+        #     ids=[]
         for rec in self.env['system.notify'].search([('type', '=', 'Collection')]):
             if rec.color == 'Green':
                 ids = []
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('agent_code', 'in', agents_codes),('prem_date', '>=', datetime.today().date()),('due_date', '<=', date1) ]):
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids),('prem_date', '>=', datetime.today().date()),('due_date', '<=', date1) ]):
                     total += prod.total_lc
                     ids.append(prod.id)
                 result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
@@ -181,7 +192,7 @@ class Brokers(models.Model):
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('agent_code', 'in',agents_codes ), ('prem_date', '<=', datetime.today().date()),('due_date', '>=', date1)]):
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids), ('prem_date', '<=', datetime.today().date()),('due_date', '>=', date1)]):
                     total += prod.total_lc
                     ids.append(prod.id)
                 result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
@@ -189,7 +200,7 @@ class Brokers(models.Model):
                 ids = []
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('agent_code', 'in',agents_codes),('due_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Orange')],limit=1).no_days)), ]):
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids),('due_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Orange')],limit=1).no_days)), ]):
                 # for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('prem_date', '<=', date.today() - relativedelta(days=self.env['collection.arope'].search([('type','=','Collection'),('color','=','Orange')])))]):
                 # self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('prem_date', '<=', datetime.today().date() - relativedelta(days=self.env['collection.arope'].search([('type','=','prem_date'),('color','=','Orange')]), ]):
                     total += prod.total_lc
@@ -419,20 +430,9 @@ class Brokers(models.Model):
 
             'targetVsProduction': self.get_target_production(id),
             'lastVsCurrentYear': self.get_production_compare(agents_codes),
-            'collections':self.get_collections(agents_codes),
-            'renews':self.get_renew(agents_codes)
+            'collections':self.get_collections(agents_codes,'broker'),
+            'renews':self.get_renew(agents_codes,'broker')
         }
-
-    @api.model
-    def check_customer(self,id):
-        pins=[]
-        user = self.env['res.users'].search([('id', '=', id)], limit=1)
-        for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
-            pins.append(rec.pin)
-        if pins:
-            return True
-        else:
-            return False
 
     @api.model
     def get_customer_dashboard(self, id):
@@ -459,15 +459,22 @@ class Brokers(models.Model):
             # 'rank': self.get_rank(id),
             # 'targetVsProduction': self.get_target_production(id),
             # 'lastVsCurrentYear': self.get_production_compare(agents_codes),
-            # 'collections': self.get_collections(agents_codes),
-            # 'renews': self.get_renew(agents_codes)
+            'collections': self.get_collections(customer_pin,type),
+            'renews': self.get_renew(customer_pin,type)
         }
     @api.model
     def get_user_groups(self,id):
         groups=[]
+        pins=[]
+        customer=False
+        user = self.env['res.users'].search([('id', '=', id)], limit=1)
+        for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
+            pins.append(rec.pin)
+        if pins:
+            customer=True
         for rec in self.env['res.groups'].sudo().search([('users','=',[id]),('category_id','=','space')]):
             groups.append(rec.name)
-        return groups
+        return {'groups':groups,'customer':customer}
     # @api.model
     # def get_customer_dashboard(self, id):
     #     card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
