@@ -17,6 +17,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       '/Arope-spaces/static/src/js/lib/d3.min.js'
     ],
     events: {
+        'click #policies': 'policies_list',
 //      'click #production': 'production_list',
     },
     init: function (parent, context) {
@@ -53,7 +54,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               },
               "dataProvider": dataProvider,
               "valueAxes": [{
-                "unit": "$",
+                /*"unit": "EGP",*/
                 "position": "left",
               }],
               "startDuration": 1,
@@ -114,7 +115,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               },
               "dataProvider": dataProvider2,
               "valueAxes": [{
-                "unit": "$",
+                /*"unit": "EGP",*/
                 "position": "left",
               }],
               "startDuration": 1,
@@ -224,7 +225,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     makeNumber: function (x) {
       return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     },
-    /*production_list: function (x) {
+    policies_list: function (x) {
+      console.log("policies")
       var self = this;
       this.do_action({
         name: _t("Policy Tree"),
@@ -235,12 +237,29 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           [false, 'list'],
           [false, 'form']
         ],
-        domain: [
+        /*domain: [
           ['id', 'in', this.brokerProduction.ids]
-        ],
+        ],*/
         target: 'current'
       })
-    },*/
+    },
+    renewals_list:: function (x) {
+      var self = this;
+      this.do_action({
+        name: _t("Policy Tree"),
+        type: 'ir.actions.act_window',
+        res_model: 'policy.arope',
+        view_mode: 'tree,form,calendar',
+        views: [
+          [false, 'list'],
+          [false, 'form']
+        ],
+        /*domain: [
+          ['id', 'in', this.brokerProduction.ids]
+        ],*/
+        target: 'current'
+      })
+    },
   });
   core.action_registry.add('broker_dashboard', BrokerDashboard);
   return BrokerDashboard;

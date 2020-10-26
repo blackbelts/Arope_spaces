@@ -201,7 +201,7 @@
                   <div id="ambarchart3" style="width: 100%; height: 250px;"></div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
-                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                  <a  id="policies" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Policies</a>
                 </div>
               </div>
             </div>
@@ -211,9 +211,9 @@
                 <div class="o_partner_dashboard_box_body">
                   <div id="ambarchart2" style="width: 100%; height: 250px;"></div>
                 </div>
-                <div class="o_partner_dashboard_box_footer">
-                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
-                </div>
+               <!-- <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Policies</a>
+                </div>-->
               </div>
             </div>
             <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
@@ -222,9 +222,9 @@
                 <div class="o_partner_dashboard_box_body">
                   <div id="ambarchart1" style="width: 100%; height: 250px;"></div>
                 </div>
-                <div class="o_partner_dashboard_box_footer">
+<!--                <div class="o_partner_dashboard_box_footer">
                   <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
-                </div>
+                </div>-->
               </div>
             </div>
           </div>
@@ -719,7 +719,7 @@
                   </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
-                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                  <a id="renewals" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Renewals</a>
                 </div>
               </div>
             </div>
