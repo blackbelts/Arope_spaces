@@ -433,6 +433,7 @@ class Brokers(models.Model):
 
         return {
             "user": self.env['persons'].search_read([('card_id', '=', user.card_id)], limit=1),
+            "user_image": user.image_1920,
             "production": self.get_production(customer_pin, type),
             "policy_lob": self.get_lob_count_policy(customer_pin,type),
             "claim_lob": self.get_lob_count_claim(customer_pin,type),

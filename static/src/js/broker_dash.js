@@ -1,6 +1,5 @@
 odoo.define('broker_dashboard.BrokerDashboard', function (require) {
   "use strict";
-
   var AbstractAction = require('web.AbstractAction');
   var ajax = require('web.ajax');
   var core = require('web.core');
@@ -9,7 +8,6 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
   var web_client = require('web.web_client');
   var _t = core._t;
   var QWeb = core.qweb;
-
   var BrokerDashboard = AbstractAction.extend({
     template: 'BrokerDashboardMain',
     cssLibs: [
@@ -19,28 +17,16 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       '/Arope-spaces/static/src/js/lib/d3.min.js'
     ],
     events: {
-
-      'click #production': 'production_list',
-      'click #green_collection': 'green_collection',
-      'click #orange_collection': 'orange_collection',
-      'click #red_collection': 'red_collection',
-      'click #green_renew': 'green_renew',
-      'click #orange_renew': 'orange_renew',
-      'click #red_renew': 'red_renew',
+//      'click #production': 'production_list',
     },
     init: function (parent, context) {
       this._super(parent, context);
       this.action_id = context.id;
       this._super(parent, context);
-
     },
     start: function () {
       var user = session.uid
       var self = this;
-//      self.$('.o_hr_dashboard').prepend(QWeb.render("brokerdash", {
-//            widget: self
-//          }));
-
       this.fetch_data().then(function(){
       self.$('.o_hr_dashboard').prepend(QWeb.render("brokerdash", {
             widget: self
@@ -187,56 +173,58 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
             });
           })
       })
-
-
       return this._super().then(function () {})
     },
     fetch_data: function () {
-
       var user = session.uid
       var self = this;
       var get_dashboard = rpc.query({
         model: "arope.broker",
-        method: "get_customer_dashboard",
+        method: "get_broker_dashboard",
         args: [user]
       }).then(function (res) {
-       self.brokerProduction = res.production
+        self.brokerProduction = res.production
         self.target_production = res.targetVsProduction
         self.brokerRank = res.rank
         self.collections_statistics = res.collections
         self.renew_statistics = res.renews
         self.production_compare = res.lastVsCurrentYear
-        self.user = res.user
+        self.user = res.user[0]
         self.collection_ratio=res.collection_ratio
         self.claims_ratio=res.claims_ratio
         self.policy_lob=res.policy_lob
         self.claim_lob=res.claim_lob
         self.App_count=res.App_count
+        self.user_image=res.user_image
+        self.renew_request=res.renew_request
+        self.cancel_request=res.cancel_request
+        self.end_request=res.end_request
         res.complaint_count.forEach(function(e,i){
             if(e.stage=="Canceled")
                 res.complaint_count.splice(i,1)
             else if(e.stage=="New"){
-                e.class="icon red"
+                e.image="/Arope-spaces/static/src/img/red.png"
                 e.subClass="redspan"
             }
             else if(e.stage=="Solved"){
-                e.class="icon green"
+                e.image="/Arope-spaces/static/src/img/green.png"
                 e.subClass="greenspan"
             }
             else{
-                 e.class="icon orange"
+                 e.image="/Arope-spaces/static/src/img/orange.png"
                  e.subClass="orangespan"
             }
         })
         self.complaint_count=res.complaint_count
-        console.log("get_broker_dashboard", res)
+        //                self.collections_statistics=res
+        console.log("get_dashboard", res)
       });
       return $.when(get_dashboard);
     },
     makeNumber: function (x) {
       return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     },
-    production_list: function (x) {
+    /*production_list: function (x) {
       var self = this;
       this.do_action({
         name: _t("Policy Tree"),
@@ -252,105 +240,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         ],
         target: 'current'
       })
-    },
-    green_collection: function () {
-      var self = this;
-      this.do_action({
-        name: _t("tree.collection"),
-        type: 'ir.actions.act_window',
-        res_model: 'collection.arope',
-        view_mode: 'tree,form,calendar',
-        views: [
-          [false, 'list'],
-          [false, 'form']
-        ],
-        domain: [
-          ['id', 'in', this.collections_statistics.Green.ids]
-        ],
-        target: 'current'
-      })
-    },
-    orange_collection: function () {
-      var self = this;
-      this.do_action({
-        name: _t("tree.collection"),
-        type: 'ir.actions.act_window',
-        res_model: 'collection.arope',
-        view_mode: 'tree,form,calendar',
-        views: [
-          [false, 'list'],
-          [false, 'form']
-        ],
-        domain: [
-          ['id', 'in', this.collections_statistics.Orange.ids]
-        ],
-        target: 'current'
-      })
-
-    },
-    red_collection: function () {
-      var self = this;
-      this.do_action({
-        name: _t("tree.collection"),
-        type: 'ir.actions.act_window',
-        res_model: 'collection.arope',
-        view_mode: 'tree,form,calendar',
-        views: [
-          [false, 'list'],
-          [false, 'form']
-        ],
-        domain: [
-          ['id', 'in', this.collections_statistics.Red.ids]
-        ],
-        target: 'current'
-      })
-    },
-    orange_renew: function () {
-      var self = this;
-      this.do_action({
-        name: _t("Policy Tree"),
-        type: 'ir.actions.act_window',
-        res_model: 'policy.arope',
-        view_mode: 'tree,form,calendar',
-        views: [
-          [false, 'list'],
-          [false, 'form']
-        ],
-        domain: [
-          ['id', 'in', this.renew_statistics.Orange.ids]
-        ],
-        target: 'current'
-      })
-
-    },
-    green_renew: function () {
-      var self = this;
-      this.do_action({
-        name: _t("Policy Tree"),
-        type: 'ir.actions.act_window',
-        res_model: 'policy.arope',
-        view_mode: 'tree,form,calendar',
-        views: [
-          [false, 'list'],
-          [false, 'form']
-        ],
-        domain: [
-          ['id', 'in', this.renew_statistics.Green.ids]
-        ],
-        target: 'current'
-      })
-    },
-    red_renew: function () {
-      var self = this;
-      this.do_action({
-      })
-    },
-
+    },*/
   });
-
-
   core.action_registry.add('broker_dashboard', BrokerDashboard);
-
   return BrokerDashboard;
-
 });

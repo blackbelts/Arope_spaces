@@ -38,9 +38,6 @@
                 Dashboard
               </h1>
               <div class="alert alert-info alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
                 <span class="text-beta">
                   <b>Have a Project right now?</b>
                 </span>
@@ -58,7 +55,10 @@
               </div>
             </div>
             <div class="col-12 col-md-4 col-lg-5">
-              <img style="height: 320px; width:100%" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+              <div class="text-center">
+                <img class="rounded" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+              </div>
+
             </div>
           </div>
         </div>

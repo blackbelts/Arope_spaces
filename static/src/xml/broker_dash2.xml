@@ -8,7 +8,7 @@
     </div>
   </t>
   <t t-name="brokerdash">
-    <xpath expr="." position="inside">
+     <xpath expr="." position="inside">
       <link rel="stylesheet" href="/Arope-spaces/static/src/css/themify-icons.css" />
       <link rel="stylesheet" href="/Arope-spaces/static/src/css/metisMenu.css" />
       <link rel="stylesheet" href="/Arope-spaces/static/src/css/owl.carousel.min.css" />
@@ -28,524 +28,704 @@
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- page container area start -->
-    <div class="page-container">
-      <!-- main content area start -->
-      <div class="main-content">
-        <!-- page title area start -->
-        <div class="page-title-area">
-          <div class="breadcrumbs-area clearfix">
-            <h4 class="page-title pull-left">Dashboard / 2020</h4>
-          </div>
-        </div>
-        <!-- page title area end -->
-        <div class="main-content-inner">
-          <div class="sales-report-area top-sales-report mt-3 mb-1">
-            <div class="row">
-              <div class="col-md-3 mt-5">
-                <div class="single-report mb-xs-30" id="rank">
-                  <div class="s-report-inner pr--20 pt--30 mb-3">
-                    <div class="icon">
-                      <i class='fas fa-medal' />
-                    </div>
-                    <div class="s-report-title d-flex justify-content-between">
-                      <h4 class="header-title mb-0 new-header">Your Rank</h4>
-                      <!--<p>24 H</p>-->
-                    </div>
-                    <div class="d-flex justify-content-between pb-2">
-                      <h2 class="larage">
-                        <t t-esc="widget.brokerRank" />
-                      </h2>
-                      <!--<span>- 45.87</span>-->
-                    </div>
+    <div id="o_partner_dashboard">
+      <section class="o_partner_dashboard_banner bg-white">
+        <div class="container">
+          <div class="row d-flex">
+            <div class="col-12 col-md-8 col-lg-7">
+              <h1 class="display-1 text-violet-dark mt32 mb32 fw_light">
+                <b>Partner</b>
+                Dashboard
+              </h1>
+              <div class="alert alert-info alert-dismissible" role="alert">
+                <span class="text-beta">
+                  <b>Have a Project right now?</b>
+                </span>
+                <p class="text-beta mt8 mb0">
+                  We can help you sell and deliver your first project.
+                  <br />
+                  Working together on your first project is the best way to success in Odoo.
+                  <br />
+                  Learn more by reading our
+                  <a href="https://www.odoo.com/r/Implementation_methodology" class="text-beta" target="_blank">
+                    <u>Implementation Methodology</u>
+                  </a>
 
-                  </div>
-
-                </div>
+                </p>
               </div>
-               <div class="col-md-3 mt-5">
-                <div class="single-report mb-xs-30" id="rank">
-                  <div class="s-report-inner pr--20 pt--30 mb-3">
-                    <div class="icon">
-                      <i class='fas fa-medal' />
-                    </div>
-                    <div class="s-report-title d-flex justify-content-between">
-                      <h4 class="header-title mb-0 new-header">Loss Ratio</h4>
-                      <!--<p>24 H</p>-->
-                    </div>
-                    <div class="d-flex justify-content-between pb-2">
-                      <h2 class="larage">
-                        <t t-esc="widget.makeNumber(widget.claims_ratio*100)" />%
-                      </h2>
-                      <!--<span>- 45.87</span>-->
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-              <div class="col-md-3 mt-5">
-                <div class="single-report mb-xs-30 cursor" id="production">
-                  <div class="s-report-inner pr--20 pt--30 mb-3">
-                    <div class="icon">
-                      <i class="fas fa-money"></i>
-                    </div>
-                    <div class="s-report-title d-flex justify-content-between">
-                      <h4 class="header-title new-header mb-0">Renewal Ratio</h4>
-                      <!--<p>24 H</p>-->
-                    </div>
-                    <div class="d-flex justify-content-between pb-2">
-                      <h2 class="larage">
-                         <t t-esc="widget.makeNumber(0*100)" />%
-                        <!--<t t-esc="widget.brokerRank" />-->
-                      </h2>
-                      <!--<span>- 45.87</span>-->
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 mt-5">
-                <div class="single-report mb-xs-30" id="rank">
-                  <div class="s-report-inner pr--20 pt--30 mb-3">
-                     <div class="icon">
-                      <i class="fas fa-money"></i>
-                    </div>
-                    <div class="s-report-title d-flex justify-content-between">
-                      <h4 class="header-title mb-0 new-header">Collection Ratio</h4>
-                      <!--<p>24 H</p>-->
-                    </div>
-                    <div class="d-flex justify-content-between pb-2">
-                      <h2 class="larage">
-                        <t t-esc="widget.makeNumber(widget.collection_ratio*100)" />%
-                      </h2>
-                      <!--<span>- 45.87</span>-->
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-<!--              <div class="col-md-4 mt-5">-->
-<!--                <div class="single-report mb-xs-30 cursor" id="production">-->
-<!--                  <div class="s-report-inner pr&#45;&#45;20 pt&#45;&#45;30 mb-3">-->
-<!--                    <div class="icon">-->
-<!--                      <i class="fas fa-money"></i>-->
-<!--                    </div>-->
-<!--                    <div class="s-report-title d-flex justify-content-between">-->
-<!--                      <h4 class="header-title new-header mb-0">Licence Code</h4>-->
-<!--                    </div>-->
-<!--                    <div class="d-flex justify-content-between pb-2">-->
-<!--                      <h2 class="larage">-->
-<!--                       <t t-esc="widget.user[0].fra_no" />-->
-<!--                      </h2>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="col-md-4 mt-5">-->
-<!--                <div class="single-report mb-xs-30" id="rank">-->
-<!--                  <div class="s-report-inner pr&#45;&#45;20 pt&#45;&#45;30 mb-3">-->
-<!--                    <div class="icon">-->
-<!--                      <i class='fas fa-medal' />-->
-<!--                    </div>-->
-<!--                    <div class="s-report-title d-flex justify-content-between">-->
-<!--                      <h4 class="header-title mb-0 new-header">Expired On</h4>-->
-<!--                    </div>-->
-<!--                    <div class="d-flex justify-content-between pb-2">-->
-<!--                      <h2 class="larage">-->
-<!--                       <t t-esc="widget.user[0].expire_date" />-->
-<!--                      </h2>-->
-<!--                    </div>-->
-
-<!--                  </div>-->
-
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="col-md-3 mt-5">-->
-<!--                <div class="single-report mb-xs-30 cursor" id="production">-->
-<!--                  <div class="s-report-inner pr&#45;&#45;10 pt&#45;&#45;30 mb-3">-->
-<!--                    <div class="icon">-->
-<!--                      <i class="fas fa-money"></i>-->
-<!--                    </div>-->
-<!--                    <div class="s-report-title  new-title justify-content-between">-->
-<!--                      <h4 class="header-title new-header mb-0">License Code : 50225555</h4>-->
-<!--                      <br />-->
-<!--                      <h4 class="header-title new-header mb-0">expired On : 20-10-2222</h4>-->
-<!--                    </div>-->
-<!--                    <div class="d-flex justify-content-between pb-2">-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-              <div class="col-lg-4 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-sm-flex justify-content-between align-items-center">
-                      <h2 class="header-title mb-0">Production per LOB in EGP</h2>
-                    </div>
-                    <div id="ambarchart3" style="width: 100%; height: 250px;"></div>
-                  </div>
-                </div>
-              </div>
-               <div class="col-lg-4 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-sm-flex justify-content-between align-items-center">
-                      <h2 class="header-title mb-0">Target Vs Production</h2>
-                    </div>
-                    <div id="ambarchart2" style="width: 100%; height: 250px;"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-sm-flex justify-content-between align-items-center">
-                      <h2 class="header-title mb-0">Current Year Vs Last Year</h2>
-                    </div>
-                    <div id="ambarchart1" style="width: 100%; height: 250px;"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 mt-5">
-                <div class="sales-report-area mt-3 mb-1">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="card custom-card">
-                        <div class="card-body">
-                          <div class="d-sm-flex justify-content-between align-items-center">
-                            <h2 class="header-title mb-0">Permium under collection</h2>
-                          </div>
-                          <div class="row">
-                            <di class="col-md-12">
-                              <div class="single-report cursor" id="red_collection">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div class="icon red"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span class="redspan">
-                                        Count :
-                                        <t t-esc="widget.collections_statistics.Red.count" />
-                                      </span>
-                                      <br />
-                                      Total :
-                                      <t t-esc="widget.makeNumber(widget.collections_statistics.Red.total)" />
-                                      $
-                                    </h4>
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>$ 4567809,987</h2>-->
-                                  <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
-                                  <!--                                                        </div>-->
-                                </div>
-
-                              </div>
-                            </di>
-
-                            <div class="col-md-12">
-                              <div class="single-report mb-xs-30 cursor" id="orange_collection">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div class="icon orange"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span class="orangespan">
-                                        Count :
-                                        <t t-esc="widget.collections_statistics.Orange.count" />
-                                      </span>
-                                      <br />
-                                      Total :
-                                      <t t-esc="widget.makeNumber(widget.collections_statistics.Orange.total)" />
-                                      $
-                                    </h4>
-                                    <!--<p>24 H</p>-->
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>-->
-                                  <!--                                                                <t t-esc="widget.makeNumber(widget.brokerProduction)" />-->
-                                  <!--                                                                $</h2>-->
-                                  <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
-                                  <!--                                                        </div>-->
-                                </div>
-
-                              </div>
-                            </div>
-                            <div class="col-md-12">
-                              <div class="single-report mb-xs-30 cursor" id="green_collection">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div class="icon green"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span class="greenspan">
-                                        Count :
-                                        <t t-esc="widget.collections_statistics.Green.count" />
-                                      </span>
-                                      <br />
-                                      Total :
-                                      <t t-esc="widget.makeNumber(widget.collections_statistics.Green.total)" />
-                                      $
-                                    </h4>
-                                    <!--<p>24 H</p>-->
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>-->
-                                  <!--                                                                <t t-esc="widget.brokerRank" />-->
-                                  <!--                                                            </h2>-->
-                                  <!--                                                        </div>-->
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4  mt-5">
-                <div class="sales-report-area mt-3 mb-1">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="card custom-card">
-                        <div class="card-body">
-                          <div class="d-sm-flex justify-content-between align-items-center">
-                            <h2 class="header-title mb-0">Complaints</h2>
-                          </div>
-                          <div class="row">
-                            <di class="col-md-12" t-foreach="widget.complaint_count" t-as="com">
-                              <div class="single-report cursor" id="red_renew">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div t-att-class="com.class"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span t-att-class="com.subClass">
-                                        <t t-esc="com.stage" />
-                                        <br/>
-
-                                      </span>
-                                        Count :
-                                        <t t-esc="com.count" />
-
-                                    </h4>
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>$ 4567809,987</h2>-->
-                                  <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
-                                  <!--                                                        </div>-->
-                                </div>
-
-                              </div>
-                            </di>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4  mt-5">
-                <div class="sales-report-area mt-3 mb-1">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="card custom-card">
-                        <div class="card-body">
-                          <div class="d-sm-flex justify-content-between align-items-center">
-                            <h2 class="header-title mb-0">Renewals</h2>
-                          </div>
-                          <div class="row">
-                            <di class="col-md-12">
-                              <div class="single-report cursor" id="red_renew">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div class="icon red"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span class="redspan">
-                                        Count :
-                                        <t t-esc="widget.renew_statistics.Red.count" />
-                                      </span>
-                                      <br />
-                                      Total :
-                                      <t t-esc="widget.makeNumber(widget.renew_statistics.Red.total)" />
-                                      $
-                                    </h4>
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>$ 4567809,987</h2>-->
-                                  <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
-                                  <!--                                                        </div>-->
-                                </div>
-
-                              </div>
-                            </di>
-                            <div class="col-md-12">
-                              <div class="single-report mb-xs-30 cursor" id="orange_renew">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div class="icon orange"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span class="orangespan">
-                                        Count :
-                                        <t t-esc="widget.renew_statistics.Orange.count" />
-                                      </span>
-                                      <br />
-                                      Total :
-                                      <t t-esc="widget.makeNumber(widget.renew_statistics.Orange.total)" />
-                                      $
-                                    </h4>
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>-->
-                                  <!--                                                                <t t-esc="widget.makeNumber(widget.brokerProduction)" />-->
-                                  <!--                                                                $</h2>-->
-                                  <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
-                                  <!--                                                        </div>-->
-                                </div>
-
-                              </div>
-                            </div>
-                            <div class="col-md-12">
-                              <div class="single-report mb-xs-30 cursor" id="green_renew">
-                                <div class="s-report-inner pr--20 pt--10 mb-3">
-                                  <div class="icon green"></div>
-                                  <div class="s-report-title d-flex justify-content-between">
-                                    <h4 class="header-title permium mb-0">
-                                      <span class="greenspan">
-                                        Count :
-                                        <t t-esc="widget.renew_statistics.Green.count" />
-                                      </span>
-                                      <br />
-                                      Total :
-                                      <t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" />
-                                      $
-                                    </h4>
-                                  </div>
-                                  <!--                                                        <div class="d-flex justify-content-between pb-2">-->
-                                  <!--                                                            <h2>-->
-                                  <!--                                                                <t t-esc="widget.brokerRank" />-->
-                                  <!--                                                            </h2>-->
-                                  <!--                                                            &lt;!&ndash;<span>- 45.87</span>&ndash;&gt;-->
-                                  <!--                                                        </div>-->
-                                </div>
-
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="header-title">Policies count per LOB</h4>
-                    <div class="single-table">
-                      <div class="table-responsive">
-                        <table class="table table-hover text-center">
-                          <thead class="text-uppercase">
-                            <tr>
-                              <th scope="col">LOB Name</th>
-                              <th scope="col">Icon</th>
-                              <th scope="col">Count</th>
-                              <th scope="col">Production</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr t-foreach="widget.policy_lob" t-as="lob">
-                              <td><t t-esc="lob.name" /></td>
-                              <td><img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
-                              <td><t t-esc="lob.count" /></td>
-                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="header-title">Claims count per LOB</h4>
-                    <div class="single-table">
-                      <div class="table-responsive">
-                        <table class="table table-hover text-center">
-                          <thead class="text-uppercase">
-                            <tr>
-                              <th scope="col">LOB Name</th>
-                              <th scope="col">Icon</th>
-                              <th scope="col">Count</th>
-                              <th scope="col">Production</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr t-foreach="widget.claim_lob" t-as="lob">
-                              <td><t t-esc="lob.name" /></td>
-                              <td><img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
-                              <td><t t-esc="lob.count" /></td>
-                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 mt-5">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="header-title">Insurance applications count per LOB</h4>
-                    <div class="single-table">
-                      <div class="table-responsive">
-                        <table class="table table-hover text-center">
-                          <thead class="text-uppercase">
-                            <tr>
-                              <th scope="col">LOB Name</th>
-                              <th scope="col">Icon</th>
-                              <th scope="col">Count</th>
-<!--                              <th scope="col">Production</th>-->
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr t-foreach="widget.App_count" t-as="lob">
-                              <td><t t-esc="lob.name" /></td>
-                              <td><img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon"/></td>
-                              <td><t t-esc="lob.count" /></td>
-<!--                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>-->
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-5">
+              <div class="text-center">
+                <img class="rounded" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
               </div>
 
             </div>
           </div>
         </div>
-      </div>
-      <!-- main content area end -->
-      <!-- footer area start-->
-      <footer>
-        <div class="footer-area">
-          <p>
-            © Copyright 2020. All right reserved. Template by
-            <a href="https://colorlib.com/wp/">BlackBelts</a>
-            .
-          </p>
+      </section>
+      <section class="bg-gray-lighter">
+        <div class="container">
+          <div class="row d-lg-flex pt48">
+
+            <div class="col-lg-7 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Profile</h2>
+              </div>
+              <div class="d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">
+                  <span class="mt0 mb0">
+                    <t t-esc="widget.user.name" />
+                  </span>
+                </h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <h4>FRA No</h4>
+
+                    </div>
+                    <div class="col-md-6">
+                      <h4>
+                        <t t-esc="widget.user.fra_no" />
+                      </h4>
+                    </div>
+                    <!--                    <div class="col-md-2">-->
+                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
+
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <h4>Expiration Date</h4>
+                    </div>
+                    <div class="col-md-6">
+                      <h4>
+                        <t t-esc="widget.user.expire_date" />
+                      </h4>
+                    </div>
+                    <!--                    <div class="col-md-2">-->
+                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
+
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <h4>Mobile</h4>
+                    </div>
+                    <div class="col-md-6">
+                      <h4>
+                        <t t-esc="widget.user.mobile" />
+                      </h4>
+                    </div>
+                    <!--                    <div class="col-md-2">-->
+                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
+
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <h4>Email</h4>
+                    </div>
+                    <div class="col-md-6">
+                      <h4>
+                        <t t-esc="widget.user.mail" />
+                      </h4>
+                    </div>
+                    <!--                    <div class="col-md-2">-->
+                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
+
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/partner/profile" class="btn btn-secondary" style="position: relative; overflow: hidden;">Update your profile</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Grade</h2>
+              </div>
+
+              <div class="d-flex flex-column o_partner_dashboard_box">
+
+                <div class="o_partner_dashboard_box_body">
+
+                  <ul class="wizard o_partner_dashboard_wizard d-flex mt32 mb32">
+
+                    <li class="o_partner_dashboard_grade_active_ready">
+                      Ready Partner
+                      <span class="chevron"></span>
+                    </li>
+                    <li class="pl-3 ">
+                      Silver Partner
+                      <span class="chevron"></span>
+                    </li>
+                    <li class="">Gold Partner</li>
+                  </ul>
+                  <p>
+                    You have
+                    <b>0</b>
+                    new Enterprise user(s) in the last 12 Months, you need
+                    <b>10</b>
+                    to remain a Ready Partner.
+                  </p>
+                  <p>
+                    You have
+                    <b>0</b>
+                    certified expert(s), you need
+                    <b>1</b>
+                    to remain Ready.
+                  </p>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/contactus" class="btn btn-secondary" style="position: relative; overflow: hidden;">Contact us</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex flex-wrap no-gutters pb64">
+            <div class="col-12">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Portfolio</h2>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Production per LOB in EGP</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div id="ambarchart3" style="width: 100%; height: 250px;"></div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Target Vs Production</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div id="ambarchart2" style="width: 100%; height: 250px;"></div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Current Year Vs Last Year</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div id="ambarchart1" style="width: 100%; height: 250px;"></div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex flex-wrap no-gutters pb64">
+            <div class="col-12">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Follow up list</h2>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Renewals</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">Total (EGP)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.renew_statistics.Red.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(widget.renew_statistics.Red.total)" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.renew_statistics.Orange.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(widget.renew_statistics.Orange.total)" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.renew_statistics.Green.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" />
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Permium under collection</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">Total (EGP)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.collections_statistics.Red.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(widget.collections_statistics.Red.total)" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.collections_statistics.Orange.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(widget.collections_statistics.Orange.total)" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.collections_statistics.Green.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(widget.collections_statistics.Green.total)" />
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Complaints</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">Stage</th>
+                            <th scope="col">Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.complaint_count" t-as="com">
+                            <td>
+                              <img class="image" t-att-src="com.image" />
+                            </td>
+                            <td>
+                              <t t-esc="com.stage" />
+                            </td>
+                            <td>
+                              <t t-esc="com.count" />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex flex-wrap no-gutters pb64">
+            <div class="col-12">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Portfolio</h2>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Policies count per LOB</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">LOB</th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">Production</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.policy_lob" t-as="lob">
+                            <td>
+                              <t t-esc="lob.name" />
+                            </td>
+                            <td>
+                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon" />
+                            </td>
+                            <td>
+                              <t t-esc="lob.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(lob.amount)" />
+                              EGP
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Claims count per LOB</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">LOB </th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">Production</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.claim_lob" t-as="lob">
+                            <td>
+                              <t t-esc="lob.name" />
+                            </td>
+                            <td>
+                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon" />
+                            </td>
+                            <td>
+                              <t t-esc="lob.count" />
+                            </td>
+                            <td>
+                              <t t-esc="widget.makeNumber(lob.amount)" />
+                              EGP
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Insurance applications count per LOB</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">LOB </th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Count</th>
+                            <!--                              <th scope="col">Production</th>-->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.App_count" t-as="lob">
+                            <td>
+                              <t t-esc="lob.name" />
+                            </td>
+                            <td>
+                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon" />
+                            </td>
+                            <td>
+                              <t t-esc="lob.count" />
+                            </td>
+                            <!--                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>-->
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex flex-wrap no-gutters pb64">
+            <div class="col-12">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Requests</h2>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">endorsements Requests</h5>
+                <div class="o_partner_dashboard_box_body">
+                 <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">Status </th>
+                            <th scope="col">Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                            </td>
+                            <td>Pending</td>
+                            <td >
+                              <t t-esc="widget.end_request.pending" />
+                              <t  t-if="widget.end_request.pending == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.end_request.pending" />
+                              </t>
+                            </td>
+
+                          </tr>
+                           <tr>
+                              <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                            </td>
+                            <td>Submitted</td>
+                            <td >
+                              <t  t-if="widget.end_request.submitted == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.end_request.submitted" />
+                              </t>
+                            </td>
+
+                          </tr>
+                           <tr>
+                              <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                            </td>
+                            <td>Issued</td>
+                            <td>
+                              <t  t-if="widget.end_request.issued == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.end_request.issued" />
+                              </t>
+
+                            </td>
+
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Cancellation Requests </h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">Status </th>
+                            <th scope="col">Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                             <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                            </td>
+                            <td>Pending</td>
+                            <td >
+                              <t t-esc="widget.cancel_request.pending" />
+                              <t  t-if="widget.cancel_request.pending == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.cancel_request.pending" />
+                              </t>
+                            </td>
+
+                          </tr>
+                           <tr>
+                              <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                            </td>
+                            <td>Submitted</td>
+                            <td >
+                              <t  t-if="widget.cancel_request.submitted == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.cancel_request.submitted" />
+                              </t>
+                            </td>
+
+                          </tr>
+                           <tr>
+                              <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                            </td>
+                            <td>Issued</td>
+                            <td>
+                              <t  t-if="widget.cancel_request.issued == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.cancel_request.issued" />
+                              </t>
+
+                            </td>
+
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Renewals Requests</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Color</th>
+                            <th scope="col">Status </th>
+                            <th scope="col">Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                             <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                            </td>
+                            <td>Pending</td>
+                            <td >
+                              <t t-esc="widget.renew_request.pending" />
+                              <t  t-if="widget.renew_request.pending == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.renew_request.pending" />
+                              </t>
+                            </td>
+
+                          </tr>
+                           <tr>
+                              <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                            </td>
+                            <td>Submitted</td>
+                            <td >
+                              <t  t-if="widget.renew_request.submitted == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.renew_request.submitted" />
+                              </t>
+                            </td>
+
+                          </tr>
+                           <tr>
+                              <td>
+                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                            </td>
+                            <td>Issued</td>
+                            <td>
+                              <t  t-if="widget.renew_request.issued == undefined">0</t>
+                              <t t-else="">
+                                <t t-esc="widget.renew_request.issued" />
+                              </t>
+
+                            </td>
+
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
-      </footer>
-      <!-- footer area end-->
+      </section>
     </div>
     <!-- page container area end -->
     <xpath expr="." position="inside">
