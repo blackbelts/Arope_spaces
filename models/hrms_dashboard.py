@@ -256,7 +256,7 @@ class Brokers(models.Model):
 
     @api.model
     def get_lob_count_policy(self,codes,type):
-
+        ids=[]
         lob_list = []
         if type=='broker':
             ids=self.env['policy.arope'].search([('agent_code', 'in', codes)]).ids
@@ -269,8 +269,9 @@ class Brokers(models.Model):
             for rec in self.env['policy.arope'].search([('id', 'in', ids), ('lob', '=', lob.line_of_business)]):
                   total+=rec.totoal_premium
                   count+=1
+                  ids.append(rec.id)
             if count>0:
-             lob_list.append({'name':lob.line_of_business,'count':count,'amount':total,'icon':lob.image})
+             lob_list.append({'name':lob.line_of_business,'count':count,'amount':total,'icon':lob.image,'ids':ids})
             else:continue
 
         return lob_list
@@ -278,6 +279,7 @@ class Brokers(models.Model):
     @api.model
     def get_lob_count_claim(self,codes,type):
         lob_list = []
+        ids=[]
         if type == 'broker':
             ids = self.env['claim.arope'].search([('agent_code', 'in', codes)]).ids
         elif type == 'customer':
@@ -289,8 +291,9 @@ class Brokers(models.Model):
             for rec in self.env['claim.arope'].search([('id', 'in', ids), ('lob', '=', lob.line_of_business)]):
                 total+=rec.claim_paid
                 count+=1
+                ids.append(rec.id)
             if count > 0:
-                lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image})
+                lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image,'ids':ids})
             else:
                 continue
         return lob_list
@@ -318,7 +321,7 @@ class Brokers(models.Model):
         for stage in self.env['helpdesk_lite.stage'].search([]):
             count = self.env['helpdesk_lite.ticket'].search_count(
                 [('id', 'in', ids), ('stage_id', '=', stage.id)])
-            complaint_list.append({'stage':stage.name,'count':count})
+            complaint_list.append({'stage':stage.name,'count':count,'ids':ids})
         return complaint_list
 
     @api.model
