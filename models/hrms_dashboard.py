@@ -424,6 +424,17 @@ class Brokers(models.Model):
         }
 
     @api.model
+    def check_customer(self,id):
+        pins=[]
+        user = self.env['res.users'].search([('id', '=', id)], limit=1)
+        for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
+            pins.append(rec.pin)
+        if pins:
+            return True
+        else:
+            return False
+
+    @api.model
     def get_customer_dashboard(self, id):
         type='customer'
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
