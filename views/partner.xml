@@ -103,7 +103,6 @@
         <field name="inherit_id" ref="arope-conf.brokers_tree_view"/>
 
         <field name="arch" type="xml">
-            <tree >
              <xpath expr="//field[@name='type']" position="after">
                                  <button  name="view_dashboard" string="View Dashboard" type="object" class="oe_highlight"  />
 
@@ -111,7 +110,6 @@
              </xpath>
 
 
-            </tree>
         </field>
     </record>
       <record id="my_partner_action" model="ir.actions.act_window">
