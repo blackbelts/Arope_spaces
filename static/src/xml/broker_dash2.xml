@@ -55,9 +55,10 @@
               </div>
             </div>
             <div class="col-12 col-md-4 col-lg-5">
-              <div class="text-center">
-                <img class="rounded" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
-              </div>
+               <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+             <!-- <div class="text-center">
+                <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+              </div>-->
 
             </div>
           </div>
@@ -140,9 +141,9 @@
                     <!--                    </div>-->
                   </div>
                 </div>
-                <div class="o_partner_dashboard_box_footer">
+                <!--<div class="o_partner_dashboard_box_footer">
                   <a href="https://www.odoo.com/my/partner/profile" class="btn btn-secondary" style="position: relative; overflow: hidden;">Update your profile</a>
-                </div>
+                </div>-->
               </div>
             </div>
             <div class="col-lg-5 d-flex flex-column mb64">
@@ -181,9 +182,9 @@
                     to remain Ready.
                   </p>
                 </div>
-                <div class="o_partner_dashboard_box_footer">
+                <!--<div class="o_partner_dashboard_box_footer">
                   <a href="https://www.odoo.com/contactus" class="btn btn-secondary" style="position: relative; overflow: hidden;">Contact us</a>
-                </div>
+                </div>-->
               </div>
             </div>
           </div>
