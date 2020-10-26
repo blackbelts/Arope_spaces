@@ -379,7 +379,7 @@ class Brokers(models.Model):
         return renew_dict
 
     @api.model
-    def get_canel_request(self, id):
+    def get_cancel_request(self, id):
         cancel_dict = {}
 
         for rec in self.env['policy.request'].search([('create_uid', '=', id), ('type', '=', 'cancel')]):
@@ -399,6 +399,7 @@ class Brokers(models.Model):
 
         return {
             "user": self.env['persons'].search_read([('card_id', '=', user.card_id)],limit=1),
+            "user_image":user.image_1920,
             "production": self.get_production(agents_codes,'broker'),
             "policy_lob": self.get_lob_count_policy(agents_codes,'broker'),
             "claim_lob": self.get_lob_count_claim(agents_codes,'broker'),
