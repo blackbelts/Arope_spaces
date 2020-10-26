@@ -45,9 +45,9 @@ odoo.define('customer_dashboard.CustomerDashboard', function (require) {
       }).then(function (res) {
         /*self.target_production = res.targetVsProduction
         self.brokerRank = res.rank
+        self.production_compare = res.lastVsCurrentYear*/
         self.collections_statistics = res.collections
         self.renew_statistics = res.renews
-        self.production_compare = res.lastVsCurrentYear*/
         self.App_count=res.App_count
         self.cancel_request=res.cancel_request
         self.claim_lob=res.claim_lob

@@ -34,7 +34,7 @@
           <div class="row d-flex">
             <div class="col-12 col-md-8 col-lg-7">
               <h1 class="display-1 text-violet-dark mt32 mb32 fw_light">
-                <b>Partner</b>
+                <b>Customer</b>
                 Dashboard
               </h1>
               <div class="alert alert-info alert-dismissible" role="alert">
@@ -187,7 +187,7 @@
               </div>
             </div>
           </div>
-         <!-- <div class="row d-flex flex-wrap no-gutters pb64">
+          <div class="row d-flex flex-wrap no-gutters pb64">
             <div class="col-12">
               <div class="o_partner_dashboard_box_header">
                 <h2>Follow up list</h2>
@@ -347,7 +347,7 @@
                 </div>
               </div>
             </div>
-          </div>-->
+          </div>
           <div class="row d-flex flex-wrap no-gutters pb64">
             <div class="col-12">
               <div class="o_partner_dashboard_box_header">

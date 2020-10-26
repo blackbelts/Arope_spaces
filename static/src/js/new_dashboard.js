@@ -30,12 +30,14 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
       var user = session.uid
       var self = this;
       this.fetch_data().then(function () {
-        console.log(self.multiGroups)
+        console.log("self.multiGroups",self.broker && self.client)
            if(self.multiGroups){
-           console.log("if")
-               self.$('.o_hr_dashboard').prepend(QWeb.render("arope", {
-                    widget: self
-               }));
+               if((self.broker && self.client))
+                   self.$('.o_hr_dashboard').prepend(QWeb.render("arope", {
+                        widget: self
+                   }));
+               else
+                self.brokerDashboard()
            }
            else
               self.brokerDashboard()
@@ -55,19 +57,24 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
         method: "get_user_groups",
         args: [user]
       }).then(function (res) {
-        self.groups = res
+        self.groups = res.groups
         console.log("res.length==1",res.length)
-        if(res.length==1)
+        if(res.groups.length==1)
             self.multiGroups=false
         console.log("res.length==1",res.length,self.multiGroups)
-        for(let i=0;i<res.length;i++){
-            if(res[i]=="Broker")
+        for(let i=0;i<res.groups.length;i++){
+            if(res.groups[i]=="Broker")
                 self.broker=true
-            else if  (res[i]=="Client")
-                self.client=true
-            else if  (res[i]=="Surveyor")
+            else if  (res.groups[i]=="Client"){
+                if(!res.customer){
+                    self.client=false
+                }else{
+                    self.client=true
+                }
+            }
+            else if  (res.groups[i]=="Surveyor")
                 self.surveyor=true
-            else if  (res[i]=="manager")
+            else if  (res.groups[i]=="manager")
                 self.manager=true
         }
         console.log("get_dashboard", res,self)
