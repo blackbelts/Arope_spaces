@@ -373,34 +373,40 @@ class Brokers(models.Model):
     def get_end_request(self,id):
         end_request = []
         end_dict={}
-
+        ids=[]
         for rec in self.env['policy.request'].search([('create_uid', '=', id), ('type', '=', 'end')]):
                 if rec.state not in end_dict.keys():
                     end_dict[rec.state]=1
                 else:
                     end_dict[rec.state]+=1
+                ids.append(rec.id)
+        end_dict['ids']=ids
         return end_dict
 
     @api.model
     def get_renew_request(self, id):
         renew_dict = {}
-
+        ids=[]
         for rec in self.env['policy.request'].search([('create_uid', '=', id), ('type', '=', 'renew')]):
             if rec.state not in renew_dict.keys():
                 renew_dict[rec.state] = 1
             else:
                 renew_dict[rec.state] += 1
+            ids.append(rec.id)
+        renew_dict['ids']=ids
         return renew_dict
 
     @api.model
     def get_cancel_request(self, id):
         cancel_dict = {}
-
+        ids=[]
         for rec in self.env['policy.request'].search([('create_uid', '=', id), ('type', '=', 'cancel')]):
             if rec.state not in cancel_dict.keys():
                 cancel_dict[rec.state] = 1
             else:
                 cancel_dict[rec.state] += 1
+            ids.append(rec.id)
+        cancel_dict['ids'] = ids
         return cancel_dict
 
 
