@@ -305,9 +305,9 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       })
       console.log("complaints_list",idsList)
       this.do_action({
-        name: _t("tree.collection"),
+        name: _t("Complaint"),
         type: 'ir.actions.act_window',
-        res_model: 'collection.arope',
+        res_model: 'helpdesk_lite.ticket',
         view_mode: 'tree',
         views: [
           [false, 'list']
@@ -347,21 +347,16 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       })
     },
      end_request_list:function (x) {
-      var idsList=[]
-      this.claim_lob.forEach(function(item){
-        idsList=idsList.concat(item.ids)
-      })
-      console.log("complaints_list",idsList)
       this.do_action({
-        name: _t("Claims Tree"),
+       name: _t("Requests"),
         type: 'ir.actions.act_window',
-        res_model: 'claim.arope',
+        res_model: 'policy.request',
         view_mode: 'tree',
         views: [
           [false, 'list']
         ],
         domain: [
-          ['id', 'in', idsList]
+          ['id', 'in', this.end_request.ids]
         ],
         context:{
             "edit":false,
@@ -371,21 +366,16 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       })
     },
      cancel_request_list:function (x) {
-      var idsList=[]
-      this.claim_lob.forEach(function(item){
-        idsList=idsList.concat(item.ids)
-      })
-      console.log("complaints_list",idsList)
       this.do_action({
-        name: _t("Claims Tree"),
+        name: _t("Requests"),
         type: 'ir.actions.act_window',
-        res_model: 'claim.arope',
+        res_model: 'policy.request',
         view_mode: 'tree',
         views: [
           [false, 'list']
         ],
         domain: [
-          ['id', 'in', idsList]
+          ['id', 'in', this.cancel_request.ids]
         ],
         context:{
             "edit":false,
@@ -395,21 +385,16 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       })
     },
      renewals_request_list:function (x) {
-      var idsList=[]
-      this.claim_lob.forEach(function(item){
-        idsList=idsList.concat(item.ids)
-      })
-      console.log("complaints_list",idsList)
       this.do_action({
-        name: _t("Claims Tree"),
+        name: _t("Requests"),
         type: 'ir.actions.act_window',
-        res_model: 'claim.arope',
+        res_model: 'policy.request',
         view_mode: 'tree',
         views: [
           [false, 'list']
         ],
         domain: [
-          ['id', 'in', idsList]
+          ['id', 'in', this.renew_request.ids]
         ],
         context:{
             "edit":false,
