@@ -126,15 +126,20 @@ class Brokers(models.Model):
         return {'current_year': current_prod, 'last_year': last_prod}
 
     @api.model
-    def get_renew(self, agents_codes):
+    def get_renew(self,codes,type):
         result={}
-        ids = []
+        pol_ids=[]
+        if type=='broker':
+            pol_ids=self.env['policy.arope'].search([('agent_code', 'in', codes)]).ids
+        elif type=='customer':
+            pol_ids=self.env['policy.arope'].search([('customer_pin', 'in', codes)]).ids
+
         for rec in self.env['system.notify'].search([('type','=','Renewal')]):
             if rec.color=='Green':
                 ids=[]
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['policy.arope'].search([('agent_code', 'in', agents_codes),('expiry_date', '>=', datetime.today().date()),('expiry_date', '<=', date1),]):
+                for prod in self.env['policy.arope'].search([('id', 'in', pol_ids),('expiry_date', '>=', datetime.today().date()),('expiry_date', '<=', date1),]):
                     total += prod.totoal_premium
                     ids.append(prod.id)
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
@@ -144,7 +149,7 @@ class Brokers(models.Model):
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['policy.arope'].search([('agent_code', 'in',agents_codes), ('expiry_date', '<=', datetime.today().date()),('expiry_date', '>=', date1)]):
+                for prod in self.env['policy.arope'].search([('id', 'in',pol_ids), ('expiry_date', '<=', datetime.today().date()),('expiry_date', '>=', date1)]):
                     total += prod.totoal_premium
                     ids.append(prod.id)
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
@@ -154,7 +159,7 @@ class Brokers(models.Model):
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
                 for prod in self.env['policy.arope'].search(
-                        [('agent_code', 'in', agents_codes), ('expiry_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Renewal'),('color','=','Orange')],limit=1).no_days)),
+                        [('id', 'in', pol_ids), ('expiry_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Renewal'),('color','=','Orange')],limit=1).no_days)),
                          ]):
                     total += prod.totoal_premium
                     ids.append(prod.id)
@@ -163,16 +168,22 @@ class Brokers(models.Model):
         return result
 
     @api.model
-    def get_collections(self, agents_codes):
+    def get_collections(self, codes,type):
+        coll_ids=[]
         result = {}
-        ids = []
         colors=[]
+        if type=='broker':
+            coll_ids=self.env['collection.arope'].search([('agent_code', 'in', codes)]).ids
+        elif type=='customer':
+            coll_ids=self.env['collection.arope'].search([('pin', 'in', codes)]).ids
+        # else:
+        #     ids=[]
         for rec in self.env['system.notify'].search([('type', '=', 'Collection')]):
             if rec.color == 'Green':
                 ids = []
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('agent_code', 'in', agents_codes),('prem_date', '>=', datetime.today().date()),('due_date', '<=', date1) ]):
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids),('prem_date', '>=', datetime.today().date()),('due_date', '<=', date1) ]):
                     total += prod.total_lc
                     ids.append(prod.id)
                 result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
@@ -181,7 +192,7 @@ class Brokers(models.Model):
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('agent_code', 'in',agents_codes ), ('prem_date', '<=', datetime.today().date()),('due_date', '>=', date1)]):
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids), ('prem_date', '<=', datetime.today().date()),('due_date', '>=', date1)]):
                     total += prod.total_lc
                     ids.append(prod.id)
                 result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
@@ -189,7 +200,7 @@ class Brokers(models.Model):
                 ids = []
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('agent_code', 'in',agents_codes),('due_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Orange')],limit=1).no_days)), ]):
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids),('due_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Orange')],limit=1).no_days)), ]):
                 # for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('prem_date', '<=', date.today() - relativedelta(days=self.env['collection.arope'].search([('type','=','Collection'),('color','=','Orange')])))]):
                 # self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('prem_date', '<=', datetime.today().date() - relativedelta(days=self.env['collection.arope'].search([('type','=','prem_date'),('color','=','Orange')]), ]):
                     total += prod.total_lc
@@ -256,7 +267,7 @@ class Brokers(models.Model):
 
     @api.model
     def get_lob_count_policy(self,codes,type):
-
+        ids=[]
         lob_list = []
         if type=='broker':
             ids=self.env['policy.arope'].search([('agent_code', 'in', codes)]).ids
@@ -269,8 +280,9 @@ class Brokers(models.Model):
             for rec in self.env['policy.arope'].search([('id', 'in', ids), ('lob', '=', lob.line_of_business)]):
                   total+=rec.totoal_premium
                   count+=1
+                  ids.append(rec.id)
             if count>0:
-             lob_list.append({'name':lob.line_of_business,'count':count,'amount':total,'icon':lob.image})
+             lob_list.append({'name':lob.line_of_business,'count':count,'amount':total,'icon':lob.image,'ids':ids})
             else:continue
 
         return lob_list
@@ -278,6 +290,7 @@ class Brokers(models.Model):
     @api.model
     def get_lob_count_claim(self,codes,type):
         lob_list = []
+        ids=[]
         if type == 'broker':
             ids = self.env['claim.arope'].search([('agent_code', 'in', codes)]).ids
         elif type == 'customer':
@@ -289,8 +302,9 @@ class Brokers(models.Model):
             for rec in self.env['claim.arope'].search([('id', 'in', ids), ('lob', '=', lob.line_of_business)]):
                 total+=rec.claim_paid
                 count+=1
+                ids.append(rec.id)
             if count > 0:
-                lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image})
+                lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image,'ids':ids})
             else:
                 continue
         return lob_list
@@ -318,7 +332,7 @@ class Brokers(models.Model):
         for stage in self.env['helpdesk_lite.stage'].search([]):
             count = self.env['helpdesk_lite.ticket'].search_count(
                 [('id', 'in', ids), ('stage_id', '=', stage.id)])
-            complaint_list.append({'stage':stage.name,'count':count})
+            complaint_list.append({'stage':stage.name,'count':count,'ids':ids})
         return complaint_list
 
     @api.model
@@ -356,6 +370,47 @@ class Brokers(models.Model):
             return 0.0
 
     @api.model
+    def get_end_request(self,id):
+        end_request = []
+        end_dict={}
+        ids=[]
+        for rec in self.env['policy.request'].search([('create_uid', '=', id), ('type', '=', 'end')]):
+                if rec.state not in end_dict.keys():
+                    end_dict[rec.state]=1
+                else:
+                    end_dict[rec.state]+=1
+                ids.append(rec.id)
+        end_dict['ids']=ids
+        return end_dict
+
+    @api.model
+    def get_renew_request(self, id):
+        renew_dict = {}
+        ids=[]
+        for rec in self.env['policy.request'].search([('create_uid', '=', id), ('type', '=', 'renew')]):
+            if rec.state not in renew_dict.keys():
+                renew_dict[rec.state] = 1
+            else:
+                renew_dict[rec.state] += 1
+            ids.append(rec.id)
+        renew_dict['ids']=ids
+        return renew_dict
+
+    @api.model
+    def get_cancel_request(self, id):
+        cancel_dict = {}
+        ids=[]
+        for rec in self.env['policy.request'].search([('create_uid', '=', id), ('type', '=', 'cancel')]):
+            if rec.state not in cancel_dict.keys():
+                cancel_dict[rec.state] = 1
+            else:
+                cancel_dict[rec.state] += 1
+            ids.append(rec.id)
+        cancel_dict['ids'] = ids
+        return cancel_dict
+
+
+    @api.model
     def get_broker_dashboard(self, id):
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
         agents_codes = []
@@ -364,6 +419,7 @@ class Brokers(models.Model):
 
         return {
             "user": self.env['persons'].search_read([('card_id', '=', user.card_id)],limit=1),
+            "user_image":user.image_1920,
             "production": self.get_production(agents_codes,'broker'),
             "policy_lob": self.get_lob_count_policy(agents_codes,'broker'),
             "claim_lob": self.get_lob_count_claim(agents_codes,'broker'),
@@ -373,10 +429,15 @@ class Brokers(models.Model):
             "App_count": self.get_lob_count_ins_app(id),
 
             'rank': self.get_rank(id),
+            'end_request': self.get_end_request(id),
+
+            'renew_request': self.get_renew_request(id),
+            'cancel_request': self.get_cancel_request(id),
+
             'targetVsProduction': self.get_target_production(id),
             'lastVsCurrentYear': self.get_production_compare(agents_codes),
-            'collections':self.get_collections(agents_codes),
-            'renews':self.get_renew(agents_codes)
+            'collections':self.get_collections(agents_codes,'broker'),
+            'renews':self.get_renew(agents_codes,'broker')
         }
 
     @api.model
@@ -389,6 +450,7 @@ class Brokers(models.Model):
 
         return {
             "user": self.env['persons'].search_read([('card_id', '=', user.card_id)], limit=1),
+            "user_image": user.image_1920,
             "production": self.get_production(customer_pin, type),
             "policy_lob": self.get_lob_count_policy(customer_pin,type),
             "claim_lob": self.get_lob_count_claim(customer_pin,type),
@@ -396,19 +458,30 @@ class Brokers(models.Model):
             "collection_ratio": self.get_collection_ratio(customer_pin,type),
             "claims_ratio": self.get_claim_ratio(customer_pin,type),
             "App_count": self.get_lob_count_ins_app(id),
+            'end_request': self.get_end_request(id),
+
+            'renew_request': self.get_renew_request(id),
+            'cancel_request': self.get_cancel_request(id),
 
             # 'rank': self.get_rank(id),
             # 'targetVsProduction': self.get_target_production(id),
             # 'lastVsCurrentYear': self.get_production_compare(agents_codes),
-            # 'collections': self.get_collections(agents_codes),
-            # 'renews': self.get_renew(agents_codes)
+            'collections': self.get_collections(customer_pin,type),
+            'renews': self.get_renew(customer_pin,type)
         }
     @api.model
     def get_user_groups(self,id):
         groups=[]
+        pins=[]
+        customer=False
+        user = self.env['res.users'].search([('id', '=', id)], limit=1)
+        for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
+            pins.append(rec.pin)
+        if pins:
+            customer=True
         for rec in self.env['res.groups'].sudo().search([('users','=',[id]),('category_id','=','space')]):
             groups.append(rec.name)
-        return groups
+        return {'groups':groups,'customer':customer}
     # @api.model
     # def get_customer_dashboard(self, id):
     #     card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
