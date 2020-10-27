@@ -35,6 +35,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       var user = session.uid
       var self = this;
       this.fetch_data().then(function(){
+
       self.$('.o_hr_dashboard').prepend(QWeb.render("brokerdash", {
             widget: self
           }));
@@ -185,10 +186,12 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     fetch_data: function () {
       var user = session.uid
       var self = this;
+         console.log("this",self)
+      console.log("Brokesssssr this.controlPanelParams.context",self.controlPanelParams.context)
       var get_dashboard = rpc.query({
         model: "arope.broker",
         method: "get_broker_dashboard",
-        args: [user]
+        args: [self.controlPanelParams.context.user_id]
       }).then(function (res) {
         self.brokerProduction = res.production
         self.target_production = res.targetVsProduction

@@ -181,9 +181,9 @@
 <!--                    </group>-->
                     <br/>
                     <div>
-                        <h3 groups="Arope-spaces.managers_group,Arope-spaces.broker_space_group" style="color: #073e89 !important">Offers</h3>
+                        <h3  style="color: #073e89 !important">Offers</h3>
                         <br/>
-                        <field groups="Arope-spaces.managers_group,Arope-spaces.broker_space_group" name="offer_ids" >
+                        <field name="offer_ids" >
                             <tree editable="bottom" decoration-danger="offer_state == 'pending'">
                                 <field name="type"/>
                                 <field name="date"/>
