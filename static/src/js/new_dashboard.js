@@ -54,6 +54,13 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
       self.multiGroups=true
       var get_dashboard = rpc.query({
         model: "arope.broker",
+        method: "current_user",
+        /*args: [user]*/
+      }).then(function (res) {
+        console.log("current_user",res)
+      })
+      var get_dashboard = rpc.query({
+        model: "arope.broker",
         method: "get_user_groups",
         args: [user]
       }).then(function (res) {
