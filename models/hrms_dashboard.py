@@ -716,7 +716,7 @@ class Brokers(models.Model):
     def current_user(self):
         context = self.env.context
         # record = self.env[context['active_model']].browse(context['active_id'])
-        if context['active_model'] == 'persons':
+        if context.get('active_id',False):
             return 1
         else:
             return self.env.user.id
