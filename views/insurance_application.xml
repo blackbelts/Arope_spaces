@@ -180,7 +180,7 @@
 <!--                        </field>-->
 <!--                    </group>-->
                     <br/>
-                    <div>
+                    <div groups="Arope-spaces.managers_group,Arope-spaces.broker_space_group">
                         <h3  style="color: #073e89 !important">Offers</h3>
                         <br/>
                         <field name="offer_ids" >
