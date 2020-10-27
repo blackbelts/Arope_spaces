@@ -113,7 +113,7 @@
                         <group>
                             <field name="status" invisible="1"/>
 
-                            <field name="type"/>
+                            <field name="type" readonly="1" force_save="1"/>
                             <field name="product"/>
                             <field name="policy_num"/>
 
@@ -264,11 +264,19 @@
         </field>
     </record>
 
-    <record model="ir.actions.act_window" id="claim_app_action">
-            <field name="name">claim.app</field>
+    <record model="ir.actions.act_window" id="motor_claim_app_action">
+            <field name="name">Claim App</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">claim.app</field>
-            <field name="context">{'search_default_groupby_state': 1}</field>
+            <field name="context">{'search_default_groupby_state': 1, 'default_type': 'motor'}</field>
+            <field name="view_id" ref="claim_app_tree"/>
+            <field name="view_mode">form,tree,kanban</field>
+    </record>
+    <record model="ir.actions.act_window" id="non-motor_claim_app_action">
+            <field name="name">Claim App</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">claim.app</field>
+            <field name="context">{'search_default_groupby_state': 1, 'default_type': 'non-motor'}</field>
             <field name="view_id" ref="claim_app_tree"/>
             <field name="view_mode">form,tree,kanban</field>
     </record>
