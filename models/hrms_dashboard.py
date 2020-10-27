@@ -727,7 +727,7 @@ class Brokers(models.Model):
 
     @api.model
     def surveyor_dashboard(self,user_id):
-        result = []
+        result = {}
         insurance_app = []
         insurance_survey = []
         motor_claim = []
@@ -740,7 +740,7 @@ class Brokers(models.Model):
             insurance_app.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image,
                                 'state': rec.state, 'count': len(insurance_app_survey)})
             insurance_survey.append(rec.id)
-        result.append({'insurance_app_survey': insurance_app, "ids": insurance_survey})
+        result.update({'insurance_app_survey': insurance_app, "ids": insurance_survey})
 
         motor_survey = self.env['survey.report'].search([('type', '=', 'motor_claim'),
                                                                  ('surveyor.id', '=', user_id)])
@@ -748,14 +748,14 @@ class Brokers(models.Model):
             motor_claim.append({'type': rec.survey_type,
                                                     'state': rec.state, 'count': len(motor_survey)})
             motor_claim_survey.append(rec.id)
-        result.append({'motor_survey': motor_claim, 'ids': motor_claim_survey})
+        result.update({'motor_survey': motor_claim, 'ids': motor_claim_survey})
         non_motor_survey = self.env['survey.report'].search([('type', '=', 'non_motor_claim'),
                                                                  ('surveyor.id', '=', user_id)])
         for rec in non_motor_survey:
             non_motor_claim.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image,
                                                     'state': rec.state, 'count': len(non_motor_survey)})
             non_motor_claim_survey.append(rec.id)
-        result.append({'non_motor_survey': non_motor_claim, 'ids': non_motor_claim_survey})
+        result.update({'non_motor_survey': non_motor_claim, 'ids': non_motor_claim_survey})
         user = self.env['res.users'].search([('id', '=', user_id)], limit=1)
         return {
             'result': result,
