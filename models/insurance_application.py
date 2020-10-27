@@ -122,6 +122,8 @@ class Quotation(models.Model):
     message = fields.Text('Description')
     persons = fields.One2many('persons.lines', 'application_id')
 
+
+
     @api.onchange('test_state','product_id')
     def get_message(self):
         if self.test_state:
@@ -784,11 +786,19 @@ class FinalOffer(models.Model):
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     offer_state = fields.Selection([('submitted', 'Submitted'),
                                     ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='State')
+    is_manager = fields.Boolean('is Manager', compute='security_broker')
 
     @api.onchange('file')
     def change_state(self):
         if self.file:
             self.offer_state = 'submitted'
+
+    def security_broker(self):
+        if self.env['res.users'].search([('id', '=', self._uid),('groups_id','=',self.env['res.groups'].search([('name', '=', 'manager')]).id)]):
+            self.is_manager = True
+        else:
+            self.is_manager = False
+
 
 class FinalApplication(models.Model):
     _name = 'final.application'
