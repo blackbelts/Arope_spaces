@@ -185,9 +185,9 @@
                         <br/>
                         <field name="offer_ids" >
                             <tree editable="bottom" decoration-danger="offer_state == 'pending'">
-                                <field name="type" groups="Arope-spaces.managers_group"/>
-                                <field name="date" groups="Arope-spaces.managers_group"/>
-                                <field name="file" widget="many2many_binary" groups="Arope-spaces.managers_group"/>
+                                <field name="type" />
+                                <field name="date" />
+                                <field name="file" widget="many2many_binary" />
                                 <field name="offer_state"/>
                                 <field name="comment"/>
                             </tree>
