@@ -426,7 +426,7 @@ class Brokers(models.Model):
         return {
             "user": self.env['persons'].search_read([('card_id', '=', user.card_id)],limit=1),
             "user_image":user.image_1920,
-            "perso_data":self.get_person_data(id,'broker'),
+            # "user":self.get_person_data(id,'broker'),
             "production": self.get_production(agents_codes,'broker'),
             "policy_lob": self.get_lob_count_policy(agents_codes,'broker'),
             "claim_lob": self.get_lob_count_claim(agents_codes,'broker'),
@@ -458,7 +458,7 @@ class Brokers(models.Model):
         return {
             "user": self.env['persons'].search_read([('card_id', '=', user.card_id)], limit=1),
             "user_image": user.image_1920,
-            "perso_data": self.get_person_data(id, 'customer'),
+            # "perso_data": self.get_person_data(id, 'customer'),
             "production": self.get_production(customer_pin, type),
             "policy_lob": self.get_lob_count_policy(customer_pin,type),
             "claim_lob": self.get_lob_count_claim(customer_pin,type),
