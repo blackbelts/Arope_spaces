@@ -79,15 +79,15 @@
                   </span>
                 </h5>
                 <div class="o_partner_dashboard_box_body">
-                  <div class="row mb-4">
+                  <div class="row">
                     <div class="col-md-6">
-                      <h4>FRA No</h4>
+                      <address>FRA No</address>
 
                     </div>
                     <div class="col-md-6">
-                      <h4>
+                      <address>
                         <t t-esc="widget.user.fra_no" />
-                      </h4>
+                      </address>
                     </div>
                     <!--                    <div class="col-md-2">-->
                     <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
@@ -95,14 +95,14 @@
                     <!--                      </div>-->
                     <!--                    </div>-->
                   </div>
-                  <div class="row mb-4">
+                  <div class="row ">
                     <div class="col-md-6">
-                      <h4>Expiration Date</h4>
+                      <address>Expiration Date</address>
                     </div>
                     <div class="col-md-6">
-                      <h4>
+                      <address>
                         <t t-esc="widget.user.expire_date" />
-                      </h4>
+                      </address>
                     </div>
                     <!--                    <div class="col-md-2">-->
                     <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
@@ -110,14 +110,14 @@
                     <!--                      </div>-->
                     <!--                    </div>-->
                   </div>
-                  <div class="row mb-4">
+                  <div class="row ">
                     <div class="col-md-6">
-                      <h4>Mobile</h4>
+                      <address>Mobile</address>
                     </div>
                     <div class="col-md-6">
-                      <h4>
+                      <address>
                         <t t-esc="widget.user.mobile" />
-                      </h4>
+                      </address>
                     </div>
                     <!--                    <div class="col-md-2">-->
                     <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
@@ -125,14 +125,14 @@
                     <!--                      </div>-->
                     <!--                    </div>-->
                   </div>
-                  <div class="row mb-4">
+                  <div class="row ">
                     <div class="col-md-6">
-                      <h4>Email</h4>
+                      <address>Email</address>
                     </div>
                     <div class="col-md-6">
-                      <h4>
+                      <address>
                         <t t-esc="widget.user.mail" />
-                      </h4>
+                      </address>
                     </div>
                     <!--                    <div class="col-md-2">-->
                     <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->

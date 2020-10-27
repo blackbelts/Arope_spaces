@@ -1794,9 +1794,12 @@ table.dbkit-table tr td {
 /*-------------------- 10. Badge------------------- */
 
 .btn {
-    padding: 11px 17px;
+   /* padding: 11px 17px;
     font-size: 13px;
-    letter-spacing: 0;
+    letter-spacing: 0;*/
+    z-index: 1;
+    transition: background 0.3s cubic-bezier(0.55, 0, 0.1, 1), color 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+    font-weight: 600;
 }
 
 .btn-xl {
@@ -3312,7 +3315,10 @@ margin-top: 27px !important;
     word-spacing: 0.02em !important;
 }
 .o_gradient, #o_partner_dashboard .o_partner_dashboard_box_header > h2 {
-    background: linear-gradient(150deg, #875A7B 20%, #62495B 80%) !important;
+    background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
+    letter-spacing: -0.02em;
+    word-spacing: 0.015em;
+
 }
 .fw_semibold, #o_partner_dashboard .o_partner_dashboard_box .o_partner_dashboard_box_title, #o_partner_dashboard .o_partner_dashboard_wizard [class*="o_partner_dashboard_grade_active"] {
     font-weight: 600;
@@ -3396,4 +3402,8 @@ ul.wizard li:last-child {
     width: 20px;
     height: 20px;
     border-radius: 50%;
+}
+#o_partner_dashboard .btn-secondary:hover {
+    background-color: #343a40;
+    color: #fff;
 }
