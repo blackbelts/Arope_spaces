@@ -725,33 +725,52 @@ class Brokers(models.Model):
     @api.model
     def current_user(self,context_rec):
         context = context_rec
-        record = self.env[context['active_model']].browse(
-            context['active_id'])
-        if context['active_model'] == 'persons':
-            return self.env['res.users'].search([('card_id','=',record.card_id)]).id
-        else:
-            return self.env.user.id
+        record=self.env[context['active_model']].search([("id","=",context['active_id'])])
+        return self.env['res.users'].search([('card_id', '=', record.card_id)]).id
+        # record = self.env[context['active_model']].browse(
+        #     context['active_id'])
+        # if context['active_model'] == 'persons':
+        #     return self.env['res.users'].search([('card_id','=',record.card_id)]).id
+        # else:
+        #     return self.env.user.id
 
+    @api.model
     def surveyor_dashboard(self,user_id):
-        result = []
+        result = {}
+        insurance_app = []
+        insurance_survey = []
+        motor_claim = []
+        motor_claim_survey = []
+        non_motor_claim = []
+        non_motor_claim_survey = []
         insurance_app_survey = self.env['survey.report'].search([('type', '=', 'insurance_application'),
                                                                  ('surveyor.id','=', user_id)])
         for rec in insurance_app_survey:
-            result.append({'insurance_app_survey': {'lob': rec.lob.line_of_business,
-                                                    'state': rec.state, 'count': len(insurance_app_survey)}})
+            insurance_app.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image,
+                                'state': rec.state, 'count': len(insurance_app_survey)})
+            insurance_survey.append(rec.id)
+        result.update({'insurance_app_survey': insurance_app, "ids": insurance_survey})
 
         motor_survey = self.env['survey.report'].search([('type', '=', 'motor_claim'),
                                                                  ('surveyor.id', '=', user_id)])
         for rec in motor_survey:
-            result.append({'motor_survey': {'type': rec.survey_type,
-                                                    'state': rec.state, 'count': len(motor_survey)}})
+            motor_claim.append({'type': rec.survey_type,
+                                                    'state': rec.state, 'count': len(motor_survey)})
+            motor_claim_survey.append(rec.id)
+        result.update({'motor_survey': motor_claim, 'ids': motor_claim_survey})
         non_motor_survey = self.env['survey.report'].search([('type', '=', 'non_motor_claim'),
                                                                  ('surveyor.id', '=', user_id)])
         for rec in non_motor_survey:
-            result.append({'non_motor_survey': {'lob': rec.lob.line_of_business,
-                                                    'state': rec.state, 'count': len(non_motor_survey)}})
-
-        return result
+            non_motor_claim.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image,
+                                                    'state': rec.state, 'count': len(non_motor_survey)})
+            non_motor_claim_survey.append(rec.id)
+        result.update({'non_motor_survey': non_motor_claim, 'ids': non_motor_claim_survey})
+        user = self.env['res.users'].search([('id', '=', user_id)], limit=1)
+        return {
+            'result': result,
+            "user": self.env['persons'].search_read([('card_id', '=', user.card_id)], limit=1),
+            "user_image": user.image_1920,
+        }
 
 
 

@@ -37,7 +37,7 @@ odoo.define('surveyor_dashboard.SurveyorDashboard', function (require) {
     start: function () {
       var user = session.uid
       var self = this;
-      self.$('.o_hr_dashboard').prepend(QWeb.render("customerdash", {
+      self.$('.o_hr_dashboard').prepend(QWeb.render("Surveyordash", {
             widget: self
           }));
 
@@ -47,13 +47,14 @@ odoo.define('surveyor_dashboard.SurveyorDashboard', function (require) {
     },
     fetch_data: function () {
     var user = session.uid
+    console.log("usssssssssssssssssssss",user)
       var self = this;
       var get_dashboard = rpc.query({
         model: "arope.broker",
-        method: "get_customer_dashboard",
+        method: "surveyor_dashboard",
         args: [user]
       }).then(function (res) {
-        console.log("get_customer_dashboard", res)
+        console.log("surveyor_dashboard", res)
       });
       return $.when(get_dashboard);
     },

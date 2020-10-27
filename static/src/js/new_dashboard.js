@@ -29,48 +29,33 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
     start: function () {
       var user = session.uid
       var self = this;
-      this.fetch_data().then(function () {
-        console.log("self.multiGroups",self.broker && self.client)
-           if(self.multiGroups){
-               if((self.broker && self.client))
-                   self.$('.o_hr_dashboard').prepend(QWeb.render("arope", {
-                        widget: self
-                   }));
-               else
-                self.brokerDashboard()
-           }
-           else
-              self.brokerDashboard()
+      this.get_user_id().then(function () {
+
       })
       return this._super().then(function () {})
     },
-    fetch_data: function () {
-      var user = session.uid
+    fetch_data: function (id) {
+      /*var user = session.uid*/
       var self = this;
       self.broker=false
       self.client=false
       self.surveyor=false
       self.manager=false
       self.multiGroups=true
-      var get_dashboard = rpc.query({
+       var get_dashboard = rpc.query({
         model: "arope.broker",
         method: "get_user_groups",
-        args: [user]
+        args: [id]
       }).then(function (res) {
         self.groups = res.groups
-        console.log("res.length==1",res.length)
         if(res.groups.length==1)
             self.multiGroups=false
-        console.log("res.length==1",res.length,self.multiGroups)
         for(let i=0;i<res.groups.length;i++){
             if(res.groups[i]=="Broker")
                 self.broker=true
             else if  (res.groups[i]=="Client"){
-                if(!res.customer){
-                    self.client=false
-                }else{
-                    self.client=true
-                }
+                self.client=res.customer
+                console.log(" self.client", self.client,res.customer)
             }
             else if  (res.groups[i]=="Surveyor")
                 self.surveyor=true
@@ -80,6 +65,65 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
         console.log("get_dashboard", res,self)
       });
       return $.when(get_dashboard);
+
+    },
+    get_user_id:function(){
+        var self = this;
+     if(this.controlPanelParams.context.active_id != undefined){
+          var get_dashboard = rpc.query({
+            model: "arope.broker",
+            method: "current_user",
+            args: [this.controlPanelParams.context]
+          }).then(function (res) {
+            self.id=res
+            self.controlPanelParams.context.user_id=res
+            console.log("curr;ent_user",res)
+            self.fetch_data(res).then(function(){
+                 console.log("self.multiGroups",self.broker && self.client)
+
+               if((self.broker && self.client)||(self.surveyor && self.client)){
+                 self.$('.o_hr_dashboard').prepend(QWeb.render("arope", {
+                        widget: self
+                   }));
+               }
+               else if(self.client){
+                    self.customerDashboard()
+               }
+               else if(self.surveyor){
+                    self.surveyorDashboard()
+               }
+               else if(self.broker){
+                    self.brokerDashboard()
+               }
+          })
+      })
+      }else{
+        self.id=session.uid
+        self.controlPanelParams.context.user_id=session.uid
+        self.fetch_data(session.uid).then(function(){
+            console.log("self.multiGroups",self.broker && self.client)
+            self.id=session.uid
+           if((self.broker && self.client)||(self.surveyor && self.client)){
+                   console.log("iffffff")
+                   self.$('.o_hr_dashboard').prepend(QWeb.render("arope", {
+                        widget: self
+                   }));
+               }
+               else if(self.client){
+                    console.log("iffffff222")
+                    self.customerDashboard()
+               }
+               else if(self.surveyor){
+                  console.log("iffffff3333333")
+                    self.surveyorDashboard()
+               }
+               else if(self.broker){
+                   console.log("iffffff4444")
+                    self.brokerDashboard()
+               }
+      })
+      }
+    return $.when(get_dashboard);
     },
     makeNumber: function (x) {
       return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -90,6 +134,7 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
         type: "ir.actions.client",
         name: _t('BrokerDashboard '),
         tag: 'broker_dashboard',
+        context:self.controlPanelParams.context
       })
     },
      customerDashboard: function (x) {
@@ -98,6 +143,7 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
         type: "ir.actions.client",
         name: _t('CustomerDashboard'),
         tag: 'customer_dashboard',
+        context:self.controlPanelParams.context
       })
     },
     surveyorDashboard:function(x){
@@ -106,6 +152,7 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
         type: "ir.actions.client",
         name: _t('SurveyorDashboard'),
         tag: 'surveyor_dashboard',
+        context:self.controlPanelParams.context
       })
     }
   });
