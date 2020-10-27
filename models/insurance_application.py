@@ -122,6 +122,8 @@ class Quotation(models.Model):
     message = fields.Text('Description')
     persons = fields.One2many('persons.lines', 'application_id')
 
+
+
     @api.onchange('test_state','product_id')
     def get_message(self):
         if self.test_state:
@@ -790,6 +792,8 @@ class FinalOffer(models.Model):
         if self.file:
             self.offer_state = 'submitted'
 
+
+
 class FinalApplication(models.Model):
     _name = 'final.application'
 
@@ -891,7 +895,7 @@ class SurveyReport(models.Model):
     state = fields.Selection([('pending', 'Pending'), ('surveyor', 'Surveyor Assigned'),
                             ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending')
     status = fields.Many2one('state.setup', domain="[('type', '=', 'survey')]")
-    surveyor = fields.Many2one('res.users', 'Surveyor')
+    surveyor = fields.Many2one('res.users', 'Surveyor', domain=lambda self: [("groups_id", "=", self.env.ref( "Arope-spaces.surveyor_group" ).id)])
     survey_report = fields.Many2many('ir.attachment', string='Upload Survey Report')
     comment = fields.Text('Comment')
     recomm = fields.Text('Recommendation')
@@ -902,12 +906,12 @@ class SurveyReport(models.Model):
     claim_id = fields.Many2one('claim.app', ondelete='cascade', string='Application')
     message = fields.Text('Description')
 
-    @api.onchange('surveyor')
-    def surveyor_domain(self):
-        ids = []
-        for rec in self.env['res.users'].search([('groups_id','=',self.env['res.groups'].search([('name', '=', 'Surveyor')]).id)]):
-            ids.append(rec.id)
-        return {'domain': {'surveyor': [('id', 'in', ids)]}}
+    # @api.onchange('surveyor')
+    # def surveyor_domain(self):
+    #     ids = []
+    #     for rec in self.env['res.users'].search([('groups_id','=',self.env['res.groups'].search([('name', '=', 'Surveyor')]).id)]):
+    #         ids.append(rec.id)
+    #     return {'domain': {'surveyor': [('id', 'in', ids)]}}
 
     @api.onchange('status')
     def get_message(self):

@@ -180,14 +180,14 @@
 <!--                        </field>-->
 <!--                    </group>-->
                     <br/>
-                    <div>
+                    <div groups="Arope-spaces.managers_group,Arope-spaces.broker_space_group">
                         <h3  style="color: #073e89 !important">Offers</h3>
                         <br/>
                         <field name="offer_ids" >
                             <tree editable="bottom" decoration-danger="offer_state == 'pending'">
-                                <field name="type"/>
-                                <field name="date"/>
-                                <field name="file" widget="many2many_binary"/>
+                                <field name="type" />
+                                <field name="date" />
+                                <field name="file" widget="many2many_binary" />
                                 <field name="offer_state"/>
                                 <field name="comment"/>
                             </tree>
