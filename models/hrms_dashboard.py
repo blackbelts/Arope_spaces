@@ -472,13 +472,14 @@ class Brokers(models.Model):
     @api.model
     def get_user_groups(self,id):
         groups=[]
-        pins=[]
         customer=False
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
-        for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
-            pins.append(rec.pin)
-        if pins:
-            customer=True
+        for rec in self.env['persons'].search([('card_id', '=', user.card_id),('type', '=', 'customer')]):
+            if  self.env['policy.arope'].search([('customer_pin','=',rec.pin)],limit=1):
+                customer = True
+                break
+
+
         for rec in self.env['res.groups'].sudo().search([('users','=',[id]),('category_id','=','space')]):
             groups.append(rec.name)
         return {'groups':groups,'customer':customer}
