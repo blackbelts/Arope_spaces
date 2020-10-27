@@ -715,10 +715,9 @@ class Brokers(models.Model):
     @api.model
     def current_user(self):
         context = self.env.context
-        record = self.env[context['active_model']].browse(
-            context['active_id'])
+        # record = self.env[context['active_model']].browse(context['active_id'])
         if context['active_model'] == 'persons':
-            return self.env['res.users'].search([('card_id','=',record.card_id)]).id
+            return 1
         else:
             return self.env.user.id
 
