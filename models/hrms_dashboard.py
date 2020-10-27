@@ -711,6 +711,17 @@ class Brokers(models.Model):
         # self.env['final.offer'].search([('id', '=', id)])[0].write({'type': ''})
         # return True
 
+    @api.model
+    def current_user(self):
+        context = self.env.context
+        record = self.env[context['active_model']].browse(
+            context['active_id'])
+        if context['active_model'] == 'persons':
+            return self.env['res.users'].search([('card_id','=',record.card_id)]).id
+        else:
+            return self.env.user.id
+
+
 
 
 
