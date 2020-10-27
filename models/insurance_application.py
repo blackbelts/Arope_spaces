@@ -929,7 +929,10 @@ class SurveyReport(models.Model):
     def assign_surveyor(self):
         self.write({'state': 'surveyor'})
         self.status = self.env['state.setup'].search([('survey_status', '=', 'surveyor'), ('type', '=', 'survey')]).id
-        self.application_id.write({'surveyor': self.surveyor.id})
+        if self.application_id:
+            self.application_id.write({'surveyor': self.surveyor.id})
+        if self.claim_id:
+            self.claim_id.write({'surveyor': self.surveyor.id})
         self.message = self.status.message
 
     def accept_survey(self):
