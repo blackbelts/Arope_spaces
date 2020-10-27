@@ -312,12 +312,14 @@ class Brokers(models.Model):
     @api.model
     def get_lob_count_ins_app(self, id):
         lob_list = []
+        ids=[]
         for lob in self.env['insurance.line.business'].search([]):
             count = 0
             for rec in self.env['insurance.quotation'].search([('create_uid', '=', id), ('lob', '=', lob.id)]):
                 count+=1
+                ids.append(rec.id)
             if count > 0:
-                lob_list.append({'name': lob.line_of_business, 'count': count,'icon': lob.image})
+                lob_list.append({'name': lob.line_of_business, 'count': count,'icon': lob.image,'ids':ids})
             else:
                 continue
         return lob_list
@@ -409,6 +411,10 @@ class Brokers(models.Model):
         cancel_dict['ids'] = ids
         return cancel_dict
 
+    @api.model
+    def get_person_data(self,id,type):
+        user = self.env['res.users'].search([('id', '=', id)], limit=1)
+        return self.env['persons'].search([('card_id', '=', user.card_id),('type','=',type)],limit=1)
 
     @api.model
     def get_broker_dashboard(self, id):
@@ -420,6 +426,7 @@ class Brokers(models.Model):
         return {
             "user": self.env['persons'].search_read([('card_id', '=', user.card_id)],limit=1),
             "user_image":user.image_1920,
+            # "user":self.get_person_data(id,'broker'),
             "production": self.get_production(agents_codes,'broker'),
             "policy_lob": self.get_lob_count_policy(agents_codes,'broker'),
             "claim_lob": self.get_lob_count_claim(agents_codes,'broker'),
@@ -451,6 +458,7 @@ class Brokers(models.Model):
         return {
             "user": self.env['persons'].search_read([('card_id', '=', user.card_id)], limit=1),
             "user_image": user.image_1920,
+            # "perso_data": self.get_person_data(id, 'customer'),
             "production": self.get_production(customer_pin, type),
             "policy_lob": self.get_lob_count_policy(customer_pin,type),
             "claim_lob": self.get_lob_count_claim(customer_pin,type),
@@ -469,17 +477,18 @@ class Brokers(models.Model):
             'collections': self.get_collections(customer_pin,type),
             'renews': self.get_renew(customer_pin,type)
         }
+
+
     @api.model
     def get_user_groups(self,id):
         groups=[]
+        pins=[]
         customer=False
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
         for rec in self.env['persons'].search([('card_id', '=', user.card_id),('type', '=', 'customer')]):
             if  self.env['policy.arope'].search([('customer_pin','=',rec.pin)],limit=1):
                 customer = True
                 break
-
-
         for rec in self.env['res.groups'].sudo().search([('users','=',[id]),('category_id','=','space')]):
             groups.append(rec.name)
         return {'groups':groups,'customer':customer}
