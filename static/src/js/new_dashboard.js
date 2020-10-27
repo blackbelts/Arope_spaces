@@ -47,12 +47,9 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
         method: "get_user_groups",
         args: [id]
       }).then(function (res) {
-      console.log("get_dashboardسسسس", res,self)
         self.groups = res.groups
-        console.log("res.length==1",res.groups.length)
         if(res.groups.length==1)
             self.multiGroups=false
-        console.log("res.length==1",res.groups.length,self.multiGroups)
         for(let i=0;i<res.groups.length;i++){
             if(res.groups[i]=="Broker")
                 self.broker=true
@@ -79,42 +76,52 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
             args: [this.controlPanelParams.context]
           }).then(function (res) {
             self.id=res
-            console.log("iddddddddddd")
             self.controlPanelParams.context.user_id=res
             console.log("curr;ent_user",res)
             self.fetch_data(res).then(function(){
                  console.log("self.multiGroups",self.broker && self.client)
-           if(self.multiGroups){
-               if((self.broker && self.client))
-                   self.$('.o_hr_dashboard').prepend(QWeb.render("arope", {
+
+               if((self.broker && self.client)||(self.surveyor && self.client)){
+                 self.$('.o_hr_dashboard').prepend(QWeb.render("arope", {
                         widget: self
                    }));
-               else
-                self.brokerDashboard()
-           }
-           else
-              self.brokerDashboard()
-            })
-            /*return res*/
+               }
+               else if(self.client){
+                    self.customerDashboard()
+               }
+               else if(self.surveyor){
+                    self.surveyorDashboard()
+               }
+               else if(self.broker){
+                    self.brokerDashboard()
+               }
           })
+      })
       }else{
         self.id=session.uid
-        console.log("iddddddddddd22222222")
         self.controlPanelParams.context.user_id=session.uid
         self.fetch_data(session.uid).then(function(){
-              console.log("self.multiGroups",self.broker && self.client)
-           if(self.multiGroups){
-               if((self.broker && self.client))
+            console.log("self.multiGroups",self.broker && self.client)
+            self.id=session.uid
+           if((self.broker && self.client)||(self.surveyor && self.client)){
+                   console.log("iffffff")
                    self.$('.o_hr_dashboard').prepend(QWeb.render("arope", {
                         widget: self
                    }));
-               else
-                self.brokerDashboard()
-           }
-           else
-              self.brokerDashboard()
-        })
-//        return session.uid;
+               }
+               else if(self.client){
+                    console.log("iffffff222")
+                    self.customerDashboard()
+               }
+               else if(self.surveyor){
+                  console.log("iffffff3333333")
+                    self.surveyorDashboard()
+               }
+               else if(self.broker){
+                   console.log("iffffff4444")
+                    self.brokerDashboard()
+               }
+      })
       }
     return $.when(get_dashboard);
     },

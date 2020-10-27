@@ -725,6 +725,7 @@ class Brokers(models.Model):
         # else:
         #     return self.env.user.id
 
+    @api.model
     def surveyor_dashboard(self,user_id):
         result = []
         insurance_app_survey = self.env['survey.report'].search([('type', '=', 'insurance_application'),

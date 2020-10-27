@@ -137,7 +137,7 @@
 
 
          <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="arope_action_dashboard"
-                  parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />
+                  parent="arope_space" groups="Arope-spaces.broker_space_group,Arope-spaces.surveyor_group" sequence="0" />
     <!--<menuitem id="menu_hrms_dashboard" name="My Portfolio" action="hr_action_dashboard"
               parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />-->
 <!--    <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="hr_action_dashboard"-->
