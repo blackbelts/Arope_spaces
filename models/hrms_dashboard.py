@@ -712,6 +712,28 @@ class Brokers(models.Model):
         # self.env['final.offer'].search([('id', '=', id)])[0].write({'type': ''})
         # return True
 
+    @api.model
+    def surveyor_dashboard(self,user_id):
+        result = []
+        insurance_app_survey = self.env['survey.report'].search([('type', '=', 'insurance_application'),
+                                                                 ('surveyor.id','=', user_id)])
+        for rec in insurance_app_survey:
+            result.append({'insurance_app_survey': {'lob': rec.lob.line_of_business,
+                                                    'state': rec.state, 'count': len(insurance_app_survey)}})
+
+        motor_survey = self.env['survey.report'].search([('type', '=', 'motor_claim'),
+                                                                 ('surveyor.id', '=', user_id)])
+        for rec in motor_survey:
+            result.append({'motor_survey': {'type': rec.survey_type,
+                                                    'state': rec.state, 'count': len(motor_survey)}})
+        non_motor_survey = self.env['survey.report'].search([('type', '=', 'non_motor_claim'),
+                                                                 ('surveyor.id', '=', user_id)])
+        for rec in non_motor_survey:
+            result.append({'non_motor_survey': {'lob': rec.lob.line_of_business,
+                                                    'state': rec.state, 'count': len(non_motor_survey)}})
+
+        return result
+
 
 
 
