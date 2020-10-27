@@ -186,8 +186,6 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     fetch_data: function () {
       var user = session.uid
       var self = this;
-         console.log("this",self)
-      console.log("Brokesssssr this.controlPanelParams.context",self.controlPanelParams.context)
       var get_dashboard = rpc.query({
         model: "arope.broker",
         method: "get_broker_dashboard",

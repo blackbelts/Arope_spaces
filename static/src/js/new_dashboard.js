@@ -47,6 +47,7 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
         method: "get_user_groups",
         args: [id]
       }).then(function (res) {
+      console.log("get_dashboardسسسس", res,self)
         self.groups = res.groups
         console.log("res.length==1",res.groups.length)
         if(res.groups.length==1)
@@ -57,6 +58,7 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
                 self.broker=true
             else if  (res.groups[i]=="Client"){
                 self.client=res.customer
+                console.log(" self.client", self.client,res.customer)
             }
             else if  (res.groups[i]=="Surveyor")
                 self.surveyor=true
@@ -134,6 +136,7 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
         type: "ir.actions.client",
         name: _t('CustomerDashboard'),
         tag: 'customer_dashboard',
+        context:self.controlPanelParams.context
       })
     },
     surveyorDashboard:function(x){
@@ -142,6 +145,7 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
         type: "ir.actions.client",
         name: _t('SurveyorDashboard'),
         tag: 'surveyor_dashboard',
+        context:self.controlPanelParams.context
       })
     }
   });
