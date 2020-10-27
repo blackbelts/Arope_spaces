@@ -10,7 +10,7 @@ class InheritBrokers(models.Model):
 
     def view_dashboard(self):
         print('kkkkkkkkkkkkkkkkkk')
-        # self.env['arope.broker'].current_user()
+        self.env['arope.broker'].current_user(self.env.context)
 
         # form = self.env.ref('Arope-spaces.brokers_user_wizard')
         # self.is_user = True
