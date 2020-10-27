@@ -891,7 +891,7 @@ class SurveyReport(models.Model):
     state = fields.Selection([('pending', 'Pending'), ('surveyor', 'Surveyor Assigned'),
                             ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending')
     status = fields.Many2one('state.setup', domain="[('type', '=', 'survey')]")
-    surveyor = fields.Many2one('res.users', 'Surveyor')
+    surveyor = fields.Many2one('res.users', 'Surveyor', domain="[('groups_id', '=', self.env['res.groups'].search([('name', '=', 'Surveyor')]).id)]")
     survey_report = fields.Many2many('ir.attachment', string='Upload Survey Report')
     comment = fields.Text('Comment')
     recomm = fields.Text('Recommendation')
@@ -902,7 +902,12 @@ class SurveyReport(models.Model):
     claim_id = fields.Many2one('claim.app', ondelete='cascade', string='Application')
     message = fields.Text('Description')
 
-
+    # @api.onchange('surveyor')
+    # def surveyor_domain(self):
+    #     ids = []
+    #     for rec in self.env['res.users'].search([('groups_id','=',)]):
+    #         ids.append(rec.id)
+    #     return {'domain': {'surveyor': [('id', 'in', ids)]}}
 
     @api.onchange('status')
     def get_message(self):
@@ -922,11 +927,6 @@ class SurveyReport(models.Model):
         self.status = self.env['state.setup'].search([('survey_status', '=', 'surveyor'), ('type', '=', 'survey')]).id
         self.application_id.write({'surveyor': self.surveyor.id})
         self.message = self.status.message
-        ids = []
-        for rec in self.env['res.users'].search(
-                [('groups_id', '=', self.env['res.groups'].search([('name', '=', 'Surveyor')]).id)]):
-            ids.append(rec.id)
-        return {'domain': {'surveyor': [('id', 'in', ids)]}}
 
     def accept_survey(self):
         self.write({'state': 'accepted'})
