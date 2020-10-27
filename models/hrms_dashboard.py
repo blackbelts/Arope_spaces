@@ -743,7 +743,9 @@ class Brokers(models.Model):
             insurance_app.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image,
                                 'state': rec.state, 'count': len(insurance_app_survey)})
             insurance_survey.append(rec.id)
-        final_insurance.update({"data":insurance_app, 'ids': insurance_survey})
+        final_insurance['data'] = insurance_survey
+        final_insurance['ids'] = insurance_survey
+        # final_insurance.update({"data":insurance_app, 'ids': insurance_survey})
         result.update({'insurance_app_survey':final_insurance})
 
         motor_survey = self.env['survey.report'].search([('type', '=', 'motor_claim'),
