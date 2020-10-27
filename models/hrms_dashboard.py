@@ -713,6 +713,15 @@ class Brokers(models.Model):
         # return True
 
     @api.model
+    def current_user(self):
+        context = self.env.context
+        record = self.env[context['active_model']].browse(
+            context['active_id'])
+        if context['active_model'] == 'persons':
+            return self.env['res.users'].search([('card_id','=',record.card_id)]).id
+        else:
+            return self.env.user.id
+
     def surveyor_dashboard(self,user_id):
         result = []
         insurance_app_survey = self.env['survey.report'].search([('type', '=', 'insurance_application'),
