@@ -149,7 +149,7 @@ class Brokers(models.Model):
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['policy.arope'].search([('pol_ids', 'in',pol_ids), ('expiry_date', '<=', datetime.today().date()),('expiry_date', '>=', date1)]):
+                for prod in self.env['policy.arope'].search([('id', 'in',pol_ids), ('expiry_date', '<=', datetime.today().date()),('expiry_date', '>=', date1)]):
                     total += prod.totoal_premium
                     ids.append(prod.id)
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
@@ -159,7 +159,7 @@ class Brokers(models.Model):
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
                 for prod in self.env['policy.arope'].search(
-                        [('pol_ids', 'in', pol_ids), ('expiry_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Renewal'),('color','=','Orange')],limit=1).no_days)),
+                        [('id', 'in', pol_ids), ('expiry_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Renewal'),('color','=','Orange')],limit=1).no_days)),
                          ]):
                     total += prod.totoal_premium
                     ids.append(prod.id)
@@ -450,6 +450,7 @@ class Brokers(models.Model):
 
         return {
             "user": self.env['persons'].search_read([('card_id', '=', user.card_id)], limit=1),
+            "user_image": user.image_1920,
             "production": self.get_production(customer_pin, type),
             "policy_lob": self.get_lob_count_policy(customer_pin,type),
             "claim_lob": self.get_lob_count_claim(customer_pin,type),
@@ -721,6 +722,26 @@ class Brokers(models.Model):
         else:
             return self.env.user.id
 
+    def surveyor_dashboard(self,user_id):
+        result = []
+        insurance_app_survey = self.env['survey.report'].search([('type', '=', 'insurance_application'),
+                                                                 ('surveyor.id','=', user_id)])
+        for rec in insurance_app_survey:
+            result.append({'insurance_app_survey': {'lob': rec.lob.line_of_business,
+                                                    'state': rec.state, 'count': len(insurance_app_survey)}})
+
+        motor_survey = self.env['survey.report'].search([('type', '=', 'motor_claim'),
+                                                                 ('surveyor.id', '=', user_id)])
+        for rec in motor_survey:
+            result.append({'motor_survey': {'type': rec.survey_type,
+                                                    'state': rec.state, 'count': len(motor_survey)}})
+        non_motor_survey = self.env['survey.report'].search([('type', '=', 'non_motor_claim'),
+                                                                 ('surveyor.id', '=', user_id)])
+        for rec in non_motor_survey:
+            result.append({'non_motor_survey': {'lob': rec.lob.line_of_business,
+                                                    'state': rec.state, 'count': len(non_motor_survey)}})
+
+        return result
 
 
 

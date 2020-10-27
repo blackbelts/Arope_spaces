@@ -36,6 +36,15 @@
             <field eval="1" name="perm_read"/>
             <field eval="1" name="perm_create"/>
         </record>
+        <record id="broker_rule02" model="ir.rule">
+            <field name="name">Offer_Broker</field>
+            <field ref="model_final_offer" name="model_id"/>
+            <field name="groups" eval="[(4, ref('Arope-spaces.broker_space_group')),(4, ref('Arope-spaces.client_space_group'))]"/>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_create"/>
+        </record>
         <record id="req_user_rule" model="ir.rule">
             <field name="name">req_user</field>
             <field ref="model_policy_request" name="model_id"/>

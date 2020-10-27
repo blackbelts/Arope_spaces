@@ -60,6 +60,7 @@ class AropeClaim(models.Model):
             currentYear = datetime.today().strftime("%Y")
             currentMonth = datetime.today().strftime("%m")
             person = ''
+            lob = ''
             self.write(
                 {'claim_number': self.type.upper() + '/' + self.product.product_name + '/' + self.policy_num +
                     '/'+ currentYear + '/' + currentMonth + '/' + number})
@@ -71,8 +72,10 @@ class AropeClaim(models.Model):
 
             for rec in self.env['persons'].search([('pin', '=', policy.customer_pin)]):
                 person = rec
-            if person != '':
+            if person != '' and lob != '':
                 self.write({'lob': lob, 'customer_name': person.name, 'phone': person.mobile})
+            elif lob == '':
+                self.write({'customer_name': person.name, 'phone': person.mobile})
             else:
                 self.write({'lob': lob})
 

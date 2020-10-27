@@ -135,10 +135,13 @@
 <odoo>
     <menuitem id="arope_space" name="My Space" web_icon="Arope-spaces,static/description/icon.png"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group,Arope-spaces.managers_group,Arope-spaces.surveyor_group" sequence="-100"/>
 
-    <!--     <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="arope_action_dashboard"-->
-    <!--              parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />-->
-    <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="hr_action_dashboard"
-              parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />
+
+         <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="arope_action_dashboard"
+                  parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />
+    <!--<menuitem id="menu_hrms_dashboard" name="My Portfolio" action="hr_action_dashboard"
+              parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />-->
+<!--    <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="hr_action_dashboard"-->
+<!--              parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />-->
 
 
     <menuitem id="policy_config" name="Configuration"
@@ -173,8 +176,17 @@
     <menuitem name="Claims Management"
               id="claim"
               parent="arope_space"
-              action="claim_app_action"
               sequence="5"/>
+    <menuitem name="Motor Claims"
+              id="motor_claim"
+              parent="claim"
+              action="motor_claim_app_action"
+              sequence="1"/>
+    <menuitem name="Non Motor Claims"
+              id="non_motor_claim"
+              parent="claim"
+              action="non-motor_claim_app_action"
+              sequence="2"/>
 
     <menuitem id="main" name="Medical "
     />
