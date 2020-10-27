@@ -752,7 +752,7 @@ class Brokers(models.Model):
             insurance_app.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image,
                                 'state': rec.state, 'count': len(insurance_app_survey)})
             insurance_survey.append(rec.id)
-        final_insurance['data'] = insurance_survey
+        final_insurance['data'] = insurance_app
         final_insurance['ids'] = insurance_survey
         # final_insurance.update({"data":insurance_app, 'ids': insurance_survey})
         result.update({'insurance_app_survey':final_insurance})
@@ -763,7 +763,9 @@ class Brokers(models.Model):
             motor_claim.append({'type': rec.survey_type,
                                                     'state': rec.state, 'count': len(motor_survey)})
             motor_claim_survey.append(rec.id)
-        final_motor.update({'data': motor_claim, 'ids': motor_claim_survey})
+        final_motor['data'] = motor_claim
+        final_motor['ids'] = motor_claim_survey
+        # final_motor.update({'data': motor_claim, 'ids': motor_claim_survey})
         result.update({'motor_survey': final_motor})
         non_motor_survey = self.env['survey.report'].search([('type', '=', 'non_motor_claim'),
                                                                  ('surveyor.id', '=', user_id)])
@@ -771,7 +773,9 @@ class Brokers(models.Model):
             non_motor_claim.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image,
                                                     'state': rec.state, 'count': len(non_motor_survey)})
             non_motor_claim_survey.append(rec.id)
-        final_non_motor.update({'data': non_motor_claim, 'ids': non_motor_claim_survey})
+        final_non_motor['data'] = non_motor_claim
+        final_non_motor['ids'] = non_motor_claim_survey
+        # final_non_motor.update({'data': non_motor_claim, 'ids': non_motor_claim_survey})
         result.update({'non_motor_survey': final_non_motor})
         user = self.env['res.users'].search([('id', '=', user_id)], limit=1)
         return {
