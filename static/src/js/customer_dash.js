@@ -48,7 +48,7 @@ odoo.define('customer_dashboard.CustomerDashboard', function (require) {
       var get_dashboard = rpc.query({
         model: "arope.broker",
         method: "get_customer_dashboard",
-        args: [user]
+        args: [self.controlPanelParams.context.user_id]
       }).then(function (res) {
         /*self.target_production = res.targetVsProduction
         self.brokerRank = res.rank

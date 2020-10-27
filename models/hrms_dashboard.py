@@ -472,13 +472,14 @@ class Brokers(models.Model):
     @api.model
     def get_user_groups(self,id):
         groups=[]
-        pins=[]
         customer=False
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
-        for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
-            pins.append(rec.pin)
-        if pins:
-            customer=True
+        for rec in self.env['persons'].search([('card_id', '=', user.card_id),('type', '=', 'customer')]):
+            if  self.env['policy.arope'].search([('customer_pin','=',rec.pin)],limit=1):
+                customer = True
+                break
+
+
         for rec in self.env['res.groups'].sudo().search([('users','=',[id]),('category_id','=','space')]):
             groups.append(rec.name)
         return {'groups':groups,'customer':customer}
@@ -715,13 +716,16 @@ class Brokers(models.Model):
     @api.model
     def current_user(self,context_rec):
         context = context_rec
-        record = self.env[context['active_model']].browse(
-            context['active_id'])
-        if context['active_model'] == 'persons':
-            return self.env['res.users'].search([('card_id','=',record.card_id)]).id
-        else:
-            return self.env.user.id
+        record=self.env[context['active_model']].search([("id","=",context['active_id'])])
+        return self.env['res.users'].search([('card_id', '=', record.card_id)]).id
+        # record = self.env[context['active_model']].browse(
+        #     context['active_id'])
+        # if context['active_model'] == 'persons':
+        #     return self.env['res.users'].search([('card_id','=',record.card_id)]).id
+        # else:
+        #     return self.env.user.id
 
+    @api.model
     def surveyor_dashboard(self,user_id):
         result = []
         insurance_app = []
