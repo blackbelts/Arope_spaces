@@ -895,7 +895,7 @@ class SurveyReport(models.Model):
     state = fields.Selection([('pending', 'Pending'), ('surveyor', 'Surveyor Assigned'),
                             ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending')
     status = fields.Many2one('state.setup', domain="[('type', '=', 'survey')]")
-    surveyor = fields.Many2one('res.users', 'Surveyor', domain=lambda self: self.env['res.users'].search([('Surveyor', '=', True)]))
+    surveyor = fields.Many2one('res.users', 'Surveyor', domain=lambda self: [("groups_id", "=", self.env.ref( "Arope-spaces.surveyor_group" ).id)])
     survey_report = fields.Many2many('ir.attachment', string='Upload Survey Report')
     comment = fields.Text('Comment')
     recomm = fields.Text('Recommendation')
