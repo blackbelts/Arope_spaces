@@ -712,7 +712,7 @@ class Brokers(models.Model):
         # self.env['final.offer'].search([('id', '=', id)])[0].write({'type': ''})
         # return True
 
-    @api.model
+    # @api.model
     def current_user(self):
         context = self.env.context
         # record = self.env[context['active_model']].browse(context['active_id'])
