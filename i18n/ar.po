@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-02 10:43+0000\n"
-"PO-Revision-Date: 2020-11-02 15:40+0200\n"
+"POT-Creation-Date: 2020-11-02 15:26+0000\n"
+"PO-Revision-Date: 2020-11-02 22:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -394,7 +394,7 @@ msgstr "العمر"
 #: model:ir.model.fields,field_description:Arope-spaces.field_broker_user_wizard__agent_code
 #: model:ir.model.fields,field_description:Arope-spaces.field_helpdesk_lite_ticket__agent_code
 msgid "Agent Code"
-msgstr ""
+msgstr "كود الوكيل"
 
 #. module: Arope-spaces
 #: model:ir.model.fields.selection,name:Arope-spaces.selection__insurance_quotation__brand__all_brands
@@ -409,7 +409,7 @@ msgstr ""
 #. module: Arope-spaces
 #: model_terms:ir.ui.view,arch_db:Arope-spaces.team_inherit
 msgid "Amount"
-msgstr ""
+msgstr "المبلغ الإجمالى"
 
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_insurances_answers__text
@@ -484,7 +484,7 @@ msgstr "لوحة التحكم"
 #. module: Arope-spaces
 #: model:ir.model.fields.selection,name:Arope-spaces.selection__claim_app__maintenance_centers_in_or_out__in
 msgid "Arope Network"
-msgstr ""
+msgstr "داخل شبكة اروب"
 
 #. module: Arope-spaces
 #: model_terms:ir.ui.view,arch_db:Arope-spaces.assets_login
@@ -564,12 +564,12 @@ msgstr "لوحة تحكم الوكيل"
 #: code:addons/Arope-spaces/static/src/js/new_dashboard.js:0
 #, python-format
 msgid "BrokerDashboard "
-msgstr "لوحة تحكم الوكيل"
+msgstr "لوحة تحكم الوكيل "
 
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_policy_request__cancel_reason
 msgid "Cancel Reason"
-msgstr ""
+msgstr "سبب الرفض"
 
 #. module: Arope-spaces
 #: model:ir.model.fields.selection,name:Arope-spaces.selection__policy_request__type__cancel
@@ -612,7 +612,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:Arope-spaces.selection__state_setup__non_motor_claim_status__cheque
 #: model_terms:ir.ui.view,arch_db:Arope-spaces.form_claim_app
 msgid "Cheque Ready"
-msgstr "الشيك جاهز"
+msgstr ""
 
 #. module: Arope-spaces
 #: model:ir.model.fields.selection,name:Arope-spaces.selection__insurance_quotation__brand__chinese_cars_&_east_asia
@@ -943,7 +943,7 @@ msgstr "لوحة تحكم العميل"
 #: model:ir.model.fields,field_description:Arope-spaces.field_insurance_quotation__email
 #: model:ir.model.fields,field_description:Arope-spaces.field_survey_report__email
 msgid "Customer Email"
-msgstr "إيميل العميل"
+msgstr "البريد الإلكترونى للعميل"
 
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_claim_app__phone
@@ -1000,7 +1000,7 @@ msgstr "التاريخ"
 #: model:ir.model.fields,field_description:Arope-spaces.field_target_policy__from_date
 #: model:ir.model.fields,field_description:Arope-spaces.field_target_rules__from_date
 msgid "Date From"
-msgstr "تاريخ الطلب"
+msgstr "من تاريخ"
 
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_insurance_quotation__dob
@@ -1028,7 +1028,7 @@ msgstr "الأيام"
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_claim_app__declaration_ids
 msgid "Declaration"
-msgstr ""
+msgstr "إقرار التعويض"
 
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_insurance_quotation__deductible
@@ -1087,7 +1087,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:Arope-spaces.field_wizard_insurance_quotation__display_name
 #: model:ir.model.fields,field_description:Arope-spaces.field_wizard_required_documents__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "الإسم"
 
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_claim_lines__question
@@ -1235,7 +1235,7 @@ msgstr "العرض النهائي"
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_insurance_quotation__final_price
 msgid "Final Premium"
-msgstr ""
+msgstr "القسط"
 
 #. module: Arope-spaces
 #. openerp-web
@@ -1715,7 +1715,7 @@ msgstr "مركز صيانة"
 #. module: Arope-spaces
 #: model:ir.ui.menu,name:Arope-spaces.maintenance_center
 msgid "Maintenance Center Setup"
-msgstr "إعداد مراكز الصيانة "
+msgstr "إعداد مراكز الصيانة"
 
 #. module: Arope-spaces
 #: model_terms:ir.ui.view,arch_db:Arope-spaces.form_maintenance_center
@@ -1735,7 +1735,7 @@ msgstr "طبى"
 #. module: Arope-spaces
 #: model:ir.ui.menu,name:Arope-spaces.main
 msgid "Medical "
-msgstr "طبى"
+msgstr "طبى "
 
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_target_rules__member_id
@@ -1764,7 +1764,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:Arope-spaces.field_insurance_quotation__message_ids
 #: model:ir.model.fields,field_description:Arope-spaces.field_survey_report__message_ids
 msgid "Messages"
-msgstr "الرسائل"
+msgstr ""
 
 #. module: Arope-spaces
 #. openerp-web
@@ -2198,7 +2198,7 @@ msgstr "الإنتاجية"
 #: code:addons/Arope-spaces/static/src/xml/hrms_dashboard.xml:0
 #, python-format
 msgid "Production per LOB in EGP"
-msgstr "الإنتاجية لكل نوع تأمين (جم)"
+msgstr "الإنتاجية لكل نوع تأمين جم "
 
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_quotation_price_line__proportional_stamp
@@ -2221,7 +2221,7 @@ msgstr ""
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_sub_questionnaire__questionnaire_ids
 msgid "Questionnaire"
-msgstr "طلب التأمين"
+msgstr ""
 
 #. module: Arope-spaces
 #: model_terms:ir.ui.view,arch_db:Arope-spaces.sub_questionnaire_answers_view_form
@@ -2598,7 +2598,7 @@ msgstr "تم الإرسال"
 #: model:ir.model.fields,field_description:Arope-spaces.field_insurance_quotation__sum_insured
 #: model:ir.model.fields,field_description:Arope-spaces.field_quotation_service__sum_insured
 msgid "Sum Insured"
-msgstr "مبلغ التأمين "
+msgstr "مبلغ التأمين"
 
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_quotation_price_line__supervisory_stamp
@@ -2653,7 +2653,7 @@ msgstr "تقرير المعاينة"
 #. module: Arope-spaces
 #: model_terms:ir.ui.view,arch_db:Arope-spaces.form_product_inherit
 msgid "Survey Setup"
-msgstr "إعدادات المعاينة"
+msgstr ""
 
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_insurance_quotation__survey_state
@@ -2918,7 +2918,7 @@ msgstr ""
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_broker_user_wizard__username
 msgid "User Name"
-msgstr ""
+msgstr "الإسم"
 
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_final_offer__value
@@ -2929,7 +2929,7 @@ msgstr ""
 #. module: Arope-spaces
 #: model_terms:ir.ui.view,arch_db:Arope-spaces.partner_id_tree_view
 msgid "View Dashboard"
-msgstr ""
+msgstr "لوحة التحكم"
 
 #. module: Arope-spaces
 #. openerp-web
@@ -3023,7 +3023,7 @@ msgstr ""
 #: code:addons/Arope-spaces/static/src/xml/customer_dash.xml:0
 #, python-format
 msgid "Your Complaints"
-msgstr ""
+msgstr "الشكاوى"
 
 #. module: Arope-spaces
 #. openerp-web
@@ -3098,7 +3098,7 @@ msgstr ""
 #. module: Arope-spaces
 #: model_terms:ir.ui.view,arch_db:Arope-spaces.get_a_quote_view_form
 msgid "Your Total Quote"
-msgstr ""
+msgstr "عرض سعر"
 
 #. module: Arope-spaces
 #. openerp-web
@@ -3118,7 +3118,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:Arope-spaces.field_medical_family__age
 #: model:ir.model.fields,field_description:Arope-spaces.field_members__age
 msgid "age"
-msgstr ""
+msgstr "العمر"
 
 #. module: Arope-spaces
 #: model:ir.model,name:Arope-spaces.model_arope_broker
@@ -3198,7 +3198,7 @@ msgstr ""
 #. module: Arope-spaces
 #: model:ir.model,name:Arope-spaces.model_final_offer
 msgid "final.offer"
-msgstr "العرض لبنهائى"
+msgstr ""
 
 #. module: Arope-spaces
 #: model:ir.model.fields.selection,name:Arope-spaces.selection__medical_family__type__grandparents
@@ -3255,7 +3255,7 @@ msgstr ""
 #. module: Arope-spaces
 #: model:ir.model,name:Arope-spaces.model_members
 msgid "members"
-msgstr "أعضاء"
+msgstr "الأعضاء"
 
 #. module: Arope-spaces
 #: model:ir.model.fields,field_description:Arope-spaces.field_medical_family__name

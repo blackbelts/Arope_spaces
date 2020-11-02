@@ -974,14 +974,14 @@ class FamilyAge(models.Model):
                 age += 1
             self.age = age
             
-class SurveyQuestions(models.Model):
-
-    _inherit = 'survey.survey'
-    product_id = fields.Many2one('insurance.product', 'Product')
-
-    @api.onchange('product_id')
-    def get_title(self):
-        self.title = self.product_id.product_name
+# class SurveyQuestions(models.Model):
+#
+#     _inherit = 'survey.survey'
+#     product_id = fields.Many2one('insurance.product', 'Product')
+#
+#     @api.onchange('product_id')
+#     def get_title(self):
+#         self.title = self.product_id.product_name
 
 
 
