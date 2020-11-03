@@ -85,6 +85,9 @@ class AropeClaim(models.Model):
                 self.write({'customer_name': person.name, 'phone': person.mobile})
             else:
                 self.write({'lob': lob})
+            if self.state:
+                print('hhhhhhhhh')
+                self.message = self.state.message
 
     @api.onchange('type')
     def get_questions(self):
@@ -113,6 +116,9 @@ class AropeClaim(models.Model):
                 else:
                     self.declaration_ids.create(
                         {"question": question.id,"claim_declaration_id": self.id})
+        if self.state:
+            print('hhhhhhhhh')
+            self.message = self.state.message
 
     def complete_and_proceed(self):
         if self.status == 'claim_intimation':
@@ -133,11 +139,13 @@ class AropeClaim(models.Model):
                         self.declaration_ids.create(
                             {"question": question.id, "claim_declaration_id": self.id})
 
+
         elif self.status == 'surveyor':
             self.write({"state": self.env['state.setup'].search(
                 [('claim_status', '=', 'survey'), ('type', '=', 'claim')]).id})
             self.write({"status": "survey"})
             self.write({"sub_state": "pending"})
+
         elif self.status == 'repair':
             self.write({"state": self.env['state.setup'].search(
                 [('claim_status', '=', 'repair_completed'), ('type', '=', 'claim')]).id})
@@ -145,6 +153,9 @@ class AropeClaim(models.Model):
             self.write({"sub_state": "pending"})
         else:
             self.write({'sub_state': 'complete'})
+        if self.state:
+            print('hhhhhhhhh')
+            self.message = self.state.message
 
     def invoice_details(self):
         self.write({"sub_state": "invoice_details"})
@@ -155,6 +166,9 @@ class AropeClaim(models.Model):
             [('claim_status', '=', 'repair'), ('type', '=', 'claim')]).id})
         self.write({"status": "repair"})
         self.write({"sub_state": "pending"})
+        if self.state:
+            print('hhhhhhhhh')
+            self.message = self.state.message
 
     def assign_surveyor(self):
         self.write({"sub_state": "surveyor"})
@@ -221,24 +235,36 @@ class AropeClaim(models.Model):
                  'message': self.env['state.setup'].search(
                      [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).message,
                  "lob": lob, 'product_id': product,})
+        if self.state:
+            print('hhhhhhhhh')
+            self.message = self.state.message
 
     def total_loss(self):
         self.write({"state": self.env['state.setup'].search(
             [('claim_status', '=', 'total_loss'), ('type', '=', 'claim')]).id})
         self.write({"status": "total_loss"})
         self.write({"sub_state": "complete"})
+        if self.state:
+            print('hhhhhhhhh')
+            self.message = self.state.message
 
     def take_cheque(self):
         self.write({"state": self.env['state.setup'].search(
             [('claim_status', '=', 'cheque'), ('type', '=', 'claim')]).id})
         self.write({"status": "cheque"})
         self.write({"sub_state": "complete"})
+        if self.state:
+            print('hhhhhhhhh')
+            self.message = self.state.message
 
     def car_release(self):
         self.write({"state": self.env['state.setup'].search(
             [('claim_status', '=', 'car_release'), ('type', '=', 'claim')]).id})
         self.write({"status": "car_release"})
         self.write({"sub_state": "complete"})
+        if self.state:
+            print('hhhhhhhhh')
+            self.message = self.state.message
 
     def get_survey(self):
         self.ensure_one()
@@ -257,22 +283,33 @@ class AropeClaim(models.Model):
         self.write({"state": self.env['state.setup'].search(
             [('non_motor_claim_status', '=', 'estimation'), ('type', '=', 'claim')]).id})
         self.write({"status": "estimation"})
+        if self.state:
+            print('hhhhhhhhh')
+            self.message = self.state.message
 
     def cheque_ready(self):
         self.write({"state": self.env['state.setup'].search(
             [('non_motor_claim_status', '=', 'cheque'), ('type', '=', 'claim')]).id})
         self.write({"status": "cheque"})
+        if self.state:
+            print('hhhhhhhhh')
+            self.message = self.state.message
 
     def reject(self):
         if self.type == 'motor':
             self.write({"state": self.env['state.setup'].search(
                 [('claim_status', '=', 'reject'), ('type', '=', 'claim')]).id})
             self.write({"status": "reject"})
+
         else:
             self.write({"state": self.env['state.setup'].search(
                 [('non_motor_claim_status', '=', 'reject'), ('type', '=', 'claim')]).id})
             self.write({"status": "reject"})
 
+        if self.state:
+            print('hhhhhhhhh')
+            self.message = self.state.message
+            
     def related_policy(self):
         policy = self.env['policy.arope'].search([('product', '=', self.product.product_name), ('policy_num', '=', int(self.policy_num))
                                                    ], limit=1)
