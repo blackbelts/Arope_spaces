@@ -1516,7 +1516,7 @@ msgstr "رسوم الإصدار"
 #: model:ir.model.fields.selection,name:Arope_spaces.selection__state_history__state__application
 #: model:ir.model.fields.selection,name:Arope_spaces.selection__state_setup__status__application
 msgid "Issue In Progress"
-msgstr "الإصدار قيد التنفيذ"
+msgstr "الإصدار قيد التقدم"
 
 #. module: Arope_spaces
 #. openerp-web
