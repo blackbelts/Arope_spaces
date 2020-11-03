@@ -13,10 +13,10 @@ odoo.define('surveyor_dashboard.SurveyorDashboard', function (require) {
   var SurveyorDashboard = AbstractAction.extend({
     template: 'SurveyorDashboardMain',
     cssLibs: [
-      '/Arope-spaces/static/src/css/lib/nv.d3.css'
+      '/Arope_spaces/static/src/css/lib/nv.d3.css'
     ],
     jsLibs: [
-      '/Arope-spaces/static/src/js/lib/d3.min.js'
+      '/Arope_spaces/static/src/js/lib/d3.min.js'
     ],
     events: {
 

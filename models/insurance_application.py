@@ -576,7 +576,7 @@ class Quotation(models.Model):
         self.test_state = self.env['state.setup'].search([('status', '=', 'offer_ready'),('type', '=', 'insurance_app')]).id
 
     def get_history(self):
-        # tree_view_id = self.env.ref("Arope-spaces.state_history_view_tree").id
+        # tree_view_id = self.env.ref("Arope_spaces.state_history_view_tree").id
         # ctx = dict(self.env.context)
         # ctx.update({
         #     'quotation_id': self.id,'name':'test', 'lob': self.lob
@@ -594,7 +594,7 @@ class Quotation(models.Model):
         }
 
     def get_survey(self):
-        # tree_view_id = self.env.ref("Arope-spaces.state_history_view_tree").id
+        # tree_view_id = self.env.ref("Arope_spaces.state_history_view_tree").id
         # ctx = dict(self.env.context)
         # ctx.update({
         #     'quotation_id': self.id,'name':'test', 'lob': self.lob
@@ -895,7 +895,7 @@ class SurveyReport(models.Model):
     state = fields.Selection([('pending', 'Pending'), ('surveyor', 'Surveyor Assigned'),
                             ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending')
     status = fields.Many2one('state.setup', domain="[('type', '=', 'survey')]")
-    surveyor = fields.Many2one('res.users', 'Surveyor', domain=lambda self: [("groups_id", "=", self.env.ref( "Arope-spaces.surveyor_group" ).id)])
+    surveyor = fields.Many2one('res.users', 'Surveyor', domain=lambda self: [("groups_id", "=", self.env.ref( "Arope_spaces.surveyor_group" ).id)])
     survey_report = fields.Many2many('ir.attachment', string='Upload Survey Report')
     comment = fields.Text('Comment')
     recomm = fields.Text('Recommendation')

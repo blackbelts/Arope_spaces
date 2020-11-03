@@ -4,7 +4,7 @@
                 string="Offer"
                 model="insurance.quotation"
                 report_type="qweb-pdf"
-                name="Arope-spaces.offer"
+                name="Arope_spaces.offer"
         />
 
         <template id="offer">

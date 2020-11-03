@@ -11,10 +11,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
   var BrokerDashboard = AbstractAction.extend({
     template: 'BrokerDashboardMain',
     cssLibs: [
-      '/Arope-spaces/static/src/css/lib/nv.d3.css'
+      '/Arope_spaces/static/src/css/lib/nv.d3.css'
     ],
     jsLibs: [
-      '/Arope-spaces/static/src/js/lib/d3.min.js'
+      '/Arope_spaces/static/src/js/lib/d3.min.js'
     ],
     events: {
         'click #policies': 'policies_list',
@@ -211,15 +211,15 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
             if(e.stage=="Canceled")
                 res.complaint_count.splice(i,1)
             else if(e.stage=="New"){
-                e.image="/Arope-spaces/static/src/img/red.png"
+                e.image="/Arope_spaces/static/src/img/red.png"
                 e.subClass="redspan"
             }
             else if(e.stage=="Solved"){
-                e.image="/Arope-spaces/static/src/img/green.png"
+                e.image="/Arope_spaces/static/src/img/green.png"
                 e.subClass="greenspan"
             }
             else{
-                 e.image="/Arope-spaces/static/src/img/orange.png"
+                 e.image="/Arope_spaces/static/src/img/orange.png"
                  e.subClass="orangespan"
             }
         })

@@ -227,7 +227,7 @@ class QuotationService(models.Model):
         self.hide_button = True
         product = self.env['insurance.product'].search([('line_of_bus', '=', self.lob.id)]).id
 
-        form_view_id = self.env.ref("Arope-spaces.insurance_view_form").id
+        form_view_id = self.env.ref("Arope_spaces.insurance_view_form").id
         # ctx = dict(self.env.context)
         # ctx.update({
         #     'quotation_id': self.id,'name':'test', 'lob': self.lob

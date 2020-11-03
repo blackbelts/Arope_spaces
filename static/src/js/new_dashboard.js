@@ -11,10 +11,10 @@ odoo.define('arope_dashboard.AropeDashboard', function (require) {
   var HrDashboard = AbstractAction.extend({
     template: 'AropeDashboardMain',
     cssLibs: [
-      '/Arope-spaces/static/src/css/lib/nv.d3.css'
+      '/Arope_spaces/static/src/css/lib/nv.d3.css'
     ],
     jsLibs: [
-      '/Arope-spaces/static/src/js/lib/d3.min.js'
+      '/Arope_spaces/static/src/js/lib/d3.min.js'
     ],
     events: {
         'click #broker': 'brokerDashboard',

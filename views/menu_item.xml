@@ -1,11 +1,11 @@
 
 <!--<odoo>-->
 <!--<<<<<<< HEAD-->
-<!--      <menuitem id="arope_space" name="My Space" web_icon="Arope-spaces,static/description/icon.png"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group,Arope-spaces.managers_group,Arope-spaces.surveyor_group" sequence="-100"/>-->
+<!--      <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group,Arope_spaces.surveyor_group" sequence="-100"/>-->
 
 
 <!--   <menuitem id="menu_hrms_dashboard" name="Dashboard" action="hr_action_dashboard"-->
-<!--            parent="arope_space" groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group" />-->
+<!--            parent="arope_space" groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group" />-->
 <!--         <menuitem id="policy_view" name="Policies"-->
 <!--                  action="policy_form_action" parent="arope_space"/>-->
 <!--      <menuitem id="claim_view" name="Claims"-->
@@ -73,11 +73,11 @@
 <!--    <menuitem id="quick_quote_view" name="Quick Quote"-->
 <!--                  action="quickQuoteAction" parent="arope_space"/>-->
 <!--=======-->
-<!--    <menuitem id="arope_space" name="My Space" web_icon="Arope-spaces,static/description/icon.png"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group,Arope-spaces.managers_group,Arope-spaces.surveyor_group" sequence="-100"/>-->
+<!--    <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group,Arope_spaces.surveyor_group" sequence="-100"/>-->
 
 
 <!--    <menuitem id="menu_hrms_dashboard" name="Dashboard" action="hr_action_dashboard"-->
-<!--              parent="arope_space" groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group" />-->
+<!--              parent="arope_space" groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group" />-->
 
 
 <!--    <menuitem id="policy_config" name="Configuration"-->
@@ -133,19 +133,19 @@
 
 <!--</odoo>-->
 <odoo>
-    <menuitem id="arope_space" name="My Space" web_icon="Arope-spaces,static/description/icon.png"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group,Arope-spaces.managers_group,Arope-spaces.surveyor_group" sequence="-100"/>
+    <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group,Arope_spaces.surveyor_group" sequence="-100"/>
 
 
          <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="arope_action_dashboard"
-                  parent="arope_space" groups="Arope-spaces.broker_space_group,Arope-spaces.surveyor_group,Arope-spaces.client_space_group" sequence="0" />
+                  parent="arope_space" groups="Arope_spaces.broker_space_group,Arope_spaces.surveyor_group,Arope_spaces.client_space_group" sequence="0" />
     <!--<menuitem id="menu_hrms_dashboard" name="My Portfolio" action="hr_action_dashboard"
-              parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />-->
+              parent="arope_space" groups="Arope_spaces.broker_space_group" sequence="0" />-->
 <!--    <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="hr_action_dashboard"-->
-<!--              parent="arope_space" groups="Arope-spaces.broker_space_group" sequence="0" />-->
+<!--              parent="arope_space" groups="Arope_spaces.broker_space_group" sequence="0" />-->
 
 
     <menuitem id="policy_config" name="Configuration"
-              parent="arope_space" sequence="4" groups="Arope-spaces.managers_group" />
+              parent="arope_space" sequence="4" groups="Arope_spaces.managers_group" />
 
 
 
@@ -202,16 +202,16 @@
               action="claim_setup_action" sequence="8000"/>
 
     <menuitem id="request" name="Requests"
-              action="request_action" parent="policy_service" groups="Arope-spaces.managers_group" />
+              action="request_action" parent="policy_service" groups="Arope_spaces.managers_group" />
     <menuitem id="end_request_form" name=" Endorsement Requests"
-              action="request_action_end_form" parent="policy_service" groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group" />
+              action="request_action_end_form" parent="policy_service" groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group" />
     <menuitem id="renew_request_form" name="Renewal Requests"
-              action="request_action_renew_form" parent="policy_service"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group"/>
+              action="request_action_renew_form" parent="policy_service"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group"/>
     <menuitem id="cancel_request_form" name="Cancellation Requests"
-              action="request_action_cancel_form" parent="policy_service" groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group"  />
+              action="request_action_cancel_form" parent="policy_service" groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group"  />
 
     <menuitem id="complain_form" name="Complaints"
-              action="complaint_action_partner" parent="arope_space"  groups="Arope-spaces.broker_space_group,Arope-spaces.client_space_group"/>
+              action="complaint_action_partner" parent="arope_space"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group"/>
 
     <menuitem id="quick_quote_view" name="Quick Quote"
               action="quickQuoteAction" parent="new_buss"  sequence="0"/>

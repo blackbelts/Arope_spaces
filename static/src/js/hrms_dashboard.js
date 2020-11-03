@@ -13,10 +13,10 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
   var HrDashboard = AbstractAction.extend({
     template: 'HrDashboardMain',
     cssLibs: [
-      '/Arope-spaces/static/src/css/lib/nv.d3.css'
+      '/Arope_spaces/static/src/css/lib/nv.d3.css'
     ],
     jsLibs: [
-      '/Arope-spaces/static/src/js/lib/d3.min.js'
+      '/Arope_spaces/static/src/js/lib/d3.min.js'
     ],
     events: {
 
@@ -232,15 +232,15 @@ odoo.define('hrms_dashboard.Dashboard', function (require) {
             if(e.stage=="Canceled")
                 res.complaint_count.splice(i,1)
             else if(e.stage=="New"){
-                e.image="/Arope-spaces/static/src/img/red.png"
+                e.image="/Arope_spaces/static/src/img/red.png"
                 e.subClass="redspan"
             }
             else if(e.stage=="Solved"){
-                e.image="/Arope-spaces/static/src/img/green.png"
+                e.image="/Arope_spaces/static/src/img/green.png"
                 e.subClass="greenspan"
             }
             else{
-                 e.image="/Arope-spaces/static/src/img/orange.png"
+                 e.image="/Arope_spaces/static/src/img/orange.png"
                  e.subClass="orangespan"
             }
         })

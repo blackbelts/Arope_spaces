@@ -9,20 +9,20 @@
   </t>
   <t t-name="brokerdash">
      <xpath expr="." position="inside">
-      <link rel="stylesheet" href="/Arope-spaces/static/src/css/themify-icons.css" />
-      <link rel="stylesheet" href="/Arope-spaces/static/src/css/metisMenu.css" />
-      <link rel="stylesheet" href="/Arope-spaces/static/src/css/owl.carousel.min.css" />
-      <link rel="stylesheet" href="/Arope-spaces/static/src/css/slicknav.min.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/themify-icons.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/metisMenu.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/owl.carousel.min.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/slicknav.min.css" />
       <!-- amchart css -->
       <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
       <!-- others css -->
-      <link rel="stylesheet" href="/Arope-spaces/static/src/css/all.min.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/all.min.css" />
 
-      <link rel="stylesheet" href="/Arope-spaces/static/src/css/typography.css" />
-      <link rel="stylesheet" href="/Arope-spaces/static/src/css/default-css.css" />
-      <link rel="stylesheet" href="/Arope-spaces/static/src/css/styles.css" />
-      <link rel="stylesheet" href="/Arope-spaces/static/src/css/responsive.css" />
-      <script src="/Arope-spaces/static/src/js/modernizr-2.8.3.min.js"></script>
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/typography.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/default-css.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/styles.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/responsive.css" />
+      <script src="/Arope_spaces/static/src/js/modernizr-2.8.3.min.js"></script>
     </xpath>
     <!--[if lt IE 8]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -251,7 +251,7 @@
                         <tbody>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
                             </td>
                             <td>
                               <t t-esc="widget.renew_statistics.Red.count" />
@@ -262,7 +262,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
                             </td>
                             <td>
                               <t t-esc="widget.renew_statistics.Orange.count" />
@@ -273,7 +273,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
                             </td>
                             <td>
                               <t t-esc="widget.renew_statistics.Green.count" />
@@ -310,7 +310,7 @@
                         <tbody>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
                             </td>
                             <td>
                               <t t-esc="widget.collections_statistics.Red.count" />
@@ -321,7 +321,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
                             </td>
                             <td>
                               <t t-esc="widget.collections_statistics.Orange.count" />
@@ -332,7 +332,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
                             </td>
                             <td>
                               <t t-esc="widget.collections_statistics.Green.count" />
@@ -539,7 +539,7 @@
                         <tbody>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
                             </td>
                             <td>Pending</td>
                             <td >
@@ -553,7 +553,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
                             </td>
                             <td>Submitted</td>
                             <td >
@@ -566,7 +566,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
                             </td>
                             <td>Issued</td>
                             <td>
@@ -606,7 +606,7 @@
                         <tbody>
                           <tr>
                              <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
                             </td>
                             <td>Pending</td>
                             <td >
@@ -620,7 +620,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
                             </td>
                             <td>Submitted</td>
                             <td >
@@ -633,7 +633,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
                             </td>
                             <td>Issued</td>
                             <td>
@@ -673,7 +673,7 @@
                         <tbody>
                           <tr>
                              <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/red.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
                             </td>
                             <td>Pending</td>
                             <td >
@@ -687,7 +687,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/orange.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
                             </td>
                             <td>Submitted</td>
                             <td >
@@ -700,7 +700,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope-spaces/static/src/img/green.png" />
+                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
                             </td>
                             <td>Issued</td>
                             <td>
@@ -730,18 +730,18 @@
     </div>
     <!-- page container area end -->
     <xpath expr="." position="inside">
-      <script src="/Arope-spaces/static/src/js/popper.min.js"></script>
-      <script src="/Arope-spaces/static/src/js/owl.carousel.min.js"></script>
-      <script src="/Arope-spaces/static/src/js/metisMenu.min.js"></script>
-      <script src="/Arope-spaces/static/src/js/jquery.slimscroll.min.js"></script>
-      <script src="/Arope-spaces/static/src/js/jquery.slicknav.min.js"></script>
-      <script src="/Arope-spaces/static/src/js/amcharts.js"></script>
-      <script src="/Arope-spaces/static/src/js/serial.js"></script>
-      <script src="/Arope-spaces/static/src/js/pie.js"></script>
-      <script src="/Arope-spaces/static/src/js/export.min.js"></script>
-      <script src="/Arope-spaces/static/src/js/light.js"></script>
-      <script src="/Arope-spaces/static/src/js/plugins.js"></script>
-      <script src="/Arope-spaces/static/src/js/scripts.js"></script>
+      <script src="/Arope_spaces/static/src/js/popper.min.js"></script>
+      <script src="/Arope_spaces/static/src/js/owl.carousel.min.js"></script>
+      <script src="/Arope_spaces/static/src/js/metisMenu.min.js"></script>
+      <script src="/Arope_spaces/static/src/js/jquery.slimscroll.min.js"></script>
+      <script src="/Arope_spaces/static/src/js/jquery.slicknav.min.js"></script>
+      <script src="/Arope_spaces/static/src/js/amcharts.js"></script>
+      <script src="/Arope_spaces/static/src/js/serial.js"></script>
+      <script src="/Arope_spaces/static/src/js/pie.js"></script>
+      <script src="/Arope_spaces/static/src/js/export.min.js"></script>
+      <script src="/Arope_spaces/static/src/js/light.js"></script>
+      <script src="/Arope_spaces/static/src/js/plugins.js"></script>
+      <script src="/Arope_spaces/static/src/js/scripts.js"></script>
     </xpath>
   </t>
 

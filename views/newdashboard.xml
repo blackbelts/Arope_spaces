@@ -7,15 +7,15 @@
     </data>
     <template id="arope_assets_backend_dashboard" name="Arope Dashboard assets inherit" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
-            <link rel="stylesheet" href="/Arope-spaces/static/src/css/hrms_dashboard.css" />
-            <script type="text/javascript" src="/Arope-spaces/static/src/js/new_dashboard.js" />
-            <link rel="stylesheet" href="/Arope-spaces/static/src/css/lib/nv.d3.css" />
-            <script type="text/javascript" src="/Arope-spaces/static/src/js/lib/d3.min.js" />
+            <link rel="stylesheet" href="/Arope_spaces/static/src/css/hrms_dashboard.css" />
+            <script type="text/javascript" src="/Arope_spaces/static/src/js/new_dashboard.js" />
+            <link rel="stylesheet" href="/Arope_spaces/static/src/css/lib/nv.d3.css" />
+            <script type="text/javascript" src="/Arope_spaces/static/src/js/lib/d3.min.js" />
         </xpath>
     </template>
     <template id="arope_assets_frontend" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
-            <script type="text/javascript" src="/Arope-spaces/static/src/js/menu-item.js" />
+            <script type="text/javascript" src="/Arope_spaces/static/src/js/menu-item.js" />
         </xpath>
     </template>
 </odoo>

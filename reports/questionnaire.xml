@@ -4,7 +4,7 @@
                 string="Questionnaire"
                 model="insurance.quotation"
                 report_type="qweb-pdf"
-                name="Arope-spaces.questionnaire"
+                name="Arope_spaces.questionnaire"
         />
 
         <template id="questionnaire">
