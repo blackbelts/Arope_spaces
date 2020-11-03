@@ -12,13 +12,14 @@
 
     'depends': ['base','sales_team','helpdesk_inherit',
                 'smart_travel_agency','personal_acciedent',
-                'survey',
+                # 'survey',
                'motor','medical' , 'mail','arope-conf'],
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
         'security/security.xml',
+        'security/ir.model.access.csv',
+
         'views/setup.xml',
 
         'views/get_a_quote.xml',
@@ -39,7 +40,7 @@
         'views/state.xml',
         'views/answer.xml',
         'views/claim_app.xml',
-        'views/survey_setup.xml',
+        # 'views/survey_setup.xml',
         'views/required_document_wizard.xml',
         'views/help_desk.xml',
         'views/policy_view.xml',
