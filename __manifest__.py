@@ -63,5 +63,5 @@
         # '/travel_quotation/static/src/css/main.css'
     ],
     'images': ['static/description/icon.png'],
-    'css': ['/Arope-space/static/src/css/main.css'],
+    'css': ['/Arope_space/static/src/css/main.css'],
 }

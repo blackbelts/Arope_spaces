@@ -46,12 +46,19 @@ class AropeClaim(models.Model):
     initial_invoice = fields.Many2many('ir.attachment', string="Upload Initial Invoice",relation="claim_app_initial_invoice")
     invoice_detail = fields.Many2many('ir.attachment', string="Upload Invoice Details", relation="claim_app_invoice_details")
     total_initial_invoice = fields.Float('Total Initial Invoice')
+    message = fields.Text('Description')
     # survey_report = fields.Many2many('ir.attachment', string="Upload Survey Report", relation="claim_app_survey_report")
 
     # @api.onchange('state')
     # def compute_status(self):
     #     self.write({"status": self.state.claim_status})
     #     self.write({"sub_state": "pending"})
+
+    @api.onchange('state', 'type')
+    def get_message(self):
+        if self.state:
+            print('hhhhhhhhh')
+            self.message = self.state.message
 
     @api.onchange('type','product','policy_num')
     def compute_claim_number(self):

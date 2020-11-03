@@ -109,6 +109,15 @@
                         <button class="oe_stat_button" string="Survey Report" icon="fa-file" type="object" name="get_survey" groups="Arope_spaces.managers_group,Arope_spaces.surveyor_group">
                         </button>
                     </div>
+                    <div>
+                        <img style="height: 50px;width: 50px;float: left;" src="/Arope_spaces/static/src/img/call.png"/>
+                        <span style="float: left; margin-left: 10px;font-size: 30px; color: #078282FF !important;"><i class="fa fa-comment"></i></span>
+                        <div style="float: left; margin-left: 10px; color: #078282FF !important; font-weight: 900; padding: 4px; border: solid 1px lightgray;">
+                            <span attrs="{'invisible': [('message', '!=', False)]}">Welcome to AROPE Egypt Self Service, I am here to help you until your policy is issued.<br/>
+                                Kindly fill the application form and upload the required documents below</span>
+                            <field attrs="{'invisible': [('message', '=', False)]}" name="message" readonly="1" force_save="1"/>
+                        </div>
+                    </div>
                     <group>
                         <group>
                             <field name="status" invisible="1"/>
