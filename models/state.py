@@ -39,7 +39,7 @@ class StateSetup(models.Model):
     product_ids = fields.Many2many('insurance.product', string='Product')
     # state_for = fields.Selection([('broker', 'Broker'),
     #                               ('surveyor', 'Surveyor'),('underwriter', 'Underwriter')], string='State For')
-    message = fields.Text('Message')
+    message = fields.Text('Message',translate=True)
 
     @api.onchange('status', 'claim_status', 'survey_status')
     def compute_status(self):
