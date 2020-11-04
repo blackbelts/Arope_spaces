@@ -45,10 +45,20 @@ odoo.define('customer_dashboard.CustomerDashboard', function (require) {
     fetch_data: function () {
     var user = session.uid
       var self = this;
+      var context
+       if(self.controlPanelParams.context.user_id == undefined ){
+            console.log("if")
+            context= JSON.parse(localStorage.getItem('context'))
+       }
+       else{
+            console.log("else")
+            localStorage.setItem('context', JSON.stringify(self.controlPanelParams.context));
+            context = self.controlPanelParams.context
+       }
       var get_dashboard = rpc.query({
         model: "arope.broker",
         method: "get_customer_dashboard",
-        args: [self.controlPanelParams.context.user_id]
+        args: [context.user_id]
       }).then(function (res) {
         /*self.target_production = res.targetVsProduction
         self.brokerRank = res.rank
