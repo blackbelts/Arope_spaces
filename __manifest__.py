@@ -13,7 +13,7 @@
     'depends': ['base','sales_team','helpdesk_inherit',
                 'smart_travel_agency','personal_acciedent',
                 # 'survey',
-               'motor','medical' , 'mail','arope-conf'],
+               'motor','medical' , 'mail','arope_conf'],
 
     # always loaded
     'data': [
