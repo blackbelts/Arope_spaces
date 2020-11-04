@@ -34,23 +34,23 @@ class Quotation(models.Model):
     # insurance_type = fields.Selection([
     #     ('medical', 'Medical'),
     #     ('non-medical', 'Non-Medical')], string='Insurance Type', default='medical', )
-    lob = fields.Many2one('insurance.line.business', 'LOB', required=True,translate=True)
-    product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]",translate=True)
+    lob = fields.Many2one('insurance.line.business', 'LOB', required=True)
+    product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
     test_state = fields.Many2one('state.setup', domain="[('product_ids', 'in', product_id),"
-                                                       "('type', '=', 'insurance_app')]",translate=True)
+                                                       "('type', '=', 'insurance_app')]")
     # domain = "[('id', '!=', 26)]"
-    name = fields.Char('Customer Name', required=True,translate=True)
+    name = fields.Char('Customer Name', required=True)
     # contact = fields.Char('Contact', required=True)
-    phone = fields.Char('Customer Mobile', required=True,translate=True)
-    email = fields.Char('Customer Email', required=True,translate=True)
-    target_price = fields.Text('High Level Requirements',translate=True)
-    application_number = fields.Char(string='Application Number', copy=False, index=True,translate=True)
-    application_date = fields.Date('Application Date', default=datetime.today(), readonly=True,translate=True)
+    phone = fields.Char('Customer Mobile', required=True)
+    email = fields.Char('Customer Email', required=True)
+    target_price = fields.Text('High Level Requirements')
+    application_number = fields.Char(string='Application Number', copy=False, index=True)
+    application_date = fields.Date('Application Date', default=datetime.today(), readonly=True)
     quote_trials = fields.Char(string='Quote Trials')
     # questions_ids = fields.One2many('questionnaire.line.setup', 'application_id')
     # survey_ids = fields.One2many('survey.report', 'application_id')
-    main_phone = fields.Char('Mobile Number (Main)',translate=True)
-    spare_phone = fields.Char('Mobile Number (Spare)',translate=True)
+    main_phone = fields.Char('Mobile Number (Main)')
+    spare_phone = fields.Char('Mobile Number (Spare)')
     state = fields.Selection([
         ('application_form', 'Application Form'),
         ('initial_offer', 'Initial Offer'),
@@ -58,60 +58,60 @@ class Quotation(models.Model):
         ('final_offer', 'Final Offer'),
         ('application', 'Issue In Progress'),
         ('policy', 'Policy Issued'),
-        ('cancel', 'Lost')], string='State',translate=True)
+        ('cancel', 'Lost')], string='State')
     rejection_reason = fields.Selection([('price', 'Price'), ('benefits', 'Benefit')], sting="Reason",translate=True)
-    comment = fields.Text('Comment',translate=True)
-    recomm = fields.Text('Recommendation',translate=True)
+    comment = fields.Text('Comment')
+    recomm = fields.Text('Recommendation')
     sub_state = fields.Selection([('pending', 'Pending'),('surveyor', 'Assign Surveyor'), ('complete', 'Submitted'),
                                   ('accepted', 'Accepted'),('cancel', 'Rejected')], string="Sub State", readonly=True)
 
 
-    address = fields.Char('Full Address',translate=True)
+    address = fields.Char('Full Address')
     bussines_activity = fields.Char('Client business activity')
-    sum_insured = fields.Float('Sum Insured',translate=True)
+    sum_insured = fields.Float('Sum Insured')
 
-    name_of_contact_person = fields.Char('Survey Contact Person',translate=True)
+    name_of_contact_person = fields.Char('Survey Contact Person')
     # inspection_address = fields.Char('Full Inspection Address')
     # available_time_from = fields.Datetime('Available Time From')
     # available_time_to = fields.Datetime('To')
     # image = fields.Binary("Image", help="Select image here")
-    questionnaire = fields.Many2many('ir.attachment', string="Download Application Form",relation="insurance_quotation_questionnaire",translate=True)
-    file_name = fields.Char("File Name",translate=True)
-    upload_questionnaire = fields.Many2many('ir.attachment', string="Upload Scanned Form",relation="insurance_quotation_issued_questionnaire",translate=True)
-    price = fields.Float('Premium',translate=True)
+    questionnaire = fields.Many2many('ir.attachment', string="Download Application Form",relation="insurance_quotation_questionnaire")
+    file_name = fields.Char("File Name")
+    upload_questionnaire = fields.Many2many('ir.attachment', string="Upload Scanned Form",relation="insurance_quotation_issued_questionnaire")
+    price = fields.Float('Premium')
     # member_ids = fields.One2many('members', 'quotation_id', 'Members')
-    dob = fields.Date('Date OF Birth', default=datetime.today(),translate=True)
+    dob = fields.Date('Date OF Birth', default=datetime.today())
     product = fields.Many2one('medical.price', 'Product', domain="[('package', '=', package)]"
                               ,translate=True)
-    application = fields.Binary("Application",translate=True)
-    final_price = fields.Float('Final Premium',translate=True)
+    application = fields.Binary("Application")
+    final_price = fields.Float('Final Premium')
     # final_price = fields.Float('Final Price')
-    final_application_ids = fields.One2many('final.application', 'quotation_id',translate=True)
+    final_application_ids = fields.One2many('final.application', 'quotation_id')
     # questions_ids = fields.One2many('insurances.answers', 'text_application_id')
-    text_questions_ids = fields.One2many('insurances.answers', 'text_application_id',translate=True)
-    choose_questions_ids = fields.One2many('insurances.answers', 'choose_application_id',translate=True)
-    numerical_questions_ids = fields.One2many('insurances.answers', 'numerical_application_id',translate=True)
-    survey_report_ids = fields.One2many('survey.report', 'application_id',translate=True)
-    available_time_ids = fields.One2many('available.time', 'application_id', sting='Available Time',translate=True)
-    state_history_ids = fields.One2many('state.history', 'application_id',translate=True)
-    offer_ids = fields.One2many('final.offer', 'application_id', translate=True)
-    surveyor = fields.Many2one('res.users', 'Surveyor', translate=True)
-    policy_number = fields.Char('Policy Num', translate=True)
-    policy_issue_date = fields.Date('Policy Issue Date', translate=True)
+    text_questions_ids = fields.One2many('insurances.answers', 'text_application_id')
+    choose_questions_ids = fields.One2many('insurances.answers', 'choose_application_id')
+    numerical_questions_ids = fields.One2many('insurances.answers', 'numerical_application_id')
+    survey_report_ids = fields.One2many('survey.report', 'application_id')
+    available_time_ids = fields.One2many('available.time', 'application_id', sting='Available Time')
+    state_history_ids = fields.One2many('state.history', 'application_id')
+    offer_ids = fields.One2many('final.offer', 'application_id')
+    surveyor = fields.Many2one('res.users', 'Surveyor')
+    policy_number = fields.Char('Policy Num')
+    policy_issue_date = fields.Date('Policy Issue Date')
     family_age = fields.One2many('medical.family', 'application_id', string='Members')
     package = fields.Selection([('individual', 'Individual'),
                                 ('family', 'Family'),
                                 ('sme', 'SME'), ],
                                'Package For',
-                               default='individual', translate=True)
+                               default='individual')
     # motor_product = fields.Many2one('product.covers', 'Product')
     brand = fields.Selection([('all brands', 'All Brands (except Chinese & East Asia)'),
                               ('chinese cars & east asia', 'Chinese Cars & East Asia'), ('all models', 'All Models')],
-                             'Brand', translate=True)
+                             'Brand')
     deductible = fields.Selection([('250 EGP', '250 EGP'),
                                    ('4 Per Thousand', '4 Per Thousand')],
-                                  'Deductible', translate=True)
-    survey_date = fields.Datetime('Appointment', translate=True)
+                                  'Deductible')
+    survey_date = fields.Datetime('Appointment')
     sub_answer_questionnaire = fields.Many2one('sub.questionnaire.answers', 'Sub Questionnaire')
     quote_state = fields.Selection([('pending', 'Pending'), ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='Quote State', default='pending')
     request_for_ofer_state = fields.Selection([('pending', 'Pending'), ('complete', 'Submitted'),('accepted', 'Accepted')],

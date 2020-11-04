@@ -47,6 +47,7 @@
         #'reports/offer.xml',
         #'reports/questionnaire.xml',
         'views/menu_item.xml',
+        'views/inherit_rtl_css.xml'
 
 
     ],

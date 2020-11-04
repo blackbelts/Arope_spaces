@@ -187,3 +187,22 @@ display:block !important;
 .o_main_navbar > .o_menu_brand:hover{
     background-color: transparent !important;
 }
+.img_micro {
+    height: 50px;
+    width: 50px;
+    float: left;
+}
+.icon_micro {
+    float: left;
+    margin-left: 10px;
+    font-size: 30px;
+    color: #078282FF !important;
+}
+.div_micro_help {
+    float: left;
+    margin-left: 10px;
+    color: #078282FF !important;
+    font-weight: 900;
+    padding: 4px;
+    border: solid 1px lightgray;
+}

@@ -1,0 +1,19 @@
+.img_micro {
+    height: 50px;
+    width: 50px;
+    float: right;
+}
+.icon_micro {
+    float: right;
+    margin-right: 10px;
+    font-size: 30px;
+    color: #078282FF !important;
+}
+.div_micro_help {
+    float: right;
+    margin-right: 10px;
+    color: #078282FF !important;
+    font-weight: 900;
+    padding: 4px;
+    border: solid 1px lightgray;
+}

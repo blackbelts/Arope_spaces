@@ -63,9 +63,9 @@
                     <!--    border: solid .5px lightblue;-->
                     <!--    padding: 4px;-->
                     <div>
-                        <img style="height: 50px;width: 50px;float: left;" src="/Arope_spaces/static/src/img/call.png"/>
-                        <span style="float: left; margin-left: 10px;font-size: 30px; color: #078282FF !important;"><i class="fa fa-comment"></i></span>
-                        <div style="float: left; margin-left: 10px; color: #078282FF !important; font-weight: 900; padding: 4px; border: solid 1px lightgray;">
+                        <img class="img_micro" src="/Arope_spaces/static/src/img/call.png"/>
+                        <span class="icon_micro"><i class="fa fa-comment"></i></span>
+                        <div class="div_micro_help">
                             <span attrs="{'invisible': [('message', '!=', False)]}">Welcome to AROPE Egypt Self Service, I am here to help you until your policy is issued.<br/>
                                 Kindly fill the application form and upload the required documents below</span>
                             <field attrs="{'invisible': [('message', '=', False)]}" name="message" readonly="1" force_save="1"/>
@@ -507,9 +507,9 @@
 
                 <sheet>
                     <div attrs="{'invisible': [('message', '=', False)]}">
-                        <img style="height: 50px;width: 50px;float: left;" src="/Arope_spaces/static/src/img/call.png"/>
-                        <span style="float: left; margin-left: 10px;font-size: 30px; color: #078282FF !important;"><i class="fa fa-comment"></i></span>
-                        <div style="float: left; margin-left: 10px; color: #078282FF !important; font-weight: 900; padding: 4px; border: solid 1px lightgray;">
+                        <img class="img_micro" src="/Arope_spaces/static/src/img/call.png"/>
+                        <span class="icon_micro"><i class="fa fa-comment"></i></span>
+                        <div class="div_micro_help">
                             <field name="message" readonly="1" force_save="1"/>
                         </div>
                     </div>
