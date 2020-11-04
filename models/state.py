@@ -12,7 +12,7 @@ class StateSetup(models.Model):
         ('final_offer', 'Final Offer'),
         ('application', 'Issue In Progress'),
         ('policy', 'Policy Issued'),
-        ('cancel', 'Lost')], string='State')
+        ('cancel', 'Lost')], string='State' ,translate=True)
     claim_status = fields.Selection([('claim_intimation', 'Claim Intimation'),
                                      ('invoicing', 'Invoicing'),
                                      ('pre_survey', 'Pre Survey'),
@@ -22,19 +22,19 @@ class StateSetup(models.Model):
                                      ('total_loss', 'Total Loss'),
                                      ('cheque', 'Take Cheque'),
                                      ('car_release', 'Car Release'),
-                                     ('reject','Reject')], string='State')
+                                     ('reject','Reject')], string='State' ,translate=True)
 
     non_motor_claim_status = fields.Selection([('claim_intimation', 'Claim Intimation'),
                                                 ('pre_survey', 'Survey'),
                                                 ('estimation', 'Estimation'),
                                                ('cheque', 'Cheque Ready'),
-                                               ('reject', 'Reject')], string='State')
-    state = fields.Char('State')
+                                               ('reject', 'Reject')], string='State' ,translate=True)
+    state = fields.Char('State' ,translate=True)
     type = fields.Selection([('insurance_app', 'Insurance Application'),
                              ('claim', 'Claim'), ('survey', 'Survey')], string='Type')
     survey_status = fields.Selection([('pending', 'Pending'), ('surveyor', 'Surveyor Assigned'),
-                            ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending')
-    claim_type = fields.Selection([('motor', 'Motor'),('non-motor', 'Non Motor')], string="Claim Type")
+                            ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending',translate=True)
+    claim_type = fields.Selection([('motor', 'Motor'),('non-motor', 'Non Motor')], string="Claim Type",translate=True)
     # lob = fields.Many2one('insurance.line.business', 'LOB', required=True)
     product_ids = fields.Many2many('insurance.product', string='Product')
     # state_for = fields.Selection([('broker', 'Broker'),
