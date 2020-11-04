@@ -49,10 +49,20 @@ odoo.define('surveyor_dashboard.SurveyorDashboard', function (require) {
     var user = session.uid
     console.log("usssssssssssssssssssss",user)
       var self = this;
+       var context
+       if(self.controlPanelParams.context.user_id == undefined ){
+            console.log("if")
+            context= JSON.parse(localStorage.getItem('context'))
+       }
+       else{
+            console.log("else")
+            localStorage.setItem('context', JSON.stringify(self.controlPanelParams.context));
+            context = self.controlPanelParams.context
+       }
       var get_dashboard = rpc.query({
         model: "arope.broker",
         method: "surveyor_dashboard",
-        args: [self.controlPanelParams.context.user_id]
+        args: [context.user_id]
       }).then(function (res) {
         self.user = res.user[0]
         console.log(self.user)

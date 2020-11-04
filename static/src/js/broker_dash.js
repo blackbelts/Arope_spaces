@@ -186,10 +186,23 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     fetch_data: function () {
       var user = session.uid
       var self = this;
+      var context
+       if(self.controlPanelParams.context.user_id == undefined ){
+            console.log("if")
+            context= JSON.parse(localStorage.getItem('context'))
+       }
+       else{
+            console.log("else")
+            localStorage.setItem('context', JSON.stringify(self.controlPanelParams.context));
+            context = self.controlPanelParams.context
+       }
+       console.log(context)
+       console.log("contextcontextcontextcontextcontext",context)
+
       var get_dashboard = rpc.query({
         model: "arope.broker",
         method: "get_broker_dashboard",
-        args: [self.controlPanelParams.context.user_id]
+        args: [context.user_id]
       }).then(function (res) {
         self.brokerProduction = res.production
         self.target_production = res.targetVsProduction
