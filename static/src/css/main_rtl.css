@@ -18,21 +18,21 @@
     border: solid 1px lightgray;
 }
 .o_main_navbar > ul {
-    float: right;
-    display: flex;
+    float: right !important;
+    display: flex !important;
 }
 .o_main_navbar > .o_menu_brand {
-    float: right;
-    margin-left: 35px;
-    margin-right: 0px;
+    float: right !important;
+    margin-left: 35px !important;
+    margin-right: 0px !important;
 }
 .o_main_navbar > ul.o_menu_systray {
-    float: left;
-    display: flex;
+    float: left !important;
+    display: flex !important;
 }
 
 .o_main_navbar .o_user_menu {
-   direction: ltr;
+   direction: ltr !important;
 }
 ul.wizard li .chevron {
     right:auto !important;
