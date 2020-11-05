@@ -34,3 +34,23 @@
 .o_main_navbar .o_user_menu {
    direction: ltr;
 }
+ul.wizard li .chevron {
+    right:auto !important;
+    left: -10px !important;
+    border-left: 0 !important;;
+    border-right: 10px solid #e9ecef !important;;
+}
+#o_partner_dashboard .o_partner_dashboard_wizard .o_partner_dashboard_grade_active_ready .chevron:before {
+    border-right-color: #078282FF !important;
+}
+ul.wizard li .chevron:before {
+    right: auto !important;
+    position: absolute !important;
+    top: -20px !important;
+    left: 1px !important;
+    display: block !important;
+    border: 20px solid transparent !important;
+    border-left: 0 !important;
+    border-right: 10px solid #fbfbfb !important;
+    content: "" !important;
+}

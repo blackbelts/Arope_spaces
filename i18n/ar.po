@@ -475,7 +475,7 @@ msgstr "الموعد"
 #: code:addons/Arope_spaces/static/src/xml/new_dashboard.xml:0
 #, python-format
 msgid "Arope Dashboard"
-msgstr "لوحة التحكم"
+msgstr "المحفظة التامينية"
 
 #. module: Arope_spaces
 #: model:ir.model.fields.selection,name:Arope_spaces.selection__claim_app__maintenance_centers_in_or_out__in
@@ -491,7 +491,7 @@ msgstr ""
 #. module: Arope_spaces
 #: model:ir.actions.client,name:Arope_spaces.arope_action_dashboard
 msgid "AropeDashboard"
-msgstr "لوحة التحكم"
+msgstr "المحفظة التامينية"
 
 #. module: Arope_spaces
 #: model:ir.model.fields.selection,name:Arope_spaces.selection__claim_app__sub_state__surveyor
@@ -548,19 +548,19 @@ msgstr "كود الوكيل"
 #: code:addons/Arope_spaces/static/src/xml/new_dashboard.xml:0
 #, python-format
 msgid "Broker Dashboard"
-msgstr "لوحة تحكم الوكيل"
+msgstr "المحفظة التامينية"
 
 #. module: Arope_spaces
 #: model:ir.actions.client,name:Arope_spaces.broker_action_dashboard
 msgid "BrokerDashboard"
-msgstr "لوحة تحكم الوكيل"
+msgstr "المحفظة التامينية"
 
 #. module: Arope_spaces
 #. openerp-web
 #: code:addons/Arope_spaces/static/src/js/new_dashboard.js:0
 #, python-format
 msgid "BrokerDashboard "
-msgstr "لوحة تحكم الوكيل "
+msgstr "المحفظة التامينية "
 
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_policy_request__cancel_reason
@@ -972,7 +972,7 @@ msgstr "لوحة تحكم العميل"
 #: model:ir.actions.client,name:Arope_spaces.hr_action_dashboard
 #, python-format
 msgid "Dashboard"
-msgstr "لوحة التحكم"
+msgstr "المحفظة التامينية"
 
 #. module: Arope_spaces
 #. openerp-web
@@ -2731,7 +2731,7 @@ msgstr "المطلوب تحقيقة بالنسبة إلي الإنتاجية"
 #: model:ir.model.fields,field_description:Arope_spaces.field_crm_team__targets_id
 #: model:ir.ui.menu,name:Arope_spaces.target_ch
 msgid "Targets"
-msgstr ""
+msgstr "المطلوب تحقيقة"
 
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_target_policy__team_id
@@ -2741,7 +2741,7 @@ msgstr ""
 #. module: Arope_spaces
 #: model_terms:ir.ui.view,arch_db:Arope_spaces.team_inherit
 msgid "Team Targets"
-msgstr ""
+msgstr "أهداف الفريق"
 
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_insurance_quotation__test_state
@@ -2919,7 +2919,7 @@ msgstr ""
 #. module: Arope_spaces
 #: model_terms:ir.ui.view,arch_db:Arope_spaces.partner_id_tree_view
 msgid "View Dashboard"
-msgstr "لوحة التحكم"
+msgstr "المحفظة التامينية"
 
 #. module: Arope_spaces
 #. openerp-web

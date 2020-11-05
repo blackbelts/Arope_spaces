@@ -198,7 +198,7 @@
               <div class=" d-flex flex-column o_partner_dashboard_box">
                 <h5 class="o_partner_dashboard_box_title">Production per LOB in EGP</h5>
                 <div class="o_partner_dashboard_box_body">
-                  <div id="ambarchart3" style="width: 100%; height: 250px;"></div>
+                  <div id="ambarchart3" dir="ltr" style="width: 100%; height: 250px;"></div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
                   <a  id="policies" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Policies</a>
@@ -209,7 +209,7 @@
               <div class=" d-flex flex-column o_partner_dashboard_box">
                 <h5 class="o_partner_dashboard_box_title">Target Vs Production</h5>
                 <div class="o_partner_dashboard_box_body">
-                  <div id="ambarchart2" style="width: 100%; height: 250px;"></div>
+                  <div id="ambarchart2" dir="ltr"  style="width: 100%; height: 250px;"></div>
                 </div>
                <!-- <div class="o_partner_dashboard_box_footer">
                   <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Policies</a>
@@ -220,7 +220,7 @@
               <div class=" d-flex flex-column o_partner_dashboard_box">
                 <h5 class="o_partner_dashboard_box_title">Current Year Vs Last Year</h5>
                 <div class="o_partner_dashboard_box_body">
-                  <div id="ambarchart1" style="width: 100%; height: 250px;"></div>
+                  <div id="ambarchart1" dir="ltr"  style="width: 100%; height: 250px;"></div>
                 </div>
 <!--                <div class="o_partner_dashboard_box_footer">
                   <a href="https://www.odoo.com/my/purchase" class="btn btn-secondary" style="position: relative; overflow: hidden;">My Purchase Orders</a>

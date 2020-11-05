@@ -4,7 +4,7 @@
         <record id="client_space_group" model="res.groups">
             <field name="name">Client</field>
             <field name="category_id" ref="base.module_category_space"/>
-            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user')),(4, ref('helpdesk_lite.group_helpdesk_lite_user'))]"/>
             <field name="comment">the user will have access All Client Document</field>
         </record>
         <record id="broker_space_group" model="res.groups">
