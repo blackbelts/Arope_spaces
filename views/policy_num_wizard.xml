@@ -1,0 +1,23 @@
+<odoo>
+<!--    <data>-->
+        <record model="ir.ui.view" id="policy_num_wizard">
+            <field name="name">wizard.insurance.quotation</field>
+            <field name="model">wizard.insurance.quotation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="insurance_app_id"  readonly="1" force_save="1"/>
+                            <field name="policy_number" required="1" />
+                            <field name="policy_issue_date" required="1" />
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="policy_num" type="object"
+                                string="Save" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+<!--    </data>-->
+</odoo>

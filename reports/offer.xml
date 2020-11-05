@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <report id="offer"
+                string="Offer"
+                model="insurance.quotation"
+                report_type="qweb-pdf"
+                name="Arope_spaces.offer"
+        />
+
+        <template id="offer">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Homemade+Apple"/>
+                    <style>
+                        table {
+                        width: 100%;
+                        border: 1px solid #000 !important;
+                        text-align: right;
+                        direction: rtl !important;
+                        }
+
+                        table td,
+                        table th {
+                        font-size: 12px;
+                        border: 1px solid #000 !important;
+                        padding: 3px !important;
+                        text-align: right !important;
+                        }
+
+                        .table,
+                        .table th,
+                        .table td {
+                        border: 1px solid #000 !important;
+                        border-collapse: collapse;
+                        padding: 3px !important;
+                        text-align: right !important;
+                        }
+                        th {
+                        color: #073e89 !important;
+                        text-align: right !important;
+                        }
+                        tr:nth-child(even) {background-color: #f2f2f2;}
+
+                    </style>
+                        <div class="header" style="height: 100px !important;">
+                            <img class="img"  style="width: 100%;" src="/smart_travel_agency/static/img/3.jpg"/>
+                            <h4 style="color: #073e89; text-align:center;">الموضوع: عرض أسعار تأمين ممتلكات</h4>
+                        </div>
+      	                <div class="page" style="unicode-bidi: bidi-override !important; direction: unset !important;text-align:right !important;">
+                            <p style="font-size:12px; padding-left: 25px !important; padding-right: 25px !important;"> / الســادة</p>
+                            <p style="font-size:12px; padding-left: 25px !important; padding-right: 25px !important;">تحية طيبة و بعد</p>
+                            <p style="font-size:12px; padding-left: 25px !important; padding-right: 25px !important;">بالإشارة إلى الموضوع بعاليه, يسر شركة آروب لتامين الممتلكات و المسئوليات – مصر أن تتقدم لسيادتكم بعرض أسعارها و نتمنى ان يكون اسم سيادتكم على راس قائمة أهم العملاء بالشركة آملين أن يحوز عرضنا على رضا سيادتكم و أن يكون ملبيا لكل طلباتكم و احتياجاتكم التأمينية.</p>
+                            <div  style="padding-left: 25px !important; padding-right: 25px !important; padding-top:1px !important;">
+                                <div  style="width: 100% !important; float:right;">
+                                    <table class="table table-hover">
+                                        <tr t-foreach="o.offer_ids" t-as="offer">
+                                            <th style="text-align: right !important;color: #073e89 !important; width:25% !important;" ><span t-field="offer.question"/></th>
+                                            <td>
+                                                <t t-if="offer.text">
+                                                    <span t-esc="offer.text"/>
+                                                </t>
+                                                <t t-if="offer.value">
+                                                    <span t-esc="offer.value"/>
+                                                </t>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <p style="font-size:12px; padding-left: 25px !important; padding-right: 25px !important;">هذا و نتمنى أن يلاقي عرضنا رضاء و إستحسان سيادتكم و أن يكون قد لبى كل متطلباتكم وإحتياجاتكم التأمينية</p>
+
+                            <div class="footer" style="float:left; width:100px;">
+                                <img style="width:100% !important;" class="img img-responsive" src="/smart_travel_agency/static/img/1.png"/>
+                                <span style="font-size: 10px !important; white-space: nowrap !important; overflow: hidden !important;">AROPE PROPERTIES &amp; LIABILITIES INSURANCE EGYPT - S.A.E</span>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

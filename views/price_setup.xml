@@ -1,0 +1,84 @@
+<odoo>
+    <!-- Add a custom form view -->
+    <record id="quotation_price_view_form" model="ir.ui.view">
+        <field name="name">Price Setup</field>
+        <field name="model">quotation.price.setup</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="package"/>
+                            <field name="zone"/>
+                            <field name="currency_id"/>
+                        </group>
+                        <group>
+                            <field name="from_age" attrs="{'invisible': [('package', '=', 'family')]}"/>
+                            <field name="to_age" attrs="{'invisible': [('package', '=', 'family')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Price" >
+                            <field name="price_lines">
+                                <tree editable="bottom">
+                                    <field name="period"/>
+                                    <field name="net_premium"/>
+                                    <field name="proportional_stamp"/>
+                                    <field name="dimensional_stamp"/>
+                                    <field name="supervisory_stamp"/>
+                                    <field name="policy_approval_fees"/>
+                                    <field name="policy_holder_fees"/>
+                                    <field name="issue_fees"/>
+                                    <field name="gross_premium"/>
+
+                                </tree>
+                            </field>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Add a custom Tree (List) view -->
+    <record id="quotation_price_view_tree" model="ir.ui.view">
+        <field name="name">Price List</field>
+        <field name="model">quotation.price.setup</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="package"/>
+                <field name="zone"/>
+                <field name="from_age"/>
+                <field name="to_age"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Add a custom Tree (List) view -->
+    <record id="quotation_price_view_tree_family" model="ir.ui.view">
+        <field name="name">Price List</field>
+        <field name="model">quotation.price.setup</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="package"/>
+                <field name="zone"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="quotation_price_action">
+        <field name="name">Price Table</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">quotation.price.setup</field>
+
+        <field name="view_id" ref="quotation_price_view_tree"/>
+        <field name="view_mode">form,tree</field>
+        <field name='domain'>[('package','!=','family')]</field>
+    </record>
+    <record model="ir.actions.act_window" id="quotation_price_action_family">
+        <field name="name">Price Table</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">quotation.price.setup</field>
+        <field name="view_id" ref="quotation_price_view_tree_family"/>
+        <field name="view_mode">form,tree</field>
+        <field name='domain'>[('package','=','family')]</field>
+    </record>
+</odoo>

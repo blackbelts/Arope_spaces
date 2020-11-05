@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+  <t t-name="SurveyorDashboardMain">
+
+    <div class="oh_dashboards">
+      <div class="container-fluid o_hr_dashboard"></div>
+    </div>
+  </t>
+  <t t-name="Surveyordash">
+  <xpath expr="." position="inside">
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/themify-icons.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/metisMenu.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/owl.carousel.min.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/slicknav.min.css" />
+      <!-- amchart css -->
+      <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+      <!-- others css -->
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/all.min.css" />
+
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/typography.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/default-css.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/styles.css" />
+      <link rel="stylesheet" href="/Arope_spaces/static/src/css/responsive.css" />
+      <script src="/Arope_spaces/static/src/js/modernizr-2.8.3.min.js"></script>
+    </xpath>
+    <!--[if lt IE 8]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- page container area start -->
+    <div id="o_partner_dashboard">
+      <section class="o_partner_dashboard_banner bg-white">
+        <div class="container">
+          <div class="row d-flex">
+            <div class="col-12 col-md-8 col-lg-7">
+              <h1 class="display-1 text-violet-dark mt32 mb32 fw_light">
+                Surveyor Dashboard
+              </h1>
+              <div class="alert alert-info alert-dismissible" role="alert">
+                <span class="text-beta">
+                  <b>Welcome to AROPE partners space</b>
+                </span>
+                <p class="text-beta mt8 mb0">
+                 You can follow your portfolio, Policies, collections, renewals, claims and Complaints
+                  <br />
+
+                </p>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-5">
+               <img class="image" style="width: 120px;height: 120px;margin-top: 25%;border-radius: 50%;border: 1px solid;margin-left: auto;margin-right: auto;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+             <!-- <div class="text-center">
+                <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+              </div>-->
+
+            </div>
+          </div>
+        </div>
+      </section>
+        <section class="bg-gray-lighter">
+
+        </section>
+      <section class="bg-gray-lighter">
+        <div class="container">
+          <div class="row d-lg-flex pt48">
+
+            <div class="col-lg-7 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Profile</h2>
+              </div>
+              <div class="d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">
+                  <span class="mt0 mb0">
+                    <t t-esc="widget.user.name" />
+                  </span>
+                </h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <h4>FRA No</h4>
+
+                    </div>
+                    <div class="col-md-6">
+                      <h4>
+                        <t t-esc="widget.user.fra_no" />
+                      </h4>
+                    </div>
+                    <!--                    <div class="col-md-2">-->
+                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
+
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <h4>Expiration Date</h4>
+                    </div>
+                    <div class="col-md-6">
+                      <h4>
+                        <t t-esc="widget.user.expire_date" />
+                      </h4>
+                    </div>
+                    <!--                    <div class="col-md-2">-->
+                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
+
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <h4>Mobile</h4>
+                    </div>
+                    <div class="col-md-6">
+                      <h4>
+                        <t t-esc="widget.user.mobile" />
+                      </h4>
+                    </div>
+                    <!--                    <div class="col-md-2">-->
+                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
+
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <h4>Email</h4>
+                    </div>
+                    <div class="col-md-6">
+                      <h4>
+                        <t t-esc="widget.user.mail" />
+                      </h4>
+                    </div>
+                    <!--                    <div class="col-md-2">-->
+                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
+
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                </div>
+                <!--<div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/my/partner/profile" class="btn btn-secondary" style="position: relative; overflow: hidden;">Update your profile</a>
+                </div>-->
+              </div>
+            </div>
+            <div class="col-lg-5 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Grade</h2>
+              </div>
+
+              <div class="d-flex flex-column o_partner_dashboard_box">
+
+                <div class="o_partner_dashboard_box_body">
+
+                  <ul class="wizard o_partner_dashboard_wizard d-flex mt32 mb32">
+
+                    <li class="o_partner_dashboard_grade_active_ready">
+                      Ready Partner
+                      <span class="chevron"></span>
+                    </li>
+                    <li class="pl-3 ">
+                      Silver Partner
+                      <span class="chevron"></span>
+                    </li>
+                    <li class="">Gold Partner</li>
+                  </ul>
+                  <p>
+                    You have
+                    <b>0</b>
+                    new Enterprise user(s) in the last 12 Months, you need
+                    <b>10</b>
+                    to remain a Ready Partner.
+                  </p>
+                  <p>
+                    You have
+                    <b>0</b>
+                    certified expert(s), you need
+                    <b>1</b>
+                    to remain Ready.
+                  </p>
+                </div>
+                <!--<div class="o_partner_dashboard_box_footer">
+                  <a href="https://www.odoo.com/contactus" class="btn btn-secondary" style="position: relative; overflow: hidden;">Contact us</a>
+                </div>-->
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex flex-wrap no-gutters pb64">
+            <div class="col-12">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Your Portfolio</h2>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Policies Survey</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">LOB</th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">State</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.insurance_app_survey.data" t-as="srv">
+                            <td>
+                              <t t-esc="srv.lob" />
+                            </td>
+                            <td>
+                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+srv.image" />
+                            </td>
+                            <td>
+                              <t t-esc="srv.count" />
+                            </td>
+                            <td>
+                              <t t-esc="srv.state" />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+               <!-- <div class="o_partner_dashboard_box_footer">
+                  <a id="policies" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your policies</a>
+                </div>-->
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Motor Survey</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">Type</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">State</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.motor_survey.data" t-as="srv">
+                            <td>
+                              <t t-esc="srv.type" />
+                            </td>
+                           <td>
+                              <t t-esc="srv.count" />
+                            </td>
+                            <td>
+                              <t t-esc="srv.state" />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+               <!-- <div class="o_partner_dashboard_box_footer">
+                  <a id="claims" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Claims</a>
+                </div>-->
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
+              <div class=" d-flex flex-column o_partner_dashboard_box">
+                <h5 class="o_partner_dashboard_box_title">Non Motor Survey</h5>
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">LOB</th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">State</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.non_motor_survey.data" t-as="srv">
+                            <td>
+                              <t t-esc="srv.lob" />
+                            </td>
+                            <td>
+                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+srv.image" />
+                            </td>
+                            <td>
+                              <t t-esc="srv.count" />
+                            </td>
+                            <td>
+                              <t t-esc="srv.state" />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+               <!-- <div class="o_partner_dashboard_box_footer">
+                  <a id="apps" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Apps</a>
+                </div>-->
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </section>
+    </div>
+    <!-- page container area end -->
+    <xpath expr="." position="inside">
+      <script src="/Arope_spaces/static/src/js/popper.min.js"></script>
+      <script src="/Arope_spaces/static/src/js/owl.carousel.min.js"></script>
+      <script src="/Arope_spaces/static/src/js/metisMenu.min.js"></script>
+      <script src="/Arope_spaces/static/src/js/jquery.slimscroll.min.js"></script>
+      <script src="/Arope_spaces/static/src/js/jquery.slicknav.min.js"></script>
+      <script src="/Arope_spaces/static/src/js/amcharts.js"></script>
+      <script src="/Arope_spaces/static/src/js/serial.js"></script>
+      <script src="/Arope_spaces/static/src/js/pie.js"></script>
+      <script src="/Arope_spaces/static/src/js/export.min.js"></script>
+      <script src="/Arope_spaces/static/src/js/light.js"></script>
+      <script src="/Arope_spaces/static/src/js/plugins.js"></script>
+      <script src="/Arope_spaces/static/src/js/scripts.js"></script>
+    </xpath>
+  </t>
+
+</templates>

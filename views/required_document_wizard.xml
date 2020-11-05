@@ -1,0 +1,34 @@
+<odoo>
+<!--    <data>-->
+        <record model="ir.ui.view" id="required_documents_wizard">
+            <field name="name">wizard.required.documents</field>
+            <field name="model">wizard.required.documents</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="insurance_app_id" readonly="1" force_save="1"/>
+                    </group>
+
+                   <field name="required_documents" widget='one2many'>
+                       <tree editable="bottom">
+                           <field name="description"/>
+                           <field name="application_file" widget="many2many_binary"/>
+                           <field name="issue_in_progress_state"/>
+                       </tree>
+                   </field>
+                </form>
+            </field>
+        </record>
+<!--    </data>-->
+        <!-- Add a custom Tree (List) view -->
+        <record id="required_documents_view_tree" model="ir.ui.view">
+            <field name="name">Required Document</field>
+            <field name="model">wizard.required.documents</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="insurance_app_id"/>
+
+                </tree>
+            </field>
+        </record>
+</odoo>

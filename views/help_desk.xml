@@ -1,0 +1,67 @@
+<odoo>
+    <record id="help_desk_inherit" model="ir.ui.view">
+        <field name="name">Help Disk</field>
+        <field name="model">helpdesk_lite.ticket</field>
+        <field name="inherit_id" ref="helpdesk_lite.helpdesk_ticket_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='priority']" position="before">
+                <field name="lob"/>
+<!--                <field name="product"/>-->
+            </xpath>
+            <xpath expr="//field[@name='contact_name']" position="after">
+                <!--                <field name="policy"/>-->
+                <label for="policy_product"/>
+                <div class="o_row">
+
+                    <field name="policy_product" />
+                    <strong>/</strong>
+                    <field name="policy_no" />
+
+                </div>
+                <field name="customer" readonly="1"/>
+<!--                <field name="customer" readonly="1"/>-->
+                <field name="agent_code" readonly="1"/>
+                <field name="card_id" readonly="1"/>
+
+            </xpath>
+            <!--            <xpath expr="//div[2]" position="after">-->
+
+            <!--               -->
+
+            <!--                &lt;!&ndash;                <field name="complain_number"/>&ndash;&gt;-->
+            <!--            </xpath>-->
+
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="help_desk_inherit_quoate_arope" model="ir.ui.view">
+        <field name="name">Help Disk</field>
+        <field name="model">quoate</field>
+        <field name="inherit_id" ref="helpdesk_inherit.help_desk_quoate"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button  name="create_application" string="Create Insurance App" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=','won')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='contact_name']" position="after">
+                <!-- Add your fields or attributes here -->
+                <field name="lob"/>
+                <field name="product"/>
+
+
+            </xpath>
+
+        </field>
+    </record>
+        <record id="complaint_action_partner" model="ir.actions.act_window">
+        <field name="name">Complaint</field>
+        <field name="res_model">helpdesk_lite.ticket</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="helpdesk_lite.helpdesk_ticket_form_view"/>
+        <!--        <field name="context">{"search_default_active":1}</field>-->
+
+        <field name="target">new</field>
+    </record>
+</odoo>

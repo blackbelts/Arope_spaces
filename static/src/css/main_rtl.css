@@ -1,0 +1,56 @@
+.img_micro {
+    height: 50px;
+    width: 50px;
+    float: right;
+}
+.icon_micro {
+    float: right;
+    margin-right: 10px;
+    font-size: 30px;
+    color: #078282FF !important;
+}
+.div_micro_help {
+    float: right;
+    margin-right: 10px;
+    color: #078282FF !important;
+    font-weight: 900;
+    padding: 4px;
+    border: solid 1px lightgray;
+}
+.o_main_navbar > ul {
+    float: right !important;
+    display: flex !important;
+}
+.o_main_navbar > .o_menu_brand {
+    float: right !important;
+    margin-left: 35px !important;
+    margin-right: 0px !important;
+}
+.o_main_navbar > ul.o_menu_systray {
+    float: left !important;
+    display: flex !important;
+}
+
+.o_main_navbar .o_user_menu {
+   direction: ltr !important;
+}
+ul.wizard li .chevron {
+    right:auto !important;
+    left: -10px !important;
+    border-left: 0 !important;;
+    border-right: 10px solid #e9ecef !important;;
+}
+#o_partner_dashboard .o_partner_dashboard_wizard .o_partner_dashboard_grade_active_ready .chevron:before {
+    border-right-color: #078282FF !important;
+}
+ul.wizard li .chevron:before {
+    right: auto !important;
+    position: absolute !important;
+    top: -20px !important;
+    left: 1px !important;
+    display: block !important;
+    border: 20px solid transparent !important;
+    border-left: 0 !important;
+    border-right: 10px solid #fbfbfb !important;
+    content: "" !important;
+}

@@ -1,0 +1,12 @@
+<odoo><data>
+
+    <record model="ir.actions.act_url" id="action_medical_url">
+
+        <field name="name">Open Medical Quote</field>
+
+        <field name="url">http://207.154.195.214:7070/survey/start/55b920c2-bb3b-453c-90e4-bbe93501f87d</field>
+
+        <field name="target">new</field>
+
+    </record>
+</data></odoo>

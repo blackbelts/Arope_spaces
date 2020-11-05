@@ -1,0 +1,298 @@
+<odoo>
+    <!--Claim Setup -->
+    <record model="ir.ui.view" id="tree_claim_setup">
+        <field name="name">claim.setup</field>
+        <field name="model">claim.setup</field>
+        <field name="arch" type="xml">
+            <tree string="Claim Setup">
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="form_claim_setup">
+        <field name="name">claim.setup</field>
+        <field name="model">claim.setup</field>
+        <field name="arch" type="xml">
+            <form string="Claim Setup form">
+                <sheet>
+
+                    <group>
+
+                        <field name="type"/>
+
+                    </group>
+                    <notebook>
+                        <page string="Required Documents" >
+                            <field name="claim_declaration_lines">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="file" widget="many2many_binary"/>
+                                    <field name="type"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="claim_setup_action">
+        <field name="name">Claim</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">claim.setup</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="tree_claim_setup"/>
+        <field name="view_mode">form,tree,kanban</field>
+    </record>
+    <!--Claim Setup Finished-->
+    <!--Maintenance Centers Start -->
+    <!-- Add a custom form view -->
+    <record model="ir.ui.view" id="tree_maintenance_center">
+        <field name="name">tree.maintenance.center</field>
+        <field name="model">maintenance.center</field>
+        <field name="arch" type="xml">
+            <tree string="Maintenance Center" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="form_maintenance_center">
+        <field name="name">form.maintenance.center</field>
+        <field name="model">maintenance.center</field>
+        <field name="arch" type="xml">
+            <form string="Maintenance Center form">
+                <sheet>
+                    <group>
+                        <field name="name" string="Name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="maintenance_center_action">
+        <field name="name">Maintenance Center</field>
+        <field name="res_model">maintenance.center</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Maintenance Center
+            </p>
+        </field>
+    </record>
+    <!--Maintenance Centers Finished -->
+
+    <!--Claim App Start -->
+    <record model="ir.ui.view" id="form_claim_app">
+        <field name="name">Claim App</field>
+        <field name="model">claim.app</field>
+        <field name="arch" type="xml">
+            <form string="Claim App form">
+                 <header>
+                     <field name="state" widget="statusbar"/>
+<!--                     <button  name="invoice_details" string="Invoice Details" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'initial_invoice')]}"/>-->
+<!--                     <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'invoice_details')]}"/>-->
+                     <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing','repair_completed'])]}" groups="Arope_spaces.managers_group"/>
+                     <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('type', '!=', 'non-motor')]}" groups="Arope_spaces.managers_group"/>
+                     <button  name="estimation" string="Estimation" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'pre_survey'),('type', '!=', 'non-motor')]}" groups="Arope_spaces.managers_group"/>
+                     <button  name="cheque_ready" string="Cheque Ready" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'estimation')]}" groups="Arope_spaces.managers_group"/>
+                     <button  name="total_loss" string="Total Loss" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing', 'pre_survey'])]}" groups="Arope_spaces.managers_group"/>
+                     <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', 'not in', ['invoicing', 'pre_survey']),('type', '!=', 'motor')]}" groups="Arope_spaces.managers_group"/>
+                     <button  name="complete_and_proceed" string="Repair Completed" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'repair'),('sub_state', '!=', 'pending')]}" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group"/>
+                     <button  name="take_cheque" string="Take Cheque" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'survey_after_repair')]}" groups="Arope_spaces.managers_group"/>
+                     <button  name="car_release" string="Car Release" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'survey_after_repair')]}" groups="Arope_spaces.managers_group"/>
+                     <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('status', '=', 'survey_after_repair')]}" groups="Arope_spaces.managers_group"/>
+
+                 </header>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-dollar" string="Related Policy" name="related_policy" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group">
+                        </button>
+                        <button class="oe_stat_button" string="Survey Report" icon="fa-file" type="object" name="get_survey" groups="Arope_spaces.managers_group,Arope_spaces.surveyor_group">
+                        </button>
+                    </div>
+                    <div>
+                        <img class="img_micro" src="/Arope_spaces/static/src/img/call.png"/>
+                        <span class="icon_micro"><i class="fa fa-comment"></i></span>
+                        <div class="div_micro_help">
+                            <span attrs="{'invisible': [('message', '!=', False)]}">Welcome to AROPE Egypt Self Service, I am here to help you until your policy is issued.<br/>
+                                Kindly fill the application form and upload the required documents below</span>
+                            <field attrs="{'invisible': [('message', '=', False)]}" name="message" readonly="1" force_save="1"/>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="status" invisible="1"/>
+
+                            <field name="type" readonly="1" force_save="1"/>
+                            <field name="product"/>
+                            <field name="policy_num"/>
+
+
+
+                        </group>
+                        <group>
+                            <field name="sub_state" invisible="1"/>
+                            <field name="claim_number" readonly="1" force_save="1"/>
+                            <field name="lob" readonly="1" force_save="1"/>
+                            <field name="customer_name" readonly="1" force_save="1"/>
+                            <field name="phone" readonly="1" force_save="1"/>
+                            <field name="date" readonly="1" force_save="1"/>
+                        </group>
+                        <group attrs="{'invisible': [('type', '!=', 'motor')]}">
+                            <field name="chasse_num"/>
+                            <field name="maintenance_centers_in_or_out"/>
+                            <field name="maintenance_centers" attrs="{'invisible': [('maintenance_centers_in_or_out', '!=', 'in')]}"/>
+                        </group>
+                    </group>
+                    <br/>
+<!--                            <h3 style="color: brown;">Upload Claim Intimation Form</h3>-->
+                    <h3 style="color: brown;">Required Documents</h3>
+                    <br/>
+                    <field name="declaration_ids">
+                        <tree editable="bottom">
+                            <field name="question"/>
+                            <field name="download_files" widget="many2many_binary"/>
+                            <field name="file" widget="many2many_binary"/>
+                            <field name="state"/>
+                            <field name="comment"/>
+                        </tree>
+                    </field>
+                    <button attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('sub_state', '=', 'complete'),('type', '!=', 'motor')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group"/>
+
+
+<!--                        <page string="Invoicing" attrs="{'invisible': [('status', '=', 'claim_intimation')]}">-->
+<!--                            <h3 style="color: brown;">Initial Invoice</h3>-->
+<!--                            <group>-->
+
+
+<!--                                <group>-->
+<!--                                    <field name="initial_invoice" widget="many2many_binary"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="total_initial_invoice"/>-->
+<!--                                </group>-->
+
+<!--                            </group>-->
+<!--                            <h3 style="color: brown;" attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', '=', 'initial_invoice')]}">Invoice Details</h3>-->
+<!--                            <group attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', '=', 'initial_invoice')]}">-->
+
+<!--                                <group>-->
+<!--                                    <field name="invoice_detail" widget="many2many_binary"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="total_invoice"/>-->
+<!--                                </group>-->
+<!--                            </group>-->
+<!--                            <h3 style="color: brown;" attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', 'in', ['initial_invoice', 'invoice_details'])]}">Assign Surveyor</h3>-->
+<!--                            <group attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', 'in', ['initial_invoice', 'invoice_details'])]}">-->
+
+<!--                                <group>-->
+<!--                                    <field name="surveyor"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="survey_date"/>-->
+<!--                                </group>-->
+<!--                            </group>-->
+<!--                            <h3 style="color: brown;" attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', 'in', ['initial_invoice', 'invoice_details', 'surveyor'])]}">Survey Report</h3>-->
+<!--                            <group attrs="{'invisible': ['|',('status', '=', 'claim_intimation'),('sub_state', 'in', ['initial_invoice', 'invoice_details', 'surveyor'])]}">-->
+
+<!--                                <group>-->
+<!--                                    <field name="survey_report" widget="many2many_binary"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="recommendation"/>-->
+<!--                                    <field name="comment"/>-->
+<!--                                </group>-->
+<!--                            </group>-->
+
+<!--&lt;!&ndash;                            <button attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>&ndash;&gt;-->
+<!--                        </page>-->
+<!--                        <page string="Surveyor" attrs="{'invisible': [('status', 'in', ['claim_intimation','invoicing',])]}">-->
+<!--                             <group>-->
+<!--                                 -->
+<!--                             </group>-->
+<!--                            <button attrs="{'invisible': ['|',('status', '!=', 'surveyor'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>-->
+<!--                         </page>-->
+<!--                        <page string="Survey" attrs="{'invisible': [('status', 'in', ['claim_intimation','invoicing','surveyor'])]}">-->
+<!--                            <field name="survey_ids">-->
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="question"/>-->
+<!--                                    <field name="text"/>-->
+<!--                                    <field name="file" widget="many2many_binary"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--                            <group>-->
+<!--                                <field name="recommendation"/>-->
+<!--                                <field name="comment"/>-->
+<!--                            </group>-->
+<!--                            <button attrs="{'invisible': ['|',('status', '!=', 'survey'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>-->
+<!--                        </page>-->
+<!--                        <page string="Second Survey" attrs="{'invisible': [('status', 'in', ['claim_intimation','invoicing','surveyor', 'survey', 'repair'])]}">-->
+<!--                                <group>-->
+<!--                                    <field name="second_surveyor"/>-->
+<!--                                    <field name="second_survey_date"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="recommendation"/>-->
+<!--                                    <field name="comment"/>-->
+<!--                                </group>-->
+
+<!--                            <button attrs="{'invisible': ['|',('status', '!=', 'survey_after_repair'),('sub_state', '=', 'complete')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight"/>-->
+<!--                        </page>-->
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Add a custom Tree (List) view -->
+    <record id="claim_app_tree" model="ir.ui.view">
+		<field name="name">claim.app</field>
+		<field name="model">claim.app</field>
+		<field name="arch" type="xml">
+			<tree>
+<!--                <field name="name"/>-->
+                <field name="type"/>
+<!--                <field name="name"/>-->
+                <field name="policy_num"/>
+                <field name="date"/>
+                <field name="state"/>
+<!--                <field name="sub_state"/>-->
+
+			</tree>
+		</field>
+	</record>
+    <record id="claim_app_view_search" model="ir.ui.view">
+        <field name="name">claim.app</field>
+        <field name="model">claim.app</field>
+        <field name="arch" type="xml">
+            <search string="Claim App">
+                <group expand="0" string="Group By">
+                    <filter string="State" name="groupby_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="motor_claim_app_action">
+            <field name="name">Claim App</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">claim.app</field>
+            <field name="context">{'search_default_groupby_state': 1, 'default_type': 'motor'}</field>
+            <field name="view_id" ref="claim_app_tree"/>
+            <field name='domain'>[('type','=','motor')]</field>
+            <field name="view_mode">form,tree,kanban</field>
+    </record>
+    <record model="ir.actions.act_window" id="non-motor_claim_app_action">
+            <field name="name">Claim App</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">claim.app</field>
+            <field name="context">{'search_default_groupby_state': 1, 'default_type': 'non-motor'}</field>
+            <field name="view_id" ref="claim_app_tree"/>
+            <field name='domain'>[('type','=','non-motor')]</field>
+            <field name="view_mode">form,tree,kanban</field>
+    </record>
+    <record id="sequence_claim_number" model="ir.sequence">
+        <field name="name">claim_number</field>
+        <field name="code">claim_number</field>
+        <field name="padding">3</field>
+    </record>
+    <!--Claim App Finished -->
+</odoo>

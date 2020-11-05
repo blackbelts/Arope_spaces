@@ -1,0 +1,208 @@
+.o_main_navbar > ul > li > a, .o_main_navbar > ul > li > label {
+    color: black;
+}
+
+.o_main_navbar{
+    background-color: white;
+    color: black;
+    border-bottom: 1px solid #cccccc !important;
+}
+.o_form_view .o_form_sheet_bg {
+    border-bottom: none;
+    background: transparent;
+    
+}
+.o_form_view{
+    background-color: transparent;
+}
+.o_control_panel {
+    /* display: none; */
+}
+html .o_web_client > .o_action_manager > .o_action > .o_content{
+    background: url(../img/background-img.jpg);
+    background-size: cover;
+    width: auto;
+}
+.o_form_view .o_form_sheet_bg > .o_form_sheet {
+    background-color: rgba(255,255,255,.9);
+    opacity: 1;
+    width: 100%;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status{
+    margin: 0 auto;
+}
+.o_form_view .o_group.o_inner_group > tbody > tr > td.o_td_label{
+    min-width: 62px
+}
+.o_form_view .o_group .o_field_widget{
+
+    width: 97% !important;
+}
+/**.o_field_widget, .o_field_widget input.o_input{
+    height: 36px;
+}**/
+.o_datepicker .o_datepicker_button{
+    top:6px;
+}
+
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.disabled{
+    color: black;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled{
+    color: black;
+}
+.edit_btn{
+    margin-right: 4px;
+    width: 54px;
+}
+.buy_btn{
+    /* margin-right: 4px; */
+    width: 54px;
+}
+.custom_btn {
+    background-color: midnightblue;
+    color: white;
+}
+.o_list_view .o_list_table{
+    background-color: rgba(255,255,255,.7);
+}
+.o_list_view .o_list_table .text-warning {
+    color: black !important;
+}
+.btn-primary{
+    color: #FFFFFF;
+    background-color: #e77a11;
+    border-color: #e77a11;
+    }
+
+.btn-primary:hover {
+    color: #FFFFFF;
+    background-color: #e77a11;
+    border-color: #e77a11;
+}
+.o_menu_apps .dropdown-menu.show {
+    background: url(../img/background-img.jpg);
+}
+.o_menu_apps .dropdown-menu.show .form-row {
+    display: none;
+}
+.o_menu_apps .dropdown-menu.show .o_app {
+     margin-top: 80px;
+}
+.o_main_navbar > ul > li > a:hover {
+    background-color: transparent;
+}
+.o_main_navbar .show .dropdown-toggle {
+    background-color: transparent;
+}
+
+.o_affix_enabled .navbar-light {
+  display: none;
+}
+.o_footer {
+    display: none;
+}
+
+
+.navbar-light {
+    display: none;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:after {
+    border-left-color: #e77a11;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled {
+    background-color: #e77a11;
+    color: white !important;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: white;
+    background-color: #e77a11;
+    border-color: #e77a11;
+}
+.o_form_view .o_group.o_inner_group > tbody > tr > td.o_td_label {
+    min-width: 160px !important;
+}
+
+.o_rtl .dropdown-menu {
+    right:0;
+}
+.o_form_view .oe_button_box .oe_stat_button .o_button_icon {
+    color: white !important;
+}
+
+
+.o_form_view .oe_button_box .btn.oe_stat_button > .o_stat_info, .o_form_view .oe_button_box .btn.oe_stat_button > span {
+    color: white !important;
+
+}
+.o_chatter_position_sided .o_content .o_form_view:not(.o_form_nosheet) .o_chatter, .o_chatter_position_sided .modal-content .o_form_view:not(.o_form_nosheet) .o_chatter {
+        flex: 0 0 25% !important;
+        background-color: white !important;
+}
+.o_form_view .oe_button_box .btn.oe_stat_button {
+    background-color: #078282FF !important;
+    opacity: 1;
+}
+.o_chatter .o_chatter_topbar > .o_topbar_right_area {
+    display: none !important;
+}
+.o_chatter .o_chatter_topbar .o_chatter_button_log_note{
+    display: none !important;
+}
+#wrapwrap{
+ background-image: url(../img/background-img.jpg);
+    }
+    .oe_login_form, .oe_signup_form, .oe_reset_password_form {
+    max-width: 40%;
+    position: relative;
+    margin: 50px auto;
+    background-color: white;
+    padding: 15px;
+        margin-top:5rem;
+
+    border-radius: 15px;
+}
+.oe_reset_password_form img,
+.oe_login_form img{
+margin-bottom:1rem;
+width:100%
+}
+.oe_reset_password_form h1,
+.oe_login_form h1{
+text-align:center
+}
+.oe_reset_password_form .small,
+.oe_login_form .small{
+font-size:100%;
+text-align:center;
+margin:1rem !important;
+display:block !important;
+}
+.o_form_view .o_form_uri > span:first-child {
+    color: #073e89 !important;
+}
+.o_control_panel .breadcrumb > li > a {
+    color: #073e89 !important;
+}
+.o_main_navbar > .o_menu_brand:hover{
+    background-color: transparent !important;
+}
+.img_micro {
+    height: 50px;
+    width: 50px;
+    float: left;
+}
+.icon_micro {
+    float: left;
+    margin-left: 10px;
+    font-size: 30px;
+    color: #078282FF !important;
+}
+.div_micro_help {
+    float: left;
+    margin-left: 10px;
+    color: #078282FF !important;
+    font-weight: 900;
+    padding: 4px;
+    border: solid 1px lightgray;
+}

@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+        <template id="Arope_spaces_rtl_layout" inherit_id="web.layout" name="RTL Layout">
+            <xpath expr="//html/head/t" position="after">
+                <link t-if="lang_direction == 'rtl'" href="/Arope_spaces/static/src/css/main_rtl.css" rel="stylesheet"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>
