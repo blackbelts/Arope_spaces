@@ -48,7 +48,7 @@
               </div>
             </div>
             <div class="col-12 col-md-4 col-lg-5">
-               <img class="image" style="width: 120px;height: 120px;margin-top: 25%;border-radius: 50%;border: 1px solid;margin-left: auto;margin-right: auto;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+               <img class="image" style="width: 120px;height: 120px;margin-top: 15%;border-radius: 50%;border: 1px solid;margin-left: auto;margin-right: auto;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
              <!-- <div class="text-center">
                 <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
               </div>-->
