@@ -417,12 +417,14 @@ class Brokers(models.Model):
         obj=self.env['persons'].search([('card_id', '=', user.card_id)], limit=1)
         return {'fra': obj.fra_no if obj.fra_no else '', 'exp_date': obj.expire_date if obj.expire_date else '', 'mobile': obj.mobile if obj.mobile else '', 'mail': obj.mail if obj.mail else''}
 
+
     @api.model
     def get_broker_dashboard(self, id):
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
         agents_codes = []
         for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
             agents_codes.append(rec.agent_code)
+
 
 
         return {
@@ -458,6 +460,7 @@ class Brokers(models.Model):
             customer_pin.append(rec.pin)
 
         return {
+
             "user": self.get_person_info(id),
             "user_image": user.image_1920,
             # "perso_data": self.get_person_data(id, 'customer'),
