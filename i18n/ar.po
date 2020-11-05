@@ -2930,6 +2930,15 @@ msgstr ""
 msgid "Welcome to AROPE partners space"
 msgstr "اهلا بك في منصه أروب للتأمين"
 
+. module: Arope_spaces
+#. openerp-web
+#: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
+#: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
+#: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
+#, python-format
+msgid "You are Ready Partner"
+msgstr "اصبحت عميل الان شكرا لك"
+
 #. module: Arope_spaces
 #. openerp-web
 #: code:addons/Arope_spaces/static/src/xml/hrms_dashboard.xml:0
