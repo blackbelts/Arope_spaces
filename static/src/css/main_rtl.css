@@ -17,3 +17,20 @@
     padding: 4px;
     border: solid 1px lightgray;
 }
+.o_main_navbar > ul {
+    float: right;
+    display: flex;
+}
+.o_main_navbar > .o_menu_brand {
+    float: right;
+    margin-left: 35px;
+    margin-right: 0px;
+}
+.o_main_navbar > ul.o_menu_systray {
+    float: left;
+    display: flex;
+}
+
+.o_main_navbar .o_user_menu {
+   direction: ltr;
+}

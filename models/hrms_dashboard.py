@@ -440,7 +440,6 @@ class Brokers(models.Model):
 
             'renew_request': self.get_renew_request(id),
             'cancel_request': self.get_cancel_request(id),
-
             'targetVsProduction': self.get_target_production(id),
             'lastVsCurrentYear': self.get_production_compare(agents_codes),
             'collections':self.get_collections(agents_codes,'broker'),
