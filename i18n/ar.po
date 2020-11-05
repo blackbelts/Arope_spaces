@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-04 09:49+0000\n"
-"PO-Revision-Date: 2020-11-04 12:14+0200\n"
+"POT-Creation-Date: 2020-11-05 11:21+0000\n"
+"PO-Revision-Date: 2020-11-05 13:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
-"Language: ar\n"
-"X-Generator: Poedit 2.0.6\n"
+"Language: ar_SY\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #. module: Arope_spaces
 #: model:ir.actions.act_window,name:Arope_spaces.request_action_cancel_form
@@ -335,10 +335,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:Arope_spaces.form_claim_app
 #: model_terms:ir.ui.view,arch_db:Arope_spaces.insurance_view_form
 msgid ""
-"<span attrs=\"{'invisible': [('message', '!=', False)]}\">Welcome to AROPE Egypt Self Service, I am here to help you until your policy is issued.<br/>\n"
+"<span attrs=\"{'invisible': [('message', '!=', False)]}\">Welcome to AROPE Egypt Self Service, I am here to "
+"help you until your policy is issued.<br/>\n"
 "                                Kindly fill the application form and upload the required documents below</span>"
 msgstr ""
-"<span attrs=\"{'invisible': [('message', '!=', False)]}\">مرحبًا بكم في آروب مصر للخدمة الذاتية ، أنا هنا لمساعدتك حتى يتم إصدار وثيقتك.<br/>\n"
+"<span attrs=\"{'invisible': [('message', '!=', False)]}\">مرحبًا بكم في آروب مصر للخدمة الذاتية ، أنا هنا "
+"لمساعدتك حتى يتم إصدار وثيقتك.<br/>\n"
 "                                يرجى ملئ نموذج الطلب وتحميل المستندات المطلوبة أدناه</span>"
 
 #. module: Arope_spaces
@@ -475,7 +477,7 @@ msgstr "الموعد"
 #: code:addons/Arope_spaces/static/src/xml/new_dashboard.xml:0
 #, python-format
 msgid "Arope Dashboard"
-msgstr "المحفظة التامينية"
+msgstr "لوحة التحكم"
 
 #. module: Arope_spaces
 #: model:ir.model.fields.selection,name:Arope_spaces.selection__claim_app__maintenance_centers_in_or_out__in
@@ -491,7 +493,7 @@ msgstr ""
 #. module: Arope_spaces
 #: model:ir.actions.client,name:Arope_spaces.arope_action_dashboard
 msgid "AropeDashboard"
-msgstr "المحفظة التامينية"
+msgstr "لوحة التحكم"
 
 #. module: Arope_spaces
 #: model:ir.model.fields.selection,name:Arope_spaces.selection__claim_app__sub_state__surveyor
@@ -531,10 +533,7 @@ msgid "Brand"
 msgstr "الماركة"
 
 #. module: Arope_spaces
-#. openerp-web
-#: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
 #: model:res.groups,name:Arope_spaces.broker_space_group
-#, python-format
 msgid "Broker"
 msgstr "الوكيل"
 
@@ -545,22 +544,23 @@ msgstr "كود الوكيل"
 
 #. module: Arope_spaces
 #. openerp-web
+#: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
 #: code:addons/Arope_spaces/static/src/xml/new_dashboard.xml:0
 #, python-format
 msgid "Broker Dashboard"
-msgstr "المحفظة التامينية"
+msgstr "لوحة تحكم الوكيل"
 
 #. module: Arope_spaces
 #: model:ir.actions.client,name:Arope_spaces.broker_action_dashboard
 msgid "BrokerDashboard"
-msgstr "المحفظة التامينية"
+msgstr "لوحة تحكم الوكيل"
 
 #. module: Arope_spaces
 #. openerp-web
 #: code:addons/Arope_spaces/static/src/js/new_dashboard.js:0
 #, python-format
 msgid "BrokerDashboard "
-msgstr "المحفظة التامينية "
+msgstr "لوحة تحكم الوكيل "
 
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_policy_request__cancel_reason
@@ -671,8 +671,7 @@ msgstr "رقم التعويض"
 
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_claim_setup__claim_declaration_lines
-#: model:ir.ui.menu,name:Arope_spaces.claim_setup
-#: model_terms:ir.ui.view,arch_db:Arope_spaces.tree_claim_setup
+#: model:ir.ui.menu,name:Arope_spaces.claim_setup model_terms:ir.ui.view,arch_db:Arope_spaces.tree_claim_setup
 msgid "Claim Setup"
 msgstr "إعدادات التعويضات"
 
@@ -757,8 +756,7 @@ msgstr "شكوى"
 #. openerp-web
 #: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
 #: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
-#: code:addons/Arope_spaces/static/src/xml/hrms_dashboard.xml:0
-#: model:ir.ui.menu,name:Arope_spaces.complain_form
+#: code:addons/Arope_spaces/static/src/xml/hrms_dashboard.xml:0 model:ir.ui.menu,name:Arope_spaces.complain_form
 #, python-format
 msgid "Complaints"
 msgstr "الشكاوى"
@@ -915,16 +913,14 @@ msgid "Current Year Vs Last Year"
 msgstr "السنة الحالية مقابل السنة السابقة"
 
 #. module: Arope_spaces
-#. openerp-web
-#: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
 #: model:ir.model.fields,field_description:Arope_spaces.field_helpdesk_lite_ticket__customer
 #: model:ir.model.fields,field_description:Arope_spaces.field_policy_request__customer
-#, python-format
 msgid "Customer"
 msgstr "العميل"
 
 #. module: Arope_spaces
 #. openerp-web
+#: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
 #: code:addons/Arope_spaces/static/src/xml/new_dashboard.xml:0
 #, python-format
 msgid "Customer Dashboard"
@@ -965,14 +961,11 @@ msgstr "لوحة تحكم العميل"
 
 #. module: Arope_spaces
 #. openerp-web
-#: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
-#: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
 #: code:addons/Arope_spaces/static/src/xml/hrms_dashboard.xml:0
-#: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #: model:ir.actions.client,name:Arope_spaces.hr_action_dashboard
 #, python-format
 msgid "Dashboard"
-msgstr "المحفظة التامينية"
+msgstr "لوحة التحكم"
 
 #. module: Arope_spaces
 #. openerp-web
@@ -1236,7 +1229,7 @@ msgstr "القسط"
 #: code:addons/Arope_spaces/static/src/xml/hrms_dashboard.xml:0
 #, python-format
 msgid "Follow up list"
-msgstr ""
+msgstr "قائمه المتابعه"
 
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_insurance_quotation__message_follower_ids
@@ -1306,10 +1299,7 @@ msgstr "مجموعة من"
 
 #. module: Arope_spaces
 #. openerp-web
-#: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
-#: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
 #: code:addons/Arope_spaces/static/src/xml/hrms_dashboard.xml:0
-#: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #, python-format
 msgid "Have a Project right now?"
 msgstr ""
@@ -1322,7 +1312,7 @@ msgstr ""
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_insurance_quotation__target_price
 msgid "High Level Requirements"
-msgstr "المتطلبات"
+msgstr "طلبات إضافية"
 
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_arope_broker__id
@@ -1400,10 +1390,7 @@ msgstr ""
 
 #. module: Arope_spaces
 #. openerp-web
-#: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
-#: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
 #: code:addons/Arope_spaces/static/src/xml/hrms_dashboard.xml:0
-#: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #, python-format
 msgid "Implementation Methodology"
 msgstr ""
@@ -1659,10 +1646,7 @@ msgstr "آخر تحديث في"
 
 #. module: Arope_spaces
 #. openerp-web
-#: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
-#: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
 #: code:addons/Arope_spaces/static/src/xml/hrms_dashboard.xml:0
-#: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #, python-format
 msgid "Learn more by reading our"
 msgstr ""
@@ -2376,8 +2360,7 @@ msgstr ""
 #. openerp-web
 #: code:addons/Arope_spaces/static/src/js/broker_dash.js:0
 #: code:addons/Arope_spaces/static/src/js/customer_dash.js:0
-#: model:ir.actions.act_window,name:Arope_spaces.request_action
-#: model:ir.ui.menu,name:Arope_spaces.request
+#: model:ir.actions.act_window,name:Arope_spaces.request_action model:ir.ui.menu,name:Arope_spaces.request
 #, python-format
 msgid "Requests"
 msgstr "طلبات"
@@ -2656,14 +2639,11 @@ msgid "Survey Type"
 msgstr "نوع المعاينة"
 
 #. module: Arope_spaces
-#. openerp-web
-#: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #: model:ir.model.fields,field_description:Arope_spaces.field_claim_app__second_surveyor
 #: model:ir.model.fields,field_description:Arope_spaces.field_claim_app__surveyor
 #: model:ir.model.fields,field_description:Arope_spaces.field_insurance_quotation__surveyor
 #: model:ir.model.fields,field_description:Arope_spaces.field_survey_report__surveyor
 #: model:res.groups,name:Arope_spaces.surveyor_group
-#, python-format
 msgid "Surveyor"
 msgstr "المعاين"
 
@@ -2677,6 +2657,7 @@ msgstr "تم تعيين المعاين"
 #. module: Arope_spaces
 #. openerp-web
 #: code:addons/Arope_spaces/static/src/xml/new_dashboard.xml:0
+#: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #, python-format
 msgid "Surveyor Dashboard"
 msgstr "لوحة تحكم المعاين"
@@ -2919,14 +2900,11 @@ msgstr ""
 #. module: Arope_spaces
 #: model_terms:ir.ui.view,arch_db:Arope_spaces.partner_id_tree_view
 msgid "View Dashboard"
-msgstr "المحفظة التامينية"
+msgstr "لوحة التحكم"
 
 #. module: Arope_spaces
 #. openerp-web
-#: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
-#: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
 #: code:addons/Arope_spaces/static/src/xml/hrms_dashboard.xml:0
-#: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #, python-format
 msgid "We can help you sell and deliver your first project."
 msgstr ""
@@ -2947,8 +2925,14 @@ msgstr ""
 #. openerp-web
 #: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
 #: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
-#: code:addons/Arope_spaces/static/src/xml/hrms_dashboard.xml:0
 #: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
+#, python-format
+msgid "Welcome to AROPE partners space"
+msgstr "اهلا بك في منصه أروب للتأمين"
+
+#. module: Arope_spaces
+#. openerp-web
+#: code:addons/Arope_spaces/static/src/xml/hrms_dashboard.xml:0
 #, python-format
 msgid "Working together on your first project is the best way to success in Odoo."
 msgstr ""
@@ -2969,6 +2953,15 @@ msgstr ""
 #. openerp-web
 #: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
 #: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
+#: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
+#, python-format
+msgid "You can follow your portfolio, Policies, collections, renewals, claims and Complaints"
+msgstr "من خلال المنصه يمكنك متابعه الاتى الشكاوي والاصدارات والتجديدات والتحصيلات"
+
+#. module: Arope_spaces
+#. openerp-web
+#: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
+#: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
 #: code:addons/Arope_spaces/static/src/xml/hrms_dashboard.xml:0
 #: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #, python-format
@@ -2981,7 +2974,7 @@ msgstr ""
 #: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
 #, python-format
 msgid "Your Apps"
-msgstr ""
+msgstr "طلبات التأمين"
 
 #. module: Arope_spaces
 #. openerp-web
@@ -3005,7 +2998,7 @@ msgstr "تعويضاتك"
 #: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
 #, python-format
 msgid "Your Collections"
-msgstr ""
+msgstr "التحصيلات"
 
 #. module: Arope_spaces
 #. openerp-web
@@ -3021,7 +3014,7 @@ msgstr "الشكاوى"
 #: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
 #, python-format
 msgid "Your Endorsements Request"
-msgstr ""
+msgstr "طلبات الملحقات"
 
 #. module: Arope_spaces
 #. openerp-web
@@ -3031,7 +3024,7 @@ msgstr ""
 #: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #, python-format
 msgid "Your Grade"
-msgstr ""
+msgstr "درجتك"
 
 #. module: Arope_spaces
 #. openerp-web
