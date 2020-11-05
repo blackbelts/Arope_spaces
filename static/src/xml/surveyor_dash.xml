@@ -34,12 +34,11 @@
           <div class="row d-flex">
             <div class="col-12 col-md-8 col-lg-7">
               <h1 class="display-1 text-violet-dark mt32 mb32 fw_light">
-                <b>Surveyor</b>
-                Dashboard
+                Surveyor Dashboard
               </h1>
               <div class="alert alert-info alert-dismissible" role="alert">
                 <span class="text-beta">
-                  <b>ًWelcome to AROPE partners space</b>
+                  <b>Welcome to AROPE partners space</b>
                 </span>
                 <p class="text-beta mt8 mb0">
                  You can follow your portfolio, Policies, collections, renewals, claims and Complaints
