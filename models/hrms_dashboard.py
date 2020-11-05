@@ -412,9 +412,10 @@ class Brokers(models.Model):
         return cancel_dict
 
     @api.model
-    def get_person_data(self,id,type):
+    def get_person_info(self,id):
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
-        return self.env['persons'].search([('card_id', '=', user.card_id),('type','=',type)],limit=1)
+        obj=self.env['persons'].search_read([('card_id', '=', user.card_id)], limit=1)
+        return {'fra': obj.fra_no, 'exp_date': obj.expire_date, 'mobile': obj.mobile, 'mail': obj.mail}
 
     @api.model
     def get_broker_dashboard(self, id):
@@ -423,8 +424,9 @@ class Brokers(models.Model):
         for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
             agents_codes.append(rec.agent_code)
 
+
         return {
-            "user": self.env['persons'].search_read([('card_id', '=', user.card_id)],limit=1),
+            "user": self.get_person_info(id),
             "user_image":user.image_1920,
             # "user":self.get_person_data(id,'broker'),
             "production": self.get_production(agents_codes,'broker'),
@@ -456,7 +458,7 @@ class Brokers(models.Model):
             customer_pin.append(rec.pin)
 
         return {
-            "user": self.env['persons'].search_read([('card_id', '=', user.card_id)], limit=1),
+            "user": self.get_person_info(id),
             "user_image": user.image_1920,
             # "perso_data": self.get_person_data(id, 'customer'),
             "production": self.get_production(customer_pin, type),
@@ -780,7 +782,7 @@ class Brokers(models.Model):
         user = self.env['res.users'].search([('id', '=', user_id)], limit=1)
         return {
             'result': result,
-            "user": self.env['persons'].search_read([('card_id', '=', user.card_id)], limit=1),
+            "user": self.get_person_info(id),
             "user_image": user.image_1920,
         }
 
