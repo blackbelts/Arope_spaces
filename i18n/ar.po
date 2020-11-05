@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-05 11:21+0000\n"
-"PO-Revision-Date: 2020-11-05 13:50+0200\n"
+"PO-Revision-Date: 2020-11-05 14:37+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "Language: ar_SY\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. module: Arope_spaces
 #: model:ir.actions.act_window,name:Arope_spaces.request_action_cancel_form
@@ -477,7 +477,7 @@ msgstr "الموعد"
 #: code:addons/Arope_spaces/static/src/xml/new_dashboard.xml:0
 #, python-format
 msgid "Arope Dashboard"
-msgstr "لوحة التحكم"
+msgstr "المحفظة التأمينية"
 
 #. module: Arope_spaces
 #: model:ir.model.fields.selection,name:Arope_spaces.selection__claim_app__maintenance_centers_in_or_out__in
@@ -493,7 +493,7 @@ msgstr ""
 #. module: Arope_spaces
 #: model:ir.actions.client,name:Arope_spaces.arope_action_dashboard
 msgid "AropeDashboard"
-msgstr "لوحة التحكم"
+msgstr "المحفظة التأمينية"
 
 #. module: Arope_spaces
 #: model:ir.model.fields.selection,name:Arope_spaces.selection__claim_app__sub_state__surveyor
@@ -548,19 +548,19 @@ msgstr "كود الوكيل"
 #: code:addons/Arope_spaces/static/src/xml/new_dashboard.xml:0
 #, python-format
 msgid "Broker Dashboard"
-msgstr "لوحة تحكم الوكيل"
+msgstr "المحفظة التأمينية للوكيل"
 
 #. module: Arope_spaces
 #: model:ir.actions.client,name:Arope_spaces.broker_action_dashboard
 msgid "BrokerDashboard"
-msgstr "لوحة تحكم الوكيل"
+msgstr "المحفظة التأمينية للوكيل"
 
 #. module: Arope_spaces
 #. openerp-web
 #: code:addons/Arope_spaces/static/src/js/new_dashboard.js:0
 #, python-format
 msgid "BrokerDashboard "
-msgstr "لوحة تحكم الوكيل "
+msgstr "المحفظة التأمينية للوكيل"
 
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_policy_request__cancel_reason
@@ -924,7 +924,7 @@ msgstr "العميل"
 #: code:addons/Arope_spaces/static/src/xml/new_dashboard.xml:0
 #, python-format
 msgid "Customer Dashboard"
-msgstr "لوحة تحكم العميل"
+msgstr "المحفظة التأمينية للعميل"
 
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_insurance_quotation__email
@@ -957,7 +957,7 @@ msgstr "كود العميل"
 #: model:ir.actions.client,name:Arope_spaces.customer_action_dashboard
 #, python-format
 msgid "CustomerDashboard"
-msgstr "لوحة تحكم العميل"
+msgstr "المحفظة التأمينية للعميل"
 
 #. module: Arope_spaces
 #. openerp-web
@@ -965,7 +965,7 @@ msgstr "لوحة تحكم العميل"
 #: model:ir.actions.client,name:Arope_spaces.hr_action_dashboard
 #, python-format
 msgid "Dashboard"
-msgstr "لوحة التحكم"
+msgstr "المحفظة التأمينية"
 
 #. module: Arope_spaces
 #. openerp-web
@@ -973,7 +973,7 @@ msgstr "لوحة التحكم"
 #: code:addons/Arope_spaces/static/src/xml/new_dashboard.xml:0
 #, python-format
 msgid "Dashboard / 2020"
-msgstr "لوحة تحكم / 2020"
+msgstr "المحفظة التأمينية / 2020"
 
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_state_history__datetime
@@ -2660,7 +2660,7 @@ msgstr "تم تعيين المعاين"
 #: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #, python-format
 msgid "Surveyor Dashboard"
-msgstr "لوحة تحكم المعاين"
+msgstr "المحفظة التأمينية للمعاين"
 
 #. module: Arope_spaces
 #. openerp-web
@@ -2668,7 +2668,7 @@ msgstr "لوحة تحكم المعاين"
 #: model:ir.actions.client,name:Arope_spaces.surveyor_action_dashboard
 #, python-format
 msgid "SurveyorDashboard"
-msgstr "لوحة تحكم المعاين"
+msgstr "المحفظة التأمينية للمعاين"
 
 #. module: Arope_spaces
 #: model:ir.model.fields.selection,name:Arope_spaces.selection__claim_app__status__cheque
@@ -2900,7 +2900,7 @@ msgstr ""
 #. module: Arope_spaces
 #: model_terms:ir.ui.view,arch_db:Arope_spaces.partner_id_tree_view
 msgid "View Dashboard"
-msgstr "لوحة التحكم"
+msgstr "المحفظة التأمينية"
 
 #. module: Arope_spaces
 #. openerp-web
