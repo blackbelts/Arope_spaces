@@ -475,7 +475,7 @@ msgstr "الموعد"
 #: code:addons/Arope_spaces/static/src/xml/new_dashboard.xml:0
 #, python-format
 msgid "Arope Dashboard"
-msgstr "لوحة التحكم"
+msgstr "المحفظة التامينية"
 
 #. module: Arope_spaces
 #: model:ir.model.fields.selection,name:Arope_spaces.selection__claim_app__maintenance_centers_in_or_out__in
@@ -491,7 +491,7 @@ msgstr ""
 #. module: Arope_spaces
 #: model:ir.actions.client,name:Arope_spaces.arope_action_dashboard
 msgid "AropeDashboard"
-msgstr "لوحة التحكم"
+msgstr "المحفظة التامينية"
 
 #. module: Arope_spaces
 #: model:ir.model.fields.selection,name:Arope_spaces.selection__claim_app__sub_state__surveyor
@@ -972,7 +972,7 @@ msgstr "لوحة تحكم العميل"
 #: model:ir.actions.client,name:Arope_spaces.hr_action_dashboard
 #, python-format
 msgid "Dashboard"
-msgstr "لوحة التحكم"
+msgstr "المحفظة التامينية"
 
 #. module: Arope_spaces
 #. openerp-web
