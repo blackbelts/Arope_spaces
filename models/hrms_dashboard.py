@@ -87,7 +87,7 @@ class Brokers(models.Model):
         x = OrderedDict(sorted(result.items(), key=lambda x: months.index(x[0])))
         for key, value in x.items():
             targetlist.append(value[0])
-            production.append(value[1])
+            production.append(valu  e[1])
         targetNum = 0
         productionNum = 0
         for rec in targetlist:
