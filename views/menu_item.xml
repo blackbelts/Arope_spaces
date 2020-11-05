@@ -216,7 +216,7 @@
     <menuitem id="quick_quote_view" name="Quick Quote"
               action="quickQuoteAction" parent="new_buss"  sequence="0"/>
     <menuitem id="partner_menu" name="My Partner" action="my_partner_action"
-              parent="arope_space" sequence="1"/>
+              parent="arope_space" sequence="1"  groups="Arope_spaces.managers_group"/>
 
 <!--    <menuitem id="survey" name="Application Setup" action="survey.action_survey_form" parent="policy_config" sequence="1"/>-->
 
