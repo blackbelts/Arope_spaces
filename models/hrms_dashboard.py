@@ -87,7 +87,7 @@ class Brokers(models.Model):
         x = OrderedDict(sorted(result.items(), key=lambda x: months.index(x[0])))
         for key, value in x.items():
             targetlist.append(value[0])
-            production.append(valu  e[1])
+            production.append(value[1])
         targetNum = 0
         productionNum = 0
         for rec in targetlist:
@@ -440,6 +440,7 @@ class Brokers(models.Model):
 
             'renew_request': self.get_renew_request(id),
             'cancel_request': self.get_cancel_request(id),
+
             'targetVsProduction': self.get_target_production(id),
             'lastVsCurrentYear': self.get_production_compare(agents_codes),
             'collections':self.get_collections(agents_codes,'broker'),
