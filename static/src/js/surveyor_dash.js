@@ -64,7 +64,7 @@ odoo.define('surveyor_dashboard.SurveyorDashboard', function (require) {
         method: "surveyor_dashboard",
         args: [context.user_id]
       }).then(function (res) {
-        self.user = res.user[0]
+        self.user = res.user
         console.log(self.user)
         self.user_image=res.user_image
         self.insurance_app_survey=res.result.insurance_app_survey

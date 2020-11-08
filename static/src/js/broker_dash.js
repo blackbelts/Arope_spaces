@@ -210,7 +210,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         self.collections_statistics = res.collections
         self.renew_statistics = res.renews
         self.production_compare = res.lastVsCurrentYear
-        self.user = res.user[0]
+        self.user = res.user
         self.collection_ratio=res.collection_ratio
         self.claims_ratio=res.claims_ratio
         self.policy_lob=res.policy_lob

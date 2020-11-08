@@ -75,7 +75,7 @@ odoo.define('customer_dashboard.CustomerDashboard', function (require) {
         self.policy_lob=res.policy_lob
         self.brokerProduction = res.production
         self.renew_request=res.renew_request
-        self.user = res.user[0]
+        self.user = res.user
         self.user_image=res.user_image
         res.complaint_count.forEach(function(e,i){
             if(e.stage=="Canceled")

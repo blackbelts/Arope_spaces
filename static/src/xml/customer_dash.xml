@@ -48,7 +48,7 @@
               </div>
             </div>
             <div class="col-12 col-md-4 col-lg-5">
-               <img class="image" style="width: 120px;height: 120px;margin-top: 25%;border-radius: 50%;border: 1px solid;margin-left: auto;margin-right: auto;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+               <img class="image" style="width: 120px;height: 120px;margin-top: 15%;border-radius: 50%;border: 1px solid;margin-left: auto;margin-right: auto;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
              <!-- <div class="text-center">
                 <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
               </div>-->
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-6">
                       <h4>
-                        <t t-esc="widget.user.fra_no" />
+                        <t t-esc="widget.user.fra" />
                       </h4>
                     </div>
                     <!--                    <div class="col-md-2">-->
@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-md-6">
                       <h4>
-                        <t t-esc="widget.user.expire_date" />
+                        <t t-esc="widget.user.exp_date" />
                       </h4>
                     </div>
                     <!--                    <div class="col-md-2">-->
