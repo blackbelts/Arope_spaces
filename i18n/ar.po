@@ -1283,7 +1283,7 @@ msgstr "النوع"
 #: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #, python-format
 msgid "Gold Partner"
-msgstr ""
+msgstr "عميل ذهبى"
 
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_quotation_price_line__gross_premium
@@ -2234,7 +2234,7 @@ msgstr "عدد المحاولات"
 #: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #, python-format
 msgid "Ready Partner"
-msgstr ""
+msgstr "عميل"
 
 #. module: Arope_spaces
 #: model:ir.model.fields,field_description:Arope_spaces.field_claim_app__recommendation
@@ -2434,7 +2434,7 @@ msgstr ""
 #: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
 #, python-format
 msgid "Silver Partner"
-msgstr ""
+msgstr "عميل فضي"
 
 #. module: Arope_spaces
 #: model:ir.model.fields.selection,name:Arope_spaces.selection__medical_family__type__spouse
@@ -2929,6 +2929,15 @@ msgstr ""
 #, python-format
 msgid "Welcome to AROPE partners space"
 msgstr "اهلا بك في منصه أروب للتأمين"
+
+. module: Arope_spaces
+#. openerp-web
+#: code:addons/Arope_spaces/static/src/xml/broker_dash2.xml:0
+#: code:addons/Arope_spaces/static/src/xml/customer_dash.xml:0
+#: code:addons/Arope_spaces/static/src/xml/surveyor_dash.xml:0
+#, python-format
+msgid "You are Ready Partner"
+msgstr "اصبحت عميل الان شكرا لك"
 
 #. module: Arope_spaces
 #. openerp-web

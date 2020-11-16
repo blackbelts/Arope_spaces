@@ -33,7 +33,7 @@ class Brokers(models.Model):
         total = 0.0
         ids=[]
         for prod in self.env['policy.arope'].search(domain):
-            total += prod.totoal_premium
+            total += prod.eq_total
             ids.append(prod.id)
         return {"total":total,"ids":ids}
 
@@ -43,7 +43,7 @@ class Brokers(models.Model):
 
         for user in self.env['persons'].search([('is_user','=',True), ('type', '=', 'broker')]):
            for pro in self.env['policy.arope'].search([('agent_code', '=', user.agent_code)]):
-                total += pro.totoal_premium
+                total += pro.eq_total
            prod[user.related_user.id] = total
         print(prod)
         print('''''''''''''''''''''''''''''''''''')
@@ -81,7 +81,7 @@ class Brokers(models.Model):
                 for pol in self.env['policy.arope'].search(
                         [('agent_code', 'in', agents_codes), ('issue_date', '>=', rule.from_date),
                          ('issue_date', '<=', rule.to_date)]):
-                    total += pol.totoal_premium
+                    total += pol.eq_total
                 result[rule.name] = [rule.amount, total]
         #del result[False]
         x = OrderedDict(sorted(result.items(), key=lambda x: months.index(x[0])))
@@ -113,12 +113,12 @@ class Brokers(models.Model):
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
-                current_total += pol.totoal_premium
+                current_total += pol.eq_total
             current_prod.append(current_total)
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('issue_date', '>=', date_last_year),
                      ('issue_date', '<', date_last_year + relativedelta(months=1))]):
-                last_total += pol.totoal_premium
+                last_total += pol.eq_total
             last_prod.append(last_total)
 
             date3 = date3 + relativedelta(months=1)
@@ -140,7 +140,7 @@ class Brokers(models.Model):
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
                 for prod in self.env['policy.arope'].search([('id', 'in', pol_ids),('expiry_date', '>=', datetime.today().date()),('expiry_date', '<=', date1),]):
-                    total += prod.totoal_premium
+                    total += prod.eq_total
                     ids.append(prod.id)
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
 
@@ -150,7 +150,7 @@ class Brokers(models.Model):
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
                 for prod in self.env['policy.arope'].search([('id', 'in',pol_ids), ('expiry_date', '<=', datetime.today().date()),('expiry_date', '>=', date1)]):
-                    total += prod.totoal_premium
+                    total += prod.eq_total
                     ids.append(prod.id)
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
 
@@ -161,7 +161,7 @@ class Brokers(models.Model):
                 for prod in self.env['policy.arope'].search(
                         [('id', 'in', pol_ids), ('expiry_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Renewal'),('color','=','Orange')],limit=1).no_days)),
                          ]):
-                    total += prod.totoal_premium
+                    total += prod.eq_total
                     ids.append(prod.id)
 
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
@@ -278,7 +278,7 @@ class Brokers(models.Model):
             total=0.0
             count=0
             for rec in self.env['policy.arope'].search([('id', 'in', ids), ('lob', '=', lob.line_of_business)]):
-                  total+=rec.totoal_premium
+                  total+=rec.eq_total
                   count+=1
                   ids.append(rec.id)
             if count>0:
@@ -414,8 +414,8 @@ class Brokers(models.Model):
     @api.model
     def get_person_info(self,id):
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
-        obj=self.env['persons'].search_read([('card_id', '=', user.card_id)], limit=1)
-        return {'fra': obj.fra_no if obj.fra_no else '', 'exp_date': obj.expire_date if obj.expire_date else '', 'mobile': obj.mobile if obj.mobile else '', 'mail': obj.mail if obj.mail else''}
+        obj=self.env['persons'].search([('card_id', '=', user.card_id)], limit=1)
+        return {'name':obj.name ,'fra': obj.fra_no if obj.fra_no else '', 'exp_date': obj.expire_date if obj.expire_date else '', 'mobile': obj.mobile if obj.mobile else '', 'mail': obj.mail if obj.mail else''}
 
 
     @api.model
