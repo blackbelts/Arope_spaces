@@ -428,27 +428,27 @@ class Brokers(models.Model):
 
 
         return {
-            "user": self.get_person_info(id),
-            "user_image":user.image_1920,
+            "user": self.get_person_info(id) if self.get_person_info(id) else False,
+            "user_image":user.image_1920 if user.image_1920 else False,
             # "user":self.get_person_data(id,'broker'),
-            "production": self.get_production(agents_codes,'broker'),
-            "policy_lob": self.get_lob_count_policy(agents_codes,'broker'),
-            "claim_lob": self.get_lob_count_claim(agents_codes,'broker'),
-            "complaint_count": self.get_complaint_count(agents_codes,'broker'),
-            "collection_ratio": self.get_collection_ratio(agents_codes,'broker'),
-            "claims_ratio": self.get_claim_ratio(agents_codes,'broker'),
-            "App_count": self.get_lob_count_ins_app(id),
+            "production": self.get_production(agents_codes,'broker') if self.get_production(agents_codes,'broker') else False,
+            "policy_lob": self.get_lob_count_policy(agents_codes,'broker') if self.get_lob_count_policy(agents_codes,'broker') else False,
+            "claim_lob": self.get_lob_count_claim(agents_codes,'broker') if self.get_lob_count_claim(agents_codes,'broker') else False,
+            "complaint_count": self.get_complaint_count(agents_codes,'broker') if self.get_complaint_count(agents_codes,'broker') else False,
+            "collection_ratio": self.get_collection_ratio(agents_codes,'broker') if self.get_collection_ratio(agents_codes,'broker') else False,
+            "claims_ratio": self.get_claim_ratio(agents_codes,'broker') if self.get_claim_ratio(agents_codes,'broker') else False,
+            "App_count": self.get_lob_count_ins_app(id) if self.get_lob_count_ins_app(id) else False,
 
-            'rank': self.get_rank(id),
-            'end_request': self.get_end_request(id),
+            'rank': self.get_rank(id) if self.get_rank(id) else False,
+            'end_request': self.get_end_request(id) if self.get_end_request(id) else False,
 
-            'renew_request': self.get_renew_request(id),
-            'cancel_request': self.get_cancel_request(id),
+            'renew_request': self.get_renew_request(id) if self.get_renew_request(id) else False,
+            'cancel_request': self.get_cancel_request(id) if self.get_cancel_request(id) else False,
 
-            'targetVsProduction': self.get_target_production(id),
-            'lastVsCurrentYear': self.get_production_compare(agents_codes),
-            'collections':self.get_collections(agents_codes,'broker'),
-            'renews':self.get_renew(agents_codes,'broker')
+            'targetVsProduction': self.get_target_production(id) if self.get_target_production(id) else False,
+            'lastVsCurrentYear': self.get_production_compare(agents_codes) if self.get_production_compare(agents_codes) else False,
+            'collections':self.get_collections(agents_codes,'broker') if self.get_collections(agents_codes,'broker') else False,
+            'renews':self.get_renew(agents_codes,'broker') if self.get_renew(agents_codes,'broker') else False
         }
 
     @api.model
