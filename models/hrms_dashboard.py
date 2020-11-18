@@ -790,8 +790,18 @@ class Brokers(models.Model):
         }
 
     @api.model
-    def get_lob_icon(self, id):
-        return self.env['insurance.line.business'].search_read([('id', '=', id)]).image
+    def get_requests(self, id):
+        result = []
+        data = {}
+        for rec in self.env['policy.request'].search([]):
+           image =  self.env['insurance.product'].search([('id', '=', rec.policy_seq.id)], limit=1).line_of_bus.image
+           data['id'] = rec.id
+           data['name'] = rec.name
+           data['type'] = rec.type
+           data['image'] = image
+           result.append(data)
+        return result
+
 
 
 
