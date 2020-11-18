@@ -156,12 +156,19 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
             });
             var lobs=[]
-            self.policy_lob.forEach(function(e){
-                lobs.push({
-                    title:e.name,
-                    value:e.amount
+            console.log(self.policy_lob)
+            if(self.policy_lob != false){
+                console.log("ifffffffffff")
+                self.policy_lob.forEach(function(e){
+                    lobs.push({
+                        title:e.name,
+                        value:e.amount
+                    })
                 })
-            })
+            }else{
+            console.log("elseeeeeeeeeeeee")
+            }
+
             var piechart = AmCharts.makeChart("ambarchart3", {
               "type": "pie",
               "labelRadius": -35,
