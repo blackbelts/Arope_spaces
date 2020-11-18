@@ -793,17 +793,38 @@ class Brokers(models.Model):
     def get_requests(self, id):
         result = []
         data = {}
-        for rec in self.env['policy.request'].search([]):
+        for rec in self.env['policy.request'].search([('create_uid', '=', id)]):
            image =  self.env['insurance.product'].search([('id', '=', rec.policy_seq.id)], limit=1).line_of_bus.image
            data['id'] = rec.id
            data['name'] = rec.name
            data['type'] = rec.type
-           data['image'] = image
+           data['image'] = image if image else False
            result.append(data)
         return result
 
+    @api.model
+    def get_insurance_apps(self, id):
+        result = []
+        data = {}
+        for rec in self.env['insurance.quotation'].search([('create_uid', '=', id)]):
+            data['id'] = rec.id
+            data['state'] = rec.test_state.state if rec.test_state.state else False
+            data['application_number'] = rec.application_number if rec.application_number else False
+            data['image'] = rec.lob.image if rec.lob.image else False
+            result.append(data)
+        return result
 
-
+    def get_claims(self,id):
+        result = []
+        data = {}
+        for rec in self.env['claim.app'].search([('create_uid', '=', id)]):
+            image = self.env['insurance.product'].search([('id', '=', rec.product.id)], limit=1).line_of_bus.image
+            data['id'] = rec.id
+            data['type'] = rec.type if rec.type else False
+            data['claim_number'] = rec.claim_number if rec.claim_number else False
+            data['image'] = image if image else False
+            result.append(data)
+        return result
 
 
 
