@@ -789,6 +789,9 @@ class Brokers(models.Model):
             "user_image": user.image_1920,
         }
 
+    @api.model
+    def get_lob_icon(self, id):
+        return self.env['insurance.line.business'].search_read([('id', '=', id)]).image
 
 
 
