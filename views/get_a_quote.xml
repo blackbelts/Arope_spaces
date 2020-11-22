@@ -56,6 +56,7 @@
                     </group>
                     <group attrs="{'invisible': [('lob', '!=', 6)]}">
                         <group>
+                                <field name="travel_product"/>
                                 <field name="travel_package" />
                                 <field name="geographical_coverage"/>
                                 <field name="dob" attrs="{'invisible': [('travel_package', '!=', 'individual')]}"/>

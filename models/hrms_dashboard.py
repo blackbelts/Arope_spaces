@@ -814,6 +814,7 @@ class Brokers(models.Model):
             result.append(data)
         return result
 
+    @api.model
     def get_claims(self,id):
         result = []
         data = {}
@@ -825,6 +826,32 @@ class Brokers(models.Model):
             data['image'] = image if image else False
             result.append(data)
         return result
+
+    @api.model
+    def get_quick_quote(self, id):
+        result = []
+        data = {}
+        for rec in self.env['quotation.service'].search([('create_uid', '=', id)]):
+            data['id'] = rec.id
+            data['lob'] = rec.lob if rec.lob else False
+            data['price'] = rec.price if rec.price else False
+            data['image'] = rec.lob.image if rec.lob.image else False
+            result.append(data)
+        return result
+    @api.model
+    def travel_quote(self,data):
+        if data.get('z') and data.get('d') and data.get('p_from') and data.get('p_to'):
+            geographical_coverage = data.get('z')
+            DOB = data.get('d')
+            coverage_from = data.get('p_from')
+            coverage_to = data.get('p_to')
+            days = self.env['policy.travel'].calculate_period(coverage_from, coverage_to)
+            age = self.env['policy.travel'].calculate_age(DOB)
+            data = self.env['travel.price'].search(
+                [('zone', '=', geographical_coverage),
+                 ('from_age', '<=', age[0]),
+                 ('to_age', '>=', age[0])])
+
 
 
 

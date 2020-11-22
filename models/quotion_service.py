@@ -38,6 +38,7 @@ class QuotationService(models.Model):
     #                                ('4 Per Thousand', '4 Per Thousand')],
     #                               'Deductible')
     medical_product = fields.Many2one('medical.price', 'Product')
+    travel_product = fields.Many2one('insurance.product', string='Product', domain="[('line_of_bus.line_of_business','=','Travel')]")
     motor_product = fields.Many2one('product.covers', 'Product')
     price = fields.Float('Premium')
     dob = fields.Date('Date OF Birth', default=datetime.today())
@@ -188,7 +189,7 @@ class QuotationService(models.Model):
 
     @api.onchange('age', 'geographical_coverage', 'days', 'members')
     def calculate_travel_price(self):
-        if self.geographical_coverage and self.days:
+        if self.geographical_coverage and self.days and self.travel_product:
             # if self.travel_package == "individual":
             result = {}
             kid_dob = []
@@ -197,14 +198,14 @@ class QuotationService(models.Model):
                 if self.travel_package == 'individual':
                     if self.age:
                         result = self.env['policy.travel'].get_individual(
-                            {'z': self.geographical_coverage, 'd': [self.dob], 'p_from': self.coverage_from,
+                            {'product': self.product, 'z': self.geographical_coverage, 'd': [self.dob], 'p_from': self.coverage_from,
                              'p_to': self.coverage_to})
                 elif self.travel_package == 'family':
                     for rec in self.members:
                         if rec.type == 'kid':
                             kid_dob.append(rec.dob)
                     result = self.env['policy.travel'].get_family(
-                        {'z': self.geographical_coverage, 'p_from': self.coverage_from, 'p_to': self.coverage_to,
+                        {'product': self.product,'z': self.geographical_coverage, 'p_from': self.coverage_from, 'p_to': self.coverage_to,
                          'kid_dob': kid_dob})
                 if result:
                     self.price = result.get('gross')
