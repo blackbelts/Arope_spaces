@@ -198,14 +198,14 @@ class QuotationService(models.Model):
                 if self.travel_package == 'individual':
                     if self.age:
                         result = self.env['policy.travel'].get_individual(
-                            {'product': self.product, 'z': self.geographical_coverage, 'd': [self.dob], 'p_from': self.coverage_from,
+                            {'product': self.product.id, 'z': self.geographical_coverage, 'd': [self.dob], 'p_from': self.coverage_from,
                              'p_to': self.coverage_to})
                 elif self.travel_package == 'family':
                     for rec in self.members:
                         if rec.type == 'kid':
                             kid_dob.append(rec.dob)
                     result = self.env['policy.travel'].get_family(
-                        {'product': self.product,'z': self.geographical_coverage, 'p_from': self.coverage_from, 'p_to': self.coverage_to,
+                        {'product': self.product.id,'z': self.geographical_coverage, 'p_from': self.coverage_from, 'p_to': self.coverage_to,
                          'kid_dob': kid_dob})
                 if result:
                     self.price = result.get('gross')
