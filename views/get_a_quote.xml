@@ -34,14 +34,14 @@
                             <field name="medical_product" />
                         </group>
                     </group >
-                    <field name="members" attrs="{'invisible': ['|',('medical_package', '=', 'individual'),('lob', '!=', 1)]}">
+                    <field name="members" attrs="{'invisible': ['|',('medical_package', '=', 'individual'),('lob.line_of_business', '!=', 'Medical')]}">
                         <tree editable="bottom">
                             <field name="type"/>
                             <field name="dob"/>
                             <field name="age" readonly="1" force_save="1"/>
                         </tree>
                     </field>
-                    <group attrs="{'invisible': [('lob', '!=', 3)]}">
+                    <group attrs="{'invisible': [('lob.line_of_business', '!=', 'Motor')]}">
                         <group>
 <!--                                <field name="brand" />-->
 <!--                                <field name="deductible" attrs="{'invisible': [('brand', '!=', 'all brands')]}"/>-->
@@ -54,7 +54,7 @@
 
 
                     </group>
-                    <group attrs="{'invisible': [('lob', '!=', 6)]}">
+                    <group attrs="{'invisible': [('lob.line_of_business', '!=', 'Travel')]}">
                         <group>
                                 <field name="travel_product"/>
                                 <field name="travel_package" />
