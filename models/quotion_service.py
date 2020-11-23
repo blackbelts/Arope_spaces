@@ -52,7 +52,8 @@ class QuotationService(models.Model):
     @api.onchange('lob')
     @api.constrains('lob')
     def get_lob_name(self):
-        self.lob_name = self.lob.line_of_business
+        if self.lob:
+            self.lob_name = self.lob.line_of_business
 
     @api.onchange('coverage_from', 'coverage_to')
     @api.constrains('coverage_from', 'coverage_to')
