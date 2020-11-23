@@ -828,16 +828,10 @@ class Brokers(models.Model):
         return result
 
     @api.model
-    def get_quick_quote(self, id):
-        result = []
-        data = {}
-        for rec in self.env['quotation.service'].search([('create_uid', '=', id)]):
-            data['id'] = rec.id
-            data['lob'] = rec.lob if rec.lob else False
-            data['price'] = rec.price if rec.price else False
-            data['image'] = rec.lob.image if rec.lob.image else False
-            result.append(data)
-        return result
+    def create_quote(self, data):
+        record = self.env['quotation.service'].create(data)
+        return record.price
+
 
 
 

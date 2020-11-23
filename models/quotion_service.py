@@ -49,8 +49,9 @@ class QuotationService(models.Model):
         # @api.onchange('lob')
         # def get_lob_id(self):
         #    self.write({"lob_id":str(self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id)})
-
+    
     @api.onchange('coverage_from', 'coverage_to')
+    @api.constrains('coverage_from', 'coverage_to')
     def compute_days(self):
         for rec in self:
             if rec.coverage_from and rec.coverage_to:
@@ -61,6 +62,7 @@ class QuotationService(models.Model):
 
 
     @api.onchange('dob')
+    @api.constrains('dob')
     def compute_age(self):
         if self.dob:
             # date1 = datetime.strptime(str(self.issue_date), '%Y-%m-%d %H:%M:%S').date()
@@ -88,6 +90,7 @@ class QuotationService(models.Model):
         return ages
 
     @api.onchange('medical_package')
+    @api.constrains('medical_package')
     def product_domain(self):
         if self.medical_package == 'family':
             return {'domain': {'medical_product': [('package', '=', 'individual')]}}
@@ -95,6 +98,7 @@ class QuotationService(models.Model):
             return {'domain': {'medical_product': [('package', '=', self.medical_package)]}}
 
     @api.onchange('sum_insured','motor_product')
+    @api.constrains('sum_insured','motor_product')
     def calculate_motor_price(self):
         # print('1010')
         # if self.brand == 'all models':
@@ -150,6 +154,7 @@ class QuotationService(models.Model):
         return DOB
 
     @api.onchange('dob','members','medical_product')
+    @api.constrains('dob','members','medical_product')
     def calculate_price(self):
         if self.lob.line_of_business == 'Medical':
             if self.medical_package == 'individual':
@@ -188,6 +193,7 @@ class QuotationService(models.Model):
                     self.write({"price": price})
 
     @api.onchange('age', 'geographical_coverage', 'days', 'members', 'travel_product')
+    @api.constrains('age', 'geographical_coverage', 'days', 'members', 'travel_product')
     def calculate_travel_price(self):
         if self.geographical_coverage and self.days and self.travel_product:
             # if self.travel_package == "individual":
