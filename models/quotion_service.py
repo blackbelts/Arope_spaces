@@ -26,9 +26,9 @@ class QuotationService(models.Model):
     issue_date = fields.Datetime(string='Issue Date', readonly=True, default=lambda self:fields.datetime.today())
 
     # compute = 'compute_age'
-    coverage_from = fields.Date('From', default=datetime.today(), required=True)
+    coverage_from = fields.Date('From', default=datetime.today())
     coverage_to = fields.Date('To')
-    days = fields.Integer('Day(s)', store='True', required=True)
+    days = fields.Integer('Day(s)', store='True')
     #compute='compute_days'
     # motor_product = fields.Many2one('product.covers', 'Product')
     # brand = fields.Selection([('all brands', 'All Brands (except Chinese & East Asia)'),
