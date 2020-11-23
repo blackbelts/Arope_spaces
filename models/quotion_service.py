@@ -45,11 +45,15 @@ class QuotationService(models.Model):
     sum_insured = fields.Float('Sum Insured')
     members = fields.One2many('members', 'quotation_id', string="Members")
     hide_button = fields.Boolean('hidden', default=False)
+    lob_name = fields.Char(string='LOB Name')
 
-        # @api.onchange('lob')
-        # def get_lob_id(self):
-        #    self.write({"lob_id":str(self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id)})
-    
+
+
+    @api.onchange('lob')
+    @api.constrains('lob')
+    def get_lob_name(self):
+        self.lob_name = self.lob.line_of_business
+
     @api.onchange('coverage_from', 'coverage_to')
     @api.constrains('coverage_from', 'coverage_to')
     def compute_days(self):
