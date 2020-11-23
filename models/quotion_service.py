@@ -226,13 +226,16 @@ class QuotationService(models.Model):
 
     def motor(self):
         self.write({"lob": 3})
+        self.get_lob_name()
 
     def medical(self):
         self.write({"lob": 1})
+        self.get_lob_name()
 
     def travel(self):
         # id = self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id
         self.write({"lob": 6})
+        self.get_lob_name()
 
     def create_app(self):
         self.hide_button = True
