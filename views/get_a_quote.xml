@@ -25,7 +25,7 @@
 
                     <field name="lob"  invisible="1"/>
                     <field name="hide_button" invisible="1"/>
-                    <group attrs="{'invisible': [('lob', '!=', 1)]}">
+                    <group attrs="{'invisible': [('lob', 'not ilike', 'Medical')]}">
                         <group>
                             <field name="medical_package" />
                             <field name="dob" attrs="{'invisible': [('medical_package', '!=', 'individual')]}"/>
@@ -34,14 +34,14 @@
                             <field name="medical_product" />
                         </group>
                     </group >
-                    <field name="members" attrs="{'invisible': ['|',('medical_package', '=', 'individual'),('lob.line_of_business', '!=', 'Medical')]}">
+                    <field name="members" attrs="{'invisible': ['|',('medical_package', '=', 'individual'),('lob', 'not ilike', 'Medical')]}">
                         <tree editable="bottom">
                             <field name="type"/>
                             <field name="dob"/>
                             <field name="age" readonly="1" force_save="1"/>
                         </tree>
                     </field>
-                    <group attrs="{'invisible': [('lob.line_of_business', '!=', 'Motor')]}">
+                    <group attrs="{'invisible': [('lob', 'not ilike', 'Motor')]}">
                         <group>
 <!--                                <field name="brand" />-->
 <!--                                <field name="deductible" attrs="{'invisible': [('brand', '!=', 'all brands')]}"/>-->
@@ -54,7 +54,7 @@
 
 
                     </group>
-                    <group attrs="{'invisible': [('lob.line_of_business', '!=', 'Travel')]}">
+                    <group attrs="{'invisible': [('lob', 'not ilike', 'Travel')]}">
                         <group>
                                 <field name="travel_product"/>
                                 <field name="travel_package" />
@@ -69,7 +69,7 @@
                         </group>
 
                     </group>
-                    <field name="members" attrs="{'invisible': ['|',('travel_package', '=', 'individual'),('lob', '!=', 6)]}">
+                    <field name="members" attrs="{'invisible': ['|',('travel_package', '=', 'individual'),('lob', 'not ilike', 6)]}">
                         <tree editable="bottom">
                             <field name="type"/>
                             <field name="dob"/>
