@@ -11,7 +11,7 @@ class QuotationService(models.Model):
     _rec_name = 'lob'
 
     # lob_id = fields.Char('id')
-    lob = fields.Many2one('insurance.line.business', 'LOB', required=True, default=3)
+    lob = fields.Many2one('insurance.line.business', 'LOB', required=True, default=8)
     travel_package = fields.Selection([('individual', 'Individual'), ('family', 'Family')], 'Package For', default='individual')
     medical_package = fields.Selection([('individual', 'Individual'),
                                 ('family', 'Family'),
@@ -45,7 +45,7 @@ class QuotationService(models.Model):
     sum_insured = fields.Float('Sum Insured')
     members = fields.One2many('members', 'quotation_id', string="Members")
     hide_button = fields.Boolean('hidden', default=False)
-    lob_name = fields.Char(string='LOB Name')
+    lob_name = fields.Char(string='LOB Name', default='Travel')
 
 
 
@@ -226,16 +226,16 @@ class QuotationService(models.Model):
 
 
     def motor(self):
-        self.write({"lob": 3})
+        self.lob.line_of_business = 'Motor'
         self.get_lob_name()
 
     def medical(self):
-        self.write({"lob": 1})
+        self.lob.line_of_business = 'Medical'
         self.get_lob_name()
 
     def travel(self):
         # id = self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id
-        self.write({"lob": 6})
+        self.lob.line_of_business = 'Travel'
         self.get_lob_name()
 
     def create_app(self):

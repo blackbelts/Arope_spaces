@@ -23,8 +23,8 @@
 <!--                    <h3>Quick Quote</h3>-->
 
 
-                    <field name="lob"  />
-                    <field name="lob_name"  />
+                    <field name="lob"  invisible="1"/>
+                    <field name="lob_name"  invisible="1"/>
                     <field name="hide_button" invisible="1"/>
                     <group attrs="{'invisible': [('lob_name', '!=', 'Medical')]}">
                         <group>
