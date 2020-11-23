@@ -226,16 +226,16 @@ class QuotationService(models.Model):
 
 
     def motor(self):
-        self.lob = self.env[''].search([('line_of_business', '=', 'Motor')]).id
+        self.lob = self.env['insurance.line.business'].search([('line_of_business', '=', 'Motor')]).id
         self.get_lob_name()
 
     def medical(self):
-        self.lob = self.env[''].search([('line_of_business', '=', 'Medical')]).id
+        self.lob = self.env['insurance.line.business'].search([('line_of_business', '=', 'Medical')]).id
         self.get_lob_name()
 
     def travel(self):
         # id = self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id
-        self.lob = self.env[''].search([('line_of_business', '=', 'Travel')]).id
+        self.lob = self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id
         self.get_lob_name()
 
     def create_app(self):
