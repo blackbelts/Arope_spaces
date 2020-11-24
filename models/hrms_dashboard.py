@@ -643,6 +643,7 @@ class Brokers(models.Model):
                                                   'test_state': self.env['state.setup'].search([('state', '=', 'Request For Offer')]).id,'state': 'proposal',  'target_price': data['target_price']})
             record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
         return {'steps': states, 'app': record}
+
     @api.model
     def get_insurance_app_list(self, parms):
         if parms['app_num']:
@@ -833,6 +834,13 @@ class Brokers(models.Model):
         data['lob'] = id
         record = self.env['quotation.service'].create(data)
         return {'price': record.price, 'id': record.id, 'lob': id}
+
+    @api.model
+    def get_product_file(self,product_id):
+        product = self.env['insurance.product'].search([('id', '=', product_id)])
+        for file in product.questionnaire_file:
+            file = file.id
+        return file
 
 
 
