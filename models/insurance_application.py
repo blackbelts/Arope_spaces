@@ -1001,6 +1001,7 @@ class PersonsLines(models.Model):
         string='State', default='pending')
 
     @api.onchange('application_file')
+    @api.constrains('application_file')
     def change_state(self):
         if self.application_file:
             self.write({"issue_in_progress_state": 'complete'})

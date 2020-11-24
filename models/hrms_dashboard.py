@@ -842,5 +842,20 @@ class Brokers(models.Model):
             file = file.id
         return file
 
+    @api.model
+    def create_insurance_application(self,data):
+        id = self.env['insurance.quotation'].create({'lob': data['lob'], 'product_id': data['product_id'],
+                                                     'name': data['name'], 'phone': data['phone'],
+                                                     'email': data['email'],
+                                                     'test_state': self.env['state.setup'].search(
+                                                         [('state', '=', 'Application Form')]).id, 'state': 'application_form',
+                                                     'persons': [(0, 0, {'application_file': [0, 0, {'name': 'Questionnaire',
+                                                                'res_name': 'questionnaire',
+                                                                'type': 'binary',
+                                                                'datas': data['file']}]})]
+                                                     })
+        self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
+        self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
+        self.env['insurance.quotation'].search([('id', '=', id.id)]).get_application_form()
 
-
+        return {'id': id.id, 'state': id.state}
