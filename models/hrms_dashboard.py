@@ -832,7 +832,7 @@ class Brokers(models.Model):
         id = self.env['insurance.line.business'].search([('line_of_business', '=', data.get('lob_name'))]).id
         data['lob'] = id
         record = self.env['quotation.service'].create(data)
-        return record.price
+        return {'price': record.price, 'id': record.id}
 
 
 
