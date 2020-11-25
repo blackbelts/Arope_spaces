@@ -855,11 +855,15 @@ class Brokers(models.Model):
 
                                                      })
         person = self.env['persons.lines'].create({'application_id': id.id})
-        person.write({'application_file': [0,0,{'name': 'Questionnaire',
+        attachment = request.env['ir.attachment'].sudo().create({
+            'name': 'Questionnaire',
             # 'datas_fname': 'questionnaire',
             'res_name': 'questionnaire',
             'type': 'binary',
-            'datas': data['file']}]})
+            'datas': data['file'],
+        })
+        self.env['']
+        person.write({'application_file': [attachment.id]]})
         self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_application_form()
