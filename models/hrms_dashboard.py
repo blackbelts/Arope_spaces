@@ -858,4 +858,4 @@ class Brokers(models.Model):
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_application_form()
 
-        return {'id': id.id, 'state': id.state}
+        return True
