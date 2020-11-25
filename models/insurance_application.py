@@ -999,8 +999,7 @@ class PersonsLines(models.Model):
         [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
         string='State', default='pending')
 
-
-    @api.constrains('application_file')
+    @api.onchange('application_file')
     def change_state(self):
         if self.application_file:
             self.issue_in_progress_state = 'complete'
