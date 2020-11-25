@@ -994,16 +994,16 @@ class PersonsLines(models.Model):
     comment = fields.Text('Comment')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     download_files = fields.Many2many('ir.attachment', string="Download File")
-    app_file = fields.Many2one('ir.attachment', string="Upload File")
+    application_file = fields.Many2one('ir.attachment', string="Upload File")
     issue_in_progress_state = fields.Selection(
         [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
         string='State', default='pending')
 
-    @api.onchange('app_file')
-    @api.constrains('app_file')
+    @api.onchange('application_file')
+    @api.constrains('application_file')
     def change_state(self):
-        if self.app_file:
-            self.write({"issue_in_progress_state": 'complete'})
+        if self.application_file:
+            self.issue_in_progress_state = 'complete'
 
 
     # def start_application(self):

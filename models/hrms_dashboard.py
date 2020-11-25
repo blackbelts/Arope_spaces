@@ -855,7 +855,7 @@ class Brokers(models.Model):
 
                                                      })
         person = self.env['persons.lines'].create({'application_id': id.id})
-        person.write({'app_file': [0,0,{'name': 'Questionnaire',
+        person.write({'application_file': [0,0,{'name': 'Questionnaire',
             # 'datas_fname': 'questionnaire',
             'res_name': 'questionnaire',
             'type': 'binary',
