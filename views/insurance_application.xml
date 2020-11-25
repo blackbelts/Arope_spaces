@@ -159,7 +159,7 @@
                         <tree editable="bottom">
                             <field name="insured" readonly="1" force_save="1"/>
                             <field name="download_files" widget="many2many_binary"/>
-                            <field name="application_file"/>
+                            <field name="application_file" widget="many2many_binary"/>
                             <button name="required_document" string="Required Documents" type="object" class="oe_highlight"/>
                             <field name="comment"/>
                             <field name="issue_in_progress_state"/>
