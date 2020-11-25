@@ -993,8 +993,8 @@ class PersonsLines(models.Model):
     insured = fields.Char("Insured")
     comment = fields.Text('Comment')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
-    download_files = fields.Many2many('ir.attachment', string="Download File")
-    application_file = fields.Many2one('ir.attachment', string="Upload File")
+    download_files = fields.Many2many('ir.attachment', string="Download File", relation="download_files")
+    application_file = fields.Many2many('ir.attachment', string="Upload File")
     issue_in_progress_state = fields.Selection(
         [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
         string='State', default='pending')
