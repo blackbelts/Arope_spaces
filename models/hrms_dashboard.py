@@ -851,8 +851,13 @@ class Brokers(models.Model):
                                                          [('state', '=', 'Application Form')]).id, 'state': 'application_form',
                                                      
                                                      })
+        self.env['persons.lines'].create({'application_id': id.id, 'application_file': [0,0,{'name': 'Questionnaire',
+            # 'datas_fname': 'questionnaire',
+            'res_name': 'questionnaire',
+            'type': 'binary',
+            'datas': data['file']}]})
         self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_application_form()
 
-        return True
+        return {'id': id.id, 'state': id.state}
