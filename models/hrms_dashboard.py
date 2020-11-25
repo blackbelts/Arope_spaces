@@ -801,6 +801,7 @@ class Brokers(models.Model):
            data['type'] = rec.type
            data['image'] = image if image else False
            result.append(data)
+           data = {}
         return result
 
     @api.model
@@ -813,6 +814,7 @@ class Brokers(models.Model):
             data['application_number'] = rec.application_number if rec.application_number else False
             data['image'] = rec.lob.image if rec.lob.image else False
             result.append(data)
+            data = {}
         return result
 
     @api.model
@@ -826,6 +828,7 @@ class Brokers(models.Model):
             data['claim_number'] = rec.claim_number if rec.claim_number else False
             data['image'] = image if image else False
             result.append(data)
+            data = {}
         return result
 
     @api.model
