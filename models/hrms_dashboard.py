@@ -862,7 +862,7 @@ class Brokers(models.Model):
             'type': 'binary',
             'datas': data['file'],
         })
-        person.write({'application_file': (6,0,[attachment.id])})
+        # person.write({'application_file': (6,0,[attachment.id])})
         self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_application_form()
