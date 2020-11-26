@@ -860,7 +860,7 @@ class Brokers(models.Model):
             'res_name': 'questionnaire',
             'type': 'binary',
             'datas': data['file'],
-        })]})
+        })],'issue_in_progress_state': 'complete'})
         # attachment = request.env['ir.attachment'].sudo().create({
         #
         # })
