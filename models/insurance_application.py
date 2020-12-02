@@ -784,7 +784,7 @@ class FinalOffer(models.Model):
     file = fields.Many2many('ir.attachment', string="Offer")
     value = fields.Float('Value')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
-    offer_state = fields.Selection([('submitted', 'Submitted'),
+    offer_state = fields.Selection([('test_state', 'Submitted'),
                                     ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='State')
 
     @api.onchange('file')

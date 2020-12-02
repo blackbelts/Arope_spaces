@@ -690,20 +690,21 @@ class Brokers(models.Model):
         rec = self.env['insurance.quotation'].search_read([('id', '=', id)])
         for rec in self.env['state.setup'].search([('id', '=', state_id)]):
             message = rec.message
-        rec[0]['message'] = message
+        if message:
+            rec[0]['message'] = message
         # for record in self.env['state.setup'].search([('product_ids', 'in', [product]),
         #                                               ('type', '=', 'insurance_app'),
         #                                               ('state_for', '=', 'broker')]):
         #     status.append({"name": record.state, "message": record.message})
-        # for offer in self.env['insurance.quotation'].search([('id', '=', id)]).offer_ids:
-        #     ids = []
-        #     if offer.offer_state != "pending":
-        #
-        #         for file in offer.file:
-        #             ids.append(file.id)
-        #
-        #         offers.append({"id": offer.id,"file_id": ids, "type": dict(offer._fields['type'].selection).get(offer.type),
-        #                        "state": offer.offer_state})
+        for offer in self.env['insurance.quotation'].search([('id', '=', id)]).offer_ids:
+            ids = []
+            if offer.offer_state != "pending":
+
+                for file in offer.file:
+                    ids.append(file.id)
+
+                offers.append({"id": offer.id,"file_id": ids, "type": dict(offer._fields['type'].selection).get(offer.type),
+                               "state": offer.offer_state})
 
         # for doc in self.env['insurance.quotation'].search([('id', '=', id)]).final_application_ids:
         #     description = self.env['final.application.setup'].search([("id", "=", doc.description.id)]).description
