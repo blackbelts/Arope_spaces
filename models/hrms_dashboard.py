@@ -686,12 +686,11 @@ class Brokers(models.Model):
         # document = []
         # status = []
         offers = []
-        state_id = self.env['insurance.quotation'].search([('id', '=', id)]).test_state.id
         rec = self.env['insurance.quotation'].search_read([('id', '=', id)])
-        for rec in self.env['state.setup'].search([('id', '=', state_id)]):
-            message = rec.message
-        if message:
-            rec[0]['message'] = message
+        # for reco in self.env['state.setup'].search([('id', '=', state_id)]):
+        #     message = reco.message
+        # if message:
+        #     rec[0]['message'] = message
         # for record in self.env['state.setup'].search([('product_ids', 'in', [product]),
         #                                               ('type', '=', 'insurance_app'),
         #                                               ('state_for', '=', 'broker')]):
@@ -705,11 +704,6 @@ class Brokers(models.Model):
 
                 offers.append({"id": offer.id,"file_id": ids, "type": dict(offer._fields['type'].selection).get(offer.type),
                                "state": offer.offer_state})
-
-        # for doc in self.env['insurance.quotation'].search([('id', '=', id)]).final_application_ids:
-        #     description = self.env['final.application.setup'].search([("id", "=", doc.description.id)]).description
-        #     document.append({"id": doc.id, "file_id": doc.application_files.ids, "state": doc.issue_in_progress_state, "attachment": description})
-
 
         return {'app': rec, 'offers': offers}
 
