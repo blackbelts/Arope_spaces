@@ -683,7 +683,7 @@ class Brokers(models.Model):
     @api.model
     def get_app_info(self, id):
         # return id
-        document = []
+        # document = []
         # status = []
         offers = []
         state_id = self.env['insurance.quotation'].search([('id', '=', id)]).test_state.id
@@ -705,12 +705,12 @@ class Brokers(models.Model):
                 offers.append({"id": offer.id,"file_id": ids, "type": dict(offer._fields['type'].selection).get(offer.type),
                                "state": offer.offer_state})
 
-        for doc in self.env['insurance.quotation'].search([('id', '=', id)]).final_application_ids:
-            description = self.env['final.application.setup'].search([("id", "=", doc.description.id)]).description
-            document.append({"id": doc.id, "file_id": doc.application_files.ids, "state": doc.issue_in_progress_state, "attachment": description})
+        # for doc in self.env['insurance.quotation'].search([('id', '=', id)]).final_application_ids:
+        #     description = self.env['final.application.setup'].search([("id", "=", doc.description.id)]).description
+        #     document.append({"id": doc.id, "file_id": doc.application_files.ids, "state": doc.issue_in_progress_state, "attachment": description})
 
 
-        return {'app': rec, 'offers': offers, "attachment": document}
+        return {'app': rec, 'offers': offers}
 
     @api.model
     def accept_offer(self,id):
