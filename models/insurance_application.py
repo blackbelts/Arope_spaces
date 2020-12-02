@@ -98,7 +98,7 @@ class Quotation(models.Model):
     surveyor = fields.Many2one('res.users', 'Surveyor')
     policy_number = fields.Char('Policy Num')
     policy_issue_date = fields.Date('Policy Issue Date')
-    family_age = fields.One2many('medical.family', 'application_id', string='Members')
+    # family_age = fields.One2many('medical.family', 'application_id', string='Members')
     package = fields.Selection([('individual', 'Individual'),
                                 ('family', 'Family'),
                                 ('sme', 'SME'), ],
