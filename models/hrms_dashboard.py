@@ -692,8 +692,7 @@ class Brokers(models.Model):
         # if message:
         #     rec[0]['message'] = message
         for record in self.env['state.setup'].search([('product_ids', 'in', [rec[0]['product_id'][0]]),
-                                                      ('type', '=', 'insurance_app'),
-                                                      ('state_for', '=', 'broker')]):
+                                                      ('type', '=', 'insurance_app')]):
             status.append({"name": dict(record._fields['state'].selection).get(record.state),
              "message": record.message})
         for offer in self.env['insurance.quotation'].search([('id', '=', id)]).offer_ids:
