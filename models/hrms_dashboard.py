@@ -694,7 +694,8 @@ class Brokers(models.Model):
         for record in self.env['state.setup'].search([('product_ids', 'in', [rec['product_id'][0]]),
                                                       ('type', '=', 'insurance_app'),
                                                       ('state_for', '=', 'broker')]):
-            status.append({"name": record.state, "message": record.message})
+            status.append({"name": dict(record._fields['state'].selection).get(record.state),
+             "message": record.message})
         for offer in self.env['insurance.quotation'].search([('id', '=', id)]).offer_ids:
             ids = []
             if offer.offer_state != "pending":
