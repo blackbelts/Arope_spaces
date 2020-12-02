@@ -691,7 +691,7 @@ class Brokers(models.Model):
         #     message = reco.message
         # if message:
         #     rec[0]['message'] = message
-        for record in self.env['state.setup'].search([('product_ids', 'in', [rec['product_id'][0]]),
+        for record in self.env['state.setup'].search([('product_ids', 'in', [rec[0]['product_id'][0]]),
                                                       ('type', '=', 'insurance_app'),
                                                       ('state_for', '=', 'broker')]):
             status.append({"name": dict(record._fields['state'].selection).get(record.state),
