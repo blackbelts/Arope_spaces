@@ -684,17 +684,17 @@ class Brokers(models.Model):
     def get_app_info(self, id):
         # return id
         # document = []
-        # status = []
+        status = []
         offers = []
         rec = self.env['insurance.quotation'].search_read([('id', '=', id)])
         # for reco in self.env['state.setup'].search([('id', '=', state_id)]):
         #     message = reco.message
         # if message:
         #     rec[0]['message'] = message
-        # for record in self.env['state.setup'].search([('product_ids', 'in', [product]),
-        #                                               ('type', '=', 'insurance_app'),
-        #                                               ('state_for', '=', 'broker')]):
-        #     status.append({"name": record.state, "message": record.message})
+        for record in self.env['state.setup'].search([('product_ids', 'in', [rec['product_id'][0]]),
+                                                      ('type', '=', 'insurance_app'),
+                                                      ('state_for', '=', 'broker')]):
+            status.append({"name": record.state, "message": record.message})
         for offer in self.env['insurance.quotation'].search([('id', '=', id)]).offer_ids:
             ids = []
             if offer.offer_state != "pending":
@@ -705,7 +705,7 @@ class Brokers(models.Model):
                 offers.append({"id": offer.id,"file_id": ids, "type": dict(offer._fields['type'].selection).get(offer.type),
                                "state": offer.offer_state})
 
-        return {'app': rec, 'offers': offers}
+        return {'app': rec, 'offers': offers, 'status': status}
 
     @api.model
     def accept_offer(self,id):
