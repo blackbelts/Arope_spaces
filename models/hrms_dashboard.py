@@ -864,3 +864,29 @@ class Brokers(models.Model):
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_application_form()
 
         return {'id': id.id, 'state': id.state}
+
+    @api.model
+    def get_required_for_claim(self):
+        products = []
+        centers = []
+        requiredDocuments = {}
+        motorDoc = []
+        nonMotorDoc = []
+        for product in self.env['insurance.product'].search([]):
+            products.append({'id': product.id,'name':product.product_name, 'lob_id': product.line_of_bus.id})
+        
+        for center in self.env['maintenance.center'].search([]):
+            centers.append({'id': center.id, 'name': center.name})
+
+        for doc in self.env['claim.setup'].search([('type', '=', 'motor')]):
+            if doc.claim_declaration_lines.type == 'claim_intimation':
+                motorDoc.append(doc.claim_declaration_lines.question)
+        requiredDocuments['motor'] = motorDoc
+        for doc in self.env['claim.setup'].search([('type', '!=', 'motor')]):
+            if doc.claim_declaration_lines.type == 'claim_intimation':
+                nonMotorDoc.append(doc.claim_declaration_lines.question)
+        requiredDocuments['non-motor'] = non-motorDoc
+
+        return {'products': products, 'centers': centers, 'documents': requiredDocuments}
+
+
