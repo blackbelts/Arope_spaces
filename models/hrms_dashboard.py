@@ -878,14 +878,14 @@ class Brokers(models.Model):
         for center in self.env['maintenance.center'].search([]):
             centers.append({'id': center.id, 'name': center.name})
 
-        for doc in self.env['claim.setup'].search([('type', '=', 'motor')]):
-            if doc.claim_declaration_lines.type == 'claim_intimation':
-                motorDoc.append(doc.claim_declaration_lines.question)
+        for doc in self.env['claim.setup'].search([('type', '=', 'motor')]).claim_declaration_lines:
+            if doc.type == 'claim_intimation':
+                motorDoc.append(doc.question)
         requiredDocuments['motor'] = motorDoc
-        for doc in self.env['claim.setup'].search([('type', '!=', 'motor')]):
-            if doc.claim_declaration_lines.type == 'claim_intimation':
-                nonMotorDoc.append(doc.claim_declaration_lines.question)
-        requiredDocuments['non-motor'] = non-motorDoc
+        for doc in self.env['claim.setup'].search([('type', '!=', 'motor')]).claim_declaration_lines:
+            if doc.type == 'claim_intimation':
+                nonMotorDoc.append(doc.question)
+        requiredDocuments['non-motor'] = nonMotorDoc
 
         return {'products': products, 'centers': centers, 'documents': requiredDocuments}
 
