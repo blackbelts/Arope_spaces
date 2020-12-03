@@ -425,18 +425,15 @@ class Brokers(models.Model):
         for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
             agents_codes.append(rec.agent_code)
 
-
-
         return {
             "user": self.get_person_info(id),
-            "user_image":user.image_1920,
+            "user_image":user.image_1920 if user.image else False,
             # "user":self.get_person_data(id,'broker'),
             "production": self.get_production(agents_codes,'broker'),
             "policy_lob": self.get_lob_count_policy(agents_codes,'broker'),
             "claim_lob": self.get_lob_count_claim(agents_codes,'broker'),
             "complaint_count": self.get_complaint_count(agents_codes,'broker'),
             "collection_ratio": self.get_collection_ratio(agents_codes,'broker'),
-            "claims_ratio": self.get_claim_ratio(agents_codes,'broker'),
             "App_count": self.get_lob_count_ins_app(id),
 
             'rank': self.get_rank(id),
@@ -788,9 +785,4 @@ class Brokers(models.Model):
             "user": self.get_person_info(id),
             "user_image": user.image_1920,
         }
-
-
-
-
-
 
