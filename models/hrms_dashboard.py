@@ -601,6 +601,10 @@ class Brokers(models.Model):
                     self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
                     self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
                     record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
+                    for file in data['files']:
+                        self.env['final.application'].create(
+                            {"description": file['id'],
+                             "quotation_id": id.id})
                     return {'steps': states, 'app': record}
 
 
@@ -917,7 +921,6 @@ class Brokers(models.Model):
                                 'type': 'binary',
                                 'datas': file['file'],
                             })],'state': 'complete'})
-                    return {'file1': file['name'], 'file2': rec.question.question}
         return {'id': id.id}
 
     @api.model
