@@ -601,10 +601,7 @@ class Brokers(models.Model):
                     self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
                     self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
                     record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
-                    for file in data['files']:
-                        self.env['final.application'].create(
-                            {"description": file['id'],
-                             "quotation_id": id.id})
+                    
                     return {'steps': states, 'app': record}
 
 
@@ -866,6 +863,18 @@ class Brokers(models.Model):
         self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_application_form()
+        for file in data['files']:
+            self.env['final.application'].create(
+                {"description": file['name'],
+                 "application_file": [(0,0,{
+                        'name': 'File',
+                        # 'datas_fname': 'questionnaire',
+                        'res_name': 'File',
+                        'type': 'binary',
+                        'datas': data['file'],
+                    })],
+                "issue_in_progress_state": 'complete',
+                 "quotation_id": id.id})
 
         return {'id': id.id, 'state': id.state}
 
