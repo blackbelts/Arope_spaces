@@ -910,6 +910,8 @@ class Brokers(models.Model):
         for rec in id.declaration_ids:
             for file in data['files']:
                 if file['name'] == rec.question.question:
+                    tes = file['name']
+                    bes = rec.question.question
                     rec.write({'file': [(0,0,{
                                 'name': file['name'],
                                 # 'datas_fname': 'questionnaire',
@@ -917,7 +919,7 @@ class Brokers(models.Model):
                                 'type': 'binary',
                                 'datas': file['file'],
                             })],'state': 'complete'})
-        return {'id': id.id}
+        return {'id': id.id, 'file1': tes, 'file2': bes}
 
     @api.model
     def get_claim_info(self,id):
