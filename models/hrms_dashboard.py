@@ -866,7 +866,7 @@ class Brokers(models.Model):
         for file in data['files']:
             final = self.env['final.application'].create(
                 {"description": file['name'],
-                 "application_file": [(0,0,{
+                 "application_files": [(0,0,{
                         'name': 'File',
                         # 'datas_fname': 'questionnaire',
                         'res_name': 'File',
