@@ -5,17 +5,19 @@
             <field name="model">wizard.required.documents</field>
             <field name="arch" type="xml">
                 <form>
-                    <group>
-                        <field name="insurance_app_id" readonly="1" force_save="1"/>
-                    </group>
+                    <sheet>
+                        <group>
+                            <field name="insurance_app_id" readonly="1" force_save="1"/>
+                        </group>
 
-                   <field name="required_documents" widget='one2many'>
-                       <tree editable="bottom">
-                           <field name="description"/>
-                           <field name="application_files" widget="many2many_binary"/>
-                           <field name="issue_in_progress_state"/>
-                       </tree>
-                   </field>
+                       <field name="required_documents" widget='one2many'>
+                           <tree editable="bottom">
+                               <field name="description"/>
+                               <field name="application_files" widget="many2many_binary"/>
+                               <field name="issue_in_progress_state"/>
+                           </tree>
+                       </field>
+                    </sheet>
                 </form>
             </field>
         </record>
