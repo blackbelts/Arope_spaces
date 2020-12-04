@@ -12,7 +12,7 @@
                    <field name="required_documents" widget='one2many'>
                        <tree editable="bottom">
                            <field name="description"/>
-                           <field name="application_file" widget="many2many_binary"/>
+                           <field name="application_files" widget="many2many_binary"/>
                            <field name="issue_in_progress_state"/>
                        </tree>
                    </field>
