@@ -864,17 +864,17 @@ class Brokers(models.Model):
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_application_form()
         for file in data['files']:
-            self.env['final.application'].create(
+            final = self.env['final.application'].create(
                 {"description": file['name'],
-                 "application_file": [(0,0,{
+                 "quotation_id": id.id})
+            final.write({"application_file": [(0,0,{
                         'name': 'File',
                         # 'datas_fname': 'questionnaire',
                         'res_name': 'File',
                         'type': 'binary',
                         'datas': data['file'],
                     })],
-                "issue_in_progress_state": 'complete',
-                 "quotation_id": id.id})
+                "issue_in_progress_state": 'complete'})
 
         return {'id': id.id, 'state': id.state}
 
