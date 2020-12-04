@@ -866,15 +866,16 @@ class Brokers(models.Model):
         for file in data['files']:
             final = self.env['final.application'].create(
                 {"description": file['name'],
-                 "quotation_id": id.id})
-            final.write({"application_file": [(0,0,{
+                 "application_file": [(0,0,{
                         'name': 'File',
                         # 'datas_fname': 'questionnaire',
                         'res_name': 'File',
                         'type': 'binary',
                         'datas': data['file'],
                     })],
-                "issue_in_progress_state": 'complete'})
+                "issue_in_progress_state": 'complete',
+                 "quotation_id": id.id})
+
 
         return {'id': id.id, 'state': id.state}
 
