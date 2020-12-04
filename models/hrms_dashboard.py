@@ -863,18 +863,33 @@ class Brokers(models.Model):
         self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_application_form()
+        req = self.env['wizard.required.documents'].create(
+            {"insurance_app_id": id.id, "insurer_id": person.id})
         for file in data['files']:
-            final = self.env['final.application'].create(
-                {"description": file['name'],
-                 "application_files": [(0,0,{
+            req.write(
+                {"required_documents": [(0,0,{
+                    "description": file['name'],
+                    "application_files": [(0, 0, {
                         'name': 'File',
                         # 'datas_fname': 'questionnaire',
                         'res_name': 'File',
                         'type': 'binary',
                         'datas': data['file'],
                     })],
-                "issue_in_progress_state": 'complete',
-                 "quotation_id": id.id})
+                    "issue_in_progress_state": 'complete',
+                    "quotation_id": id.id
+                })]})
+            # final = self.env['final.application'].create(
+            #     {"description": file['name'],
+            #      "application_files": [(0,0,{
+            #             'name': 'File',
+            #             # 'datas_fname': 'questionnaire',
+            #             'res_name': 'File',
+            #             'type': 'binary',
+            #             'datas': data['file'],
+            #         })],
+            #     "issue_in_progress_state": 'complete',
+            #      "quotation_id": id.id})
 
 
         return {'id': id.id, 'state': id.state}
