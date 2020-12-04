@@ -897,21 +897,27 @@ class Brokers(models.Model):
                                                    'policy_num': data['policy'],'chasse_num': data['chasse_no'],
                                                     'maintenance_centers_in_or_out': data['inOrOut'],
                                                     'maintenance_centers': data['center']})
+                self.env['claim.app'].search([('id', '=', id.id)]).compute_claim_number()
+                self.env['claim.app'].search([('id', '=', id.id)]).get_questions()
+                self.env['claim.app'].search([('id', '=', id.id)]).get_message()
             else:
                 id = self.env['claim.app'].create({'type': data['type'], 'product': data['product'],
                                                    'policy_num': data['policy'],'chasse_num': data['chasse_no'],
                                                     'maintenance_centers_in_or_out': data['inOrOut']})
+                self.env['claim.app'].search([('id', '=', id.id)]).compute_claim_number()
+                self.env['claim.app'].search([('id', '=', id.id)]).get_questions()
+                self.env['claim.app'].search([('id', '=', id.id)]).get_message()
         else:
             id = self.env['claim.app'].create({'type': data['type'], 'product': data['product'],
                                                    'policy_num': data['policy']})
-        self.env['claim.app'].search([('id', '=', id.id)]).compute_claim_number()
-        self.env['claim.app'].search([('id', '=', id.id)]).get_questions()
-        self.env['claim.app'].search([('id', '=', id.id)]).get_message()
+            self.env['claim.app'].search([('id', '=', id.id)]).compute_claim_number()
+            self.env['claim.app'].search([('id', '=', id.id)]).get_questions()
+            self.env['claim.app'].search([('id', '=', id.id)]).get_message()
         for rec in id.declaration_ids:
             for file in data['files']:
                 if file['name'] == rec.question.question:
-                    tes = file['name']
-                    bes = rec.question.question
+                    # tes = file['name']
+                    # bes = rec.question.question
                     rec.write({'file': [(0,0,{
                                 'name': file['name'],
                                 # 'datas_fname': 'questionnaire',
@@ -919,7 +925,7 @@ class Brokers(models.Model):
                                 'type': 'binary',
                                 'datas': file['file'],
                             })],'state': 'complete'})
-        return {'id': id.id, 'file1': tes, 'file2': bes}
+        return {'id': id.id}
 
     @api.model
     def get_claim_info(self,id):
