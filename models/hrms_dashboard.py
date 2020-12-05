@@ -951,9 +951,13 @@ class Brokers(models.Model):
     @api.model
     def get_claim_info(self,id):
         status = []
+        invoiceDocuments = []
         rec = self.env['claim.app'].search_read([('id', '=', id)])
         for record in self.env['state.setup'].search([('claim_type', '=', rec[0]['type']),
                                                       ('type', '=', 'claim')]):
             status.append({"name": record.state,"message": record.message})
-        return {'app': rec, 'status': status}
+        for doc in self.env['claim.setup'].search([('type', '=', rec[0]['type'])]).claim_declaration_lines:
+            if doc.type == 'invoicing':
+                invoiceDocuments.append(doc.question)
+        return {'app': rec, 'status': status, 'invoice': invoiceDocuments}
 
