@@ -961,3 +961,18 @@ class Brokers(models.Model):
                 invoiceDocuments.append(doc.question)
         return {'app': rec, 'status': status, 'invoice': invoiceDocuments}
 
+    @api.model
+    def upload_claim_invoice(self,data):
+        id = self.env['claim.app'].search([('id', '=', data['id'])])
+        for rec in id.declaration_ids:
+            for file in data['files']:
+                if file['name'] == rec.question.question:
+                    rec.write({'file': [(0,0,{
+                                'name': file['name'],
+                                # 'datas_fname': 'questionnaire',
+                                'res_name': 'questionnaire',
+                                'type': 'binary',
+                                'datas': file['file'],
+                            })],'state': 'complete'})
+        return True
+
