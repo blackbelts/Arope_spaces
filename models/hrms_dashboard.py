@@ -975,4 +975,11 @@ class Brokers(models.Model):
                                 'datas': file['file'],
                             })],'state': 'complete'})
         return True
-
+    @api.model
+    def repair_completed(self,id):
+        rec = self.env['claim.app'].search([('id', '=', id)])
+        rec.write({"state": self.env['state.setup'].search(
+            [('claim_status', '=', 'repair_completed'), ('type', '=', 'claim')]).id,
+                   "status": "repair_completed"})
+        rec = self.env['claim.app'].search_read([('id', '=', id)])
+        return rec[0]
