@@ -841,7 +841,7 @@ class Brokers(models.Model):
         return result
 
     @api.model
-    def get_collections(self,ids):
+    def get_my_collections(self,ids):
         result = []
         data = {}
         for rec in self.env['collection.arope'].search([('id', 'in', ids)]):
