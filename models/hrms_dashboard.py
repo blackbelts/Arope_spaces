@@ -711,8 +711,7 @@ class Brokers(models.Model):
     def accept_offer(self,id):
         offer = self.env['final.offer'].search([('id', '=', id)])
         for rec in offer:
-            if rec.type == 'final':
-                rec.application_id.change_offer()
+            self.env['insurance.quotation'].search([('id', '=', rec.application_id.id)]).change_offer()
             rec.write({'offer_state': 'accepted'})
         return True
 
