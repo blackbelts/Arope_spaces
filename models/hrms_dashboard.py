@@ -910,20 +910,9 @@ class Brokers(models.Model):
                     "issue_in_progress_state": 'complete',
                     "quotation_id": id.id
                 })]})
-            # final = self.env['final.application'].create(
-            #     {"description": file['name'],
-            #      "application_files": [(0,0,{
-            #             'name': 'File',
-            #             # 'datas_fname': 'questionnaire',
-            #             'res_name': 'File',
-            #             'type': 'binary',
-            #             'datas': data['file'],
-            #         })],
-            #     "issue_in_progress_state": 'complete',
-            #      "quotation_id": id.id})
 
-
-        return {'id': id.id, 'state': id.state}
+        return self.get_app_info(id.id)
+        # return {'id': id.id, 'state': id.state}
 
     @api.model
     def get_required_for_claim(self):
