@@ -710,9 +710,16 @@ class Brokers(models.Model):
     @api.model
     def accept_offer(self,id):
         offer = self.env['final.offer'].search([('id', '=', id)])
+        app = self.env['insurance.quotation'].search([('id', '=', offer.application_id.id)], limit=1)
         for rec in offer:
-            self.env['insurance.quotation'].search([('id', '=', rec.application_id.id)]).change_offer()
             rec.write({'offer_state': 'accepted'})
+            self.env['insurance.quotation'].search([('id', '=', rec.application_id.id)], limit=1).write({'state': 'application',
+                                                                                                         'test_state': self.env['state.setup'].search([('status', '=', 'application'), ('type', '=', 'insurance_app')]).id})
+            self.env['state.history'].create({'application_id': rec.application_id.id,
+                                                                "state": 'application',
+                                                                "datetime": datetime.now().strftime(
+                                                                    "%Y-%m-%d %H:%M:%S"),
+                                                                "user": app.write_uid.id})
         return True
 
     @api.model
