@@ -144,6 +144,7 @@ class Quotation(models.Model):
                                                       "user": self.write_uid.id})
                     self.test_state = self.env['state.setup'].search(
                         [('status', '=', 'initial_offer'), ('type', '=', 'insurance_app')]).id
+                    self.message = self.test_state.message
                     # related_documents = self.env["final.application.setup"].search(
                     #     [("product_id.id", "=", self.product_id.id)])
                     # if related_documents:
@@ -192,6 +193,7 @@ class Quotation(models.Model):
                                                       "user": self.write_uid.id})
                     self.test_state = self.env['state.setup'].search(
                         [('status', '=', 'application'), ('type', '=', 'insurance_app')]).id
+                    self.message = self.test_state.message
                     # related_documents = self.env["final.application.setup"].search(
                     #     [("product_id.id", "=", self.product_id.id)])
                     # if related_documents:
