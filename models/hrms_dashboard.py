@@ -713,13 +713,14 @@ class Brokers(models.Model):
         app = self.env['insurance.quotation'].search([('id', '=', offer.application_id.id)], limit=1)
         for rec in offer:
             rec.write({'offer_state': 'accepted'})
-            self.env['insurance.quotation'].search([('id', '=', rec.application_id.id)], limit=1).write({'state': 'application',
-                                                                                                         'test_state': self.env['state.setup'].search([('status', '=', 'application'), ('type', '=', 'insurance_app')]).id})
-            self.env['state.history'].create({'application_id': rec.application_id.id,
-                                                                "state": 'application',
-                                                                "datetime": datetime.now().strftime(
-                                                                    "%Y-%m-%d %H:%M:%S"),
-                                                                "user": app.write_uid.id})
+            if rec.type == 'final':
+                self.env['insurance.quotation'].search([('id', '=', rec.application_id.id)], limit=1).write({'state': 'application',
+                                                                                                             'test_state': self.env['state.setup'].search([('status', '=', 'application'), ('type', '=', 'insurance_app')]).id})
+                self.env['state.history'].create({'application_id': rec.application_id.id,
+                                                                    "state": 'application',
+                                                                    "datetime": datetime.now().strftime(
+                                                                        "%Y-%m-%d %H:%M:%S"),
+                                                                    "user": app.write_uid.id})
         return True
 
     @api.model
