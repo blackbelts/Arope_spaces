@@ -801,7 +801,7 @@ class Brokers(models.Model):
         result = []
         data = {}
         for rec in self.env['policy.request'].search([('create_uid', '=', id)]):
-           image =  self.env['insurance.product'].search([('id', '=', rec.policy_seq.id)], limit=1).line_of_bus.image
+           image =  self.env['insurance.product'].search([('id', '=', rec.policy_seq.id)], limit=1).line_of_bus.icon
            data['id'] = rec.id
            data['name'] = rec.name
            data['type'] = rec.type
@@ -818,7 +818,7 @@ class Brokers(models.Model):
             data['id'] = rec.id
             data['state'] = rec.test_state.state if rec.test_state.state else False
             data['application_number'] = rec.application_number if rec.application_number else False
-            data['image'] = rec.lob.image if rec.lob.image else False
+            data['image'] = rec.lob.icon if rec.lob.icon else False
             result.append(data)
             data = {}
         return result
@@ -828,7 +828,7 @@ class Brokers(models.Model):
         result = []
         data = {}
         for rec in self.env['claim.app'].search([('create_uid', '=', id)]):
-            image = self.env['insurance.product'].search([('id', '=', rec.product.id)], limit=1).line_of_bus.image
+            image = self.env['insurance.product'].search([('id', '=', rec.product.id)], limit=1).line_of_bus.icon
             data['id'] = rec.id
             data['type'] = rec.type if rec.type else False
             data['claim_number'] = rec.claim_number if rec.claim_number else False
@@ -842,7 +842,7 @@ class Brokers(models.Model):
         result = []
         data = {}
         for rec in self.env['policy.arope'].search([('id', 'in', ids)]):
-            image = self.env['insurance.product'].search([('product_name', '=', rec.product)], limit=1).line_of_bus.image
+            image = self.env['insurance.product'].search([('product_name', '=', rec.product)], limit=1).line_of_bus.icon
             data['id'] = rec.id
             data['product'] = rec.product if rec.product else False
             data['policy_number'] = rec.policy_num if rec.policy_num else False
@@ -857,7 +857,7 @@ class Brokers(models.Model):
         data = {}
         for rec in self.env['collection.arope'].search([('id', 'in', ids)]):
             image = self.env['insurance.product'].search([('product_name', '=', rec.product)],
-                                                         limit=1).line_of_bus.image
+                                                         limit=1).line_of_bus.icon
             data['id'] = rec.id
             data['product'] = rec.product if rec.product else False
             data['policy_number'] = rec.policy_no if rec.policy_no else False
