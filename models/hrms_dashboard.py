@@ -867,6 +867,21 @@ class Brokers(models.Model):
         return result
 
     @api.model
+    def get_arope_claims(self,ids):
+        result = []
+        data = {}
+        for rec in self.env['claim.arope'].search([('id', 'in', ids)]):
+            image = self.env['insurance.product'].search([('product_name', '=', rec.product)],
+                                                         limit=1).line_of_bus.icon
+            data['id'] = rec.id
+            data['product'] = rec.product if rec.product else False
+            data['policy_number'] = rec.policy_no if rec.policy_no else False
+            data['image'] = image if image else False
+            result.append(data)
+            data = {}
+        return result
+
+    @api.model
     def create_quote(self, data):
         id = self.env['insurance.line.business'].search([('line_of_business', '=', data.get('lob_name'))]).id
         data['lob'] = id
