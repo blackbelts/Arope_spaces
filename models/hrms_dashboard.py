@@ -282,7 +282,7 @@ class Brokers(models.Model):
                   count+=1
                   ids.append(rec.id)
             if count>0:
-             lob_list.append({'name':lob.line_of_business,'count':count,'amount':total,'icon':lob.image,'ids':ids})
+             lob_list.append({'name':lob.line_of_business,'count':count,'amount':total,'icon':lob.image,'image': lob.icon,'ids':ids})
             else:continue
 
         return lob_list
@@ -304,7 +304,7 @@ class Brokers(models.Model):
                 count+=1
                 ids.append(rec.id)
             if count > 0:
-                lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image,'ids':ids})
+                lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image,'image': lob.icon,'ids':ids})
             else:
                 continue
         return lob_list
