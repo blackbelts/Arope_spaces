@@ -426,26 +426,28 @@ class Brokers(models.Model):
             agents_codes.append(rec.agent_code)
 
         return {
-            "user": self.get_person_info(id),
-            "user_image":user.image_1920 if user.image else False,
+
+            "user": self.get_person_info(id) if self.get_person_info(id) else False,
+            "user_image":user.image_1920 if user.image_1920 else False,
             # "user":self.get_person_data(id,'broker'),
-            "production": self.get_production(agents_codes,'broker'),
-            "policy_lob": self.get_lob_count_policy(agents_codes,'broker'),
-            "claim_lob": self.get_lob_count_claim(agents_codes,'broker'),
-            "complaint_count": self.get_complaint_count(agents_codes,'broker'),
-            "collection_ratio": self.get_collection_ratio(agents_codes,'broker'),
-            "App_count": self.get_lob_count_ins_app(id),
+            "production": self.get_production(agents_codes,'broker') if self.get_production(agents_codes,'broker') else False,
+            "policy_lob": self.get_lob_count_policy(agents_codes,'broker') if self.get_lob_count_policy(agents_codes,'broker') else False,
+            "claim_lob": self.get_lob_count_claim(agents_codes,'broker') if self.get_lob_count_claim(agents_codes,'broker') else False,
+            "complaint_count": self.get_complaint_count(agents_codes,'broker') if self.get_complaint_count(agents_codes,'broker') else False,
+            "collection_ratio": self.get_collection_ratio(agents_codes,'broker') if self.get_collection_ratio(agents_codes,'broker') else False,
+            "claims_ratio": self.get_claim_ratio(agents_codes,'broker') if self.get_claim_ratio(agents_codes,'broker') else False,
+            "App_count": self.get_lob_count_ins_app(id) if self.get_lob_count_ins_app(id) else False,
 
-            'rank': self.get_rank(id),
-            'end_request': self.get_end_request(id),
+            'rank': self.get_rank(id) if self.get_rank(id) else False,
+            'end_request': self.get_end_request(id) if self.get_end_request(id) else False,
 
-            'renew_request': self.get_renew_request(id),
-            'cancel_request': self.get_cancel_request(id),
+            'renew_request': self.get_renew_request(id) if self.get_renew_request(id) else False,
+            'cancel_request': self.get_cancel_request(id) if self.get_cancel_request(id) else False,
 
-            'targetVsProduction': self.get_target_production(id),
-            'lastVsCurrentYear': self.get_production_compare(agents_codes),
-            'collections':self.get_collections(agents_codes,'broker'),
-            'renews':self.get_renew(agents_codes,'broker')
+            'targetVsProduction': self.get_target_production(id) if self.get_target_production(id) else False,
+            'lastVsCurrentYear': self.get_production_compare(agents_codes) if self.get_production_compare(agents_codes) else False,
+            'collections':self.get_collections(agents_codes,'broker') if self.get_collections(agents_codes,'broker') else False,
+            'renews':self.get_renew(agents_codes,'broker') if self.get_renew(agents_codes,'broker') else False
         }
 
     @api.model
@@ -640,6 +642,7 @@ class Brokers(models.Model):
                                                   'test_state': self.env['state.setup'].search([('state', '=', 'Request For Offer')]).id,'state': 'proposal',  'target_price': data['target_price']})
             record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
         return {'steps': states, 'app': record}
+
     @api.model
     def get_insurance_app_list(self, parms):
         if parms['app_num']:
@@ -679,18 +682,17 @@ class Brokers(models.Model):
     @api.model
     def get_app_info(self, id):
         # return id
-        document = []
-        # status = []
+        # document = []
+        status = []
         offers = []
-        state_id = self.env['insurance.quotation'].search([('id', '=', id)]).test_state.id
         rec = self.env['insurance.quotation'].search_read([('id', '=', id)])
-        for rec in self.env['state.setup'].search([('id', '=', state_id)]):
-            message = rec.message
-        rec[0]['message'] = message
-        # for record in self.env['state.setup'].search([('product_ids', 'in', [product]),
-        #                                               ('type', '=', 'insurance_app'),
-        #                                               ('state_for', '=', 'broker')]):
-        #     status.append({"name": record.state, "message": record.message})
+        # for reco in self.env['state.setup'].search([('id', '=', state_id)]):
+        #     message = reco.message
+        # if message:
+        #     rec[0]['message'] = message
+        for record in self.env['state.setup'].search([('product_ids', 'in', [rec[0]['product_id'][0]]),
+                                                      ('type', '=', 'insurance_app')]):
+            status.append({"name": record.state,"message": record.message})
         for offer in self.env['insurance.quotation'].search([('id', '=', id)]).offer_ids:
             ids = []
             if offer.offer_state != "pending":
@@ -701,12 +703,7 @@ class Brokers(models.Model):
                 offers.append({"id": offer.id,"file_id": ids, "type": dict(offer._fields['type'].selection).get(offer.type),
                                "state": offer.offer_state})
 
-        for doc in self.env['insurance.quotation'].search([('id', '=', id)]).final_application_ids:
-            description = self.env['final.application.setup'].search([("id", "=", doc.description.id)]).description
-            document.append({"id": doc.id, "file_id": doc.application_files.ids, "state": doc.issue_in_progress_state, "attachment": description})
-
-
-        return {'app': rec, 'offers': offers, "attachment": document}
+        return {'app': rec, 'offers': offers, 'status': status}
 
     @api.model
     def accept_offer(self,id):
@@ -785,4 +782,111 @@ class Brokers(models.Model):
             "user": self.get_person_info(id),
             "user_image": user.image_1920,
         }
+
+
+    @api.model
+    def get_requests(self, id):
+        result = []
+        data = {}
+        for rec in self.env['policy.request'].search([('create_uid', '=', id)]):
+           image =  self.env['insurance.product'].search([('id', '=', rec.policy_seq.id)], limit=1).line_of_bus.image
+           data['id'] = rec.id
+           data['name'] = rec.name
+           data['type'] = rec.type
+           data['image'] = image if image else False
+           result.append(data)
+           data = {}
+        return result
+
+    @api.model
+    def get_insurance_apps(self, id):
+        result = []
+        data = {}
+        for rec in self.env['insurance.quotation'].search([('create_uid', '=', id)]):
+            data['id'] = rec.id
+            data['state'] = rec.test_state.state if rec.test_state.state else False
+            data['application_number'] = rec.application_number if rec.application_number else False
+            data['image'] = rec.lob.image if rec.lob.image else False
+            result.append(data)
+            data = {}
+        return result
+
+    @api.model
+    def get_claims(self,id):
+        result = []
+        data = {}
+        for rec in self.env['claim.app'].search([('create_uid', '=', id)]):
+            image = self.env['insurance.product'].search([('id', '=', rec.product.id)], limit=1).line_of_bus.image
+            data['id'] = rec.id
+            data['type'] = rec.type if rec.type else False
+            data['claim_number'] = rec.claim_number if rec.claim_number else False
+            data['image'] = image if image else False
+            result.append(data)
+            data = {}
+        return result
+
+    @api.model
+    def create_quote(self, data):
+        id = self.env['insurance.line.business'].search([('line_of_business', '=', data.get('lob_name'))]).id
+        data['lob'] = id
+        record = self.env['quotation.service'].create(data)
+        return {'price': record.price, 'id': record.id, 'lob': id}
+
+    @api.model
+    def get_product_file(self,product_id):
+        product = self.env['insurance.product'].search([('id', '=', product_id)])
+        for file in product.questionnaire_file:
+            file = file.id
+        return file
+
+    @api.model
+    def create_insurance_application(self,data):
+        id = self.env['insurance.quotation'].create({'lob': data['lob'], 'product_id': data['product_id'],
+                                                     'name': data['name'], 'phone': data['phone'],
+                                                     'email': data['email'],
+                                                     'test_state': self.env['state.setup'].search(
+                                                         [('state', '=', 'Application Form')]).id, 'state': 'application_form',
+
+                                                     })
+        person = self.env['persons.lines'].create({'application_id': id.id, 'application_file': [(0,0,{
+            'name': 'Questionnaire',
+            # 'datas_fname': 'questionnaire',
+            'res_name': 'questionnaire',
+            'type': 'binary',
+            'datas': data['file'],
+        })],'issue_in_progress_state': 'complete'})
+        # attachment = request.env['ir.attachment'].sudo().create({
+        #
+        # })
+        # person.write({'application_file': [(6,0,[attachment.id])]})
+        self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
+        self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
+        self.env['insurance.quotation'].search([('id', '=', id.id)]).get_application_form()
+
+        return {'id': id.id, 'state': id.state}
+
+    @api.model
+    def get_required_for_claim(self):
+        products = []
+        centers = []
+        requiredDocuments = {}
+        motorDoc = []
+        nonMotorDoc = []
+        for product in self.env['insurance.product'].search([]):
+            products.append({'id': product.id,'name':product.product_name, 'lob_id': product.line_of_bus.id})
+        
+        for center in self.env['maintenance.center'].search([]):
+            centers.append({'id': center.id, 'name': center.name})
+
+        for doc in self.env['claim.setup'].search([('type', '=', 'motor')]).claim_declaration_lines:
+            if doc.type == 'claim_intimation':
+                motorDoc.append(doc.question)
+        requiredDocuments['motor'] = motorDoc
+        for doc in self.env['claim.setup'].search([('type', '!=', 'motor')]).claim_declaration_lines:
+            if doc.type == 'claim_intimation':
+                nonMotorDoc.append(doc.question)
+        requiredDocuments['non-motor'] = nonMotorDoc
+
+        return {'products': products, 'centers': centers, 'documents': requiredDocuments}
+
 

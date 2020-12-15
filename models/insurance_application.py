@@ -98,7 +98,7 @@ class Quotation(models.Model):
     surveyor = fields.Many2one('res.users', 'Surveyor')
     policy_number = fields.Char('Policy Num')
     policy_issue_date = fields.Date('Policy Issue Date')
-    family_age = fields.One2many('medical.family', 'application_id', string='Members')
+    # family_age = fields.One2many('medical.family', 'application_id', string='Members')
     package = fields.Selection([('individual', 'Individual'),
                                 ('family', 'Family'),
                                 ('sme', 'SME'), ],
@@ -993,9 +993,8 @@ class PersonsLines(models.Model):
     insured = fields.Char("Insured")
     comment = fields.Text('Comment')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
-    download_files = fields.Many2many('ir.attachment', string="Download File")
-    application_file = fields.Many2many('ir.attachment', string="Upload File",
-                                        relation="wizard_required_documents_uploads")
+    download_files = fields.Many2many('ir.attachment', string="Download File", relation="download_files")
+    application_file = fields.Many2many('ir.attachment', string="Upload File")
     issue_in_progress_state = fields.Selection(
         [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
         string='State', default='pending')
@@ -1003,7 +1002,7 @@ class PersonsLines(models.Model):
     @api.onchange('application_file')
     def change_state(self):
         if self.application_file:
-            self.write({"issue_in_progress_state": 'complete'})
+            self.issue_in_progress_state = 'complete'
 
 
     # def start_application(self):

@@ -11,7 +11,7 @@ class QuotationService(models.Model):
     _rec_name = 'lob'
 
     # lob_id = fields.Char('id')
-    lob = fields.Many2one('insurance.line.business', 'LOB', required=True, default=3)
+    lob = fields.Many2one('insurance.line.business', 'LOB', required=True, default=8)
     travel_package = fields.Selection([('individual', 'Individual'), ('family', 'Family')], 'Package For', default='individual')
     medical_package = fields.Selection([('individual', 'Individual'),
                                 ('family', 'Family'),
@@ -26,9 +26,9 @@ class QuotationService(models.Model):
     issue_date = fields.Datetime(string='Issue Date', readonly=True, default=lambda self:fields.datetime.today())
 
     # compute = 'compute_age'
-    coverage_from = fields.Date('From', default=datetime.today(), required=True)
+    coverage_from = fields.Date('From', default=datetime.today())
     coverage_to = fields.Date('To')
-    days = fields.Integer('Day(s)', store='True', required=True)
+    days = fields.Integer('Day(s)', store='True')
     #compute='compute_days'
     # motor_product = fields.Many2one('product.covers', 'Product')
     # brand = fields.Selection([('all brands', 'All Brands (except Chinese & East Asia)'),
@@ -38,18 +38,25 @@ class QuotationService(models.Model):
     #                                ('4 Per Thousand', '4 Per Thousand')],
     #                               'Deductible')
     medical_product = fields.Many2one('medical.price', 'Product')
+    travel_product = fields.Many2one('insurance.product', string='Product', domain="[('line_of_bus.line_of_business','=','Travel')]")
     motor_product = fields.Many2one('product.covers', 'Product')
     price = fields.Float('Premium')
     dob = fields.Date('Date OF Birth', default=datetime.today())
     sum_insured = fields.Float('Sum Insured')
     members = fields.One2many('members', 'quotation_id', string="Members")
     hide_button = fields.Boolean('hidden', default=False)
+    lob_name = fields.Char(string='LOB Name', default='Travel')
 
-        # @api.onchange('lob')
-        # def get_lob_id(self):
-        #    self.write({"lob_id":str(self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id)})
+
+
+    @api.onchange('lob')
+    @api.constrains('lob')
+    def get_lob_name(self):
+        if self.lob:
+            self.lob_name = self.lob.line_of_business
 
     @api.onchange('coverage_from', 'coverage_to')
+    @api.constrains('coverage_from', 'coverage_to')
     def compute_days(self):
         for rec in self:
             if rec.coverage_from and rec.coverage_to:
@@ -60,6 +67,7 @@ class QuotationService(models.Model):
 
 
     @api.onchange('dob')
+    @api.constrains('dob')
     def compute_age(self):
         if self.dob:
             # date1 = datetime.strptime(str(self.issue_date), '%Y-%m-%d %H:%M:%S').date()
@@ -87,6 +95,7 @@ class QuotationService(models.Model):
         return ages
 
     @api.onchange('medical_package')
+    @api.constrains('medical_package')
     def product_domain(self):
         if self.medical_package == 'family':
             return {'domain': {'medical_product': [('package', '=', 'individual')]}}
@@ -94,6 +103,7 @@ class QuotationService(models.Model):
             return {'domain': {'medical_product': [('package', '=', self.medical_package)]}}
 
     @api.onchange('sum_insured','motor_product')
+    @api.constrains('sum_insured','motor_product')
     def calculate_motor_price(self):
         # print('1010')
         # if self.brand == 'all models':
@@ -149,6 +159,7 @@ class QuotationService(models.Model):
         return DOB
 
     @api.onchange('dob','members','medical_product')
+    @api.constrains('dob','members','medical_product')
     def calculate_price(self):
         if self.lob.line_of_business == 'Medical':
             if self.medical_package == 'individual':
@@ -186,9 +197,10 @@ class QuotationService(models.Model):
                                     price += rec.price
                     self.write({"price": price})
 
-    @api.onchange('age', 'geographical_coverage', 'days', 'members')
+    @api.onchange('age', 'geographical_coverage', 'days', 'members', 'travel_product')
+    @api.constrains('age', 'geographical_coverage', 'days', 'members', 'travel_product')
     def calculate_travel_price(self):
-        if self.geographical_coverage and self.days:
+        if self.geographical_coverage and self.days and self.travel_product:
             # if self.travel_package == "individual":
             result = {}
             kid_dob = []
@@ -197,14 +209,14 @@ class QuotationService(models.Model):
                 if self.travel_package == 'individual':
                     if self.age:
                         result = self.env['policy.travel'].get_individual(
-                            {'z': self.geographical_coverage, 'd': [self.dob], 'p_from': self.coverage_from,
+                            {'product': self.travel_product.id, 'z': self.geographical_coverage, 'd': [self.dob], 'p_from': self.coverage_from,
                              'p_to': self.coverage_to})
                 elif self.travel_package == 'family':
                     for rec in self.members:
                         if rec.type == 'kid':
                             kid_dob.append(rec.dob)
                     result = self.env['policy.travel'].get_family(
-                        {'z': self.geographical_coverage, 'p_from': self.coverage_from, 'p_to': self.coverage_to,
+                        {'product': self.travel_product.id,'z': self.geographical_coverage, 'p_from': self.coverage_from, 'p_to': self.coverage_to,
                          'kid_dob': kid_dob})
                 if result:
                     self.price = result.get('gross')
@@ -214,14 +226,17 @@ class QuotationService(models.Model):
 
 
     def motor(self):
-        self.write({"lob": 3})
+        self.lob = self.env['insurance.line.business'].search([('line_of_business', '=', 'Motor')]).id
+        self.get_lob_name()
 
     def medical(self):
-        self.write({"lob": 1})
+        self.lob = self.env['insurance.line.business'].search([('line_of_business', '=', 'Medical')]).id
+        self.get_lob_name()
 
     def travel(self):
         # id = self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id
-        self.write({"lob": 6})
+        self.lob = self.env['insurance.line.business'].search([('line_of_business', '=', 'Travel')]).id
+        self.get_lob_name()
 
     def create_app(self):
         self.hide_button = True
