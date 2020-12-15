@@ -425,9 +425,8 @@ class Brokers(models.Model):
         for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
             agents_codes.append(rec.agent_code)
 
-
-
         return {
+
             "user": self.get_person_info(id) if self.get_person_info(id) else False,
             "user_image":user.image_1920 if user.image_1920 else False,
             # "user":self.get_person_data(id,'broker'),
@@ -795,6 +794,7 @@ class Brokers(models.Model):
             "user": self.get_person_info(id),
             "user_image": user.image_1920,
         }
+
 
     @api.model
     def get_requests(self, id):
