@@ -600,6 +600,7 @@ class Brokers(models.Model):
                     self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
                     self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
                     record = self.env['insurance.quotation'].search_read([('id', '=', id.id)])
+                    
                     return {'steps': states, 'app': record}
 
 
@@ -708,8 +709,19 @@ class Brokers(models.Model):
     @api.model
     def accept_offer(self,id):
         offer = self.env['final.offer'].search([('id', '=', id)])
+        app = self.env['insurance.quotation'].search([('id', '=', offer.application_id.id)], limit=1)
         for rec in offer:
             rec.write({'offer_state': 'accepted'})
+            if rec.type == 'final':
+                self.env['insurance.quotation'].search([('id', '=', rec.application_id.id)], limit=1).write({'state': 'application',
+                                                                                                             'test_state': self.env['state.setup'].search([('status', '=', 'application'), ('type', '=', 'insurance_app')]).id,
+                                                                                                             'message': self.env['state.setup'].search([('status', '=', 'application'), ('type', '=', 'insurance_app')]).message})
+                self.env['state.history'].create({'application_id': rec.application_id.id,
+                                                                    "state": 'application',
+                                                                    "datetime": datetime.now().strftime(
+                                                                        "%Y-%m-%d %H:%M:%S"),
+                                                                    "user": app.write_uid.id})
+
         return True
 
     @api.model
@@ -789,7 +801,7 @@ class Brokers(models.Model):
         result = []
         data = {}
         for rec in self.env['policy.request'].search([('create_uid', '=', id)]):
-           image =  self.env['insurance.product'].search([('id', '=', rec.policy_seq.id)], limit=1).line_of_bus.image
+           image =  self.env['insurance.product'].search([('id', '=', rec.policy_seq.id)], limit=1).line_of_bus.icon
            data['id'] = rec.id
            data['name'] = rec.name
            data['type'] = rec.type
@@ -806,7 +818,7 @@ class Brokers(models.Model):
             data['id'] = rec.id
             data['state'] = rec.test_state.state if rec.test_state.state else False
             data['application_number'] = rec.application_number if rec.application_number else False
-            data['image'] = rec.lob.image if rec.lob.image else False
+            data['image'] = rec.lob.icon if rec.lob.icon else False
             result.append(data)
             data = {}
         return result
@@ -816,10 +828,54 @@ class Brokers(models.Model):
         result = []
         data = {}
         for rec in self.env['claim.app'].search([('create_uid', '=', id)]):
-            image = self.env['insurance.product'].search([('id', '=', rec.product.id)], limit=1).line_of_bus.image
+            image = self.env['insurance.product'].search([('id', '=', rec.product.id)], limit=1).line_of_bus.icon
             data['id'] = rec.id
             data['type'] = rec.type if rec.type else False
             data['claim_number'] = rec.claim_number if rec.claim_number else False
+            data['image'] = image if image else False
+            result.append(data)
+            data = {}
+        return result
+
+    @api.model
+    def get_policies(self,ids):
+        result = []
+        data = {}
+        for rec in self.env['policy.arope'].search([('id', 'in', ids)]):
+            image = self.env['insurance.product'].search([('product_name', '=', rec.product)], limit=1).line_of_bus.icon
+            data['id'] = rec.id
+            data['product'] = rec.product if rec.product else False
+            data['policy_number'] = rec.policy_num if rec.policy_num else False
+            data['image'] = image if image else False
+            result.append(data)
+            data = {}
+        return result
+
+    @api.model
+    def get_my_collections(self,ids):
+        result = []
+        data = {}
+        for rec in self.env['collection.arope'].search([('id', 'in', ids)]):
+            image = self.env['insurance.product'].search([('product_name', '=', rec.product)],
+                                                         limit=1).line_of_bus.icon
+            data['id'] = rec.id
+            data['product'] = rec.product if rec.product else False
+            data['policy_number'] = rec.policy_no if rec.policy_no else False
+            data['image'] = image if image else False
+            result.append(data)
+            data = {}
+        return result
+
+    @api.model
+    def get_arope_claims(self,ids):
+        result = []
+        data = {}
+        for rec in self.env['claim.arope'].search([('id', 'in', ids)]):
+            image = self.env['insurance.product'].search([('product_name', '=', rec.product)],
+                                                         limit=1).line_of_bus.icon
+            data['id'] = rec.id
+            data['product'] = rec.product if rec.product else False
+            data['policy_number'] = rec.policy_no if rec.policy_no else False
             data['image'] = image if image else False
             result.append(data)
             data = {}
@@ -862,8 +918,25 @@ class Brokers(models.Model):
         self.env['insurance.quotation'].search([('id', '=', id.id)]).compute_application_number()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_questions()
         self.env['insurance.quotation'].search([('id', '=', id.id)]).get_application_form()
+        req = self.env['wizard.required.documents'].create(
+            {"insurance_app_id": id.id, "insurer_id": person.id})
+        for file in data['files']:
+            req.write(
+                {"required_documents": [(0,0,{
+                    "description": file['name'],
+                    "application_files": [(0, 0, {
+                        'name': 'File',
+                        # 'datas_fname': 'questionnaire',
+                        'res_name': 'File',
+                        'type': 'binary',
+                        'datas': data['file'],
+                    })],
+                    "issue_in_progress_state": 'complete',
+                    "quotation_id": id.id
+                })]})
 
-        return {'id': id.id, 'state': id.state}
+        return self.get_app_info(id.id)
+        # return {'id': id.id, 'state': id.state}
 
     @api.model
     def get_required_for_claim(self):
@@ -889,4 +962,68 @@ class Brokers(models.Model):
 
         return {'products': products, 'centers': centers, 'documents': requiredDocuments}
 
+    @api.model
+    def create_claim(self, data):
+        if data['type'] == 'motor':
+            if data['inOrOut'] == 'in':
+                id = self.env['claim.app'].create({'type': data['type'], 'product': data['product'],
+                                                   'policy_num': data['policy'],'chasse_num': data['chasse_no'],
+                                                    'maintenance_centers_in_or_out': data['inOrOut'],
+                                                    'maintenance_centers': data['center']})
+            else:
+                id = self.env['claim.app'].create({'type': data['type'], 'product': data['product'],
+                                                   'policy_num': data['policy'],'chasse_num': data['chasse_no'],
+                                                    'maintenance_centers_in_or_out': data['inOrOut']})
+        else:
+            id = self.env['claim.app'].create({'type': data['type'], 'product': data['product'],
+                                                   'policy_num': data['policy']})
+        self.env['claim.app'].search([('id', '=', id.id)]).compute_claim_number()
+        self.env['claim.app'].search([('id', '=', id.id)]).get_questions()
+        self.env['claim.app'].search([('id', '=', id.id)]).get_message()
+        for rec in id.declaration_ids:
+            for file in data['files']:
+                if file['name'] == rec.question.question:
+                    rec.write({'file': [(0,0,{
+                                'name': file['name'],
+                                # 'datas_fname': 'questionnaire',
+                                'res_name': 'questionnaire',
+                                'type': 'binary',
+                                'datas': file['file'],
+                            })],'state': 'complete'})
+        return {'id': id.id}
 
+    @api.model
+    def get_claim_info(self,id):
+        status = []
+        invoiceDocuments = []
+        rec = self.env['claim.app'].search_read([('id', '=', id)])
+        for record in self.env['state.setup'].search([('claim_type', '=', rec[0]['type']),
+                                                      ('type', '=', 'claim')]):
+            status.append({"name": record.state,"message": record.message})
+        for doc in self.env['claim.setup'].search([('type', '=', rec[0]['type'])]).claim_declaration_lines:
+            if doc.type == 'invoicing':
+                invoiceDocuments.append(doc.question)
+        return {'app': rec, 'status': status, 'invoice': invoiceDocuments}
+
+    @api.model
+    def upload_claim_invoice(self,data):
+        id = self.env['claim.app'].search([('id', '=', data['id'])])
+        for rec in id.declaration_ids:
+            for file in data['files']:
+                if file['name'] == rec.question.question:
+                    rec.write({'file': [(0,0,{
+                                'name': file['name'],
+                                # 'datas_fname': 'questionnaire',
+                                'res_name': 'questionnaire',
+                                'type': 'binary',
+                                'datas': file['file'],
+                            })],'state': 'complete'})
+        return True
+    @api.model
+    def repair_completed(self,id):
+        rec = self.env['claim.app'].search([('id', '=', id)])
+        rec.write({"state": self.env['state.setup'].search(
+            [('claim_status', '=', 'repair_completed'), ('type', '=', 'claim')]).id,
+                   "status": "repair_completed"})
+        rec = self.env['claim.app'].search_read([('id', '=', id)])
+        return rec[0]

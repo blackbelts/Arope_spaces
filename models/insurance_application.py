@@ -144,6 +144,7 @@ class Quotation(models.Model):
                                                       "user": self.write_uid.id})
                     self.test_state = self.env['state.setup'].search(
                         [('status', '=', 'initial_offer'), ('type', '=', 'insurance_app')]).id
+                    self.message = self.test_state.message
                     # related_documents = self.env["final.application.setup"].search(
                     #     [("product_id.id", "=", self.product_id.id)])
                     # if related_documents:
@@ -192,6 +193,7 @@ class Quotation(models.Model):
                                                       "user": self.write_uid.id})
                     self.test_state = self.env['state.setup'].search(
                         [('status', '=', 'application'), ('type', '=', 'insurance_app')]).id
+                    self.message = self.test_state.message
                     # related_documents = self.env["final.application.setup"].search(
                     #     [("product_id.id", "=", self.product_id.id)])
                     # if related_documents:
@@ -798,8 +800,8 @@ class FinalApplication(models.Model):
     _name = 'final.application'
 
     description = fields.Many2one('final.application.setup', 'Document Name')
-    download_files = fields.Many2many('ir.attachment', string="Download File")
-    application_file = fields.Many2many('ir.attachment', string="Upload File", relation="final_application_uploads")
+    # download_files = fields.Many2many('ir.attachment', string="Download File")
+    application_files = fields.Many2many('ir.attachment', string="Upload File")
     issue_in_progress_state = fields.Selection(
         [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
         string='State', default='pending')
