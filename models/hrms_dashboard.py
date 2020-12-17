@@ -791,7 +791,7 @@ class Brokers(models.Model):
         user = self.env['res.users'].search([('id', '=', user_id)], limit=1)
         return {
             'result': result,
-            "user": self.get_person_info(id),
+            "user": self.get_person_info(user_id),
             "user_image": user.image_1920,
         }
 
