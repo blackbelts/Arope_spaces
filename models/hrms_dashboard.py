@@ -760,7 +760,7 @@ class Brokers(models.Model):
         insurance_app_survey = self.env['survey.report'].search([('type', '=', 'insurance_application'),
                                                                  ('surveyor.id','=', user_id)])
         for rec in insurance_app_survey:
-            insurance_app.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image,
+            insurance_app.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image, 'icon': rec.lob.icon,
                                 'state': rec.state, 'count': len(insurance_app_survey)})
             insurance_survey.append(rec.id)
         final_insurance['data'] = insurance_app
@@ -781,7 +781,7 @@ class Brokers(models.Model):
         non_motor_survey = self.env['survey.report'].search([('type', '=', 'non_motor_claim'),
                                                                  ('surveyor.id', '=', user_id)])
         for rec in non_motor_survey:
-            non_motor_claim.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image,
+            non_motor_claim.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image, 'icon': rec.lob.icon,
                                                     'state': rec.state, 'count': len(non_motor_survey)})
             non_motor_claim_survey.append(rec.id)
         final_non_motor['data'] = non_motor_claim
