@@ -771,7 +771,7 @@ class Brokers(models.Model):
         motor_survey = self.env['survey.report'].search([('type', '=', 'motor_claim'),
                                                                  ('surveyor.id', '=', user_id)])
         for rec in motor_survey:
-            motor_claim.append({'type': rec.survey_type,
+            motor_claim.append({'type': dict(rec._fields['survey_type'].selection).get(rec.survey_type),
                                                     'state': rec.state, 'count': len(motor_survey)})
             motor_claim_survey.append(rec.id)
         final_motor['data'] = motor_claim
@@ -1078,3 +1078,16 @@ class Brokers(models.Model):
             result.append(data)
             data = {}
         return result
+
+    @api.model
+    def submit_survey(self,data):
+        for rec in self.env['survey.report'].search([('id', '=', data['id'])]):
+            rec.write({'comment': data['comment'], 'recomm': data['recomm'],
+                       'survey_report': [(0,0,{'name': 'Survey Report',
+                                                'res_name': 'Survey Report',
+                                                'type': 'binary',
+                                                'datas': data['file'],
+                                            })]})
+            rec.get_message()
+            rec.survey_submitted()
+        return True
