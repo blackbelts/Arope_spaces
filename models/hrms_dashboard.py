@@ -1027,3 +1027,54 @@ class Brokers(models.Model):
                    "status": "repair_completed"})
         rec = self.env['claim.app'].search_read([('id', '=', id)])
         return rec[0]
+
+    @api.model
+    def get_insurance_app_survey(self,user_id):
+        result = []
+        data = {}
+        for rec in self.env['survey.report'].search([('type', '=', 'insurance_application'),
+                                                                 ('surveyor.id', '=', user_id)]):
+            image = self.env['insurance.product'].search([('id', '=', rec.product_id.id)], limit=1).line_of_bus.icon
+            data['id'] = rec.id
+            data['product'] = rec.product_id.product_name if rec.product_id.product_name else False
+            data['survey_number'] = rec.name if rec.name else False
+            data['image'] = image if image else False
+            data['state'] = dict(rec._fields['state'].selection).get(rec.state)
+            data['app_id'] = rec.application_id if rec.application_id else False
+            result.append(data)
+            data = {}
+        return result
+
+    @api.model
+    def get_motor_claim_survey(self, user_id):
+        result = []
+        data = {}
+        for rec in self.env['survey.report'].search([('type', '=', 'motor_claim'),
+                                                     ('surveyor.id', '=', user_id)]):
+            image = self.env['insurance.line.business'].search([('line_of_business', '=', 'Motor')], limit=1).icon
+            data['id'] = rec.id
+            data['product'] = rec.claim_id.product.product_name if rec.claim_id.product.product_name else False
+            data['survey_number'] = rec.name if rec.name else False
+            data['image'] = image if image else False
+            data['state'] = dict(rec._fields['state'].selection).get(rec.state)
+            data['claim_id'] = rec.claim_id if rec.claim_id else False
+            result.append(data)
+            data = {}
+        return result
+
+    @api.model
+    def get_non_motor_claim_survey(self, user_id):
+        result = []
+        data = {}
+        for rec in self.env['survey.report'].search([('type', '=', 'non_motor_claim'),
+                                                     ('surveyor.id', '=', user_id)]):
+            image = self.env['insurance.product'].search([('id', '=', rec.product_id.id)], limit=1).line_of_bus.icon
+            data['id'] = rec.id
+            data['product'] = rec.product_id.product_name if rec.product_id.product_name else False
+            data['survey_number'] = rec.name if rec.name else False
+            data['image'] = image if image else False
+            data['state'] = dict(rec._fields['state'].selection).get(rec.state)
+            data['claim_id'] = rec.claim_id if rec.claim_id else False
+            result.append(data)
+            data = {}
+        return result
