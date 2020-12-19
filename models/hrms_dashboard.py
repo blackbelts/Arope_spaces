@@ -1039,7 +1039,7 @@ class Brokers(models.Model):
             data['product'] = rec.application_id.product_id.product_name if rec.application_id.product_id.product_name else False
             data['survey_number'] = rec.name if rec.name else False
             data['image'] = image if image else False
-            data['state'] = dict(rec._fields['state'].selection).get(rec.state)
+            # data['state'] = dict(rec._fields['state'].selection).get(rec.state)
             data['app_id'] = rec.application_id if rec.application_id else False
             result.append(data)
             data = {}
