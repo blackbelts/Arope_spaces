@@ -1090,4 +1090,5 @@ class Brokers(models.Model):
                                             })]})
             rec.get_message()
             rec.survey_submitted()
-        return True
+        result = self.env['survey.report'].search_read([('id', '=', data['id'])])
+        return result
