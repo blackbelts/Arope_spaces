@@ -1034,9 +1034,9 @@ class Brokers(models.Model):
         data = {}
         for rec in self.env['survey.report'].search([('type', '=', 'insurance_application'),
                                                                  ('surveyor.id', '=', user_id)]):
-            image = self.env['insurance.product'].search([('id', '=', rec.product_id.id)], limit=1).line_of_bus.icon
+            image = self.env['insurance.product'].search([('id', '=', rec.application_id.product_id.id)], limit=1).line_of_bus.icon
             data['id'] = rec.id
-            data['product'] = rec.product_id.product_name if rec.product_id.product_name else False
+            data['product'] = rec.application_id.product_id.product_name if rec.application_id.product_id.product_name else False
             data['survey_number'] = rec.name if rec.name else False
             data['image'] = image if image else False
             data['state'] = dict(rec._fields['state'].selection).get(rec.state)
