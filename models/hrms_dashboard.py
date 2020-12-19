@@ -1057,7 +1057,7 @@ class Brokers(models.Model):
             data['survey_number'] = rec.name if rec.name else False
             data['image'] = image if image else False
             data['state'] = dict(rec._fields['state'].selection).get(rec.state)
-            data['claim_id'] = rec.claim_id if rec.claim_id else False
+            data['claim_id'] = rec.claim_id.id if rec.claim_id.id else False
             result.append(data)
             data = {}
         return result
@@ -1074,7 +1074,7 @@ class Brokers(models.Model):
             data['survey_number'] = rec.name if rec.name else False
             data['image'] = image if image else False
             data['state'] = dict(rec._fields['state'].selection).get(rec.state)
-            data['claim_id'] = rec.claim_id if rec.claim_id else False
+            data['claim_id'] = rec.claim_id.id if rec.claim_id.id else False
             result.append(data)
             data = {}
         return result
