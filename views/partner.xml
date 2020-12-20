@@ -114,7 +114,7 @@
         <field name="res_model">res.users</field>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="partner_id_tree_view_user"/>
-        <field name='domain' eval="[('groups_id','in',ref('Arope_spaces.broker_space_group'))]"/>
+        <field name='domain' eval="[('groups_id','in',[ref('Arope_spaces.broker_space_group'),ref('Arope_spaces.client_space_group'),ref('Arope_spaces.surveyor_group')])]"/>
         <field name="context">{'create': False,'edit':False}</field>
 
     </record>
