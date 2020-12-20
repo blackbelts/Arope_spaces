@@ -282,7 +282,7 @@ class Brokers(models.Model):
                   count+=1
                   ids.append(rec.id)
             if count>0:
-             lob_list.append({'name':lob.line_of_business,'count':count,'amount':total,'icon':lob.image,'ids':ids})
+             lob_list.append({'name':lob.line_of_business,'count':count,'amount':total,'icon':lob.image,'image': lob.icon,'ids':ids})
             else:continue
 
         return lob_list
@@ -304,7 +304,7 @@ class Brokers(models.Model):
                 count+=1
                 ids.append(rec.id)
             if count > 0:
-                lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image,'ids':ids})
+                lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image,'image': lob.icon,'ids':ids})
             else:
                 continue
         return lob_list
@@ -760,7 +760,7 @@ class Brokers(models.Model):
         insurance_app_survey = self.env['survey.report'].search([('type', '=', 'insurance_application'),
                                                                  ('surveyor.id','=', user_id)])
         for rec in insurance_app_survey:
-            insurance_app.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image,
+            insurance_app.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image, 'icon': rec.lob.icon,
                                 'state': rec.state, 'count': len(insurance_app_survey)})
             insurance_survey.append(rec.id)
         final_insurance['data'] = insurance_app
@@ -771,7 +771,7 @@ class Brokers(models.Model):
         motor_survey = self.env['survey.report'].search([('type', '=', 'motor_claim'),
                                                                  ('surveyor.id', '=', user_id)])
         for rec in motor_survey:
-            motor_claim.append({'type': rec.survey_type,
+            motor_claim.append({'type': dict(rec._fields['survey_type'].selection).get(rec.survey_type),
                                                     'state': rec.state, 'count': len(motor_survey)})
             motor_claim_survey.append(rec.id)
         final_motor['data'] = motor_claim
@@ -781,7 +781,7 @@ class Brokers(models.Model):
         non_motor_survey = self.env['survey.report'].search([('type', '=', 'non_motor_claim'),
                                                                  ('surveyor.id', '=', user_id)])
         for rec in non_motor_survey:
-            non_motor_claim.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image,
+            non_motor_claim.append({'lob': rec.lob.line_of_business, 'image': rec.lob.image, 'icon': rec.lob.icon,
                                                     'state': rec.state, 'count': len(non_motor_survey)})
             non_motor_claim_survey.append(rec.id)
         final_non_motor['data'] = non_motor_claim
@@ -791,7 +791,7 @@ class Brokers(models.Model):
         user = self.env['res.users'].search([('id', '=', user_id)], limit=1)
         return {
             'result': result,
-            "user": self.get_person_info(id),
+            "user": self.get_person_info(user_id),
             "user_image": user.image_1920,
         }
 
@@ -1027,3 +1027,68 @@ class Brokers(models.Model):
                    "status": "repair_completed"})
         rec = self.env['claim.app'].search_read([('id', '=', id)])
         return rec[0]
+
+    @api.model
+    def get_insurance_app_survey(self,user_id):
+        result = []
+        data = {}
+        for rec in self.env['survey.report'].search([('type', '=', 'insurance_application'),
+                                                                 ('surveyor.id', '=', user_id)]):
+            image = self.env['insurance.product'].search([('id', '=', rec.application_id.product_id.id)], limit=1).line_of_bus.icon
+            data['id'] = rec.id
+            data['product'] = rec.application_id.product_id.product_name if rec.application_id.product_id.product_name else False
+            data['survey_number'] = rec.name if rec.name else False
+            data['image'] = image if image else False
+            data['state'] = dict(rec._fields['state'].selection).get(rec.state)
+            data['app_id'] = rec.application_id.id if rec.application_id.id else False
+            result.append(data)
+            data = {}
+        return result
+
+    @api.model
+    def get_motor_claim_survey(self, user_id):
+        result = []
+        data = {}
+        for rec in self.env['survey.report'].search([('type', '=', 'motor_claim'),
+                                                     ('surveyor.id', '=', user_id)]):
+            image = self.env['insurance.line.business'].search([('line_of_business', '=', 'Motor')], limit=1).icon
+            data['id'] = rec.id
+            data['product'] = rec.claim_id.product.product_name if rec.claim_id.product.product_name else False
+            data['survey_number'] = rec.name if rec.name else False
+            data['image'] = image if image else False
+            data['state'] = dict(rec._fields['state'].selection).get(rec.state)
+            data['claim_id'] = rec.claim_id.id if rec.claim_id.id else False
+            result.append(data)
+            data = {}
+        return result
+
+    @api.model
+    def get_non_motor_claim_survey(self, user_id):
+        result = []
+        data = {}
+        for rec in self.env['survey.report'].search([('type', '=', 'non_motor_claim'),
+                                                     ('surveyor.id', '=', user_id)]):
+            image = self.env['insurance.product'].search([('id', '=', rec.product_id.id)], limit=1).line_of_bus.icon
+            data['id'] = rec.id
+            data['product'] = rec.product_id.product_name if rec.product_id.product_name else False
+            data['survey_number'] = rec.name if rec.name else False
+            data['image'] = image if image else False
+            data['state'] = dict(rec._fields['state'].selection).get(rec.state)
+            data['claim_id'] = rec.claim_id.id if rec.claim_id.id else False
+            result.append(data)
+            data = {}
+        return result
+
+    @api.model
+    def submit_survey(self,data):
+        for rec in self.env['survey.report'].search([('id', '=', data['id'])]):
+            rec.write({'comment': data['comment'], 'recomm': data['recomm'],
+                       'survey_report': [(0,0,{'name': 'Survey Report',
+                                                'res_name': 'Survey Report',
+                                                'type': 'binary',
+                                                'datas': data['file'],
+                                            })]})
+            rec.get_message()
+            rec.survey_submitted()
+        result = self.env['survey.report'].search_read([('id', '=', data['id'])])
+        return result
