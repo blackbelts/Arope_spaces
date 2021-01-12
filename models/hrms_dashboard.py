@@ -816,6 +816,7 @@ class Brokers(models.Model):
         data = {}
         for rec in self.env['insurance.quotation'].search([('create_uid', '=', id)]):
             data['id'] = rec.id
+            data['name'] = rec.name
             data['state'] = rec.test_state.state if rec.test_state.state else False
             data['application_number'] = rec.application_number if rec.application_number else False
             data['image'] = rec.lob.icon if rec.lob.icon else False
@@ -844,6 +845,7 @@ class Brokers(models.Model):
         for rec in self.env['policy.arope'].search([('id', 'in', ids)]):
             image = self.env['insurance.product'].search([('product_name', '=', rec.product)], limit=1).line_of_bus.icon
             data['id'] = rec.id
+            data['net_prem'] = rec.net_premium if rec.net_premium else False
             data['product'] = rec.product if rec.product else False
             data['policy_number'] = rec.policy_num if rec.policy_num else False
             data['image'] = image if image else False
