@@ -104,6 +104,9 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
+                <button  name="view_dashboard" string="Portfolio" type="object" class="oe_highlight" />
+
+
             </tree>
 
 
@@ -114,7 +117,7 @@
         <field name="res_model">res.users</field>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="partner_id_tree_view_user"/>
-        <field name='domain'>[('groups_id','in',[113])]</field>
+        <field name='domain' eval="[('groups_id','in',[ref('Arope_spaces.broker_space_group'),ref('Arope_spaces.client_space_group'),ref('Arope_spaces.surveyor_group')])]"/>
         <field name="context">{'create': False,'edit':False}</field>
 
     </record>
