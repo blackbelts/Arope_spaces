@@ -844,11 +844,13 @@ class Brokers(models.Model):
         data = {}
         for rec in self.env['policy.arope'].search([('id', 'in', ids)]):
             image = self.env['insurance.product'].search([('product_name', '=', rec.product)], limit=1).line_of_bus.icon
+            customer = self.env['persons'].search([('pin', '=', rec.customer_pin)], limit=1).name
             data['id'] = rec.id
             data['net_prem'] = rec.net_premium if rec.net_premium else False
             data['product'] = rec.product if rec.product else False
             data['policy_number'] = rec.policy_num if rec.policy_num else False
             data['image'] = image if image else False
+            data['customer_name'] = customer if customer else False
             result.append(data)
             data = {}
         return result
