@@ -4,12 +4,12 @@
             <field name="model">crm.team</field>
             <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
             <field name="arch" type="xml">
+
                 <xpath expr="//page[@name='members']" position="after">
                     <page string="Team Targets">
                         <field name="targets_id" nolabel="1">
                             <tree>
                                 <field name="member"/>
-                                <field name="type"/>
                                 <field name="Total_amount"/>
                                 <field name="no_months"/>
                             </tree>
@@ -17,7 +17,8 @@
                                 <sheet>
                                     <group>
                                         <field name="member"/>
-                                        <field name="type"/>
+                                        <field name="new"/>
+                                        <field name="rate" attrs="{'invisible': [('new', '=', False)]}"/>
                                         <field name="target_start"/>
                                         <field name="Total_amount"/>
                                         <field name="no_months"/>
@@ -40,16 +41,19 @@
                             </form>
                         </field>
                     </page>
-                    <page string="Target Policy">
-                        <field name="target_policy_ids" nolabel="1">
-                            <tree editable="bottom">
-                                <field name="from_date"/>
-                                <field name="to_date"/>
-                                <field name="line_of_business" widget="many2many_tags"/>
-                                <field name="amount"/>
-                            </tree>
-                        </field>
-                    </page>
+<!--                    <page string="Target Policy">-->
+<!--                        <field name="target_policy_ids" nolabel="1">-->
+<!--                            <tree editable="bottom">-->
+<!--                                <field name="from_date"/>-->
+<!--                                <field name="to_date"/>-->
+<!--                                <field name="line_of_business" widget="many2many_tags"/>-->
+<!--                                <field name="amount"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </page>-->
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="chain" widget="many2many_tags"/>
                 </xpath>
             </field>
         </record>

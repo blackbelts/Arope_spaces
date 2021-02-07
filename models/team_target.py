@@ -23,6 +23,8 @@ class CRMTeam(models.Model):
     targets_id = fields.One2many(comodel_name="team.target", inverse_name="channel_id", string="Targets",
                                  required=False, )
     target_policy_ids = fields.One2many('target.policy','team_id',string='Target Policy')
+    chain = fields.Many2many(comodel_name="res.users", string='Managers')
+
 
 
 #
@@ -36,6 +38,8 @@ class TeamTarget(models.Model):
     type = fields.Selection(
         [("individual", "Individual"), ("corporate", "Corporate")],
         string="Type", default='individual', copy=True)
+    new = fields.Boolean('Is New Partner')
+    rate = fields.Float('Rate')
     targets = fields.One2many('target.rules', 'target_id', string='Target Lines')
     target_start = fields.Date(string='Start')
     Total_amount = fields.Float(string='Total Amount')
@@ -46,14 +50,34 @@ class TeamTarget(models.Model):
         for i in range(self.no_months):
             date1 = datetime.strptime(str(date_start), '%Y-%m-%d').date()
             date3 = date1 + relativedelta(months=1)
-            self.targets = [(0, 0, {'name': MONTHS[datetime.strptime(str(date_start), '%Y-%m-%d').month],
-                                    'from_date': date_start, 'to_date': date3 - relativedelta(days=1)
-                , 'amount': round(self.Total_amount / self.no_months,2) , 'member_id': self.member.id, 'target_id': self.id})]
+            if self.new == True:
+                self.targets = [(0, 0, {'name': MONTHS[datetime.strptime(str(date_start), '%Y-%m-%d').month],
+                                        'from_date': date_start, 'to_date': date3 - relativedelta(days=1)
+                    , 'amount': round(self.Total_amount / self.no_months,2) , 'member_id': self.member.id, 'target_id': self.id})]
+            else:
+                last_total = 0
+                for pol in self.env['policy.arope'].search(
+                        [('agent_code', '=', self.member.agent_code), ('issue_date', '>=', date_start - relativedelta(years=1)),
+                         ('issue_date', '<', date_start + relativedelta(months=1))]):
+                    last_total += pol.eq_total
+                self.targets = [(0, 0, {'name': MONTHS[datetime.strptime(str(date_start), '%Y-%m-%d').month],
+                                        'from_date': date_start, 'to_date': date3 - relativedelta(days=1)
+                    , 'amount': round((self.rate * last_total)+ last_total, 2), 'member_id': self.member.id,
+                                        'target_id': self.id})]
             date_start = date3
 
     @api.onchange('member')
     def set_member(self):
             return {'domain': {'member': [('id', 'in', self.channel_id.member_ids.ids)]}}
+
+    @api.onchange('targets')
+    def calc_total_amount(self):
+        targets = []
+        for rec in self.targets:
+            self.Total_amount += rec.amount
+            targets.append(rec)
+        self.no_months = len(targets)
+
 
 #
 class TargetRules(models.Model):
