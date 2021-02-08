@@ -74,6 +74,7 @@ class TeamTarget(models.Model):
 
     def calc_total_amount(self):
         targets = []
+        self.Total_amount = 0
         for rec in self.targets:
             self.Total_amount += rec.amount
             targets.append(rec)
