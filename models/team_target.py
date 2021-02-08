@@ -71,6 +71,7 @@ class TeamTarget(models.Model):
             return {'domain': {'member': [('id', 'in', self.channel_id.member_ids.ids)]}}
 
     @api.onchange('targets')
+    @api.constrains('targets')
     def calc_total_amount(self):
         targets = []
         for rec in self.targets:
