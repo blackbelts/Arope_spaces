@@ -38,7 +38,7 @@ class TeamTarget(models.Model):
     type = fields.Selection(
         [("individual", "Individual"), ("corporate", "Corporate")],
         string="Type", default='individual', copy=True)
-    new = fields.Boolean('Is New Partner')
+    is_new = fields.Boolean('Is New Partner',default=False)
     rate = fields.Float('Rate')
     targets = fields.One2many('target.rules', 'target_id', string='Target Lines')
     target_start = fields.Date(string='Start')
@@ -50,7 +50,7 @@ class TeamTarget(models.Model):
         for i in range(self.no_months):
             date1 = datetime.strptime(str(date_start), '%Y-%m-%d').date()
             date3 = date1 + relativedelta(months=1)
-            if self.new == True:
+            if self.is_new == True:
                 self.targets = [(0, 0, {'name': MONTHS[datetime.strptime(str(date_start), '%Y-%m-%d').month],
                                         'from_date': date_start, 'to_date': date3 - relativedelta(days=1)
                     , 'amount': round(self.Total_amount / self.no_months,2) , 'member_id': self.member.id, 'target_id': self.id})]

@@ -17,8 +17,8 @@
                                 <sheet>
                                     <group>
                                         <field name="member"/>
-                                        <field name="new"/>
-                                        <field name="rate" attrs="{'invisible': [('new', '=', False)]}"/>
+                                        <field name="is_new"/>
+                                        <field name="rate" attrs="{'invisible': [('is_new', '=', False)]}"/>
                                         <field name="target_start"/>
                                         <field name="Total_amount"/>
                                         <field name="no_months"/>
