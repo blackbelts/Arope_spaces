@@ -65,13 +65,13 @@ class TeamTarget(models.Model):
                     , 'amount': round((self.rate * last_total)+ last_total, 2), 'member_id': self.member.id,
                                         'target_id': self.id})]
             date_start = date3
+        self.calc_total_amount()
 
     @api.onchange('member')
     def set_member(self):
             return {'domain': {'member': [('id', 'in', self.channel_id.member_ids.ids)]}}
 
-    @api.onchange('targets')
-    @api.constrains('targets')
+
     def calc_total_amount(self):
         targets = []
         for rec in self.targets:
