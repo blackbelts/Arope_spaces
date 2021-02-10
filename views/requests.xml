@@ -18,10 +18,10 @@
                 <xpath expr="//field[@name='planned_revenue']/parent::div" position="attributes">
                     <attribute name="invisible">1</attribute>>
                 </xpath>
-                <xpath expr="//field[@name='probability']/parent::div" position="attributes">
+                <xpath expr="//field[@name='probability']" position="attributes">
                     <attribute name="invisible">1</attribute>>
                 </xpath>
-                <xpath expr="//field[@name='email_from']/parent::div" position="attributes">
+                <xpath expr="//field[@name='email_from']" position="attributes">
                     <attribute name="invisible">1</attribute>>
                 </xpath>
                 <xpath expr="//field[@name='partner_address_phone']" position="attributes">
