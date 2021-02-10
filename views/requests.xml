@@ -43,9 +43,9 @@
                 <xpath expr="//field[@name='name']" position="attributes">
                     <attribute name="style">width: 50% !important;</attribute>
                 </xpath>
-<!--                <xpath expr="//div/h1" position="after">-->
-<!--                    <field name="opp_type" widget="radio" class="oe_edit_only" options="{'horizontal': true}"/>-->
-<!--                </xpath>-->
+                <xpath expr="//div/h1" position="after">
+                    <field name="opp_type"/>
+                </xpath>
                 <xpath expr="//label[@for='planned_revenue']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
@@ -64,6 +64,11 @@
                 <xpath expr="//page[@name='lead']" position="attributes">
                     <attribute name="invisible">1</attribute>>
                 </xpath>
+                <notebook>
+                    <page string="Insurance App">
+
+                    </page>
+                </notebook>
             </field>
         </record>
         <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities">
