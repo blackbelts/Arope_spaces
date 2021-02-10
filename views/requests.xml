@@ -58,8 +58,8 @@
                             <field name="opp_type"/>
                         </group>
                     </group>
-                    <group>
-                        <group attrs="{'invisible': [('opp_type', '!=', 'insurance_app')]}">
+                    <group attrs="{'invisible': [('opp_type', '!=', 'insurance_app')]}">
+                        <group>
                             <field name="state" invisible="1"/>
                             <field name="lob"/>
                             <field name="product_id"/>
@@ -68,7 +68,7 @@
                             <field name="email" />
                         </group>
 
-                        <group attrs="{'invisible': [('opp_type', '!=', 'insurance_app')]}">
+                        <group>
 
                             <field name="application_number" readonly="1" force_save="1"/>
                             <field name="application_date" />
@@ -78,6 +78,47 @@
 
                         </group>
                     </group>
+                    <group attrs="{'invisible': [('opp_type', 'not in', ['end','renew','cancel'])]}">
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <label for="policy"/>
+                            <div class="o_row">
+
+                                <field name="policy" />
+                                <strong>/</strong>
+                                <field name="policy_seq" />
+                            </div>
+                            <field name="product" readonly="1"/>
+                            <field name="customer" readonly="1"/>
+                            <field name="start_date" readonly="1"/>
+
+                            <field name="end_date" readonly="1"/>
+
+                            <field name="type" />
+                            <field name="end_reason" attrs="{'invisible': [('opp_type', '!=', 'end')]}"/>
+                            <field name="cancel_reason" attrs="{'invisible': [('opp_type', '!=', 'cancel')]}"/>
+
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('opp_type', 'not in', ['motor_claim','general_claim'])]}">
+                        <group>
+                            <field name="product"/>
+                            <field name="policy_num"/>
+                        </group>
+                        <group>
+                            <field name="claim_number" readonly="1" force_save="1"/>
+                            <field name="lob" readonly="1" force_save="1"/>
+                            <field name="customer_name" readonly="1" force_save="1"/>
+                            <field name="phone" readonly="1" force_save="1"/>
+                            <field name="date" readonly="1" force_save="1"/>
+                        </group>
+                        <group attrs="{'invisible': [('opp_type', '!=', 'motor_claim')]}">
+                            <field name="chasse_num"/>
+                            <field name="maintenance_centers_in_or_out"/>
+                            <field name="maintenance_centers" attrs="{'invisible': [('maintenance_centers_in_or_out', '!=', 'in')]}"/>
+                        </group>
+                    </group>
+
                 </xpath>
                 <xpath expr="//label[@for='planned_revenue']" position="attributes">
                     <attribute name="invisible">1</attribute>
@@ -132,6 +173,17 @@
                                 <field name="date" />
                                 <field name="file" widget="many2many_binary" />
                                 <field name="offer_state"/>
+                                <field name="comment"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Required Documents" attrs="{'invisible': [('opp_type', 'not in', ['motor_claim','general_claim'])]}">
+                        <field name="declaration_ids">
+                            <tree editable="bottom">
+                                <field name="question"/>
+                                <field name="download_files" widget="many2many_binary"/>
+                                <field name="file" widget="many2many_binary"/>
+                                <field name="state"/>
                                 <field name="comment"/>
                             </tree>
                         </field>

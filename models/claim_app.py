@@ -358,6 +358,7 @@ class ClaimLines(models.Model):
     download_files = fields.Many2many('ir.attachment', string="Download File")
     file = fields.Many2many('ir.attachment', string="Upload File", relation="claim_lines_uploads")
     claim_declaration_id = fields.Many2one('claim.app', ondelete='cascade')
+    opp_id = fields.Many2one('crm.lead', ondelete='cascade')
     state = fields.Selection(
         [('pending', 'Pending'), ('complete', 'Submitted'), ('accepted', 'Accepted'), ('cancel', 'Rejected')],
         string='State', default='pending')
