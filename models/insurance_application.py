@@ -786,6 +786,7 @@ class FinalOffer(models.Model):
     file = fields.Many2many('ir.attachment', string="Offer")
     value = fields.Float('Value')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    opp_id = fields.Many2one('crm.lead', ondelete='cascade')
     offer_state = fields.Selection([('submitted', 'Submitted'),
                                     ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='State')
 
@@ -995,6 +996,7 @@ class PersonsLines(models.Model):
     insured = fields.Char("Insured")
     comment = fields.Text('Comment')
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    opp_id = fields.Many2one('crm.lead', ondelete='cascade')
     download_files = fields.Many2many('ir.attachment', string="Download File", relation="download_files")
     application_file = fields.Many2many('ir.attachment', string="Upload File")
     issue_in_progress_state = fields.Selection(

@@ -45,7 +45,26 @@
                 </xpath>
                 <xpath expr="//group" position="after">
                     <group>
-                        <field name="opp_type"/>
+                        <group>
+                            <field name="opp_type"/>
+                            <div attrs="{'invisible': [('opp_type', '!=', 'insurance_app')]}">
+                                <field name="state" invisible="1"/>
+                                <field name="lob"/>
+                                <field name="product_id"/>
+                                <field name="name" />
+                                <field name="phone" />
+                                <field name="email" />
+                            </div>
+                        </group>
+                        <group attrs="{'invisible': [('opp_type', '!=', 'insurance_app')]}">
+
+                            <field name="application_number" readonly="1" force_save="1"/>
+                            <field name="application_date" />
+                            <field name="policy_number" readonly="1" force_save="1" attrs="{'invisible': [('policy_number', '=', False)]}"/>
+                            <field name="policy_issue_date" readonly="1" force_save="1" attrs="{'invisible': [('policy_issue_date', '=', False)]}"/>
+
+
+                        </group>
                     </group>
                 </xpath>
                 <xpath expr="//label[@for='planned_revenue']" position="attributes">
@@ -65,8 +84,42 @@
                     <attribute name="invisible">1</attribute>>
                 </xpath>
                 <notebook>
-                    <page string="Insurance App">
+                    <page string="Required For Survey" attrs="{'invisible': ['|',('opp_type', '!=', 'insurance_app'),('state', '!=', 'survey')]}">
+                        <group>
+                            <group>
+                                <field name="name_of_contact_person"/>
+                            </group>
+                            <group>
+                                <field name="main_phone"/>
+                            </group>
+                            <group>
+                                <field name="spare_phone"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group">
+                        <field name="persons" >
+                            <tree editable="bottom">
+                                <field name="insured" readonly="1" force_save="1"/>
+                                <field name="download_files" widget="many2many_binary"/>
+                                <field name="application_file" widget="many2many_binary"/>
+                                <button name="required_document" string="Required Documents" type="object" class="oe_highlight"/>
+                                <field name="comment"/>
+                                <field name="issue_in_progress_state"/>
+                            </tree>
+                        </field>
 
+                    </page>
+                    <page string="Offers" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group">
+                        <field name="offer_ids" >
+                            <tree editable="bottom" decoration-danger="offer_state == 'pending'">
+                                <field name="type" />
+                                <field name="date" />
+                                <field name="file" widget="many2many_binary" />
+                                <field name="offer_state"/>
+                                <field name="comment"/>
+                            </tree>
+                        </field>
                     </page>
                 </notebook>
             </field>
