@@ -16,28 +16,28 @@
                 </field>
 
                 <xpath expr="//field[@name='planned_revenue']/parent::div" position="attributes">
-                    <attribute name="invisible">1</attribute>>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='probability']/parent::div" position="attributes">
-                    <attribute name="invisible">1</attribute>>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
 <!--                <xpath expr="//field[@name='partner_id']/parent::div" position="attributes">-->
 <!--                    <attribute name="invisible">1</attribute>>-->
 <!--                </xpath>-->
                 <xpath expr="//field[@name='partner_id']" position="attributes">
-                    <attribute name="invisible">1</attribute>>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='email_from']/parent::div" position="attributes">
-                    <attribute name="invisible">1</attribute>>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='email_from']" position="attributes">
-                    <attribute name="invisible">1</attribute>>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='partner_address_phone']" position="attributes">
-                    <attribute name="invisible">1</attribute>>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='tag_ids']" position="attributes">
-                    <attribute name="invisible">1</attribute>>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
 
                 <xpath expr="//field[@name='name']" position="attributes">
@@ -47,16 +47,16 @@
 <!--                    <field name="opp_type" widget="radio" class="oe_edit_only" options="{'horizontal': true}"/>-->
 <!--                </xpath>-->
                 <xpath expr="//label[@for='planned_revenue']" position="attributes">
-                    <attribute name="invisible">1</attribute>>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//label[@for='probability']" position="attributes">
-                    <attribute name="invisible">1</attribute>>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//label[@for='email_from']" position="attributes">
-                    <attribute name="invisible">1</attribute>>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//label[@for='partner_id']" position="attributes">
-                    <attribute name="invisible">1</attribute>>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='description']/parent::page" position="attributes">
                     <attribute name="invisible">1</attribute>>
