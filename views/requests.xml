@@ -43,7 +43,7 @@
                 <xpath expr="//field[@name='name']" position="attributes">
                     <attribute name="style">width: 50% !important;</attribute>
                 </xpath>
-                <xpath expr="//div/h2/group" position="after">
+                <xpath expr="//group" position="after">
                     <group>
                         <field name="opp_type"/>
                     </group>
