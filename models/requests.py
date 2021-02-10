@@ -43,7 +43,7 @@ class CrmLeads(models.Model):
 
         return super(CrmLeads, self).create(vals)
 
-    name = fields.Char('Request')
+    name = fields.Char('Request', required="0", readonly="1")
     policy = fields.Char(string='Policy')
     policy_seq = fields.Many2one('insurance.product', string='product')
     product = fields.Char('Policy Product')
