@@ -43,7 +43,7 @@
                 <xpath expr="//field[@name='name']" position="attributes">
                     <attribute name="style">width: 50% !important;</attribute>
                 </xpath>
-                <xpath expr="//div/h1" position="after">
+                <xpath expr="//field[@name='partner_id']" position="before">
                     <field name="opp_type"/>
                 </xpath>
                 <xpath expr="//label[@for='planned_revenue']" position="attributes">
