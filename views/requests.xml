@@ -97,7 +97,7 @@
                             </group>
                         </group>
                     </page>
-                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group">
+                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 'insurance_app')]}">
                         <field name="persons" >
                             <tree editable="bottom">
                                 <field name="insured" readonly="1" force_save="1"/>
@@ -110,7 +110,7 @@
                         </field>
 
                     </page>
-                    <page string="Offers" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group">
+                    <page string="Offers" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 'insurance_app')]}">
                         <field name="offer_ids" >
                             <tree editable="bottom" decoration-danger="offer_state == 'pending'">
                                 <field name="type" />
