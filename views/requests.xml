@@ -51,6 +51,8 @@
                         <group>
                             <field name="opp_type"/>
                         </group>
+                    </group>
+                    <group>
                         <group attrs="{'invisible': [('opp_type', '!=', 'insurance_app')]}">
                             <field name="state" invisible="1"/>
                             <field name="lob"/>
