@@ -2,7 +2,7 @@
     <data>
         <record model="ir.ui.view" id="crm__lead_form_view">
             <field name="model">crm.lead</field>
-            <field name="inherit_id" ref="crm.crm_case_form_view_salesteams_opportunity"/>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
             <field name="arch" type="xml">
 
                 <header>
