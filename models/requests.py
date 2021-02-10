@@ -38,14 +38,8 @@ class CrmLeads(models.Model):
     @api.model
     def create(self, vals):
         serial_no = self.env['ir.sequence'].next_by_code('req')
-        if vals.get('opp_type') == 'end':
-            r_type = 'End'
-        elif vals.get('opp_type') == 'renew':
-            r_type = 'Renew'
-        else:
-            r_type = 'Cancel'
         # merge code and serial number
-        vals['name'] = str(serial_no) + '/' + r_type
+        vals['name'] = str(serial_no)
 
         return super(CrmLeads, self).create(vals)
 
