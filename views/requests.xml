@@ -42,12 +42,12 @@
                 <xpath expr="//field[@name='tag_ids']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
-                <xpath expr="//div/h1" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </xpath>
-                <xpath expr="//div/label[@for='name']" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </xpath>
+<!--                <xpath expr="//div/h1" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//div/label[@for='name']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
 
                 <xpath expr="//field[@name='name']" position="attributes">
                     <attribute name="style">width: 50% !important;</attribute>
