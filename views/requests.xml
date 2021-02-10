@@ -192,7 +192,7 @@
             </field>
         </record>
         <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities">
-            <field name="name">Opportunities</field>
+            <field name="name">Requests</field>
             <field name="res_model">crm.lead</field>
             <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
             <field name="domain">[('type','=','opportunity')]</field>
