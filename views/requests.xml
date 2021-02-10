@@ -24,9 +24,9 @@
                 <xpath expr="//field[@name='name']" position="attributes">
                     <attribute name="style">width: 50% !important;</attribute>
                 </xpath>
-                <xpath expr="//div/h1" position="after">
-                    <field name="opp_type" widget="radio" class="oe_edit_only" options="{'horizontal': true}"/>
-                </xpath>
+<!--                <xpath expr="//div/h1" position="after">-->
+<!--                    <field name="opp_type" widget="radio" class="oe_edit_only" options="{'horizontal': true}"/>-->
+<!--                </xpath>-->
                 <xpath expr="//label[@for='planned_revenue']" position="attributes">
                     <attribute name="invisible">1</attribute>>
                 </xpath>
