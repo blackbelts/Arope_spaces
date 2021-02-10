@@ -24,10 +24,10 @@
                 <xpath expr="//field[@name='email_from']/parent::div" position="attributes">
                     <attribute name="invisible">1</attribute>>
                 </xpath>
-                <xpath expr="//field[@name='partner_address_phone']/parent::div" position="attributes">
+                <xpath expr="//field[@name='partner_address_phone']" position="attributes">
                     <attribute name="invisible">1</attribute>>
                 </xpath>
-                <xpath expr="//field[@name='tag_ids']/parent::div" position="attributes">
+                <xpath expr="//field[@name='tag_ids']" position="attributes">
                     <attribute name="invisible">1</attribute>>
                 </xpath>
 
