@@ -42,6 +42,12 @@
                 <xpath expr="//field[@name='tag_ids']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
+                <xpath expr="//div/h1" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//div/label[@for='name']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
 
                 <xpath expr="//field[@name='name']" position="attributes">
                     <attribute name="style">width: 50% !important;</attribute>
@@ -57,7 +63,7 @@
                             <field name="state" invisible="1"/>
                             <field name="lob"/>
                             <field name="product_id"/>
-                            <field name="name" />
+                            <field name="customer_name" />
                             <field name="phone" />
                             <field name="email" />
                         </group>
