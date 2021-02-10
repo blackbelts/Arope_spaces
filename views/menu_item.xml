@@ -168,6 +168,8 @@
               sequence="2"/>
     <menuitem id="policy_service" name="Policy Services" parent="arope_space"
               sequence="2"/>
+    <menuitem id="requests_view_menu" name="Requests" parent="arope_space"
+                  action="ibs_crm_lead_opportunities" sequence="1"/>
     <menuitem name="Insurance Application"
               id="inurance"
               parent="new_buss"

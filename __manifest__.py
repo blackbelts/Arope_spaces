@@ -46,8 +46,10 @@
         'views/policy_view.xml',
         #'reports/offer.xml',
         #'reports/questionnaire.xml',
+        'views/requests.xml',
         'views/menu_item.xml',
         'views/inherit_rtl_css.xml'
+
 
 
     ],
