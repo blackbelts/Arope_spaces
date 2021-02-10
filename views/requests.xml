@@ -43,8 +43,10 @@
                 <xpath expr="//field[@name='name']" position="attributes">
                     <attribute name="style">width: 50% !important;</attribute>
                 </xpath>
-                <xpath expr="//field[@name='phone']" position="before">
-                    <field name="opp_type"/>
+                <xpath expr="//div/h2/group" position="after">
+                    <group>
+                        <field name="opp_type"/>
+                    </group>
                 </xpath>
                 <xpath expr="//label[@for='planned_revenue']" position="attributes">
                     <attribute name="invisible">1</attribute>
