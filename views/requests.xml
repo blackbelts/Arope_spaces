@@ -55,9 +55,7 @@
                 <xpath expr="//label[@for='email_from']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
-                <xpath expr="//label[@for='partner_id']" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </xpath>
+
                 <xpath expr="//field[@name='description']/parent::page" position="attributes">
                     <attribute name="invisible">1</attribute>>
                 </xpath>
