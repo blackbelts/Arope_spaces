@@ -202,15 +202,20 @@
                 }
             </field>
         </record>
-<!--        <record model="ir.ui.view" id="crm_stage_form_view">-->
-<!--            <field name="model">crm.stage</field>-->
-<!--            <field name="inherit_id" ref="	crm.crm_stage_form"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <xpath expr="//field[@name='is_won']" position="before">-->
-<!--                    <field name="type"/>-->
-<!--                </xpath>-->
-<!--            </field>-->
-<!--        </record>-->
+        <record model="ir.ui.view" id="crm_stage_form_view">
+            <field name="model">crm.stage</field>
+            <field name="inherit_id" ref="crm.crm_stage_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='is_won']" position="before">
+                    <field name="type"/>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="crm_lead_stages">
+            <field name="name">Stages</field>
+            <field name="res_model">crm.stage</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
     </data>
 </odoo>
