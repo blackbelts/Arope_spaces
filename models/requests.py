@@ -26,6 +26,7 @@ class CrmLeads(models.Model):
     # stage_id = fields.Many2one('crm.stage', domain="['|',('type', '=', 'opp_type'),('type', '=', False)]")
 
     @api.onchange('opp_type')
+    @api.constrains('opp_type')
     def stage_domain(self):
         return {'domain': {'stage_id': ['|',('type', '=', 'opp_type'),('type', '=', False)]}}
 
