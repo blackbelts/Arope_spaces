@@ -23,7 +23,12 @@ class CrmLeads(models.Model):
         ('cancel', 'Lost')], string='State')
     lob = fields.Many2one('insurance.line.business', 'LOB')
     product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
-    stage_id = fields.Many2one('crm.stage', domain="['|',('type', '=', 'opp_type'),('type', '=', False)]")
+    # stage_id = fields.Many2one('crm.stage', domain="['|',('type', '=', 'opp_type'),('type', '=', False)]")
+
+    @api.onchange('opp_type')
+    def stage_domain(self):
+        return {'domain': {'stage_id': [('type', '=', 'opp_type')]}}
+
     customer_name = fields.Char('Customer Name')
     phone = fields.Char('Customer Mobile')
     email = fields.Char('Customer Email')
