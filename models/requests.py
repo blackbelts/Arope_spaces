@@ -9,6 +9,7 @@ from odoo import api, tools, fields, models
 
 class CrmLeads(models.Model):
     _inherit = "crm.lead"
+
     opp_type = fields.Selection([('insurance_app', 'Insurance Application'),
                                 ('motor_claim', 'Motor Claim'),('general_claim', 'General Claim'),
                                  ('end', 'Endorsement'),('renew', 'Renewal'),('cancel', 'Cancellation')],string='Type')
@@ -22,6 +23,7 @@ class CrmLeads(models.Model):
         ('cancel', 'Lost')], string='State')
     lob = fields.Many2one('insurance.line.business', 'LOB')
     product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
+    stage_id = fields.Many2one('crm.stage', domain="['|',('type', '=', 'opp_type'),('type', '=', False)]")
     customer_name = fields.Char('Customer Name')
     phone = fields.Char('Customer Mobile')
     email = fields.Char('Customer Email')
@@ -251,3 +253,10 @@ class CrmLeads(models.Model):
                 else:
                     self.declaration_ids.create(
                         {"question": question.id,"claim_declaration_id": self.id})
+
+class CrmStages(models.Model):
+    _inherit = "crm.stage"
+
+    type = fields.Selection([('insurance_app', 'Insurance Application'),
+                                ('motor_claim', 'Motor Claim'),('general_claim', 'General Claim'),
+                                 ('end', 'Endorsement'),('renew', 'Renewal'),('cancel', 'Cancellation')],string='Type')
