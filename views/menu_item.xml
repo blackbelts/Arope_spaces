@@ -200,8 +200,8 @@
               action="state_action" sequence="9000"/>
     <menuitem id="maintenance_center" name="Maintenance Center Setup" parent="policy_config"
               action="maintenance_center_action" sequence="7000"/>
-    <menuitem id="stages" name="Stages Setup" parent="policy_config"
-              action="crm.crm_stage_action	" sequence="10000"/>
+<!--    <menuitem id="stages" name="Stages Setup" parent="policy_config"-->
+<!--              action="crm.crm_stage_action	" sequence="10000"/>-->
     <menuitem id="claim_setup" name="Claim Setup" parent="policy_config"
               action="claim_setup_action" sequence="8000"/>
 
