@@ -153,7 +153,8 @@
                             </group>
                         </group>
                     </page>
-                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 'insurance_app')]}">
+                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 'insurance_app'),
+                    ('lob','not in', ['4', '7'])]}">
                         <field name="persons" >
                             <tree editable="bottom">
                                 <field name="insured" readonly="1" force_save="1"/>
@@ -165,6 +166,16 @@
                             </tree>
                         </field>
 
+                    </page>
+                    <page string="Application Form" attrs="{'invisible': ['|',('opp_type', '!=', 'insurance_app'),
+                    ('lob','in', ['4', '7'])]}">
+                        <field name="question_ids">
+                            <tree editable="bottom">
+                                <field name="question"/>
+                                <field name="text"/>
+                                <field name="file"/>
+                            </tree>
+                        </field>
                     </page>
                     <page string="Offers" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 'insurance_app')]}">
                         <field name="offer_ids" >

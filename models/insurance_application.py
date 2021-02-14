@@ -729,6 +729,7 @@ class Answers(models.Model):
     value = fields.Float('Value')
     boolean = fields.Boolean('True Or False Answer', default=False)
     text_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    request_id = fields.Many2one('crm.lead', ondelete='cascade')
     choose_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     numerical_application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
     options = fields.Many2one('selection.options', 'Choose',ondelete='cascade')

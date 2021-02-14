@@ -42,6 +42,7 @@ class CrmLeads(models.Model):
     spare_phone = fields.Char('Mobile Number (Spare)')
     persons = fields.One2many('persons.lines', 'opp_id')
     offer_ids = fields.One2many('final.offer', 'opp_id')
+    question_ids = fields.One2many('insurances.answers', 'request_id')
 
     @api.model
     def create(self, vals):
