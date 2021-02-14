@@ -195,10 +195,46 @@
             <field name="name">Requests</field>
             <field name="res_model">crm.lead</field>
             <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
-            <field name="domain">[('type','=','opportunity')]</field>
+            <field name="domain">[('type','=','opportunity'),('opp_type','not in',['insurance_app', 'motor_claim', 'general_claim'])]</field>
             <field name="context">{
                 'default_type': 'opportunity',
                 'default_user_id': uid
+                }
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities_insurance_app">
+            <field name="name">Insurance App</field>
+            <field name="res_model">crm.lead</field>
+            <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
+            <field name="domain">[('type','=','opportunity'),('opp_type','=','insurance_app')]</field>
+            <field name="context">{
+                'default_type': 'opportunity',
+                'default_user_id': uid,
+                'default_opp_type': 'insurance_app'
+                }
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities_motor_claim">
+            <field name="name">Motor Claims</field>
+            <field name="res_model">crm.lead</field>
+            <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
+            <field name="domain">[('type','=','opportunity'),('opp_type','=','motor_claim')]</field>
+            <field name="context">{
+                'default_type': 'opportunity',
+                'default_user_id': uid,
+                'default_opp_type': 'motor_claim'
+                }
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities_general_claim">
+            <field name="name">General Claim</field>
+            <field name="res_model">crm.lead</field>
+            <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
+            <field name="domain">[('type','=','opportunity'),('opp_type','=','general_claim')]</field>
+            <field name="context">{
+                'default_type': 'opportunity',
+                'default_user_id': uid,
+                'default_opp_type': 'general_claim'
                 }
             </field>
         </record>
@@ -216,6 +252,7 @@
             <field name="res_model">crm.stage</field>
             <field name="view_mode">tree,form</field>
         </record>
+
 
     </data>
 </odoo>

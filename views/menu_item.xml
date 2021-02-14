@@ -169,7 +169,15 @@
     <menuitem id="policy_service" name="Policy Services" parent="arope_space"
               sequence="2"/>
     <menuitem id="requests_view_menu" name="Requests" parent="arope_space"
+                   sequence="1"/>
+    <menuitem id="requests_view_menu" name="Policy Services" parent="requests_view_menu"
                   action="ibs_crm_lead_opportunities" sequence="1"/>
+    <menuitem id="requests_view_menu" name="Insurance App" parent="requests_view_menu"
+                  action="ibs_crm_lead_opportunities_insurance_app" sequence="2"/>
+    <menuitem id="requests_view_menu" name="Motor Claim" parent="requests_view_menu"
+                  action="ibs_crm_lead_opportunities_motor_claim" sequence="3"/>
+    <menuitem id="requests_view_menu" name="General Claim" parent="requests_view_menu"
+                  action="ibs_crm_lead_opportunities_general_claim" sequence="4"/>
     <menuitem name="Insurance Application"
               id="inurance"
               parent="new_buss"
@@ -202,6 +210,7 @@
               action="maintenance_center_action" sequence="7000"/>
     <menuitem id="stages" name="Stages Setup" parent="policy_config"
               action="crm_lead_stages" sequence="10000"/>
+
     <menuitem id="claim_setup" name="Claim Setup" parent="policy_config"
               action="claim_setup_action" sequence="8000"/>
 
