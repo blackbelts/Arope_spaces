@@ -3,14 +3,14 @@ from odoo import models, tools, fields, api
 
 class QuestionnaireLineSetup(models.Model):
     _name = 'questionnaire.line.setup'
-    _rec_name= 'question'
+    _rec_name = 'question'
     question = fields.Char('Question')
     options = fields.Many2many('selection.options', sting="Selections")
     desc = fields.Char('Description')
     question_type = fields.Selection([('text', 'Text'), ('numerical', 'Numerical'), ('choose', 'Choose')],
                                      'Question Type', default='text')
 
-    product_id = fields.Many2one('insurance.product', ondelele='cascade', index=True)
+    product = fields.Many2one('insurance.product', ondelele='cascade', index=True)
     sub_questionnaire_id = fields.Many2one('sub.questionnaire', ondelele='cascade', index=True)
 
 
