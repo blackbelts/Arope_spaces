@@ -9,7 +9,7 @@
 }
 .o_form_view .o_form_sheet_bg {
     border-bottom: none;
-    background: transparent;
+    background: white;
     
 }
 .o_form_view{
@@ -63,9 +63,11 @@ html .o_web_client > .o_action_manager > .o_action > .o_content{
     background-color: midnightblue;
     color: white;
 }
+/*
 .o_list_view .o_list_table{
     background-color: rgba(255,255,255,.7);
 }
+*/
 .o_list_view .o_list_table .text-warning {
     color: black !important;
 }
