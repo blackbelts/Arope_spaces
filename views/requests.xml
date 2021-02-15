@@ -61,11 +61,11 @@
                 <xpath expr="//field[@name='name']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
-                <xpath expr="//field[@name='name']" position="after">
-                    <group>
-                            <field name="opp_type"/>
-                        </group>
-                </xpath>
+<!--                <xpath expr="//field[@name='name']" position="after">-->
+<!--                    <group>-->
+<!--                            <field name="opp_type"/>-->
+<!--                        </group>-->
+<!--                </xpath>-->
                 <xpath expr="//group" position="after">
                     <group>
                         <group>
