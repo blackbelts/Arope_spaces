@@ -10,7 +10,7 @@ from odoo import api, tools, fields, models
 class CrmLeads(models.Model):
     _inherit = "crm.lead"
 
-    opp_type = fields.Many2many('request.type',string='Type')
+    opp_type = fields.Many2one('request.type',string='Type')
     state = fields.Selection([
         ('application_form', 'Application Form'),
         ('initial_offer', 'Initial Offer'),
