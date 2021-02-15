@@ -16,3 +16,4 @@ from . import quotion_service
 from . import policy_request
 from . import partner
 from . import requests
+from . import sign_up
