@@ -26,7 +26,7 @@ class CrmLeads(models.Model):
     @api.onchange('opp_type')
     @api.constrains('opp_type')
     def stage_domain(self):
-        return {'domain': {'stage_id': ['|',('type', 'in', self.opp_type),('type', '=', False)]}}
+        return {'domain': {'stage_id': ['|',('type', 'in', self.opp_type.id),('type', '=', False)]}}
 
     customer_name = fields.Char('Customer Name')
     phone = fields.Char('Customer Mobile')
