@@ -10,9 +10,7 @@ from odoo import api, tools, fields, models
 class CrmLeads(models.Model):
     _inherit = "crm.lead"
 
-    opp_type = fields.Selection([('insurance_app', 'Insurance Application'),
-                                ('motor_claim', 'Motor Claim'),('general_claim', 'General Claim'),
-                                 ('end', 'Endorsement'),('renew', 'Renewal'),('cancel', 'Cancellation')],string='Type')
+    opp_type = fields.Many2many('request.type',string='Type')
     state = fields.Selection([
         ('application_form', 'Application Form'),
         ('initial_offer', 'Initial Offer'),
@@ -28,7 +26,7 @@ class CrmLeads(models.Model):
     @api.onchange('opp_type')
     @api.constrains('opp_type')
     def stage_domain(self):
-        return {'domain': {'stage_id': ['|',('type', '=', self.opp_type),('type', '=', False)]}}
+        return {'domain': {'stage_id': ['|',('type', 'in', self.opp_type),('type', '=', False)]}}
 
     customer_name = fields.Char('Customer Name')
     phone = fields.Char('Customer Mobile')
@@ -264,6 +262,10 @@ class CrmLeads(models.Model):
 class CrmStages(models.Model):
     _inherit = "crm.stage"
 
-    type = fields.Selection([('insurance_app', 'Insurance Application'),
-                                ('motor_claim', 'Motor Claim'),('general_claim', 'General Claim'),
-                                 ('end', 'Endorsement'),('renew', 'Renewal'),('cancel', 'Cancellation')],string='Type')
+    type = fields.Many2many('request.type',string='Type')
+
+class RequestsTypes(models.Model):
+    _name = "request.type"
+    _rec_name = 'type'
+
+    type = fields.Char(string='Request Type')

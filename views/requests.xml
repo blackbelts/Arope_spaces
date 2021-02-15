@@ -263,7 +263,23 @@
             <field name="res_model">crm.stage</field>
             <field name="view_mode">tree,form</field>
         </record>
-
-
+        <record model="ir.ui.view" id="tree_request_type">
+            <field name="name">Requests Type</field>
+            <field name="model">request.type</field>
+            <field name="arch" type="xml">
+                <tree string="Requests Type" editable="bottom">
+                    <field name="type"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="request_type_action">
+            <field name="name">Request Type</field>
+            <field name="res_model">request.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Request Type
+                </p>
+            </field>
+        </record>
     </data>
 </odoo>

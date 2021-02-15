@@ -210,6 +210,8 @@
               action="maintenance_center_action" sequence="7000"/>
     <menuitem id="stages" name="Stages Setup" parent="policy_config"
               action="crm_lead_stages" sequence="10000"/>
+    <menuitem id="request_types" name="Request Type" parent="policy_config"
+              action="request_type_action" sequence="90000"/>
 
     <menuitem id="claim_setup" name="Claim Setup" parent="policy_config"
               action="claim_setup_action" sequence="8000"/>
