@@ -21,6 +21,15 @@
                 <xpath expr="//field[@name='probability']/parent::div" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
+                <xpath expr="//button[@name='action_set_won_rainbowman']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='send_mail_template_insurer']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='746']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
 <!--                <xpath expr="//field[@name='partner_id']/parent::div" position="attributes">-->
 <!--                    <attribute name="invisible">1</attribute>>-->
 <!--                </xpath>-->
