@@ -206,7 +206,7 @@
             <field name="name">Requests</field>
             <field name="res_model">crm.lead</field>
             <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
-            <field name="domain">[('type','=','opportunity'),('opp_type','not in',['insurance_app', 'motor_claim', 'general_claim'])]</field>
+<!--            <field name="domain">[('type','=','opportunity'),('opp_type','not in',['insurance_app', 'motor_claim', 'general_claim'])]</field>-->
             <field name="context">{
                 'default_type': 'opportunity',
                 'default_user_id': uid
