@@ -61,6 +61,9 @@
                 <xpath expr="//field[@name='name']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
+                <xpath expr="//label[@for='name']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
 <!--                <xpath expr="//field[@name='name']" position="after">-->
 <!--                    <group>-->
 <!--                            <field name="opp_type"/>-->
@@ -68,6 +71,9 @@
 <!--                </xpath>-->
                 <xpath expr="//group" position="after">
                     <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
                         <group>
                             <field name="opp_type"/>
                         </group>
