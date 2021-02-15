@@ -58,7 +58,7 @@
                             <field name="opp_type"/>
                         </group>
                     </group>
-                    <group attrs="{'invisible': [('opp_type', '!=', 'insurance_app')]}">
+                    <group attrs="{'invisible': [('opp_type', '!=', 1)]}">
                         <group>
                             <field name="state" invisible="1"/>
                             <field name="lob"/>
@@ -78,7 +78,7 @@
 
                         </group>
                     </group>
-                    <group attrs="{'invisible': [('opp_type', 'not in', ['end','renew','cancel'])]}">
+                    <group attrs="{'invisible': [('opp_type', '!=', 2)]}">
                         <group>
                             <field name="name" readonly="1"/>
                             <label for="policy"/>
@@ -95,12 +95,12 @@
                             <field name="end_date" readonly="1"/>
 
                             <field name="type" />
-                            <field name="end_reason" attrs="{'invisible': [('opp_type', '!=', 'end')]}"/>
-                            <field name="cancel_reason" attrs="{'invisible': [('opp_type', '!=', 'cancel')]}"/>
+<!--                            <field name="end_reason" attrs="{'invisible': [('opp_type', '!=', 'end')]}"/>-->
+<!--                            <field name="cancel_reason" attrs="{'invisible': [('opp_type', '!=', 'cancel')]}"/>-->
 
                         </group>
                     </group>
-                    <group attrs="{'invisible': [('opp_type', 'not in', ['motor_claim','general_claim'])]}">
+                    <group attrs="{'invisible': [('opp_type', 'not in', [3,4])]}">
                         <group>
                             <field name="product"/>
                             <field name="policy_num"/>
@@ -112,7 +112,7 @@
                             <field name="phone" readonly="1" force_save="1"/>
                             <field name="date" readonly="1" force_save="1"/>
                         </group>
-                        <group attrs="{'invisible': [('opp_type', '!=', 'motor_claim')]}">
+                        <group attrs="{'invisible': [('opp_type', '!=', 4)]}">
                             <field name="chasse_num"/>
                             <field name="maintenance_centers_in_or_out"/>
                             <field name="maintenance_centers" attrs="{'invisible': [('maintenance_centers_in_or_out', '!=', 'in')]}"/>
@@ -140,7 +140,7 @@
                     <attribute name="invisible">1</attribute>>
                 </xpath>
                 <notebook>
-                    <page string="Required For Survey" attrs="{'invisible': ['|',('opp_type', '!=', 'insurance_app'),('state', '!=', 'survey')]}">
+                    <page string="Required For Survey" attrs="{'invisible': ['|',('opp_type', '!=', 1),('state', '!=', 'survey')]}">
                         <group>
                             <group>
                                 <field name="name_of_contact_person"/>
@@ -153,7 +153,7 @@
                             </group>
                         </group>
                     </page>
-                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 'insurance_app'),
+                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),
                     ('lob','in', [4, 7])]}">
                         <field name="persons" >
                             <tree editable="bottom">
@@ -167,7 +167,7 @@
                         </field>
 
                     </page>
-                    <page string="Application Form" attrs="{'invisible': ['|',('opp_type', '!=', 'insurance_app'),
+                    <page string="Application Form" attrs="{'invisible': ['|',('opp_type', '!=', 1),
                     ('lob','not in', [4, 7])]}">
                         <field name="question_ids">
                             <tree editable="bottom">
@@ -177,7 +177,7 @@
                             </tree>
                         </field>
                     </page>
-                    <page string="Offers" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 'insurance_app')]}">
+                    <page string="Offers" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 1)]}">
                         <field name="offer_ids" >
                             <tree editable="bottom" decoration-danger="offer_state == 'pending'">
                                 <field name="type" />
@@ -188,7 +188,7 @@
                             </tree>
                         </field>
                     </page>
-                    <page string="Required Documents" attrs="{'invisible': [('opp_type', 'not in', ['motor_claim','general_claim'])]}">
+                    <page string="Required Documents" attrs="{'invisible': [('opp_type', 'not in', [3,4])]}">
                         <field name="declaration_ids">
                             <tree editable="bottom">
                                 <field name="question"/>
@@ -206,7 +206,7 @@
             <field name="name">Requests</field>
             <field name="res_model">crm.lead</field>
             <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
-<!--            <field name="domain">[('type','=','opportunity'),('opp_type','not in',['insurance_app', 'motor_claim', 'general_claim'])]</field>-->
+            <field name="domain">[('type','=','opportunity'),('opp_type','not in',[1, 3, 4])]</field>
             <field name="context">{
                 'default_type': 'opportunity',
                 'default_user_id': uid
@@ -217,11 +217,11 @@
             <field name="name">Insurance App</field>
             <field name="res_model">crm.lead</field>
             <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
-            <field name="domain">[('type','=','opportunity'),('opp_type','=','insurance_app')]</field>
+            <field name="domain">[('type','=','opportunity'),('opp_type','=',1)]</field>
             <field name="context">{
                 'default_type': 'opportunity',
                 'default_user_id': uid,
-                'default_opp_type': 'insurance_app'
+                'default_opp_type': 1
                 }
             </field>
         </record>
@@ -229,11 +229,11 @@
             <field name="name">Motor Claims</field>
             <field name="res_model">crm.lead</field>
             <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
-            <field name="domain">[('type','=','opportunity'),('opp_type','=','motor_claim')]</field>
+            <field name="domain">[('type','=','opportunity'),('opp_type','=',4)]</field>
             <field name="context">{
                 'default_type': 'opportunity',
                 'default_user_id': uid,
-                'default_opp_type': 'motor_claim'
+                'default_opp_type': 4
                 }
             </field>
         </record>
@@ -241,11 +241,11 @@
             <field name="name">General Claim</field>
             <field name="res_model">crm.lead</field>
             <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
-            <field name="domain">[('type','=','opportunity'),('opp_type','=','general_claim')]</field>
+            <field name="domain">[('type','=','opportunity'),('opp_type','=',3)]</field>
             <field name="context">{
                 'default_type': 'opportunity',
                 'default_user_id': uid,
-                'default_opp_type': 'general_claim'
+                'default_opp_type': 3
                 }
             </field>
         </record>
