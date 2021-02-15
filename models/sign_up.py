@@ -9,12 +9,12 @@ class ResUsers(models.Model):
 
     x_pin = fields.Char(string='PIN')
 
-    # @api.model
-    # def _signup_create_user(self, values):
-    #     current_website = self.env['website'].get_current_website()
-    #     if request and current_website.specific_user_account:
-    #         values['company_id'] = current_website.company_id.id
-    #         values['company_ids'] = [(4, current_website.company_id.id)]
-    #         values['website_id'] = current_website.id
-    #     new_user = super(ResUsers, self)._signup_create_user(values)
-    #     return new_user
+    @api.model
+    def _signup_create_user(self, values):
+
+        new_user = super(ResUsers, self)._signup_create_user(values)
+        if new_user:
+            self.env['crm.lead'].create({
+                'customer_name': new_user.name
+            })
+        return new_user
