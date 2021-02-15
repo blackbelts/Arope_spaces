@@ -7,7 +7,7 @@ from odoo.http import request
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
-    # pin = fields.Char(string='PIN')
+    x_pin = fields.Char(string='PIN')
 
     # @api.model
     # def _signup_create_user(self, values):
