@@ -263,7 +263,7 @@ class CrmStages(models.Model):
     _inherit = "crm.stage"
 
     type = fields.Many2many('request.type',string='Type')
-
+    message = fields.Text('Message', translate=True)
 class RequestsTypes(models.Model):
     _name = "request.type"
     _rec_name = 'type'

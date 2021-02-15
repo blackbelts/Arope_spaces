@@ -256,6 +256,9 @@
                 <xpath expr="//field[@name='is_won']" position="before">
                     <field name="type" widget="many2many_tags"/>
                 </xpath>
+                <xpath expr="//field[@name='fold']" position="after">
+                    <field name="message" />
+                </xpath>
             </field>
         </record>
         <record model="ir.actions.act_window" id="crm_lead_stages">
