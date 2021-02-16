@@ -71,13 +71,6 @@
                   Dashboard
                 </div>
               </div>
-
-              <div class="card">
-                <div class="card-body">
-                  <i style="padding-right: 4px;" class="fa fa-tachometer-alt"></i>
-                  Dashboard
-                </div>
-              </div>
               <div class="card">
                 <div class="card-body">
                   <i style="padding-right: 4px;" class="fa fa-users"></i>
