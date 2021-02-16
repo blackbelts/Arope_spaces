@@ -345,7 +345,7 @@ class CrmLeads(models.Model):
         }
     def get_survey(self):
 
-        self.ensure_one()
+        # self.ensure_one()
         return {
             'name': 'Survey Report',
             'res_model': 'survey.report',
