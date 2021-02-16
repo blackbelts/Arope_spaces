@@ -886,7 +886,7 @@ class SurveyReport(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     type = fields.Selection([('insurance_application', 'Insurance Application'),
                              ('motor_claim', 'Motor Claim'),
-                             ('non_motor_claim', 'Non Motor Claim')])
+                             ('non_motor_claim', 'General Claim')])
     survey_type = fields.Selection([('pre_survey', 'Pre Survey'),
                                     ('Survey_after_repair', 'Survey After Repair')])
     lob = fields.Many2one('insurance.line.business', 'LOB')

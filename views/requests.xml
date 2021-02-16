@@ -34,7 +34,7 @@
                 <xpath expr="//button[@name='action_schedule_meeting']" position="replace">
                     <button attrs="{'invisible': [('opp_type', '!=', 1)]}" class="oe_stat_button" type="object" icon="fa-dollar" string="Related Quick Quote" name="related_quote">
                     </button>
-                    <button attrs="{'invisible': [('opp_type', '!=', 1)]}" class="oe_stat_button" string="Survey Report" icon="fa-file" type="object" name="get_survey" groups="Arope_spaces.managers_group,Arope_spaces.surveyor_group">
+                    <button attrs="{'invisible': [('opp_type', 'not in', [1,3,4])]}" class="oe_stat_button" string="Survey Report" icon="fa-file" type="object" name="get_survey" groups="Arope_spaces.managers_group,Arope_spaces.surveyor_group">
                     </button>
                 </xpath>
 <!--                <xpath expr="//field[@name='partner_id']/parent::div" position="attributes">-->
