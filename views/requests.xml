@@ -32,9 +32,9 @@
                     <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//button[@name='action_schedule_meeting']" position="replace">
-                    <button class="oe_stat_button" type="object" icon="fa-dollar" string="Related Quick Quote" name="related_quote">
+                    <button attrs="{'invisible': [('opp_type', '!=', 1)]}" class="oe_stat_button" type="object" icon="fa-dollar" string="Related Quick Quote" name="related_quote">
                     </button>
-                    <button class="oe_stat_button" string="Survey Report" icon="fa-file" type="object" name="get_survey" groups="Arope_spaces.managers_group,Arope_spaces.surveyor_group">
+                    <button attrs="{'invisible': [('opp_type', '!=', 1)]}" class="oe_stat_button" string="Survey Report" icon="fa-file" type="object" name="get_survey" groups="Arope_spaces.managers_group,Arope_spaces.surveyor_group">
                     </button>
                 </xpath>
 <!--                <xpath expr="//field[@name='partner_id']/parent::div" position="attributes">-->
@@ -122,9 +122,9 @@
 
                             <field name="end_date" readonly="1"/>
 
-                            <field name="type" />
-<!--                            <field name="end_reason" attrs="{'invisible': [('opp_type', '!=', 'end')]}"/>-->
-<!--                            <field name="cancel_reason" attrs="{'invisible': [('opp_type', '!=', 'cancel')]}"/>-->
+                            <field name="policy_services_type" />
+                            <field name="end_reason" attrs="{'invisible': [('policy_services_type', '!=', 'end')]}"/>
+                            <field name="cancel_reason" attrs="{'invisible': [('policy_services_type', '!=', 'cancel')]}"/>
 
                         </group>
                     </group>

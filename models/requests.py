@@ -23,6 +23,8 @@ class CrmLeads(models.Model):
     product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
     # stage_id = fields.Many2one('crm.stage', domain="['|',('type', '=', 'opp_type'),('type', '=', False)]")
     message = fields.Text('Description')
+    policy_services_type = fields.Selection([('end', 'Endorsement'),
+                                ('renew', 'Renwal'),('cancel', 'Cancellation')],string='Request Type')
 
     @api.onchange('opp_type')
     @api.constrains('opp_type')
