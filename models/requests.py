@@ -41,7 +41,7 @@ class CrmLeads(models.Model):
     persons = fields.One2many('persons.lines', 'opp_id')
     offer_ids = fields.One2many('final.offer', 'opp_id')
     question_ids = fields.One2many('insurances.answers', 'request_id')
-
+    name = fields.Char('Request')
     @api.model
     def create(self, vals):
         serial_no = self.env['ir.sequence'].next_by_code('req')
