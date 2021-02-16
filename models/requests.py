@@ -252,8 +252,7 @@ class CrmLeads(models.Model):
                  "lob": self.lob.id, 'product_id': self.product_id.id,"customer_name": self.customer_name, 'phone': self.phone, 'email': self.email,
                  'application_date': self.application_date})
             self.customer_name = survey.name
-        if self.stage_id == self.env['crm.stage'].search([('name', '=', 'Solved'),
-                                                          ('type', '=', self.opp_type.id)]).id:
+        if self.stage_id.name == 'Solved':
             return {
                 'type': 'ir.actions.act_window',
                 'res_model': 'wizard.insurance.quotation',
