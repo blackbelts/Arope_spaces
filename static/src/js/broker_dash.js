@@ -25,6 +25,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         'click #endorsement':'end_request_list',
         'click #cancellation': 'cancel_request_list',
         'click #renewals-req':'renewals_request_list',
+        'click #dashboard':'showDashboard',
+
     },
     init: function (parent, context) {
       this._super(parent, context);
@@ -248,6 +250,17 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         console.log("get_dashboard", res)
       });
       return $.when(get_dashboard);
+    },
+    showDashboard: function(){
+      console.log('jhkjhkhjkhkhkhkhkhkhkjhkhk')
+      var x = document.getElementById("dash");
+      if (x.style.display === "none") {
+        x.setAttribute('style', 'display:flex !important');
+//        x.style.display = "block";
+      } else {
+        x.setAttribute('style', 'display:none !important');
+//        x.style.display = "none";
+      }
     },
     makeNumber: function (x) {
       return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")

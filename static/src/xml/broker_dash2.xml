@@ -65,14 +65,7 @@
       <section class="bg-gray-lighter">
         <div class="container">
           <div class="row d-flex flex-wrap no-gutters pb64">
-              <div class="card">
-                <div class="card-body">
-                  <i style="padding-right: 4px;" class="fa fa-tachometer-alt"></i>
-                  Dashboard
-                </div>
-              </div>
-
-              <div class="card">
+              <div class="card" id="dashboard">
                 <div class="card-body">
                   <i style="padding-right: 4px;" class="fa fa-tachometer-alt"></i>
                   Dashboard
@@ -122,7 +115,7 @@
 
 
           </div>
-          <div class="row d-lg-flex pt48">
+          <div class="row d-lg-flex pt48" id="dash">
 
 
             <div class="col-lg-7 d-flex flex-column mb64">
