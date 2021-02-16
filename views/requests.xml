@@ -61,7 +61,7 @@
                 <xpath expr="//field[@name='name']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
-                <xpath expr="//label[@for='o_field_input_127']" position="attributes">
+                <xpath expr="//label[@for='name']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
 <!--                <xpath expr="//field[@name='name']" position="after">-->
@@ -72,11 +72,12 @@
                 <xpath expr="//group" position="after">
                     <group>
                         <group>
-                            <field name="name"/>
-                        </group>
-                        <group>
                             <field name="opp_type"/>
                         </group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+
                     </group>
                     <group attrs="{'invisible': [('opp_type', '!=', 1)]}">
                         <group>
