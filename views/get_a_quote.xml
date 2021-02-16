@@ -139,7 +139,7 @@
 
         <xpath expr="//form/input" position="before">
             <img src="/Arope_spaces/static/src/img/logo.png"/>
-            <h1>Arope partners Portal </h1>
+            <h1>Arope Partners Services </h1>
         <link rel="stylesheet" href="/Arope_spaces/static/src/css/main.css"/>
         </xpath>
     </template>
@@ -147,7 +147,7 @@
 
         <xpath expr="//form/input" position="before">
             <img src="/Arope_spaces/static/src/img/logo.png"/>
-            <h1>Arope partners Portal </h1>
+            <h1>Arope Partners Services </h1>
         <link rel="stylesheet" href="/Arope_spaces/static/src/css/main.css"/>
         </xpath>
     </template>
