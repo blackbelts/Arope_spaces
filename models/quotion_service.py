@@ -242,7 +242,7 @@ class QuotationService(models.Model):
         self.hide_button = True
         product = self.env['insurance.product'].search([('line_of_bus', '=', self.lob.id)]).id
 
-        form_view_id = self.env.ref("Arope_spaces.insurance_view_form").id
+        form_view_id = self.env.ref("Arope_spaces.crm__lead_form_view").id
         # ctx = dict(self.env.context)
         # ctx.update({
         #     'quotation_id': self.id,'name':'test', 'lob': self.lob
@@ -252,7 +252,7 @@ class QuotationService(models.Model):
             # 'name': 'My Action Name',
             'view_type': 'form',
             'view_mode': 'form',
-            'res_model': 'insurance.quotation',
+            'res_model': 'crm.lead',
 
             # 'domain': [('quotation_id', '=', self.id),('lob', '=', self.lob)],
             'views': [(form_view_id, 'form')],

@@ -30,6 +30,12 @@
                 <xpath expr="//button[@name='746']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
+                <xpath expr="//button[@name='action_schedule_meeting']" position="replace">
+                    <button class="oe_stat_button" type="object" icon="fa-dollar" string="Related Quick Quote" name="related_quote">
+                    </button>
+                    <button class="oe_stat_button" string="Survey Report" icon="fa-file" type="object" name="get_survey" groups="Arope_spaces.managers_group,Arope_spaces.surveyor_group">
+                    </button>
+                </xpath>
 <!--                <xpath expr="//field[@name='partner_id']/parent::div" position="attributes">-->
 <!--                    <attribute name="invisible">1</attribute>>-->
 <!--                </xpath>-->
@@ -194,7 +200,7 @@
                             <tree editable="bottom">
                                 <field name="question"/>
                                 <field name="text"/>
-<!--                                <field name="file"/>-->
+                                <field name="file"/>
                             </tree>
                         </field>
                     </page>

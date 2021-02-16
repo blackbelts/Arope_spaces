@@ -720,7 +720,7 @@ class Quotation(models.Model):
 class Answers(models.Model):
     _name = 'insurances.answers'
 
-    question = fields.Many2one('questionnaire.line.setup','Question')
+    question = fields.Many2one('questionnaire.lines.setup','Question')
     question_type = fields.Selection([('text', 'Text'), ('numerical', 'Numerical'), ('choose', 'Choose')],
                                      'Question Type', default='text')
     desc = fields.Char('Description')
@@ -809,6 +809,7 @@ class FinalApplication(models.Model):
         string='State', default='pending')
 
     quotation_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    request_id = fields.Many2one('crm.lead', ondelete='cascade')
 
     @api.onchange('application_file')
     def change_state(self):
@@ -827,6 +828,7 @@ class WizardFinalApplication(models.Model):
     _name = 'wizard.required.documents'
 
     insurance_app_id = fields.Many2one('insurance.quotation')
+    request_id = fields.Many2one('crm.lead')
     insurer_id = fields.Many2one('persons.lines')
     required_documents = fields.Many2many('final.application')
 
@@ -871,11 +873,12 @@ class SelectionOptions(models.Model):
 class WizardInsuranceQuotation(models.TransientModel):
     _name = 'wizard.insurance.quotation'
     insurance_app_id = fields.Many2one('insurance.quotation')
+    request_id = fields.Many2one('crm.lead')
     policy_number = fields.Char('Policy Num')
     policy_issue_date = fields.Date('Policy Issue Date', default=datetime.today())
 
     def policy_num(self):
-        self.insurance_app_id.write({'policy_number' : self.policy_number, "policy_issue_date": self.policy_issue_date})
+        self.request_id.write({'policy_number' : self.policy_number, "policy_issue_date": self.policy_issue_date})
 
 class SurveyReport(models.Model):
 
@@ -908,6 +911,7 @@ class SurveyReport(models.Model):
 
     application_id = fields.Many2one('insurance.quotation', ondelete='cascade', string='Application')
     claim_id = fields.Many2one('claim.app', ondelete='cascade', string='Application')
+    request_id = fields.Many2one('crm.lead', ondelete='cascade', string='Request')
     message = fields.Text('Description')
 
     # @api.onchange('surveyor')
@@ -1029,14 +1033,13 @@ class PersonsLines(models.Model):
         ids = []
         if not self.env['wizard.required.documents'].search([('insurer_id', '=', self.id)]):
             related_documents = self.env["final.application.setup"].search(
-                [("product_id.id", "=", self.application_id.product_id.id)])
+                [("product_id.id", "=", self.opp_id.product_id.id)])
             if related_documents:
                 for question in related_documents:
                     id = self.env['final.application'].create(
                         {"description": question.id,
-                         "quotation_id": self.id})
+                         "request_id": self.id})
                     ids.append(id.id)
-
 
             return {
                 'type': 'ir.actions.act_window',
@@ -1047,7 +1050,7 @@ class PersonsLines(models.Model):
                 'domain': [('insurer_id', '=', self.id)],
                 'context': {
                     'default_insurer_id':self.id,
-                    'default_insurance_app_id': self.application_id.id,
+                    'default_request_id': self.opp_id.id,
                     'default_required_documents': ids
 
 
