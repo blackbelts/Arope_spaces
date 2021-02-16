@@ -366,7 +366,7 @@ class CrmLeads(models.Model):
             person = ''
             lob = ''
             self.write(
-                {'claim_number': self.opp_type.type.upper() + '/' + self.claim_product.product_name + '/' + self.policy_num +
+                {'claim_number': 'GENERAL' + '/' + self.claim_product.product_name + '/' + self.policy_num +
                     '/'+ currentYear + '/' + currentMonth + '/' + number})
             policy = self.env['policy.arope'].search(
                 [('product', '=', self.claim_product.product_name), ('policy_num', '=', int(self.policy_num))
