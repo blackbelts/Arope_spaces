@@ -217,6 +217,13 @@ overflow: auto !important;
     display: none;
   }
   .card {
-     margin: 3px;
+    margin: 3px;
+    padding: 7px;
+    border-radius: 10px;
+    background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
   }
+  .card-body {
+    background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
+    color: white;
+}
   

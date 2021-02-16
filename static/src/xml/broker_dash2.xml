@@ -67,56 +67,59 @@
           <div class="row d-flex flex-wrap no-gutters pb64">
               <div class="card">
                 <div class="card-body">
-                  <i class="fa fa-tachometer-alt"></i>
+                  <i style="padding-right: 4px;" class="fa fa-tachometer-alt"></i>
                   Dashboard
                 </div>
-            </div>
+              </div>
+
               <div class="card">
                 <div class="card-body">
-                  This is some text within a card body.
+                  <i style="padding-right: 4px;" class="fa fa-tachometer-alt"></i>
+                  Dashboard
                 </div>
               </div>
               <div class="card">
                 <div class="card-body">
-                  This is some text within a card body.
+                  <i style="padding-right: 4px;" class="fa fa-users"></i>
+                  My Customers
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <i style="padding-right: 4px;" class="fa fa-hospital-user"></i>
+                  Insurance Portfolio
                 </div>
               </div>
 
               <div class="card">
                 <div class="card-body">
-                  This is some text within a card body.
+                  <i style="padding-right: 4px;" class="fa fa-user-plus"></i>
+                  Insurance requests
                 </div>
               </div>
 
               <div class="card">
                 <div class="card-body">
-                  This is some text within a card body.
+                  <i style="padding-right: 4px;" class="fa fa-car"></i>
+                  Motor Claims
                 </div>
               </div>
 
               <div class="card">
                 <div class="card-body">
-                  This is some text within a card body.
+                  <i style="padding-right: 4px;" class="fa fa-bullhorn"></i>
+                  General Claims
                 </div>
               </div>
 
               <div class="card">
                 <div class="card-body">
-                  This is some text within a card body.
+                  <i style="padding-right: 4px;" class="fa fa-headset"></i>
+                  Policies Requests
                 </div>
               </div>
 
-              <div class="card">
-                <div class="card-body">
-                  This is some text within a card body.
-                </div>
-              </div>
 
-              <div class="card">
-                <div class="card-body">
-                  This is some text within a card body.
-                </div>
-              </div>
 
           </div>
           <div class="row d-lg-flex pt48">
