@@ -42,12 +42,12 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     start: function () {
       var user = session.uid
       var self = this;
-      this.showDash1()
       this.fetch_data().then(function(){
 
       self.$('.o_hr_dashboard').prepend(QWeb.render("brokerdash", {
             widget: self
           }));
+          this.showDash1()
           $("document").ready(function () {
             var dataProvider = []
             var monthes = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
