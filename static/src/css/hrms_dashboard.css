@@ -216,4 +216,7 @@ overflow: auto !important;
     outline: none;
     display: none;
   }
+  .card {
+     margin: 3px;
+  }
   
