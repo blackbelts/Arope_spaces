@@ -25,16 +25,40 @@
             <field name="implied_ids" eval="[(4, ref('Arope_spaces.client_space_group'))]"/>
             <field name="comment">the user will have access to his allowed Documents</field>
         </record>
-           <record id="motor_group01" model="res.groups">
+           <record id="motor_group_sale" model="res.groups">
             <field name="name">Motor Underwriting</field>
             <field name="category_id" ref="base.module_category_space"/>
-            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
             <field name="comment">the user will have access to his allowed Documents</field>
         </record>
-          <record id="non_motor_group01" model="res.groups">
+          <record id="non_motor_group_sale" model="res.groups">
             <field name="name"> non Motor Underwriting</field>
             <field name="category_id" ref="base.module_category_space"/>
-            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+                <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+            <field name="comment">the user will have access to his allowed Documents</field>
+        </record>
+         <record id="motor_claim_group" model="res.groups">
+            <field name="name"> Motor Claim</field>
+            <field name="category_id" ref="base.module_category_space"/>
+            <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+            <field name="comment">the user will have access to his allowed Documents</field>
+        </record>
+         <record id="non_motor_claim_group" model="res.groups">
+            <field name="name">non Motor Claim</field>
+            <field name="category_id" ref="base.module_category_space"/>
+            <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+            <field name="comment">the user will have access to his allowed Documents</field>
+        </record>
+        <record id="medical_group" model="res.groups">
+            <field name="name">Medical underwritting</field>
+            <field name="category_id" ref="base.module_category_space"/>
+            <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+            <field name="comment">the user will have access to his allowed Documents</field>
+        </record>
+        <record id="call_center_group" model="res.groups">
+            <field name="name"> Call Center</field>
+            <field name="category_id" ref="base.module_category_space"/>
+            <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
             <field name="comment">the user will have access to his allowed Documents</field>
         </record>
 
@@ -130,10 +154,47 @@
         <record id="motor_underwritting" model="ir.rule">
             <field name="name">Motor Underwritting</field>
             <field ref="crm.model_crm_lead" name="model_id"/>
-            <field name="domain_force">[('lob','=','Motor')]
+            <field name="domain_force">[('opp_type','in',['Insurance Application','Policy Services']),('lob','=','Motor')]
             </field>
             <field name="groups" eval="[(4, ref('motor_group01'))]"/>
         </record>
+        <record id="non_motor_underwritting" model="ir.rule">
+            <field name="name"> Non Motor Underwritting</field>
+            <field ref="crm.model_crm_lead" name="model_id"/>
+            <field name="domain_force">[('opp_type','in',['Insurance Application','Policy Services']),('lob','not in',['Motor','Medical'])]
+            </field>
+            <field name="groups" eval="[(4, ref('non_motor_group01'))]"/>
+        </record>
+         <record id="motor_claim" model="ir.rule">
+            <field name="name">Motor Claim</field>
+            <field ref="crm.model_crm_lead" name="model_id"/>
+            <field name="domain_force">[('opp_type','in',['Motor Claim']),('lob','=','Motor')]
+            </field>
+            <field name="groups" eval="[(4, ref('motor_claim_group'))]"/>
+        </record>
+        <record id="non_motor_claim" model="ir.rule">
+            <field name="name"> Non Motor Claim</field>
+            <field ref="crm.model_crm_lead" name="model_id"/>
+            <field name="domain_force">[('opp_type','in',['Motor Claim']),('lob','not in',['Motor','Medical'])]
+            </field>
+            <field name="groups" eval="[(4, ref('non_motor_claim_group'))]"/>
+        </record>
+        <record id="medical_underwritting" model="ir.rule">
+            <field name="name">Medical Underwritting</field>
+            <field ref="crm.model_crm_lead" name="model_id"/>
+            <field name="domain_force">[('opp_type','in',['Insurance Application','Policy Services']),('lob','=','Medical')]
+            </field>
+            <field name="groups" eval="[(4, ref('medical_group'))]"/>
+        </record>
+         <record id="call_center" model="ir.rule">
+            <field name="name">call center rule</field>
+            <field ref="crm.model_crm_lead" name="model_id"/>
+            <field name="domain_force">[('opp_type','in',['Complain','Online Quote']),('lob','=','Medical')]
+            </field>
+            <field name="groups" eval="[(4, ref('call_center_group'))]"/>
+        </record>
+
+
         <!--<record id="policy_user_own_group" model="res.groups">-->
             <!--<field name="name">User: Own Documents Only</field>-->
             <!--<field name="category_id" ref="base.module_category_policy"/>-->
