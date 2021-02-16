@@ -32,10 +32,11 @@ class CrmLeads(models.Model):
         if self.stage_id:
             self.message = self.stage_id.message
         self.product = str(self.opp_type.id)
-        if self.opp_type == 3 or self.opp_type == 4:
-            if self.opp_type == 3:
+        if self.opp_type.id == 3 or self.opp_type.id == 4:
+            name = 'cond'
+            if self.opp_type.id == 3:
                 name = 'non-motor'
-            elif self.opp_type == 4:
+            elif self.opp_type.id == 4:
                 name = 'motor'
             self.product = name
             if self.declaration_ids:
