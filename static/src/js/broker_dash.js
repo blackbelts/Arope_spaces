@@ -255,9 +255,11 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       console.log('jhkjhkhjkhkhkhkhkhkhkjhkhk')
       var x = document.getElementById("dash");
       if (x.style.display === "none") {
-        x.style.display = "block";
+        x.setAttribute('style', 'display:flex !important');
+//        x.style.display = "block";
       } else {
-        x.style.display = "none";
+        x.setAttribute('style', 'display:none !important');
+//        x.style.display = "none";
       }
     },
     makeNumber: function (x) {
