@@ -140,8 +140,15 @@
                     </group>
                     <group attrs="{'invisible': [('opp_type', 'not in', [3,4])]}">
                         <group>
-                            <field name="product"/>
-                            <field name="policy_num"/>
+                            <label for="policy"/>
+                            <div class="o_row">
+
+                                <field name="product" />
+                                <strong>/</strong>
+                                <field name="policy_num" />
+                            </div>
+<!--                            <field name="product"/>-->
+<!--                            <field name="policy_num"/>-->
                         </group>
                         <group>
                             <field name="claim_number" readonly="1" force_save="1"/>
