@@ -237,10 +237,11 @@
             <field name="name">Requests</field>
             <field name="res_model">crm.lead</field>
             <field name="view_mode">tree,kanban,form</field>
-            <field name="domain">[('type','=','opportunity'),('opp_type','not in',[1, 3, 4])]</field>
+            <field name="domain">[('type','=','opportunity'),('opp_type','=', '2')]</field>
             <field name="context">{
                 'default_type': 'opportunity',
-                'default_user_id': uid
+                'default_user_id': uid,
+                'default_opp_type': 2
                 }
             </field>
         </record>
