@@ -36,6 +36,7 @@ class CrmLeads(models.Model):
                 name = 'non-motor'
             elif self.opp_type == 4:
                 name = 'motor'
+            self.product = name
             if self.declaration_ids:
                 for question in self.declaration_ids:
                     question.unlink()
@@ -43,6 +44,7 @@ class CrmLeads(models.Model):
                 [("claim_declaration_id", "=", self.env['claim.setup'].search([('type', '=', name)]).id),
                  ('type', '=', 'claim_intimation')])
             if declaration_question:
+                self.product = 'yes'
                 for question in declaration_question:
                     if question.file:
                         self.declaration_ids.create(
