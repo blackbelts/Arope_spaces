@@ -236,7 +236,7 @@ class CrmLeads(models.Model):
     @api.onchange('stage_id')
     @api.constrains('stage_id')
     def change_stage_id(self):
-        self.customer_name = self.self.env['crm.stage'].search([('name', '=', 'Survey'),
+        self.customer_name = self.env['crm.stage'].search([('name', '=', 'Survey'),
                                                           ('type', '=', self.opp_type.id)]).name
         if self.stage_id == self.env['crm.stage'].search([('name', '=', 'Survey'),
                                                           ('type', '=', self.opp_type.id)]).id:
