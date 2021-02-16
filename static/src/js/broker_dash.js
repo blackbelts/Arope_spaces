@@ -252,6 +252,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       return $.when(get_dashboard);
     },
     showDashboard: function(){
+      console.log('jhkjhkhjkhkhkhkhkhkhkjhkhk')
       var x = document.getElementById("dash");
       if (x.style.display === "none") {
         x.style.display = "block";
