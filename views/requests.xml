@@ -226,7 +226,7 @@
         <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities">
             <field name="name">Requests</field>
             <field name="res_model">crm.lead</field>
-            <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
+            <field name="view_mode">tree,kanban,form</field>
             <field name="domain">[('type','=','opportunity'),('opp_type','not in',[1, 3, 4])]</field>
             <field name="context">{
                 'default_type': 'opportunity',
@@ -237,7 +237,7 @@
         <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities_insurance_app">
             <field name="name">Insurance App</field>
             <field name="res_model">crm.lead</field>
-            <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
+            <field name="view_mode">tree,kanban,form</field>
             <field name="domain">[('type','=','opportunity'),('opp_type','=',1)]</field>
             <field name="context">{
                 'default_type': 'opportunity',
@@ -249,7 +249,7 @@
         <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities_motor_claim">
             <field name="name">Motor Claims</field>
             <field name="res_model">crm.lead</field>
-            <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
+            <field name="view_mode">tree,kanban,form</field>
             <field name="domain">[('type','=','opportunity'),('opp_type','=',4)]</field>
             <field name="context">{
                 'default_type': 'opportunity',
@@ -261,7 +261,7 @@
         <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities_general_claim">
             <field name="name">General Claim</field>
             <field name="res_model">crm.lead</field>
-            <field name="view_mode">kanban,tree,graph,pivot,form,calendar</field>
+            <field name="view_mode">tree,kanban,form</field>
             <field name="domain">[('type','=','opportunity'),('opp_type','=',3)]</field>
             <field name="context">{
                 'default_type': 'opportunity',
