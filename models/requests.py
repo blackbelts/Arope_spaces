@@ -238,8 +238,7 @@ class CrmLeads(models.Model):
     def change_stage_id(self):
         self.customer_name = self.env['crm.stage'].search([('name', '=', 'Survey'),
                                                           ('type', '=', self.opp_type.id)]).name
-        if self.stage_id == self.env['crm.stage'].search([('name', '=', 'Survey'),
-                                                          ('type', '=', self.opp_type.id)]).id:
+        if self.stage_id.name == 'Survey':
             self.customer_name = 'hjgjhjgjadasdas'
             number = self.env['ir.sequence'].next_by_code('survies')
             currentYear = datetime.today().strftime("%Y")
