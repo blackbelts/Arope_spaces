@@ -349,9 +349,6 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         type: 'ir.actions.act_window',
         res_model: 'crm.lead',
         view_mode: 'tree,form',
-        views: [
-          [false, 'list']
-        ],
         domain: [
           ['opp_type', '=', 4]
         ],
@@ -381,9 +378,6 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         type: 'ir.actions.act_window',
         res_model: 'crm.lead',
         view_mode: 'tree,form',
-        views: [
-          [false, 'list']
-        ],
         domain: [
           ['opp_type', '=', 3]
         ],
