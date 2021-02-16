@@ -236,8 +236,7 @@ class CrmLeads(models.Model):
     @api.onchange('stage_id')
     @api.constrains('stage_id')
     def change_stage_id(self):
-        self.customer_name = self.env['crm.stage'].search([('name', '=', 'Survey'),
-                                                          ('type', '=', self.opp_type.id)]).name
+
         if self.stage_id.name == 'Survey':
 
             number = self.env['ir.sequence'].next_by_code('survies')
@@ -253,6 +252,8 @@ class CrmLeads(models.Model):
                  'application_date': self.application_date})
             self.customer_name = survey.name
         if self.stage_id.name == 'Solved':
+            self.customer_name = self.customer_name = self.env['crm.stage'].search([('name', '=', 'Survey'),
+                                                          ('type', '=', self.opp_type.id)]).name
             return {
                 'type': 'ir.actions.act_window',
                 'res_model': 'wizard.insurance.quotation',
