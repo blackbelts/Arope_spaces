@@ -64,7 +64,7 @@
       </section>
       <section class="bg-gray-lighter">
         <div class="container">
-          <div class="row d-flex flex-wrap no-gutters pb64">
+          <div class="row d-flex flex-wrap no-gutters pb30">
               <div class="card" id="dashboard">
                 <div class="card-body">
                   <i style="padding-right: 4px;" class="fa fa-tachometer-alt"></i>
@@ -115,7 +115,7 @@
 
 
           </div>
-          <div class="row d-lg-flex pt48" id="dash">
+          <div class="row d-lg-flex pt30" id="dash1">
 
 
             <div class="col-lg-7 d-flex flex-column mb64">
@@ -196,7 +196,7 @@
                 </div>-->
               </div>
             </div>
-            <div class="col-lg-5 d-flex flex-column mb64">
+            <div class="col-lg-5 d-flex flex-column mb30">
               <div class="o_partner_dashboard_box_header">
                 <h2>Your Grade</h2>
               </div>
@@ -228,7 +228,7 @@
               </div>
             </div>
           </div>
-          <div class="row d-flex flex-wrap no-gutters pb64">
+          <div class="row d-flex flex-wrap no-gutters pb30" id="dash2">
             <div class="col-12">
               <div class="o_partner_dashboard_box_header">
                 <h2>Your Portfolio</h2>
@@ -268,7 +268,7 @@
               </div>
             </div>
           </div>
-          <div class="row d-flex flex-wrap no-gutters pb64">
+          <div class="row d-flex flex-wrap no-gutters pb30" id="dash3">
             <div class="col-12">
               <div class="o_partner_dashboard_box_header">
                 <h2>Follow up list</h2>
@@ -429,7 +429,7 @@
               </div>
             </div>
           </div>
-          <div class="row d-flex flex-wrap no-gutters pb64">
+          <div class="row d-flex flex-wrap no-gutters pb30" id="dash4">
             <div class="col-12">
               <div class="o_partner_dashboard_box_header">
                 <h2>Your Portfolio</h2>
@@ -556,7 +556,7 @@
               </div>
             </div>
           </div>
-          <div class="row d-flex flex-wrap no-gutters pb64">
+          <div class="row d-flex flex-wrap no-gutters pb30" id="dash5">
             <div class="col-12">
               <div class="o_partner_dashboard_box_header">
                 <h2>Your Requests</h2>

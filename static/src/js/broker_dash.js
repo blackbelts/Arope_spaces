@@ -252,15 +252,17 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       return $.when(get_dashboard);
     },
     showDashboard: function(){
-      console.log('jhkjhkhjkhkhkhkhkhkhkjhkhk')
-      var x = document.getElementById("dash");
-      if (x.style.display === "none") {
-        x.setAttribute('style', 'display:flex !important');
-//        x.style.display = "block";
-      } else {
-        x.setAttribute('style', 'display:none !important');
-//        x.style.display = "none";
-      }
+      var dash1 = document.getElementById("dash1");
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+      var dash4 = document.getElementById("dash4");
+      var dash5 = document.getElementById("dash5");
+      dash1.setAttribute('style', 'display:flex !important');
+      dash2.setAttribute('style', 'display:none !important');
+      dash3.setAttribute('style', 'display:none !important');
+      dash4.setAttribute('style', 'display:none !important');
+      dash5.setAttribute('style', 'display:none !important');
+
     },
     makeNumber: function (x) {
       return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
