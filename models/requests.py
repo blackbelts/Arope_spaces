@@ -31,6 +31,7 @@ class CrmLeads(models.Model):
     def stage_domain(self):
         if self.stage_id:
             self.message = self.stage_id.message
+        self.product = str(self.opp_type)
         if self.opp_type == 3 or self.opp_type == 4:
             if self.opp_type == 3:
                 name = 'non-motor'
