@@ -348,7 +348,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         name: "Motor Claims",
         type: 'ir.actions.act_window',
         res_model: 'crm.lead',
-        view_mode: 'tree',
+        view_mode: 'tree,form',
         views: [
           [false, 'list']
         ],
@@ -383,7 +383,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         name: "General Claims",
         type: 'ir.actions.act_window',
         res_model: 'crm.lead',
-        view_mode: 'tree',
+        view_mode: 'tree,form',
         views: [
           [false, 'list']
         ],
