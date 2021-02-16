@@ -412,6 +412,22 @@ class CrmLeads(models.Model):
                     self.declaration_ids.create(
                         {"question": question.id,"claim_declaration_id": self.id})
 
+    def related_policy(self):
+        policy = self.env['policy.arope'].search([('product', '=', self.product), ('policy_num', '=', int(self.policy_num))
+                                                   ], limit=1)
+        self.ensure_one()
+        return {
+            'name': 'Related Policy',
+            'res_model': 'policy.arope',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree',
+            'domain': [('id', '=', policy.id)],
+            'context': {
+                "create": False,
+            },
+        }
+
+
 class CrmStages(models.Model):
     _inherit = "crm.stage"
 
