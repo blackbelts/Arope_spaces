@@ -28,13 +28,13 @@
            <record id="motor_group" model="res.groups">
             <field name="name">Motor Under writing</field>
             <field name="category_id" ref="base.module_category_space"/>
-            <field name="implied_ids" eval="[(4, ref('Arope_spaces.client_space_group'))]"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
             <field name="comment">the user will have access to his allowed Documents</field>
         </record>
           <record id="non_motor_group" model="res.groups">
             <field name="name"> non Motor Under writing</field>
             <field name="category_id" ref="base.module_category_space"/>
-            <field name="implied_ids" eval="[(4, ref('Arope_spaces.client_space_group'))]"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
             <field name="comment">the user will have access to his allowed Documents</field>
         </record>
 
