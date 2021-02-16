@@ -294,7 +294,7 @@ class CrmLeads(models.Model):
             currentMonth = datetime.today().strftime("%m")
             person = ''
             policy = self.env['policy.arope'].search(
-                [('product', '=', self.product.product_name), ('policy_num', '=', int(self.policy_num))
+                [('product', '=', self.product), ('policy_num', '=', int(self.policy_num))
                  ], limit=1)
             for rec in self.env['insurance.line.business'].search([('line_of_business', '=', policy.lob)]):
                 lob = rec.id
@@ -366,10 +366,10 @@ class CrmLeads(models.Model):
             person = ''
             lob = ''
             self.write(
-                {'claim_number': 'GENERAL' + '/' + self.claim_product.product_name + '/' + self.policy_num +
+                {'claim_number': 'GENERAL' + '/' + self.product + '/' + self.policy_num +
                     '/'+ currentYear + '/' + currentMonth + '/' + number})
             policy = self.env['policy.arope'].search(
-                [('product', '=', self.claim_product.product_name), ('policy_num', '=', int(self.policy_num))
+                [('product', '=', self.product), ('policy_num', '=', int(self.policy_num))
                  ], limit=1)
             for rec in self.env['insurance.line.business'].search([('line_of_business', '=', policy.lob)]):
                 lob = rec.id
