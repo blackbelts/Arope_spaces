@@ -65,69 +65,59 @@
       <section class="bg-gray-lighter">
         <div class="container">
           <div class="row d-flex flex-wrap no-gutters pb64">
-            <div class="col-1">
+              <div class="card">
+                <div class="card-body">
+                  <i class="fa fa-tachometer-alt"></i>
+                  Dashboard
+                </div>
+            </div>
               <div class="card">
                 <div class="card-body">
                   This is some text within a card body.
                 </div>
               </div>
-            </div>
-            <div class="col-1">
               <div class="card">
                 <div class="card-body">
                   This is some text within a card body.
                 </div>
               </div>
-            </div>
-            <div class="col-1">
+
               <div class="card">
                 <div class="card-body">
                   This is some text within a card body.
                 </div>
               </div>
-            </div>
-            <div class="col-1">
+
               <div class="card">
                 <div class="card-body">
                   This is some text within a card body.
                 </div>
               </div>
-            </div>
-            <div class="col-1">
+
               <div class="card">
                 <div class="card-body">
                   This is some text within a card body.
                 </div>
               </div>
-            </div>
-            <div class="col-1">
+
               <div class="card">
                 <div class="card-body">
                   This is some text within a card body.
                 </div>
               </div>
-            </div>
-            <div class="col-1">
+
               <div class="card">
                 <div class="card-body">
                   This is some text within a card body.
                 </div>
               </div>
-            </div>
-            <div class="col-1">
+
               <div class="card">
                 <div class="card-body">
                   This is some text within a card body.
                 </div>
               </div>
-            </div>
-            <div class="col-1">
-              <div class="card">
-                <div class="card-body">
-                  This is some text within a card body.
-                </div>
-              </div>
-            </div>
+
           </div>
           <div class="row d-lg-flex pt48">
 
