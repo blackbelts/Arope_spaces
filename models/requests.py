@@ -52,7 +52,7 @@ class CrmLeads(models.Model):
                         self.declaration_ids.create(
                             {"question": question.id, "opp_id": self.id})
 
-        return {'domain': {'stage_id': ['|',('type', 'in', self.opp_type.id),('type', '=', False)]}}
+        return {'domain': {'stage_id': [('type', 'in', self.opp_type.id)]}}
 
     customer_name = fields.Char('Customer Name')
     phone = fields.Char('Customer Mobile')
@@ -345,7 +345,7 @@ class CrmLeads(models.Model):
         }
     def get_survey(self):
 
-        # self.ensure_one()
+        self.ensure_one()
         return {
             'name': 'Survey Report',
             'res_model': 'survey.report',
