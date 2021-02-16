@@ -26,13 +26,13 @@
             <field name="comment">the user will have access to his allowed Documents</field>
         </record>
            <record id="motor_group01" model="res.groups">
-            <field name="name">Motor Under writing</field>
+            <field name="name">Motor Underwriting</field>
             <field name="category_id" ref="base.module_category_space"/>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
             <field name="comment">the user will have access to his allowed Documents</field>
         </record>
           <record id="non_motor_group01" model="res.groups">
-            <field name="name"> non Motor Under writing</field>
+            <field name="name"> non Motor Underwriting</field>
             <field name="category_id" ref="base.module_category_space"/>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
             <field name="comment">the user will have access to his allowed Documents</field>
@@ -130,9 +130,9 @@
         <record id="motor_underwritting" model="ir.rule">
             <field name="name">Motor Underwritting</field>
             <field ref="crm.model_crm_lead" name="model_id"/>
-            <field name="domain_force">[('lob','!=','Motor')]
+            <field name="domain_force">[('lob','=','Motor')]
             </field>
-            <field name="groups" eval="[(4, ref('motor_group'))]"/>
+            <field name="groups" eval="[(4, ref('motor_group01'))]"/>
         </record>
         <!--<record id="policy_user_own_group" model="res.groups">-->
             <!--<field name="name">User: Own Documents Only</field>-->
