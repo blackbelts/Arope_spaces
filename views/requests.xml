@@ -89,6 +89,13 @@
                         </group>
 
                     </group>
+                    <group attrs="{'invisible': [('opp_type', '!=', 5)]}">
+                        <group>
+                            <field name="customer_name" />
+                            <field name="pin" />
+                            <field name="email" />
+                        </group>
+                    </group>
                     <group attrs="{'invisible': [('opp_type', '!=', 1)]}">
                         <group>
                             <field name="state" invisible="1"/>

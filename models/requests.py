@@ -68,6 +68,7 @@ class CrmLeads(models.Model):
     offer_ids = fields.One2many('final.offer', 'opp_id')
     question_ids = fields.One2many('insurances.answers', 'request_id')
     name = fields.Char('Request')
+
     @api.model
     def create(self, vals):
         serial_no = self.env['ir.sequence'].next_by_code('req')
@@ -99,7 +100,7 @@ class CrmLeads(models.Model):
     maintenance_centers = fields.Many2one('maintenance.center', 'Service Center')
     date = fields.Date('Intimation Date', default=datetime.today())
     declaration_ids = fields.One2many('claim.lines', 'opp_id')
-
+    pin = fields.Char('PIN')
 
 
     @api.onchange('policy')
