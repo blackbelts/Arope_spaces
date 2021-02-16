@@ -354,10 +354,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         ],
         domain: [
           ['opp_type', '=', 4]
-        ],context:{
-            "edit":false,
-            "create":false
-        },
+        ]
         target: 'current'
       })
 
@@ -389,10 +386,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         ],
         domain: [
           ['opp_type', '=', 3]
-        ],context:{
-            "edit":false,
-            "create":false
-        },
+        ]
         target: 'current'
       })
 
