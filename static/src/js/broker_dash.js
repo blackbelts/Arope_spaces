@@ -345,7 +345,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     console.log("policies")
       var self = this;
       this.do_action({
-        name: _t("Motor Claims"),
+        name: "Motor Claims",
         type: 'ir.actions.act_window',
         res_model: 'crm.lead',
         view_mode: 'tree',
@@ -380,7 +380,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       console.log("policies")
       var self = this;
       this.do_action({
-        name: _t("Motor Claims"),
+        name: "General Claims",
         type: 'ir.actions.act_window',
         res_model: 'crm.lead',
         view_mode: 'tree',
