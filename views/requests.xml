@@ -268,6 +268,30 @@
                 }
             </field>
         </record>
+        <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities_signup">
+            <field name="name">Signup</field>
+            <field name="res_model">crm.lead</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('type','=','opportunity'),('opp_type','=',5)]</field>
+            <field name="context">{
+                'default_type': 'opportunity',
+                'default_user_id': uid,
+                'default_opp_type': 5
+                }
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities_complain">
+            <field name="name">Complains</field>
+            <field name="res_model">crm.lead</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('type','=','opportunity'),('opp_type','=',6)]</field>
+            <field name="context">{
+                'default_type': 'opportunity',
+                'default_user_id': uid,
+                'default_opp_type': 6
+                }
+            </field>
+        </record>
         <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities_general_claim">
             <field name="name">General Claim</field>
             <field name="res_model">crm.lead</field>
