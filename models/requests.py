@@ -239,18 +239,19 @@ class CrmLeads(models.Model):
         self.customer_name = self.env['crm.stage'].search([('name', '=', 'Survey'),
                                                           ('type', '=', self.opp_type.id)]).name
         if self.stage_id.name == 'Survey':
-            self.customer_name = 'hjgjhjgjadasdas'
+
             number = self.env['ir.sequence'].next_by_code('survies')
             currentYear = datetime.today().strftime("%Y")
             currentMonth = datetime.today().strftime("%m")
 
-            self.env['survey.report'].create(
+            survey = self.env['survey.report'].create(
                 {"name": "Survey"+ '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
                  "type": 'insurance_application',
                  "request_id": self.id,'state': 'pending', 'status': self.env['state.setup'].search([('survey_status', '=', 'pending'),('type', '=', 'survey')]).id,
                  'message':self.env['state.setup'].search([('survey_status', '=', 'pending'),('type', '=', 'survey')]).message,
                  "lob": self.lob.id, 'product_id': self.product_id.id,"customer_name": self.customer_name, 'phone': self.phone, 'email': self.email,
                  'application_date': self.application_date})
+            self.customer_name = survey.name
         if self.stage_id == self.env['crm.stage'].search([('name', '=', 'Solved'),
                                                           ('type', '=', self.opp_type.id)]).id:
             return {
