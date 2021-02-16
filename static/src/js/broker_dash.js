@@ -328,37 +328,73 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     },
     showDash5: function(){
-      var dash1 = document.getElementById("dash1");
-      var dash2 = document.getElementById("dash2");
-      var dash3 = document.getElementById("dash3");
-      var dash4 = document.getElementById("dash4");
-      var dash5 = document.getElementById("dash5");
-      var dash6 = document.getElementById("dash6");
-      var dash7 = document.getElementById("dash7");
-      dash1.setAttribute('style', 'display:none !important');
-      dash2.setAttribute('style', 'display:none !important');
-      dash3.setAttribute('style', 'display:none !important');
-      dash4.setAttribute('style', 'display:none !important');
-      dash5.setAttribute('style', 'display:flex !important');
-      dash6.setAttribute('style', 'display:none !important');
-      dash7.setAttribute('style', 'display:none !important');
+//      var dash1 = document.getElementById("dash1");
+//      var dash2 = document.getElementById("dash2");
+//      var dash3 = document.getElementById("dash3");
+//      var dash4 = document.getElementById("dash4");
+//      var dash5 = document.getElementById("dash5");
+//      var dash6 = document.getElementById("dash6");
+//      var dash7 = document.getElementById("dash7");
+//      dash1.setAttribute('style', 'display:none !important');
+//      dash2.setAttribute('style', 'display:none !important');
+//      dash3.setAttribute('style', 'display:none !important');
+//      dash4.setAttribute('style', 'display:none !important');
+//      dash5.setAttribute('style', 'display:flex !important');
+//      dash6.setAttribute('style', 'display:none !important');
+//      dash7.setAttribute('style', 'display:none !important');
+    console.log("policies")
+      var self = this;
+      this.do_action({
+        name: _t("Motor Claims"),
+        type: 'ir.actions.act_window',
+        res_model: 'crm.lead',
+        view_mode: 'tree',
+        views: [
+          [false, 'list']
+        ],
+        domain: [
+          ['opp_type', '=', '4']
+        ],context:{
+            "edit":false,
+            "create":false
+        },
+        target: 'current'
+      })
 
     },
     showDash6: function(){
-      var dash1 = document.getElementById("dash1");
-      var dash2 = document.getElementById("dash2");
-      var dash3 = document.getElementById("dash3");
-      var dash4 = document.getElementById("dash4");
-      var dash5 = document.getElementById("dash5");
-      var dash6 = document.getElementById("dash6");
-      var dash7 = document.getElementById("dash7");
-      dash1.setAttribute('style', 'display:none !important');
-      dash2.setAttribute('style', 'display:none !important');
-      dash3.setAttribute('style', 'display:none !important');
-      dash4.setAttribute('style', 'display:none !important');
-      dash5.setAttribute('style', 'display:none !important');
-      dash6.setAttribute('style', 'display:flex !important');
-      dash7.setAttribute('style', 'display:none !important');
+//      var dash1 = document.getElementById("dash1");
+//      var dash2 = document.getElementById("dash2");
+//      var dash3 = document.getElementById("dash3");
+//      var dash4 = document.getElementById("dash4");
+//      var dash5 = document.getElementById("dash5");
+//      var dash6 = document.getElementById("dash6");
+//      var dash7 = document.getElementById("dash7");
+//      dash1.setAttribute('style', 'display:none !important');
+//      dash2.setAttribute('style', 'display:none !important');
+//      dash3.setAttribute('style', 'display:none !important');
+//      dash4.setAttribute('style', 'display:none !important');
+//      dash5.setAttribute('style', 'display:none !important');
+//      dash6.setAttribute('style', 'display:flex !important');
+//      dash7.setAttribute('style', 'display:none !important');
+      console.log("policies")
+      var self = this;
+      this.do_action({
+        name: _t("Motor Claims"),
+        type: 'ir.actions.act_window',
+        res_model: 'crm.lead',
+        view_mode: 'tree',
+        views: [
+          [false, 'list']
+        ],
+        domain: [
+          ['opp_type', '=', '3']
+        ],context:{
+            "edit":false,
+            "create":false
+        },
+        target: 'current'
+      })
 
     },
     showDash7: function(){
