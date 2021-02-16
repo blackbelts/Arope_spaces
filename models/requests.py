@@ -31,14 +31,11 @@ class CrmLeads(models.Model):
     def stage_domain(self):
         if self.stage_id:
             self.message = self.stage_id.message
-        self.product = str(self.opp_type.id)
         if self.opp_type.id == 3 or self.opp_type.id == 4:
-            name = 'cond'
             if self.opp_type.id == 3:
                 name = 'non-motor'
             elif self.opp_type.id == 4:
                 name = 'motor'
-            self.product = name
             if self.declaration_ids:
                 for question in self.declaration_ids:
                     question.unlink()
@@ -48,15 +45,13 @@ class CrmLeads(models.Model):
             if declaration_question:
                 for question in declaration_question:
                     if question.file:
-
-                        d = self.declaration_ids.create(
+                        self.declaration_ids.create(
                             {"question": question.id, 'download_files': [question.file.id],
-                             "claim_declaration_id": self.id})
-
+                             "opp_id": self.id})
                     else:
-                        d = self.declaration_ids.create(
-                            {"question": question.id, "claim_declaration_id": self.id})
-                    self.product = str(d.question.id)
+                        self.declaration_ids.create(
+                            {"question": question.id, "opp_id": self.id})
+
         return {'domain': {'stage_id': ['|',('type', 'in', self.opp_type.id),('type', '=', False)]}}
 
     customer_name = fields.Char('Customer Name')
