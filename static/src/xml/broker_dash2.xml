@@ -115,7 +115,7 @@
 
 
           </div>
-          <div class="row d-lg-flex pt48" id="dash1" style="padding-top:30px !important;">
+          <div class="row d-lg-flex" id="dash1">
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
                 <h2>Current Year Vs Last Year</h2>
