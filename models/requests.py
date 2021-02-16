@@ -276,7 +276,7 @@ class CrmLeads(models.Model):
             self.customer_name = survey.name
         elif self.stage_id.name == 'Invoicing' and self.opp_type.id == 4:
             declaration_question = self.env["claim.setup.lines"].search(
-                [("claim_declaration_id", "=", self.env['claim.setup'].search([('type', '=', self.type)]).id),
+                [("claim_declaration_id", "=", self.env['claim.setup'].search([('type', '=', 'motor')]).id),
                  ('type', '=', 'invoicing')])
             if declaration_question:
                 for question in declaration_question:
@@ -316,36 +316,38 @@ class CrmLeads(models.Model):
                      "lob": lob, 'product_id': product, "customer_name": person.name, 'phone': person.mobile
                      })
         elif self.opp_type.id == 4:
-            if self.stage_id.name == 'Pre Survey':
-                type = 'motor_claim'
-                survey_type = 'pre_survey'
-            elif self.stage_id.name == 'Survey After Repair':
-                type = 'motor_claim'
-                survey_type = 'Survey_after_repair'
-            number = self.env['ir.sequence'].next_by_code('survies')
-            currentYear = datetime.today().strftime("%Y")
-            currentMonth = datetime.today().strftime("%m")
-            person = ''
-            policy = self.env['policy.arope'].search(
-                [('product', '=', self.product), ('policy_num', '=', int(self.policy_num))
-                 ], limit=1)
-            for rec in self.env['insurance.line.business'].search([('line_of_business', '=', policy.lob)]):
-                lob = rec.id
-            for rec in self.env['insurance.product'].search([('product_name', '=', policy.product)]):
-                product = rec.id
-            for rec in self.env['persons'].search([('pin', '=', policy.customer_pin)]):
-                person = rec
-            if person != '':
-                self.env['survey.report'].create(
-                    {"name": "Survey" + '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
-                     "type": type, 'survey_type': survey_type,
-                     "request_id": self.id, 'state': 'pending',
-                     'status': self.env['state.setup'].search(
-                         [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).id,
-                     'message': self.env['state.setup'].search(
-                         [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).message,
-                     "lob": lob, 'product_id': product, "customer_name": person.name, 'phone': person.mobile
-                     })
+            if self.stage_id.name == 'Pre Survey' or self.stage_id.name == 'Survey After Repair':
+                if self.stage_id.name == 'Pre Survey':
+                    type = 'motor_claim'
+                    survey_type = 'pre_survey'
+                elif self.stage_id.name == 'Survey After Repair':
+                    type = 'motor_claim'
+                    survey_type = 'Survey_after_repair'
+
+                number = self.env['ir.sequence'].next_by_code('survies')
+                currentYear = datetime.today().strftime("%Y")
+                currentMonth = datetime.today().strftime("%m")
+                person = ''
+                policy = self.env['policy.arope'].search(
+                    [('product', '=', self.product), ('policy_num', '=', int(self.policy_num))
+                     ], limit=1)
+                for rec in self.env['insurance.line.business'].search([('line_of_business', '=', policy.lob)]):
+                    lob = rec.id
+                for rec in self.env['insurance.product'].search([('product_name', '=', policy.product)]):
+                    product = rec.id
+                for rec in self.env['persons'].search([('pin', '=', policy.customer_pin)]):
+                    person = rec
+                if person != '':
+                    self.env['survey.report'].create(
+                        {"name": "Survey" + '/' + currentYear[2:4] + '/' + currentMonth + '/' + number,
+                         "type": type, 'survey_type': survey_type,
+                         "request_id": self.id, 'state': 'pending',
+                         'status': self.env['state.setup'].search(
+                             [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).id,
+                         'message': self.env['state.setup'].search(
+                             [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).message,
+                         "lob": lob, 'product_id': product, "customer_name": person.name, 'phone': person.mobile
+                         })
 
     def issued(self):
         self.stage_id = self.env['crm.stage'].search(
