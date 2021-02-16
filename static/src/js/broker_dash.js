@@ -25,7 +25,13 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         'click #endorsement':'end_request_list',
         'click #cancellation': 'cancel_request_list',
         'click #renewals-req':'renewals_request_list',
-        'click #dashboard':'showDashboard',
+        'click #button1':'showDash1',
+        'click #button2':'showDash2',
+        'click #button3':'showDash3',
+        'click #button4':'showDash4',
+        'click #button5':'showDash5',
+        'click #button6':'showDash6',
+        'click #button7':'showDash7',
 
     },
     init: function (parent, context) {
@@ -36,6 +42,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     start: function () {
       var user = session.uid
       var self = this;
+      this.showDash1()
       this.fetch_data().then(function(){
 
       self.$('.o_hr_dashboard').prepend(QWeb.render("brokerdash", {
@@ -251,17 +258,123 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       });
       return $.when(get_dashboard);
     },
-    showDashboard: function(){
+    showDash1: function(){
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
       var dash4 = document.getElementById("dash4");
       var dash5 = document.getElementById("dash5");
+      var dash6 = document.getElementById("dash6");
+      var dash7 = document.getElementById("dash7");
       dash1.setAttribute('style', 'display:flex !important');
       dash2.setAttribute('style', 'display:none !important');
       dash3.setAttribute('style', 'display:none !important');
       dash4.setAttribute('style', 'display:none !important');
       dash5.setAttribute('style', 'display:none !important');
+      dash6.setAttribute('style', 'display:none !important');
+      dash7.setAttribute('style', 'display:none !important');
+
+
+    },
+    showDash2: function(){
+      var dash1 = document.getElementById("dash1");
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+      var dash4 = document.getElementById("dash4");
+      var dash5 = document.getElementById("dash5");
+      var dash6 = document.getElementById("dash6");
+      var dash7 = document.getElementById("dash7");
+      dash1.setAttribute('style', 'display:none !important');
+      dash2.setAttribute('style', 'display:flex !important');
+      dash3.setAttribute('style', 'display:none !important');
+      dash4.setAttribute('style', 'display:none !important');
+      dash5.setAttribute('style', 'display:none !important');
+      dash6.setAttribute('style', 'display:none !important');
+      dash7.setAttribute('style', 'display:none !important');
+
+    },
+    showDash3: function(){
+      var dash1 = document.getElementById("dash1");
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+      var dash4 = document.getElementById("dash4");
+      var dash5 = document.getElementById("dash5");
+      var dash6 = document.getElementById("dash6");
+      var dash7 = document.getElementById("dash7");
+      dash1.setAttribute('style', 'display:none !important');
+      dash2.setAttribute('style', 'display:none !important');
+      dash3.setAttribute('style', 'display:flex !important');
+      dash4.setAttribute('style', 'display:none !important');
+      dash5.setAttribute('style', 'display:none !important');
+      dash6.setAttribute('style', 'display:none !important');
+      dash7.setAttribute('style', 'display:none !important');
+    },
+    showDash4: function(){
+      var dash1 = document.getElementById("dash1");
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+      var dash4 = document.getElementById("dash4");
+      var dash5 = document.getElementById("dash5");
+      var dash6 = document.getElementById("dash6");
+      var dash7 = document.getElementById("dash7");
+      dash1.setAttribute('style', 'display:none !important');
+      dash2.setAttribute('style', 'display:none !important');
+      dash3.setAttribute('style', 'display:none !important');
+      dash4.setAttribute('style', 'display:flex !important');
+      dash5.setAttribute('style', 'display:none !important');
+      dash6.setAttribute('style', 'display:none !important');
+      dash7.setAttribute('style', 'display:none !important');
+
+    },
+    showDash5: function(){
+      var dash1 = document.getElementById("dash1");
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+      var dash4 = document.getElementById("dash4");
+      var dash5 = document.getElementById("dash5");
+      var dash6 = document.getElementById("dash6");
+      var dash7 = document.getElementById("dash7");
+      dash1.setAttribute('style', 'display:none !important');
+      dash2.setAttribute('style', 'display:none !important');
+      dash3.setAttribute('style', 'display:none !important');
+      dash4.setAttribute('style', 'display:none !important');
+      dash5.setAttribute('style', 'display:flex !important');
+      dash6.setAttribute('style', 'display:none !important');
+      dash7.setAttribute('style', 'display:none !important');
+
+    },
+    showDash6: function(){
+      var dash1 = document.getElementById("dash1");
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+      var dash4 = document.getElementById("dash4");
+      var dash5 = document.getElementById("dash5");
+      var dash6 = document.getElementById("dash6");
+      var dash7 = document.getElementById("dash7");
+      dash1.setAttribute('style', 'display:none !important');
+      dash2.setAttribute('style', 'display:none !important');
+      dash3.setAttribute('style', 'display:none !important');
+      dash4.setAttribute('style', 'display:none !important');
+      dash5.setAttribute('style', 'display:none !important');
+      dash6.setAttribute('style', 'display:flex !important');
+      dash7.setAttribute('style', 'display:none !important');
+
+    },
+    showDash7: function(){
+      var dash1 = document.getElementById("dash1");
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+      var dash4 = document.getElementById("dash4");
+      var dash5 = document.getElementById("dash5");
+      var dash6 = document.getElementById("dash6");
+      var dash7 = document.getElementById("dash7");
+      dash1.setAttribute('style', 'display:none !important');
+      dash2.setAttribute('style', 'display:none !important');
+      dash3.setAttribute('style', 'display:none !important');
+      dash4.setAttribute('style', 'display:none !important');
+      dash5.setAttribute('style', 'display:none !important');
+      dash6.setAttribute('style', 'display:none !important');
+      dash7.setAttribute('style', 'display:flex !important');
 
     },
     makeNumber: function (x) {
