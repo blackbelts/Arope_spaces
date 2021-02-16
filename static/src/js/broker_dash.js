@@ -197,7 +197,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
             });
           })
       })
-      this.showDash1()
+//      this.showDash1()
       return this._super().then(function () {})
     },
     fetch_data: function () {
