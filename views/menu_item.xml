@@ -246,9 +246,8 @@
 
     <menuitem id="quick_quote_view" name="Quick Quote"
               action="quickQuoteAction" parent="new_buss"  sequence="0"/>
-    <menuitem id="partner_menu"  action="my_partner_action_user01"
-              parent="arope_space" sequence="1"  groups="Arope_spaces.managers_group">
-        <i style="padding-right: 4px;" class="fa fa-tachometer-alt"></i>My Partner</menuitem>
+    <menuitem id="partner_menu" name="My Partner" action="my_partner_action_user01"
+              parent="arope_space" sequence="1"  groups="Arope_spaces.managers_group"/>
 
 <!--    <menuitem id="survey" name="Application Setup" action="survey.action_survey_form" parent="policy_config" sequence="1"/>-->
 
