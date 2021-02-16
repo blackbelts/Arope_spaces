@@ -251,20 +251,23 @@ class CrmLeads(models.Model):
                  "lob": self.lob.id, 'product_id': self.product_id.id,"customer_name": self.customer_name, 'phone': self.phone, 'email': self.email,
                  'application_date': self.application_date})
             self.customer_name = survey.name
-        if self.stage_id.name == 'Solved':
-            self.customer_name = self.env['crm.stage'].search([('name', '=', 'Solved'),
-                                                          ('type', '=', self.opp_type.id)]).name
-            return {
-                'type': 'ir.actions.act_window',
-                'res_model': 'wizard.insurance.quotation',
-                'view_type': 'form',
-                'view_mode': 'form',
-                'target': 'new',
-                'context': {
-                    'default_request_id': self.id
-                }
 
+
+    def issued(self):
+        self.stage_id = self.env['crm.stage'].search(
+            [('name', '=', 'Solved'), ('type', '=', self.opp_type.id)]).id
+        self.message = self.stage_id.message
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'wizard.insurance.quotation',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_request_id': self.id
             }
+
+        }
     def related_quote(self):
         self.ensure_one()
         return {
