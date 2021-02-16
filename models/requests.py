@@ -252,7 +252,7 @@ class CrmLeads(models.Model):
                  'application_date': self.application_date})
             self.customer_name = survey.name
         if self.stage_id.name == 'Solved':
-            self.customer_name = self.env['crm.stage'].search([('name', '=', 'Survey'),
+            self.customer_name = self.env['crm.stage'].search([('name', '=', 'Solved'),
                                                           ('type', '=', self.opp_type.id)]).name
             return {
                 'type': 'ir.actions.act_window',
