@@ -7,6 +7,7 @@
 
                 <header>
                     <button string="Send To Insurer" name="send_mail_template_insurer" type="object"/>
+                    <button  name="issued"  string="Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group"/>
                 </header>
 <!--                <field name="user_id" position="attributes">-->
 <!--                    <attribute name="context">{'filter_own_user': True}</attribute>-->
