@@ -214,6 +214,6 @@ display:block !important;
     margin: 0 auto;
     }
 .my_card_body {
-    font-size: large !important;
+    font-size: 14px !important;
     text-align: center !important;
 }
