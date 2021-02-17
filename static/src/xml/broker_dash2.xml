@@ -106,7 +106,7 @@
         <div class="container my_container">
           <div class="row d-flex flex-wrap no-gutters pb64" id="myBtn" style="padding-bottom:30px !important;">
               <div class="card active-card" id="button1" style="width: 13.8%;">
-                <div class="card-body my_card_body active-card">
+                <div class="card-body my_card_body active-card-body">
                   <i style="padding-right: 4px;" class="fa fa-tachometer-alt"></i>
                   Dashboard
                 </div>
