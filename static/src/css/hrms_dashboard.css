@@ -233,6 +233,15 @@ overflow: auto !important;
     background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
     color: white !important;
 }
+.surveyor_card {
+    margin: 3px;
+    padding: 7px;
+    border-radius: 10px;
+    background: white;
+    border: solid 1px darkblue !important;
+    color: darkblue !important;
+    width: 17% !important;
+  }
 
 
   
