@@ -1,7 +1,7 @@
 
 <!--<odoo>-->
 <!--<<<<<<< HEAD-->
-<!--      <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group,Arope_spaces.surveyor_group" sequence="-100"/>-->
+<!--      <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group_arope,Arope_spaces.surveyor_group" sequence="-100"/>-->
 
 
 <!--   <menuitem id="menu_hrms_dashboard" name="Dashboard" action="hr_action_dashboard"-->
@@ -73,7 +73,7 @@
 <!--    <menuitem id="quick_quote_view" name="Quick Quote"-->
 <!--                  action="quickQuoteAction" parent="arope_space"/>-->
 <!--=======-->
-<!--    <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group,Arope_spaces.surveyor_group" sequence="-100"/>-->
+<!--    <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group_arope,Arope_spaces.surveyor_group" sequence="-100"/>-->
 
 
 <!--    <menuitem id="menu_hrms_dashboard" name="Dashboard" action="hr_action_dashboard"-->
@@ -133,7 +133,7 @@
 
 <!--</odoo>-->
 <odoo>
-    <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group,Arope_spaces.surveyor_group" sequence="-100"/>
+    <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group_arope,Arope_spaces.surveyor_group" sequence="-100"/>
 
 
          <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="arope_action_dashboard"
@@ -145,11 +145,11 @@
 
 
     <menuitem id="policy_config" name="Configuration"
-              parent="arope_space" sequence="4" groups="Arope_spaces.managers_group" />
+              parent="arope_space" sequence="4" groups="Arope_spaces.managers_group_arope" />
     <menuitem id="mysetting" name="Setting" action="base_setup.action_general_configuration"
-              parent="arope_space" sequence="999999" groups="Arope_spaces.managers_group" />
+              parent="arope_space" sequence="999999" groups="Arope_spaces.managers_group_arope" />
     <menuitem id="myapps" name="Apps" action="base.open_module_tree"
-              parent="arope_space" sequence="9999999" groups="Arope_spaces.managers_group" />
+              parent="arope_space" sequence="9999999" groups="Arope_spaces.managers_group_arope" />
 
 
 
@@ -244,7 +244,7 @@
               action="claim_setup_action" sequence="8000"/>
 
 <!--    <menuitem id="request" name="Requests"-->
-<!--              action="request_action" parent="policy_service" groups="Arope_spaces.managers_group" />-->
+<!--              action="request_action" parent="policy_service" groups="Arope_spaces.managers_group_arope" />-->
 <!--    <menuitem id="end_request_form" name=" Endorsement Requests"-->
 <!--              action="request_action_end_form" parent="policy_service" groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group" />-->
 <!--    <menuitem id="renew_request_form" name="Renewal Requests"-->
@@ -258,7 +258,7 @@
     <menuitem id="quick_quote_view" name="Quick Quote"
               action="quickQuoteAction" parent="new_buss"  sequence="0"/>
     <menuitem id="partner_menu" name="My Partner" action="my_partner_action_user01"
-              parent="arope_space" sequence="1"  groups="Arope_spaces.managers_group"/>
+              parent="arope_space" sequence="1"  groups="Arope_spaces.managers_group_arope"/>
 
 <!--    <menuitem id="survey" name="Application Setup" action="survey.action_survey_form" parent="policy_config" sequence="1"/>-->
 
