@@ -225,7 +225,7 @@ overflow: auto !important;
     color: darkblue !important;
   }
   .card-body {
-    background: inherit;
+    background: inherit !important;
 
 }
 .active-card {
