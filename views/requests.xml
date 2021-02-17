@@ -7,8 +7,17 @@
 
                 <header>
                     <button string="Send To Insurer" name="send_mail_template_insurer" type="object"/>
+<<<<<<< HEAD
                     <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', '!=', 1)]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>
+=======
+                    <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', '!=', 1)]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group"/>
+                    <xpath expr="//field[@name='stage_id']" position="replace">
+                        <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" domain="[('type', 'in',opp_type)]" />
+
+                    </xpath>
+>>>>>>> 0aa873e8cd3256ac8a60ee5294670b5f8a6dc3a3
                 </header>
+
 <!--                <field name="user_id" position="attributes">-->
 <!--                    <attribute name="context">{'filter_own_user': True}</attribute>-->
 <!--                </field>-->
