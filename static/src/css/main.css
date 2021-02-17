@@ -213,3 +213,7 @@ display:block !important;
     max-width: 90%;
     margin: 0 auto;
     }
+.my_card_body {
+    font-size: large !important;
+    text-align: center !important;
+}

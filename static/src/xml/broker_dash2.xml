@@ -106,47 +106,47 @@
         <div class="container my_container">
           <div class="row d-flex flex-wrap no-gutters pb64" style="padding-bottom:30px !important;">
               <div class="card" id="button1" style="width: 13.8%;">
-                <div class="card-body">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-tachometer-alt"></i>
                   Dashboard
                 </div>
               </div>
               <div class="card" id="button4" style="width: 13.8%;">
-                <div class="card-body">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-users"></i>
                   My Customers
                 </div>
               </div>
               <div class="card" id="button2" style="width: 13.8%;">
-                <div class="card-body">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-hospital-user"></i>
                   Insurance Portfolio
                 </div>
               </div>
 
               <div class="card" id="button3" style="width: 13.8%;">
-                <div class="card-body">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-user-plus"></i>
                   Insurance requests
                 </div>
               </div>
 
               <div class="card" id="button5" style="width: 13.8%;">
-                <div class="card-body">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-car"></i>
                   Motor Claims
                 </div>
               </div>
 
               <div class="card" id="button6" style="width: 13.8%;">
-                <div class="card-body">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-bullhorn"></i>
                   General Claims
                 </div>
               </div>
 
               <div class="card" id="button7" style="width: 13.8%;">
-                <div class="card-body">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-headset"></i>
                   Policies Requests
                 </div>
@@ -155,7 +155,7 @@
 
 
           </div>
-          <div class="row d-lg-flex" id="dash1">
+          <div class="row d-lg-flex" id="dash1" style="display: flex;">
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
                 <h2>Current Year Vs Last Year</h2>
@@ -177,7 +177,7 @@
               </div>
             </div>
           </div>
-          <div class="row d-lg-flex" id="dash2">
+          <div class="row d-lg-flex" id="dash2" style="display: none;">
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
                 <h2>Policies count per LOB</h2>
@@ -388,7 +388,7 @@
             </div>
 
           </div>
-          <div class="row d-lg-flex" id="dash3">
+          <div class="row d-lg-flex" id="dash3" style="display: none;">
             <div class="col-lg-12 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
                 <h2>Insurance applications count per LOB</h2>
@@ -430,14 +430,14 @@
               </div>
             </div>
           </div>
-          <div class="row d-lg-flex" id="dash4">
+          <div class="row d-lg-flex" id="dash4" style="display: none;">
 
           </div>
-          <div class="row d-lg-flex" id="dash5">
+          <div class="row d-lg-flex" id="dash5" style="display: none;">
           </div>
-          <div class="row d-lg-flex" id="dash6">
+          <div class="row d-lg-flex" id="dash6" style="display: none;">
           </div>
-          <div class="row d-lg-flex" id="dash7">
+          <div class="row d-lg-flex" id="dash7" style="display: none;">
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
                 <h2>Endorsements Requests</h2>
