@@ -45,8 +45,8 @@
       <section class="o_partner_dashboard_banner bg-white">
         <div class="container">
           <div class="row d-flex">
-            <div class="col-12 col-md-4 col-lg-4">
-              <h1 class="display-1 text-violet-dark mt32 mb32 fw_light">
+            <div class="col-12 col-md-4 col-lg-6">
+              <h1 class="display-1 text-violet-dark mt32 mb32 fw_light" style="color: black !important;padding: 5px 10px;">
                 Broker Dashboard
               </h1>
               <div class="alert alert-info alert-dismissible" style="background: white !important;" role="alert">
@@ -65,18 +65,16 @@
                 </p>
               </div>
             </div>
-            <div class="col-12 col-md-4 col-lg-4">
-               <img class="image" style="width: 120px;height: 120px;margin-top: 15%;border-radius: 50%;border: 1px solid;margin-left: auto;margin-right: auto;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
-             <!-- <div class="text-center">
-                <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
-              </div>-->
-
-            </div>
             <div id="o_my_sidebar" class="col-12 col-md col-lg-4 col-xl-3 o_my_sidebar">
 
-                <div class="o_portal_my_details">
-                    <h4>Details <a role="button" href="/my/account" class="btn btn-sm btn-link"><i class="fa fa-pencil"/> Edit</a></h4>
-                    <hr class="mt-1 mb-0"/>
+                <div class="o_portal_my_details" style="margin-top: 15%;">
+                    <h4>
+                      Details
+                      <a role="button" href="/my/account" class="btn btn-sm btn-link" style="font-size: small;color: #0645AD;">
+                        <i class="fa fa-user-edit"/> Edit
+                      </a>
+                    </h4>
+                    <hr class="mt-1 mb-0" style="border-top: 2px solid black !important;"/>
                     <div>
                       <address class="mb-0" itemscope="itemscope">
                         <div>
@@ -93,53 +91,61 @@
                 </div>
 
             </div>
+            <div class="col-12 col-md-4 col-lg-2">
+               <img class="image" style="width: 120px;height: 120px;margin-top: 15%;margin-left: 70%;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+             <!-- <div class="text-center">
+                <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+              </div>-->
+
+            </div>
+
           </div>
         </div>
       </section>
       <section class="bg-gray-lighter">
         <div class="container">
           <div class="row d-flex flex-wrap no-gutters pb64" style="padding-bottom:30px !important;">
-              <div class="card" id="button1">
+              <div class="card" id="button1" style="width: 13.8%;">
                 <div class="card-body">
                   <i style="padding-right: 4px;" class="fa fa-tachometer-alt"></i>
                   Dashboard
                 </div>
               </div>
-              <div class="card" id="button4">
+              <div class="card" id="button4" style="width: 13.8%;">
                 <div class="card-body">
                   <i style="padding-right: 4px;" class="fa fa-users"></i>
                   My Customers
                 </div>
               </div>
-              <div class="card" id="button2">
+              <div class="card" id="button2" style="width: 13.8%;">
                 <div class="card-body">
                   <i style="padding-right: 4px;" class="fa fa-hospital-user"></i>
                   Insurance Portfolio
                 </div>
               </div>
 
-              <div class="card" id="button3">
+              <div class="card" id="button3" style="width: 13.8%;">
                 <div class="card-body">
                   <i style="padding-right: 4px;" class="fa fa-user-plus"></i>
                   Insurance requests
                 </div>
               </div>
 
-              <div class="card" id="button5">
+              <div class="card" id="button5" style="width: 13.8%;">
                 <div class="card-body">
                   <i style="padding-right: 4px;" class="fa fa-car"></i>
                   Motor Claims
                 </div>
               </div>
 
-              <div class="card" id="button6">
+              <div class="card" id="button6" style="width: 13.8%;">
                 <div class="card-body">
                   <i style="padding-right: 4px;" class="fa fa-bullhorn"></i>
                   General Claims
                 </div>
               </div>
 
-              <div class="card" id="button7">
+              <div class="card" id="button7" style="width: 13.8%;">
                 <div class="card-body">
                   <i style="padding-right: 4px;" class="fa fa-headset"></i>
                   Policies Requests

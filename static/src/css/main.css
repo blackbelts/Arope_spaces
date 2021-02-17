@@ -209,3 +209,8 @@ display:block !important;
     padding: 4px;
     border: solid 1px lightgray;
 }
+@media (min-width: 1200px)
+.container {
+    max-width: 90%;
+    margin: 0 auto;
+    }
