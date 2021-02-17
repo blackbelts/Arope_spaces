@@ -283,7 +283,7 @@
                         <tbody>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
+                              <i style="color: red" class="fa fa-flag"></i>
                             </td>
                             <td>
                               <t t-esc="widget.collections_statistics.Red.count" />
@@ -294,7 +294,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
+                              <i style="color: orange" class="fa fa-flag"></i>
                             </td>
                             <td>
                               <t t-esc="widget.collections_statistics.Orange.count" />
@@ -305,7 +305,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
+                              <i style="color: green" class="fa fa-flag"></i>
                             </td>
                             <td>
                               <t t-esc="widget.collections_statistics.Green.count" />
@@ -344,7 +344,7 @@
                         <tbody>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
+                              <i style="color: red" class="fa fa-flag"></i>
                             </td>
                             <td>
                               <t t-esc="widget.renew_statistics.Red.count" />
@@ -355,7 +355,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
+                              <i style="color: orange" class="fa fa-flag"></i>
                             </td>
                             <td>
                               <t t-esc="widget.renew_statistics.Orange.count" />
@@ -366,7 +366,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
+                              <i style="color: green" class="fa fa-flag"></i>
                             </td>
                             <td>
                               <t t-esc="widget.renew_statistics.Green.count" />
@@ -457,7 +457,7 @@
                         <tbody>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
+                              <i style="color: red" class="fa fa-flag"></i>
                             </td>
                             <td>Pending</td>
                             <td >
@@ -471,7 +471,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
+                              <i style="color: orange" class="fa fa-flag"></i>
                             </td>
                             <td>Submitted</td>
                             <td >
@@ -484,7 +484,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
+                              <i style="color: green" class="fa fa-flag"></i>
                             </td>
                             <td>Issued</td>
                             <td>
@@ -526,7 +526,8 @@
                         <tbody>
                           <tr>
                              <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
+                               <i style="color: red" class="fa fa-flag"></i>
+<!--                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />-->
                             </td>
                             <td>Pending</td>
                             <td >
@@ -540,7 +541,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
+                              <i style="color: orange" class="fa fa-flag"></i>
                             </td>
                             <td>Submitted</td>
                             <td >
@@ -553,7 +554,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
+                              <i style="color: green" class="fa fa-flag"></i>
                             </td>
                             <td>Issued</td>
                             <td>
@@ -595,7 +596,7 @@
                         <tbody>
                           <tr>
                              <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
+                              <i style="color: red" class="fa fa-flag"></i>
                             </td>
                             <td>Pending</td>
                             <td >
@@ -609,7 +610,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
+                              <i style="color: orange" class="fa fa-flag"></i>
                             </td>
                             <td>Submitted</td>
                             <td >
@@ -622,7 +623,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
+                              <i style="color: green" class="fa fa-flag"></i>
                             </td>
                             <td>Issued</td>
                             <td>
