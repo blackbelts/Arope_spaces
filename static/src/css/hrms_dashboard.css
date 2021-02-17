@@ -226,7 +226,7 @@ overflow: auto !important;
   }
   .card-body {
     background: inherit !important;
-
+    color: inherit !important;
 }
 .active-card {
     background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
