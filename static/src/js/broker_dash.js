@@ -239,6 +239,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         self.renew_request=res.renew_request
         self.cancel_request=res.cancel_request
         self.end_request=res.end_request
+        self.customers = res.
         res.complaint_count.forEach(function(e,i){
             if(e.stage=="Canceled")
                 res.complaint_count.splice(i,1)
@@ -355,37 +356,22 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       dash7.setAttribute('style', 'display:none !important');
     },
     showDash4: function(){
-      var button1 = document.getElementById("button1");
-      var button2 = document.getElementById("button2");
-      var button3 = document.getElementById("button3");
-      var button4 = document.getElementById("button4");
-      var button5 = document.getElementById("button5");
-      var button6 = document.getElementById("button6");
-      var button7 = document.getElementById("button7");
-      button4.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
-      button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
-      button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
-      button1.setAttribute('style', 'background: white !important;color: darkblue !important;');
-      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
-      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
-      button7.setAttribute('style', 'background: white !important;color: darkblue !important;');
-//      current[0].className='';
-//      button[0].className='active-card';
-      var dash1 = document.getElementById("dash1");
-      var dash2 = document.getElementById("dash2");
-      var dash3 = document.getElementById("dash3");
-      var dash4 = document.getElementById("dash4");
-      var dash5 = document.getElementById("dash5");
-      var dash6 = document.getElementById("dash6");
-      var dash7 = document.getElementById("dash7");
-      dash1.setAttribute('style', 'display:none !important');
-      dash2.setAttribute('style', 'display:none !important');
-      dash3.setAttribute('style', 'display:none !important');
-      dash4.setAttribute('style', 'display:flex !important');
-      dash5.setAttribute('style', 'display:none !important');
-      dash6.setAttribute('style', 'display:none !important');
-      dash7.setAttribute('style', 'display:none !important');
-
+      this.do_action({
+        name: _t("Customers"),
+        type: 'ir.actions.act_window',
+        res_model: 'persons',
+        view_mode: 'tree',
+        views: [
+          [false, 'list']
+        ],
+        domain: [
+          ['id', 'in', this.customers]
+        ],context:{
+            "edit":false,
+            "create":false
+        },
+        target: 'current'
+      })
     },
     showDash5: function(){
 
