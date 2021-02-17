@@ -262,8 +262,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     showDash1: function(){
       var button = document.getElementById("button1");
       var current = document.getElementsByClassName("active-card");
-      current[0].className='';
-      button[0].className='active-card';
+      current.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -284,8 +284,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     showDash2: function(){
       var button = document.getElementById("button2");
       var current = document.getElementsByClassName("active-card");
-      current[0].className='';
-      button[0].className='active-card';
+      current.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -305,8 +305,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     showDash3: function(){
       var button = document.getElementById("button3");
       var current = document.getElementsByClassName("active-card");
-      current[0].className='';
-      button[0].className='active-card';
+      current.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -325,8 +325,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     showDash4: function(){
       var button = document.getElementById("button4");
       var current = document.getElementsByClassName("active-card");
-      current[0].className='';
-      button[0].className='active-card';
+      current.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+//      current[0].className='';
+//      button[0].className='active-card';
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -411,8 +413,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     showDash7: function(){
       var button = document.getElementById("button7");
       var current = document.getElementsByClassName("active-card");
-      current[0].className='';
-      button[0].className='active-card';
+      current.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
