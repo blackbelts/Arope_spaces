@@ -260,10 +260,20 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       return $.when(get_dashboard);
     },
     showDash1: function(){
-      var button = document.getElementById("button1");
-      var current = document.getElementsByClassName("active-card");
-      current[0].setAttribute('style', 'background: white !important;color: darkblue !important;');
-      button.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button2");
+      var button4 = document.getElementById("button2");
+      var button5 = document.getElementById("button2");
+      var button6 = document.getElementById("button2");
+      var button7 = document.getElementById("button2");
+      button1.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button4.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button7.setAttribute('style', 'background: white !important;color: darkblue !important;');
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -282,10 +292,20 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     },
     showDash2: function(){
-      var button = document.getElementById("button2");
-      var current = document.getElementsByClassName("active-card");
-      current[0].setAttribute('style', 'background: white !important;color: darkblue !important;');
-      button.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button2");
+      var button4 = document.getElementById("button2");
+      var button5 = document.getElementById("button2");
+      var button6 = document.getElementById("button2");
+      var button7 = document.getElementById("button2");
+      button2.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button1.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button4.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button7.setAttribute('style', 'background: white !important;color: darkblue !important;');
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -303,10 +323,20 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     },
     showDash3: function(){
-      var button = document.getElementById("button3");
-      var current = document.getElementsByClassName("active-card");
-      current[0].setAttribute('style', 'background: white !important;color: darkblue !important;');
-      button.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button2");
+      var button4 = document.getElementById("button2");
+      var button5 = document.getElementById("button2");
+      var button6 = document.getElementById("button2");
+      var button7 = document.getElementById("button2");
+      button3.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button1.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button4.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button7.setAttribute('style', 'background: white !important;color: darkblue !important;');
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -323,10 +353,20 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       dash7.setAttribute('style', 'display:none !important');
     },
     showDash4: function(){
-      var button = document.getElementById("button4");
-      var current = document.getElementsByClassName("active-card");
-      current[0].setAttribute('style', 'background: white !important;color: darkblue !important;');
-      button.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button2");
+      var button4 = document.getElementById("button2");
+      var button5 = document.getElementById("button2");
+      var button6 = document.getElementById("button2");
+      var button7 = document.getElementById("button2");
+      button4.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button1.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button7.setAttribute('style', 'background: white !important;color: darkblue !important;');
 //      current[0].className='';
 //      button[0].className='active-card';
       var dash1 = document.getElementById("dash1");
@@ -411,10 +451,20 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     },
     showDash7: function(){
-      var button = document.getElementById("button7");
-      var current = document.getElementsByClassName("active-card");
-      current[0].setAttribute('style', 'background: white !important;color: darkblue !important;');
-      button.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button2");
+      var button4 = document.getElementById("button2");
+      var button5 = document.getElementById("button2");
+      var button6 = document.getElementById("button2");
+      var button7 = document.getElementById("button2");
+      button7.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button4.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button1.setAttribute('style', 'background: white !important;color: darkblue !important;');
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
