@@ -611,13 +611,11 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           [false, 'list']
         ],
         domain: [
-          ['type','=','opportunity'],
-          ['opp_type','=',1]
+          ['id', 'in', this.end_request.ids]
         ],
         context:{
-            'default_type': 'opportunity',
-            'default_user_id': uid,
-            'default_opp_type': 1
+            "edit":false,
+            "create":false
         },
         target: 'current'
       })
@@ -633,11 +631,12 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           [false, 'list']
         ],
         domain: [
-          ['id', 'in', this.end_request.ids]
+          ['type','=','opportunity'],
+          ['opp_type','=',1]
         ],
         context:{
-            "edit":false,
-            "create":false
+            'default_type': 'opportunity',
+            'default_opp_type': 1
         },
         target: 'current'
       })
