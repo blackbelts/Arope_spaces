@@ -30,25 +30,51 @@
     <!-- page container area start -->
     <div id="o_partner_dashboard">
       <section class="o_partner_dashboard_banner bg-white">
-        <div class="container">
+        <div class="container my_container">
           <div class="row d-flex">
-            <div class="col-12 col-md-8 col-lg-7">
-              <h1 class="display-1 text-violet-dark mt32 mb32 fw_light">
-                Surveyor Dashboard
+            <div class="col-12 col-md-4 col-lg-6">
+              <h1 class="display-1 text-violet-dark mt32 mb32 fw_light" style="color: black !important;padding: 5px 10px;">
+                Surveyor Space
               </h1>
-              <div class="alert alert-info alert-dismissible" role="alert">
-                <span class="text-beta">
+              <div class="alert alert-info alert-dismissible" style="background: white !important;" role="alert">
+                <span class="text-beta" style="color: black !important;">
                   <b>Welcome to AROPE partners space</b>
                 </span>
-                <p class="text-beta mt8 mb0">
+                <p class="text-beta mt8 mb0" style="color: black !important;">
                  You can follow your portfolio, Policies, collections, renewals, claims and Complaints
                   <br />
 
                 </p>
               </div>
             </div>
-            <div class="col-12 col-md-4 col-lg-5">
-               <img class="image" style="width: 120px;height: 120px;margin-top: 15%;border-radius: 50%;border: 1px solid;margin-left: auto;margin-right: auto;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+            <div id="o_my_sidebar" class="col-12 col-md col-lg-4 col-xl-3 o_my_sidebar">
+
+                <div class="o_portal_my_details" style="margin-top: 15%;">
+                    <h4>
+                      Details
+                      <a role="button" href="/my/account" class="btn btn-sm btn-link" style="font-size: small;color: #0645AD;">
+                        <i class="fa fa-user-edit"/> Edit
+                      </a>
+                    </h4>
+                    <hr class="mt-1 mb-0" style="border-top: 2px solid black !important;"/>
+                    <div>
+                      <address class="mb-0" itemscope="itemscope">
+                        <div>
+                          <span itemprop="name"><t t-esc="widget.user.name" /></span>
+                        </div>
+                        <div itemprop="address" itemscope="itemscope">
+                          <div>
+                            <i class="fa fa-envelope fa-fw" role="img" aria-label="Email" title="Email"></i>
+                            <span itemprop="email"><t t-esc="widget.user.mail" /></span>
+                          </div>
+                        </div>
+                      </address>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 col-md-2 col-lg-2">
+               <img class="image" style="width: 120px;height: 120px;margin-top: 15%;margin-left: 70%;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
              <!-- <div class="text-center">
                 <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
               </div>-->
@@ -60,139 +86,65 @@
         <section class="bg-gray-lighter">
 
         </section>
-      <section class="bg-gray-lighter">
-        <div class="container">
-          <div class="row d-lg-flex pt48">
-
-            <div class="col-lg-7 d-flex flex-column mb64">
-              <div class="o_partner_dashboard_box_header">
-                <h2>Your Profile</h2>
-              </div>
-              <div class="d-flex flex-column o_partner_dashboard_box">
-                <h5 class="o_partner_dashboard_box_title">
-                  <span class="mt0 mb0">
-                    <t t-esc="widget.user.name" />
-                  </span>
-                </h5>
-                <div class="o_partner_dashboard_box_body">
-                  <div class="row mb-4">
-                    <div class="col-md-6">
-                      <h4>FRA No</h4>
-
-                    </div>
-                    <div class="col-md-6">
-                      <h4>
-                        <t t-esc="widget.user.fra" />
-                      </h4>
-                    </div>
-                    <!--                    <div class="col-md-2">-->
-                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
-
-                    <!--                      </div>-->
-                    <!--                    </div>-->
-                  </div>
-                  <div class="row mb-4">
-                    <div class="col-md-6">
-                      <h4>Expiration Date</h4>
-                    </div>
-                    <div class="col-md-6">
-                      <h4>
-                        <t t-esc="widget.user.exp_date" />
-                      </h4>
-                    </div>
-                    <!--                    <div class="col-md-2">-->
-                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
-
-                    <!--                      </div>-->
-                    <!--                    </div>-->
-                  </div>
-                  <div class="row mb-4">
-                    <div class="col-md-6">
-                      <h4>Mobile</h4>
-                    </div>
-                    <div class="col-md-6">
-                      <h4>
-                        <t t-esc="widget.user.mobile" />
-                      </h4>
-                    </div>
-                    <!--                    <div class="col-md-2">-->
-                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
-
-                    <!--                      </div>-->
-                    <!--                    </div>-->
-                  </div>
-                  <div class="row mb-4">
-                    <div class="col-md-6">
-                      <h4>Email</h4>
-                    </div>
-                    <div class="col-md-6">
-                      <h4>
-                        <t t-esc="widget.user.mail" />
-                      </h4>
-                    </div>
-                    <!--                    <div class="col-md-2">-->
-                    <!--                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">-->
-
-                    <!--                      </div>-->
-                    <!--                    </div>-->
-                  </div>
+      <section class="bg-white">
+        <div class="container my_container">
+          <div class="row d-flex flex-wrap no-gutters pb64" id="myBtn" style="padding-bottom:30px !important;">
+              <div class="card surveyor_card active-card" id="button1" style="width: 13.8%;">
+                <div class="card-body my_card_body ">
+                  <i style="padding-right: 4px;" class="fa fa-edit"></i>
+                  Policy Survey Request
                 </div>
-                <!--<div class="o_partner_dashboard_box_footer">
-                  <a href="https://www.odoo.com/my/partner/profile" class="btn btn-secondary" style="position: relative; overflow: hidden;">Update your profile</a>
-                </div>-->
               </div>
-            </div>
-            <div class="col-lg-5 d-flex flex-column mb64">
-              <div class="o_partner_dashboard_box_header">
-                <h2>Your Grade</h2>
-              </div>
-
-              <div class="d-flex flex-column o_partner_dashboard_box">
-
-                <div class="o_partner_dashboard_box_body">
-
-                  <ul class="wizard o_partner_dashboard_wizard d-flex mt32 mb32">
-
-                    <li class="o_partner_dashboard_grade_active_ready">
-                      Ready Partner
-                      <span class="chevron"></span>
-                    </li>
-                    <li class="pl-3 ">
-                      Silver Partner
-                      <span class="chevron"></span>
-                    </li>
-                    <li class="">Gold Partner</li>
-                  </ul>
-                  <p>
-                    You have
-                    <b>0</b>
-                    new Enterprise user(s) in the last 12 Months, you need
-                    <b>10</b>
-                    to remain a Ready Partner.
-                  </p>
-                  <p>
-                    You have
-                    <b>0</b>
-                    certified expert(s), you need
-                    <b>1</b>
-                    to remain Ready.
-                  </p>
+              <div class="card surveyor_card" id="button2" style="width: 13.8%;">
+                <div class="card-body my_card_body">
+                  <i style="padding-right: 4px;" class="fa fa-car"></i>
+                  Motor Claim Survey
                 </div>
-                <!--<div class="o_partner_dashboard_box_footer">
-                  <a href="https://www.odoo.com/contactus" class="btn btn-secondary" style="position: relative; overflow: hidden;">Contact us</a>
-                </div>-->
               </div>
-            </div>
+              <div class="card surveyor_card" id="button3" style="width: 13.8%;">
+                <div class="card-body my_card_body">
+                  <i style="padding-right: 4px;" class="fa fa-bullhorn"></i>
+                  Non Motor Claim Survey
+                </div>
+              </div>
+
+<!--              <div class="card" id="button3" style="width: 13.8%;">-->
+<!--                <div class="card-body my_card_body">-->
+<!--                  <i style="padding-right: 4px;" class="fa fa-user-plus"></i>-->
+<!--                  Insurance requests-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--              <div class="card" id="button5" style="width: 13.8%;">-->
+<!--                <div class="card-body my_card_body">-->
+<!--                  <i style="padding-right: 4px;" class="fa fa-car"></i>-->
+<!--                  Motor Claims-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--              <div class="card" id="button6" style="width: 13.8%;">-->
+<!--                <div class="card-body my_card_body">-->
+<!--                  <i style="padding-right: 4px;" class="fa fa-bullhorn"></i>-->
+<!--                  General Claims-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--              <div class="card" id="button7" style="width: 13.8%;">-->
+<!--                <div class="card-body my_card_body">-->
+<!--                  <i style="padding-right: 4px;" class="fa fa-headset"></i>-->
+<!--                  Policies Requests-->
+<!--                </div>-->
+<!--              </div>-->
+
+
+
           </div>
-          <div class="row d-flex flex-wrap no-gutters pb64">
-            <div class="col-12">
+          <div class="row d-lg-flex" id="dash1" style="display: flex !important;">
+            <div class="col-lg-12 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
-                <h2>Your Portfolio</h2>
+                <h2>Policies Survey</h2>
               </div>
-            </div>
-            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
-              <div class=" d-flex flex-column o_partner_dashboard_box">
-                <h5 class="o_partner_dashboard_box_title">Policies Survey</h5>
+              <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
                   <div class="single-table">
                     <div class="table-responsive">
@@ -225,14 +177,135 @@
                     </div>
                   </div>
                 </div>
-               <!-- <div class="o_partner_dashboard_box_footer">
-                  <a id="policies" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your policies</a>
-                </div>-->
               </div>
+
             </div>
-            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
-              <div class=" d-flex flex-column o_partner_dashboard_box">
-                <h5 class="o_partner_dashboard_box_title">Motor Survey</h5>
+<!--            <div class="col-lg-7 d-flex flex-column mb64">-->
+<!--              <div class="o_partner_dashboard_box_header">-->
+<!--                <h2>Your Profile</h2>-->
+<!--              </div>-->
+<!--              <div class="d-flex flex-column o_partner_dashboard_box">-->
+<!--                <h5 class="o_partner_dashboard_box_title">-->
+<!--                  <span class="mt0 mb0">-->
+<!--                    <t t-esc="widget.user.name" />-->
+<!--                  </span>-->
+<!--                </h5>-->
+<!--                <div class="o_partner_dashboard_box_body">-->
+<!--                  <div class="row mb-4">-->
+<!--                    <div class="col-md-6">-->
+<!--                      <h4>FRA No</h4>-->
+
+<!--                    </div>-->
+<!--                    <div class="col-md-6">-->
+<!--                      <h4>-->
+<!--                        <t t-esc="widget.user.fra" />-->
+<!--                      </h4>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;                    <div class="col-md-2">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">&ndash;&gt;-->
+
+<!--                    &lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                  </div>-->
+<!--                  <div class="row mb-4">-->
+<!--                    <div class="col-md-6">-->
+<!--                      <h4>Expiration Date</h4>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-6">-->
+<!--                      <h4>-->
+<!--                        <t t-esc="widget.user.exp_date" />-->
+<!--                      </h4>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;                    <div class="col-md-2">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">&ndash;&gt;-->
+
+<!--                    &lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                  </div>-->
+<!--                  <div class="row mb-4">-->
+<!--                    <div class="col-md-6">-->
+<!--                      <h4>Mobile</h4>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-6">-->
+<!--                      <h4>-->
+<!--                        <t t-esc="widget.user.mobile" />-->
+<!--                      </h4>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;                    <div class="col-md-2">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">&ndash;&gt;-->
+
+<!--                    &lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                  </div>-->
+<!--                  <div class="row mb-4">-->
+<!--                    <div class="col-md-6">-->
+<!--                      <h4>Email</h4>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-6">-->
+<!--                      <h4>-->
+<!--                        <t t-esc="widget.user.mail" />-->
+<!--                      </h4>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;                    <div class="col-md-2">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                      <div data-oe-type="image" data-oe-expression="source_image" class="o_partner_dashboard_logo">&ndash;&gt;-->
+
+<!--                    &lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;<div class="o_partner_dashboard_box_footer">-->
+<!--                  <a href="https://www.odoo.com/my/partner/profile" class="btn btn-secondary" style="position: relative; overflow: hidden;">Update your profile</a>-->
+<!--                </div>&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-5 d-flex flex-column mb64">-->
+<!--              <div class="o_partner_dashboard_box_header">-->
+<!--                <h2>Your Grade</h2>-->
+<!--              </div>-->
+
+<!--              <div class="d-flex flex-column o_partner_dashboard_box">-->
+
+<!--                <div class="o_partner_dashboard_box_body">-->
+
+<!--                  <ul class="wizard o_partner_dashboard_wizard d-flex mt32 mb32">-->
+
+<!--                    <li class="o_partner_dashboard_grade_active_ready">-->
+<!--                      Ready Partner-->
+<!--                      <span class="chevron"></span>-->
+<!--                    </li>-->
+<!--                    <li class="pl-3 ">-->
+<!--                      Silver Partner-->
+<!--                      <span class="chevron"></span>-->
+<!--                    </li>-->
+<!--                    <li class="">Gold Partner</li>-->
+<!--                  </ul>-->
+<!--                  <p>-->
+<!--                    You have-->
+<!--                    <b>0</b>-->
+<!--                    new Enterprise user(s) in the last 12 Months, you need-->
+<!--                    <b>10</b>-->
+<!--                    to remain a Ready Partner.-->
+<!--                  </p>-->
+<!--                  <p>-->
+<!--                    You have-->
+<!--                    <b>0</b>-->
+<!--                    certified expert(s), you need-->
+<!--                    <b>1</b>-->
+<!--                    to remain Ready.-->
+<!--                  </p>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;<div class="o_partner_dashboard_box_footer">-->
+<!--                  <a href="https://www.odoo.com/contactus" class="btn btn-secondary" style="position: relative; overflow: hidden;">Contact us</a>-->
+<!--                </div>&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+          </div>
+          <div class="row d-lg-flex" id="dash2" style="display: none !important;">
+            <div class="col-lg-12 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Motor Survey</h2>
+              </div>
+              <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
                   <div class="single-table">
                     <div class="table-responsive">
@@ -261,14 +334,16 @@
                     </div>
                   </div>
                 </div>
-               <!-- <div class="o_partner_dashboard_box_footer">
-                  <a id="claims" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Claims</a>
-                </div>-->
               </div>
+
             </div>
-            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">
-              <div class=" d-flex flex-column o_partner_dashboard_box">
-                <h5 class="o_partner_dashboard_box_title">Non Motor Survey</h5>
+          </div>
+          <div class="row d-lg-flex" id="dash3" style="display: none !important;">
+            <div class="col-lg-12 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Non Motor Survey</h2>
+              </div>
+              <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
                   <div class="single-table">
                     <div class="table-responsive">
@@ -301,12 +376,133 @@
                     </div>
                   </div>
                 </div>
-               <!-- <div class="o_partner_dashboard_box_footer">
-                  <a id="apps" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Apps</a>
-                </div>-->
               </div>
+
             </div>
           </div>
+<!--          <div class="row d-flex flex-wrap no-gutters pb64">-->
+<!--            <div class="col-12">-->
+<!--              <div class="o_partner_dashboard_box_header">-->
+<!--                <h2>Your Portfolio</h2>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">-->
+<!--              <div class=" d-flex flex-column o_partner_dashboard_box">-->
+<!--                <h5 class="o_partner_dashboard_box_title">Policies Survey</h5>-->
+<!--                <div class="o_partner_dashboard_box_body">-->
+<!--                  <div class="single-table">-->
+<!--                    <div class="table-responsive">-->
+<!--                      <table class="table table-hover text-center">-->
+<!--                        <thead class="text-uppercase">-->
+<!--                          <tr>-->
+<!--                            <th scope="col">LOB</th>-->
+<!--                            <th scope="col">Icon</th>-->
+<!--                            <th scope="col">Count</th>-->
+<!--                            <th scope="col">State</th>-->
+<!--                          </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                          <tr t-foreach="widget.insurance_app_survey.data" t-as="srv">-->
+<!--                            <td>-->
+<!--                              <t t-esc="srv.lob" />-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+srv.image" />-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                              <t t-esc="srv.count" />-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                              <t t-esc="srv.state" />-->
+<!--                            </td>-->
+<!--                          </tr>-->
+<!--                        </tbody>-->
+<!--                      </table>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--               &lt;!&ndash; <div class="o_partner_dashboard_box_footer">-->
+<!--                  <a id="policies" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your policies</a>-->
+<!--                </div>&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">-->
+<!--              <div class=" d-flex flex-column o_partner_dashboard_box">-->
+<!--                <h5 class="o_partner_dashboard_box_title">Motor Survey</h5>-->
+<!--                <div class="o_partner_dashboard_box_body">-->
+<!--                  <div class="single-table">-->
+<!--                    <div class="table-responsive">-->
+<!--                      <table class="table table-hover text-center">-->
+<!--                        <thead class="text-uppercase">-->
+<!--                          <tr>-->
+<!--                            <th scope="col">Type</th>-->
+<!--                            <th scope="col">Count</th>-->
+<!--                            <th scope="col">State</th>-->
+<!--                          </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                          <tr t-foreach="widget.motor_survey.data" t-as="srv">-->
+<!--                            <td>-->
+<!--                              <t t-esc="srv.type" />-->
+<!--                            </td>-->
+<!--                           <td>-->
+<!--                              <t t-esc="srv.count" />-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                              <t t-esc="srv.state" />-->
+<!--                            </td>-->
+<!--                          </tr>-->
+<!--                        </tbody>-->
+<!--                      </table>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--               &lt;!&ndash; <div class="o_partner_dashboard_box_footer">-->
+<!--                  <a id="claims" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Claims</a>-->
+<!--                </div>&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-12 col-lg-4 d-flex flex-column border-md-right">-->
+<!--              <div class=" d-flex flex-column o_partner_dashboard_box">-->
+<!--                <h5 class="o_partner_dashboard_box_title">Non Motor Survey</h5>-->
+<!--                <div class="o_partner_dashboard_box_body">-->
+<!--                  <div class="single-table">-->
+<!--                    <div class="table-responsive">-->
+<!--                      <table class="table table-hover text-center">-->
+<!--                        <thead class="text-uppercase">-->
+<!--                          <tr>-->
+<!--                            <th scope="col">LOB</th>-->
+<!--                            <th scope="col">Icon</th>-->
+<!--                            <th scope="col">Count</th>-->
+<!--                            <th scope="col">State</th>-->
+<!--                          </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                          <tr t-foreach="widget.non_motor_survey.data" t-as="srv">-->
+<!--                            <td>-->
+<!--                              <t t-esc="srv.lob" />-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+srv.image" />-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                              <t t-esc="srv.count" />-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                              <t t-esc="srv.state" />-->
+<!--                            </td>-->
+<!--                          </tr>-->
+<!--                        </tbody>-->
+<!--                      </table>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--               &lt;!&ndash; <div class="o_partner_dashboard_box_footer">-->
+<!--                  <a id="apps" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Apps</a>-->
+<!--                </div>&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
 
         </div>

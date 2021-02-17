@@ -209,3 +209,20 @@ display:block !important;
     padding: 4px;
     border: solid 1px lightgray;
 }
+.my_container {
+    max-width: 90%;
+    margin: 0 auto;
+    }
+.my_card_body {
+    font-size: 14px !important;
+    text-align: center !important;
+}
+.o_main_navbar > .o_menu_apps > .dropdown {
+    display: none !important;
+}
+.gift_icon  {
+    display: none !important;
+}
+.  o_portal > .  o_affix_enabled {
+    display: none !important;
+}

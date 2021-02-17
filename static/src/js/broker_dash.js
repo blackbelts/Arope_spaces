@@ -32,6 +32,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         'click #button5':'showDash5',
         'click #button6':'showDash6',
         'click #button7':'showDash7',
+        'click #apps':'insuranceApps',
+
 
     },
     init: function (parent, context) {
@@ -237,6 +239,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         self.renew_request=res.renew_request
         self.cancel_request=res.cancel_request
         self.end_request=res.end_request
+        self.customers = res.customers
         res.complaint_count.forEach(function(e,i){
             if(e.stage=="Canceled")
                 res.complaint_count.splice(i,1)
@@ -260,6 +263,20 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       return $.when(get_dashboard);
     },
     showDash1: function(){
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button3");
+      var button4 = document.getElementById("button4");
+      var button5 = document.getElementById("button5");
+      var button6 = document.getElementById("button6");
+      var button7 = document.getElementById("button7");
+      button1.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button4.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button7.setAttribute('style', 'background: white !important;color: darkblue !important;');
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -278,6 +295,20 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     },
     showDash2: function(){
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button3");
+      var button4 = document.getElementById("button4");
+      var button5 = document.getElementById("button5");
+      var button6 = document.getElementById("button6");
+      var button7 = document.getElementById("button7");
+      button2.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button1.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button4.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button7.setAttribute('style', 'background: white !important;color: darkblue !important;');
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -295,6 +326,20 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     },
     showDash3: function(){
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button3");
+      var button4 = document.getElementById("button4");
+      var button5 = document.getElementById("button5");
+      var button6 = document.getElementById("button6");
+      var button7 = document.getElementById("button7");
+      button3.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button1.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button4.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button7.setAttribute('style', 'background: white !important;color: darkblue !important;');
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -311,23 +356,25 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       dash7.setAttribute('style', 'display:none !important');
     },
     showDash4: function(){
-      var dash1 = document.getElementById("dash1");
-      var dash2 = document.getElementById("dash2");
-      var dash3 = document.getElementById("dash3");
-      var dash4 = document.getElementById("dash4");
-      var dash5 = document.getElementById("dash5");
-      var dash6 = document.getElementById("dash6");
-      var dash7 = document.getElementById("dash7");
-      dash1.setAttribute('style', 'display:none !important');
-      dash2.setAttribute('style', 'display:none !important');
-      dash3.setAttribute('style', 'display:none !important');
-      dash4.setAttribute('style', 'display:flex !important');
-      dash5.setAttribute('style', 'display:none !important');
-      dash6.setAttribute('style', 'display:none !important');
-      dash7.setAttribute('style', 'display:none !important');
-
+      this.do_action({
+        name: _t("Customers"),
+        type: 'ir.actions.act_window',
+        res_model: 'persons',
+        view_mode: 'tree',
+        views: [
+          [false, 'list']
+        ],
+        domain: [
+          ['id', 'in', this.customers]
+        ],context:{
+            "edit":false,
+            "create":false
+        },
+        target: 'current'
+      })
     },
     showDash5: function(){
+
 //      var dash1 = document.getElementById("dash1");
 //      var dash2 = document.getElementById("dash2");
 //      var dash3 = document.getElementById("dash3");
@@ -392,6 +439,20 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     },
     showDash7: function(){
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button3");
+      var button4 = document.getElementById("button4");
+      var button5 = document.getElementById("button5");
+      var button6 = document.getElementById("button6");
+      var button7 = document.getElementById("button7");
+      button7.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;width: 13.8%;');
+      button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button4.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button1.setAttribute('style', 'background: white !important;color: darkblue !important;');
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -530,55 +591,82 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       this.do_action({
        name: _t("Requests"),
         type: 'ir.actions.act_window',
-        res_model: 'policy.request',
-        view_mode: 'tree',
+        res_model: 'crm.lead',
+        view_mode: 'form,tree',
         views: [
           [false, 'list']
         ],
         domain: [
-          ['id', 'in', this.end_request.ids]
+          ['type','=','opportunity'],
+          ['opp_type','=', 2],
+          ['policy_services_type', '=', 'end']
         ],
         context:{
-            "edit":false,
-            "create":false
+            'default_type': 'opportunity',
+            'default_opp_type': 2
+        },
+        target: 'current'
+      })
+    },
+
+    insuranceApps:function (x) {
+      this.do_action({
+        name: _t("Insurance Application"),
+        type: 'ir.actions.act_window',
+        res_model: 'crm.lead',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list']
+        ],
+        domain: [
+          ['type','=','opportunity'],
+          ['opp_type','=',1]
+        ],
+        context:{
+            'default_type': 'opportunity',
+            'default_opp_type': 1
         },
         target: 'current'
       })
     },
      cancel_request_list:function (x) {
       this.do_action({
-        name: _t("Requests"),
+       name: _t("Requests"),
         type: 'ir.actions.act_window',
-        res_model: 'policy.request',
-        view_mode: 'tree',
+        res_model: 'crm.lead',
+        view_mode: 'form,tree',
         views: [
           [false, 'list']
         ],
         domain: [
-          ['id', 'in', this.cancel_request.ids]
+          ['type','=','opportunity'],
+          ['opp_type','=', 2],
+          ['policy_services_type', '=', 'cancel']
         ],
         context:{
-            "edit":false,
-            "create":false
+            'default_type': 'opportunity',
+            'default_opp_type': 2
         },
         target: 'current'
       })
     },
      renewals_request_list:function (x) {
       this.do_action({
-        name: _t("Requests"),
+       name: _t("Requests"),
         type: 'ir.actions.act_window',
-        res_model: 'policy.request',
-        view_mode: 'tree',
+        res_model: 'crm.lead',
+        view_mode: 'form,tree',
         views: [
           [false, 'list']
         ],
         domain: [
-          ['id', 'in', this.renew_request.ids]
+          ['type','=','opportunity'],
+          ['opp_type','=', 2],
+          ['policy_services_type', '=', 'renew']
         ],
         context:{
-            "edit":false,
-            "create":false
+            'default_type': 'opportunity',
+            'default_opp_type': 2
         },
         target: 'current'
       })

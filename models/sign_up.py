@@ -18,6 +18,6 @@ class ResUsers(models.Model):
                 'opp_type': 5,
                 'customer_name': new_user.name,
                 'email': new_user.login,
-                'pin': new_user.x_pin
+                # 'pin': new_user.x_pin
             })
         return new_user

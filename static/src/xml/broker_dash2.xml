@@ -29,18 +29,31 @@
     <![endif]-->
     <!-- page container area start -->
     <div id="o_partner_dashboard">
+<!--      <div id="o_my_sidebar" class="col-12 col-md col-lg-4 col-xl-3 o_my_sidebar">-->
+<!--                                <div class="o_my_contact" t-if="sales_user">-->
+<!--                                    <t t-call="portal.portal_contact"/>-->
+<!--                                </div>-->
+<!--                                <div class="o_portal_my_details">-->
+<!--                                    <h4>Details <a role="button" href="/my/account" class="btn btn-sm btn-link"><i class="fa fa-pencil"/> Edit</a></h4>-->
+<!--                                    <hr class="mt-1 mb-0"/>-->
+<!--                                    <div t-field="user_id.partner_id" t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'/>-->
+<!--                                </div>-->
+<!--                                <div class="o_my_archives" t-if="archive_groups">-->
+<!--                                    <t t-call="portal.portal_archive_groups"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
       <section class="o_partner_dashboard_banner bg-white">
-        <div class="container">
+        <div class="container my_container">
           <div class="row d-flex">
-            <div class="col-12 col-md-8 col-lg-7">
-              <h1 class="display-1 text-violet-dark mt32 mb32 fw_light">
-                Broker Dashboard
+            <div class="col-12 col-md-4 col-lg-6">
+              <h1 class="display-1 text-violet-dark mt32 mb32 fw_light" style="color: black !important;padding: 5px 10px;">
+                Broker Space
               </h1>
-              <div class="alert alert-info alert-dismissible" role="alert">
-                <span class="text-beta">
+              <div class="alert alert-info alert-dismissible" style="background: white !important;" role="alert">
+                <span class="text-beta" style="color: black !important;">
                   <b>Welcome to AROPE partners space</b>
                 </span>
-                <p class="text-beta mt8 mb0">
+                <p class="text-beta mt8 mb0" style="color: black !important;">
                  You can follow your portfolio, Policies, collections, renewals, claims and Complaints
                  <!-- Working together on your first project is the best way to success in Odoo.
                   <br />
@@ -52,61 +65,88 @@
                 </p>
               </div>
             </div>
-            <div class="col-12 col-md-4 col-lg-5">
-               <img class="image" style="width: 120px;height: 120px;margin-top: 15%;border-radius: 50%;border: 1px solid;margin-left: auto;margin-right: auto;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+            <div id="o_my_sidebar" class="col-12 col-md col-lg-4 col-xl-3 o_my_sidebar">
+
+                <div class="o_portal_my_details" style="margin-top: 15%;">
+                    <h4>
+                      Details
+                      <a role="button" href="/my/account" class="btn btn-sm btn-link" style="font-size: small;color: #0645AD;">
+                        <i class="fa fa-user-edit"/> Edit
+                      </a>
+                    </h4>
+                    <hr class="mt-1 mb-0" style="border-top: 2px solid black !important;"/>
+                    <div>
+                      <address class="mb-0" itemscope="itemscope">
+                        <div>
+                          <span itemprop="name"><t t-esc="widget.user.name" /></span>
+                        </div>
+                        <div itemprop="address" itemscope="itemscope">
+                          <div>
+                            <i class="fa fa-envelope fa-fw" role="img" aria-label="Email" title="Email"></i>
+                            <span itemprop="email"><t t-esc="widget.user.mail" /></span>
+                          </div>
+                        </div>
+                      </address>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 col-md-2 col-lg-2">
+               <img class="image" style="width: 120px;height: 120px;margin-top: 15%;margin-left: 70%;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
              <!-- <div class="text-center">
                 <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
               </div>-->
 
             </div>
+
           </div>
         </div>
       </section>
-      <section class="bg-gray-lighter">
-        <div class="container">
-          <div class="row d-flex flex-wrap no-gutters pb64" style="padding-bottom:30px !important;">
-              <div class="card" id="button1">
-                <div class="card-body">
+      <section class="bg-white">
+        <div class="container my_container">
+          <div class="row d-flex flex-wrap no-gutters pb64" id="myBtn" style="padding-bottom:30px !important;">
+              <div class="card active-card" id="button1" style="width: 13.8%;">
+                <div class="card-body my_card_body ">
                   <i style="padding-right: 4px;" class="fa fa-tachometer-alt"></i>
-                  Dashboard
+                  Performance
                 </div>
               </div>
-              <div class="card" id="button4">
-                <div class="card-body">
+              <div class="card" id="button4" style="width: 13.8%;">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-users"></i>
                   My Customers
                 </div>
               </div>
-              <div class="card" id="button2">
-                <div class="card-body">
+              <div class="card" id="button2" style="width: 13.8%;">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-hospital-user"></i>
                   Insurance Portfolio
                 </div>
               </div>
 
-              <div class="card" id="button3">
-                <div class="card-body">
+              <div class="card" id="button3" style="width: 13.8%;">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-user-plus"></i>
                   Insurance requests
                 </div>
               </div>
 
-              <div class="card" id="button5">
-                <div class="card-body">
+              <div class="card" id="button5" style="width: 13.8%;">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-car"></i>
                   Motor Claims
                 </div>
               </div>
 
-              <div class="card" id="button6">
-                <div class="card-body">
+              <div class="card" id="button6" style="width: 13.8%;">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-bullhorn"></i>
                   General Claims
                 </div>
               </div>
 
-              <div class="card" id="button7">
-                <div class="card-body">
+              <div class="card" id="button7" style="width: 13.8%;">
+                <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-headset"></i>
                   Policies Requests
                 </div>
@@ -115,7 +155,7 @@
 
 
           </div>
-          <div class="row d-lg-flex" id="dash1">
+          <div class="row d-lg-flex" id="dash1" style="display: flex !important;">
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
                 <h2>Current Year Vs Last Year</h2>
@@ -137,7 +177,7 @@
               </div>
             </div>
           </div>
-          <div class="row d-lg-flex" id="dash2">
+          <div class="row d-lg-flex" id="dash2" style="display: none !important;">
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
                 <h2>Policies count per LOB</h2>
@@ -152,7 +192,7 @@
                             <th scope="col">LOB</th>
                             <th scope="col">Icon</th>
                             <th scope="col">Count</th>
-                            <th scope="col">Production</th>
+                            <th scope="col">Premium (EGP)</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -168,7 +208,7 @@
                             </td>
                             <td>
                               <t t-esc="widget.makeNumber(lob.amount)" />
-                              EGP
+
                             </td>
                           </tr>
                         </tbody>
@@ -177,13 +217,13 @@
                   </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
-                  <a id="policies" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your policies</a>
+                  <a id="policies" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Policies</a>
                 </div>
               </div>
             </div>
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
-                <h2>Claims count per LOB</h2>
+                <h2>Claims Paid EGP</h2>
               </div>
               <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
@@ -195,7 +235,7 @@
                             <th scope="col">LOB </th>
                             <th scope="col">Icon</th>
                             <th scope="col">Count</th>
-                            <th scope="col">Production</th>
+                            <th scope="col">Premium (EGP)</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -211,7 +251,7 @@
                             </td>
                             <td>
                               <t t-esc="widget.makeNumber(lob.amount)" />
-                              EGP
+
                             </td>
                           </tr>
                         </tbody>
@@ -220,7 +260,7 @@
                   </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
-                  <a id="claims" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Claims</a>
+                  <a id="claims" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Claims</a>
                 </div>
               </div>
             </div>
@@ -237,13 +277,13 @@
                           <tr>
                             <th scope="col">Color</th>
                             <th scope="col">Count</th>
-                            <th scope="col">Total (EGP)</th>
+                            <th scope="col">Outstanding (EGP)</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
+                              <i style="color: red" class="fa fa-flag"></i>
                             </td>
                             <td>
                               <t t-esc="widget.collections_statistics.Red.count" />
@@ -254,7 +294,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
+                              <i style="color: orange" class="fa fa-flag"></i>
                             </td>
                             <td>
                               <t t-esc="widget.collections_statistics.Orange.count" />
@@ -265,7 +305,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
+                              <i style="color: green" class="fa fa-flag"></i>
                             </td>
                             <td>
                               <t t-esc="widget.collections_statistics.Green.count" />
@@ -281,13 +321,13 @@
                   </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
-                  <a id="collections" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Collections</a>
+                  <a id="collections" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Collections</a>
                 </div>
               </div>
             </div>
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
-                <h2>Renewals</h2>
+                <h2>Premium EGP</h2>
               </div>
               <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
@@ -304,7 +344,7 @@
                         <tbody>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
+                              <i style="color: red" class="fa fa-flag"></i>
                             </td>
                             <td>
                               <t t-esc="widget.renew_statistics.Red.count" />
@@ -315,7 +355,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
+                              <i style="color: orange" class="fa fa-flag"></i>
                             </td>
                             <td>
                               <t t-esc="widget.renew_statistics.Orange.count" />
@@ -326,7 +366,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
+                              <i style="color: green" class="fa fa-flag"></i>
                             </td>
                             <td>
                               <t t-esc="widget.renew_statistics.Green.count" />
@@ -342,13 +382,13 @@
                   </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
-                  <a id="renewals" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Renewals</a>
+                  <a id="renewals" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Renewals</a>
                 </div>
               </div>
             </div>
 
           </div>
-          <div class="row d-lg-flex" id="dash3">
+          <div class="row d-lg-flex" id="dash3" style="display: none !important;">
             <div class="col-lg-12 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
                 <h2>Insurance applications count per LOB</h2>
@@ -385,19 +425,19 @@
                   </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
-                  <a id="apps" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Apps</a>
+                  <a id="apps" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Apps</a>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row d-lg-flex" id="dash4">
+          <div class="row d-lg-flex" id="dash4" style="display: none !important;">
 
           </div>
-          <div class="row d-lg-flex" id="dash5">
+          <div class="row d-lg-flex" id="dash5" style="display: none !important;">
           </div>
-          <div class="row d-lg-flex" id="dash6">
+          <div class="row d-lg-flex" id="dash6" style="display: none !important;">
           </div>
-          <div class="row d-lg-flex" id="dash7">
+          <div class="row d-lg-flex" id="dash7" style="display: none !important;">
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
                 <h2>Endorsements Requests</h2>
@@ -417,7 +457,7 @@
                         <tbody>
                           <tr>
                             <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
+                              <i style="color: red" class="fa fa-flag"></i>
                             </td>
                             <td>Pending</td>
                             <td >
@@ -431,7 +471,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
+                              <i style="color: orange" class="fa fa-flag"></i>
                             </td>
                             <td>Submitted</td>
                             <td >
@@ -444,7 +484,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
+                              <i style="color: green" class="fa fa-flag"></i>
                             </td>
                             <td>Issued</td>
                             <td>
@@ -463,7 +503,7 @@
                   </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
-                  <a id="endorsement" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Endorsements Request</a>
+                  <a id="endorsement" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Endorsements Request</a>
                 </div>
               </div>
             </div>
@@ -486,7 +526,8 @@
                         <tbody>
                           <tr>
                              <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
+                               <i style="color: red" class="fa fa-flag"></i>
+<!--                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />-->
                             </td>
                             <td>Pending</td>
                             <td >
@@ -500,7 +541,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
+                              <i style="color: orange" class="fa fa-flag"></i>
                             </td>
                             <td>Submitted</td>
                             <td >
@@ -513,7 +554,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
+                              <i style="color: green" class="fa fa-flag"></i>
                             </td>
                             <td>Issued</td>
                             <td>
@@ -555,7 +596,7 @@
                         <tbody>
                           <tr>
                              <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/red.png" />
+                              <i style="color: red" class="fa fa-flag"></i>
                             </td>
                             <td>Pending</td>
                             <td >
@@ -569,7 +610,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/orange.png" />
+                              <i style="color: orange" class="fa fa-flag"></i>
                             </td>
                             <td>Submitted</td>
                             <td >
@@ -582,7 +623,7 @@
                           </tr>
                            <tr>
                               <td>
-                              <img class="image" src="/Arope_spaces/static/src/img/green.png" />
+                              <i style="color: green" class="fa fa-flag"></i>
                             </td>
                             <td>Issued</td>
                             <td>

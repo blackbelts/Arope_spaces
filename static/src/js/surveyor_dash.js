@@ -27,6 +27,9 @@ odoo.define('surveyor_dashboard.SurveyorDashboard', function (require) {
       'click #green_renew': 'green_renew',
       'click #orange_renew': 'orange_renew',
       'click #red_renew': 'red_renew',
+      'click #button1':'showDash1',
+      'click #button2':'showDash2',
+      'click #button3':'showDash3',
     },
     init: function (parent, context) {
       this._super(parent, context);
@@ -73,6 +76,62 @@ odoo.define('surveyor_dashboard.SurveyorDashboard', function (require) {
         console.log("surveyor_dashboard", res)
       });
       return $.when(get_dashboard);
+    },
+    showDash1: function(){
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button3");
+      button1.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
+
+      var dash1 = document.getElementById("dash1");
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+
+      dash1.setAttribute('style', 'display:flex !important');
+      dash2.setAttribute('style', 'display:none !important');
+      dash3.setAttribute('style', 'display:none !important');
+
+
+
+    },
+    showDash2: function(){
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button3");
+
+      button2.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button1.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
+
+      var dash1 = document.getElementById("dash1");
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+
+      dash1.setAttribute('style', 'display:none !important');
+      dash2.setAttribute('style', 'display:flex !important');
+      dash3.setAttribute('style', 'display:none !important');
+
+
+    },
+    showDash3: function(){
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button3");
+
+      button3.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button1.setAttribute('style', 'background: white !important;color: darkblue !important;');
+
+      var dash1 = document.getElementById("dash1");
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+
+      dash1.setAttribute('style', 'display:none !important');
+      dash2.setAttribute('style', 'display:none !important');
+      dash3.setAttribute('style', 'display:flex !important');
+
     },
     makeNumber: function (x) {
       return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")

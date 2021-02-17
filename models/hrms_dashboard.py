@@ -266,6 +266,16 @@ class Brokers(models.Model):
         return True
 
     @api.model
+    def get_customers(self, codes):
+        pins = []
+        # customers = []
+        for rec in self.env['policy.arope'].search([('agent_code', 'in', codes)]):
+            pins.append(rec.customer_pin)
+        customers = self.env['persons'].search([('pin', 'in', pins),('type', '=', 'customer')]).ids
+        return customers
+
+
+    @api.model
     def get_lob_count_policy(self,codes,type):
         ids=[]
         lob_list = []
@@ -415,7 +425,7 @@ class Brokers(models.Model):
     def get_person_info(self,id):
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
         obj=self.env['persons'].search([('card_id', '=', user.card_id)], limit=1)
-        return {'name':obj.name ,'fra': obj.fra_no if obj.fra_no else '', 'exp_date': obj.expire_date if obj.expire_date else '', 'mobile': obj.mobile if obj.mobile else '', 'mail': obj.mail if obj.mail else''}
+        return {'name':obj.name ,'fra': obj.fra_no if obj.fra_no else '', 'exp_date': obj.expire_date if obj.expire_date else '', 'mobile': obj.mobile if obj.mobile else '', 'mail': user.partner_id.email if user.partner_id.email else''}
 
 
     @api.model
@@ -447,7 +457,8 @@ class Brokers(models.Model):
             'targetVsProduction': self.get_target_production(id) if self.get_target_production(id) else False,
             'lastVsCurrentYear': self.get_production_compare(agents_codes) if self.get_production_compare(agents_codes) else False,
             'collections':self.get_collections(agents_codes,'broker') if self.get_collections(agents_codes,'broker') else False,
-            'renews':self.get_renew(agents_codes,'broker') if self.get_renew(agents_codes,'broker') else False
+            'renews':self.get_renew(agents_codes,'broker') if self.get_renew(agents_codes,'broker') else False,
+            'customers': self.get_customers(agents_codes) if self.get_customers(agents_codes) else False,
         }
 
     @api.model

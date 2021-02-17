@@ -3035,6 +3035,9 @@ margin-top: 27px !important;
 #o_partner_dashboard .o_partner_dashboard_box{
 	background-color: #fff;
 	flex: 1;
+	border: 1px solid #c8c8d3;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background: white;
 }
 @media (max-width: 767.98px){
 	#o_partner_dashboard .o_partner_dashboard_box{

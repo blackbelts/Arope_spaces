@@ -220,10 +220,31 @@ overflow: auto !important;
     margin: 3px;
     padding: 7px;
     border-radius: 10px;
-    background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
+    background: white;
+    border: solid 1px darkblue !important;
+    color: darkblue !important;
+    width: 13.8% !important;
   }
-  .card-body {
-    background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
-    color: white;
+
+
+.surveyor_card {
+    margin: 3px;
+    padding: 7px;
+    border-radius: 10px;
+    background: white;
+    border: solid 1px darkblue !important;
+    color: darkblue !important;
+    width: 17% !important;
+  }
+.card-body {
+    background: inherit !important;
+    color: inherit !important;
 }
+.active-card {
+    background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
+    color: white !important;
+}
+
+
+
   

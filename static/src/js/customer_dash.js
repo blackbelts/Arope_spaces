@@ -26,6 +26,11 @@ odoo.define('customer_dashboard.CustomerDashboard', function (require) {
         'click #endorsement':'end_request_list',
         'click #cancellation': 'cancel_request_list',
         'click #renewals-req':'renewals_request_list',
+        'click #button2':'showDash2',
+        'click #button3':'showDash3',
+        'click #button5':'showDash5',
+        'click #button6':'showDash6',
+        'click #button7':'showDash7',
     },
     init: function (parent, context) {
       this._super(parent, context);
@@ -96,6 +101,141 @@ odoo.define('customer_dashboard.CustomerDashboard', function (require) {
         console.log("get_customer_dashboard", res)
       });
       return $.when(get_dashboard);
+    },
+    showDash2: function(){
+
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button3");
+      var button5 = document.getElementById("button5");
+      var button6 = document.getElementById("button6");
+      var button7 = document.getElementById("button7");
+      button2.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button7.setAttribute('style', 'background: white !important;color: darkblue !important;');
+
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+      var dash5 = document.getElementById("dash5");
+      var dash6 = document.getElementById("dash6");
+      var dash7 = document.getElementById("dash7");
+      dash2.setAttribute('style', 'display:flex !important');
+      dash3.setAttribute('style', 'display:none !important');
+      dash5.setAttribute('style', 'display:none !important');
+      dash6.setAttribute('style', 'display:none !important');
+      dash7.setAttribute('style', 'display:none !important');
+
+    },
+    showDash3: function(){
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button3");
+      var button5 = document.getElementById("button5");
+      var button6 = document.getElementById("button6");
+      var button7 = document.getElementById("button7");
+      button3.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button7.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+      var dash5 = document.getElementById("dash5");
+      var dash6 = document.getElementById("dash6");
+      var dash7 = document.getElementById("dash7");
+      dash2.setAttribute('style', 'display:none !important');
+      dash3.setAttribute('style', 'display:flex !important');
+      dash5.setAttribute('style', 'display:none !important');
+      dash6.setAttribute('style', 'display:none !important');
+      dash7.setAttribute('style', 'display:none !important');
+    },
+    showDash5: function(){
+
+//      var dash1 = document.getElementById("dash1");
+//      var dash2 = document.getElementById("dash2");
+//      var dash3 = document.getElementById("dash3");
+//      var dash4 = document.getElementById("dash4");
+//      var dash5 = document.getElementById("dash5");
+//      var dash6 = document.getElementById("dash6");
+//      var dash7 = document.getElementById("dash7");
+//      dash1.setAttribute('style', 'display:none !important');
+//      dash2.setAttribute('style', 'display:none !important');
+//      dash3.setAttribute('style', 'display:none !important');
+//      dash4.setAttribute('style', 'display:none !important');
+//      dash5.setAttribute('style', 'display:flex !important');
+//      dash6.setAttribute('style', 'display:none !important');
+//      dash7.setAttribute('style', 'display:none !important');
+    console.log("policies")
+      var self = this;
+      this.do_action({
+        name: "Motor Claims",
+        type: 'ir.actions.act_window',
+        res_model: 'crm.lead',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list']
+        ],
+        domain: [
+          ['opp_type', '=', 4]
+        ],
+        target: 'current'
+      })
+
+    },
+    showDash6: function(){
+//      var dash1 = document.getElementById("dash1");
+//      var dash2 = document.getElementById("dash2");
+//      var dash3 = document.getElementById("dash3");
+//      var dash4 = document.getElementById("dash4");
+//      var dash5 = document.getElementById("dash5");
+//      var dash6 = document.getElementById("dash6");
+//      var dash7 = document.getElementById("dash7");
+//      dash1.setAttribute('style', 'display:none !important');
+//      dash2.setAttribute('style', 'display:none !important');
+//      dash3.setAttribute('style', 'display:none !important');
+//      dash4.setAttribute('style', 'display:none !important');
+//      dash5.setAttribute('style', 'display:none !important');
+//      dash6.setAttribute('style', 'display:flex !important');
+//      dash7.setAttribute('style', 'display:none !important');
+      console.log("policies")
+      var self = this;
+      this.do_action({
+        name: "General Claims",
+        type: 'ir.actions.act_window',
+        res_model: 'crm.lead',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list']
+        ],
+        domain: [
+          ['opp_type', '=', 3]
+        ],
+        target: 'current'
+      })
+
+    },
+    showDash7: function(){
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button3");
+      var button5 = document.getElementById("button5");
+      var button6 = document.getElementById("button6");
+      var button7 = document.getElementById("button7");
+      button7.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;width: 13.8%;');
+      button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button5.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      button6.setAttribute('style', 'background: white !important;color: darkblue !important;');
+      var dash2 = document.getElementById("dash2");
+      var dash3 = document.getElementById("dash3");
+      var dash5 = document.getElementById("dash5");
+      var dash6 = document.getElementById("dash6");
+      var dash7 = document.getElementById("dash7");
+      dash2.setAttribute('style', 'display:none !important');
+      dash3.setAttribute('style', 'display:none !important');
+      dash5.setAttribute('style', 'display:none !important');
+      dash6.setAttribute('style', 'display:none !important');
+      dash7.setAttribute('style', 'display:flex !important');
+
     },
     makeNumber: function (x) {
       return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")

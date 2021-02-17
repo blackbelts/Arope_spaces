@@ -146,6 +146,10 @@
 
     <menuitem id="policy_config" name="Configuration"
               parent="arope_space" sequence="4" groups="Arope_spaces.managers_group" />
+    <menuitem id="mysetting" name="Setting" action="base_setup.action_general_configuration"
+              parent="arope_space" sequence="999999" groups="Arope_spaces.managers_group" />
+    <menuitem id="myapps" name="Apps" action="base.open_module_tree"
+              parent="arope_space" sequence="9999999" groups="Arope_spaces.managers_group" />
 
 
 
