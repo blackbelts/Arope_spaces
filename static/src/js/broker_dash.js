@@ -260,7 +260,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       return $.when(get_dashboard);
     },
     showDash1: function(){
-
+      var button = document.getElementById("button1");
+      var current = document.getElementsByClassName("active-card");
+      current[0].className='';
+      button[0].className='active-card';
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -279,6 +282,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     },
     showDash2: function(){
+      var button = document.getElementById("button2");
+      var current = document.getElementsByClassName("active-card");
+      current[0].className='';
+      button[0].className='active-card';
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -296,6 +303,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     },
     showDash3: function(){
+      var button = document.getElementById("button3");
+      var current = document.getElementsByClassName("active-card");
+      current[0].className='';
+      button[0].className='active-card';
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -312,6 +323,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       dash7.setAttribute('style', 'display:none !important');
     },
     showDash4: function(){
+      var button = document.getElementById("button4");
+      var current = document.getElementsByClassName("active-card");
+      current[0].className='';
+      button[0].className='active-card';
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
@@ -329,6 +344,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     },
     showDash5: function(){
+
 //      var dash1 = document.getElementById("dash1");
 //      var dash2 = document.getElementById("dash2");
 //      var dash3 = document.getElementById("dash3");
@@ -393,6 +409,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     },
     showDash7: function(){
+      var button = document.getElementById("button7");
+      var current = document.getElementsByClassName("active-card");
+      current[0].className='';
+      button[0].className='active-card';
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");
