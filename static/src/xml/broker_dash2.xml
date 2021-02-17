@@ -29,18 +29,31 @@
     <![endif]-->
     <!-- page container area start -->
     <div id="o_partner_dashboard">
+<!--      <div id="o_my_sidebar" class="col-12 col-md col-lg-4 col-xl-3 o_my_sidebar">-->
+<!--                                <div class="o_my_contact" t-if="sales_user">-->
+<!--                                    <t t-call="portal.portal_contact"/>-->
+<!--                                </div>-->
+<!--                                <div class="o_portal_my_details">-->
+<!--                                    <h4>Details <a role="button" href="/my/account" class="btn btn-sm btn-link"><i class="fa fa-pencil"/> Edit</a></h4>-->
+<!--                                    <hr class="mt-1 mb-0"/>-->
+<!--                                    <div t-field="user_id.partner_id" t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'/>-->
+<!--                                </div>-->
+<!--                                <div class="o_my_archives" t-if="archive_groups">-->
+<!--                                    <t t-call="portal.portal_archive_groups"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
       <section class="o_partner_dashboard_banner bg-white">
         <div class="container">
           <div class="row d-flex">
-            <div class="col-12 col-md-8 col-lg-7">
+            <div class="col-12 col-md-4 col-lg-4">
               <h1 class="display-1 text-violet-dark mt32 mb32 fw_light">
                 Broker Dashboard
               </h1>
-              <div class="alert alert-info alert-dismissible" role="alert">
-                <span class="text-beta">
+              <div class="alert alert-info alert-dismissible" style="background: white !important;" role="alert">
+                <span class="text-beta" style="color: black !important;">
                   <b>Welcome to AROPE partners space</b>
                 </span>
-                <p class="text-beta mt8 mb0">
+                <p class="text-beta mt8 mb0" style="color: black !important;">
                  You can follow your portfolio, Policies, collections, renewals, claims and Complaints
                  <!-- Working together on your first project is the best way to success in Odoo.
                   <br />
@@ -52,11 +65,32 @@
                 </p>
               </div>
             </div>
-            <div class="col-12 col-md-4 col-lg-5">
+            <div class="col-12 col-md-4 col-lg-4">
                <img class="image" style="width: 120px;height: 120px;margin-top: 15%;border-radius: 50%;border: 1px solid;margin-left: auto;margin-right: auto;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
              <!-- <div class="text-center">
                 <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
               </div>-->
+
+            </div>
+            <div id="o_my_sidebar" class="col-12 col-md col-lg-4 col-xl-3 o_my_sidebar">
+
+                <div class="o_portal_my_details">
+                    <h4>Details <a role="button" href="/my/account" class="btn btn-sm btn-link"><i class="fa fa-pencil"/> Edit</a></h4>
+                    <hr class="mt-1 mb-0"/>
+                    <div>
+                      <address class="mb-0" itemscope="itemscope">
+                        <div>
+                          <span itemprop="name"><t t-esc="widget.user.name" /></span>
+                        </div>
+                        <div itemprop="address" itemscope="itemscope">
+                          <div>
+                            <i class="fa fa-envelope fa-fw" role="img" aria-label="Email" title="Email"></i>
+                            <span itemprop="email"><t t-esc="widget.user.mail" /></span>
+                          </div>
+                        </div>
+                      </address>
+                    </div>
+                </div>
 
             </div>
           </div>
