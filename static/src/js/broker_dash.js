@@ -260,6 +260,23 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       return $.when(get_dashboard);
     },
     showDash1: function(){
+      var header = document.getElementById("myBtn");
+      var cards = header.getElementsByClassName("card");
+      var cards_body = header.getElementsByClassName("card-body");
+      for (var i = 0; i < cards.length; i++) {
+         cards[i].addEventListener("click", function() {
+         var current = document.getElementsByClassName("active-card");
+         current[0].className = current[0].className.replace("active-card", "");
+         this.className += "active-card";
+         });
+       }
+       for (var i = 0; i < cards_body.length; i++) {
+         cards_body[i].addEventListener("click", function() {
+         var current = document.getElementsByClassName("active-card-body");
+         current[0].className = current[0].className.replace("active-card-body", "");
+         this.className += "active-card-body";
+         });
+       }
       var dash1 = document.getElementById("dash1");
       var dash2 = document.getElementById("dash2");
       var dash3 = document.getElementById("dash3");

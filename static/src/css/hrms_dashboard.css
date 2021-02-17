@@ -220,10 +220,19 @@ overflow: auto !important;
     margin: 3px;
     padding: 7px;
     border-radius: 10px;
-    background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
+    background: white;
+    border: solid 1px darkblue;
   }
   .card-body {
+    background: white;
+    color: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
+}
+.active-card {
+    background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;;
+}
+.active-card-body {
     background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
     color: white;
 }
+
   
