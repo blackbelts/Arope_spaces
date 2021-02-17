@@ -104,7 +104,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <button  name="view_dashboard" string="Portfolio" type="object" class="oe_highlight" />
+                <button  name="view_dashboard" string="View Space" type="object" class="oe_highlight" />
 
 
             </tree>
