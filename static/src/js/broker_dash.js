@@ -32,6 +32,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         'click #button5':'showDash5',
         'click #button6':'showDash6',
         'click #button7':'showDash7',
+        'click #apps':'insuranceApps',
+
 
     },
     init: function (parent, context) {
@@ -605,6 +607,28 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         type: 'ir.actions.act_window',
         res_model: 'policy.request',
         view_mode: 'tree',
+        views: [
+          [false, 'list']
+        ],
+        domain: [
+          ['type','=','opportunity'],
+          ['opp_type','=',1]
+        ],
+        context:{
+            'default_type': 'opportunity',
+            'default_user_id': uid,
+            'default_opp_type': 1
+        },
+        target: 'current'
+      })
+    },
+
+    insuranceApps:function (x) {
+      this.do_action({
+        name: _t("Insurance Application"),
+        type: 'ir.actions.act_window',
+        res_model: 'crm.lead',
+        view_mode: 'tree,form',
         views: [
           [false, 'list']
         ],

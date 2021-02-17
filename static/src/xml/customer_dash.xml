@@ -34,7 +34,7 @@
           <div class="row d-flex">
             <div class="col-12 col-md-4 col-lg-6">
               <h1 class="display-1 text-violet-dark mt32 mb32 fw_light" style="color: black !important;padding: 5px 10px;">
-                Customer Dashboard
+                Customer Space
               </h1>
               <div class="alert alert-info alert-dismissible" style="background: white !important;" role="alert">
                 <span class="text-beta" style="color: black !important;">
