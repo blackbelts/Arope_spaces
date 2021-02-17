@@ -91,7 +91,7 @@
                 </div>
 
             </div>
-            <div class="col-12 col-md-4 col-lg-2">
+            <div class="col-12 col-md-2 col-lg-2">
                <img class="image" style="width: 120px;height: 120px;margin-top: 15%;margin-left: 70%;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
              <!-- <div class="text-center">
                 <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
