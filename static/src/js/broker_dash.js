@@ -605,17 +605,19 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       this.do_action({
        name: _t("Requests"),
         type: 'ir.actions.act_window',
-        res_model: 'policy.request',
-        view_mode: 'tree',
+        res_model: 'crm.lead',
+        view_mode: 'form,tree',
         views: [
           [false, 'list']
         ],
         domain: [
-          ['id', 'in', this.end_request.ids]
+          ['type','=','opportunity'],
+          ['opp_type','=', 2],
+          ['policy_services_type', '=', 'end']
         ],
         context:{
-            "edit":false,
-            "create":false
+            'default_type': 'opportunity',
+            'default_opp_type': 2
         },
         target: 'current'
       })
@@ -643,38 +645,42 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     },
      cancel_request_list:function (x) {
       this.do_action({
-        name: _t("Requests"),
+       name: _t("Requests"),
         type: 'ir.actions.act_window',
-        res_model: 'policy.request',
-        view_mode: 'tree',
+        res_model: 'crm.lead',
+        view_mode: 'form,tree',
         views: [
           [false, 'list']
         ],
         domain: [
-          ['id', 'in', this.cancel_request.ids]
+          ['type','=','opportunity'],
+          ['opp_type','=', 2],
+          ['policy_services_type', '=', 'cancel']
         ],
         context:{
-            "edit":false,
-            "create":false
+            'default_type': 'opportunity',
+            'default_opp_type': 2
         },
         target: 'current'
       })
     },
      renewals_request_list:function (x) {
       this.do_action({
-        name: _t("Requests"),
+       name: _t("Requests"),
         type: 'ir.actions.act_window',
-        res_model: 'policy.request',
-        view_mode: 'tree',
+        res_model: 'crm.lead',
+        view_mode: 'form,tree',
         views: [
           [false, 'list']
         ],
         domain: [
-          ['id', 'in', this.renew_request.ids]
+          ['type','=','opportunity'],
+          ['opp_type','=', 2],
+          ['policy_services_type', '=', 'renew']
         ],
         context:{
-            "edit":false,
-            "create":false
+            'default_type': 'opportunity',
+            'default_opp_type': 2
         },
         target: 'current'
       })
