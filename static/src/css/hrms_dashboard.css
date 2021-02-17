@@ -232,7 +232,7 @@ overflow: auto !important;
 }
 .active-card-body {
     background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
-    color: white;
+    color: white !important;
 }
 
   
