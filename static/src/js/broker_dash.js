@@ -458,7 +458,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       var button5 = document.getElementById("button5");
       var button6 = document.getElementById("button6");
       var button7 = document.getElementById("button7");
-      button7.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;');
+      button7.setAttribute('style', 'background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;color: white !important;width: 13.8%;');
       button2.setAttribute('style', 'background: white !important;color: darkblue !important;');
       button3.setAttribute('style', 'background: white !important;color: darkblue !important;');
       button4.setAttribute('style', 'background: white !important;color: darkblue !important;');
