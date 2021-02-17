@@ -239,7 +239,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         self.renew_request=res.renew_request
         self.cancel_request=res.cancel_request
         self.end_request=res.end_request
-        self.customers = res.
+        self.customers = res.customers
         res.complaint_count.forEach(function(e,i){
             if(e.stage=="Canceled")
                 res.complaint_count.splice(i,1)
