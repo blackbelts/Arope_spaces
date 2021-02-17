@@ -43,7 +43,7 @@
 <!--                                </div>-->
 <!--                            </div>-->
       <section class="o_partner_dashboard_banner bg-white">
-        <div class="container">
+        <div class="container my_container">
           <div class="row d-flex">
             <div class="col-12 col-md-4 col-lg-6">
               <h1 class="display-1 text-violet-dark mt32 mb32 fw_light" style="color: black !important;padding: 5px 10px;">
@@ -103,7 +103,7 @@
         </div>
       </section>
       <section class="bg-gray-lighter">
-        <div class="container">
+        <div class="container my_container">
           <div class="row d-flex flex-wrap no-gutters pb64" style="padding-bottom:30px !important;">
               <div class="card" id="button1" style="width: 13.8%;">
                 <div class="card-body">
