@@ -618,7 +618,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'tree,form',
         views: [
-          [false, 'list']
+          [true, 'list']
         ],
         domain: [
           ['type','=','opportunity'],
