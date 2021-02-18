@@ -617,9 +617,9 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         type: 'ir.actions.act_window',
         res_model: 'crm.lead',
         view_mode: 'tree,form',
-//        views: [
-//          [false, 'list']
-//        ],
+        views: [
+          ['ibs_crm_lead_opportunities_insurance_app', 'list']
+        ],
         domain: [
           ['type','=','opportunity'],
           ['opp_type','=',1]
