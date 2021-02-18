@@ -90,23 +90,23 @@
                      <field name="state" widget="statusbar"/>
 <!--                     <button  name="invoice_details" string="Invoice Details" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'initial_invoice')]}"/>-->
 <!--                     <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'invoicing'),('sub_state', '!=', 'invoice_details')]}"/>-->
-                     <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing','repair_completed'])]}" groups="Arope_spaces.managers_group"/>
-                     <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('type', '!=', 'non-motor')]}" groups="Arope_spaces.managers_group"/>
-                     <button  name="estimation" string="Estimation" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'pre_survey'),('type', '!=', 'non-motor')]}" groups="Arope_spaces.managers_group"/>
-                     <button  name="cheque_ready" string="Cheque Ready" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'estimation')]}" groups="Arope_spaces.managers_group"/>
-                     <button  name="total_loss" string="Total Loss" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing', 'pre_survey'])]}" groups="Arope_spaces.managers_group"/>
-                     <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', 'not in', ['invoicing', 'pre_survey']),('type', '!=', 'motor')]}" groups="Arope_spaces.managers_group"/>
-                     <button  name="complete_and_proceed" string="Repair Completed" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'repair'),('sub_state', '!=', 'pending')]}" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group"/>
-                     <button  name="take_cheque" string="Take Cheque" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'survey_after_repair')]}" groups="Arope_spaces.managers_group"/>
-                     <button  name="car_release" string="Car Release" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'survey_after_repair')]}" groups="Arope_spaces.managers_group"/>
-                     <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('status', '=', 'survey_after_repair')]}" groups="Arope_spaces.managers_group"/>
+                     <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing','repair_completed'])]}" groups="Arope_spaces.managers_group_arope"/>
+                     <button  name="survey_report" string="Survey Report" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('type', '!=', 'non-motor')]}" groups="Arope_spaces.managers_group_arope"/>
+                     <button  name="estimation" string="Estimation" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'pre_survey'),('type', '!=', 'non-motor')]}" groups="Arope_spaces.managers_group_arope"/>
+                     <button  name="cheque_ready" string="Cheque Ready" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'estimation')]}" groups="Arope_spaces.managers_group_arope"/>
+                     <button  name="total_loss" string="Total Loss" type="object" class="oe_highlight" attrs="{'invisible': [('status', 'not in', ['invoicing', 'pre_survey'])]}" groups="Arope_spaces.managers_group_arope"/>
+                     <button  name="start_repair" string="Start Repair" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', 'not in', ['invoicing', 'pre_survey']),('type', '!=', 'motor')]}" groups="Arope_spaces.managers_group_arope"/>
+                     <button  name="complete_and_proceed" string="Repair Completed" type="object" class="oe_highlight" attrs="{'invisible': ['|',('status', '!=', 'repair'),('sub_state', '!=', 'pending')]}" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group"/>
+                     <button  name="take_cheque" string="Take Cheque" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'survey_after_repair')]}" groups="Arope_spaces.managers_group_arope"/>
+                     <button  name="car_release" string="Car Release" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'survey_after_repair')]}" groups="Arope_spaces.managers_group_arope"/>
+                     <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('status', '=', 'survey_after_repair')]}" groups="Arope_spaces.managers_group_arope"/>
 
                  </header>
                 <sheet>
                     <div name="button_box" class="oe_button_box">
-                        <button class="oe_stat_button" type="object" icon="fa-dollar" string="Related Policy" name="related_policy" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group">
+                        <button class="oe_stat_button" type="object" icon="fa-dollar" string="Related Policy" name="related_policy" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group">
                         </button>
-                        <button class="oe_stat_button" string="Survey Report" icon="fa-file" type="object" name="get_survey" groups="Arope_spaces.managers_group,Arope_spaces.surveyor_group">
+                        <button class="oe_stat_button" string="Survey Report" icon="fa-file" type="object" name="get_survey" groups="Arope_spaces.managers_group_arope,Arope_spaces.surveyor_group">
                         </button>
                     </div>
                     <div>
@@ -156,7 +156,7 @@
                             <field name="comment"/>
                         </tree>
                     </field>
-                    <button attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('sub_state', '=', 'complete'),('type', '!=', 'motor')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight" groups="Arope_spaces.managers_group,Arope_spaces.broker_space_group"/>
+                    <button attrs="{'invisible': ['|',('status', '!=', 'claim_intimation'),('sub_state', '=', 'complete'),('type', '!=', 'motor')]}" name="complete_and_proceed" string="Confirm And Proceed" type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group"/>
 
 
 <!--                        <page string="Invoicing" attrs="{'invisible': [('status', '=', 'claim_intimation')]}">-->
