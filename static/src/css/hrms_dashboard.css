@@ -289,42 +289,6 @@ overflow: auto !important;
     text-transform: capitalize;
     margin: 0 0 5px;
 }
-.serviceBox .description{
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    line-height: 23px;
-    margin: 0;
-}
-.serviceBox.red .service-icon{
-    color: #F9635C;
-    border-color: #F9635C;
-}
-.serviceBox.red .service-icon:before,
-.serviceBox.red .service-icon:after{
-    border-color: #F9635C;
-}
-.serviceBox.red .title{ color: #F9635C; }
-.serviceBox.purple .service-icon{
-    color: #8F4681;
-    border-color: #8F4681;
-}
-.serviceBox.purple .service-icon:before,
-.serviceBox.purple .service-icon:after{
-    border-color: #8F4681;
-}
-.serviceBox.purple .title{ color: #8F4681; }
-.serviceBox.gray .service-icon{
-    color: #404E51;
-    border-color: #404E51;
-}
-.serviceBox.gray .service-icon:before,
-.serviceBox.gray .service-icon:after{
-    border-color: #404E51;
-}
-.serviceBox.gray .title{ color: #404E51; }
-@media only screen and (max-width:990px){
-    .serviceBox{ margin: 0 0 30px; }
-}
 
 
   
