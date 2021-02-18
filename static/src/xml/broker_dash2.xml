@@ -92,7 +92,7 @@
 
             </div>
             <div class="col-12 col-md-2 col-lg-2">
-               <img class="image" style="width: 120px;height: 120px;margin-top: 15%;margin-left: 70%;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+               <img class="image" style="width: 200px;height: 200px;margin-top: 0%;margin-left: 70%;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
              <!-- <div class="text-center">
                 <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
               </div>-->
@@ -390,7 +390,7 @@
           </div>
           <div class="row d-lg-flex" id="dash3" style="display: none !important;">
             <div class="col-md-3 col-sm-6 col-lg-3 d-flex flex-column mb64">
-                <div class="serviceBox">
+                <div class="serviceBox" id="insuranceApp">
                     <div class="service-icon">
                         <span><i class="fa fa-building"></i></span>
                     </div>
@@ -398,7 +398,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 col-lg-3 d-flex flex-column mb64">
-                <div class="serviceBox">
+                <div class="serviceBox" id="travel">
                     <div class="service-icon">
                         <span><i class="fa fa-plane"></i></span>
                     </div>
@@ -406,7 +406,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 col-lg-3 d-flex flex-column mb64">
-                <div class="serviceBox">
+                <div class="serviceBox" id="pa">
                     <div class="service-icon">
                         <span><i class="fa fa-blind"></i></span>
                     </div>
@@ -415,7 +415,7 @@
             </div>
 
             <div class="col-md-3 col-sm-6 col-lg-3 d-flex flex-column mb64">
-                <div class="serviceBox">
+                <div class="serviceBox" id="marine">
                     <div class="service-icon">
                         <span><i class="fa fa-ship"></i></span>
                     </div>

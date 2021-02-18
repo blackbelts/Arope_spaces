@@ -33,6 +33,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         'click #button6':'showDash6',
         'click #button7':'showDash7',
         'click #apps':'insuranceApps',
+        'click #insuranceApp':'insuranceApps',
+
 
 
     },
@@ -624,7 +626,9 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         ],
         context:{
             'default_type': 'opportunity',
-            'default_opp_type': 1
+            'default_opp_type': 1,
+            "edit":true,
+            "create":true
         },
         target: 'current'
       })
