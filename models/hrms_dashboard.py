@@ -101,8 +101,8 @@ class Brokers(models.Model):
 
     @api.model
     def get_production_compare(self, agents_codes):
-        date_last_year = date(date.today().year, 1, 1) - relativedelta(years=1)
-        date_start = date(date.today().year, 1, 1)
+        date_last_year = date(date.today().year, 7, 1) - relativedelta(years=2)
+        date_start = date(date.today().year, 7, 1) - relativedelta(years=1)
         date3 = date_start
         current_total = 0.0
         current_prod = []

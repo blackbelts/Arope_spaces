@@ -58,7 +58,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 //          this.showDash1()
           $("document").ready(function () {
             var dataProvider = []
-            var monthes = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            var monthes = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
             self.target_production.target.forEach(function (e, i) {
               var dataProvideritem = {}
               dataProvideritem.month = monthes[i]
