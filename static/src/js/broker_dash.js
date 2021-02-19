@@ -613,12 +613,13 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     insuranceApps:function (x) {
       this.do_action({
+
         name: _t("Insurance Application"),
         type: 'ir.actions.act_window',
         res_model: 'crm.lead',
         view_mode: 'tree,form',
         views: [
-          [1953, 'list']
+          [false, 'list'],[false, 'form']],
         ],
         domain: [
           ['type','=','opportunity'],
