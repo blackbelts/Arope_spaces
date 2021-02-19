@@ -471,7 +471,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       dash7.setAttribute('style', 'display:flex !important');
 
     },
-    showDash6: function(){
+    showDash8: function(){
 
       var self = this;
       this.do_action({
