@@ -74,7 +74,7 @@ class Brokers(models.Model):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
-        months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        months = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
         for target in self.env['team.target'].search([('member.id', '=', id)]):
             for rule in target.targets:
                 total = 0.0
