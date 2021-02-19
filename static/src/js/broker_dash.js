@@ -408,6 +408,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           ['opp_type', '=', 4],
           ['create_uid', '=', this.user.id]
         ],
+        context:{
+            'default_type': 'opportunity',
+            'default_opp_type': 4
+        },
         target: 'current'
       })
 
@@ -441,6 +445,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           ['opp_type', '=', 3],
           ['create_uid', '=', this.user.id]
         ],
+        context:{
+            'default_type': 'opportunity',
+            'default_opp_type': 3
+        },
         target: 'current'
       })
 
