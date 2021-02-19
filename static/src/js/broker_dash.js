@@ -34,6 +34,9 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         'click #button7':'showDash7',
         'click #apps':'insuranceApps',
         'click #insuranceApp':'insuranceApps',
+        'click #travel':'travel',
+        'click #pa':'personalAcc',
+
 
 
 
@@ -402,7 +405,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           [false, 'list'],[false, 'form']
         ],
         domain: [
-          ['opp_type', '=', 4]
+          ['opp_type', '=', 4],
+          ['create_uid', '=', this.users.id]
         ],
         target: 'current'
       })
@@ -434,7 +438,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           [false, 'list'],[false, 'form']
         ],
         domain: [
-          ['opp_type', '=', 3]
+          ['opp_type', '=', 3],
+          ['create_uid', '=', this.users.id]
         ],
         target: 'current'
       })
@@ -601,7 +606,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         domain: [
           ['type','=','opportunity'],
           ['opp_type','=', 2],
-          ['policy_services_type', '=', 'end']
+          ['policy_services_type', '=', 'end'],
+          ['create_uid', '=', this.users.id]
         ],
         context:{
             'default_type': 'opportunity',
@@ -623,11 +629,54 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         ],
         domain: [
           ['type','=','opportunity'],
-          ['opp_type','=',1]
+          ['opp_type','=',1],
+          ['create_uid', '=', this.users.id]
         ],
         context:{
             'default_type': 'opportunity',
             'default_opp_type': 1,
+            "edit":true,
+            "create":true
+        },
+        target: 'current'
+      })
+    },
+    travel:function (x) {
+      this.do_action({
+
+        name: _t("Travel"),
+        type: 'ir.actions.act_window',
+        res_model: 'policy.travel',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+          ['create_uid', '=', this.users.id]
+        ],
+        context:{
+
+            "edit":true,
+            "create":true
+        },
+        target: 'current'
+      })
+    },
+    personalAcc:function (x) {
+      this.do_action({
+
+        name: _t("Personal Accident"),
+        type: 'ir.actions.act_window',
+        res_model: 'policy.personal',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+          ['create_uid', '=', this.users.id]
+        ],
+        context:{
+
             "edit":true,
             "create":true
         },
@@ -646,7 +695,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         domain: [
           ['type','=','opportunity'],
           ['opp_type','=', 2],
-          ['policy_services_type', '=', 'cancel']
+          ['policy_services_type', '=', 'cancel'],
+          ['create_uid', '=', this.users.id]
         ],
         context:{
             'default_type': 'opportunity',
@@ -667,7 +717,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         domain: [
           ['type','=','opportunity'],
           ['opp_type','=', 2],
-          ['policy_services_type', '=', 'renew']
+          ['policy_services_type', '=', 'renew'],
+          ['create_uid', '=', this.users.id]
         ],
         context:{
             'default_type': 'opportunity',
