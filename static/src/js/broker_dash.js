@@ -32,6 +32,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         'click #button5':'showDash5',
         'click #button6':'showDash6',
         'click #button7':'showDash7',
+        'click #button8':'showDash8',
         'click #apps':'insuranceApps',
         'click #insuranceApp':'insuranceApps',
         'click #travel':'travel',
@@ -417,21 +418,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     },
     showDash6: function(){
-//      var dash1 = document.getElementById("dash1");
-//      var dash2 = document.getElementById("dash2");
-//      var dash3 = document.getElementById("dash3");
-//      var dash4 = document.getElementById("dash4");
-//      var dash5 = document.getElementById("dash5");
-//      var dash6 = document.getElementById("dash6");
-//      var dash7 = document.getElementById("dash7");
-//      dash1.setAttribute('style', 'display:none !important');
-//      dash2.setAttribute('style', 'display:none !important');
-//      dash3.setAttribute('style', 'display:none !important');
-//      dash4.setAttribute('style', 'display:none !important');
-//      dash5.setAttribute('style', 'display:none !important');
-//      dash6.setAttribute('style', 'display:flex !important');
-//      dash7.setAttribute('style', 'display:none !important');
-      console.log("policies")
+
       var self = this;
       this.do_action({
         name: "General Claims",
@@ -482,6 +469,29 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       dash5.setAttribute('style', 'display:none !important');
       dash6.setAttribute('style', 'display:none !important');
       dash7.setAttribute('style', 'display:flex !important');
+
+    },
+    showDash6: function(){
+
+      var self = this;
+      this.do_action({
+        name: "Quick Quote",
+        type: 'ir.actions.act_window',
+        res_model: 'quotation.service',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+//          ['opp_type', '=', 3],
+          ['create_uid', '=', this.user.id]
+        ],
+//        context:{
+//            'default_type': 'opportunity',
+//            'default_opp_type': 3
+//        },
+        target: 'current'
+      })
 
     },
     makeNumber: function (x) {

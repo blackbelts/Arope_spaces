@@ -223,7 +223,8 @@ overflow: auto !important;
     background: white;
     border: solid 1px darkblue !important;
     color: darkblue !important;
-    width: 13.8% !important;
+    width: 12.5% !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   }
 
 
@@ -235,6 +236,7 @@ overflow: auto !important;
     border: solid 1px darkblue !important;
     color: darkblue !important;
     width: 17% !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   }
 .card-body {
     background: inherit !important;
