@@ -223,7 +223,7 @@
             </div>
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
-                <h2>Claims Paid EGP</h2>
+                <h2>Claims count per LOB</h2>
               </div>
               <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
@@ -235,7 +235,7 @@
                             <th scope="col">LOB </th>
                             <th scope="col">Icon</th>
                             <th scope="col">Count</th>
-                            <th scope="col">Premium (EGP)</th>
+                            <th scope="col">Claims Paid EGP</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -327,7 +327,7 @@
             </div>
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
-                <h2>Premium EGP</h2>
+                <h2>Renewals</h2>
               </div>
               <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
@@ -338,7 +338,7 @@
                           <tr>
                             <th scope="col">Color</th>
                             <th scope="col">Count</th>
-                            <th scope="col">Total (EGP)</th>
+                            <th scope="col">PREMIUM (EGP)</th>
                           </tr>
                         </thead>
                         <tbody>

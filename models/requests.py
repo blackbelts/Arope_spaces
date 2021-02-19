@@ -42,15 +42,15 @@ class CrmLeads(models.Model):
             declaration_question = self.env["claim.setup.lines"].search(
                 [("claim_declaration_id", "=", self.env['claim.setup'].search([('type', '=', name)]).id),
                  ('type', '=', 'claim_intimation')])
-            if declaration_question:
-                for question in declaration_question:
-                    if question.file:
-                        self.declaration_ids.create(
-                            {"question": question.id, 'download_files': [question.file.id],
-                             "opp_id": self.id})
-                    else:
-                        self.declaration_ids.create(
-                            {"question": question.id, "opp_id": self.id})
+            # if declaration_question:
+            #     for question in declaration_question:
+            #         if question.file:
+            #             self.declaration_ids.create(
+            #                 {"question": question.id, 'download_files': [question.file.id],
+            #                  "opp_id": self.id})
+            #         else:
+            #             self.declaration_ids.create(
+            #                 {"question": question.id, "opp_id": self.id})
 
         return {'domain': {'stage_id': [('type', 'in', self.opp_type.id)]}}
 

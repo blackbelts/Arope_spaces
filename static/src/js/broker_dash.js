@@ -510,7 +510,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'policy.arope',
         view_mode: 'tree',
         views: [
-          [false, 'list']
+          [2001, 'list']
         ],
         domain: [
           ['id', 'in', idsList]
