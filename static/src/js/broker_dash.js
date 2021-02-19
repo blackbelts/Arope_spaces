@@ -399,7 +399,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'tree,form',
         views: [
-          [false, 'list']
+          [false, 'list'],[false, 'form']
         ],
         domain: [
           ['opp_type', '=', 4]
@@ -431,7 +431,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'tree,form',
         views: [
-          [false, 'list']
+          [false, 'list'],[false, 'form']
         ],
         domain: [
           ['opp_type', '=', 3]
@@ -553,7 +553,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'helpdesk_lite.ticket',
         view_mode: 'tree',
         views: [
-          [false, 'list']
+          [false, 'list'],[false, 'form']
         ],
         domain: [
           ['id', 'in', idsList]
@@ -596,7 +596,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'form,tree',
         views: [
-          [false, 'list']
+          [false, 'list'],[false, 'form']
         ],
         domain: [
           ['type','=','opportunity'],
@@ -619,7 +619,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'tree,form',
         views: [
-          [false, 'list'],[false, 'form'],
+          [false, 'list'],[false, 'form']
         ],
         domain: [
           ['type','=','opportunity'],
@@ -641,7 +641,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'form,tree',
         views: [
-          [false, 'list']
+          [false, 'list'],[false, 'form']
         ],
         domain: [
           ['type','=','opportunity'],
@@ -662,7 +662,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'form,tree',
         views: [
-          [false, 'list']
+          [false, 'list'],[false, 'form']
         ],
         domain: [
           ['type','=','opportunity'],
