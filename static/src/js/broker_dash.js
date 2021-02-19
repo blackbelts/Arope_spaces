@@ -406,7 +406,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         ],
         domain: [
           ['opp_type', '=', 4],
-          ['create_uid', '=', this.users.id]
+          ['create_uid', '=', this.user.id]
         ],
         target: 'current'
       })
@@ -439,7 +439,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         ],
         domain: [
           ['opp_type', '=', 3],
-          ['create_uid', '=', this.users.id]
+          ['create_uid', '=', this.user.id]
         ],
         target: 'current'
       })
@@ -607,7 +607,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           ['type','=','opportunity'],
           ['opp_type','=', 2],
           ['policy_services_type', '=', 'end'],
-          ['create_uid', '=', this.users.id]
+          ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',
@@ -630,7 +630,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         domain: [
           ['type','=','opportunity'],
           ['opp_type','=',1],
-          ['create_uid', '=', this.users.id]
+          ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',
@@ -652,7 +652,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           [false, 'list'],[false, 'form']
         ],
         domain: [
-          ['create_uid', '=', this.users.id]
+          ['create_uid', '=', this.user.id]
         ],
         context:{
 
@@ -673,7 +673,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           [false, 'list'],[false, 'form']
         ],
         domain: [
-          ['create_uid', '=', this.users.id]
+          ['create_uid', '=', this.user.id]
         ],
         context:{
 
@@ -696,7 +696,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           ['type','=','opportunity'],
           ['opp_type','=', 2],
           ['policy_services_type', '=', 'cancel'],
-          ['create_uid', '=', this.users.id]
+          ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',
@@ -718,7 +718,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           ['type','=','opportunity'],
           ['opp_type','=', 2],
           ['policy_services_type', '=', 'renew'],
-          ['create_uid', '=', this.users.id]
+          ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',
