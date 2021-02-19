@@ -367,7 +367,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'persons',
         view_mode: 'tree',
         views: [
-          [false, 'list']
+          [2000, 'list']
         ],
         domain: [
           ['id', 'in', this.customers]
