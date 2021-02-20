@@ -130,12 +130,12 @@ class Brokers(models.Model):
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
-                current_total += pol.eq_total
+                current_total = pol.eq_total
             current_prod.append(current_total)
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('issue_date', '>=', date_last_year),
                      ('issue_date', '<', date_last_year + relativedelta(months=1))]):
-                last_total += pol.eq_total
+                last_total = pol.eq_total
             last_prod.append(last_total)
 
             date3 = date3 + relativedelta(months=1)
@@ -156,12 +156,12 @@ class Brokers(models.Model):
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('lob','=','Motor'), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
-                current_total += pol.eq_total
+                current_total = pol.eq_total
             current_prod.append(current_total)
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('lob','=','Motor'),  ('issue_date', '>=', date_last_year),
                      ('issue_date', '<', date_last_year + relativedelta(months=1))]):
-                last_total += pol.eq_total
+                last_total = pol.eq_total
             last_prod.append(last_total)
 
             date3 = date3 + relativedelta(months=1)
@@ -182,12 +182,12 @@ class Brokers(models.Model):
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('lob','=','Medical'), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
-                current_total += pol.eq_total
+                current_total = pol.eq_total
             current_prod.append(current_total)
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('lob','=','Medical'), ('issue_date', '>=', date_last_year),
                      ('issue_date', '<', date_last_year + relativedelta(months=1))]):
-                last_total += pol.eq_total
+                last_total = pol.eq_total
             last_prod.append(last_total)
 
             date3 = date3 + relativedelta(months=1)
@@ -208,12 +208,12 @@ class Brokers(models.Model):
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('lob','not in',['Medical', 'Motor']), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
-                current_total += pol.eq_total
+                current_total = pol.eq_total
             current_prod.append(current_total)
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('lob','not in',['Medical', 'Motor']), ('issue_date', '>=', date_last_year),
                      ('issue_date', '<', date_last_year + relativedelta(months=1))]):
-                last_total += pol.eq_total
+                last_total = pol.eq_total
             last_prod.append(last_total)
 
             date3 = date3 + relativedelta(months=1)
