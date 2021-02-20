@@ -118,7 +118,7 @@ class CrmLeads(models.Model):
     cancel_reason = fields.Text(string='Cancel Reason')
 
     @api.onchange('offer_ids')
-    def change_offer(self):
+    def change_offers(self):
         if self.offer_ids:
             offers = []
             for rec in self.offer_ids:
