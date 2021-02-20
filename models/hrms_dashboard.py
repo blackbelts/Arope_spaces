@@ -434,6 +434,23 @@ class Brokers(models.Model):
         return lob_list
 
     @api.model
+    def get_requests_count_per_user(self, codes):
+        lob_list = []
+        ids = []
+        for request in self.env['request.type'].search([]):
+            for user in self.env['res.users'].search([]):
+                count = 0
+                for rec in self.env['crm.lead'].search([('opp_type', '=', request.id), ('agent_code', 'in', codes),
+                                                        ('create_uid', '=', user.id)]):
+                    count += 1
+                    ids.append(rec.id)
+                if count > 0:
+                    lob_list.append({'type': request.type, 'count': count, 'user': user.name, 'ids': ids})
+                else:
+                    continue
+        return lob_list
+
+    @api.model
     def get_complaint_count(self, codes,type):
         complaint_list = []
         if type == 'broker':
@@ -566,6 +583,7 @@ class Brokers(models.Model):
             'collections':self.get_collections(agents_codes,'broker') if self.get_collections(agents_codes,'broker') else False,
             'renews':self.get_renew(agents_codes,'broker') if self.get_renew(agents_codes,'broker') else False,
             'customers': self.get_customers(agents_codes) if self.get_customers(agents_codes) else False,
+            'requests_per_user': self.get_requests_count_per_user(agents_codes) if self.get_requests_count_per_user(agents_codes) else False,
         }
 
     @api.model
