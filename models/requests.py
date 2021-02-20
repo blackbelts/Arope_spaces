@@ -68,6 +68,7 @@ class CrmLeads(models.Model):
     offer_ids = fields.One2many('final.offer', 'opp_id')
     question_ids = fields.One2many('insurances.answers', 'request_id')
     name = fields.Char('Request')
+    agent_code = fields.Char('Agent Code')
 
     @api.model
     def create(self, vals):
