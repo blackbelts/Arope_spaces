@@ -18,7 +18,7 @@
             <field name="category_id" ref="base.module_category_space"/>
             <field name="implied_ids" eval="[(4, ref('Arope_spaces.motor_group_sale')),(4, ref('Arope_spaces.non_motor_group_sale'))
             ,(4, ref('Arope_spaces.motor_claim_group')),(4, ref('Arope_spaces.non_motor_claim_group')),
-            (4, ref('Arope_spaces.medical_group')),(4, ref('Arope_spaces.call_center_group'))]"/>
+           (4, ref('Arope_spaces.call_center_group'))]"/>
             <field name="comment">the user will have access All Broker Document</field>
         </record>
         <record id="surveyor_group" model="res.groups">
