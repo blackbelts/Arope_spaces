@@ -172,6 +172,168 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               }
 
             });
+            var dataProvider3 = []
+            self.production_compare_motor.current_year.forEach(function (e, i) {
+              var dataProvideritem = {}
+              dataProvideritem.month = monthes[i]
+              dataProvideritem.current_year = e.toFixed(2)
+              dataProvideritem.last_year = self.production_compare_motor.last_year[i].toFixed(2)
+              dataProvideritem.color = "#3EB650"
+              dataProvideritem.color2 = "#3778C2"
+              dataProvider3.push(dataProvideritem)
+            })
+            var chart = AmCharts.makeChart("ambarchart4", {
+              "theme": "light",
+              "type": "serial",
+              "balloon": {
+                "adjustBorderColor": false,
+                "horizontalPadding": 10,
+                "verticalPadding": 4,
+                "color": "#fff"
+              },
+              "dataProvider": dataProvider3,
+              "valueAxes": [{
+                /*"unit": "EGP",*/
+                "position": "left",
+              }],
+              "startDuration": 1,
+              "graphs": [{
+                "balloonText": "production in [[category]] (current year): <b>[[value]]</b>",
+                "fillAlphas": 0.9,
+                "fillColorsField": "color",
+                "lineAlpha": 0.2,
+                "title": "current Year",
+                "type": "column",
+                "valueField": "current_year"
+              }, {
+                "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
+                "fillAlphas": 0.9,
+                "fillColorsField": "color2",
+                "lineAlpha": 0.2,
+                "title": "2018",
+                "type": "column",
+                "clustered": false,
+                "columnWidth": 0.5,
+                "valueField": "last_year"
+              }],
+              "plotAreaFillAlphas": 0.1,
+              "categoryField": "month",
+              "categoryAxis": {
+                "gridPosition": "start"
+              },
+              "export": {
+                "enabled": false
+              }
+
+            });
+            var dataProvider4 = []
+            self.production_compare_medical.current_year.forEach(function (e, i) {
+              var dataProvideritem = {}
+              dataProvideritem.month = monthes[i]
+              dataProvideritem.current_year = e.toFixed(2)
+              dataProvideritem.last_year = self.production_compare_medical.last_year[i].toFixed(2)
+              dataProvideritem.color = "#3EB650"
+              dataProvideritem.color2 = "#3778C2"
+              dataProvider4.push(dataProvideritem)
+            })
+            var chart = AmCharts.makeChart("ambarchart5", {
+              "theme": "light",
+              "type": "serial",
+              "balloon": {
+                "adjustBorderColor": false,
+                "horizontalPadding": 10,
+                "verticalPadding": 4,
+                "color": "#fff"
+              },
+              "dataProvider": dataProvider4,
+              "valueAxes": [{
+                /*"unit": "EGP",*/
+                "position": "left",
+              }],
+              "startDuration": 1,
+              "graphs": [{
+                "balloonText": "production in [[category]] (current year): <b>[[value]]</b>",
+                "fillAlphas": 0.9,
+                "fillColorsField": "color",
+                "lineAlpha": 0.2,
+                "title": "current Year",
+                "type": "column",
+                "valueField": "current_year"
+              }, {
+                "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
+                "fillAlphas": 0.9,
+                "fillColorsField": "color2",
+                "lineAlpha": 0.2,
+                "title": "2018",
+                "type": "column",
+                "clustered": false,
+                "columnWidth": 0.5,
+                "valueField": "last_year"
+              }],
+              "plotAreaFillAlphas": 0.1,
+              "categoryField": "month",
+              "categoryAxis": {
+                "gridPosition": "start"
+              },
+              "export": {
+                "enabled": false
+              }
+
+            });
+            var dataProvider5 = []
+            self.production_compare_commercial.current_year.forEach(function (e, i) {
+              var dataProvideritem = {}
+              dataProvideritem.month = monthes[i]
+              dataProvideritem.current_year = e.toFixed(2)
+              dataProvideritem.last_year = self.production_compare_commercial.last_year[i].toFixed(2)
+              dataProvideritem.color = "#3EB650"
+              dataProvideritem.color2 = "#3778C2"
+              dataProvider5.push(dataProvideritem)
+            })
+            var chart = AmCharts.makeChart("ambarchart6", {
+              "theme": "light",
+              "type": "serial",
+              "balloon": {
+                "adjustBorderColor": false,
+                "horizontalPadding": 10,
+                "verticalPadding": 4,
+                "color": "#fff"
+              },
+              "dataProvider": dataProvider5,
+              "valueAxes": [{
+                /*"unit": "EGP",*/
+                "position": "left",
+              }],
+              "startDuration": 1,
+              "graphs": [{
+                "balloonText": "production in [[category]] (current year): <b>[[value]]</b>",
+                "fillAlphas": 0.9,
+                "fillColorsField": "color",
+                "lineAlpha": 0.2,
+                "title": "current Year",
+                "type": "column",
+                "valueField": "current_year"
+              }, {
+                "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
+                "fillAlphas": 0.9,
+                "fillColorsField": "color2",
+                "lineAlpha": 0.2,
+                "title": "2018",
+                "type": "column",
+                "clustered": false,
+                "columnWidth": 0.5,
+                "valueField": "last_year"
+              }],
+              "plotAreaFillAlphas": 0.1,
+              "categoryField": "month",
+              "categoryAxis": {
+                "gridPosition": "start"
+              },
+              "export": {
+                "enabled": false
+              }
+
+            });
             var lobs=[]
             console.log(self.policy_lob)
             if(self.policy_lob != false){
@@ -235,6 +397,9 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         self.collections_statistics = res.collections
         self.renew_statistics = res.renews
         self.production_compare = res.lastVsCurrentYear
+        self.production_compare_motor = res.lastVsCurrentYearMotor
+        self.production_compare_medical = res.lastVsCurrentYearMedical
+        self.production_compare_commercial = res.lastVsCurrentYearCommercial
         self.user = res.user
         self.collection_ratio=res.collection_ratio
         self.claims_ratio=res.claims_ratio
