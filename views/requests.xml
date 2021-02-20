@@ -10,7 +10,7 @@
 <!--<<<<<<< HEAD-->
 <!--                    <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', '!=', 1)]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>-->
 <!--=======-->
-                    <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 4),('opp_type', 'not in', [1, 7])]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>
+                    <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', 'not in', [1, 7])]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>
                     <xpath expr="//field[@name='stage_id']" position="replace">
                         <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" domain="[('type', 'in',opp_type)]" />
                     </xpath>
