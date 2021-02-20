@@ -132,6 +132,7 @@
 <!--&gt;>>>>>> 1aa7a965a46b9ba2a4e2f92ba6048b54f5e5e28a-->
 
 <!--</odoo>-->
+
 <odoo>
     <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group_arope,Arope_spaces.surveyor_group" sequence="-100"/>
 
@@ -170,10 +171,10 @@
     <!--                  action="selection_questions_action" sequence="15"/>-->
     <menuitem id="new_buss" name="New Business" parent="arope_space"
               sequence="2"
-    groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group"/>
+    groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sale"/>
     <menuitem id="policy_service" name="Policy Services" parent="arope_space"
               sequence="2" action="ibs_crm_lead_opportunities"
-    groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group"/>
+    groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sale"/>
     <menuitem id="requests_view_menu" name="Support" parent="arope_space"
                    sequence="1"
     groups="Arope_spaces.call_center_group"/>
@@ -195,7 +196,7 @@
               parent="new_buss"
               action="ibs_crm_lead_opportunities_insurance_app"
               sequence="2"
-    groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group"/>
+    groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sale"/>
 <!--    <menuitem name="Claims Management"-->
 <!--              id="claim"-->
 <!--              parent="arope_space"-->
