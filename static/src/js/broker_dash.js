@@ -712,13 +712,13 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         ],
         domain: [
           ['type','=','opportunity'],
-          ['opp_type','=', 8],
+          ['opp_type','=', 11],
 //          ['policy_services_type', '=', 'cancel'],
           ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',
-            'default_opp_type': 8
+            'default_opp_type': 11
         },
         target: 'current'
       })
