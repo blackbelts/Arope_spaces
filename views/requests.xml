@@ -363,5 +363,22 @@
                 </p>
             </field>
         </record>
+        <!-- Add a custom Tree (List) view -->
+    <record id="crm_lead_tree_view" model="ir.ui.view">
+		<field name="name">Requests</field>
+		<field name="model">crm.lead</field>
+		<field name="arch" type="xml">
+			<tree>
+                <field name="name" string="Request"/>
+                <field name="opp_type"/>
+                <field name="lob"/>
+                <field name="product_id"/>
+                <field name="customer_name"/>
+                <field name="phone"/>
+                <field name="phone"/>
+                <field name="stage_id"/>
+			</tree>
+		</field>
+	</record>
     </data>
 </odoo>
