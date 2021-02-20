@@ -132,7 +132,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               "theme": "light",
               "type": "serial",
               "balloon": {
-                "adjustBorderColor": false,
+                "adjustBorderColor": true,
                 "horizontalPadding": 10,
                 "verticalPadding": 4,
                 "color": "#fff"
@@ -158,7 +158,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "lineAlpha": 0.2,
                 "title": "2018",
                 "type": "column",
-                "clustered": false,
+                "clustered": true,
                 "columnWidth": 0.5,
                 "valueField": "last_year"
               }],
@@ -168,7 +168,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "gridPosition": "start"
               },
               "export": {
-                "enabled": false
+                "enabled": true
               }
 
             });
