@@ -653,7 +653,7 @@
                   </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
-                  <a id="cancellation" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Cancellation Request</a>
+                  <a id="cancellation" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Cancellation Request</a>
                 </div>
               </div>
             </div>
