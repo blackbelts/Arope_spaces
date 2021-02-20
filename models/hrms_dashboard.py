@@ -442,7 +442,7 @@ class Brokers(models.Model):
             "user": self.get_person_info(id) if self.get_person_info(id) else False,
             "user_image":user.image_1920 if user.image_1920 else False,
             # "user":self.get_person_data(id,'broker'),
-            "production": self.get_production(agents_codes,'broker') if self.get_production(agents_codes,'broker') else False,
+            # "production": self.get_production(agents_codes,'broker') if self.get_production(agents_codes,'broker') else False,
             "policy_lob": self.get_lob_count_policy(agents_codes,'broker') if self.get_lob_count_policy(agents_codes,'broker') else False,
             "claim_lob": self.get_lob_count_claim(agents_codes,'broker') if self.get_lob_count_claim(agents_codes,'broker') else False,
             "complaint_count": self.get_complaint_count(agents_codes,'broker') if self.get_complaint_count(agents_codes,'broker') else False,
