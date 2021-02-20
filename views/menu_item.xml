@@ -196,11 +196,11 @@
               action="ibs_crm_lead_opportunities_insurance_app"
               sequence="2"
     groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group"/>
-    <menuitem name="Claims Management"
-              id="claim"
-              parent="arope_space"
-              sequence="5"
-    groups="Arope_spaces.motor_claim_group,Arope_spaces.non_motor_claim_group"/>
+<!--    <menuitem name="Claims Management"-->
+<!--              id="claim"-->
+<!--              parent="arope_space"-->
+<!--              sequence="5"-->
+<!--    groups="Arope_spaces.motor_claim_group,Arope_spaces.non_motor_claim_group"/>-->
 <!--    <menuitem name="Motor Claims"-->
 <!--              id="motor_claim"-->
 <!--              parent="claim"-->
@@ -211,18 +211,18 @@
 <!--              parent="claim"-->
 <!--              action="non-motor_claim_app_action"-->
 <!--              sequence="2"/>-->
-    <menuitem name="Motor Claims"
-              id="motor_claim"
-              parent="claim"
-              action="ibs_crm_lead_opportunities_motor_claim"
-              sequence="1"
-    groups="Arope_spaces.motor_claim_group"/>
-    <menuitem name="General Claims"
-              id="non_motor_claim"
-              parent="claim"
-              action="ibs_crm_lead_opportunities_general_claim"
-              sequence="2"
-    groups="Arope_spaces.non_motor_claim_group"/>
+<!--    <menuitem name="Motor Claims"-->
+<!--              id="motor_claim"-->
+<!--              parent="claim"-->
+<!--              action="ibs_crm_lead_opportunities_motor_claim"-->
+<!--              sequence="1"-->
+<!--    groups="Arope_spaces.motor_claim_group"/>-->
+<!--    <menuitem name="General Claims"-->
+<!--              id="non_motor_claim"-->
+<!--              parent="claim"-->
+<!--              action="ibs_crm_lead_opportunities_general_claim"-->
+<!--              sequence="2"-->
+<!--    groups="Arope_spaces.non_motor_claim_group"/>-->
 
 
     <menuitem id="main" name="Medical "

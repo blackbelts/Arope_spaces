@@ -24,7 +24,7 @@ class CrmLeads(models.Model):
     # stage_id = fields.Many2one('crm.stage', domain="['|',('type', '=', 'opp_type'),('type', '=', False)]")
     message = fields.Text('Description')
     policy_services_type = fields.Selection([('end', 'Endorsement'),
-                                ('renew', 'Renwal'),('cancel', 'Cancellation')],string='Request Type')
+                                ('renew', 'Renwal')],string='Request Type')
 
     @api.onchange('opp_type')
     @api.constrains('opp_type')
@@ -124,10 +124,10 @@ class CrmLeads(models.Model):
             for rec in self.offer_ids:
                 offers.append(rec)
             if offers[-1].offer_state == 'submitted':
-                if offers[-1].type == 'initial':
-                    self.stage_id = self.env['crm.stage'].search(
-                        [('name', '=', 'Initial Offer'), ('type', '=', self.opp_type.id)]).id
-                    self.message = self.stage_id.message
+            #     if offers[-1].type == 'initial':
+                self.stage_id = self.env['crm.stage'].search(
+                    [('name', '=', 'Offer Ready'), ('type', '=', self.opp_type.id)]).id
+                self.message = self.stage_id.message
                     # related_documents = self.env["final.application.setup"].search(
                     #     [("product_id.id", "=", self.product_id.id)])
                     # if related_documents:
@@ -145,7 +145,7 @@ class CrmLeads(models.Model):
                     #                     {"description": question.id,
                     #                      "quotation_id": self.id})
 
-            elif offers[-1].offer_state == 'accepted':
+            # elif offers[-1].offer_state == 'accepted':
                 # if offers[-1].type == 'initial':
                 #     self.write({'state': 'application_form'})
                 #     self.env['state.history'].create({"application_id": self.id, "state": 'application_form',
@@ -169,10 +169,10 @@ class CrmLeads(models.Model):
                 #                 self.env['final.application'].create(
                 #                     {"description": question.id,
                 #                      "quotation_id": self.id})
-                if offers[-1].type == 'final':
-                    self.stage_id = self.env['crm.stage'].search(
-                        [('name', '=', 'Issue In Progress'), ('type', '=', self.opp_type.id)]).id
-                    self.message = self.stage_id.message
+                # if offers[-1].type == 'final':
+                #     self.stage_id = self.env['crm.stage'].search(
+                #         [('name', '=', 'Issue In Progress'), ('type', '=', self.opp_type.id)]).id
+                #     self.message = self.stage_id.message
                     # related_documents = self.env["final.application.setup"].search(
                     #     [("product_id.id", "=", self.product_id.id)])
                     # if related_documents:
@@ -208,6 +208,7 @@ class CrmLeads(models.Model):
         # if self.survey_report_ids:
         #     for question in self.survey_report_ids:
         #         question.unlink()
+
         if self.question_ids:
             for question in self.question_ids:
                 question.unlink()
@@ -275,7 +276,7 @@ class CrmLeads(models.Model):
                  "lob": self.lob.id, 'product_id': self.product_id.id,"customer_name": self.customer_name, 'phone': self.phone, 'email': self.email,
                  'application_date': self.application_date})
             self.customer_name = survey.name
-        elif self.stage_id.name == 'Invoicing' and self.opp_type.id == 4:
+        elif self.stage_id.name == 'Repair, Upload Invoices' and self.opp_type.id == 4:
             declaration_question = self.env["claim.setup.lines"].search(
                 [("claim_declaration_id", "=", self.env['claim.setup'].search([('type', '=', 'motor')]).id),
                  ('type', '=', 'invoicing')])

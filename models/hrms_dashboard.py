@@ -22,7 +22,7 @@ class Brokers(models.Model):
     _name = 'arope.broker'
 
     @api.model
-    def get_production(self,codes,type):
+    def policy_lob(self,codes,type):
         if type=='broker':
             domain=[('agent_code', 'in', codes)]
         elif type=='customer':
