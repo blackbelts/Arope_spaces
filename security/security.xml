@@ -168,7 +168,7 @@
             <field ref="crm.model_crm_lead" name="model_id"/>
             <field name="domain_force">[('opp_type','in',['Insurance Application','Policy Services']),('lob','=','Medical')]
             </field>
-            <field name="groups" eval="[(4, ref('medical_group'))]"/>
+            <field name="groups" eval="[(4, ref('medical_group_sale'))]"/>
         </record>
          <record id="call_center" model="ir.rule">
             <field name="name">call center rule</field>
