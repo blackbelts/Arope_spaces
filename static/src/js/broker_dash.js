@@ -403,7 +403,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'tree,form',
         views: [
-          [false, 'list'],[false, 'form']
+          [2002, 'list'],[false, 'form']
         ],
         domain: [
           ['opp_type', '=', 4],
@@ -426,7 +426,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'tree,form',
         views: [
-          [false, 'list'],[false, 'form']
+          [2002, 'list'],[false, 'form']
         ],
         domain: [
           ['opp_type', '=', 3],
@@ -619,7 +619,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'form,tree',
         views: [
-          [false, 'list'],[false, 'form']
+          [2002, 'list'],[false, 'form']
         ],
         domain: [
           ['type','=','opportunity'],
@@ -643,7 +643,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'tree,form',
         views: [
-          [false, 'list'],[false, 'form']
+          [2002, 'list'],[false, 'form']
         ],
         domain: [
           ['type','=','opportunity'],
@@ -708,7 +708,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'form,tree',
         views: [
-          [false, 'list'],[false, 'form']
+          [2002, 'list'],[false, 'form']
         ],
         domain: [
           ['type','=','opportunity'],
@@ -730,7 +730,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'form,tree',
         views: [
-          [false, 'list'],[false, 'form']
+          [2002, 'list'],[false, 'form']
         ],
         domain: [
           ['type','=','opportunity'],
