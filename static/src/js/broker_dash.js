@@ -718,7 +718,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         ],
         context:{
             'default_type': 'opportunity',
-            'default_opp_type': 2
+            'default_opp_type': 8
         },
         target: 'current'
       })
