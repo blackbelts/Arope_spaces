@@ -132,6 +132,7 @@
 <!--&gt;>>>>>> 1aa7a965a46b9ba2a4e2f92ba6048b54f5e5e28a-->
 
 <!--</odoo>-->
+
 <odoo>
     <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group_arope,Arope_spaces.surveyor_group" sequence="-100"/>
 
