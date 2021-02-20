@@ -22,20 +22,37 @@ class Brokers(models.Model):
     _name = 'arope.broker'
 
     @api.model
-    def policy_lob(self,codes,type):
-        if type=='broker':
-            domain=[('agent_code', 'in', codes)]
-        elif type=='customer':
-            domain=[('customer_pin', 'in', codes)]
+    def get_production(self, codes, type):
+        if type == 'broker':
+            domain = [('agent_code', 'in', codes)]
+        elif type == 'customer':
+            domain = [('customer_pin', 'in', codes)]
         else:
-            domain=[]
+            domain = []
 
         total = 0.0
-        ids=[]
+        ids = []
         for prod in self.env['policy.arope'].search(domain):
             total += prod.eq_total
             ids.append(prod.id)
-        return {"total":total,"ids":ids}
+        return {"total": total, "ids": ids}
+
+
+    # @api.model
+    # def policy_lob(self,codes,type):
+    #     if type=='broker':
+    #         domain=[('agent_code', 'in', codes)]
+    #     elif type=='customer':
+    #         domain=[('customer_pin', 'in', codes)]
+    #     else:
+    #         domain=[]
+    #
+    #     total = 0.0
+    #     ids=[]
+    #     for prod in self.env['policy.arope'].search(domain):
+    #         total += prod.eq_total
+    #         ids.append(prod.id)
+    #     return {"total":total,"ids":ids}
 
     def get_all_production(self):
         prod = {}
@@ -442,7 +459,7 @@ class Brokers(models.Model):
             "user": self.get_person_info(id) if self.get_person_info(id) else False,
             "user_image":user.image_1920 if user.image_1920 else False,
             # "user":self.get_person_data(id,'broker'),
-            # "production": self.get_production(agents_codes,'broker') if self.get_production(agents_codes,'broker') else False,
+            "production": self.get_production(agents_codes,'broker') if self.get_production(agents_codes,'broker') else False,
             "policy_lob": self.get_lob_count_policy(agents_codes,'broker') if self.get_lob_count_policy(agents_codes,'broker') else False,
             "claim_lob": self.get_lob_count_claim(agents_codes,'broker') if self.get_lob_count_claim(agents_codes,'broker') else False,
             "complaint_count": self.get_complaint_count(agents_codes,'broker') if self.get_complaint_count(agents_codes,'broker') else False,
