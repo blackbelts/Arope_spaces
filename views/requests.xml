@@ -7,15 +7,13 @@
 
                 <header>
                     <button string="Send To Insurer" name="send_mail_template_insurer" type="object"/>
-<<<<<<< HEAD
-                    <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', '!=', 1)]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>
-=======
-                    <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', '!=', 1)]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group"/>
+<!--<<<<<<< HEAD-->
+<!--                    <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', '!=', 1)]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>-->
+<!--=======-->
+                    <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', 'not in', [1, 7])]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>
                     <xpath expr="//field[@name='stage_id']" position="replace">
                         <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" domain="[('type', 'in',opp_type)]" />
-
                     </xpath>
->>>>>>> 0aa873e8cd3256ac8a60ee5294670b5f8a6dc3a3
                 </header>
 
 <!--                <field name="user_id" position="attributes">-->
@@ -91,7 +89,7 @@
                 <xpath expr="//group" position="after">
                     <group>
                         <group>
-                            <field name="opp_type"/>
+                            <field name="opp_type" readonly="1"/>
                         </group>
                         <group>
                             <field name="name"/>
@@ -125,7 +123,7 @@
 
                         </group>
                     </group>
-                    <group attrs="{'invisible': [('opp_type', '!=', 2)]}">
+                    <group attrs="{'invisible': [('opp_type', 'not in', [2,11])]}">
                         <group>
                             <field name="name" readonly="1"/>
                             <label for="policy"/>
@@ -141,9 +139,9 @@
 
                             <field name="end_date" readonly="1"/>
 
-                            <field name="policy_services_type" />
+                            <field name="policy_services_type" attrs="{'invisible': [('opp_type', '=', 11)]}"/>
                             <field name="end_reason" attrs="{'invisible': [('policy_services_type', '!=', 'end')]}"/>
-                            <field name="cancel_reason" attrs="{'invisible': [('policy_services_type', '!=', 'cancel')]}"/>
+                            <field name="cancel_reason" attrs="{'invisible': [('opp_type', '!=', 11)]}"/>
 
                         </group>
                     </group>
@@ -207,8 +205,8 @@
                             </group>
                         </group>
                     </page>
-                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),
-                    ('lob','in', [4, 7])]}">
+                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|','|',('opp_type', '!=', 1),
+                    ('lob','in', [4, 7]),('stage_id','not in', [58,3,4,10])]}">
                         <field name="persons" >
                             <tree editable="bottom">
                                 <field name="insured" readonly="1" force_save="1"/>
@@ -221,8 +219,8 @@
                         </field>
 
                     </page>
-                    <page string="Application Form" attrs="{'invisible': ['|',('opp_type', '!=', 1),
-                    ('lob','not in', [4, 7])]}">
+                    <page string="Application Form" attrs="{'invisible': ['|','|',('opp_type', '!=', 1),
+                    ('lob','not in', [4, 7]),('stage_id','not in', [58,3,4,10])]}">
                         <field name="question_ids">
                             <tree editable="bottom">
                                 <field name="question"/>
@@ -231,7 +229,8 @@
                             </tree>
                         </field>
                     </page>
-                    <page string="Offers" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 1)]}">
+                    <page string="Offers" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),
+                    ('stage_id', '=', 57)]}">
                         <field name="offer_ids" >
                             <tree editable="bottom" decoration-danger="offer_state == 'pending'">
                                 <field name="type" />
@@ -242,7 +241,8 @@
                             </tree>
                         </field>
                     </page>
-                    <page string="Required Documents" attrs="{'invisible': [('opp_type', 'not in', [3,4])]}">
+                    <page string="Required Documents" attrs="{'invisible': ['|',('opp_type', 'not in', [3,4]),
+                    ('stage_id', '=', 57)]}">
                         <field name="declaration_ids">
                             <tree editable="bottom" decoration-danger="state == 'pending'">
                                 <field name="question"/>
@@ -363,5 +363,22 @@
                 </p>
             </field>
         </record>
+        <!-- Add a custom Tree (List) view -->
+    <record id="crm_lead_tree_view" model="ir.ui.view">
+		<field name="name">Requests</field>
+		<field name="model">crm.lead</field>
+		<field name="arch" type="xml">
+			<tree>
+                <field name="name" string="Request"/>
+                <field name="opp_type"/>
+                <field name="lob"/>
+                <field name="product_id"/>
+                <field name="customer_name"/>
+                <field name="phone"/>
+                <field name="phone"/>
+                <field name="stage_id"/>
+			</tree>
+		</field>
+	</record>
     </data>
 </odoo>

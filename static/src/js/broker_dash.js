@@ -32,7 +32,13 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         'click #button5':'showDash5',
         'click #button6':'showDash6',
         'click #button7':'showDash7',
+        'click #button8':'showDash8',
         'click #apps':'insuranceApps',
+        'click #insuranceApp':'insuranceApps',
+        'click #travel':'travel',
+        'click #pa':'personalAcc',
+
+
 
 
     },
@@ -52,7 +58,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 //          this.showDash1()
           $("document").ready(function () {
             var dataProvider = []
-            var monthes = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            var monthes = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
             self.target_production.target.forEach(function (e, i) {
               var dataProvideritem = {}
               dataProvideritem.month = monthes[i]
@@ -166,6 +172,168 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               }
 
             });
+            var dataProvider3 = []
+            self.production_compare_motor.current_year.forEach(function (e, i) {
+              var dataProvideritem = {}
+              dataProvideritem.month = monthes[i]
+              dataProvideritem.current_year = e.toFixed(2)
+              dataProvideritem.last_year = self.production_compare_motor.last_year[i].toFixed(2)
+              dataProvideritem.color = "#3EB650"
+              dataProvideritem.color2 = "#3778C2"
+              dataProvider3.push(dataProvideritem)
+            })
+            var chart = AmCharts.makeChart("ambarchart4", {
+              "theme": "light",
+              "type": "serial",
+              "balloon": {
+                "adjustBorderColor": false,
+                "horizontalPadding": 10,
+                "verticalPadding": 4,
+                "color": "#fff"
+              },
+              "dataProvider": dataProvider3,
+              "valueAxes": [{
+                /*"unit": "EGP",*/
+                "position": "left",
+              }],
+              "startDuration": 1,
+              "graphs": [{
+                "balloonText": "production in [[category]] (current year): <b>[[value]]</b>",
+                "fillAlphas": 0.9,
+                "fillColorsField": "color",
+                "lineAlpha": 0.2,
+                "title": "current Year",
+                "type": "column",
+                "valueField": "current_year"
+              }, {
+                "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
+                "fillAlphas": 0.9,
+                "fillColorsField": "color2",
+                "lineAlpha": 0.2,
+                "title": "2018",
+                "type": "column",
+                "clustered": false,
+                "columnWidth": 0.5,
+                "valueField": "last_year"
+              }],
+              "plotAreaFillAlphas": 0.1,
+              "categoryField": "month",
+              "categoryAxis": {
+                "gridPosition": "start"
+              },
+              "export": {
+                "enabled": false
+              }
+
+            });
+            var dataProvider4 = []
+            self.production_compare_medical.current_year.forEach(function (e, i) {
+              var dataProvideritem = {}
+              dataProvideritem.month = monthes[i]
+              dataProvideritem.current_year = e.toFixed(2)
+              dataProvideritem.last_year = self.production_compare_medical.last_year[i].toFixed(2)
+              dataProvideritem.color = "#3EB650"
+              dataProvideritem.color2 = "#3778C2"
+              dataProvider4.push(dataProvideritem)
+            })
+            var chart = AmCharts.makeChart("ambarchart5", {
+              "theme": "light",
+              "type": "serial",
+              "balloon": {
+                "adjustBorderColor": false,
+                "horizontalPadding": 10,
+                "verticalPadding": 4,
+                "color": "#fff"
+              },
+              "dataProvider": dataProvider4,
+              "valueAxes": [{
+                /*"unit": "EGP",*/
+                "position": "left",
+              }],
+              "startDuration": 1,
+              "graphs": [{
+                "balloonText": "production in [[category]] (current year): <b>[[value]]</b>",
+                "fillAlphas": 0.9,
+                "fillColorsField": "color",
+                "lineAlpha": 0.2,
+                "title": "current Year",
+                "type": "column",
+                "valueField": "current_year"
+              }, {
+                "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
+                "fillAlphas": 0.9,
+                "fillColorsField": "color2",
+                "lineAlpha": 0.2,
+                "title": "2018",
+                "type": "column",
+                "clustered": false,
+                "columnWidth": 0.5,
+                "valueField": "last_year"
+              }],
+              "plotAreaFillAlphas": 0.1,
+              "categoryField": "month",
+              "categoryAxis": {
+                "gridPosition": "start"
+              },
+              "export": {
+                "enabled": false
+              }
+
+            });
+            var dataProvider5 = []
+            self.production_compare_commercial.current_year.forEach(function (e, i) {
+              var dataProvideritem = {}
+              dataProvideritem.month = monthes[i]
+              dataProvideritem.current_year = e.toFixed(2)
+              dataProvideritem.last_year = self.production_compare_commercial.last_year[i].toFixed(2)
+              dataProvideritem.color = "#3EB650"
+              dataProvideritem.color2 = "#3778C2"
+              dataProvider5.push(dataProvideritem)
+            })
+            var chart = AmCharts.makeChart("ambarchart6", {
+              "theme": "light",
+              "type": "serial",
+              "balloon": {
+                "adjustBorderColor": false,
+                "horizontalPadding": 10,
+                "verticalPadding": 4,
+                "color": "#fff"
+              },
+              "dataProvider": dataProvider5,
+              "valueAxes": [{
+                /*"unit": "EGP",*/
+                "position": "left",
+              }],
+              "startDuration": 1,
+              "graphs": [{
+                "balloonText": "production in [[category]] (current year): <b>[[value]]</b>",
+                "fillAlphas": 0.9,
+                "fillColorsField": "color",
+                "lineAlpha": 0.2,
+                "title": "current Year",
+                "type": "column",
+                "valueField": "current_year"
+              }, {
+                "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
+                "fillAlphas": 0.9,
+                "fillColorsField": "color2",
+                "lineAlpha": 0.2,
+                "title": "2018",
+                "type": "column",
+                "clustered": false,
+                "columnWidth": 0.5,
+                "valueField": "last_year"
+              }],
+              "plotAreaFillAlphas": 0.1,
+              "categoryField": "month",
+              "categoryAxis": {
+                "gridPosition": "start"
+              },
+              "export": {
+                "enabled": false
+              }
+
+            });
             var lobs=[]
             console.log(self.policy_lob)
             if(self.policy_lob != false){
@@ -229,6 +397,9 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         self.collections_statistics = res.collections
         self.renew_statistics = res.renews
         self.production_compare = res.lastVsCurrentYear
+        self.production_compare_motor = res.lastVsCurrentYearMotor
+        self.production_compare_medical = res.lastVsCurrentYearMedical
+        self.production_compare_commercial = res.lastVsCurrentYearCommercial
         self.user = res.user
         self.collection_ratio=res.collection_ratio
         self.claims_ratio=res.claims_ratio
@@ -362,7 +533,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'persons',
         view_mode: 'tree',
         views: [
-          [false, 'list']
+          [2000, 'list']
         ],
         domain: [
           ['id', 'in', this.customers]
@@ -397,31 +568,22 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'tree,form',
         views: [
-          [false, 'list']
+          [2002, 'list'],[false, 'form']
         ],
         domain: [
-          ['opp_type', '=', 4]
+          ['opp_type', '=', 4],
+          ['create_uid', '=', this.user.id]
         ],
+        context:{
+            'default_type': 'opportunity',
+            'default_opp_type': 4
+        },
         target: 'current'
       })
 
     },
     showDash6: function(){
-//      var dash1 = document.getElementById("dash1");
-//      var dash2 = document.getElementById("dash2");
-//      var dash3 = document.getElementById("dash3");
-//      var dash4 = document.getElementById("dash4");
-//      var dash5 = document.getElementById("dash5");
-//      var dash6 = document.getElementById("dash6");
-//      var dash7 = document.getElementById("dash7");
-//      dash1.setAttribute('style', 'display:none !important');
-//      dash2.setAttribute('style', 'display:none !important');
-//      dash3.setAttribute('style', 'display:none !important');
-//      dash4.setAttribute('style', 'display:none !important');
-//      dash5.setAttribute('style', 'display:none !important');
-//      dash6.setAttribute('style', 'display:flex !important');
-//      dash7.setAttribute('style', 'display:none !important');
-      console.log("policies")
+
       var self = this;
       this.do_action({
         name: "General Claims",
@@ -429,11 +591,16 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'tree,form',
         views: [
-          [false, 'list']
+          [2002, 'list'],[false, 'form']
         ],
         domain: [
-          ['opp_type', '=', 3]
+          ['opp_type', '=', 3],
+          ['create_uid', '=', this.user.id]
         ],
+        context:{
+            'default_type': 'opportunity',
+            'default_opp_type': 3
+        },
         target: 'current'
       })
 
@@ -469,6 +636,29 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       dash7.setAttribute('style', 'display:flex !important');
 
     },
+    showDash8: function(){
+
+      var self = this;
+      this.do_action({
+        name: "Quick Quote",
+        type: 'ir.actions.act_window',
+        res_model: 'quotation.service',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+//          ['opp_type', '=', 3],
+          ['create_uid', '=', this.user.id]
+        ],
+//        context:{
+//            'default_type': 'opportunity',
+//            'default_opp_type': 3
+//        },
+        target: 'current'
+      })
+
+    },
     makeNumber: function (x) {
       return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     },
@@ -481,7 +671,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'policy.arope',
         view_mode: 'tree',
         views: [
-          [false, 'list']
+          [2001, 'list']
         ],
         domain: [
           ['id', 'in', this.brokerProduction.ids]
@@ -503,7 +693,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'policy.arope',
         view_mode: 'tree',
         views: [
-          [false, 'list']
+          [2001, 'list']
         ],
         domain: [
           ['id', 'in', idsList]
@@ -551,7 +741,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'helpdesk_lite.ticket',
         view_mode: 'tree',
         views: [
-          [false, 'list']
+          [false, 'list'],[false, 'form']
         ],
         domain: [
           ['id', 'in', idsList]
@@ -594,12 +784,13 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'form,tree',
         views: [
-          [false, 'list']
+          [2002, 'list'],[false, 'form']
         ],
         domain: [
           ['type','=','opportunity'],
           ['opp_type','=', 2],
-          ['policy_services_type', '=', 'end']
+          ['policy_services_type', '=', 'end'],
+          ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',
@@ -611,20 +802,66 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 
     insuranceApps:function (x) {
       this.do_action({
+
         name: _t("Insurance Application"),
         type: 'ir.actions.act_window',
         res_model: 'crm.lead',
         view_mode: 'tree,form',
         views: [
-          [false, 'list']
+          [2002, 'list'],[false, 'form']
         ],
         domain: [
           ['type','=','opportunity'],
-          ['opp_type','=',1]
+          ['opp_type','=',1],
+          ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',
-            'default_opp_type': 1
+            'default_opp_type': 1,
+            "edit":true,
+            "create":true
+        },
+        target: 'current'
+      })
+    },
+    travel:function (x) {
+      this.do_action({
+
+        name: _t("Travel"),
+        type: 'ir.actions.act_window',
+        res_model: 'policy.travel',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+          ['create_uid', '=', this.user.id]
+        ],
+        context:{
+
+            "edit":true,
+            "create":true
+        },
+        target: 'current'
+      })
+    },
+    personalAcc:function (x) {
+      this.do_action({
+
+        name: _t("Personal Accident"),
+        type: 'ir.actions.act_window',
+        res_model: 'policy.personal',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+          ['create_uid', '=', this.user.id]
+        ],
+        context:{
+
+            "edit":true,
+            "create":true
         },
         target: 'current'
       })
@@ -636,16 +873,17 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'form,tree',
         views: [
-          [false, 'list']
+          [2002, 'list'],[false, 'form']
         ],
         domain: [
           ['type','=','opportunity'],
-          ['opp_type','=', 2],
-          ['policy_services_type', '=', 'cancel']
+          ['opp_type','=', 11],
+//          ['policy_services_type', '=', 'cancel'],
+          ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',
-            'default_opp_type': 2
+            'default_opp_type': 11
         },
         target: 'current'
       })
@@ -657,12 +895,13 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         res_model: 'crm.lead',
         view_mode: 'form,tree',
         views: [
-          [false, 'list']
+          [2002, 'list'],[false, 'form']
         ],
         domain: [
           ['type','=','opportunity'],
           ['opp_type','=', 2],
-          ['policy_services_type', '=', 'renew']
+          ['policy_services_type', '=', 'renew'],
+          ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',

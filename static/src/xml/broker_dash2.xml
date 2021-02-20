@@ -92,7 +92,7 @@
 
             </div>
             <div class="col-12 col-md-2 col-lg-2">
-               <img class="image" style="width: 120px;height: 120px;margin-top: 15%;margin-left: 70%;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+               <img class="image" style="width: 200px;height: 200px;margin-top: 0%;margin-left: 70%;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
              <!-- <div class="text-center">
                 <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
               </div>-->
@@ -127,7 +127,7 @@
               <div class="card" id="button3" style="width: 13.8%;">
                 <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-user-plus"></i>
-                  Insurance requests
+                  New Business
                 </div>
               </div>
 
@@ -148,7 +148,13 @@
               <div class="card" id="button7" style="width: 13.8%;">
                 <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-headset"></i>
-                  Policies Requests
+                  Requests Services
+                </div>
+              </div>
+              <div class="card" id="button8" style="width: 13.8%;">
+                <div class="card-body my_card_body">
+                  <i style="padding-right: 4px;" class="fa fa-hand-holding-usd"></i>
+                  Quick Quote
                 </div>
               </div>
 
@@ -173,6 +179,36 @@
               <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
                   <div id="ambarchart2" dir="ltr"  style="width: 100%; height: 250px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Motor Current Year Vs Last Year</h2>
+              </div>
+              <div class="d-flex flex-column o_partner_dashboard_box">
+                <div class="o_partner_dashboard_box_body">
+                  <div id="ambarchart4" dir="ltr"  style="width: 100%; height: 250px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Medical Current Year Vs Last Year</h2>
+              </div>
+              <div class="d-flex flex-column o_partner_dashboard_box">
+                <div class="o_partner_dashboard_box_body">
+                  <div id="ambarchart5" dir="ltr"  style="width: 100%; height: 250px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Commercial Current Year Vs Last Year</h2>
+              </div>
+              <div class="d-flex flex-column o_partner_dashboard_box">
+                <div class="o_partner_dashboard_box_body">
+                  <div id="ambarchart6" dir="ltr"  style="width: 100%; height: 250px;"></div>
                 </div>
               </div>
             </div>
@@ -223,7 +259,7 @@
             </div>
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
-                <h2>Claims Paid EGP</h2>
+                <h2>Claims count per LOB</h2>
               </div>
               <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
@@ -235,7 +271,7 @@
                             <th scope="col">LOB </th>
                             <th scope="col">Icon</th>
                             <th scope="col">Count</th>
-                            <th scope="col">Premium (EGP)</th>
+                            <th scope="col">Claims Paid EGP</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -327,7 +363,7 @@
             </div>
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
-                <h2>Premium EGP</h2>
+                <h2>Renewals</h2>
               </div>
               <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
@@ -338,7 +374,7 @@
                           <tr>
                             <th scope="col">Color</th>
                             <th scope="col">Count</th>
-                            <th scope="col">Total (EGP)</th>
+                            <th scope="col">PREMIUM (EGP)</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -389,6 +425,89 @@
 
           </div>
           <div class="row d-lg-flex" id="dash3" style="display: none !important;">
+            <div class="col-md-3 col-sm-6 col-lg-3 d-flex flex-column mb64">
+                <div class="serviceBox" id="insuranceApp">
+                    <div class="service-icon">
+                        <span><i class="fa fa-building"></i></span>
+                    </div>
+                    <h3 class="title">Insurance <span>Application</span></h3>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-lg-3 d-flex flex-column mb64">
+                <div class="serviceBox" id="travel">
+                    <div class="service-icon">
+                        <span><i class="fa fa-plane"></i></span>
+                    </div>
+                    <h3 class="title">Travel <span>Policy</span></h3>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-lg-3 d-flex flex-column mb64">
+                <div class="serviceBox" id="pa">
+                    <div class="service-icon">
+                        <span><i class="fa fa-blind"></i></span>
+                    </div>
+                    <h3 class="title">Personal <span>Accident</span></h3>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-lg-3 d-flex flex-column mb64">
+                <div class="serviceBox" id="marine">
+                    <div class="service-icon">
+                        <span><i class="fa fa-ship"></i></span>
+                    </div>
+                    <h3 class="title">Marine</h3>
+                </div>
+            </div>
+              
+<!--            <div class="col-lg-12 d-flex flex-column mb64">-->
+<!--              <div class="o_partner_dashboard_box_header">-->
+<!--                <h2>Insurance applications count per LOB</h2>-->
+<!--              </div>-->
+<!--              <div class="d-flex flex-column o_partner_dashboard_box">-->
+<!--                <div class="o_partner_dashboard_box_body">-->
+<!--                  <div class="single-table">-->
+<!--                    <div class="table-responsive">-->
+<!--                      <table class="table table-hover text-center">-->
+<!--                        <thead class="text-uppercase">-->
+<!--                          <tr>-->
+<!--                            <th scope="col">LOB </th>-->
+<!--                            <th scope="col">Icon</th>-->
+<!--                            <th scope="col">Count</th>-->
+<!--                            &lt;!&ndash;                              <th scope="col">Production</th>&ndash;&gt;-->
+<!--                          </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                          <tr t-foreach="widget.App_count" t-as="lob">-->
+<!--                            <td>-->
+<!--                              <t t-esc="lob.name" />-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon" />-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                              <t t-esc="lob.count" />-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>&ndash;&gt;-->
+<!--                          </tr>-->
+<!--                        </tbody>-->
+<!--                      </table>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="o_partner_dashboard_box_footer">-->
+<!--                  <a id="apps" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Apps</a>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+          </div>
+          <div class="row d-lg-flex" id="dash4" style="display: none !important;">
+
+          </div>
+          <div class="row d-lg-flex" id="dash5" style="display: none !important;">
+          </div>
+          <div class="row d-lg-flex" id="dash6" style="display: none !important;">
+          </div>
+          <div class="row d-lg-flex" id="dash7" style="display: none !important;">
             <div class="col-lg-12 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
                 <h2>Insurance applications count per LOB</h2>
@@ -429,15 +548,6 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row d-lg-flex" id="dash4" style="display: none !important;">
-
-          </div>
-          <div class="row d-lg-flex" id="dash5" style="display: none !important;">
-          </div>
-          <div class="row d-lg-flex" id="dash6" style="display: none !important;">
-          </div>
-          <div class="row d-lg-flex" id="dash7" style="display: none !important;">
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
                 <h2>Endorsements Requests</h2>
@@ -573,7 +683,7 @@
                   </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
-                  <a id="cancellation" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Cancellation Request</a>
+                  <a id="cancellation" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Cancellation Request</a>
                 </div>
               </div>
             </div>

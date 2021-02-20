@@ -22,20 +22,37 @@ class Brokers(models.Model):
     _name = 'arope.broker'
 
     @api.model
-    def get_production(self,codes,type):
-        if type=='broker':
-            domain=[('agent_code', 'in', codes)]
-        elif type=='customer':
-            domain=[('customer_pin', 'in', codes)]
+    def get_production(self, codes, type):
+        if type == 'broker':
+            domain = [('agent_code', 'in', codes)]
+        elif type == 'customer':
+            domain = [('customer_pin', 'in', codes)]
         else:
-            domain=[]
+            domain = []
 
         total = 0.0
-        ids=[]
+        ids = []
         for prod in self.env['policy.arope'].search(domain):
             total += prod.eq_total
             ids.append(prod.id)
-        return {"total":total,"ids":ids}
+        return {"total": total, "ids": ids}
+
+
+    # @api.model
+    # def policy_lob(self,codes,type):
+    #     if type=='broker':
+    #         domain=[('agent_code', 'in', codes)]
+    #     elif type=='customer':
+    #         domain=[('customer_pin', 'in', codes)]
+    #     else:
+    #         domain=[]
+    #
+    #     total = 0.0
+    #     ids=[]
+    #     for prod in self.env['policy.arope'].search(domain):
+    #         total += prod.eq_total
+    #         ids.append(prod.id)
+    #     return {"total":total,"ids":ids}
 
     def get_all_production(self):
         prod = {}
@@ -74,7 +91,7 @@ class Brokers(models.Model):
         card = self.env['res.users'].search([('id', '=', id)], limit=1).card_id
         for rec in self.env['persons'].search([('card_id', '=', card)]):
             agents_codes.append(rec.agent_code)
-        months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        months = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
         for target in self.env['team.target'].search([('member.id', '=', id)]):
             for rule in target.targets:
                 total = 0.0
@@ -101,8 +118,8 @@ class Brokers(models.Model):
 
     @api.model
     def get_production_compare(self, agents_codes):
-        date_last_year = date(date.today().year, 1, 1) - relativedelta(years=1)
-        date_start = date(date.today().year, 1, 1)
+        date_last_year = date(date.today().year, 7, 1) - relativedelta(years=2)
+        date_start = date(date.today().year, 7, 1) - relativedelta(years=1)
         date3 = date_start
         current_total = 0.0
         current_prod = []
@@ -117,6 +134,84 @@ class Brokers(models.Model):
             current_prod.append(current_total)
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('issue_date', '>=', date_last_year),
+                     ('issue_date', '<', date_last_year + relativedelta(months=1))]):
+                last_total += pol.eq_total
+            last_prod.append(last_total)
+
+            date3 = date3 + relativedelta(months=1)
+            date_last_year = date_last_year + relativedelta(months=1)
+        return {'current_year': current_prod, 'last_year': last_prod}
+
+    @api.model
+    def get_production_compare_motor(self, agents_codes):
+        date_last_year = date(date.today().year, 7, 1) - relativedelta(years=2)
+        date_start = date(date.today().year, 7, 1) - relativedelta(years=1)
+        date3 = date_start
+        current_total = 0.0
+        current_prod = []
+        last_total = 0.0
+        last_prod = []
+
+        for i in range(12):
+            for pol in self.env['policy.arope'].search(
+                    [('agent_code', 'in', agents_codes), ('lob','=','Motor'), ('issue_date', '>=', date3),
+                     ('issue_date', '<', date3 + relativedelta(months=1))]):
+                current_total += pol.eq_total
+            current_prod.append(current_total)
+            for pol in self.env['policy.arope'].search(
+                    [('agent_code', 'in', agents_codes), ('lob','=','Motor'),  ('issue_date', '>=', date_last_year),
+                     ('issue_date', '<', date_last_year + relativedelta(months=1))]):
+                last_total += pol.eq_total
+            last_prod.append(last_total)
+
+            date3 = date3 + relativedelta(months=1)
+            date_last_year = date_last_year + relativedelta(months=1)
+        return {'current_year': current_prod, 'last_year': last_prod}
+
+    @api.model
+    def get_production_compare_medical(self, agents_codes):
+        date_last_year = date(date.today().year, 7, 1) - relativedelta(years=2)
+        date_start = date(date.today().year, 7, 1) - relativedelta(years=1)
+        date3 = date_start
+        current_total = 0.0
+        current_prod = []
+        last_total = 0.0
+        last_prod = []
+
+        for i in range(12):
+            for pol in self.env['policy.arope'].search(
+                    [('agent_code', 'in', agents_codes), ('lob','=','Medical'), ('issue_date', '>=', date3),
+                     ('issue_date', '<', date3 + relativedelta(months=1))]):
+                current_total += pol.eq_total
+            current_prod.append(current_total)
+            for pol in self.env['policy.arope'].search(
+                    [('agent_code', 'in', agents_codes), ('lob','=','Medical'), ('issue_date', '>=', date_last_year),
+                     ('issue_date', '<', date_last_year + relativedelta(months=1))]):
+                last_total += pol.eq_total
+            last_prod.append(last_total)
+
+            date3 = date3 + relativedelta(months=1)
+            date_last_year = date_last_year + relativedelta(months=1)
+        return {'current_year': current_prod, 'last_year': last_prod}
+
+    @api.model
+    def get_production_compare_commercial(self, agents_codes):
+        date_last_year = date(date.today().year, 7, 1) - relativedelta(years=2)
+        date_start = date(date.today().year, 7, 1) - relativedelta(years=1)
+        date3 = date_start
+        current_total = 0.0
+        current_prod = []
+        last_total = 0.0
+        last_prod = []
+
+        for i in range(12):
+            for pol in self.env['policy.arope'].search(
+                    [('agent_code', 'in', agents_codes), ('lob','not in',['Medical', 'Motor']), ('issue_date', '>=', date3),
+                     ('issue_date', '<', date3 + relativedelta(months=1))]):
+                current_total += pol.eq_total
+            current_prod.append(current_total)
+            for pol in self.env['policy.arope'].search(
+                    [('agent_code', 'in', agents_codes), ('lob','not in',['Medical', 'Motor']), ('issue_date', '>=', date_last_year),
                      ('issue_date', '<', date_last_year + relativedelta(months=1))]):
                 last_total += pol.eq_total
             last_prod.append(last_total)
@@ -425,7 +520,9 @@ class Brokers(models.Model):
     def get_person_info(self,id):
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
         obj=self.env['persons'].search([('card_id', '=', user.card_id)], limit=1)
-        return {'name':obj.name ,'fra': obj.fra_no if obj.fra_no else '', 'exp_date': obj.expire_date if obj.expire_date else '', 'mobile': obj.mobile if obj.mobile else '', 'mail': user.partner_id.email if user.partner_id.email else''}
+        return {'id': id, 'name':obj.name ,'fra': obj.fra_no if obj.fra_no else '',
+                'exp_date': obj.expire_date if obj.expire_date else '',
+                'mobile': obj.mobile if obj.mobile else '', 'mail': user.partner_id.email if user.partner_id.email else''}
 
 
     @api.model
@@ -456,6 +553,12 @@ class Brokers(models.Model):
 
             'targetVsProduction': self.get_target_production(id) if self.get_target_production(id) else False,
             'lastVsCurrentYear': self.get_production_compare(agents_codes) if self.get_production_compare(agents_codes) else False,
+            'lastVsCurrentYearMotor': self.get_production_compare_motor(agents_codes) if self.get_production_compare_motor(
+                agents_codes) else False,
+            'lastVsCurrentYearMedical': self.get_production_compare_medical(agents_codes) if self.get_production_compare_medical(
+                agents_codes) else False,
+            'lastVsCurrentYearCommercial': self.get_production_compare_commercial(agents_codes) if self.get_production_compare_commercial(
+                agents_codes) else False,
             'collections':self.get_collections(agents_codes,'broker') if self.get_collections(agents_codes,'broker') else False,
             'renews':self.get_renew(agents_codes,'broker') if self.get_renew(agents_codes,'broker') else False,
             'customers': self.get_customers(agents_codes) if self.get_customers(agents_codes) else False,
