@@ -184,7 +184,7 @@
             </div>
             <div class="col-lg-4 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
-                <h2>Current Year Vs Last Year Motor</h2>
+                <h2>Motor Current Year Vs Last Year</h2>
               </div>
               <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
@@ -194,7 +194,7 @@
             </div>
             <div class="col-lg-4 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
-                <h2>Current Year Vs Last Year Medical</h2>
+                <h2>Medical Current Year Vs Last Year</h2>
               </div>
               <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
@@ -204,7 +204,7 @@
             </div>
             <div class="col-lg-4 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
-                <h2>Current Year Vs Last Year Commercial</h2>
+                <h2>Commercial Current Year Vs Last Year</h2>
               </div>
               <div class="d-flex flex-column o_partner_dashboard_box">
                 <div class="o_partner_dashboard_box_body">
