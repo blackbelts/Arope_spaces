@@ -156,6 +156,8 @@
 
     <menuitem id="target_ch" name="Targets" parent="policy_config"
               action="sales_team.sales_team_config_action" />
+    <menuitem id="target_rule" name="Targets Rule" parent="policy_config"
+              action="target_rule_action" />
 
     <!--      <menuitem id="get_a_quote" name="Get A Quote" parent="arope_space" action="survey.get_quote_action" />-->
     <!--    <menuitem id="get_a_quote" name="Get A Quote" parent="arope_space"  />-->

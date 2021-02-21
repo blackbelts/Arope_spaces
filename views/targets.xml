@@ -57,4 +57,25 @@
                 </xpath>
             </field>
         </record>
+    <!-- Add a custom Tree (List) view -->
+    <record id="targets_rule_tree" model="ir.ui.view">
+		<field name="name">target.rules</field>
+		<field name="model">target.rules</field>
+		<field name="arch" type="xml">
+			<tree>
+                <field name="name"/>
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <field name="amount" string="Amount"/>
+
+			</tree>
+		</field>
+	</record>
+    <record model="ir.actions.act_window" id="target_rule_action">
+            <field name="name">Rules</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">target.rules</field>
+            <field name="view_id" ref="targets_rule_tree"/>
+            <field name="view_mode">form,tree,kanban</field>
+    </record>
 </odoo>

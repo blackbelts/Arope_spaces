@@ -34,7 +34,7 @@ class TeamTarget(models.Model):
     _name = 'team.target'
 
     member = fields.Many2one(comodel_name="res.users", string="Member", required=False, )
-    channel_id = fields.Many2one(comodel_name="crm.team")
+    channel_id = fields.Many2one(comodel_name="crm.team", ondelete='cascade')
     type = fields.Selection(
         [("individual", "Individual"), ("corporate", "Corporate")],
         string="Type", default='individual', copy=True)
@@ -91,7 +91,7 @@ class TargetRules(models.Model):
     amount = fields.Float('Target')
     total_sales = fields.Float(string='Total Sales')
     target_percent = fields.Float('Percentage(%)')
-    target_id = fields.Many2one('team.target')
+    target_id = fields.Many2one('team.target', ondelete='cascade')
     member_id = fields.Many2one("res.users")
 #
 #
@@ -102,4 +102,4 @@ class TargetPolicy(models.Model):
     to_date = fields.Date('Date To')
     amount = fields.Float('Percentage(%)')
     line_of_business = fields.Many2many('insurance.line.business', string='Line of business')
-    team_id = fields.Many2one('crm.team')
+    team_id = fields.Many2one('crm.team', ondelete='cascade')
