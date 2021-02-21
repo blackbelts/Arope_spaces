@@ -101,7 +101,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "bulletSize": 7,
                 "bulletBorderAlpha": 1,
                 "bulletColor": "#FFFFFF",
-                "lineColor": "#3EB650",
+                "lineColor": "#e77a11",
                 "useLineColorForBulletBorder": true,
                 "bulletBorderThickness": 3,
                 "fillAlphas": 0,
