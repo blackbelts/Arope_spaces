@@ -24,11 +24,7 @@ access_setup21,setup.setup21,model_state_history,base.group_user,1,1,1,1
 access_setup500,setup.setup500,model_final_application_setup,base.group_user,1,1,1,1
 access_setup23,setup.setup23,model_selection_options,base.group_user,1,1,1,1
 access_setup24,setup.setup24,model_offer_setup,base.group_user,1,1,1,1
-access_setup25,setup.setup25,model_final_offer,managers_group_arope,1,1,1,1
-access_setup44,setup.setup44,model_final_offer,broker_space_group,1,1,0,0
-access_setup45,setup.setup45,model_final_offer,surveyor_group,1,0,0,0
 access_setupoo,setup.setupoo,model_final_offer,base.group_user,1,1,1,1
-
 access_setup26,setup.setup26,model_state_setup,base.group_user,1,1,1,1
 
 
