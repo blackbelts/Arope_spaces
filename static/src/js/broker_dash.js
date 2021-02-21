@@ -37,6 +37,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         'click #insuranceApp':'insuranceApps',
         'click #travel':'travel',
         'click #pa':'personalAcc',
+        'click #medical':'medical',
+        'click #motor':'motor',
 
 
 
@@ -859,6 +861,50 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         ],
         context:{
 
+            "edit":true,
+            "create":true
+        },
+        target: 'current'
+      })
+    },
+    medical:function (x) {
+      this.do_action({
+
+        name: _t("Travel"),
+        type: 'ir.actions.act_window',
+        res_model: 'quotation.service',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+          ['create_uid', '=', this.user.id],
+          ['lob', '=', 4]
+        ],
+        context:{
+            'default_type': 4,
+            "edit":true,
+            "create":true
+        },
+        target: 'current'
+      })
+    },
+    motor:function (x) {
+      this.do_action({
+
+        name: _t("Travel"),
+        type: 'ir.actions.act_window',
+        res_model: 'quotation.service',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+          ['create_uid', '=', this.user.id],
+          ['lob', '=', 7]
+        ],
+        context:{
+            'default_lob': 7,
             "edit":true,
             "create":true
         },
