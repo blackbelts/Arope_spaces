@@ -58,7 +58,7 @@ class TeamTarget(models.Model):
                 last_total = 0
                 for pol in self.env['policy.arope'].search(
                         [('agent_code', '=', self.member.agent_code), ('issue_date', '>=', date_start - relativedelta(years=1)),
-                         ('issue_date', '<', date_start + relativedelta(months=1))]):
+                         ('issue_date', '<', (date_start - relativedelta(years=1)) + relativedelta(months=1))]):
                     last_total += pol.eq_total
                 self.targets = [(0, 0, {'name': MONTHS[datetime.strptime(str(date_start), '%Y-%m-%d').month],
                                         'from_date': date_start, 'to_date': date3 - relativedelta(days=1)
