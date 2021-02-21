@@ -111,12 +111,13 @@
                   Performance
                 </div>
               </div>
-              <div class="card" id="button4" style="width: 13.8%;">
+              <div class="card" id="button3" style="width: 13.8%;">
                 <div class="card-body my_card_body">
-                  <i style="padding-right: 4px;" class="fa fa-users"></i>
-                  My Customers
+                  <i style="padding-right: 4px;" class="fa fa-user-plus"></i>
+                  New Business
                 </div>
               </div>
+
               <div class="card" id="button2" style="width: 13.8%;">
                 <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-hospital-user"></i>
@@ -124,12 +125,14 @@
                 </div>
               </div>
 
-              <div class="card" id="button3" style="width: 13.8%;">
+            <div class="card" id="button4" style="width: 13.8%;">
                 <div class="card-body my_card_body">
-                  <i style="padding-right: 4px;" class="fa fa-user-plus"></i>
-                  New Business
+                  <i style="padding-right: 4px;" class="fa fa-users"></i>
+                  My Customers
                 </div>
               </div>
+
+
 
               <div class="card" id="button5" style="width: 13.8%;">
                 <div class="card-body my_card_body">
