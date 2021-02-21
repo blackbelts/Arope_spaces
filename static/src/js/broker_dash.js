@@ -86,32 +86,17 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               "startDuration": 1,
               "graphs": [
                {
-                "id": "graph1",
+
+              {
+                "alphaField": "alpha",
                 "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
-                "bullet": "round",
-                "lineThickness": 3,
-                "bulletSize": 7,
-                "bulletBorderAlpha": 1,
-                "bulletColor": "#FFFFFF",
-                "lineColor": "#3EB650",
-                "useLineColorForBulletBorder": true,
-                "bulletBorderThickness": 3,
-                "fillAlphas": 0,
-                "lineAlpha": 1,
+                "fillAlphas": 1,
+                "fillColorsField": "color",
                 "title": "Production",
-                "valueField": "Production",
-                "dashLengthField": "dashLengthLine"
+                "type": "column",
+                "valueField": "production",
+                "dashLengthField": "dashLengthColumn"
               },
-//              {
-//                "alphaField": "alpha",
-//                "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
-//                "fillAlphas": 1,
-//                "fillColorsField": "color",
-//                "title": "Production",
-//                "type": "column",
-//                "valueField": "production",
-//                "dashLengthField": "dashLengthColumn"
-//              },
                {
                 "id": "graph2",
                 "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
