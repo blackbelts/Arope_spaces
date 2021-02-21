@@ -870,7 +870,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     medical:function (x) {
       this.do_action({
 
-        name: _t("Travel"),
+        name: _t("Medical"),
         type: 'ir.actions.act_window',
         res_model: 'quotation.service',
         view_mode: 'tree,form',
@@ -882,7 +882,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           ['lob', '=', 4]
         ],
         context:{
-            'default_type': 4,
+            'default_lob': 4,
             "edit":true,
             "create":true
         },
@@ -892,7 +892,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     motor:function (x) {
       this.do_action({
 
-        name: _t("Travel"),
+        name: _t("Motor"),
         type: 'ir.actions.act_window',
         res_model: 'quotation.service',
         view_mode: 'tree,form',
