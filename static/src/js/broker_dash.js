@@ -84,16 +84,35 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "position": "left",
               }],
               "startDuration": 1,
-              "graphs": [{
-                "alphaField": "alpha",
+              "graphs": [
+               {
+                "id": "graph1",
                 "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
-                "fillAlphas": 1,
-                "fillColorsField": "color",
+                "bullet": "round",
+                "lineThickness": 3,
+                "bulletSize": 7,
+                "bulletBorderAlpha": 1,
+                "bulletColor": "#FFFFFF",
+                "lineColor": "#3EB650",
+                "useLineColorForBulletBorder": true,
+                "bulletBorderThickness": 3,
+                "fillAlphas": 0,
+                "lineAlpha": 1,
                 "title": "Production",
-                "type": "column",
-                "valueField": "production",
-                "dashLengthField": "dashLengthColumn"
-              }, {
+                "valueField": "Production",
+                "dashLengthField": "dashLengthLine"
+              },
+//              {
+//                "alphaField": "alpha",
+//                "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
+//                "fillAlphas": 1,
+//                "fillColorsField": "color",
+//                "title": "Production",
+//                "type": "column",
+//                "valueField": "production",
+//                "dashLengthField": "dashLengthColumn"
+//              },
+               {
                 "id": "graph2",
                 "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
                 "bullet": "round",
@@ -109,7 +128,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "title": "Target",
                 "valueField": "target",
                 "dashLengthField": "dashLengthLine"
-              }],
+              }
+              ],
               "plotAreaFillAlphas": 0.1,
               "categoryField": "month",
               "categoryAxis": {
