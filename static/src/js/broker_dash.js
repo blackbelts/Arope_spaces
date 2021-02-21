@@ -85,7 +85,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               }],
               "startDuration": 1,
               "graphs": [
-               {
+//               {
 
 //              {
 //                "alphaField": "alpha",
