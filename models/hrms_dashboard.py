@@ -128,6 +128,7 @@ class Brokers(models.Model):
 
         for i in range(12):
             current_total = 0
+            last_total = 0.0
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
@@ -155,6 +156,7 @@ class Brokers(models.Model):
 
         for i in range(12):
             current_total = 0
+            last_total = 0.0
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('lob','=','Motor'), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
@@ -182,6 +184,7 @@ class Brokers(models.Model):
 
         for i in range(12):
             current_total = 0
+            last_total = 0.0
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('lob','=','Medical'), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
@@ -209,6 +212,8 @@ class Brokers(models.Model):
         last_prod = []
 
         for i in range(12):
+            current_total = 0.0
+            last_total = 0.0
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('lob','not in',['Medical', 'Motor']), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
