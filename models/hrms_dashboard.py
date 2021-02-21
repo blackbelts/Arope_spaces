@@ -97,7 +97,7 @@ class Brokers(models.Model):
                 total = 0.0
                 for pol in self.env['policy.arope'].search(
                         [('agent_code', 'in', agents_codes), ('issue_date', '>=', rule.from_date),
-                         ('issue_date', '<=', rule.to_date)]):
+                         ('issue_date', '<', rule.from_date + relativedelta(months=1))]):
                     total += pol.eq_total
                 result[rule.name] = [rule.amount, total]
         #del result[False]
