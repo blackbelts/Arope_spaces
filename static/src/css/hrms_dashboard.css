@@ -259,8 +259,8 @@ overflow: auto !important;
     width: 105px;
     height: 105px;
     margin: 0 auto 25px;
-    border: 3px solid #06BBBD;
-    border-radius: 20px 20px;
+    /**border: 3px solid #06BBBD;
+    border-radius: 20px 20px;**/
     position: relative;
 }
 .serviceBox .service-icon:before,
@@ -268,10 +268,10 @@ overflow: auto !important;
     content: "";
     width: 60px;
     height: 60px;
-    border-top: 8px solid #06BBBD;
+    /**border-top: 8px solid #06BBBD;
     border-right: 8px solid #06BBBD;
     border-radius: 0 20px 0 0;
-    position: absolute;
+    position: absolute;**/
     top: -6px;
     right: -6px;
 }
