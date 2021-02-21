@@ -97,7 +97,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
 //                "valueField": "production",
 //                "dashLengthField": "dashLengthColumn"
 //              }
-              ,
+
               {
                 "id": "graph1",
                 "balloonText": "<span style='font-size:12px;'>[[title]] in [[category]]:<br><span style='font-size:20px;'>[[value]]</span> [[additional]]</span>",
