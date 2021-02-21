@@ -68,6 +68,7 @@ class CrmLeads(models.Model):
     offer_ids = fields.One2many('final.offer', 'opp_id')
     question_ids = fields.One2many('insurances.answers', 'request_id')
     name = fields.Char('Request')
+    agent_code = fields.Char('Agent Code')
 
     @api.model
     def create(self, vals):
@@ -104,6 +105,7 @@ class CrmLeads(models.Model):
 
 
     @api.onchange('policy')
+    @api.constrains('policy')
     def get_policy(self):
         if self.policy:
             pol = self.env['policy.arope'].search([('product', '=', self.policy_seq.product_name),
@@ -113,6 +115,7 @@ class CrmLeads(models.Model):
             # self.agent_code = str(pol.pin)
             self.start_date = pol.inception_date
             self.end_date = pol.expiry_date
+            self.agent_code = pol.agent_code
 
     end_reason = fields.Text(string='Endorsement Reason')
     cancel_reason = fields.Text(string='Cancel Reason')
@@ -393,6 +396,7 @@ class CrmLeads(models.Model):
         }
 
     @api.onchange('type','product','policy_num')
+    @api.constrains('type', 'product', 'policy_num')
     def compute_claim_number(self):
         if self.opp_type and self.product and self.policy_num:
             number = self.env['ir.sequence'].next_by_code('claim_number')
@@ -412,11 +416,11 @@ class CrmLeads(models.Model):
             for rec in self.env['persons'].search([('pin', '=', policy.customer_pin)]):
                 person = rec
             if person != '' and lob != '':
-                self.write({'lob': lob, 'customer_name': person.name, 'phone': person.mobile})
+                self.write({'lob': lob, 'customer_name': person.name, 'phone': person.mobile, 'agent_code': policy.agent_code})
             elif lob == '':
-                self.write({'customer_name': person.name, 'phone': person.mobile})
+                self.write({'customer_name': person.name, 'phone': person.mobile, 'agent_code': policy.agent_code})
             else:
-                self.write({'lob': lob})
+                self.write({'lob': lob, 'agent_code': policy.agent_code})
 
     # @api.onchange('type')
     #claim

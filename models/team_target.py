@@ -34,7 +34,7 @@ class TeamTarget(models.Model):
     _name = 'team.target'
 
     member = fields.Many2one(comodel_name="res.users", string="Member", required=False, )
-    channel_id = fields.Many2one(comodel_name="crm.team")
+    channel_id = fields.Many2one(comodel_name="crm.team", ondelete='cascade')
     type = fields.Selection(
         [("individual", "Individual"), ("corporate", "Corporate")],
         string="Type", default='individual', copy=True)
@@ -58,7 +58,7 @@ class TeamTarget(models.Model):
                 last_total = 0
                 for pol in self.env['policy.arope'].search(
                         [('agent_code', '=', self.member.agent_code), ('issue_date', '>=', date_start - relativedelta(years=1)),
-                         ('issue_date', '<', date_start + relativedelta(months=1))]):
+                         ('issue_date', '<', (date3 - relativedelta(days=1)) - relativedelta(years=1))]):
                     last_total += pol.eq_total
                 self.targets = [(0, 0, {'name': MONTHS[datetime.strptime(str(date_start), '%Y-%m-%d').month],
                                         'from_date': date_start, 'to_date': date3 - relativedelta(days=1)
@@ -91,7 +91,7 @@ class TargetRules(models.Model):
     amount = fields.Float('Target')
     total_sales = fields.Float(string='Total Sales')
     target_percent = fields.Float('Percentage(%)')
-    target_id = fields.Many2one('team.target')
+    target_id = fields.Many2one('team.target', ondelete='cascade')
     member_id = fields.Many2one("res.users")
 #
 #
@@ -102,4 +102,4 @@ class TargetPolicy(models.Model):
     to_date = fields.Date('Date To')
     amount = fields.Float('Percentage(%)')
     line_of_business = fields.Many2many('insurance.line.business', string='Line of business')
-    team_id = fields.Many2one('crm.team')
+    team_id = fields.Many2one('crm.team', ondelete='cascade')

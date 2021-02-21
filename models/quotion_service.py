@@ -55,7 +55,7 @@ class QuotationService(models.Model):
         if self.lob:
             self.lob_name = self.lob.line_of_business
 
-    @api.onchange('coverage_from', 'coverage_to')
+    @api.onchange('covemotorrage_from', 'coverage_to')
     @api.constrains('coverage_from', 'coverage_to')
     def compute_days(self):
         for rec in self:

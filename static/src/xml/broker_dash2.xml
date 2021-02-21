@@ -45,15 +45,11 @@
       <section class="o_partner_dashboard_banner bg-white">
         <div class="container my_container">
           <div class="row d-flex">
-            <div class="col-12 col-md-4 col-lg-6">
-              <h1 class="display-1 text-violet-dark mt32 mb32 fw_light" style="color: black !important;padding: 5px 10px;">
-                Broker Space
-              </h1>
-              <div class="alert alert-info alert-dismissible" style="background: white !important;" role="alert">
-                <span class="text-beta" style="color: black !important;">
+            <div class="col-12 col-md-4 col-lg-6" style="margin-top: 60px;">
+              <span class="text-beta" style="color: gray !important;">
                   <b>Welcome to AROPE partners space</b>
                 </span>
-                <p class="text-beta mt8 mb0" style="color: black !important;">
+                <p class="text-beta mt8 mb0" style="color: gray !important;">
                  You can follow your portfolio, Policies, collections, renewals, claims and Complaints
                  <!-- Working together on your first project is the best way to success in Odoo.
                   <br />
@@ -63,7 +59,9 @@
                   </a>-->
 
                 </p>
-              </div>
+<!--              <div class="alert alert-info alert-dismissible" style="background: white !important;" role="alert">-->
+<!--                -->
+<!--              </div>-->
             </div>
             <div id="o_my_sidebar" class="col-12 col-md col-lg-4 col-xl-3 o_my_sidebar">
 
@@ -111,12 +109,13 @@
                   Performance
                 </div>
               </div>
-              <div class="card" id="button4" style="width: 13.8%;">
+              <div class="card" id="button3" style="width: 13.8%;">
                 <div class="card-body my_card_body">
-                  <i style="padding-right: 4px;" class="fa fa-users"></i>
-                  My Customers
+                  <i style="padding-right: 4px;" class="fa fa-user-plus"></i>
+                  New Business
                 </div>
               </div>
+
               <div class="card" id="button2" style="width: 13.8%;">
                 <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-hospital-user"></i>
@@ -124,12 +123,14 @@
                 </div>
               </div>
 
-              <div class="card" id="button3" style="width: 13.8%;">
+            <div class="card" id="button4" style="width: 13.8%;">
                 <div class="card-body my_card_body">
-                  <i style="padding-right: 4px;" class="fa fa-user-plus"></i>
-                  New Business
+                  <i style="padding-right: 4px;" class="fa fa-users"></i>
+                  My Customers
                 </div>
               </div>
+
+
 
               <div class="card" id="button5" style="width: 13.8%;">
                 <div class="card-body my_card_body">
@@ -151,12 +152,12 @@
                   Requests Services
                 </div>
               </div>
-              <div class="card" id="button8" style="width: 13.8%;">
-                <div class="card-body my_card_body">
-                  <i style="padding-right: 4px;" class="fa fa-hand-holding-usd"></i>
-                  Quick Quote
-                </div>
-              </div>
+<!--              <div class="card" id="button8" style="width: 13.8%;">-->
+<!--                <div class="card-body my_card_body">-->
+<!--                  <i style="padding-right: 4px;" class="fa fa-hand-holding-usd"></i>-->
+<!--                  Quick Quote-->
+<!--                </div>-->
+<!--              </div>-->
 
 
 
@@ -425,7 +426,7 @@
 
           </div>
           <div class="row d-lg-flex" id="dash3" style="display: none !important;">
-            <div class="col-md-3 col-sm-6 col-lg-3 d-flex flex-column mb64">
+            <div class="col-md-2 col-sm-6 col-lg-2 d-flex flex-column mb64">
                 <div class="serviceBox" id="insuranceApp">
                     <div class="service-icon">
                         <span><i class="fa fa-building"></i></span>
@@ -433,7 +434,7 @@
                     <h3 class="title">Insurance <span>Application</span></h3>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-lg-3 d-flex flex-column mb64">
+            <div class="col-md-2 col-sm-6 col-lg-2 d-flex flex-column mb64">
                 <div class="serviceBox" id="travel">
                     <div class="service-icon">
                         <span><i class="fa fa-plane"></i></span>
@@ -441,16 +442,32 @@
                     <h3 class="title">Travel <span>Policy</span></h3>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-lg-3 d-flex flex-column mb64">
+            <div class="col-md-2 col-sm-6 col-lg-2 d-flex flex-column mb64">
                 <div class="serviceBox" id="pa">
                     <div class="service-icon">
-                        <span><i class="fa fa-blind"></i></span>
+                        <span><i class="fa fa-wheelchair"></i></span>
                     </div>
                     <h3 class="title">Personal <span>Accident</span></h3>
                 </div>
             </div>
+            <div class="col-md-2 col-sm-6 col-lg-2 d-flex flex-column mb64">
+                <div class="serviceBox" id="medical">
+                    <div class="service-icon">
+                        <span><i class="fa fa-user-md"></i></span>
+                    </div>
+                    <h3 class="title">Medical</h3>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-6 col-lg-2 d-flex flex-column mb64">
+                <div class="serviceBox" id="motor">
+                    <div class="service-icon">
+                        <span><i class="fa fa-car"></i></span>
+                    </div>
+                    <h3 class="title">Motor</h3>
+                </div>
+            </div>
 
-            <div class="col-md-3 col-sm-6 col-lg-3 d-flex flex-column mb64">
+            <div class="col-md-2 col-sm-6 col-lg-2 d-flex flex-column mb64">
                 <div class="serviceBox" id="marine">
                     <div class="service-icon">
                         <span><i class="fa fa-ship"></i></span>
@@ -508,46 +525,6 @@
           <div class="row d-lg-flex" id="dash6" style="display: none !important;">
           </div>
           <div class="row d-lg-flex" id="dash7" style="display: none !important;">
-            <div class="col-lg-12 d-flex flex-column mb64">
-              <div class="o_partner_dashboard_box_header">
-                <h2>Insurance applications count per LOB</h2>
-              </div>
-              <div class="d-flex flex-column o_partner_dashboard_box">
-                <div class="o_partner_dashboard_box_body">
-                  <div class="single-table">
-                    <div class="table-responsive">
-                      <table class="table table-hover text-center">
-                        <thead class="text-uppercase">
-                          <tr>
-                            <th scope="col">LOB </th>
-                            <th scope="col">Icon</th>
-                            <th scope="col">Count</th>
-                            <!--                              <th scope="col">Production</th>-->
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr t-foreach="widget.App_count" t-as="lob">
-                            <td>
-                              <t t-esc="lob.name" />
-                            </td>
-                            <td>
-                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon" />
-                            </td>
-                            <td>
-                              <t t-esc="lob.count" />
-                            </td>
-                            <!--                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>-->
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                <div class="o_partner_dashboard_box_footer">
-                  <a id="apps" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Apps</a>
-                </div>
-              </div>
-            </div>
             <div class="col-lg-6 d-flex flex-column mb64">
               <div class="o_partner_dashboard_box_header">
                 <h2>Endorsements Requests</h2>
@@ -791,6 +768,86 @@
                 </div>
                 <div class="o_partner_dashboard_box_footer">
                   <a id="complaints" class="btn btn-secondary" style="position: relative; overflow: hidden;">Your Complaints</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Insurance applications count per LOB</h2>
+              </div>
+              <div class="d-flex flex-column o_partner_dashboard_box">
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">LOB </th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Count</th>
+                            <!--                              <th scope="col">Production</th>-->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.App_count" t-as="lob">
+                            <td>
+                              <t t-esc="lob.name" />
+                            </td>
+                            <td>
+                              <img style="height: 3rem;" t-att-src="'data:image/jpeg;base64,'+lob.icon" />
+                            </td>
+                            <td>
+                              <t t-esc="lob.count" />
+                            </td>
+                            <!--                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>-->
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a id="apps" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Apps</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex flex-column mb64">
+              <div class="o_partner_dashboard_box_header">
+                <h2>Requests count per user</h2>
+              </div>
+              <div class="d-flex flex-column o_partner_dashboard_box">
+                <div class="o_partner_dashboard_box_body">
+                  <div class="single-table">
+                    <div class="table-responsive">
+                      <table class="table table-hover text-center">
+                        <thead class="text-uppercase">
+                          <tr>
+                            <th scope="col">type </th>
+                            <th scope="col">count</th>
+                            <th scope="col">user</th>
+                            <!--                              <th scope="col">Production</th>-->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr t-foreach="widget.requestsPerUser" t-as="request">
+                            <td>
+                              <t t-esc="request.type" />
+                            </td>
+                            <td>
+                              <t t-esc="request.count" />
+                            </td>
+                            <td>
+                              <t t-esc="request.user" />
+                            </td>
+                            <!--                              <td><t t-esc="widget.makeNumber(lob.amount)" /> EGP</td>-->
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+<!--                  <a id="apps" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Apps</a>-->
                 </div>
               </div>
             </div>

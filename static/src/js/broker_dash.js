@@ -37,6 +37,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         'click #insuranceApp':'insuranceApps',
         'click #travel':'travel',
         'click #pa':'personalAcc',
+        'click #medical':'medical',
+        'click #motor':'motor',
 
 
 
@@ -99,7 +101,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "bulletSize": 7,
                 "bulletBorderAlpha": 1,
                 "bulletColor": "#FFFFFF",
-                "lineColor": "#3EB650",
+                "lineColor": "#e77a11",
                 "useLineColorForBulletBorder": true,
                 "bulletBorderThickness": 3,
                 "fillAlphas": 0,
@@ -393,6 +395,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       }).then(function (res) {
         self.brokerProduction = res.production
         self.target_production = res.targetVsProduction
+        self.requestsPerUser = res.requests_per_user
         self.brokerRank = res.rank
         self.collections_statistics = res.collections
         self.renew_statistics = res.renews
@@ -571,8 +574,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           [2002, 'list'],[false, 'form']
         ],
         domain: [
-          ['opp_type', '=', 4],
-          ['create_uid', '=', this.user.id]
+          ['opp_type', '=', 4]
         ],
         context:{
             'default_type': 'opportunity',
@@ -594,8 +596,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           [2002, 'list'],[false, 'form']
         ],
         domain: [
-          ['opp_type', '=', 3],
-          ['create_uid', '=', this.user.id]
+          ['opp_type', '=', 3]
         ],
         context:{
             'default_type': 'opportunity',
@@ -649,7 +650,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         ],
         domain: [
 //          ['opp_type', '=', 3],
-          ['create_uid', '=', this.user.id]
+//          ['create_uid', '=', this.user.id]
         ],
 //        context:{
 //            'default_type': 'opportunity',
@@ -790,7 +791,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           ['type','=','opportunity'],
           ['opp_type','=', 2],
           ['policy_services_type', '=', 'end'],
-          ['create_uid', '=', this.user.id]
+//          ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',
@@ -813,7 +814,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         domain: [
           ['type','=','opportunity'],
           ['opp_type','=',1],
-          ['create_uid', '=', this.user.id]
+//          ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',
@@ -835,7 +836,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           [false, 'list'],[false, 'form']
         ],
         domain: [
-          ['create_uid', '=', this.user.id]
+//          ['create_uid', '=', this.user.id]
         ],
         context:{
 
@@ -856,10 +857,54 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           [false, 'list'],[false, 'form']
         ],
         domain: [
-          ['create_uid', '=', this.user.id]
+//          ['create_uid', '=', this.user.id]
         ],
         context:{
 
+            "edit":true,
+            "create":true
+        },
+        target: 'current'
+      })
+    },
+    medical:function (x) {
+      this.do_action({
+
+        name: _t("Medical"),
+        type: 'ir.actions.act_window',
+        res_model: 'quotation.service',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+          ['create_uid', '=', this.user.id],
+          ['lob', '=', 4]
+        ],
+        context:{
+            'default_lob': 4,
+            "edit":true,
+            "create":true
+        },
+        target: 'current'
+      })
+    },
+    motor:function (x) {
+      this.do_action({
+
+        name: _t("Motor"),
+        type: 'ir.actions.act_window',
+        res_model: 'quotation.service',
+        view_mode: 'tree,form',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+          ['create_uid', '=', this.user.id],
+          ['lob', '=', 7]
+        ],
+        context:{
+            'default_lob': 7,
             "edit":true,
             "create":true
         },
@@ -879,7 +924,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           ['type','=','opportunity'],
           ['opp_type','=', 11],
 //          ['policy_services_type', '=', 'cancel'],
-          ['create_uid', '=', this.user.id]
+//          ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',
@@ -901,7 +946,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
           ['type','=','opportunity'],
           ['opp_type','=', 2],
           ['policy_services_type', '=', 'renew'],
-          ['create_uid', '=', this.user.id]
+//          ['create_uid', '=', this.user.id]
         ],
         context:{
             'default_type': 'opportunity',

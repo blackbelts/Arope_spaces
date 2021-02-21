@@ -97,7 +97,7 @@ class Brokers(models.Model):
                 total = 0.0
                 for pol in self.env['policy.arope'].search(
                         [('agent_code', 'in', agents_codes), ('issue_date', '>=', rule.from_date),
-                         ('issue_date', '<=', rule.to_date)]):
+                         ('issue_date', '<', rule.from_date + relativedelta(months=1))]):
                     total += pol.eq_total
                 result[rule.name] = [rule.amount, total]
         #del result[False]
@@ -127,6 +127,8 @@ class Brokers(models.Model):
         last_prod = []
 
         for i in range(12):
+            current_total = 0
+            last_total = 0.0
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
@@ -153,6 +155,8 @@ class Brokers(models.Model):
         last_prod = []
 
         for i in range(12):
+            current_total = 0
+            last_total = 0.0
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('lob','=','Motor'), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
@@ -179,6 +183,8 @@ class Brokers(models.Model):
         last_prod = []
 
         for i in range(12):
+            current_total = 0
+            last_total = 0.0
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('lob','=','Medical'), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
@@ -196,6 +202,7 @@ class Brokers(models.Model):
 
     @api.model
     def get_production_compare_commercial(self, agents_codes):
+        current_total = 0
         date_last_year = date(date.today().year, 7, 1) - relativedelta(years=2)
         date_start = date(date.today().year, 7, 1) - relativedelta(years=1)
         date3 = date_start
@@ -205,6 +212,8 @@ class Brokers(models.Model):
         last_prod = []
 
         for i in range(12):
+            current_total = 0.0
+            last_total = 0.0
             for pol in self.env['policy.arope'].search(
                     [('agent_code', 'in', agents_codes), ('lob','not in',['Medical', 'Motor']), ('issue_date', '>=', date3),
                      ('issue_date', '<', date3 + relativedelta(months=1))]):
@@ -430,6 +439,23 @@ class Brokers(models.Model):
         return lob_list
 
     @api.model
+    def get_requests_count_per_user(self, codes):
+        lob_list = []
+        ids = []
+        for request in self.env['request.type'].search([]):
+            for user in self.env['res.users'].search([]):
+                count = 0
+                for rec in self.env['crm.lead'].search([('opp_type', '=', request.id), ('agent_code', 'in', codes),
+                                                        ('create_uid', '=', user.id)]):
+                    count += 1
+                    ids.append(rec.id)
+                if count > 0:
+                    lob_list.append({'type': request.type, 'count': count, 'user': user.name, 'ids': ids})
+                else:
+                    continue
+        return lob_list
+
+    @api.model
     def get_complaint_count(self, codes,type):
         complaint_list = []
         if type == 'broker':
@@ -562,6 +588,7 @@ class Brokers(models.Model):
             'collections':self.get_collections(agents_codes,'broker') if self.get_collections(agents_codes,'broker') else False,
             'renews':self.get_renew(agents_codes,'broker') if self.get_renew(agents_codes,'broker') else False,
             'customers': self.get_customers(agents_codes) if self.get_customers(agents_codes) else False,
+            'requests_per_user': self.get_requests_count_per_user(agents_codes) if self.get_requests_count_per_user(agents_codes) else False,
         }
 
     @api.model
