@@ -45,15 +45,11 @@
       <section class="o_partner_dashboard_banner bg-white">
         <div class="container my_container">
           <div class="row d-flex">
-            <div class="col-12 col-md-4 col-lg-6">
-              <h1 class="display-1 text-violet-dark mt32 mb32 fw_light" style="color: black !important;padding: 5px 10px;">
-                Broker Space
-              </h1>
-              <div class="alert alert-info alert-dismissible" style="background: white !important;" role="alert">
-                <span class="text-beta" style="color: black !important;">
+            <div class="col-12 col-md-4 col-lg-6" style="margin-top: 60px;">
+              <span class="text-beta" style="color: gray !important;">
                   <b>Welcome to AROPE partners space</b>
                 </span>
-                <p class="text-beta mt8 mb0" style="color: black !important;">
+                <p class="text-beta mt8 mb0" style="color: gray !important;">
                  You can follow your portfolio, Policies, collections, renewals, claims and Complaints
                  <!-- Working together on your first project is the best way to success in Odoo.
                   <br />
@@ -63,7 +59,9 @@
                   </a>-->
 
                 </p>
-              </div>
+<!--              <div class="alert alert-info alert-dismissible" style="background: white !important;" role="alert">-->
+<!--                -->
+<!--              </div>-->
             </div>
             <div id="o_my_sidebar" class="col-12 col-md col-lg-4 col-xl-3 o_my_sidebar">
 
