@@ -830,7 +830,7 @@
                   </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
-                  <a id="apps" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Apps</a>
+<!--                  <a id="apps" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Apps</a>-->
                 </div>
               </div>
             </div>
