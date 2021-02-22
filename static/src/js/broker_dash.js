@@ -172,7 +172,6 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "balloonText": "production in [[category]] (current year): <b>[[value]]</b>",
                 "fillAlphas": 0.9,
                 "fillColorsField": "color",
-                "stroke": "color",
                 "lineAlpha": 0.2,
                 "title": "current Year",
                 "type": "column",
@@ -212,7 +211,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                         "cornerRadiusBottomLeft": 12,
                         "strokeWidth": 2,
                         "strokeOpacity": 1,
-                        "stroke": "#ccc"
+                        "stroke": "color"
                       }]
                     }
                   }
