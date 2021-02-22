@@ -200,7 +200,21 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               },
               "export": {
                 "enabled": false
-              }
+              },
+              "legend": {
+                    "useDefaultMarker": true,
+                    "markers": {
+                      "children": [{
+                        "cornerRadiusTopLeft": 12,
+                        "cornerRadiusTopRight": 12,
+                        "cornerRadiusBottomRight": 12,
+                        "cornerRadiusBottomLeft": 12,
+                        "strokeWidth": 2,
+                        "strokeOpacity": 1,
+                        "stroke": "#ccc"
+                      }]
+                    }
+                  }
 
             });
             var dataProvider3 = []
