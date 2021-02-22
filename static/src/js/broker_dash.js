@@ -212,7 +212,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                         "cornerRadiusBottomLeft": 12,
                         "strokeWidth": 2,
                         "strokeOpacity": 1,
-                        "stroke": "color"
+                        "color": "#952FFE"
                       }]
                     }
                   }
