@@ -555,8 +555,9 @@ class Brokers(models.Model):
     def get_broker_dashboard(self, id):
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
         agents_codes = []
-        for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
-            agents_codes.append(rec.agent_code)
+        agents_codes.append(user.agent_code)
+        # for rec in self.env['persons'].search([('card_id', '=', user.card_id)]):
+
 
         return {
 
