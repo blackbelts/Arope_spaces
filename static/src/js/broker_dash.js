@@ -203,19 +203,20 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "enabled": false
               },
               "legend": {
-                    "useDefaultMarker": true,
-                    "markers": {
-                      "children": [{
-                        "cornerRadiusTopLeft": 12,
-                        "cornerRadiusTopRight": 12,
-                        "cornerRadiusBottomRight": 12,
-                        "cornerRadiusBottomLeft": 12,
-                        "strokeWidth": 2,
-                        "strokeOpacity": 1,
-                        "color": "#952FFE"
-                      }]
-                    }
-                  }
+                "horizontalGap": 10,
+                "markerSize": 10,
+                 "data": [{
+                   "title": "Total_Balance",
+                   "value": "120", //not officially documented - use at your own risk
+            //       "backgroundColor":"#0D52D1", not valid
+                   "color": "#0D52D1"
+                 }, {
+                   "title": "Total_Paid",
+                   "value":"150", //not officially documented - use at your own risk
+            //       "backgroundColor":"#04D215", not valid
+                   "color": "#04D215"
+                 }]
+            },
 
             });
             var dataProvider3 = []
