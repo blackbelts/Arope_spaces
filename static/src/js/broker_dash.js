@@ -177,6 +177,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "type": "column",
                 "labelText": '[[value]]',
                 "tooltipText": 'Current Year',
+                "name": 'Current Year',
                 "valueField": "current_year"
               }, {
                 "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
@@ -189,6 +190,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "columnWidth": 0.5,
                 "labelText": '[[value]]',
                 "tooltipText": 'Last Year',
+                "name": 'Last Year',
                 "valueField": "last_year"
               }],
               "plotAreaFillAlphas": 0.1,
