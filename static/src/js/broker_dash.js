@@ -144,6 +144,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               "legend": {
                 "horizontalGap": 5,
                 "markerSize": 15,
+
                  "data": [{
                    "title": "Target",
                    "color": "#e77a11"
@@ -216,6 +217,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               "legend": {
                 "horizontalGap": 5,
                 "markerSize": 15,
+                "useGraphSettings": true,
                  "data": [{
                    "title": "Current Year",
                    "color": "#3EB650"
