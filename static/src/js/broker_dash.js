@@ -190,7 +190,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "labelText": '[[value]]',
                 "tooltipText": 'Current Year',
                 "name": 'Current Year',
-//                "color": "#04D215",
+                "color": "#04D215",
                 "valueField": "current_year"
               }, {
                 "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
