@@ -175,6 +175,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "lineAlpha": 0.2,
                 "title": "current Year",
                 "type": "column",
+                "labelText": '[[value]]',
                 "valueField": "current_year"
               }, {
                 "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
@@ -185,6 +186,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "type": "column",
                 "clustered": false,
                 "columnWidth": 0.5,
+                "labelText": '[[value]]',
                 "valueField": "last_year"
               }],
               "plotAreaFillAlphas": 0.1,
@@ -229,6 +231,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "lineAlpha": 0.2,
                 "title": "current Year",
                 "type": "column",
+                "labelText": '[[value]]',
                 "valueField": "current_year"
               }, {
                 "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
@@ -239,6 +242,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "type": "column",
                 "clustered": false,
                 "columnWidth": 0.5,
+                "labelText": '[[value]]',
                 "valueField": "last_year"
               }],
               "plotAreaFillAlphas": 0.1,
@@ -283,6 +287,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "lineAlpha": 0.2,
                 "title": "current Year",
                 "type": "column",
+                "labelText": '[[value]]',
                 "valueField": "current_year"
               }, {
                 "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
@@ -293,6 +298,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "type": "column",
                 "clustered": false,
                 "columnWidth": 0.5,
+                "labelText": '[[value]]',
                 "valueField": "last_year"
               }],
               "plotAreaFillAlphas": 0.1,
@@ -337,6 +343,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "lineAlpha": 0.2,
                 "title": "current Year",
                 "type": "column",
+                "labelText": '[[value]]',
                 "valueField": "current_year"
               }, {
                 "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
@@ -347,6 +354,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "type": "column",
                 "clustered": false,
                 "columnWidth": 0.5,
+                "labelText": '[[value]]',
                 "valueField": "last_year"
               }],
               "plotAreaFillAlphas": 0.1,
