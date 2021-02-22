@@ -140,7 +140,18 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               },
               "export": {
                 "enabled": false
-              }
+              },
+              "legend": {
+                "horizontalGap": 5,
+                "markerSize": 15,
+                 "data": [{
+                   "title": "Target",
+                   "color": "#e77a11"
+                 }, {
+                   "title": "Production",
+                   "color": "#3EB650"
+                 }]
+            },
 
             });
             var dataProvider2 = []
@@ -178,7 +189,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "labelText": '[[value]]',
                 "tooltipText": 'Current Year',
                 "name": 'Current Year',
-                "color": "#04D215",
+//                "color": "#04D215",
                 "valueField": "current_year"
               }, {
                 "balloonText": "production in [[category]] (last year) <b>[[value]]</b>",
@@ -203,7 +214,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "enabled": false
               },
               "legend": {
-                "horizontalGap": 10,
+                "horizontalGap": 5,
                 "markerSize": 15,
                  "data": [{
                    "title": "Current Year",
@@ -268,7 +279,18 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               },
               "export": {
                 "enabled": false
-              }
+              },
+              "legend": {
+                "horizontalGap": 5,
+                "markerSize": 15,
+                 "data": [{
+                   "title": "Current Year",
+                   "color": "#3EB650"
+                 }, {
+                   "title": "Last Year",
+                   "color": "#3778C2"
+                 }]
+            },
 
             });
             var dataProvider4 = []
@@ -324,7 +346,18 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               },
               "export": {
                 "enabled": false
-              }
+              },
+              "legend": {
+                "horizontalGap": 5,
+                "markerSize": 15,
+                 "data": [{
+                   "title": "Current Year",
+                   "color": "#3EB650"
+                 }, {
+                   "title": "Last Year",
+                   "color": "#3778C2"
+                 }]
+            },
 
             });
             var dataProvider5 = []
@@ -380,7 +413,18 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               },
               "export": {
                 "enabled": false
-              }
+              },
+              "legend": {
+                "horizontalGap": 5,
+                "markerSize": 15,
+                 "data": [{
+                   "title": "Current Year",
+                   "color": "#3EB650"
+                 }, {
+                   "title": "Last Year",
+                   "color": "#3778C2"
+                 }]
+            },
 
             });
             var lobs=[]
