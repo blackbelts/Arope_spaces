@@ -204,17 +204,13 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               },
               "legend": {
                 "horizontalGap": 10,
-                "markerSize": 10,
+                "markerSize": 15,
                  "data": [{
-                   "title": "Total_Balance",
-                   "value": "120", //not officially documented - use at your own risk
-            //       "backgroundColor":"#0D52D1", not valid
-                   "color": "#0D52D1"
+                   "title": "Current Year",
+                   "color": "#3EB650"
                  }, {
-                   "title": "Total_Paid",
-                   "value":"150", //not officially documented - use at your own risk
-            //       "backgroundColor":"#04D215", not valid
-                   "color": "#04D215"
+                   "title": "Last Year",
+                   "color": "#3778C2"
                  }]
             },
 
