@@ -217,7 +217,6 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
               "legend": {
                 "horizontalGap": 5,
                 "markerSize": 15,
-                "useDefaultMarker": true,
                  "data": [{
                    "title": "Current Year",
                    "color": "#3EB650"
