@@ -353,6 +353,19 @@
                 }
             </field>
         </record>
+        <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities_online_quotes">
+            <field name="name">General Claim</field>
+            <field name="res_model">crm.lead</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('type','=','opportunity'),('opp_type','=',7)]</field>
+            <field name="context">{
+                'default_type': 'opportunity',
+                'default_user_id': uid,
+                'default_opp_type': 7
+                }
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="crm_stage_form_view">
             <field name="model">crm.stage</field>
             <field name="inherit_id" ref="crm.crm_stage_form"/>

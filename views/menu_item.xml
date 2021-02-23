@@ -180,8 +180,54 @@
     <menuitem id="requests_view_menu" name="Support" parent="arope_space"
                    sequence="1"
     groups="Arope_spaces.call_center_group"/>
-    <menuitem id="requests_view_menu_services" name="Signup" parent="requests_view_menu"
-                  action="ibs_crm_lead_opportunities_signup" sequence="1"/>
+    <menuitem id="requests_view_menu_signup" groups="Arope_spaces.managers_group_arope" name="Signup" parent="arope_space"
+                  action="ibs_crm_lead_opportunities_signup" sequence="8088"/>
+    <menuitem id="requests_view_menu_online_quotes" groups="Arope_spaces.managers_group_arope,Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sale" name="Online Quote" parent="arope_space"
+                  action="ibs_crm_lead_opportunities_online_quotes" sequence="8089"/>
+    <menuitem id="arope_main_id" groups="Arope_spaces.managers_group_arope" name="Arope Configuration" parent="arope_space"
+              sequence="989898987"/>
+    <menuitem id="conf_menu" name="Configurations "
+                  parent="arope_main_id" sequence="3" />
+        <menuitem id="line_business" name="Line Of Business" parent="conf_menu"
+                  action="arope_conf.insurance_line_business_action" sequence="0" />
+         <menuitem id="product" name="Products" parent="conf_menu"
+                  action="arope_conf.insurance_Products_action"  sequence="1"/>
+       <menuitem id="comm_menu" name="Commissions" parent="conf_menu"
+                  action="arope_conf.comm_action"  sequence="2"/>
+    <menuitem id="notify_menu" name="Notifications" parent="conf_menu"
+                  action="arope_conf.insurance_notify_action" />
+     <menuitem id="policy_view" name="Policies"
+                  action="arope_conf.policy_form_action" parent="arope_main_id" sequence="0"/>
+    <menuitem id="risk_view" name="Motor Risks"
+                  action="arope_conf.risk_action" parent="policy_view" sequence="0"/>
+
+      <menuitem id="claim_view" name="Claims"
+                action="arope_conf.claim_arope_action" parent="arope_main_id" sequence="3"/>
+
+    <menuitem id="policy_collection" name="Collections"
+                   action="arope_conf.collection_action" parent="arope_main_id" sequence="4"/>
+
+      <menuitem name="Partners" id="person_menu" parent="arope_main_id"/>
+       <menuitem id="broker_menu" name="Brokers"
+                  action="arope_conf.broker_action" parent="person_menu"/>
+    <menuitem id="surveyor_menu" name="Surveyors"
+                  action="arope_conf.surveyor_action_id" parent="person_menu"/>
+     <menuitem id="customers_menu" name="customers"
+                  action="arope_conf.customers_action" parent="person_menu"/>
+    <menuitem id="users_menu" name="Users"
+                   parent="arope_main_id" sequence="1"/>
+    <menuitem id="broker_user_menu" name=" Broker Users"
+                  action="arope_conf.broker_user_action" parent="users_menu" sequence="1"/>
+    <menuitem id="customer_users_menu" name="Customer Users"
+                  action="arope_conf.customer_user_action" parent="users_menu" sequence="2"/>
+    <menuitem id="surv_users_menu" name="Surveyors Users"
+                  action="arope_conf.surv_user_action" parent="users_menu" sequence="3"/>
+     <menuitem id="curr_view" name="Currency"
+              action="base.action_currency_form" parent="arope_main_id" sequence="6"/>
+    <menuitem id="log_menu" name="IMS LOG"
+              action="arope_conf.log_action" parent="arope_main_id" sequence="7"/>
+
+
     <menuitem id="requests_view_menu_insurance_app" name="Complains" parent="requests_view_menu"
                   action="ibs_crm_lead_opportunities_complain" sequence="2"/>
 <!--    <menuitem id="requests_view_menu_motor_claim" name="Motor Claim" parent="requests_view_menu"-->
