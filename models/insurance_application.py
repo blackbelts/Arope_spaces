@@ -797,6 +797,25 @@ class FinalOffers(models.Model):
             self.offer_state = 'submitted'
 
 
+class FinalOffer(models.Model):
+    _name = 'final.offer'
+
+    # question = fields.Many2one('offer.setup','Offer Item')
+    type = fields.Selection([('initial', 'Initial Offer'), ('final', 'Final Offer')], default='initial')
+    date = fields.Date('Offer Date',default=lambda self:fields.datetime.today())
+    comment = fields.Text('Comment')
+    file = fields.Many2many('ir.attachment', string="Offer")
+    value = fields.Float('Value')
+    application_id = fields.Many2one('insurance.quotation', ondelete='cascade')
+    opp_id = fields.Many2one('crm.lead', ondelete='cascade')
+    offer_state = fields.Selection([('submitted', 'Submitted'),
+                                    ('accepted', 'Accepted'), ('cancel', 'Rejected')], string='State')
+
+    @api.onchange('file')
+    def change_state(self):
+        if self.file:
+            self.offer_state = 'submitted'
+
 
 class FinalApplication(models.Model):
     _name = 'final.application'
