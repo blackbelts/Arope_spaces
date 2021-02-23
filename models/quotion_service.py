@@ -240,7 +240,7 @@ class QuotationService(models.Model):
 
     def create_app(self):
         self.hide_button = True
-        product = self.env['insurance.product'].search([('line_of_bus', '=', self.lob.id)]).id
+        # product = self.env['insurance.product'].search([('line_of_bus', '=', self.lob.id)]).id
 
         form_view_id = self.env.ref("Arope_spaces.crm__lead_form_view").id
         # ctx = dict(self.env.context)
@@ -257,7 +257,7 @@ class QuotationService(models.Model):
             # 'domain': [('quotation_id', '=', self.id),('lob', '=', self.lob)],
             'views': [(form_view_id, 'form')],
             'target': 'current',
-            'context': {'default_quotation_id': self.id, 'default_lob': self.lob.id, 'default_product_id': product},
+            'context': {'default_quotation_id': self.id, 'default_lob': self.lob.id},
         }
 
 class Members(models.Model):
