@@ -90,7 +90,8 @@
 
             </div>
             <div class="col-12 col-md-2 col-lg-2">
-               <img class="image" style="width: 200px;height: 200px;margin-top: 0%;margin-left: 70%;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+               <img class="image" style="width: 200px;height: 200px;margin-top: 0%;margin-left: 70%;display: block; " t-if="widget.user_image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+              <img class="image" style="width: 200px;height: 200px;margin-top: 0%;margin-left: 70%;display: block; " t-if="!widget.user_image"  src="/Arope_spaces/static/src/img/portrait-blank-male.png"/>
              <!-- <div class="text-center">
                 <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
               </div>-->
@@ -109,12 +110,7 @@
                   Performance
                 </div>
               </div>
-              <div class="card" id="button3" style="width: 13.8%;">
-                <div class="card-body my_card_body">
-                  <i style="padding-right: 4px;" class="fa fa-user-plus"></i>
-                  New Business
-                </div>
-              </div>
+
 
               <div class="card" id="button2" style="width: 13.8%;">
                 <div class="card-body my_card_body">
@@ -123,13 +119,19 @@
                 </div>
               </div>
 
-            <div class="card" id="button4" style="width: 13.8%;">
+              <div class="card" id="button4" style="width: 13.8%;">
                 <div class="card-body my_card_body">
                   <i style="padding-right: 4px;" class="fa fa-users"></i>
                   My Customers
                 </div>
               </div>
 
+              <div class="card" id="button3" style="width: 13.8%;">
+                <div class="card-body my_card_body">
+                  <i style="padding-right: 4px;" class="fa fa-user-plus"></i>
+                  New Business
+                </div>
+              </div>
 
 
               <div class="card" id="button5" style="width: 13.8%;">

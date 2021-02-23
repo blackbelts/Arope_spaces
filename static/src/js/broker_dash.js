@@ -149,7 +149,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                    "title": "Target",
                    "color": "#e77a11"
                  }, {
-                   "title": "Production",
+                   "title": "Current Year Production",
                    "color": "#3EB650"
                  }]
             },
@@ -218,10 +218,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "horizontalGap": 5,
                 "markerSize": 15,
                  "data": [{
-                   "title": "Current Year",
+                   "title": "Current Year Production",
                    "color": "#3EB650"
                  }, {
-                   "title": "Last Year",
+                   "title": "Last Year Production",
                    "color": "#3778C2"
                  }]
             },
@@ -285,10 +285,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "horizontalGap": 5,
                 "markerSize": 15,
                  "data": [{
-                   "title": "Current Year",
+                   "title": "Current Year Production",
                    "color": "#3EB650"
                  }, {
-                   "title": "Last Year",
+                   "title": "Last Year Production",
                    "color": "#3778C2"
                  }]
             },
@@ -352,10 +352,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "horizontalGap": 5,
                 "markerSize": 15,
                  "data": [{
-                   "title": "Current Year",
+                   "title": "Current Year Production",
                    "color": "#3EB650"
                  }, {
-                   "title": "Last Year",
+                   "title": "Last Year Production",
                    "color": "#3778C2"
                  }]
             },
@@ -419,10 +419,10 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "horizontalGap": 5,
                 "markerSize": 15,
                  "data": [{
-                   "title": "Current Year",
+                   "title": "Current Year Production",
                    "color": "#3EB650"
                  }, {
-                   "title": "Last Year",
+                   "title": "Last Year Production",
                    "color": "#3778C2"
                  }]
             },
