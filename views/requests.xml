@@ -359,7 +359,7 @@
             </field>
         </record>
         <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities_online_quotes">
-            <field name="name">General Claim</field>
+            <field name="name">Online Quote</field>
             <field name="res_model">crm.lead</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="domain">[('type','=','opportunity'),('opp_type','=',7)]</field>
