@@ -130,6 +130,18 @@ class CrmLeads(models.Model):
 
     support_team = fields.Many2one('helpdesk_lite.team', string='Team')
 
+    # Complains
+
+    # username = fields.Char('UserName')
+    # password = fields.Char('Password')
+    # phone = fields.Char('Mobile Number')
+    complain = fields.Text('Complain')
+    source = fields.Selection([('online', 'Online'),
+                               ('call', 'Call Center'),
+                               ('social', 'Social Media')],
+                              'Source', copy=False)
+    team_id = fields.Many2one('helpdesk_lite.team', string='Complaint Types', index=True)
+
     @api.onchange('policy')
     @api.constrains('policy')
     def get_policy(self):

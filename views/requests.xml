@@ -107,6 +107,11 @@
                         </group>
 
                     </group>
+                    <group attrs="{'invisible': [('opp_type', '!=', 6)]}">
+                        <field name="source"/>
+                        <field name="team_id"/>
+                        <field name="complain" placeholder="Complaint Summary..."/>
+                    </group>
                     <group attrs="{'invisible': [('opp_type', '!=', 7)]}">
                         <group>
                             <field name="job"/>

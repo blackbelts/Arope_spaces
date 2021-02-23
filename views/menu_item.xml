@@ -228,8 +228,8 @@
               action="arope_conf.log_action" parent="arope_main_id" sequence="7"/>
 
 
-    <menuitem id="requests_view_menu_insurance_app" name="Complains" parent="requests_view_menu"
-                  action="ibs_crm_lead_opportunities_complain" sequence="2"/>
+    <menuitem id="requests_view_menu_complain" name="Complains" parent="arope_space"
+                  action="ibs_crm_lead_opportunities_complain" sequence="8090"/>
 <!--    <menuitem id="requests_view_menu_motor_claim" name="Motor Claim" parent="requests_view_menu"-->
 <!--                  action="ibs_crm_lead_opportunities_motor_claim" sequence="3"/>-->
 <!--    <menuitem id="requests_view_menu_general_claim" name="General Claim" parent="requests_view_menu"-->
