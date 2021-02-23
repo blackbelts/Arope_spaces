@@ -140,7 +140,7 @@ class CrmLeads(models.Model):
                                ('call', 'Call Center'),
                                ('social', 'Social Media')],
                               'Source', copy=False)
-    team_id = fields.Many2one('helpdesk_lite.team', string='Complaint Types', index=True)
+    # team_id = fields.Many2one('helpdesk_lite.team', string='Complaint Types', index=True)
 
     @api.onchange('policy')
     @api.constrains('policy')
