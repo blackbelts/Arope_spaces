@@ -781,7 +781,7 @@ class FinalOffers(models.Model):
     _name = 'final.offers'
 
     # question = fields.Many2one('offer.setup','Offer Item')
-    type = fields.Selection([('initial', 'Initial Offer'), ('final', 'Final Offer')], default='initial')
+    types = fields.Selection([('initial', 'Initial Offer'), ('final', 'Final Offer')], default='initial')
     date = fields.Date('Offer Date',default=lambda self:fields.datetime.today())
     comment = fields.Text('Comment')
     file = fields.Many2many('ir.attachment', string="Offer")
