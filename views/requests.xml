@@ -11,6 +11,7 @@
 <!--                    <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', '!=', 1)]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>-->
 <!--=======-->
                     <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', 'not in', [1, 7])]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>
+                    <button  name="submit" attrs="{'invisible': ['|',('stage_id', '!=', 57),('opp_type', 'not in', [1])]}" string="Submit"  type="object" class="oe_highlight" />
                     <xpath expr="//field[@name='stage_id']" position="replace">
                         <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" domain="[('type', 'in',opp_type)]" />
                     </xpath>
@@ -207,8 +208,8 @@
                             </group>
                         </group>
                     </page>
-                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|','|',('opp_type', '!=', 1),
-                    ('lob','in', [4, 7]),('stage_id','not in', [58,3,4,10])]}">
+                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),
+                    ('lob','in', [4, 7])]}">
                         <field name="persons" >
                             <tree editable="bottom">
                                 <field name="insured" readonly="1" force_save="1"/>
@@ -221,8 +222,8 @@
                         </field>
 
                     </page>
-                    <page string="Application Form" attrs="{'invisible': ['|','|',('opp_type', '!=', 1),
-                    ('lob','not in', [4, 7]),('stage_id','not in', [58,3,4,10])]}">
+                    <page string="Application Form" attrs="{'invisible': ['|',('opp_type', '!=', 1),
+                    ('lob','not in', [4, 7])]}">
                         <field name="question_ids">
                             <tree editable="bottom">
                                 <field name="question"/>
@@ -231,8 +232,7 @@
                             </tree>
                         </field>
                     </page>
-                    <page string="Offers" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),
-                    ('stage_id', '=', 57)]}">
+                    <page string="Offers" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 1)]}">
                         <field name="offer_ids" >
                             <tree editable="bottom" decoration-danger="offer_state == 'pending'">
                                 <field name="type" />
@@ -243,8 +243,7 @@
                             </tree>
                         </field>
                     </page>
-                    <page string="Required Documents" attrs="{'invisible': ['|',('opp_type', 'not in', [3,4]),
-                    ('stage_id', '=', 57)]}">
+                    <page string="Required Documents" attrs="{'invisible': [('opp_type', 'not in', [3,4])]}">
                         <field name="declaration_ids">
                             <tree editable="bottom" decoration-danger="state == 'pending'">
                                 <field name="question"/>

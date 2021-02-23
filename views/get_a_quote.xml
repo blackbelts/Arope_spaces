@@ -9,17 +9,17 @@
 			<form>
 
                 <sheet>
-                    <div name="button_box" class="oe_button_box">
-                        <button class="oe_stat_button" string="Motor" type="object" name="motor"
-                            icon="fa-car">
-                        </button>
-                        <button class="oe_stat_button" string="Medical" type="object" name="medical"
-                            icon="fa-stethoscope">
-                        </button>
-                        <button class="oe_stat_button" string="Travel" type="object" name="travel"
-                            icon="fa-plane">
-                        </button>
-                    </div>
+<!--                    <div name="button_box" class="oe_button_box">-->
+<!--                        <button class="oe_stat_button" string="Motor" type="object" name="motor"-->
+<!--                            icon="fa-car">-->
+<!--                        </button>-->
+<!--                        <button class="oe_stat_button" string="Medical" type="object" name="medical"-->
+<!--                            icon="fa-stethoscope">-->
+<!--                        </button>-->
+<!--                        <button class="oe_stat_button" string="Travel" type="object" name="travel"-->
+<!--                            icon="fa-plane">-->
+<!--                        </button>-->
+<!--                    </div>-->
 <!--                    <h3>Quick Quote</h3>-->
 
 

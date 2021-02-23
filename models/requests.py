@@ -466,6 +466,11 @@ class CrmLeads(models.Model):
             },
         }
 
+    def submit(self):
+        self.stage_id = self.env['crm.stage'].search(
+            [('name', '=', 'Submitted'), ('type', '=', self.opp_type.id)]).id
+        self.message = self.stage_id.message
+
 
 class CrmStages(models.Model):
     _inherit = "crm.stage"
