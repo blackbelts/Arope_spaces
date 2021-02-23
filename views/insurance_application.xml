@@ -545,6 +545,7 @@
                                 </tree>
                             </field>
                             <group>
+                                <field name="survey_report" widget="many2many_binary"/>
                                 <field name="comment"/>
                             </group>
                         </page>
