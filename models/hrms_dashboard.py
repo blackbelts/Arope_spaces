@@ -546,7 +546,7 @@ class Brokers(models.Model):
     def get_person_info(self,id):
         user = self.env['res.users'].search([('id', '=', id)], limit=1)
         obj=self.env['persons'].search([('card_id', '=', user.card_id)], limit=1)
-        return {'id': id, 'name':obj.name ,'fra': obj.fra_no if obj.fra_no else '',
+        return {'id': id, 'name':user.name ,'fra': obj.fra_no if obj.fra_no else '',
                 'exp_date': obj.expire_date if obj.expire_date else '',
                 'mobile': obj.mobile if obj.mobile else '', 'mail': user.partner_id.email if user.partner_id.email else''}
 
