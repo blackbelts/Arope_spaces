@@ -967,8 +967,9 @@ class SurveyReport(models.Model):
         self.status = self.env['state.setup'].search([('survey_status', '=', 'accepted'), ('type', '=', 'survey')]).id
         self.message = self.status.message
 
-
-
+    @api.onchange('recomm')
+    def recommendation(self):
+        self.request_id.write({'recomm': self.recomm})
 
 class FamilyAge(models.Model):
     _name = 'medical.family'

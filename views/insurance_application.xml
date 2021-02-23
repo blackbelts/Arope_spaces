@@ -536,23 +536,29 @@
                     </group>
                     <group attrs="{'invisible': [('state', '=', 'pending')]}">
                         <group>
+
                             <field name="survey_report" widget="many2many_binary"/>
+                            <field name="survey_report_ids">
+                                <tree editable="bottom" decoration-danger="state == 'pending'">
+                                    <field name="question"/>
+                                    <field name="file" widget="many2many_binary"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </group>
+
+
+                    </group>
+                    <group attrs="{'invisible': [('state', '=', 'pending')]}">
+                        <group>
+                            <field name="comment"/>
                         </group>
                         <group>
                             <field name="recomm"/>
                         </group>
-                        <group>
-                            <field name="comment"/>
-                        </group>
                     </group>
 
-                    <!--                    <field attrs="{'invisible': [('state', '=', 'pending')]}" name="survey_report_ids">-->
-                    <!--                        <tree editable="bottom" decoration-danger="state == 'pending'">-->
-                    <!--                            <field name="question"/>-->
-                    <!--                            <field name="file" widget="many2many_binary"/>-->
-                    <!--                            <field name="state"/>-->
-                    <!--                        </tree>-->
-                    <!--                    </field>-->
+
 
                 </sheet>
                 <!--                <div class="oe_chatter">-->

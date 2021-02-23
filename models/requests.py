@@ -69,7 +69,7 @@ class CrmLeads(models.Model):
     question_ids = fields.One2many('insurances.answers', 'request_id')
     name = fields.Char('Request')
     agent_code = fields.Char('Agent Code')
-
+    recomm = fields.Text('Recommendation')
     @api.model
     def create(self, vals):
         serial_no = self.env['ir.sequence'].next_by_code('req')

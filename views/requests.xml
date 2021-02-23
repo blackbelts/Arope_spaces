@@ -121,6 +121,7 @@
                             <field name="customer_name" />
                             <field name="phone" />
                             <field name="email" />
+                            <field name="recomm" attrs="{'invisible': [('recomm', '=', False)]}"/>
                         </group>
 
                         <group>
