@@ -54,7 +54,7 @@
                 <xpath expr="//field[@name='partner_id']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
-                <xpath expr="//field[@name='activity_ids']" position="attributes">
+                <xpath expr="//div[@class='oe_chatter']/field[@name='activity_ids']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='email_from']/parent::div" position="attributes">
