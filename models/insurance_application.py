@@ -777,8 +777,8 @@ class SurveyReportLine(models.Model):
         if self.file != False:
             self.state = 'submitted'
 
-class FinalOffer(models.Model):
-    _name = 'final.offer'
+class FinalOffers(models.Model):
+    _name = 'final.offers'
 
     # question = fields.Many2one('offer.setup','Offer Item')
     type = fields.Selection([('initial', 'Initial Offer'), ('final', 'Final Offer')], default='initial')

@@ -65,7 +65,7 @@ class CrmLeads(models.Model):
     main_phone = fields.Char('Mobile Number (Main)')
     spare_phone = fields.Char('Mobile Number (Spare)')
     persons = fields.One2many('persons.lines', 'opp_id')
-    offer_ids = fields.One2many('final.offer', 'opp_id')
+    offer_ids = fields.One2many('final.offers', 'opp_id')
     question_ids = fields.One2many('insurances.answers', 'request_id')
     name = fields.Char('Request')
     agent_code = fields.Char('Agent Code')

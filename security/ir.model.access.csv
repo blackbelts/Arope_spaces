@@ -24,7 +24,7 @@ access_setup21,setup.setup21,model_state_history,base.group_user,1,1,1,1
 access_setup500,setup.setup500,model_final_application_setup,base.group_user,1,1,1,1
 access_setup23,setup.setup23,model_selection_options,base.group_user,1,1,1,1
 access_setup24,setup.setup24,model_offer_setup,base.group_user,1,1,1,1
-access_setupoo,setup.setupoo,model_final_offer,base.group_user,1,1,1,1
+access_setupoo,setup.setupoo,model_final_offers,base.group_user,1,1,1,1
 access_setup26,setup.setup26,model_state_setup,base.group_user,1,1,1,1
 
 
