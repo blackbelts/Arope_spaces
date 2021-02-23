@@ -471,6 +471,9 @@ class CrmLeads(models.Model):
             [('name', '=', 'Submitted'), ('type', '=', self.opp_type.id)]).id
         self.message = self.stage_id.message
 
+    def accept_offer(self):
+        self.offer_ids.offer_state = 'accepted'
+
 
 class CrmStages(models.Model):
     _inherit = "crm.stage"

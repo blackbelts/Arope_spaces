@@ -12,6 +12,7 @@
 <!--=======-->
                     <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', 'not in', [1, 7])]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>
                     <button  name="submit" attrs="{'invisible': ['|',('stage_id', '!=', 57),('opp_type', 'not in', [1])]}" string="Submit"  type="object" class="oe_highlight" />
+                    <button  name="accept_offer" attrs="{'invisible': ['|',('stage_id', '!=', 37),('opp_type', 'not in', [1])]}" string="Accept Offer"  type="object" class="oe_highlight" />
                     <xpath expr="//field[@name='stage_id']" position="replace">
                         <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" domain="[('type', 'in',opp_type)]" />
                     </xpath>
