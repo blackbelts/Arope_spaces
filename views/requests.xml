@@ -11,8 +11,8 @@
 <!--                    <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', '!=', 1)]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>-->
 <!--=======-->
                     <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', 'not in', [1, 7])]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>
-                    <button  name="submit" attrs="{'invisible': ['|',('stage_id', '!=', 57),('opp_type', 'not in', [1])]}" string="Submit"  type="object" class="oe_highlight" />
-                    <button  name="accept_offer" attrs="{'invisible': ['|',('stage_id', '!=', 37),('opp_type', 'not in', [1])]}" string="Accept Offer"  type="object" class="oe_highlight" />
+                    <button  name="submit" attrs="{'invisible': ['|',('stage_id', '!=', 57),('opp_type', 'not in', [1])]}" string="Submit"  type="object" class="oe_highlight" groups="Arope_spaces.broker_space_group,client_space_group" />
+                    <button  name="accept_offer" attrs="{'invisible': ['|',('stage_id', '!=', 37),('opp_type', 'not in', [1])]}" string="Accept Offer"  type="object" class="oe_highlight" groups="Arope_spaces.broker_space_group,client_space_group" />
                     <xpath expr="//field[@name='stage_id']" position="replace">
                         <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" domain="[('type', 'in',opp_type)]" />
                     </xpath>
@@ -41,7 +41,7 @@
                     <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//button[@name='action_schedule_meeting']" position="replace">
-                    <button attrs="{'invisible': [('opp_type', '!=', 1)]}" class="oe_stat_button" type="object" icon="fa-dollar" string="Related Quick Quote" name="related_quote">
+                    <button attrs="{'invisible': [('opp_type', '!=', 1)]}" class="oe_stat_button" type="object" icon="fa-dollar" string="Related Quick Quote" name="related_quote" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group">
                     </button>
                     <button attrs="{'invisible': [('opp_type', 'not in', [3,4])]}" class="oe_stat_button" type="object" icon="fa-dollar" string="Related Policy" name="related_policy" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group">
                     </button>

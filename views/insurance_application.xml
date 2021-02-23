@@ -532,12 +532,11 @@
                         </group>
                         <group>
                             <field name="surveyor"/>
+                            <field name="recomm" groups="Arope_spaces.managers_group_arope"/>
                         </group>
                     </group>
-                    <group attrs="{'invisible': [('state', '=', 'pending')]}">
-                        <group>
-
-                            <field name="survey_report" widget="many2many_binary"/>
+                    <notebook>
+                        <page string="Survey Report" attrs="{'invisible': [('state', '=', 'pending')]}">
                             <field name="survey_report_ids">
                                 <tree editable="bottom" decoration-danger="state == 'pending'">
                                     <field name="question"/>
@@ -545,18 +544,26 @@
                                     <field name="state"/>
                                 </tree>
                             </field>
-                        </group>
+                            <group>
+                                <field name="comment"/>
+                            </group>
+                        </page>
+                    </notebook>
+<!--                    <group >-->
+<!--                        <group>-->
+
+<!--                            <field name="survey_report" widget="many2many_binary"/>-->
+<!--                            -->
+<!--                        </group>-->
 
 
-                    </group>
-                    <group attrs="{'invisible': [('state', '=', 'pending')]}">
-                        <group>
-                            <field name="comment"/>
-                        </group>
-                        <group>
-                            <field name="recomm"/>
-                        </group>
-                    </group>
+<!--                    </group>-->
+<!--                    <group attrs="{'invisible': [('state', '=', 'pending')]}">-->
+<!--                        -->
+<!--                        <group>-->
+<!--                            -->
+<!--                        </group>-->
+<!--                    </group>-->
 
 
 
