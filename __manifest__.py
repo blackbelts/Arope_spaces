@@ -44,6 +44,7 @@
         'views/required_document_wizard.xml',
         'views/help_desk.xml',
         'views/policy_view.xml',
+        'views/help_support_team.xml',
         #'reports/offer.xml',
         #'reports/questionnaire.xml',
         'views/requests.xml',

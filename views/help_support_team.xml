@@ -1,0 +1,19 @@
+<odoo>
+    <record id="help_desk_inherit_main_team" model="ir.ui.view">
+        <field name="name">helpdesk_lite.team.form</field>
+        <field name="model">helpdesk_lite.team</field>
+        <field name="inherit_id" ref="helpdesk_lite.support_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="string">Support Leader</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="placeholder">Complaint Type...</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="team_support_type"/>
+                <field name="support_chain" widget="many2many_tags" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
