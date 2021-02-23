@@ -122,7 +122,7 @@ class CrmLeads(models.Model):
 
     @api.onchange('offer_ids')
     def change_offers(self):
-        if self.offer_ids.type == '':
+        if self.offer_ids:
             offers = []
             for rec in self.offer_ids:
                 offers.append(rec)
