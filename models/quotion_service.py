@@ -257,7 +257,7 @@ class QuotationService(models.Model):
             # 'domain': [('quotation_id', '=', self.id),('lob', '=', self.lob)],
             'views': [(form_view_id, 'form')],
             'target': 'current',
-            'context': {'default_quotation_id': self.id, 'default_lob': self.lob.id},
+            'context': {'default_quotation_id': self.id, 'default_lob': self.lob.id,'default_opp_type': 1},
         }
 
 class Members(models.Model):
