@@ -103,6 +103,32 @@ class CrmLeads(models.Model):
     declaration_ids = fields.One2many('claim.lines', 'opp_id')
     pin = fields.Char('PIN')
 
+    #Online Quote
+    contact_name = fields.Char('Contact Name')
+    email_from = fields.Char('Email', help="Email address of the contact", index=True)
+    job = fields.Char('Job')
+    phone = fields.Char('Phone')
+    ticket_type = fields.Selection([('personal', 'PA'),
+                                    ('travel', 'Travel'), ('medical', 'Medical'), ('motor', 'Motor')],
+                                   default='personal')
+    sum_insured = fields.Float('Sum Insured')
+    state = fields.Selection([('new', 'New'),
+                              ('verified', 'Verified'),
+                              ('proposal', 'Proposal'),
+                              ('won', 'Won'),
+                              ('canceled', 'Canceled'), ],
+                             'Status', required=True, default='new', copy=False)
+
+    user_id = fields.Many2one('res.users', string='Assigned to', track_visibility='onchange', index=True, default=False,
+                              )
+
+    active = fields.Boolean(default=True)
+    source = fields.Selection([('online', 'Online'),
+                               ('call', 'Call Center'),
+                               ('social', 'Social Media')],
+                              'Source', copy=False)
+
+    support_team = fields.Many2one('helpdesk_lite.team', string='Team')
 
     @api.onchange('policy')
     @api.constrains('policy')
@@ -474,6 +500,21 @@ class CrmLeads(models.Model):
     def accept_offer(self):
         self.offer_ids.offer_state = 'accepted'
 
+    #Online Quote
+
+    def takeit(self):
+        self.user_id = self.env.uid
+
+
+    @api.onchange('support_team')
+    def onchange_support_team(self):
+        if self.support_team:
+            # filter products by seller
+            user_ids = self.support_team.member_ids.ids
+            return {'domain': {'user_id': [('id', 'in', user_ids)]}}
+        else:
+            # filter all products -> remove domain
+            return {'domain': {'user_id': []}}
 
 class CrmStages(models.Model):
     _inherit = "crm.stage"
@@ -485,3 +526,16 @@ class RequestsTypes(models.Model):
     _rec_name = 'type'
 
     type = fields.Char(string='Request Type')
+
+
+
+
+class TicketTypes(models.Model):
+    _inherit = 'helpdesk_lite.team'
+    support_chain = fields.Many2many('res.users', string='Support Chain')
+    team_support_type = fields.Selection([('personal', 'PA'),
+                                          ('travel', 'Travel'), ('medical', 'Medical'), ('motor', 'Motor')],
+                                         default='personal', sting='Support Type')
+
+
+
