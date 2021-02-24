@@ -231,7 +231,7 @@
                             <th scope="col">LOB</th>
                             <th scope="col">Icon</th>
                             <th scope="col">Count</th>
-                            <th scope="col">Premium (EGP)</th>
+                            <th scope="col" style="text-align: right;">Premium (EGP)</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -245,7 +245,7 @@
                             <td>
                               <t t-esc="lob.count" />
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                               <t t-esc="widget.makeNumber(lob.amount)" />
 
                             </td>
@@ -274,7 +274,7 @@
                             <th scope="col">LOB </th>
                             <th scope="col">Icon</th>
                             <th scope="col">Count</th>
-                            <th scope="col">Claims Paid EGP</th>
+                            <th scope="col" style="text-align: right;">Claims Paid (EGP)</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -288,7 +288,7 @@
                             <td>
                               <t t-esc="lob.count" />
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                               <t t-esc="widget.makeNumber(lob.amount)" />
 
                             </td>
@@ -316,7 +316,7 @@
                           <tr>
                             <th scope="col">Color</th>
                             <th scope="col">Count</th>
-                            <th scope="col">Outstanding (EGP)</th>
+                            <th scope="col" style="text-align: right;">Outstanding (EGP)</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -338,7 +338,7 @@
                             <td>
                               <t t-esc="widget.collections_statistics.Orange.count" />
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                               <t t-esc="widget.makeNumber(widget.collections_statistics.Orange.total)" />
                             </td>
                           </tr>
@@ -377,7 +377,7 @@
                           <tr>
                             <th scope="col">Color</th>
                             <th scope="col">Count</th>
-                            <th scope="col">PREMIUM (EGP)</th>
+                            <th scope="col" style="text-align: right;">PREMIUM (EGP)</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -388,7 +388,7 @@
                             <td>
                               <t t-esc="widget.renew_statistics.Red.count" />
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                               <t t-esc="widget.makeNumber(widget.renew_statistics.Red.total)" />
                             </td>
                           </tr>
