@@ -46,10 +46,10 @@
         <div class="container my_container">
           <div class="row d-flex">
             <div class="col-12 col-md-4 col-lg-6" style="margin-top: 60px;">
-              <span class="text-beta" style="color: gray !important;">
+              <span class="text-beta" style="color: gray !important;font-size: 22px;">
                   <b>Welcome to AROPE partners space</b>
                 </span>
-                <p class="text-beta mt8 mb0" style="color: gray !important;">
+                <p class="text-beta mt8 mb0" style="color: gray !important; font-size: 16px;">
                  You can follow your portfolio, Policies, collections, renewals, claims and Complaints
                  <!-- Working together on your first project is the best way to success in Odoo.
                   <br />
@@ -103,7 +103,7 @@
       </section>
       <section class="bg-white">
         <div class="container my_container">
-          <div class="row d-flex flex-wrap no-gutters pb64" id="myBtn" style="padding-bottom:30px !important;">
+          <div class="row d-flex flex-wrap no-gutters pb64" id="myBtn" style="padding-bottom:30px !important;padding-top: 20px;">
               <div class="card active-card" id="button1" style="width: 13.8%;">
                 <div class="card-body my_card_body ">
                   <i style="padding-right: 4px;" class="fa fa-tachometer-alt"></i>
