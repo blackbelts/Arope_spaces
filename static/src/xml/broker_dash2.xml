@@ -327,7 +327,7 @@
                             <td>
                               <t t-esc="widget.collections_statistics.Red.count" />
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                               <t t-esc="widget.makeNumber(widget.collections_statistics.Red.total)" />
                             </td>
                           </tr>
@@ -349,7 +349,7 @@
                             <td>
                               <t t-esc="widget.collections_statistics.Green.count" />
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                               <t t-esc="widget.makeNumber(widget.collections_statistics.Green.total)" />
                             </td>
 
@@ -399,7 +399,7 @@
                             <td>
                               <t t-esc="widget.renew_statistics.Orange.count" />
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                               <t t-esc="widget.makeNumber(widget.renew_statistics.Orange.total)" />
                             </td>
                           </tr>
@@ -410,7 +410,7 @@
                             <td>
                               <t t-esc="widget.renew_statistics.Green.count" />
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                               <t t-esc="widget.makeNumber(widget.renew_statistics.Green.total)" />
                             </td>
 
