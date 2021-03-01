@@ -146,12 +146,14 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
                 "markerSize": 15,
 
                  "data": [{
-                   "title": "Target",
-                   "color": "#e77a11"
-                 }, {
                    "title": "Current Year Production",
                    "color": "#3EB650"
-                 }]
+                 },
+                 {
+                   "title": "Target",
+                   "color": "#e77a11"
+                 }
+                 ]
             },
 
             });

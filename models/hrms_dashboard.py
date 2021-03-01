@@ -388,16 +388,29 @@ class Brokers(models.Model):
         elif type=='customer':
             ids=self.env['policy.arope'].search([('customer_pin', 'in', codes)]).ids
 
-        for lob in self.env['insurance.line.business'].search([]):
+        for lob in self.env['insurance.line.business'].search([('line_of_business', 'in', ['Medical', 'Motor'])]):
             total=0.0
             count=0
-            for rec in self.env['policy.arope'].search([('id', 'in', ids), ('lob', '=', lob.line_of_business)]):
+            for rec in self.env['policy.arope'].search([('id', 'in', ids),
+                                                        ('lob', '=', lob.line_of_business)]):
                   total+=rec.eq_total
                   count+=1
                   ids.append(rec.id)
             if count>0:
-             lob_list.append({'name':lob.line_of_business,'count':count,'amount':total,'icon':lob.image,'image': lob.icon,'ids':ids})
+                lob_list.append({'name':lob.line_of_business,'count':count,
+                                 'amount':total,'icon':lob.image,'image': lob.icon,'ids':ids})
             else:continue
+        total = 0.0
+        count = 0
+        for rec in self.env['policy.arope'].search([('id', 'in', ids),
+                                                    ('lob', 'not in', ['Medical', 'Motor'])]):
+            total += rec.eq_total
+            count += 1
+            ids.append(rec.id)
+        if count > 0:
+            lob_list.append({'name': 'Commercial', 'count': count,
+                             'amount': total, 'ids': ids})
+
 
         return lob_list
 
