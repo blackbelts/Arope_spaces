@@ -197,7 +197,10 @@
     <menuitem id="notify_menu" name="Notifications" parent="conf_menu"
                   action="arope_conf.insurance_notify_action" />
      <menuitem id="policy_view" name="Policies"
-                  action="arope_conf.policy_form_action" parent="arope_main_id" sequence="0"/>
+                   parent="arope_main_id" sequence="0"/>
+
+     <menuitem id="policy_view" name="Policies"
+                  action="arope_conf.policy_form_action" parent="policy_view" sequence="1"/>
     <menuitem id="risk_view" name="Motor Risks"
                   action="arope_conf.risk_action" parent="policy_view" sequence="0"/>
 
