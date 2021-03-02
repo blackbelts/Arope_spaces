@@ -430,11 +430,11 @@ class Brokers(models.Model):
             count = 0
             unpaid_count = 0
             for rec in self.env['claim.arope'].search([('id', 'in', ids), ('lob', '=', lob.line_of_business)]):
-                if rec.eq_total > 0:
-                    total+=rec.eq_total
+                if rec.claim_paid > 0:
+                    total+=rec.claim_paid
                     count+=1
                     ids.append(rec.id)
-                elif rec.eq_total == 0:
+                elif rec.claim_paid == 0:
                     total = 0
                     unpaid_count += 1
                     unpaid_ids.append(rec.id)
@@ -448,11 +448,11 @@ class Brokers(models.Model):
         count = 0
         for rec in self.env['claim.arope'].search([('id', 'in', ids),
                                                     ('lob', 'not in', ['Medical', 'Motor'])]):
-            if rec.eq_total > 0 :
-                total += rec.eq_total
+            if rec.claim_paid > 0 :
+                total += rec.claim_paid
                 count += 1
                 ids.append(rec.id)
-            elif rec.eq_total == 0:
+            elif rec.claim_paid == 0:
                 # total = 0
                 unpaid_count += 1
                 unpaid_ids.append(rec.id)
