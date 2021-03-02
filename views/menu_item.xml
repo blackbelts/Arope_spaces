@@ -199,7 +199,7 @@
      <menuitem id="policy_view" name="Policies"
                    parent="arope_main_id" sequence="0"/>
 
-     <menuitem id="policy_view" name="Policies"
+     <menuitem id="policies_view" name="Policies"
                   action="arope_conf.policy_form_action" parent="policy_view" sequence="1"/>
     <menuitem id="risk_view" name="Motor Risks"
                   action="arope_conf.risk_action" parent="policy_view" sequence="0"/>
