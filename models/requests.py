@@ -551,6 +551,9 @@ class TicketTypes(models.Model):
     team_support_type = fields.Selection([('personal', 'PA'),
                                           ('travel', 'Travel'), ('medical', 'Medical'), ('motor', 'Motor')],
                                          default='personal', sting='Support Type')
+    request_type = fields.Many2many('request.type', sting='request Type')
+    lob = fields.Many2many('insurance.line.business', string='LOB')
+    team_mail = fields.Char('Team Mail')
 
 
 

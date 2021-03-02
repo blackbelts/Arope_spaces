@@ -11,9 +11,16 @@
                 <attribute name="placeholder">Complaint Type...</attribute>
             </xpath>
             <xpath expr="//field[@name='user_id']" position="after">
-                <field name="team_support_type"/>
+                <field name="request_type"/>
+                <field name="lob" widget="many2many_tags"/>
+                <field name="team_mail"/>
                 <field name="support_chain" widget="many2many_tags" />
             </xpath>
         </field>
+    </record>
+    <record model="ir.actions.act_window" id="team_support_action">
+            <field name="name">Team Support</field>
+            <field name="res_model">helpdesk_lite.team</field>
+            <field name="view_mode">tree,form</field>
     </record>
 </odoo>

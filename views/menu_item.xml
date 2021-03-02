@@ -156,6 +156,9 @@
 
     <menuitem id="target_ch" name="Targets" parent="policy_config"
               action="sales_team.sales_team_config_action" />
+    <menuitem id="team_support" name="Team Support" parent="policy_config"
+              action="team_support_action" />
+
 <!--    <menuitem id="target_rule" name="Targets Rule" parent="policy_config"-->
 <!--              action="target_rule_action" />-->
 
