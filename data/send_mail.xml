@@ -9,7 +9,7 @@
             <field name="subject">New Request</field>
             <!--<field name="email_to">${object.user_id.partner_id.email}</field>-->
             <field name="lang">${object.lang}</field>
-            <field name="model_id" ref="Arope_spaces.model_crm.lead"/>
+            <field name="model_id" ref="Arope_spaces.model_crm_lead"/>
             <field name="auto_delete" eval="True"/>
             <field name="body_html">
                 <![CDATA[
