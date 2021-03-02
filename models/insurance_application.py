@@ -104,6 +104,7 @@ class Quotation(models.Model):
                                 ('sme', 'SME'), ],
                                'Package For',
                                default='individual')
+
     # motor_product = fields.Many2one('product.covers', 'Product')
     brand = fields.Selection([('all brands', 'All Brands (except Chinese & East Asia)'),
                               ('chinese cars & east asia', 'Chinese Cars & East Asia'), ('all models', 'All Models')],
@@ -894,10 +895,16 @@ class WizardInsuranceQuotation(models.TransientModel):
     insurance_app_id = fields.Many2one('insurance.quotation')
     request_id = fields.Many2one('crm.lead')
     policy_number = fields.Char('Policy Num')
+    attach_policy = fields.Many2one('ir.attachment', string='Attach Policy')
     policy_issue_date = fields.Date('Policy Issue Date', default=datetime.today())
 
     def policy_num(self):
-        self.request_id.write({'policy_number' : self.policy_number, "policy_issue_date": self.policy_issue_date})
+        if self.attach_policy:
+            self.request_id.write({'policy_number' : self.policy_number,
+                                   "policy_issue_date": self.policy_issue_date, "attach_policy": self.attach_policy})
+        else:
+            self.request_id.write({'policy_number': self.policy_number,
+                                   "policy_issue_date": self.policy_issue_date})
 
 class SurveyReport(models.Model):
 

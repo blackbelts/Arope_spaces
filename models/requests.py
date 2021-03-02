@@ -70,6 +70,7 @@ class CrmLeads(models.Model):
     name = fields.Char('Request')
     agent_code = fields.Char('Agent Code')
     recomm = fields.Text('Recommendation')
+    notes_recommendations = fields.Many2one('ir.attachment', string="Notes or Recommendations")
     @api.model
     def create(self, vals):
         serial_no = self.env['ir.sequence'].next_by_code('req')
@@ -102,7 +103,8 @@ class CrmLeads(models.Model):
     date = fields.Date('Intimation Date', default=datetime.today())
     declaration_ids = fields.One2many('claim.lines', 'opp_id')
     pin = fields.Char('PIN')
-
+    financial_clearance = fields.Many2one('ir.attachment', string="Financial Clearance")
+    attach_policy = fields.Many2one('ir.attachment', string='Policy Attachment')
     #Online Quote
     contact_name = fields.Char('Contact Name')
     email_from = fields.Char('Email', help="Email address of the contact", index=True)
@@ -359,11 +361,11 @@ class CrmLeads(models.Model):
                      "lob": lob, 'product_id': product, "customer_name": person.name, 'phone': person.mobile
                      })
         elif self.opp_type.id == 4:
-            if self.stage_id.name == 'Pre Survey' or self.stage_id.name == 'Survey After Repair':
-                if self.stage_id.name == 'Pre Survey':
+            if self.stage_id.name == 'Pre Repair Assessment' or self.stage_id.name == 'Post Repair Assessment':
+                if self.stage_id.name == 'Pre Repair Assessment':
                     type = 'motor_claim'
                     survey_type = 'pre_survey'
-                elif self.stage_id.name == 'Survey After Repair':
+                elif self.stage_id.name == 'Post Repair Assessment':
                     type = 'motor_claim'
                     survey_type = 'Survey_after_repair'
 
@@ -391,6 +393,7 @@ class CrmLeads(models.Model):
                              [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).message,
                          "lob": lob, 'product_id': product, "customer_name": person.name, 'phone': person.mobile
                          })
+
 
     def issued(self):
         self.stage_id = self.env['crm.stage'].search(
