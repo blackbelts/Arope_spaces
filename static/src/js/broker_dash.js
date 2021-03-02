@@ -501,7 +501,8 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         self.collection_ratio=res.collection_ratio
         self.claims_ratio=res.claims_ratio
         self.policy_lob=res.policy_lob
-        self.claim_lob=res.claim_lob
+        self.claim_lob=res.claim_lob.paid
+        self.unpaid_claim_lob=res.claim_lob.unpaid
         self.App_count=res.App_count
         self.user_image=res.user_image
         self.renew_request=res.renew_request

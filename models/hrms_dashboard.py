@@ -416,8 +416,10 @@ class Brokers(models.Model):
 
     @api.model
     def get_lob_count_claim(self,codes,type):
-        lob_list = []
+        paid_lob_list = []
+        unpaid_lob_list = []
         ids=[]
+        unpaid_ids = []
         if type == 'broker':
             ids = self.env['claim.arope'].search([('agent_code', 'in', codes)]).ids
         elif type == 'customer':
@@ -426,13 +428,20 @@ class Brokers(models.Model):
         for lob in self.env['insurance.line.business'].search([('line_of_business', 'in', ['Medical', 'Motor'])]):
             total = 0.0
             count = 0
+            unpaid_count = 0
             for rec in self.env['claim.arope'].search([('id', 'in', ids), ('lob', '=', lob.line_of_business)]):
                 if rec.claim_paid > 0:
                     total+=rec.claim_paid
                     count+=1
                     ids.append(rec.id)
+                elif rec.claim_paid == 0:
+                    total = 0
+                    unpaid_count += 1
+                    unpaid_ids.append(rec.id)
+            if unpaid_count > 0:
+                unpaid_lob_list.append({'name': lob.line_of_business, 'count': unpaid_count,'amount':total ,'icon': lob.image,'image': lob.icon,'ids':unpaid_ids})
             if count > 0:
-                lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image,'image': lob.icon,'ids':ids})
+                paid_lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image,'image': lob.icon,'ids':ids})
             else:
                 continue
         total = 0.0
@@ -443,10 +452,17 @@ class Brokers(models.Model):
                 total += rec.eq_total
                 count += 1
                 ids.append(rec.id)
+            elif rec.claim_paid == 0:
+                total = 0
+                unpaid_count += 1
+                unpaid_ids.append(rec.id)
+        if unpaid_count > 0:
+            unpaid_lob_list.append({'name': 'Commercial', 'count': unpaid_count,
+                                  'amount': total, 'ids': unpaid_ids})
         if count > 0:
-            lob_list.append({'name': 'Commercial', 'count': count,
+            paid_lob_list.append({'name': 'Commercial', 'count': count,
                              'amount': total, 'ids': ids})
-        return lob_list
+        return {'paid':paid_lob_list, 'unpaid': unpaid_lob_list}
 
     @api.model
     def get_lob_count_ins_app(self, id):
