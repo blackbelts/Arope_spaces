@@ -22,6 +22,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
         'click #collections':'collections_list',
         'click #complaints': 'complaints_list',
         'click #claims':'claims_list',
+        'click #unpaid_claims':'unpaid_claims_list',
         'click #endorsement':'end_request_list',
         'click #cancellation': 'cancel_request_list',
         'click #renewals-req':'renewals_request_list',
@@ -857,6 +858,30 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
       console.log("complaints_list",idsList)
       this.do_action({
         name: _t("Claims Tree"),
+        type: 'ir.actions.act_window',
+        res_model: 'claim.arope',
+        view_mode: 'tree',
+        views: [
+          [false, 'list']
+        ],
+        domain: [
+          ['id', 'in', idsList]
+        ],
+        context:{
+            "edit":false,
+            "create":false
+        },
+        target: 'current'
+      })
+    },
+    unpaid_claims_list:function (x) {
+      var idsList=[]
+      this.unpaid_claim_lob.forEach(function(item){
+        idsList=idsList.concat(item.ids)
+      })
+      console.log("complaints_list",idsList)
+      this.do_action({
+        name: _t("Unpaid Claims Tree"),
         type: 'ir.actions.act_window',
         res_model: 'claim.arope',
         view_mode: 'tree',

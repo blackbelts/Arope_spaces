@@ -342,7 +342,7 @@
                   </div>
                 </div>
                 <div class="o_partner_dashboard_box_footer">
-                  <a id="claims" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Claims</a>
+                  <a id="unpaid_claims" class="btn btn-secondary" style="position: relative; overflow: hidden;">View Claims</a>
                 </div>
               </div>
             </div>
