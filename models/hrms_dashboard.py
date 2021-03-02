@@ -420,6 +420,7 @@ class Brokers(models.Model):
         unpaid_lob_list = []
         ids=[]
         unpaid_ids = []
+        paid_ids = []
         if type == 'broker':
             ids = self.env['claim.arope'].search([('agent_code', 'in', codes)]).ids
         elif type == 'customer':
@@ -433,7 +434,7 @@ class Brokers(models.Model):
                 if rec.claim_paid > 0:
                     total+=rec.claim_paid
                     count+=1
-                    ids.append(rec.id)
+                    paid_ids.append(rec.id)
                 elif rec.claim_paid == 0:
                     total = 0
                     unpaid_count += 1
@@ -441,17 +442,18 @@ class Brokers(models.Model):
             if unpaid_count > 0:
                 unpaid_lob_list.append({'name': lob.line_of_business, 'count': unpaid_count,'amount':total ,'icon': lob.image,'image': lob.icon,'ids':unpaid_ids})
             if count > 0:
-                paid_lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image,'image': lob.icon,'ids':ids})
+                paid_lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image,'image': lob.icon,'ids':paid_ids})
             else:
                 continue
         total = 0.0
         count = 0
+        unpaid_count = 0
         for rec in self.env['claim.arope'].search([('id', 'in', ids),
                                                     ('lob', 'not in', ['Medical', 'Motor'])]):
             if rec.claim_paid > 0 :
                 total += rec.claim_paid
                 count += 1
-                ids.append(rec.id)
+                paid_ids.append(rec.id)
             elif rec.claim_paid == 0:
                 # total = 0
                 unpaid_count += 1
@@ -461,7 +463,7 @@ class Brokers(models.Model):
                                   'amount': 0, 'ids': unpaid_ids})
         if count > 0:
             paid_lob_list.append({'name': 'Commercial', 'count': count,
-                             'amount': total, 'ids': ids})
+                             'amount': total, 'ids': paid_ids})
         return {'paid':paid_lob_list, 'unpaid': unpaid_lob_list}
 
     @api.model
