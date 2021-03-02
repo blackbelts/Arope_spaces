@@ -35,7 +35,7 @@
         'views/insurance_application.xml',
         'views/actions.xml',
         'views/partner.xml',
-
+        'data/send_mail.xml',
         'views/policy_num_wizard.xml',
         'views/state.xml',
         'views/answer.xml',
