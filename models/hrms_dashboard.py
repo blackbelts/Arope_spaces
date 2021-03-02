@@ -431,16 +431,16 @@ class Brokers(models.Model):
             count = 0
             unpaid_count = 0
             for rec in self.env['claim.arope'].search([('id', 'in', ids), ('lob', '=', lob.line_of_business)]):
-                if rec.claim_paid > 0:
+                if rec.claim_paid > 0.0:
                     total+=rec.claim_paid
                     count+=1
                     paid_ids.append(rec.id)
                 elif rec.claim_paid == 0:
-                    total = 0
+                    # total = 0
                     unpaid_count += 1
                     unpaid_ids.append(rec.id)
             if unpaid_count > 0:
-                unpaid_lob_list.append({'name': lob.line_of_business, 'count': unpaid_count,'amount':total ,'icon': lob.image,'image': lob.icon,'ids':unpaid_ids})
+                unpaid_lob_list.append({'name': lob.line_of_business, 'count': unpaid_count,'amount':0 ,'icon': lob.image,'image': lob.icon,'ids':unpaid_ids})
             if count > 0:
                 paid_lob_list.append({'name': lob.line_of_business, 'count': count,'amount':total ,'icon': lob.image,'image': lob.icon,'ids':paid_ids})
             else:
