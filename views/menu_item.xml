@@ -134,7 +134,7 @@
 <!--</odoo>-->
 
 <odoo>
-    <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group_arope,Arope_spaces.surveyor_group" sequence="-100"/>
+    <menuitem id="arope_space" name="My Space" web_icon="Arope_spaces,static/description/icon.png"  groups="Arope_spaces.medical_group_sales,Arope_spaces.broker_space_group,Arope_spaces.client_space_group,Arope_spaces.managers_group_arope,Arope_spaces.surveyor_group" sequence="-100"/>
 
 
          <menuitem id="menu_hrms_dashboard" name="My Portfolio" action="arope_action_dashboard"
