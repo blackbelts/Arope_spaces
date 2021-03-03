@@ -52,7 +52,7 @@
             <field name="comment">the user will have access to his allowed Documents</field>
         </record>
         <record id="medical_group_sales" model="res.groups">
-            <field name="name">Medical underwritter</field>
+            <field name="name">Medical underwritters</field>
             <field name="category_id" ref="base.module_category_space"/>
             <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
             <field name="comment">the user will have access to his allowed Documents</field>
