@@ -176,10 +176,10 @@
     <!--                  action="selection_questions_action" sequence="15"/>-->
     <menuitem id="new_buss" name="New Business" parent="arope_space"
               sequence="2"
-    groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sale"/>
+    groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sales"/>
     <menuitem id="policy_service" name="Policy Services" parent="arope_space"
               sequence="2" action="ibs_crm_lead_opportunities"
-    groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sale"/>
+    groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sales"/>
     <menuitem id="claims_management" name="Claims Management" parent="arope_space"
               sequence="5" groups="Arope_spaces.motor_claim_group,Arope_spaces.non_motor_claim_group"/>
     <menuitem name="Motor Claims"
@@ -200,7 +200,7 @@
     groups="Arope_spaces.call_center_group"/>
     <menuitem id="requests_view_menu_signup" groups="Arope_spaces.managers_group_arope" name="Signup" parent="requests_view_menu"
                   action="ibs_crm_lead_opportunities_signup" sequence="8088"/>
-    <menuitem id="requests_view_menu_online_quotes" groups="Arope_spaces.managers_group_arope,Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sale" name="Online Quote" parent="requests_view_menu"
+    <menuitem id="requests_view_menu_online_quotes" groups="Arope_spaces.managers_group_arope,Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sales" name="Online Quote" parent="requests_view_menu"
                   action="ibs_crm_lead_opportunities_online_quotes" sequence="8089"/>
     <menuitem id="arope_main_id" groups="Arope_spaces.managers_group_arope" name="Arope Configuration" parent="arope_space"
               sequence="989898987"/>
@@ -265,7 +265,7 @@
               parent="new_buss"
               action="ibs_crm_lead_opportunities_insurance_app"
               sequence="2"
-    groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sale"/>
+    groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sales"/>
 <!--    <menuitem name="Claims Management"-->
 <!--              id="claim"-->
 <!--              parent="arope_space"-->
