@@ -145,7 +145,7 @@
         <record id="non_motor_underwritting" model="ir.rule">
             <field name="name"> Non Motor Underwritting</field>
             <field ref="crm.model_crm_lead" name="model_id"/>
-            <field name="domain_force">['|',('opp_type','in',['Insurance Application','Policy Services']),('lob','not in',[4,7])]
+            <field name="domain_force">[('opp_type','in',['Insurance Application','Policy Services']),('lob','not in',[4,7])]
             </field>
             <field name="groups" eval="[(4, ref('non_motor_group_sale'))]"/>
         </record>
