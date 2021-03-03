@@ -166,7 +166,7 @@
         <record id="medical_underwritting" model="ir.rule">
             <field name="name">Medical Underwritting</field>
             <field ref="crm.model_crm_lead" name="model_id"/>
-            <field name="domain_force">[('opp_type','in',[1, 2]),('lob','=',4)]
+            <field name="domain_force">[('opp_type','in',[1, 2]),('lob','=',7)]
             </field>
             <field name="groups" eval="[(4, ref('medical_group_sales'))]"/>
         </record>

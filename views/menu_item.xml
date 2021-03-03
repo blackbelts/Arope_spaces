@@ -175,9 +175,7 @@
     <!--        <menuitem id="selection_setup" name="Selection Answer Setup" parent="policy_config"-->
     <!--                  action="selection_questions_action" sequence="15"/>-->
     <menuitem id="new_buss" name="New Business" parent="arope_space"
-              sequence="2" groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale"/>
-    <menuitem id="new_bussi" name="New Business" parent="arope_space"
-              sequence="3" groups="Arope_spaces.medical_group_sales"/>
+              sequence="2" groups="Arope_spaces.motor_group_sale,Arope_spaces.medical_group_sales,Arope_spaces.non_motor_group_sale"/>
     <menuitem id="policy_service" name="Policy Services" parent="arope_space"
               sequence="2" action="ibs_crm_lead_opportunities"
     groups="Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale,Arope_spaces.medical_group_sales"/>
