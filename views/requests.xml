@@ -226,6 +226,33 @@
                             </tree>
                         </field>
                     </div>
+                    <div attrs="{'invisible': ['|',('opp_type', '!=', 1),
+                    ('lob','not in', [4, 7])]}">
+                        <br/>
+                        <h3 style="color: #073e89 !important"><i class="fa fa-edit"></i> Application Form</h3>
+                        <br/>
+                        <field name="question_ids">
+                            <tree editable="bottom">
+                                <field name="question"/>
+                                <field name="text"/>
+                                <field name="file"/>
+                            </tree>
+                        </field>
+                    </div>
+                    <div  attrs="{'invisible': [('opp_type', 'not in', [3,4])]}">
+                        <br/>
+                        <h3 style="color: #073e89 !important"><i class="fa fa-edit"></i> Required Documents</h3>
+                        <br/>
+                        <field name="declaration_ids">
+                            <tree editable="bottom" decoration-danger="state == 'pending'">
+                                <field name="question"/>
+                                <field name="download_files" widget="many2many_binary"/>
+                                <field name="file" widget="many2many_binary"/>
+                                <field name="state"/>
+                                <field name="comment"/>
+                            </tree>
+                        </field>
+                    </div>
                 </xpath>
 
                 <xpath expr="//label[@for='planned_revenue']" position="attributes">
@@ -277,40 +304,9 @@
 <!--                        </field>-->
 
 <!--                    </page>-->
-                <notebook>
-                    <page string="Application Form"  attrs="{'invisible': ['|',('opp_type', '!=', 1),
-                    ('lob','not in', [4, 7])]}">
-                        <field name="question_ids">
-                            <tree editable="bottom">
-                                <field name="question"/>
-                                <field name="text"/>
-                                <field name="file"/>
-                            </tree>
-                        </field>
-                    </page>
-<!--                    <page string="Offers" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 1)]}">-->
-<!--                        <field name="offer_ids" >-->
-<!--                            <tree editable="bottom" decoration-danger="offer_state == 'pending'">-->
-<!--                                <field name="types" default='initial'/>-->
-<!--                                <field name="date" />-->
-<!--                                <field name="file" widget="many2many_binary" />-->
-<!--                                <field name="offer_state"/>-->
-<!--                                <field name="comment"/>-->
-<!--                            </tree>-->
-<!--                        </field>-->
-<!--                    </page>-->
-                    <page string="Required Documents" attrs="{'invisible': [('opp_type', 'not in', [3,4])]}">
-                        <field name="declaration_ids">
-                            <tree editable="bottom" decoration-danger="state == 'pending'">
-                                <field name="question"/>
-                                <field name="download_files" widget="many2many_binary"/>
-                                <field name="file" widget="many2many_binary"/>
-                                <field name="state"/>
-                                <field name="comment"/>
-                            </tree>
-                        </field>
-                    </page>
-                </notebook>
+
+
+
             </field>
         </record>
         <record model="ir.actions.act_window" id="ibs_crm_lead_opportunities">
