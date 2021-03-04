@@ -60,22 +60,10 @@ class TeamTarget(models.Model):
                         [('agent_code', '=', self.member.agent_code), ('issue_date', '>=', date_start - relativedelta(years=1)),
                          ('issue_date', '<', (date3 - relativedelta(days=1)) - relativedelta(years=1))]):
                     last_total += pol.eq_total
-                if last_total != 0:
-                    self.targets = [(0, 0, {'name': MONTHS[datetime.strptime(str(date_start), '%Y-%m-%d').month],
-                                            'from_date': date_start, 'to_date': date3 - relativedelta(days=1)
-                        , 'amount': round((self.rate * last_total)+ last_total, 2), 'member_id': self.member.id,
-                                            'target_id': self.id})]
-                else:
-                    date5 = date3 + relativedelta(months=1)
-                    for pol in self.env['policy.arope'].search(
-                            [('agent_code', '=', self.member.agent_code),
-                             ('issue_date', '>=', date_start - relativedelta(years=1)),
-                             ('issue_date', '<', (date5 - relativedelta(days=1)) - relativedelta(years=1))]):
-                        last_total += pol.eq_total
-                    self.targets = [(0, 0, {'name': MONTHS[datetime.strptime(str(date_start), '%Y-%m-%d').month],
-                                            'from_date': date_start, 'to_date': date3 - relativedelta(days=1)
-                        , 'amount': round((self.rate * last_total) + last_total, 2), 'member_id': self.member.id,
-                                            'target_id': self.id})]
+                self.targets = [(0, 0, {'name': MONTHS[datetime.strptime(str(date_start), '%Y-%m-%d').month],
+                                        'from_date': date_start, 'to_date': date3 - relativedelta(days=1)
+                    , 'amount': round((self.rate * last_total)+ last_total, 2), 'member_id': self.member.id,
+                                        'target_id': self.id})]
             date_start = date3
         self.calc_total_amount()
 
