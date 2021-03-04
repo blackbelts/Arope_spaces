@@ -12,7 +12,7 @@
 <!--=======-->
                     <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', 'not in', [1, 7])]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>
                     <button  name="submit" attrs="{'invisible': ['|',('stage_id', '!=', 57),('opp_type', 'not in', [1])]}" string="Submit"  type="object" class="oe_highlight" groups="Arope_spaces.broker_space_group" />
-                    <button  name="accept_offer" attrs="{'invisible': ['|',('stage_id', '!=', 37),('opp_type', 'not in', [1])]}" string="Accept Offer"  type="object" class="oe_highlight" groups="Arope_spaces.broker_space_group" />
+<!--                    <button  name="accept_offer" attrs="{'invisible': ['|',('stage_id', '!=', 37),('opp_type', 'not in', [1])]}" string="Accept Offer"  type="object" class="oe_highlight" groups="Arope_spaces.broker_space_group" />-->
                     <button string="I Take It" type="object" name="takeit" class="oe_highlight" attrs="{'invisible': ['|',('opp_type', 'not in', [5, 7, 6]),('user_id', '!=', False)]}"/>
                     <xpath expr="//field[@name='stage_id']" position="replace">
                         <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" domain="[('type', 'in',opp_type)]" />
@@ -156,6 +156,9 @@
 
 
                         </group>
+                        <group>
+                            <field name="offer"/>
+                        </group>
                     </group>
                     <group attrs="{'invisible': [('opp_type', 'not in', [2,11])]}">
                         <group>
@@ -242,8 +245,11 @@
                             </group>
                         </group>
                     </page>
-                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),
+                    <div groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),
                     ('lob','in', [4, 7])]}">
+                        <br/>
+                        <h3 style="color: #073e89 !important"><i class="fa fa-pen-square"></i> Application Form And Required Documents</h3>
+                        <br/>
                         <field name="persons" >
                             <tree editable="bottom">
                                 <field name="insured" readonly="1" force_save="1"/>
@@ -254,8 +260,21 @@
                                 <field name="issue_in_progress_state"/>
                             </tree>
                         </field>
+                    </div>
+<!--                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),-->
+<!--                    ('lob','in', [4, 7])]}">-->
+<!--                        <field name="persons" >-->
+<!--                            <tree editable="bottom">-->
+<!--                                <field name="insured" readonly="1" force_save="1"/>-->
+<!--                                <field name="download_files" widget="many2many_binary"/>-->
+<!--                                <field name="application_file" widget="many2many_binary"/>-->
+<!--                                <button name="required_document" string="Required Documents" type="object" class="oe_highlight"/>-->
+<!--                                <field name="comment"/>-->
+<!--                                <field name="issue_in_progress_state"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
 
-                    </page>
+<!--                    </page>-->
                     <page string="Application Form" attrs="{'invisible': ['|',('opp_type', '!=', 1),
                     ('lob','not in', [4, 7])]}">
                         <field name="question_ids">
@@ -266,17 +285,17 @@
                             </tree>
                         </field>
                     </page>
-                    <page string="Offers" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 1)]}">
-                        <field name="offer_ids" >
-                            <tree editable="bottom" decoration-danger="offer_state == 'pending'">
-                                <field name="types" default='initial'/>
-                                <field name="date" />
-                                <field name="file" widget="many2many_binary" />
-                                <field name="offer_state"/>
-                                <field name="comment"/>
-                            </tree>
-                        </field>
-                    </page>
+<!--                    <page string="Offers" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 1)]}">-->
+<!--                        <field name="offer_ids" >-->
+<!--                            <tree editable="bottom" decoration-danger="offer_state == 'pending'">-->
+<!--                                <field name="types" default='initial'/>-->
+<!--                                <field name="date" />-->
+<!--                                <field name="file" widget="many2many_binary" />-->
+<!--                                <field name="offer_state"/>-->
+<!--                                <field name="comment"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </page>-->
                     <page string="Required Documents" attrs="{'invisible': [('opp_type', 'not in', [3,4])]}">
                         <field name="declaration_ids">
                             <tree editable="bottom" decoration-danger="state == 'pending'">
@@ -421,8 +440,8 @@
                 <field name="opp_type"/>
                 <field name="lob"/>
                 <field name="product_id" attrs="{'invisible': [('product_id', '=', False)]}"/>
-                <field name="application_number" attrs="{'invisible': [('application_number', '=', False)]}"/>
-                <field name="claim_number" attrs="{'invisible': [('claim_number', '=', False)]}"/>
+<!--                <field name="application_number" attrs="{'invisible': [('application_number', '=', False)]}"/>-->
+<!--                <field name="claim_number" attrs="{'invisible': [('claim_number', '=', False)]}"/>-->
                 <field name="customer_name"/>
                 <field name="phone"/>
                 <field name="stage_id"/>

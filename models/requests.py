@@ -125,6 +125,7 @@ class CrmLeads(models.Model):
                               )
 
     active = fields.Boolean(default=True)
+    offer = fields.Many2one('ir.attachment', string="Offer")
     source = fields.Selection([('online', 'Online'),
                                ('call', 'Call Center'),
                                ('social', 'Social Media')],
@@ -160,17 +161,17 @@ class CrmLeads(models.Model):
     end_reason = fields.Text(string='Endorsement Reason')
     cancel_reason = fields.Text(string='Cancel Reason')
 
-    @api.onchange('offer_ids')
+    @api.onchange('offer')
     def change_offers(self):
-        if self.offer_ids:
-            offers = []
-            for rec in self.offer_ids:
-                offers.append(rec)
-            if offers[-1].offer_state == 'submitted':
+        if self.offer:
+            # offers = []
+            # for rec in self.offer_ids:
+            #     offers.append(rec)
+            # if offers[-1].offer_state == 'submitted':
             #     if offers[-1].type == 'initial':
-                self.stage_id = self.env['crm.stage'].search(
-                    [('name', '=', 'Offer Ready'), ('type', '=', self.opp_type.id)]).id
-                self.message = self.stage_id.message
+            self.stage_id = self.env['crm.stage'].search(
+                [('name', '=', 'Offer Ready'), ('type', '=', self.opp_type.id)]).id
+            self.message = self.stage_id.message
                     # related_documents = self.env["final.application.setup"].search(
                     #     [("product_id.id", "=", self.product_id.id)])
                     # if related_documents:
