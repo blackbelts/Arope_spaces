@@ -325,7 +325,7 @@
 <!--              action="complaint_action_partner" parent="arope_space"  groups="Arope_spaces.broker_space_group,Arope_spaces.client_space_group"/>-->
 
     <menuitem id="quick_quote_view" name="Quick Quote"
-              action="quickQuoteAction" parent="new_buss"  sequence="0"/>
+              action="quickQuoteAction" parent="new_buss"  sequence="0" groups="Arope_spaces.motor_group_sale,Arope_spaces.medical_group_sales"/>
     <menuitem id="partner_menu" name="My Partner" action="my_partner_action_user01"
               parent="arope_space" sequence="1"  groups="Arope_spaces.managers_group_arope"/>
 
