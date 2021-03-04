@@ -318,7 +318,7 @@ class CrmLeads(models.Model):
                  'message':self.env['state.setup'].search([('survey_status', '=', 'pending'),('type', '=', 'survey')]).message,
                  "lob": self.lob.id, 'product_id': self.product_id.id,"customer_name": self.customer_name, 'phone': self.phone, 'email': self.email,
                  'application_date': self.application_date})
-            self.customer_name = survey.name
+            # self.customer_name = survey.name
         elif self.stage_id.name == 'Repair, Upload Invoices' and self.opp_type.id == 4:
             declaration_question = self.env["claim.setup.lines"].search(
                 [("claim_declaration_id", "=", self.env['claim.setup'].search([('type', '=', 'motor')]).id),

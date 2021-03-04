@@ -420,9 +420,10 @@
                 <field name="name" string="Request"/>
                 <field name="opp_type"/>
                 <field name="lob"/>
-                <field name="product_id"/>
+                <field name="product_id" attrs="{'invisible': [('product_id', '=', False)]}"/>
+                <field name="application_number" attrs="{'invisible': [('application_number', '=', False)]}"/>
+                <field name="claim_number" attrs="{'invisible': [('claim_number', '=', False)]}"/>
                 <field name="customer_name"/>
-                <field name="phone"/>
                 <field name="phone"/>
                 <field name="stage_id"/>
 			</tree>
