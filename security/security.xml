@@ -107,7 +107,7 @@
 
         <record id="surveyor_rule01" model="ir.rule">
             <field name="name">Surveyor</field>
-            <field ref="model_crm_lead" name="model_id"/>
+            <field ref="model_survey_report" name="model_id"/>
             <field name="domain_force">[('surveyor', '=', user.id)]</field>
             <field name="groups" eval="[(4, ref('Arope_spaces.surveyor_group'))]"/>
             <field eval="0" name="perm_unlink"/>
