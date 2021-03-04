@@ -113,6 +113,13 @@ class Brokers(models.Model):
         for record in production:
             productionNum += record
             finalProduction.append(productionNum)
+        for i in range(len(finalTarget)):
+
+            if finalTarget[i] == 0:
+                for index in range(i, len(finalTarget)):
+                    if finalTarget[index] != 0:
+                        finalTarget[i] = finalTarget[index]
+                        break
         result1 = {'target': finalTarget, 'production': finalProduction}
         return result1
 
