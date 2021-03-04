@@ -32,20 +32,16 @@
       <section class="o_partner_dashboard_banner bg-white">
         <div class="container my_container">
           <div class="row d-flex">
-            <div class="col-12 col-md-4 col-lg-6">
-              <h1 class="display-1 text-violet-dark mt32 mb32 fw_light" style="color: black !important;padding: 5px 10px;">
-                Surveyor Space
-              </h1>
-              <div class="alert alert-info alert-dismissible" style="background: white !important;" role="alert">
-                <span class="text-beta" style="color: black !important;">
+            <div class="col-12 col-md-4 col-lg-6" style="margin-top: 60px;">
+                <span class="text-beta" style="color: gray !important;font-size: 22px;">
                   <b>Welcome to AROPE partners space</b>
                 </span>
                 <p class="text-beta mt8 mb0" style="color: black !important;">
-                 You can follow your portfolio, Policies, collections, renewals, claims and Complaints
+                 You can follow your portfolio
                   <br />
 
                 </p>
-              </div>
+
             </div>
             <div id="o_my_sidebar" class="col-12 col-md col-lg-4 col-xl-3 o_my_sidebar">
 
@@ -74,7 +70,8 @@
 
             </div>
             <div class="col-12 col-md-2 col-lg-2">
-               <img class="image" style="width: 120px;height: 120px;margin-top: 15%;margin-left: 70%;display: block; " t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+              <img class="image" style="width: 200px;height: 200px;margin-top: 0%;margin-left: 70%;display: block; " t-if="widget.user_image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
+              <img class="image" style="width: 200px;height: 200px;margin-top: 0%;margin-left: 70%;display: block; " t-if="!widget.user_image"  src="/Arope_spaces/static/src/img/portrait-blank-male.png"/>
              <!-- <div class="text-center">
                 <img class=" image" t-att-src="'data:image/jpeg;base64,'+widget.user_image" />
               </div>-->
@@ -176,6 +173,9 @@
                       </table>
                     </div>
                   </div>
+                </div>
+                <div class="o_partner_dashboard_box_footer">
+                  <a id="policies_survey" class="btn btn-secondary" style="position: relative; overflow: hidden;">View</a>
                 </div>
               </div>
 
@@ -335,7 +335,9 @@
                   </div>
                 </div>
               </div>
-
+              <div class="o_partner_dashboard_box_footer">
+                  <a id="motor_survey" class="btn btn-secondary" style="position: relative; overflow: hidden;">View</a>
+              </div>
             </div>
           </div>
           <div class="row d-lg-flex" id="dash3" style="display: none !important;">
@@ -377,7 +379,9 @@
                   </div>
                 </div>
               </div>
-
+              <div class="o_partner_dashboard_box_footer">
+                  <a id="non_motor_survey" class="btn btn-secondary" style="position: relative; overflow: hidden;">View</a>
+              </div>
             </div>
           </div>
 <!--          <div class="row d-flex flex-wrap no-gutters pb64">-->

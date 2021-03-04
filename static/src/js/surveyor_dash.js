@@ -30,6 +30,9 @@ odoo.define('surveyor_dashboard.SurveyorDashboard', function (require) {
       'click #button1':'showDash1',
       'click #button2':'showDash2',
       'click #button3':'showDash3',
+      'click #policies_survey':'policies_survey',
+      'click #motor_survey':'motor_survey',
+      'click #non_motor_survey':'non_motor_survey',
     },
     init: function (parent, context) {
       this._super(parent, context);
@@ -132,6 +135,66 @@ odoo.define('surveyor_dashboard.SurveyorDashboard', function (require) {
       dash2.setAttribute('style', 'display:none !important');
       dash3.setAttribute('style', 'display:flex !important');
 
+    },
+    policies_survey: function (x) {
+//      console.log("policies")
+      var self = this;
+      this.do_action({
+        name: _t("Survey Reports Tree"),
+        type: 'ir.actions.act_window',
+        res_model: 'survey.report',
+        view_mode: 'tree',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+          ['id', 'in', this.insurance_app_survey.ids]
+        ],context:{
+            "edit":false,
+            "create":false
+        },
+        target: 'current'
+      })
+    },
+    motor_survey: function (x) {
+//      console.log("policies")
+      var self = this;
+      this.do_action({
+        name: _t("Survey Reports Tree"),
+        type: 'ir.actions.act_window',
+        res_model: 'survey.report',
+        view_mode: 'tree',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+          ['id', 'in', this.motor_survey.ids]
+        ],context:{
+            "edit":false,
+            "create":false
+        },
+        target: 'current'
+      })
+    },
+    non_motor_survey: function (x) {
+//      console.log("policies")
+      var self = this;
+      this.do_action({
+        name: _t("Survey Reports Tree"),
+        type: 'ir.actions.act_window',
+        res_model: 'survey.report',
+        view_mode: 'tree',
+        views: [
+          [false, 'list'],[false, 'form']
+        ],
+        domain: [
+          ['id', 'in', this.non_motor_survey.ids]
+        ],context:{
+            "edit":false,
+            "create":false
+        },
+        target: 'current'
+      })
     },
     makeNumber: function (x) {
       return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
