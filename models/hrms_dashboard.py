@@ -258,7 +258,7 @@ class Brokers(models.Model):
                     ids.append(prod.id)
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
 
-            else:
+            elif rec.color=='Red':
                 ids=[]
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
@@ -269,6 +269,19 @@ class Brokers(models.Model):
                     ids.append(prod.id)
 
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
+            else:
+                ids = []
+                date1 = datetime.today().date() - relativedelta(days=rec.no_days)
+                total = 0
+                for prod in self.env['policy.arope'].search(
+                        [('id', 'in', pol_ids), ('expiry_date', '<=', datetime.today().date() - relativedelta(
+                            days=self.env['system.notify'].search([('type', '=', 'Renewal'), ('color', '=', 'Orange')],
+                                                                  limit=1).no_days)),
+                         ]):
+                    total += prod.eq_total
+                    ids.append(prod.id)
+
+                result[rec.color] = {'total': total, 'count': len(ids), 'ids': ids}
         return result
 
     @api.model

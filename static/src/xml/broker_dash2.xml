@@ -365,6 +365,17 @@
                         <tbody>
                           <tr>
                             <td>
+                              <i style="color: black" class="fa fa-flag"></i>
+                            </td>
+                            <td>
+                              <t t-esc="widget.collections_statistics.Black.count" />
+                            </td>
+                            <td style="text-align: right;">
+                              <t t-esc="widget.makeNumber(widget.collections_statistics.Black.total)" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
                               <i style="color: red" class="fa fa-flag"></i>
                             </td>
                             <td>
@@ -424,6 +435,17 @@
                           </tr>
                         </thead>
                         <tbody>
+                          <tr>
+                            <td>
+                              <i style="color: black" class="fa fa-flag"></i>
+                            </td>
+                            <td>
+                              <t t-esc="widget.renew_statistics.Black.count" />
+                            </td>
+                            <td style="text-align: right;">
+                              <t t-esc="widget.makeNumber(widget.renew_statistics.Black.total)" />
+                            </td>
+                          </tr>
                           <tr>
                             <td>
                               <i style="color: red" class="fa fa-flag"></i>
