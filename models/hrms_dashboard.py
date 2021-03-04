@@ -263,7 +263,11 @@ class Brokers(models.Model):
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
                 for prod in self.env['policy.arope'].search(
-                        [('id', 'in', pol_ids), ('expiry_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Renewal'),('color','=','Orange')],limit=1).no_days)),
+                        [('id', 'in', pol_ids), ('expiry_date', '<=', datetime.today().date() - relativedelta(
+                            days=self.env['system.notify'].search([('type', '=', 'Renewal'), ('color', '=', 'Red')],
+                                                                  limit=1).no_days)),('expiry_date', '>=', datetime.today().date() - relativedelta(
+                            days=self.env['system.notify'].search([('type', '=', 'Renewal'), ('color', '=', 'Black')],
+                                                                  limit=1).no_days))
                          ]):
                     total += prod.eq_total
                     ids.append(prod.id)
@@ -274,9 +278,9 @@ class Brokers(models.Model):
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
                 for prod in self.env['policy.arope'].search(
-                        [('id', 'in', pol_ids), ('expiry_date', '<=', datetime.today().date() - relativedelta(
-                            days=self.env['system.notify'].search([('type', '=', 'Renewal'), ('color', '=', 'Orange')],
-                                                                  limit=1).no_days)),
+                        [('id', 'in', pol_ids), ('expiry_date', '<', datetime.today().date() - relativedelta(
+                            days=self.env['system.notify'].search([('type', '=', 'Renewal'), ('color', '=', 'Black')],
+                                                                  limit=1).no_days))
                          ]):
                     total += prod.eq_total
                     ids.append(prod.id)
@@ -317,7 +321,14 @@ class Brokers(models.Model):
                 ids = []
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids),('due_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Orange')],limit=1).no_days)), ]):
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids),('due_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Red')],limit=1).no_days)),
+                                                                 ('due_date', '>=',
+                                                                  datetime.today().date() - relativedelta(
+                                                                      days=self.env['system.notify'].search(
+                                                                          [('type', '=', 'Collection'),
+                                                                           ('color', '=', 'Black')],
+                                                                          limit=1).no_days))
+                                                                 ]):
                 # for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('prem_date', '<=', date.today() - relativedelta(days=self.env['collection.arope'].search([('type','=','Collection'),('color','=','Orange')])))]):
                 # self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('prem_date', '<=', datetime.today().date() - relativedelta(days=self.env['collection.arope'].search([('type','=','prem_date'),('color','=','Orange')]), ]):
                     total += prod.total_lc
@@ -327,7 +338,7 @@ class Brokers(models.Model):
                 ids = []
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids), ('due_date', '<=',
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids), ('due_date', '<',
                                                                                           datetime.today().date() - relativedelta(
                                                                                                   days=self.env[
                                                                                                       'system.notify'].search(
@@ -335,7 +346,7 @@ class Brokers(models.Model):
                                                                                                             'Collection'),
                                                                                                            (
                                                                                                            'color', '=',
-                                                                                                           'Orange')],
+                                                                                                           'Black')],
                                                                                                           limit=1).no_days)), ]):
                     # for prod in self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('prem_date', '<=', date.today() - relativedelta(days=self.env['collection.arope'].search([('type','=','Collection'),('color','=','Orange')])))]):
                     # self.env['collection.arope'].search([('broker.id', '=', id),('state', '=', 'outstanding'), ('prem_date', '<=', datetime.today().date() - relativedelta(days=self.env['collection.arope'].search([('type','=','prem_date'),('color','=','Orange')]), ]):
