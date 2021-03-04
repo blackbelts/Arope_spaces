@@ -212,6 +212,22 @@
                     </group>
 
                 </xpath>
+                <div groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),
+                    ('lob','in', [4, 7])]}">
+                        <br/>
+                        <h3 style="color: #073e89 !important"><i class="fa fa-edit"></i> Application Form And Required Documents</h3>
+                        <br/>
+                        <field name="persons" >
+                            <tree editable="bottom">
+                                <field name="insured" readonly="1" force_save="1"/>
+                                <field name="download_files" widget="many2many_binary"/>
+                                <field name="application_file" widget="many2many_binary"/>
+                                <button name="required_document" string="Required Documents" type="object" class="oe_highlight"/>
+                                <field name="comment"/>
+                                <field name="issue_in_progress_state"/>
+                            </tree>
+                        </field>
+                    </div>
                 <xpath expr="//label[@for='planned_revenue']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
@@ -246,22 +262,7 @@
                         </group>
                     </page>
                 </notebook>
-                    <div groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),
-                    ('lob','in', [4, 7])]}">
-                        <br/>
-                        <h3 style="color: #073e89 !important"><i class="fa fa-edit"></i> Application Form And Required Documents</h3>
-                        <br/>
-                        <field name="persons" >
-                            <tree editable="bottom">
-                                <field name="insured" readonly="1" force_save="1"/>
-                                <field name="download_files" widget="many2many_binary"/>
-                                <field name="application_file" widget="many2many_binary"/>
-                                <button name="required_document" string="Required Documents" type="object" class="oe_highlight"/>
-                                <field name="comment"/>
-                                <field name="issue_in_progress_state"/>
-                            </tree>
-                        </field>
-                    </div>
+
 <!--                    <page string="Application Form And Required Documents" groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),-->
 <!--                    ('lob','in', [4, 7])]}">-->
 <!--                        <field name="persons" >-->
