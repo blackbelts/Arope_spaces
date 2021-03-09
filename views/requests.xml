@@ -143,7 +143,7 @@
                             <field name="phone" />
                             <field name="email" />
                             <field name="recomm" string="Survey Recommendation" attrs="{'invisible': [('recomm', '=', False)]}"/>
-                            <field name="notes_recommendations" widget="many2many_binary"/>
+                            <field name="notes_recommendations" widget="many2many_binary" groups="Arope_spaces.managers_group_arope,Arope_spaces.non_motor_group_sale"/>
                         </group>
 
                         <group>
