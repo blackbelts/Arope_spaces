@@ -124,6 +124,19 @@
 			</tree>
 		</field>
 	</record>
+    <record id="motor_get_quote_view_tree" model="ir.ui.view">
+		<field name="name">Get A Quote</field>
+		<field name="model">quotation.service</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="lob"/>
+<!--                <field name="package"/>-->
+                <field name="motor_product"/>
+<!--                <field name="product"/>-->
+
+			</tree>
+		</field>
+	</record>
     <record model="ir.actions.act_window" id="quickQuoteAction">
             <field name="name">Quick Quote</field>
             <field name="type">ir.actions.act_window</field>
@@ -131,6 +144,30 @@
             <field name="view_id" ref="get_quote_view_tree"/>
 
             <field name="view_mode">form,tree</field>
+    </record>
+    <record model="ir.actions.act_window" id="medicalQuoteAction">
+        <field name="name">Medical Quote</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">quotation.service</field>
+        <field name="view_id" ref="get_quote_view_tree"/>
+        <field name="domain">[('lob','=',4)]</field>
+        <field name="context">{
+            'default_lob': 4,
+            }
+        </field>
+        <field name="view_mode">form,tree</field>
+    </record>
+    <record model="ir.actions.act_window" id="motorQuoteAction">
+        <field name="name">Motor Quote</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">quotation.service</field>
+        <field name="view_id" ref="motor_get_quote_view_tree"/>
+        <field name="domain">[('lob','=',7)]</field>
+        <field name="context">{
+            'default_lob': 7,
+            }
+        </field>
+        <field name="view_mode">form,tree</field>
     </record>
 
 
