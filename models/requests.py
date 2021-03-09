@@ -70,7 +70,7 @@ class CrmLeads(models.Model):
     name = fields.Char('Request')
     agent_code = fields.Char('Agent Code')
     recomm = fields.Text('Recommendation')
-    notes_recommendations = fields.Many2one('ir.attachment', string="Notes or Recommendations", relation="notes_recommendations")
+    notes_recommendations = fields.Many2many('ir.attachment', string="Notes or Recommendations", relation="notes_recommendations")
     @api.model
     def create(self, vals):
         serial_no = self.env['ir.sequence'].next_by_code('req')
@@ -103,8 +103,8 @@ class CrmLeads(models.Model):
     date = fields.Date('Intimation Date', default=datetime.today())
     declaration_ids = fields.One2many('claim.lines', 'opp_id')
     pin = fields.Char('PIN')
-    financial_clearance = fields.Many2one('ir.attachment', string="Financial Clearance" , relation="financial_clearance")
-    attach_policy = fields.Many2one('ir.attachment', string='Policy Attachment', relation="attach_policy")
+    financial_clearance = fields.Many2many('ir.attachment', string="Financial Clearance" , relation="financial_clearance")
+    attach_policy = fields.Many2many('ir.attachment', string='Policy Attachment', relation="attach_policy")
     #Online Quote
     contact_name = fields.Char('Contact Name')
     email_from = fields.Char('Email', help="Email address of the contact", index=True)
@@ -125,7 +125,7 @@ class CrmLeads(models.Model):
                               )
 
     active = fields.Boolean(default=True)
-    offer = fields.Many2one('ir.attachment', string="Offer", relation="offer")
+    offer = fields.Many2many('ir.attachment', string="Offer", relation="offer")
     source = fields.Selection([('online', 'Online'),
                                ('call', 'Call Center'),
                                ('social', 'Social Media')],
