@@ -143,7 +143,7 @@
                             <field name="phone" />
                             <field name="email" />
                             <field name="recomm" string="Survey Recommendation" attrs="{'invisible': [('recomm', '=', False)]}"/>
-                            <field name="notes_recommendations"/>
+                            <field name="notes_recommendations" widget="many2many_binary"/>
                         </group>
 
                         <group>
@@ -151,13 +151,13 @@
                             <field name="application_number" readonly="1" force_save="1"/>
                             <field name="application_date" />
                             <field name="policy_number" readonly="1" force_save="1" attrs="{'invisible': [('policy_number', '=', False)]}"/>
-                            <field name="attach_policy" readonly="1" force_save="1" attrs="{'invisible': [('attach_policy', '=', False)]}"/>
+                            <field name="attach_policy" readonly="1" force_save="1" attrs="{'invisible': [('attach_policy', '=', False)]}" widget="many2many_binary"/>
                             <field name="policy_issue_date" readonly="1" force_save="1" attrs="{'invisible': [('policy_issue_date', '=', False)]}"/>
 
 
                         </group>
                         <group>
-                            <field name="offer"/>
+                            <field name="offer" widget="many2many_binary"/>
                         </group>
                     </group>
                     <group attrs="{'invisible': [('opp_type', 'not in', [2,11])]}">
@@ -207,7 +207,7 @@
                             <field name="maintenance_centers" attrs="{'invisible': [('maintenance_centers_in_or_out', '!=', 'in')]}"/>
                         </group>
                         <group attrs="{'invisible': ['|',('opp_type', '!=', 3),('stage_id', 'not in', [60,10])]}">
-                            <field name="financial_clearance"/>
+                            <field name="financial_clearance" widget="many2many_binary"/>
                         </group>
                     </group>
                     <div groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),
