@@ -157,7 +157,7 @@
 
                         </group>
                         <group>
-                            <field name="offer"/>
+                            <field name="offer" widget="many2many_binary"/>
                         </group>
                     </group>
                     <group attrs="{'invisible': [('opp_type', 'not in', [2,11])]}">
