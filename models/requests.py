@@ -394,18 +394,18 @@ class CrmLeads(models.Model):
                              [('survey_status', '=', 'pending'), ('type', '=', 'survey')]).message,
                          "lob": lob, 'product_id': product, "customer_name": person.name, 'phone': person.mobile
                          })
-        elif self.stage_id.name == 'Submitted':
-            if self.lob:
-               mail =  self.env['helpdesk_lite.team'].search([('lob', 'in', self.lob.id),('request_type', 'in', self.opp_type.id)]).team_mail
-            else:
-                mail = self.env['helpdesk_lite.team'].search([('lob', '=', False),('request_type', 'in', self.opp_type.id)]).team_mail
-            if mail:
-                self.ensure_one()
-                ir_model_data = self.env['ir.model.data']
-                template_id = self.env.ref('Arope_spaces.email_template')
-                template_id.write({'email_to': mail})
+        # elif self.stage_id.name == 'Submitted':
+        #     if self.lob:
+        #        mail =  self.env['helpdesk_lite.team'].search([('lob', 'in', self.lob.id),('request_type', 'in', self.opp_type.id)]).team_mail
+        #     else:
+        #         mail = self.env['helpdesk_lite.team'].search([('lob', '=', False),('request_type', 'in', self.opp_type.id)]).team_mail
+        #     if mail:
+        #         self.ensure_one()
+        #         ir_model_data = self.env['ir.model.data']
+        #         template_id = self.env.ref('Arope_spaces.email_template')
+        #         template_id.write({'email_to': mail})
 
-                template_id.send_mail(self.ids[0], force_send=True)
+                # template_id.send_mail(self.ids[0], force_send=True)
 
     def issued(self):
         self.stage_id = self.env['crm.stage'].search(
