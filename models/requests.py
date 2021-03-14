@@ -64,6 +64,8 @@ class CrmLeads(models.Model):
     name_of_contact_person = fields.Char('Survey Contact Person')
     main_phone = fields.Char('Mobile Number (Main)')
     spare_phone = fields.Char('Mobile Number (Spare)')
+
+    offer_state = fields.Selection([('accepted', 'Accepted'),('rejected', 'Rejected')], string="Offer State", readonly=True)
     persons = fields.One2many('persons.lines', 'opp_id')
     offer_ids = fields.One2many('final.offers', 'opp_id')
     question_ids = fields.One2many('insurances.answers', 'request_id')
@@ -247,21 +249,21 @@ class CrmLeads(models.Model):
                                        '/' + number})
 
 
-    @api.onchange('product_id')
-    def get_questions(self):
+    # @api.onchange('product_id')
+    # def get_questions(self):
         # if self.survey_report_ids:
         #     for question in self.survey_report_ids:
         #         question.unlink()
 
-        if self.question_ids:
-            for question in self.question_ids:
-                question.unlink()
-        if self.product_id == 4 or self.product_id == 7:
-            related_questions = self.env["questionnaire.lines.setup"].search([("product_id.id", "=", self.product_id.id)])
-            if related_questions:
-                for question in related_questions:
-                        self.question_ids.create(
-                            {"question": question.id, "choose_application_id": self.id})
+        # if self.question_ids:
+        #     for question in self.question_ids:
+        #         question.unlink()
+        # if self.product_id == 4 or self.product_id == 7:
+        #     related_questions = self.env["questionnaire.lines.setup"].search([("product_id.id", "=", self.product_id.id)])
+        #     if related_questions:
+        #         for question in related_questions:
+        #                 self.question_ids.create(
+        #                     {"question": question.id, "choose_application_id": self.id})
 
 
 
@@ -525,7 +527,7 @@ class CrmLeads(models.Model):
         self.message = self.stage_id.message
 
     def accept_offer(self):
-        self.offer_ids.offer_state = 'accepted'
+        self.offer_state = 'accepted'
 
     #Online Quote
 

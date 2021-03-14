@@ -12,7 +12,7 @@
 <!--=======-->
                     <button  name="issued" attrs="{'invisible': ['|',('stage_id', '!=', 3),('opp_type', 'not in', [1, 7])]}" string="Policy Issued"  type="object" class="oe_highlight" groups="Arope_spaces.managers_group_arope"/>
                     <button  name="submit" attrs="{'invisible': ['|',('stage_id', '!=', 57),('opp_type', 'not in', [1])]}" string="Submit"  type="object" class="oe_highlight" groups="Arope_spaces.broker_space_group" />
-<!--                    <button  name="accept_offer" attrs="{'invisible': ['|',('stage_id', '!=', 37),('opp_type', 'not in', [1])]}" string="Accept Offer"  type="object" class="oe_highlight" groups="Arope_spaces.broker_space_group" />-->
+                    <button  name="accept_offer" attrs="{'invisible': ['|',('stage_id', '!=', 37),('opp_type', 'not in', [1])]}" string="Accept Offer"  type="object" class="oe_highlight" groups="Arope_spaces.broker_space_group" />
                     <button string="I Take It" type="object" name="takeit" class="oe_highlight" attrs="{'invisible': ['|',('opp_type', 'not in', [5, 7, 6]),('user_id', '!=', False)]}"/>
                     <xpath expr="//field[@name='stage_id']" position="replace">
                         <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" domain="[('type', 'in',opp_type)]" />
@@ -147,7 +147,7 @@
                         </group>
 
                         <group>
-
+                            <field name="offer_state" attrs="{'invisible': [('policy_number', '=', False)]}"/>
                             <field name="application_number" readonly="1" force_save="1"/>
                             <field name="application_date" />
                             <field name="policy_number" readonly="1" force_save="1" attrs="{'invisible': [('policy_number', '=', False)]}"/>
@@ -210,8 +210,7 @@
                             <field name="financial_clearance" widget="many2many_binary"/>
                         </group>
                     </group>
-                    <div groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': ['|',('opp_type', '!=', 1),
-                    ('lob','in', [4, 7])]}">
+                    <div groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 1)]}">
                         <br/>
                         <h3 style="color: #073e89 !important"><i class="fa fa-edit"></i> Application Form And Required Documents</h3>
                         <br/>
@@ -226,19 +225,19 @@
                             </tree>
                         </field>
                     </div>
-                    <div attrs="{'invisible': ['|',('opp_type', '!=', 1),
-                    ('lob','not in', [4, 7])]}">
-                        <br/>
-                        <h3 style="color: #073e89 !important"><i class="fa fa-edit"></i> Application Form</h3>
-                        <br/>
-                        <field name="question_ids">
-                            <tree editable="bottom">
-                                <field name="question"/>
-                                <field name="text"/>
-                                <field name="file"/>
-                            </tree>
-                        </field>
-                    </div>
+<!--                    <div attrs="{'invisible': ['|',('opp_type', '!=', 1),-->
+<!--                    ('lob','not in', [4, 7])]}">-->
+<!--                        <br/>-->
+<!--                        <h3 style="color: #073e89 !important"><i class="fa fa-edit"></i> Application Form</h3>-->
+<!--                        <br/>-->
+<!--                        <field name="question_ids">-->
+<!--                            <tree editable="bottom">-->
+<!--                                <field name="question"/>-->
+<!--                                <field name="text"/>-->
+<!--                                <field name="file"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </div>-->
                     <div  attrs="{'invisible': [('opp_type', 'not in', [3,4])]}">
                         <br/>
                         <h3 style="color: #073e89 !important"><i class="fa fa-edit"></i> Required Documents</h3>

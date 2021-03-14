@@ -65,7 +65,6 @@ class Quotation(models.Model):
     sub_state = fields.Selection([('pending', 'Pending'),('surveyor', 'Assign Surveyor'), ('complete', 'Submitted'),
                                   ('accepted', 'Accepted'),('cancel', 'Rejected')], string="Sub State", readonly=True)
 
-
     address = fields.Char('Full Address')
     bussines_activity = fields.Char('Client business activity')
     sum_insured = fields.Float('Sum Insured')
