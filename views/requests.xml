@@ -210,7 +210,7 @@
                             <field name="financial_clearance" widget="many2many_binary"/>
                         </group>
                     </group>
-                    <div groups="Arope_spaces.managers_group_arope,Arope_spaces.broker_space_group" attrs="{'invisible': [('opp_type', '!=', 1)]}">
+                    <div attrs="{'invisible': [('opp_type', '!=', 1)]}">
                         <br/>
                         <h3 style="color: #073e89 !important"><i class="fa fa-edit"></i> Application Form And Required Documents</h3>
                         <br/>
