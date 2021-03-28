@@ -805,7 +805,7 @@ odoo.define('broker_dashboard.BrokerDashboard', function (require) {
     collections_list: function (x) {
       /*var self = this;*/
       var idsList=[]
-      idsList=idsList.concat(this.collections_statistics.Green.ids,this.collections_statistics.Orange.ids,this.collections_statistics.Red.ids)
+      idsList=idsList.concat(this.collections_statistics.Green.ids,this.collections_statistics.Orange.ids,this.collections_statistics.Red.ids,this.collections_statistics.Black.ids)
       console.log("idsList",idsList)
       this.do_action({
         name: _t("tree.collection"),

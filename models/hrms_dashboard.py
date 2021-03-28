@@ -250,7 +250,7 @@ class Brokers(models.Model):
                 ids=[]
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['policy.arope'].search([('id', 'in', pol_ids),('expiry_date', '>=', datetime.today().date()),('expiry_date', '<=', date1),]):
+                for prod in self.env['policy.arope'].search([('id', 'in', pol_ids),('expiry_date', '>=', datetime.today().date())]):
                     total += prod.eq_total
                     ids.append(prod.id)
                 result[rec.color]={'total':total,'count':len(ids),'ids':ids}
@@ -311,7 +311,7 @@ class Brokers(models.Model):
                 ids = []
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids),('prem_date', '>=', datetime.today().date()),('due_date', '<=', date1) ]):
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids),('prem_date', '>=', datetime.today().date()) ]):
                     total += prod.total_lc
                     ids.append(prod.id)
                 result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
