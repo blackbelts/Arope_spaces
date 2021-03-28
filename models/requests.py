@@ -412,7 +412,7 @@ class CrmLeads(models.Model):
     def issued(self):
         self.stage_id = self.env['crm.stage'].search(
             [('name', '=', 'Issued'), ('type', '=', self.opp_type.id)]).id
-        self.message = self.stage_id.message
+        # self.message = self.stage_id.message
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'wizard.insurance.quotation',
