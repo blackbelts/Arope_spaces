@@ -9,7 +9,7 @@
                         <group>
                             <field name="request_id"  readonly="1" force_save="1"/>
                             <field name="policy_number" required="1" />
-                            <field name="attach_policy"  />
+                            <field name="attach_policy"  widget="many2many_binary"/>
                             <field name="policy_issue_date" required="1" />
                         </group>
                     </group>
