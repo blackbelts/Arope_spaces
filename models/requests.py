@@ -106,7 +106,7 @@ class CrmLeads(models.Model):
     declaration_ids = fields.One2many('claim.lines', 'opp_id')
     pin = fields.Char('PIN')
     financial_clearance = fields.Many2many('ir.attachment', string="Financial Clearance" , relation="financial_clearance")
-    attach_policy = fields.Many2many('ir.attachment', string='Policy Attachment', relation="attach_policy")
+    attach_policy = fields.Binary(string='Policy Attachment')
     #Online Quote
     contact_name = fields.Char('Contact Name')
     email_from = fields.Char('Email', help="Email address of the contact", index=True)

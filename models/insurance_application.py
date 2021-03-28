@@ -894,7 +894,7 @@ class WizardInsuranceQuotation(models.TransientModel):
     insurance_app_id = fields.Many2one('insurance.quotation')
     request_id = fields.Many2one('crm.lead')
     policy_number = fields.Char('Policy Num')
-    attach_policy = fields.Many2one('ir.attachment', string='Attach Policy')
+    attach_policy = fields.Binary(string='Attach Policy')
     policy_issue_date = fields.Date('Policy Issue Date', default=datetime.today())
 
     def policy_num(self):
