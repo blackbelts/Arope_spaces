@@ -565,7 +565,7 @@ class RequestsTypes(models.Model):
     _name = "request.type"
     _rec_name = 'type'
 
-    type = fields.Char(string='Request Type')
+    type = fields.Char(string='Request Type', readonly=True)
 
 
 
