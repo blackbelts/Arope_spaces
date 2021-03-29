@@ -444,6 +444,7 @@
                 <field name="customer_name"/>
                 <field name="phone"/>
                 <field name="stage_id"/>
+                <field name="group_clickable"/>
 			</tree>
 		</field>
 	</record>
