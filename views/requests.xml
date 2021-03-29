@@ -15,8 +15,8 @@
                     <button  name="accept_offer" attrs="{'invisible': ['|',('stage_id', '!=', 37),('opp_type', 'not in', [1])]}" string="Accept Offer"  type="object" class="oe_highlight" groups="Arope_spaces.broker_space_group" />
                     <button string="I Take It" type="object" name="takeit" class="oe_highlight" attrs="{'invisible': ['|',('opp_type', 'not in', [5, 7, 6]),('user_id', '!=', False)]}"/>
                     <xpath expr="//field[@name='stage_id']" position="replace">
-                        <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"  domain="[('type', 'in',opp_type)]" />
-<!--                        <field name="stage_id" widget="statusbar"  attrs="{'invisible':[('group_clickable','!=', True)]}" domain="[('type', 'in',opp_type)]" />-->
+                        <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" attrs="{'invisible':[('group_clickable','!=', True)]}"  domain="[('type', 'in',opp_type)]" />
+                        <field name="stage_id" widget="statusbar"  attrs="{'invisible':[('group_clickable','=', True)]}" domain="[('type', 'in',opp_type)]" />
                     </xpath>
                 </header>
 
@@ -144,10 +144,11 @@
                             <field name="customer_name" />
                             <field name="phone" />
                             <field name="email" />
-                            <field name="recomm" string="Survey Recommendation" attrs="{'invisible': [('recomm', '=', False)]}"/>
+                            <field name="recomm" string="Survey Recommendation" attrs="{'invisible': [('recomm', '=', False)]}" widget="html" />
                             <field name="notes_recommendations" widget="many2many_binary" groups="Arope_spaces.managers_group_arope,Arope_spaces.non_motor_group_sale"/>
                         </group>
 
+                            <field name="recomm" string="Survey Recommendation"  widget="html" />
                         <group>
                             <field name="offer_state" attrs="{'invisible': [('policy_number', '=', False)]}"/>
                             <field name="application_number" readonly="1" force_save="1"/>
