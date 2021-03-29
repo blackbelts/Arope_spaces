@@ -168,7 +168,7 @@ class CrmLeads(models.Model):
 
     def get_group_security(self):
         for rec in self:
-            if self.env.user.has_group('Arope_spaces.client_space_group') or self.env.user.has_group('Arope_spaces.broker_space_group'):
+            if self.env.user.has_group('Arope_spaces.broker_space_group'):
                 rec.group_clickable = False
             else:
                 rec.group_clickable = True
