@@ -57,6 +57,7 @@ class CrmLeads(models.Model):
     customer_name = fields.Char('Customer Name')
     phone = fields.Char('Customer Mobile')
     email = fields.Char('Customer Email')
+    group_clickable = fields.Boolean('is clickable', compute='get_group_security')
     application_number = fields.Char(string='Application Number', copy=False, index=True)
     application_date = fields.Date('Application Date', default=datetime.today(), readonly=True)
     policy_number = fields.Char('Policy Num')
@@ -83,6 +84,7 @@ class CrmLeads(models.Model):
 
     name = fields.Char('Request', required=False, readonly=True)
     policy = fields.Char(string='Policy')
+
     policy_seq = fields.Many2one('insurance.product', string='product')
     product = fields.Char('Policy Product')
     customer = fields.Char('Customer')
@@ -145,6 +147,7 @@ class CrmLeads(models.Model):
                                ('call', 'Call Center'),
                                ('social', 'Social Media')],
                               'Source', copy=False)
+
     # team_id = fields.Many2one('helpdesk_lite.team', string='Complaint Types', index=True)
 
     @api.onchange('policy')
@@ -162,6 +165,14 @@ class CrmLeads(models.Model):
 
     end_reason = fields.Text(string='Endorsement Reason')
     cancel_reason = fields.Text(string='Cancel Reason')
+
+    def get_group_security(self):
+        for rec in self:
+            if self.env.user.has_group('Arope_spaces.client_space_group') or self.env.user.has_group('Arope_spaces.broker_space_group'):
+                rec.group_clickable = False
+            else:
+                rec.group_clickable = True
+
 
     @api.onchange('offer')
     def change_offers(self):
