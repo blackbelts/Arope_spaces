@@ -57,7 +57,7 @@ class CrmLeads(models.Model):
     customer_name = fields.Char('Customer Name')
     phone = fields.Char('Customer Mobile')
     email = fields.Char('Customer Email')
-    clickable = fields.Boolean(string='is clickable' , store=True, default='get_group_security')
+    clickable = fields.Boolean(string='is clickable' , store=True, compute='get_group_security')
     user_click = fields.Many2one('res.users', 'User Name', index=True, track_visibility='onchange',
                               default=lambda self: self.env.uid, readonly=True)
     application_number = fields.Char(string='Application Number', copy=False, index=True)
