@@ -163,11 +163,10 @@
                         <group>
                             <group>
                                 <field name="offer" widget="many2many_binary"/>
-                            </group>
-                            <group>
                                 <field name="offer_validation_start" attrs="{'readonly': [('isClickable', '=', False)]}"/>
                                 <field name="offer_validation_end" attrs="{'readonly': [('isClickable', '=', False)]}"/>
                             </group>
+
                         </group>
                     </group>
                     <group attrs="{'invisible': [('opp_type', 'not in', [2,11])]}">
