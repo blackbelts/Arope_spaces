@@ -165,8 +165,8 @@
                                 <field name="offer" widget="many2many_binary"/>
                             </group>
                             <group>
-                                <field name="offer_validation_start"/>
-                                <field name="offer_validation_end"/>
+                                <field name="offer_validation_start" attrs="{'readonly': [('isClickable', '=', False)]}"/>
+                                <field name="offer_validation_end" attrs="{'readonly': [('isClickable', '=', False)]}"/>
                             </group>
                         </group>
                     </group>
