@@ -21,11 +21,12 @@ class CrmLeads(models.Model):
         ('cancel', 'Lost')], string='State')
     lob = fields.Many2one('insurance.line.business', 'LOB')
     product_id = fields.Many2one('insurance.product', 'Product', domain="[('line_of_bus', '=', lob)]")
-    # stage_id = fields.Many2one('crm.stage', domain="['|',('type', '=', 'opp_type'),('type', '=', False)]")
+    state_ids = fields.Many2one('crm.stage')
     message = fields.Text('Description')
     policy_services_type = fields.Selection([('end', 'Endorsement'),
                                 ('renew', 'Renwal')],string='Request Type')
 
+    # @api.onchange('stage_id')
     @api.onchange('opp_type')
     @api.constrains('opp_type')
     def stage_domain(self):
@@ -328,7 +329,7 @@ class CrmLeads(models.Model):
     @api.onchange('stage_id')
     @api.constrains('stage_id')
     def change_stage_id(self):
-
+        self.state_ids = self.stage_id.id
         if self.stage_id.name == 'Survey' and self.opp_type.id == 1:
 
             number = self.env['ir.sequence'].next_by_code('survies')
