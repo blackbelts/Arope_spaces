@@ -57,9 +57,9 @@ class CrmLeads(models.Model):
     customer_name = fields.Char('Customer Name')
     phone = fields.Char('Customer Mobile')
     email = fields.Char('Customer Email')
-    clickable = fields.Boolean(string='is clickable' , store=True)
+    clickable = fields.Boolean(string='is clickable' , store=True, default='get_group_security')
     user_click = fields.Many2one('res.users', 'User Name', index=True, track_visibility='onchange',
-                              default=lambda self: self.env.user.id, readonly=True)
+                              default=lambda self: self.env.user, readonly=True)
     application_number = fields.Char(string='Application Number', copy=False, index=True)
     application_date = fields.Date('Application Date', default=datetime.today(), readonly=True)
     policy_number = fields.Char('Policy Num')
@@ -172,13 +172,13 @@ class CrmLeads(models.Model):
         # for i in self.browse(cr, uid, ids, context=context):
         #     res[i.clickable] = 'odedra'
         # return res
-    @api.constrains('user_click')
+    @api.model
     def get_group_security(self):
-        for rec in self:
-            if self.env.user.has_group('Arope_spaces.broker_space_group'):
-                rec.clickable = False
-            else:
-                rec.clickable = False
+        # for rec in self:
+        if self.env.user.has_group('Arope_spaces.broker_space_group'):
+            return False
+        else:
+            return False
 
 
     @api.onchange('offer')
