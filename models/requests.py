@@ -60,6 +60,7 @@ class CrmLeads(models.Model):
     clickable = fields.Boolean(string='is clickable' , force_save="1" ,store=True, compute='get_group_security')
     user_click = fields.Many2one('res.users', 'User Name', index=True, track_visibility='onchange',
                               compute='current_user', store=False ,readonly=True)
+    user_test = fields.Many2one('res.users')
     application_number = fields.Char(string='Application Number', copy=False, index=True)
     application_date = fields.Date('Application Date', default=datetime.today(), readonly=True)
     policy_number = fields.Char('Policy Num')
@@ -172,7 +173,7 @@ class CrmLeads(models.Model):
         # for i in self.browse(cr, uid, ids, context=context):
         #     res[i.clickable] = 'odedra'
         # return res
-    @api.model
+    @api.depends('user_test')
     def get_group_security(self):
         # for rec in self:
         if self.env.user.has_group('Arope_spaces.broker_space_group'):
@@ -550,6 +551,12 @@ class CrmLeads(models.Model):
     #Online Quote
     def current_user(self):
         self.user_click = self.env.uid
+        self.user_test = self.env.uid
+        if self.env.user.has_group('Arope_spaces.broker_space_group'):
+            self.clickable = False
+        else:
+            self.clickable = True
+
 
     def takeit(self):
         self.user_id = self.env.uid
