@@ -133,6 +133,8 @@ class CrmLeads(models.Model):
 
     active = fields.Boolean(default=True)
     offer = fields.Many2many('ir.attachment', string="Offer", relation="offer")
+    offer_validation_start = fields.Date('Offer Validation Start From')
+    offer_validation_end = fields.Date('To')
     source = fields.Selection([('online', 'Online'),
                                ('call', 'Call Center'),
                                ('social', 'Social Media')],
