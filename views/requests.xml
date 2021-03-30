@@ -16,7 +16,7 @@
                     <button string="I Take It" type="object" name="takeit" class="oe_highlight" attrs="{'invisible': ['|',('opp_type', 'not in', [5, 7, 6]),('user_id', '!=', False)]}"/>
                     <field name="state_ids" widget="statusbar"  attrs="{'invisible':[('isClickable','=', True)]}"  domain="[('type', 'in',opp_type)]" />
 
-                    <xpath expr="//field[@name='stage_id']" position="attributes">
+                    <xpath expr="//form/header/field[@name='stage_id']" position="attributes">
                         <attribute name="invisible">1</attribute>
 <!--                        <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" attrs="{'invisible':[('isClickable','=', False)]}" domain="[('type', 'in',opp_type)]" />-->
                     </xpath>
