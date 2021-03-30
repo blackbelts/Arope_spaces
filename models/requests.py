@@ -59,7 +59,7 @@ class CrmLeads(models.Model):
     email = fields.Char('Customer Email')
     clickable = fields.Boolean(string='is clickable' , store=True, default='get_group_security')
     user_click = fields.Many2one('res.users', 'User Name', index=True, track_visibility='onchange',
-                              default=lambda self: self.env.user, readonly=True)
+                              default=lambda self: self.env.uid, readonly=True)
     application_number = fields.Char(string='Application Number', copy=False, index=True)
     application_date = fields.Date('Application Date', default=datetime.today(), readonly=True)
     policy_number = fields.Char('Policy Num')
