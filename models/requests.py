@@ -173,6 +173,8 @@ class CrmLeads(models.Model):
         #     res[i.clickable] = 'odedra'
         # return res
     @api.depends('user_click')
+    @api.constrains('user_click')
+    @api.onchange('user_click')
     def get_group_security(self):
         # for rec in self:
         if self.env.user.has_group('Arope_spaces.broker_space_group'):
