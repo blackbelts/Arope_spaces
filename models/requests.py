@@ -166,6 +166,16 @@ class CrmLeads(models.Model):
     end_reason = fields.Text(string='Endorsement Reason')
     cancel_reason = fields.Text(string='Cancel Reason')
 
+    def _set_value(self, cr, uid, ids, name, args, context=None):
+        for rec in self:
+            if self.env.user.has_group('Arope_spaces.broker_space_group'):
+                rec.clickable = False
+            else:
+                rec.clickable = True
+        # res = {}
+        # for i in self.browse(cr, uid, ids, context=context):
+        #     res[i.clickable] = 'odedra'
+        # return res
     def get_group_security(self):
         for rec in self:
             if self.env.user.has_group('Arope_spaces.broker_space_group'):
