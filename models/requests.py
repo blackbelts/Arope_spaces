@@ -57,7 +57,7 @@ class CrmLeads(models.Model):
     customer_name = fields.Char('Customer Name')
     phone = fields.Char('Customer Mobile')
     email = fields.Char('Customer Email')
-    clickable = fields.Boolean(string='is clickable' , force_save="1" ,store=True, compute='get_group_security')
+    isClickable = fields.Boolean(string='is clickable')
     user_click = fields.Many2one('res.users', 'User Name', index=True, track_visibility='onchange',
                               compute='current_user', store=False ,readonly=True)
     user_test = fields.Many2one('res.users')
@@ -177,9 +177,9 @@ class CrmLeads(models.Model):
     def get_group_security(self):
         # for rec in self:
         if self.env.user.has_group('Arope_spaces.broker_space_group'):
-            self.clickable = False
+            self.isClickable = False
         else:
-            self.clickable = True
+            self.isClickable = True
 
 
     @api.onchange('offer')
@@ -553,9 +553,9 @@ class CrmLeads(models.Model):
         self.user_click = self.env.uid
         self.user_test = self.env.uid
         if self.env.user.has_group('Arope_spaces.broker_space_group'):
-            self.clickable = False
+            self.isClickable = False
         else:
-            self.clickable = True
+            self.isClickable = True
 
 
     def takeit(self):
