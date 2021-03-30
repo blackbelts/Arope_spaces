@@ -552,7 +552,7 @@ class CrmLeads(models.Model):
     def current_user(self):
         self.user_click = self.env.uid
         self.user_test = self.env.uid
-        if self.user_test.has_group('Arope_spaces.broker_space_group'):
+        if self.env.user.has_group('Arope_spaces.broker_space_group'):
             self.isClickable = False
         else:
             self.isClickable = True
