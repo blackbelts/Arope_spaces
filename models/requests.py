@@ -171,7 +171,7 @@ class CrmLeads(models.Model):
             if self.env.user.has_group('Arope_spaces.broker_space_group'):
                 rec.clickable = False
             else:
-                rec.clickable = True
+                rec.clickable = False
 
 
     @api.onchange('offer')
