@@ -160,14 +160,9 @@
 
 
                         </group>
-                        <group>
-                            <group>
-                                <field name="offer" widget="many2many_binary"/>
-                                <field name="offer_validation_start" attrs="{'readonly': [('isClickable', '=', False)]}"/>
-                                <field name="offer_validation_end" attrs="{'readonly': [('isClickable', '=', False)]}"/>
-                            </group>
-
-                        </group>
+                        <field name="offer" widget="many2many_binary"/>
+                        <field name="offer_validation_start" attrs="{'readonly': [('isClickable', '=', False)]}"/>
+                        <field name="offer_validation_end" attrs="{'readonly': [('isClickable', '=', False)]}"/>
                     </group>
                     <group attrs="{'invisible': [('opp_type', 'not in', [2,11])]}">
                         <group>
