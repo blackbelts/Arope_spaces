@@ -57,7 +57,7 @@ class CrmLeads(models.Model):
     customer_name = fields.Char('Customer Name')
     phone = fields.Char('Customer Mobile')
     email = fields.Char('Customer Email')
-    group_clickable = fields.Char('is clickable', compute='get_group_security', store=True)
+    clickable = fields.Boolean('is clickable', compute='get_group_security', store=True)
     application_number = fields.Char(string='Application Number', copy=False, index=True)
     application_date = fields.Date('Application Date', default=datetime.today(), readonly=True)
     policy_number = fields.Char('Policy Num')
@@ -169,9 +169,9 @@ class CrmLeads(models.Model):
     def get_group_security(self):
         for rec in self:
             if self.env.user.has_group('Arope_spaces.broker_space_group'):
-                rec.group_clickable = 'False'
+                rec.clickable = 'False'
             else:
-                rec.group_clickable = 'True'
+                rec.clickable = 'True'
 
 
     @api.onchange('offer')
