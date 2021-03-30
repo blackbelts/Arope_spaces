@@ -176,9 +176,9 @@ class CrmLeads(models.Model):
     def get_group_security(self):
         # for rec in self:
         if self.env.user.has_group('Arope_spaces.broker_space_group'):
-            return False
+            self.clickable = False
         else:
-            return False
+            self.clickable = False
 
 
     @api.onchange('offer')
