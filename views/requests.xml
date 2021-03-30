@@ -101,6 +101,7 @@
                         <group>
                             <field name="opp_type" readonly="1"/>
                             <field name="clickable"  force_save="1"/>
+                            <field name="user_click"  force_save="1"/>
 
                         </group>
                         <group>
