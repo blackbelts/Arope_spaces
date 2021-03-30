@@ -172,10 +172,10 @@ class CrmLeads(models.Model):
         # for i in self.browse(cr, uid, ids, context=context):
         #     res[i.clickable] = 'odedra'
         # return res
-    @api.model
+    @api.depends('user_click')
     def get_group_security(self):
         # for rec in self:
-        if self.env.user.has_group('Arope_spaces.broker_space_group'):
+        if self.user_click.has_group('Arope_spaces.broker_space_group'):
             self.clickable = False
         else:
             self.clickable = True
