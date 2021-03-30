@@ -311,7 +311,7 @@ class Brokers(models.Model):
                 ids = []
                 date1=datetime.today().date()+relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids),('prem_date', '>=', datetime.today().date()) ]):
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids),('due_date', '>=', datetime.today().date()) ]):
                     total += prod.total_lc
                     ids.append(prod.id)
                 result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
@@ -320,7 +320,7 @@ class Brokers(models.Model):
                 #rec.no_days*=-1
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids), ('prem_date', '<=', datetime.today().date()),('prem_date', '>=', date1)]):
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids), ('due_date', '<=', datetime.today().date()),('due_date', '>=', date1)]):
                     total += prod.total_lc
                     ids.append(prod.id)
                 result[rec.color] = {'total':total,'count':len(ids),'ids':ids}
@@ -328,8 +328,8 @@ class Brokers(models.Model):
                 ids = []
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids),('prem_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Red')],limit=1).no_days)),
-                                                                 ('prem_date', '>=',
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids),('due_date', '<=', datetime.today().date() - relativedelta(days=self.env['system.notify'].search([('type','=','Collection'),('color','=','Red')],limit=1).no_days)),
+                                                                 ('due_date', '>=',
                                                                   datetime.today().date() - relativedelta(
                                                                       days=self.env['system.notify'].search(
                                                                           [('type', '=', 'Collection'),
@@ -345,7 +345,7 @@ class Brokers(models.Model):
                 ids = []
                 date1 = datetime.today().date() - relativedelta(days=rec.no_days)
                 total = 0
-                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids), ('prem_date', '<',
+                for prod in self.env['collection.arope'].search([('id', 'in', coll_ids), ('due_date', '<',
                                                                                           datetime.today().date() - relativedelta(
                                                                                                   days=self.env[
                                                                                                       'system.notify'].search(
