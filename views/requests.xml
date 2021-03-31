@@ -15,8 +15,8 @@
                     <button  name="accept_offer" attrs="{'invisible': ['|',('stage_id', '!=', 37),('opp_type', 'not in', [1])]}" string="Accept Offer"  type="object" class="oe_highlight" groups="Arope_spaces.broker_space_group" />
                     <button string="I Take It" type="object" name="takeit" class="oe_highlight" attrs="{'invisible': ['|',('opp_type', 'not in', [5, 7, 6]),('user_id', '!=', False)]}"/>
                     <xpath expr="//field[@name='stage_id']" position="replace">
-                        <field name="stage_id" widget="statusbar"  attrs="{'invisible':[('isClickable','=', True)]}"  domain="[('type', 'in',opp_type)]" />
-                        <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" attrs="{'invisible':[('isClickable','=', False)]}" domain="[('type', 'in',opp_type)]" />
+                        <field name="stage_id" widget="statusbar"  attrs="{'invisible':[('opp_type','=', 3)]}"  domain="[('type', 'in',opp_type)]" />
+                        <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}" attrs="{'invisible':[('opp_type','=', 1)]}" domain="[('type', 'in',opp_type)]" />
                     </xpath>
                 </header>
 
