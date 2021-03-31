@@ -151,7 +151,7 @@
 
 <!--                            <field name="recomm" string="Survey Recommendation"  widget="html" />-->
                         <group>
-                            <field name="offer_state" attrs="{'invisible': [('policy_number', '=', False)]}"/>
+                            <field name="offer_state" attrs="{'invisible': [('offer_state', '=', False)]}"/>
                             <field name="application_number" readonly="1" force_save="1"/>
                             <field name="application_date" />
                             <field name="policy_number" readonly="1" force_save="1" attrs="{'invisible': [('policy_number', '=', False)]}"/>
