@@ -25,6 +25,12 @@ class CrmLeads(models.Model):
     message = fields.Text('Description')
     policy_services_type = fields.Selection([('end', 'Endorsement'),
                                 ('renew', 'Renwal')],string='Request Type')
+    cancel_reason = fields.Text('Cancel Reason')
+
+    def cancel(self):
+        self.stage_id = self.env['crm.stage'].search(
+            [('name', '=', 'Closed'), ('type', '=', self.opp_type.id)]).id
+        self.message = self.stage_id.message
 
     # @api.onchange('stage_id')
     @api.onchange('opp_type')
@@ -557,11 +563,34 @@ class CrmLeads(models.Model):
     @api.onchange('offer_ids')
     def offer_type(self):
         offers = []
+        supmit = []
         for record in self.offer_ids:
             offers.append(record)
+        supmit.append(offers[-1])
         del offers[-1]
         for rec in offers:
             rec.types = 'initial'
+        if supmit[-1].offer_state == 'submitted':
+            self.stage_id = self.env['crm.stage'].search(
+                [('name', '=', 'Offer Ready'), ('type', '=', self.opp_type.id)]).id
+            self.message = self.stage_id.message
+
+    def survey(self):
+        self.stage_id = self.env['crm.stage'].search(
+            [('name', '=', 'Survey'), ('type', '=', self.opp_type.id)]).id
+        self.message = self.stage_id.message
+
+    def issue_in_progress(self):
+        self.stage_id = self.env['crm.stage'].search(
+            [('name', '=', 'Issue In Progress'), ('type', '=', self.opp_type.id)]).id
+        self.message = self.stage_id.message
+
+    def offer(self):
+        self.stage_id = self.env['crm.stage'].search(
+            [('name', '=', 'Offer Ready'), ('type', '=', self.opp_type.id)]).id
+        self.message = self.stage_id.message
+
+
 
     #Online Quote
     def current_user(self):
