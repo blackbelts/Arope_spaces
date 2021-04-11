@@ -11,7 +11,7 @@ class CrmLeads(models.Model):
     _inherit = "crm.lead"
 
     opp_type = fields.Many2one('request.type',string='Type')
-    state = fields.Selection([stage_id
+    state = fields.Selection([
         ('application_form', 'Application Form'),
         ('initial_offer', 'Initial Offer'),
         ('survey', 'Survey'),
