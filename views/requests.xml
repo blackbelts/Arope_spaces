@@ -242,7 +242,7 @@
                                 <field name="file" widget="many2many_binary"/>
                                 <field name="offer_validation_start" />
                                 <field name="offer_validation_end" />
-                                <button name="offer_state" type="object" class="oe_highlight"/>
+                                <field name="offer_state" type="object" class="oe_highlight"/>
                                 <field name="comment"/>
 <!--                                <field name="issue_in_progress_state"/>-->
                             </tree>
