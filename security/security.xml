@@ -162,28 +162,28 @@
         <record id="non_motor_underwritting" model="ir.rule">
             <field name="name"> Non Motor Underwritting</field>
             <field ref="crm.model_crm_lead" name="model_id"/>
-            <field name="domain_force">[('opp_type','in',['Insurance Application', 'Policy Services', 'Cancellation']),('lob','not in',['Medical','Motor'])]
+            <field name="domain_force">[('lob','not in',['Medical','Motor'])]
             </field>
             <field name="groups" eval="[(4, ref('non_motor_group_sale'))]"/>
         </record>
          <record id="motor_claim" model="ir.rule">
             <field name="name">Motor Claim</field>
             <field ref="crm.model_crm_lead" name="model_id"/>
-            <field name="domain_force">[('opp_type','in',['Motor Claim']),('lob','=','Motor')]
+            <field name="domain_force">[('lob','=','Motor')]
             </field>
             <field name="groups" eval="[(4, ref('motor_claim_group'))]"/>
         </record>
         <record id="non_motor_claim" model="ir.rule">
             <field name="name"> Non Motor Claim</field>
             <field ref="crm.model_crm_lead" name="model_id"/>
-            <field name="domain_force">[('opp_type','=','General Claim'),('lob','!=','Motor')]
+            <field name="domain_force">[('lob','!=','Motor')]
             </field>
             <field name="groups" eval="[(4, ref('non_motor_claim_group'))]"/>
         </record>
         <record id="medical_underwritting" model="ir.rule">
             <field name="name">Medical Underwritting</field>
             <field ref="crm.model_crm_lead" name="model_id"/>
-            <field name="domain_force">[('opp_type','in',['Insurance Application', 'Policy Services', 'Cancellation']),('lob','=','Medical')]
+            <field name="domain_force">[('lob','=','Medical')]
             </field>
             <field name="groups" eval="[(4, ref('medical_group_sales'))]"/>
         </record>
