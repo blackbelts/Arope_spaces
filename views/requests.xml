@@ -16,7 +16,7 @@
                     <button string="I Take It" type="object" name="takeit" class="oe_highlight" attrs="{'invisible': ['|',('opp_type', 'not in', [5, 7, 6]),('user_id', '!=', False)]}"/>
                     <xpath expr="//field[@name='stage_id']" position="replace">
                         <field name="stage_id" widget="statusbar"  attrs="{'invisible':[('isClickable','=', True)]}"  domain="[('type', 'in',opp_type)]" />
-                        <field name="stage_id" widget="statusbar" options="{'clickable': [('isClickable','=', True)], 'fold_field': 'fold'}" attrs="{'invisible':[('isClickable','=', False)]}" domain="[('type', 'in',opp_type)]" />
+                        <field name="stage_id" widget="statusbar" attrs="{'invisible':[('isClickable','=', False)]}" options="{'clickable': '1', 'fold_field': 'fold'}"  domain="[('type', 'in',opp_type)]" />
                     </xpath>
                 </header>
 
