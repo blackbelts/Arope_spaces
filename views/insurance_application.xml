@@ -499,9 +499,9 @@
                 <header>
 
                     <field name="status" widget="statusbar"/>
-                    <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'pending')]}" groups="Arope_spaces.managers_group_arope"/>
-                    <button  name="accept_survey" string="Accept Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}" groups="Arope_spaces.managers_group_arope"/>
-
+                    <button  name="assign_surveyor" string="Assign Surveyor" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'pending')]}" groups="Arope_spaces.managers_group_arope,Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale"/>
+                    <button  name="accept_survey" string="Accept Survey" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}" groups="Arope_spaces.managers_group_arope,Arope_spaces.motor_group_sale,Arope_spaces.non_motor_group_sale"/>
+                    <button  name="suspended" string="Survey Suspended" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'surveyor')]}" groups="Arope_spaces.surveyor_group"/>
 
                 </header>
 
@@ -533,6 +533,7 @@
                         <group>
                             <field name="surveyor"/>
                             <field name="recomm" groups="Arope_spaces.managers_group_arope"/>
+                            <field name="suspended_reason" attrs="{'invisible': [('state', '!=', 'suspended')]}"/>
                         </group>
                     </group>
                     <notebook>

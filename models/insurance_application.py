@@ -781,8 +781,10 @@ class FinalOffers(models.Model):
     _name = 'final.offers'
 
     # question = fields.Many2one('offer.setup','Offer Item')
-    types = fields.Selection([('initial', 'Initial Offer'), ('final', 'Final Offer')], default='initial')
+    types = fields.Selection([('initial', 'Initial Offer'), ('final', 'Final Offer')], default='final')
     date = fields.Date('Offer Date',default=lambda self:fields.datetime.today())
+    offer_validation_start = fields.Date('Offer Validation Start From',default=lambda self:fields.datetime.today())
+    offer_validation_end = fields.Date('To')
     comment = fields.Text('Comment')
     file = fields.Many2many('ir.attachment', string="Offer")
     value = fields.Float('Value')
@@ -925,6 +927,7 @@ class SurveyReport(models.Model):
                              default=lambda self: self.env['ir.sequence'].next_by_code('survey'), readonly=True)
 
     state = fields.Selection([('pending', 'Pending'), ('surveyor', 'Surveyor Assigned'),
+                              ('suspended', 'Suspended'),
                             ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending')
     status = fields.Many2one('state.setup', domain="[('type', '=', 'survey')]")
     surveyor = fields.Many2one('res.users', 'Surveyor', domain=lambda self: [("groups_id", "=", self.env.ref( "Arope_spaces.surveyor_group" ).id)])
@@ -938,6 +941,7 @@ class SurveyReport(models.Model):
     claim_id = fields.Many2one('claim.app', ondelete='cascade', string='Application')
     request_id = fields.Many2one('crm.lead', ondelete='cascade', string='Request')
     message = fields.Text('Description')
+    suspended_reason = fields.Text('Suspended Reason')
 
     # @api.onchange('surveyor')
     # def surveyor_domain(self):
@@ -971,6 +975,11 @@ class SurveyReport(models.Model):
     def accept_survey(self):
         self.write({'state': 'accepted'})
         self.status = self.env['state.setup'].search([('survey_status', '=', 'accepted'), ('type', '=', 'survey')]).id
+        self.message = self.status.message
+
+    def suspended(self):
+        self.write({'state': 'suspended'})
+        self.status = self.env['state.setup'].search([('survey_status', '=', 'suspended'), ('type', '=', 'survey')]).id
         self.message = self.status.message
 
     @api.onchange('recomm')

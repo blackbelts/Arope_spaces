@@ -549,7 +549,19 @@ class CrmLeads(models.Model):
         self.message = self.stage_id.message
 
     def accept_offer(self):
-        self.offer_state = 'accepted'
+        offers = []
+        for record in self.offer_ids:
+            offers.append(record)
+        offers[-1].offer_state = 'accepted'
+
+    @api.onchange('offer_ids')
+    def offer_type(self):
+        offers = []
+        for record in self.offer_ids:
+            offers.append(record)
+        del offers[-1]
+        for rec in offers:
+            rec.types = 'initial'
 
     #Online Quote
     def current_user(self):

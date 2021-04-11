@@ -33,7 +33,8 @@ class StateSetup(models.Model):
     type = fields.Selection([('insurance_app', 'Insurance Application'),
                              ('claim', 'Claim'), ('survey', 'Survey')], string='Type')
     survey_status = fields.Selection([('pending', 'Pending'), ('surveyor', 'Surveyor Assigned'),
-                            ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending',translate=True)
+                                      ('suspended', 'Suspended'),
+                                        ('submitted', 'Submitted'), ('accepted', 'Accepted')], 'State', default='pending',translate=True)
     claim_type = fields.Selection([('motor', 'Motor'),('non-motor', 'Non Motor')], string="Claim Type",translate=True)
     # lob = fields.Many2one('insurance.line.business', 'LOB', required=True)
     product_ids = fields.Many2many('insurance.product', string='Product')
