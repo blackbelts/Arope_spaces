@@ -575,6 +575,10 @@ class CrmLeads(models.Model):
                 self.stage_id = self.env['crm.stage'].search(
                     [('name', '=', 'Offer Ready'), ('type', '=', self.opp_type.id)]).id
                 self.message = self.stage_id.message
+        else:
+            self.stage_id = self.env['crm.stage'].search(
+                [('name', '=', 'Submitted'), ('type', '=', self.opp_type.id)]).id
+            self.message = self.stage_id.message
 
     def survey(self):
         self.stage_id = self.env['crm.stage'].search(
